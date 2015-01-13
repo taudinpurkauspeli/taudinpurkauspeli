@@ -1,0 +1,13 @@
+# OS X stuff
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# Thumbnails
+._*
+Thumbs.db
+
+# RubyMine stuff
+.idea/*
+*.iml
+
