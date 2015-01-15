@@ -1,0 +1,13 @@
+language: ruby
+
+rvm:
+ - 2.2.0
+
+gemfile:
+ - taudinpurkauspeli/Gemfile
+
+script:
+ - bundle exec rake -f db:migrate --trace
+ - RAILS_ENV=test bundle exec rake -f db:migrate --trace
+ - bundle exec rake -f db:test:prepare
+ - bundle exec rspec -fd spec/
