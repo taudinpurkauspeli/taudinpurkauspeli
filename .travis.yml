@@ -7,6 +7,7 @@ gemfile:
  - taudinpurkauspeli/Gemfile
 
 script:
+ - bundle install
  - bundle exec rake -f db:migrate --trace
  - RAILS_ENV=test bundle exec rake -f db:migrate --trace
  - bundle exec rake -f db:test:prepare
