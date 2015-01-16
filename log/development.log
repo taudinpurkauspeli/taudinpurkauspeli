@@ -775,3 +775,5 @@ Completed 200 OK in 60ms (Views: 59.0ms | ActiveRecord: 0.2ms)
 
 
 Started GET "/assets/exercises-069e88c06b889877799890854d7f4c40.css?body=1" for ::1 at 2015-01-16 14:18:07 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"

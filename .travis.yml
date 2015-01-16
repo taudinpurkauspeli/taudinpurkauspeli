@@ -8,7 +8,7 @@ gemfile:
 
 script:
  - bundle install
- - bundle exec rake -f db:migrate --trace
- - RAILS_ENV=test bundle exec rake -f db:migrate --trace
- - bundle exec rake -f db:test:prepare
+ - bundle exec rake db:migrate --trace
+ - RAILS_ENV=test bundle exec rake db:migrate --trace
+ - bundle exec rake db:test:prepare
  - bundle exec rspec -fd spec/
