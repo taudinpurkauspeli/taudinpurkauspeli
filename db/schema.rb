@@ -13,12 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20150115135958) do
 
-  create_table "cases", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "exercises", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
