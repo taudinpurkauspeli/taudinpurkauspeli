@@ -13,3 +13,25 @@ Thumbs.db
 
 # Temporary files
 *~
+/tmp
+/spec/tmp
+
+# Log
+/log/*.log
+
+# Ignore bundler config.
+/.bundle
+/vendor/bundle
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Enviroment variables shouldn't be public
+.env
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+.rvmrc
+
+.rspec
+*.rbc
