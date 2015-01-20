@@ -36,3 +36,5 @@ Thumbs.db
 
 .rspec
 *.rbc
+capybara-*.html
+/coverage/
