@@ -17,7 +17,8 @@ Thumbs.db
 /spec/tmp
 
 # Log
-/log/*.log
+/log/*
+!/log/.keep
 
 # Ignore bundler config.
 /.bundle
@@ -35,3 +36,5 @@ Thumbs.db
 
 .rspec
 *.rbc
+capybara-*.html
+/coverage/
