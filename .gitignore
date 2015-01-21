@@ -8,7 +8,7 @@
 Thumbs.db
 
 # RubyMine stuff
-*/.idea/*
+.idea
 *.iml
 
 # Temporary files
