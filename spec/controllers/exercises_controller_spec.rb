@@ -24,12 +24,14 @@ RSpec.describe ExercisesController, :type => :controller do
   # Exercise. As you add validations to Exercise, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { name: "Lihanautakuolemat" }
   }
 
+=begin
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { }
   }
+=end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -87,6 +89,7 @@ RSpec.describe ExercisesController, :type => :controller do
       end
     end
 
+=begin
     describe "with invalid params" do
       it "assigns a newly created but unsaved exercise as @exercise" do
         post :create, {:exercise => invalid_attributes}, valid_session
@@ -98,19 +101,20 @@ RSpec.describe ExercisesController, :type => :controller do
         expect(response).to render_template("new")
       end
     end
+=end
   end
 
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { name: "Ripuloiva koira" }
       }
 
       it "updates the requested exercise" do
         exercise = Exercise.create! valid_attributes
         put :update, {:id => exercise.to_param, :exercise => new_attributes}, valid_session
         exercise.reload
-        skip("Add assertions for updated state")
+        expect(exercise.name).to eq("Ripuloiva koira")
       end
 
       it "assigns the requested exercise as @exercise" do
@@ -126,6 +130,7 @@ RSpec.describe ExercisesController, :type => :controller do
       end
     end
 
+=begin
     describe "with invalid params" do
       it "assigns the exercise as @exercise" do
         exercise = Exercise.create! valid_attributes
@@ -139,6 +144,7 @@ RSpec.describe ExercisesController, :type => :controller do
         expect(response).to render_template("edit")
       end
     end
+=end
   end
 
   describe "DELETE destroy" do

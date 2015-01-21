@@ -1,3 +1,4 @@
+=begin
 require 'rails_helper'
 
 RSpec.describe "Exercises", :type => :request do
@@ -8,3 +9,4 @@ RSpec.describe "Exercises", :type => :request do
     end
   end
 end
+=end
