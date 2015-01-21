@@ -20,3 +20,5 @@ deploy:
   app:
     development: taudinpurkauspeli-development
     master: taudinpurkauspeli
+notifications:
+  email: false
