@@ -1,3 +1,4 @@
 class Hypothesis < ActiveRecord::Base
-	has_many :exercises
+	has_many :exercise_hypotheses
+	has_many :exercises, through: :exercise_hypotheses
 end

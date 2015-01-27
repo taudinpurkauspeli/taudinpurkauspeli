@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :hypothesis_lists
+  resources :exercise_hypotheses
 
   resources :hypotheses
 

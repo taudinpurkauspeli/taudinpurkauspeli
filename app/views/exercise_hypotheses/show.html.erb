@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Exercise:</strong>
+  <%= @exercise_hypothesis.exercise_id %>
+</p>
+
+<p>
+  <strong>Hypothesis:</strong>
+  <%= @exercise_hypothesis.hypothesis_id %>
+</p>
+
+<p>
+  <strong>Explanation:</strong>
+  <%= @exercise_hypothesis.explanation %>
+</p>
+
+<%= link_to 'Edit', edit_exercise_hypothesis_path(@exercise_hypothesis) %> |
+<%= link_to 'Back', exercise_hypotheses_path %>

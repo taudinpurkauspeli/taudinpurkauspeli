@@ -1,3 +1,3 @@
 class Task < ActiveRecord::Base
-	belongs_to :exercises
+	belongs_to :exercise
 end

@@ -1,22 +1,22 @@
 require 'rails_helper'
 
-RSpec.describe "hypothesis_lists/index", :type => :view do
+RSpec.describe "exercise_hypotheses/index", :type => :view do
   before(:each) do
-    assign(:hypothesis_lists, [
-      HypothesisList.create!(
-        :hypothesis_id => 1,
-        :exercise_id => 2,
+    assign(:exercise_hypotheses, [
+      ExerciseHypothesis.create!(
+        :exercise_id => 1,
+        :hypothesis_id => 2,
         :explanation => "Explanation"
       ),
-      HypothesisList.create!(
-        :hypothesis_id => 1,
-        :exercise_id => 2,
+      ExerciseHypothesis.create!(
+        :exercise_id => 1,
+        :hypothesis_id => 2,
         :explanation => "Explanation"
       )
     ])
   end
 
-  it "renders a list of hypothesis_lists" do
+  it "renders a list of exercise_hypotheses" do
     render
     assert_select "tr>td", :text => 1.to_s, :count => 2
     assert_select "tr>td", :text => 2.to_s, :count => 2

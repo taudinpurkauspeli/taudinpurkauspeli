@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe "hypothesis_lists/show", :type => :view do
+RSpec.describe "exercise_hypotheses/show", :type => :view do
   before(:each) do
-    @hypothesis_list = assign(:hypothesis_list, HypothesisList.create!(
-      :hypothesis_id => 1,
-      :exercise_id => 2,
+    @exercise_hypothesis = assign(:exercise_hypothesis, ExerciseHypothesis.create!(
+      :exercise_id => 1,
+      :hypothesis_id => 2,
       :explanation => "Explanation"
     ))
   end

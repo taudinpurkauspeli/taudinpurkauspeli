@@ -1,10 +1,10 @@
-<%= form_for(@hypothesis_list) do |f| %>
-  <% if @hypothesis_list.errors.any? %>
+<%= form_for(@exercise_hypothesis) do |f| %>
+  <% if @exercise_hypothesis.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@hypothesis_list.errors.count, "error") %> prohibited this hypothesis_list from being saved:</h2>
+      <h2><%= pluralize(@exercise_hypothesis.errors.count, "error") %> prohibited this exercise_hypothesis from being saved:</h2>
 
       <ul>
-      <% @hypothesis_list.errors.full_messages.each do |message| %>
+      <% @exercise_hypothesis.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :hypothesis_id %><br>
-    <%= f.number_field :hypothesis_id %>
-  </div>
-  <div class="field">
     <%= f.label :exercise_id %><br>
     <%= f.number_field :exercise_id %>
+  </div>
+  <div class="field">
+    <%= f.label :hypothesis_id %><br>
+    <%= f.number_field :hypothesis_id %>
   </div>
   <div class="field">
     <%= f.label :explanation %><br>
