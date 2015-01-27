@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :hypotheses
+
   resources :tasks
 
   resources :exercises
