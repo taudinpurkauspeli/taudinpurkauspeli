@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :hypothesis_lists
+
   resources :hypotheses
 
   resources :tasks

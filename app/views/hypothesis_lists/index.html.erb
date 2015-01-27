@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Hypothesis Lists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hypothesis</th>
+      <th>Exercise</th>
+      <th>Explanation</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hypothesis_lists.each do |hypothesis_list| %>
+      <tr>
+        <td><%= hypothesis_list.hypothesis_id %></td>
+        <td><%= hypothesis_list.exercise_id %></td>
+        <td><%= hypothesis_list.explanation %></td>
+        <td><%= link_to 'Show', hypothesis_list %></td>
+        <td><%= link_to 'Edit', edit_hypothesis_list_path(hypothesis_list) %></td>
+        <td><%= link_to 'Destroy', hypothesis_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Hypothesis list', new_hypothesis_list_path %>
