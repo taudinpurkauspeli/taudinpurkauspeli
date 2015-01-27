@@ -1,13 +1,25 @@
 language: ruby
-
 rvm:
- - 2.2.0
-
+- 2.2.0
 gemfile:
- - taudinpurkauspeli/Gemfile
-
+- taudinpurkauspeli/Gemfile
 script:
- - bundle exec rake -f taudinpurkauspeli/Rakefile db:migrate --trace
- - RAILS_ENV=test bundle exec rake -f taudinpurkauspeli/Rakefile db:migrate --trace
- - bundle exec rake -f taudinpurkauspeli/Rakefile db:test:prepare
-# - bundle exec rspec -fd spec/
+- bundle install
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec cucumber
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: OSp56YRohWiqx0/mwTsYmYqDnkkBYFR+co5Hg0/2a6UQNVGaQDBX2yeB9EyfWTwlDFbWiYvYtOrNr+5B6X2PHTN59iLAD68k65YYa92ZNFzMmk/9kTkbi7SJUL9yxuJFiLMnR2+rG1DdTSeSlCoTye2aAVAbXw3RVcq3q31PniI=
+  run: 
+    - "rake db:migrate"
+    - restart
+    - "rake cleanup"
+  app:
+    development: taudinpurkauspeli-development
+    master: taudinpurkauspeli
+notifications:
+  email: false
