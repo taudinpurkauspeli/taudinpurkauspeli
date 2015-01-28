@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :exercise_hypotheses
+
+  resources :hypotheses
+
+  resources :tasks
+
   resources :exercises
 
   root 'exercises#index'
