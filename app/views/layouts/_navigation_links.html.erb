@@ -1,4 +1,7 @@
 <%# add navigation links to this file %>
-      <%= link_to 'Anamneesi', "/exercises/1", class: 'navbar-brand' %>
-      <%= link_to 'Toimenpiteet', tasks_path, class: 'navbar-brand' %>
-      <%= link_to 'Työhypoteesit', hypotheses_path, class: 'navbar-brand' %>
+	
+      <%= link_to 'Anamneesi', "/exercises/1", class: if current_page?("/exercises/1") then 'active navbar-brand' else 'navbar-brand' end %>
+
+      	<%= link_to 'Toimenpiteet', tasks_path, class: if current_page?(tasks_path) then 'active navbar-brand' else 'navbar-brand' end %>
+
+      <%= link_to 'Työhypoteesit', hypotheses_path, class: if current_page?(hypotheses_path) then 'active navbar-brand' else 'navbar-brand' end %>
