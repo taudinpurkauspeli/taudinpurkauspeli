@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @exercise.name %>
-</p>
+<h1> Case: <%= @exercise.name %> </h1>
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -13,7 +10,11 @@
   </div>
   <div id="collapse0" class="panel-collapse collapse in">
     <div class="panel-body">
-    Sikanautakuolemat blablabla...
+		<% if @exercise.anamnesis.nil?%>
+			<%= link_to 'Casen anamneesia ei ole asetettu.', edit_exercise_path(@exercise) %>  
+		<% else %>
+			<%= @exercise.anamnesis %>
+		<% end %>
     </div>
   </div>
 </div>
@@ -41,5 +42,5 @@
   </div>
 </div>
 
-<%= link_to 'Edit', edit_exercise_path(@exercise) %> |
-<%= link_to 'Back', exercises_path %>
+<%= link_to 'Muokkaa', edit_exercise_path(@exercise) %> |
+<%= link_to 'Takaisin', exercises_path %>
