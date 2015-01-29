@@ -8,7 +8,7 @@ describe "New Exercise page" do
   	fill_in('exercise_name', with: "Broilerimysteeri")
   	fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
 
-  	click_button('Create Exercise')
+  	click_button('Tallenna')
 
   	expect(page).to have_content 'Broilerimysteeri'
   end
