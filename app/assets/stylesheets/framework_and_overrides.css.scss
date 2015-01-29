@@ -2,6 +2,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
+//Colors
+$BtnExerciseClr       : #c8c8c8;
+$BtnExerciseBorderClr : #999;
+$BtnExerciseHoverClr  : #0d0;
+
+
 // make all images responsive by default
 img {
   @extend .img-responsive;
@@ -130,6 +137,25 @@ img {
 .navbar-header{
   float: right;
 }
+
+
+//Buttons
+
+.btn-exercise{
+  width: 300px;
+  height: 45px;
+  text-align: left;
+  background-color: $BtnExerciseClr;
+  border-color: $BtnExerciseBorderClr;
+  border-radius: 7px;
+  margin-bottom: 5px;
+  border-width: 0px;
+}
+.btn-exercise:hover{
+  background-color: $BtnExerciseHoverClr;
+}
+
+
 
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
