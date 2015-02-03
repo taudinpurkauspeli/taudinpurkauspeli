@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "tasks/edit", :type => :view do
   before(:each) do
     @task = assign(:task, Task.create!(
-      :name => "MyString"
+      :name => "Soita asiakkaalle"
     ))
   end
 

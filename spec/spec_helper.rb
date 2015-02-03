@@ -1,5 +1,3 @@
-require 'simplecov'
-SimpleCov.start('rails')
 
 # Do not remove those first two lines or else simplecov (test line coverage tool) will not work.
 

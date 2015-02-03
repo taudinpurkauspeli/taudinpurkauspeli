@@ -24,12 +24,14 @@ RSpec.describe TasksController, :type => :controller do
   # Task. As you add validations to Task, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {name: "Soita asiakkaalle"}
   }
 
+=begin
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {}
   }
+=end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -87,6 +89,7 @@ RSpec.describe TasksController, :type => :controller do
       end
     end
 
+=begin
     describe "with invalid params" do
       it "assigns a newly created but unsaved task as @task" do
         post :create, {:task => invalid_attributes}, valid_session
@@ -99,6 +102,7 @@ RSpec.describe TasksController, :type => :controller do
       end
     end
   end
+=end
 
   describe "PUT update" do
     describe "with valid params" do
@@ -126,6 +130,8 @@ RSpec.describe TasksController, :type => :controller do
       end
     end
 
+
+=begin
     describe "with invalid params" do
       it "assigns the task as @task" do
         task = Task.create! valid_attributes
@@ -140,6 +146,7 @@ RSpec.describe TasksController, :type => :controller do
       end
     end
   end
+=end
 
   describe "DELETE destroy" do
     it "destroys the requested task" do
