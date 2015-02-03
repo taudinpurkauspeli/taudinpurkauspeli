@@ -5,12 +5,19 @@
 
 
 <% @exercises.each do |exercise| %>
-  <%= button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get  %>
-  <%#= exercise.name %>
-  <%#= link_to 'Show', exercise %>
-  <%#= link_to 'Edit', edit_exercise_path(exercise) %>
-  <%#= link_to 'Destroy', exercise, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% end %>
+  <div class="row">
+    <div class="col-md-5">
+      <%= button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get  %>
+      <%#= exercise.name %>
+      <%#= link_to 'Show', exercise %>
+      <%#= link_to 'Edit', edit_exercise_path(exercise) %>
+    </div>
+    <div class="col-md-2">
+      <%= button_to 'Poista', exercise, :class => 'btn btn-default btn-del-exercise', :method => :delete, data: { confirm: 'Haluatko varmasti poistaa casen?' } %>
+      <%#= link_to 'Destroy', exercise, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+<% end %>
   
 <br />
 <br />
