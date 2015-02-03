@@ -36,10 +36,10 @@ Then(/^page should have message: "(.*?)"$/) do |arg1|
 end
 
 
-And(/^the exercise should be in the database$/) do
+Then(/^the exercise should be in the database$/) do
   expect(Exercise.count).to eq(1)
 end
 
-And(/^the exercise should not be in the database$/) do
+Then(/^the exercise should not be in the database$/) do
   expect(Exercise.count).to eq(0)
 end

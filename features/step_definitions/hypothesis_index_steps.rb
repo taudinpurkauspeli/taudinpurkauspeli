@@ -11,16 +11,4 @@ Given(/^I am on the front page with preexisting exercises which have hypotheses$
   Hypothesis.create name:"Nautaflunssa"
 
   visit exercises_path
-end
-
-And(/^I click on the link "(.?)"$/) do |variable|
-  click_link(variable)
-end
-
-When(/^I click on the link "(.?)"$/) do |variable|
-  click_link(variable)
-end
-
-Then(/^the page should have a link: "(.*?)"$/) do |arg1|
-  expect(page).to have_content(arg1)
-end
+end 
