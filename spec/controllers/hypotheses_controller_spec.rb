@@ -108,14 +108,14 @@ RSpec.describe HypothesesController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {name: "Virustauti2"}
       }
 
       it "updates the requested hypothesis" do
         hypothesis = Hypothesis.create! valid_attributes
         put :update, {:id => hypothesis.to_param, :hypothesis => new_attributes}, valid_session
         hypothesis.reload
-        skip("Add assertions for updated state")
+        expect(hypothesis.name).to eq("Virustauti2")
       end
 
       it "assigns the requested hypothesis as @hypothesis" do

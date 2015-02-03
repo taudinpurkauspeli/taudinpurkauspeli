@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Task, :type => :model do
    it "has the name set correctly" do
-    task = Hypothesis.new name:"Soita asiakkaalle"
+    task = Task.new name:"Soita asiakkaalle"
 
-    expect(hypothesis.name).to eq("Soita asiakkaalle")
+    expect(task.name).to eq("Soita asiakkaalle")
 
   end
 

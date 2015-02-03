@@ -108,14 +108,14 @@ RSpec.describe TasksController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {name: "Soita asiakkaalle uudestaan"}
       }
 
       it "updates the requested task" do
         task = Task.create! valid_attributes
         put :update, {:id => task.to_param, :task => new_attributes}, valid_session
         task.reload
-        skip("Add assertions for updated state")
+        expect(task.name).to eq("Soita asiakkaalle uudestaan")
       end
 
       it "assigns the requested task as @task" do
