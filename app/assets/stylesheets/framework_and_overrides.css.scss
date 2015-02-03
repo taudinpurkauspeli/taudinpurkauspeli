@@ -2,6 +2,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
+//Colors
+$MediumGrey           : #dbdbdb;
+$BtnExerciseBorderClr : #999;
+$LightGreen           : #74ad61;
+$LightRed             : #ae6161;
+$DarkRed              : #692f2f;
+$DarkGreen            : #232e1e;
+
+
 // make all images responsive by default
 img {
   @extend .img-responsive;
@@ -107,7 +117,7 @@ img {
    border-top-right-radius: 10px; 
 }
 .navbar-nav > .navbar-brand:hover{
-   background: #555;
+   background: #446639;
    color: #eee;
    border-top-left-radius: 10px;
    border-top-right-radius: 10px;
@@ -121,6 +131,7 @@ img {
 .navbar{
   border-width: 0px;
   min-height: 50px;
+  background-color: $DarkGreen;
 }
 .navbar > .container .navbar-brand, .navbar > main .navbar-brand, .navbar > .container-fluid .navbar-brand {
     margin-left: 0px;
@@ -130,6 +141,41 @@ img {
 .navbar-header{
   float: right;
 }
+
+
+//Buttons
+
+.btn-exercise{
+  width: 100%;
+  height: 45px;
+  text-align: left;
+  background-color: $MediumGrey;
+  border-color: $BtnExerciseBorderClr;
+  border-radius: 7px;
+  margin-bottom: 5px;
+  border-width: 0px;
+}
+.btn-exercise:hover{
+  background-color: $LightGreen;
+  color: #fff;
+}
+
+.btn-del-exercise{
+  //width: 10px;
+  height: 45px;
+  text-align: left;
+  color: #fff;
+  background-color: $LightRed;
+  border-color: $BtnExerciseBorderClr;
+  border-radius: 7px;
+  margin-bottom: 5px;
+  border-width: 0px;
+}
+.btn-del-exercise:hover{
+  background-color: $DarkRed;
+  color: #fff;
+}
+
 
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
@@ -158,6 +204,7 @@ main {
   background-color: #eee;
   padding-bottom: 80px;
   width: 100%;
+  max-width: 1170px;
   margin-top: 50px; // accommodate the navbar
   }
 section {

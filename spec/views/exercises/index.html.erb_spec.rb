@@ -14,7 +14,6 @@ RSpec.describe "exercises/index", :type => :view do
 
   it "renders a list of exercises" do
     render
-    assert_select "tr>td", :text => "Name".to_s, :count => 1
-    assert_select "tr>td", :text => "Name2".to_s, :count => 1
+    assert_select ".btn-exercise", :count => 2
   end
 end
