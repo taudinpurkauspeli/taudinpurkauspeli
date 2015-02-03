@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "exercises/edit", :type => :view do
   before(:each) do
     @exercise = assign(:exercise, Exercise.create!(
-      :name => "MyString"
+      :name => "Lihanautakuolemat"
     ))
   end
 

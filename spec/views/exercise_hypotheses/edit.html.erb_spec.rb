@@ -5,7 +5,7 @@ RSpec.describe "exercise_hypotheses/edit", :type => :view do
     @exercise_hypothesis = assign(:exercise_hypothesis, ExerciseHypothesis.create!(
       :exercise_id => 1,
       :hypothesis_id => 1,
-      :explanation => "MyString"
+      :explanation => "Oikea Valinta!"
     ))
   end
 

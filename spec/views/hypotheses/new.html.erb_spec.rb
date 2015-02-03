@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "hypotheses/new", :type => :view do
   before(:each) do
     assign(:hypothesis, Hypothesis.new(
-      :name => "MyString"
+      :name => "Virustauti"
     ))
   end
 
