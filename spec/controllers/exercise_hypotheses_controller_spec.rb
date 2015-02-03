@@ -24,12 +24,14 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
   # ExerciseHypothesis. As you add validations to ExerciseHypothesis, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {exercise_id: 1, hypothesis_id: 1, explanation: "Oikea poisto!"}
   }
 
+=begin
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {}
   }
+=end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -87,6 +89,7 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
       end
     end
 
+=begin
     describe "with invalid params" do
       it "assigns a newly created but unsaved exercise_hypothesis as @exercise_hypothesis" do
         post :create, {:exercise_hypothesis => invalid_attributes}, valid_session
@@ -98,19 +101,22 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
         expect(response).to render_template("new")
       end
     end
+=end
   end
+
 
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {exercise_id: 2, hypothesis_id: 2, explanation: "Oikea poisto!"}
       }
 
       it "updates the requested exercise_hypothesis" do
         exercise_hypothesis = ExerciseHypothesis.create! valid_attributes
         put :update, {:id => exercise_hypothesis.to_param, :exercise_hypothesis => new_attributes}, valid_session
         exercise_hypothesis.reload
-        skip("Add assertions for updated state")
+        expect(exercise_hypothesis.exercise_id).to eq(2)
+        expect(exercise_hypothesis.hypothesis_id).to eq(2)
       end
 
       it "assigns the requested exercise_hypothesis as @exercise_hypothesis" do
@@ -126,6 +132,7 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
       end
     end
 
+=begin
     describe "with invalid params" do
       it "assigns the exercise_hypothesis as @exercise_hypothesis" do
         exercise_hypothesis = ExerciseHypothesis.create! valid_attributes
@@ -139,7 +146,9 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
         expect(response).to render_template("edit")
       end
     end
+=end
   end
+
 
   describe "DELETE destroy" do
     it "destroys the requested exercise_hypothesis" do
@@ -157,3 +166,4 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
   end
 
 end
+
