@@ -1,4 +1,4 @@
-Feature: New exercise feature
+Feature: Task list feature
   As a user
   I want to view the task list of an exercise
 
