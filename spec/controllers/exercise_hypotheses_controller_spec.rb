@@ -101,8 +101,9 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
         expect(response).to render_template("new")
       end
     end
-  end
 =end
+  end
+
 
   describe "PUT update" do
     describe "with valid params" do
@@ -144,8 +145,9 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
         expect(response).to render_template("edit")
       end
     end
-  end
 =end
+  end
+
 
   describe "DELETE destroy" do
     it "destroys the requested exercise_hypothesis" do
@@ -163,3 +165,4 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
   end
 
 end
+
