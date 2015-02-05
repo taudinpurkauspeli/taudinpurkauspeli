@@ -7,13 +7,13 @@ RSpec.describe "exercises/index", :type => :view do
         :name => "Name"
       ),
       Exercise.create!(
-        :name => "Name"
+        :name => "Name2"
       )
     ])
   end
 
   it "renders a list of exercises" do
     render
-    assert_select "tr>td", :text => "Name".to_s, :count => 2
+    assert_select ".btn-exercise", :count => 2
   end
 end

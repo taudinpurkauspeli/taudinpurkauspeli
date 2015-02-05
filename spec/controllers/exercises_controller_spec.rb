@@ -24,14 +24,14 @@ RSpec.describe ExercisesController, :type => :controller do
   # Exercise. As you add validations to Exercise, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    { name: "Lihanautakuolemat" }
+    { name: "Lihanautakuolemat", anamnesis: "Lihanauta on kuollut" }
   }
 
-=begin
+
   let(:invalid_attributes) {
-    { }
+    { name: ""}
   }
-=end
+
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -89,7 +89,7 @@ RSpec.describe ExercisesController, :type => :controller do
       end
     end
 
-=begin
+
     describe "with invalid params" do
       it "assigns a newly created but unsaved exercise as @exercise" do
         post :create, {:exercise => invalid_attributes}, valid_session
@@ -101,7 +101,7 @@ RSpec.describe ExercisesController, :type => :controller do
         expect(response).to render_template("new")
       end
     end
-=end
+
   end
 
   describe "PUT update" do
@@ -130,7 +130,7 @@ RSpec.describe ExercisesController, :type => :controller do
       end
     end
 
-=begin
+
     describe "with invalid params" do
       it "assigns the exercise as @exercise" do
         exercise = Exercise.create! valid_attributes
@@ -144,7 +144,7 @@ RSpec.describe ExercisesController, :type => :controller do
         expect(response).to render_template("edit")
       end
     end
-=end
+
   end
 
   describe "DELETE destroy" do

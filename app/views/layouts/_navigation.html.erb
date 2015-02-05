@@ -1,0 +1,24 @@
+<%# navigation styled for Bootstrap 3.0 %>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+	<% unless current_page?(root_path) or current_page?( new_exercise_path) %>
+          <%= render 'layouts/navigation_links' %>
+	<% end %>
+      </ul>
+    </div>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <% unless current_page?(root_path) %>
+        <%= link_to 'Palaa pääsivulle', root_path, class: 'navbar-brand' %>
+      <% end %>
+    </div>
+   
+  </div>
+</nav>
