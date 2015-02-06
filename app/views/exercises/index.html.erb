@@ -1,7 +1,7 @@
 <!--<p id="notice"><%= notice %></p>-->
 
 <h1>Taudinpurkauspeli</h1>
-      <% unless session[:user_id].nil? %>
+      <% unless current_user.nil? %>
         <p>Tervetuloa Taudinpurkauspelin pariin, <%= current_user.username %>! :)</p>
         <%= button_to 'Kirjaudu ulos', 'signout', :class => 'btn btn-default btn-del-exercise', :method => :delete%>
       <% else %>
@@ -11,6 +11,12 @@
         <%= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-exercise', :method => :get %>
       <% end %>
       </div>
+
+        <% if current_user_is_admin %>
+        Olet administraattori, onneksi olkoon!
+        <%else%>
+        Olet pelkkä opiskelija, alistu
+        <%end%>
   </div>
 <% @exercises.each do |exercise| %>
   <div class="row">
