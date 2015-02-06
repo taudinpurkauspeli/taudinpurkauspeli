@@ -13,10 +13,13 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_is_admin
+
   	u = current_user
-  	if !u.nil? 
+  	unless u.nil?
   		return u.admin
   	end
   	return false
+
+
   end
 end

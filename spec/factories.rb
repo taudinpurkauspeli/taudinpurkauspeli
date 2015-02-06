@@ -6,6 +6,7 @@ FactoryGirl.define do
     email "teppo.testailija@gmail.com"
     password "Salainen"
     password_confirmation "Salainen"
+    admin true
   end
 
   factory :exercise do
@@ -25,5 +26,6 @@ FactoryGirl.define do
     exercise_id 1
     hypothesis_id 1
   end
+
 
 end

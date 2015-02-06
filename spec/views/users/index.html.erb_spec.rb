@@ -13,11 +13,11 @@ RSpec.describe "users/index", :type => :view do
         :realname => "Nimi"
       ),
       User.create!(
-        :username => "Username2",
-        :password => "Salasana1",
-        :password_confirmation => "Salasana1",
-        :admin => true,
-        :realname => "Nimi"
+          :username => "Username2",
+          :password => "Salasana1",
+          :password_confirmation => "Salasana1",
+          :admin => true,
+          :realname => "Nimi"
       )
     ])
 
