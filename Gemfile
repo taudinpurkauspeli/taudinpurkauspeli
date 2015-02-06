@@ -30,6 +30,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Twitter Boostrap
 gem 'bootstrap-sass'
 
+# Password encryption
+gem 'bcrypt-ruby', '~> 3.1.2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
