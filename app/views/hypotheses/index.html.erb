@@ -1,19 +1,62 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Työhypoteesilista</h1>
 
-<table>
-  <tbody>
-    <% @hypotheses.each do |hypothesis| %>
-      <tr>
-        <td><%= hypothesis.name %></td>
-        <td><%= link_to 'Näytä', hypothesis %></td>
-        <td><%= link_to 'Muokkaa', edit_hypothesis_path(hypothesis) %></td>
-        <td><%= link_to 'Poista', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<!-- headers -->
+<div class="row" style = "border: 1px solid green">
+  <div class="col-md-5">
+    <h2>Casen <%= @case.name %> työhypoteesit id: <%= @case.id %></h2>
+  </div>
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-5">
+    <h2>Työhypoteesipankki</h2>
+  </div>
+</div>
+
+<!-- lists of hypotheses -->
+<div class="row" style = "border: 1px solid red">
+  <div class="col-md-5" style = "border: 1px solid #ff9999">
+    <table>
+      <tbody>
+        <% @case_hypotheses.each do |hypothesis| %>
+          <tr>
+            <td><%= hypothesis.name %></td>
+            <td><%= link_to 'Näytä', hypothesis %></td>
+            <td><%= link_to 'Muokkaa', edit_hypothesis_path(hypothesis) %></td>
+            <td><%= link_to 'Poista', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+            <!-- <td><%= link_to 'Poista', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td> -->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-2" style = "border: 1px solid #ff7777">
+  </div>
+  <div class="col-md-5" style = "border: 1px solid #ff5555">
+    <table>
+      <tbody>
+        <% @rest_hypotheses.each do |hypothesis| %>
+          <tr>
+            <td><%= hypothesis.name %></td>
+            <td><%= link_to 'Näytä', hypothesis %></td>
+            <td><%= link_to 'Muokkaa', edit_hypothesis_path(hypothesis) %></td>
+            <td><%= link_to 'Lisää', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+            <!-- <td><%= link_to 'Lisää', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td> -->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<br />
+<br />
+
+
+
+
+
 
 <br>
 

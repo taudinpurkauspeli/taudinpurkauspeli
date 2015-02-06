@@ -4,7 +4,9 @@ class HypothesesController < ApplicationController
   # GET /hypotheses
   # GET /hypotheses.json
   def index
-    @hypotheses = Hypothesis.all
+    @rest_hypotheses = Hypothesis.all - Exercise.first.hypotheses
+    @case_hypotheses = Exercise.first.hypotheses
+    @case = Exercise.first
   end
 
   # GET /hypotheses/1
