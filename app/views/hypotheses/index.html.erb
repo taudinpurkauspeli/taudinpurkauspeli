@@ -25,6 +25,7 @@
             <td><%= link_to 'Muokkaa', edit_hypothesis_path(hypothesis) %></td>
             <td><%= link_to 'Poista', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
             <!-- <td><%= link_to 'Poista', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td> -->
+
           </tr>
         <% end %>
       </tbody>
@@ -40,8 +41,29 @@
             <td><%= hypothesis.name %></td>
             <td><%= link_to 'Näytä', hypothesis %></td>
             <td><%= link_to 'Muokkaa', edit_hypothesis_path(hypothesis) %></td>
-            <td><%= link_to 'Lisää', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+            <td><%= link_to 'Lisää', new_exercise_hypothesis_path() %></td>
             <!-- <td><%= link_to 'Lisää', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td> -->
+            <td>
+
+              <%= form_for(@exercise_hypothesis) do |f| %>
+              <div class="field">
+                <%= f.label :exercise_id %><br>
+                <%= f.number_field :exercise_id, :value => @case.id %>
+              </div>
+              <div class="field">
+                <%= f.label :hypothesis_id %><br>
+                <%= f.number_field :hypothesis_id, :value => hypothesis.id %>
+              </div>
+              <div class="field">
+                <%= f.label :explanation %><br>
+                <%= f.text_field :explanation %>
+              </div>
+              <div class="actions">
+                <%= f.submit %>
+              </div>
+              <% end %>
+              
+            </td>
           </tr>
         <% end %>
       </tbody>

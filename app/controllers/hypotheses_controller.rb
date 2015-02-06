@@ -7,6 +7,8 @@ class HypothesesController < ApplicationController
     @rest_hypotheses = Hypothesis.all - Exercise.first.hypotheses
     @case_hypotheses = Exercise.first.hypotheses
     @case = Exercise.first
+
+    @exercise_hypothesis = ExerciseHypothesis.new
   end
 
   # GET /hypotheses/1
