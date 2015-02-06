@@ -9,8 +9,8 @@ describe "Exercises page" do
 
   it "should have login and signup buttons for a user that hasn't logged in" do 
 	visit exercises_path
-	expect(page).should have_button('Kirjaudu sisään')
-	expect(page).should have_button('Luo uusi tunnus')
+	expect(page).to have_button('Kirjaudu sisään')
+	expect(page).to have_button('Luo uusi tunnus')
   end
 
 

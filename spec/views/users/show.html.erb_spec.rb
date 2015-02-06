@@ -3,8 +3,14 @@ require 'rails_helper'
 RSpec.describe "users/show", :type => :view do
   before(:each) do
     @user = assign(:user, User.create!(
-      :username => "Username"
+      :username => "Username",
+      :password => "Salasana1",
+      :password_confirmation => "Salasana1",
+      :admin => true,
+      :realname => "Nimi"
     ))
+
+
   end
 
   it "renders attributes in <p>" do
