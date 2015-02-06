@@ -1,5 +1,12 @@
 FactoryGirl.define do
 
+  factory :user do
+    username "Testipoika"
+    realname "Teppo Testailija"
+    email "teppo.testailija@gmail.com"
+    password "Salainen"
+    password_confirmation "Salainen"
+  end
 
   factory :exercise do
     name "Lihanautakuolemat"
