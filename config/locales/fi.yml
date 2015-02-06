@@ -19,8 +19,16 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
+
 fi:
   helpers:
     submit:
       create: "Tallenna"
       update: "Päivitä"
+  activerecord:
+    errors:
+       models:
+         user:
+           attributes:
+             username:
+               taken: "Valitsemasi käytäjätunnus on jo käytössä"
