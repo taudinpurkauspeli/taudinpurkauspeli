@@ -31,4 +31,12 @@ fi:
          user:
            attributes:
              username:
-               taken: "Valitsemasi käytäjätunnus on jo käytössä"
+               taken: "on jo käytössä"
+    models:
+      user: "Käyttäjä"
+    attributes:
+      user:
+        username: "Käyttäjätunnus"
+        password: "Salasana"
+        password_confirmation: "Salasanan vahvistus"
+        realname: "Nimi"
