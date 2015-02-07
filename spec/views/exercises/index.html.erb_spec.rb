@@ -1,8 +1,5 @@
 require 'rails_helper'
 
-include RSpec::Mocks::ExampleMethods
-
-
 RSpec.describe "exercises/index", :type => :view do
 
   before(:each) do
@@ -21,7 +18,7 @@ RSpec.describe "exercises/index", :type => :view do
   end
 
 
-  it "renders a list of exercises again" do
+  it "renders exercise buttons" do
     #controller.stub!(:current_user).and_return(User.create!(:name => "Koira"))
 
     render
