@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+include HelperMethods
+
 describe "Exercises page" do
 
   it "should have right title" do

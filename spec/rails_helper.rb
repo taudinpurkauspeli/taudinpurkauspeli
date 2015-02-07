@@ -1,8 +1,10 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
-require 'spec_helper'
+
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'spec_helper'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -52,10 +54,3 @@ RSpec.configure do |config|
 end
 
 #Apumetodi capybaran feature-testeille
-
-def sign_in(credentials)
-  visit signin_path
-  fill_in('username', with:credentials[:username])
-  fill_in('password', with:credentials[:password])
-  click_button('Log in')
-end
