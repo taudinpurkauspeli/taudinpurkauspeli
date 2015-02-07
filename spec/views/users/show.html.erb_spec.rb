@@ -6,7 +6,7 @@ RSpec.describe "users/show", :type => :view do
       :username => "Username",
       :password => "Salasana1",
       :password_confirmation => "Salasana1",
-      :admin => true,
+      :email => "osoite@osoite.com",
       :realname => "Nimi"
     ))
 

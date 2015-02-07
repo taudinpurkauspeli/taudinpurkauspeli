@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe "exercises/index", :type => :view do
 
-  let!(:user){FactoryGirl.create(:user)}
+
 
   before(:each) do
 
@@ -17,7 +17,8 @@ RSpec.describe "exercises/index", :type => :view do
     ])
 
 
-    allow(controller).to receive(:current_user).and_return(FactoryGirl.create(:user))
+   # allow(controller).to receive(:current_user).and_return(FactoryGirl.create(:user))
+
 
 
 
@@ -28,7 +29,9 @@ RSpec.describe "exercises/index", :type => :view do
   #it "renders a list of exercises" do
     #controller.stub!(:current_user).and_return(User.create!(:name => "Koira"))
 
-   # assert_select ".btn-exercise", :count => 2
+
+   # render
+    #assert_select ".btn-exercise", :count => 2
   #end
 
 end

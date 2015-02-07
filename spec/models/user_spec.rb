@@ -8,32 +8,37 @@ RSpec.describe User, :type => :model do
   end
 
   it "cannot be saved with no username" do
-    user = User.new username:nil
-    user.save
+    user = User.create username:"", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com"
+
+    expect(user).not_to be_valid
     expect(User.count).to eq(0)
   end
 
   it "cannot be saved with no realname" do
-    user = User.new realname:nil
-    user.save
+    user = User.create username:"Pekka", realname:"", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com"
+
+    expect(user).not_to be_valid
     expect(User.count).to eq(0)
   end
 
   it "cannot be saved with no email" do
-    user = User.new email:nil
-    user.save
+    user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:""
+
+    expect(user).not_to be_valid
     expect(User.count).to eq(0)
   end
 
   it "cannot be saved with no password" do
-    user = User.new password:nil
-    user.save
+    user = User.create username:"Pekka", realname:"Pera", password:"", password_confirmation: "Salasana1", email:"pekka@gmail.com"
+
+    expect(user).not_to be_valid
     expect(User.count).to eq(0)
   end
 
   it "cannot be saved with no valid password confirmation" do
-    user = User.new password:"Koira", password_confirmation:nil
-    user.save
+    user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "", email:"pekka@gmail.com"
+
+    expect(user).not_to be_valid
     expect(User.count).to eq(0)
   end
 
@@ -44,10 +49,13 @@ RSpec.describe User, :type => :model do
   end
 
   it "cannot be saved if username is not unique" do
-  	user = User.new username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com"
-  	user.save
-  	user = User.new username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com"
-  	user.save
+    User.create username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com"
+
+   #FactoryGirl.create(:user)
+
+  	user = User.create username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com"
+
+    expect(user).not_to be_valid
   	expect(User.count).to eq(1)
   end
 end
