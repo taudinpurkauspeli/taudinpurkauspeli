@@ -18,14 +18,12 @@
   <div class="col-md-5" style = "border: 1px solid #ff9999">
     <table>
       <tbody>
-        <% @case_hypotheses.each do |hypothesis| %>
+        <% @exercise_hypotheses.each do |exercise_hypothesis| %>
           <tr>
-            <td><%= hypothesis.name %></td>
-            <td><%= link_to 'Näytä', hypothesis %></td>
-            <td><%= link_to 'Muokkaa', edit_hypothesis_path(hypothesis) %></td>
-            <td><%= link_to 'Poista', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
-            <!-- <td><%= link_to 'Poista', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td> -->
-
+            <td><%= exercise_hypothesis.hypothesis.name %></td>
+            <td><%= exercise_hypothesis.explanation %></td>
+            <td><%= link_to 'Muokkaa', edit_exercise_hypothesis_path(exercise_hypothesis) %></td>
+            <td><%= link_to 'Poista', exercise_hypothesis, method: :delete %></td>
           </tr>
         <% end %>
       </tbody>
@@ -45,21 +43,15 @@
             <!-- <td><%= link_to 'Lisää', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td> -->
             <td>
 
-              <%= form_for(@exercise_hypothesis) do |f| %>
-              <div class="field">
-                <%= f.label :exercise_id %><br>
-                <%= f.number_field :exercise_id, :value => @case.id %>
-              </div>
-              <div class="field">
-                <%= f.label :hypothesis_id %><br>
-                <%= f.number_field :hypothesis_id, :value => hypothesis.id %>
-              </div>
+              <%= form_for(@new_exercise_hypothesis) do |f| %>
+                <%= f.hidden_field :exercise_id, :value => @case.id %>
+                <%= f.hidden_field :hypothesis_id, :value => hypothesis.id %>
               <div class="field">
                 <%= f.label :explanation %><br>
                 <%= f.text_field :explanation %>
               </div>
               <div class="actions">
-                <%= f.submit %>
+                <%= f.submit "Lisää caseen" %>
               </div>
               <% end %>
               
