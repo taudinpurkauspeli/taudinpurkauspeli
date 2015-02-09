@@ -20,6 +20,7 @@ require 'rails_helper'
 
 RSpec.describe UsersController, :type => :controller do
 
+
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
@@ -36,7 +37,9 @@ RSpec.describe UsersController, :type => :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # UsersController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { {
+      user_id: 1
+  } }
 
   describe "GET index" do
     it "assigns all users as @users" do
@@ -85,7 +88,7 @@ RSpec.describe UsersController, :type => :controller do
 
       it "redirects to the created user" do
         post :create, {:user => valid_attributes}, valid_session
-        expect(response).to redirect_to(User.last)
+        expect(response).to redirect_to(:root)
       end
     end
 
