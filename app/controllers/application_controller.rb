@@ -13,13 +13,21 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_is_admin
-
   	u = current_user
   	unless u.nil?
   		return u.admin
   	end
   	return false
-
-
   end
+
+def ensure_user_is_logged_in
+  redirect_to signin_path, notice: "you are not logged in" if current_user.nil?
+end
+
+  def ensure_user_is_admin
+    if current_user_is_admin == false
+        redirect_to signin_path, notice: "you are not signed in as admin"
+    end  
+  end
+
 end

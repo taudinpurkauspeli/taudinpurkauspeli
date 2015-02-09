@@ -1,6 +1,7 @@
 class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
-
+  before_action :ensure_user_is_logged_in, except: [:index]
+  before_action :ensure_user_is_admin, except: [:index, :show]
   # GET /exercises
   # GET /exercises.json
   def index
