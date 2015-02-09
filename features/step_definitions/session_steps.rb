@@ -17,3 +17,12 @@ When(/^I fill in the form with correct values$/) do
   fill_in('user_realname', with: 'Teppo Testaaja')
   fill_in('user_email', with: 'nauta@on.koullut')
 end
+
+Given(/^I have an user account$/) do
+  User.create username:'Testikäyttäjä', password:'Nauta on koullut', password_confirmation:'Nauta on koullut', realname:'Teppo Testaaja', email:'nauta@on.koullut'
+end
+
+When(/^I enter my username and password$/) do
+  fill_in('username', with: 'Testikäyttäjä')
+  fill_in('password', with: 'Nauta on koullut')
+end

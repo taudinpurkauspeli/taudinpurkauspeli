@@ -20,4 +20,13 @@ Feature: Session
     When I click on the button "Luo uusi tunnus"
     And I fill in the form with correct values
     And I click on the button "Tallenna"
-    Then the page should show the content "Tervetuloa Taudinpurkauspelin pariin"
+    Then the page should show the content "success"
+
+  Scenario: Logged out user with existing account can log in
+    Given I am not logged in
+    And I have an user account
+    And I go to the front page
+    When I click on the button "Kirjaudu sisään"
+    And I enter my username and password
+    And I click on the button "Log in"
+    Then the page should show the content "Tervetuloa"
