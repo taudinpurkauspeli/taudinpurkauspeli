@@ -39,6 +39,6 @@
   </div>
 </div>
 
-<%= link_to 'Muokkaa', edit_exercise_path(@exercise) %> <!-- |
+<%= link_to 'Muokkaa', edit_exercise_path(@exercise) if current_user_is_admin %> <!-- |
 <%= link_to 'Takaisin', exercises_path %> -->
  
