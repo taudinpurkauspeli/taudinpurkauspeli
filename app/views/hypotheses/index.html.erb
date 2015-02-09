@@ -6,10 +6,11 @@
   <tbody>
     <% @hypotheses.each do |hypothesis| %>
       <tr>
-        <td><%= hypothesis.name %></td>
-        <td><%= link_to 'Näytä', hypothesis %></td>
-        <td><%= link_to 'Muokkaa', edit_hypothesis_path(hypothesis) %></td>
-        <td><%= link_to 'Poista', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+        <td><%= link_to hypothesis.name, hypothesis %></td>
+        <% if current_user_is_admin %>
+          <td><%= link_to 'Muokkaa', edit_hypothesis_path(hypothesis) %></td>
+          <td><%= link_to 'Poista', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+        <% end%>
       </tr>
     <% end %>
   </tbody>
@@ -17,4 +18,4 @@
 
 <br>
 
-<%= link_to 'Luo uusi työhypoteesi', new_hypothesis_path %>
+<%= link_to 'Luo uusi työhypoteesi', new_hypothesis_path if current_user_is_admin%>

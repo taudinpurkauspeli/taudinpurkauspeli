@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  root 'exercises#index'
+
+  resources :users
+
   resources :exercise_hypotheses
 
   resources :hypotheses
@@ -7,8 +12,11 @@ Rails.application.routes.draw do
 
   resources :exercises
 
-  root 'exercises#index'
+  resources :sessions, only: [:new, :create, :destroy]
 
+  get 'signin', to: 'sessions#new'
+  delete 'signout', to: 'sessions#destroy'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

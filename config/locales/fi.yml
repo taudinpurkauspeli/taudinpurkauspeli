@@ -19,8 +19,26 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
+
 fi:
   helpers:
     submit:
       create: "Tallenna"
       update: "Päivitä"
+  activerecord:
+    errors:
+       models:
+         user:
+           attributes:
+             username:
+               taken: "on jo käytössä"
+       messages:
+             record_invalid: "Vääränlainen"
+    models:
+      user: "Käyttäjä"
+    attributes:
+      user:
+        username: "Käyttäjätunnus"
+        password: "Salasana"
+        password_confirmation: "Salasanan vahvistus"
+        realname: "Nimi"

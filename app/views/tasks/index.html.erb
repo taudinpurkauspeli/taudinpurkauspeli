@@ -13,10 +13,11 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= task.name %></td>
-        <td><%= link_to 'Näytä', task %></td>
-        <td><%= link_to 'Muokkaa', edit_task_path(task) %></td>
-        <td><%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+        <td><%= link_to task.name, task %></td>
+        <% if current_user_is_admin %>
+          <td><%= link_to 'Muokkaa', edit_task_path(task) %></td>
+          <td><%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +25,4 @@
 
 <br>
 
-<%= link_to 'Luo uusi toimenpide', new_task_path %>
+<%= link_to 'Luo uusi toimenpide', new_task_path if current_user_is_admin%>
