@@ -8,10 +8,10 @@ class SessionsController < ApplicationController
       if user
         if user.authenticate params[:password]
         session[:user_id] = user.id
-        redirect_to user_path(user), notice: "Welcome back!"
+        redirect_to :root, notice: "Tervetuloa takaisin!"
       end
       else
-        redirect_to :back, notice: "Username and/or password mismatch"
+        redirect_to :back, notice: "Käyttäjätunnus tai salasana on väärin."
       end
     end
 
