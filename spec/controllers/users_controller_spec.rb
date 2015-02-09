@@ -30,7 +30,7 @@ RSpec.describe UsersController, :type => :controller do
   }
 
   let(:invalid_attributes) {
-    {username: "", realname: "", password: "Salasana1", password_confirmation: "Salasana1"}
+    {username: "", realname: "", password: "Salasana1", password_confirmation: "Salasana1", email: ""}
 
   }
 
