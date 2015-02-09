@@ -32,6 +32,8 @@ fi:
            attributes:
              username:
                taken: "on jo käytössä"
+       messages:
+             record_invalid: "Vääränlainen"
     models:
       user: "Käyttäjä"
     attributes:
