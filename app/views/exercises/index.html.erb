@@ -28,8 +28,9 @@
   <div class="col-md-5">
     <%= button_to 'Kirjaudu sisään', new_session_path, :class => 'btn btn-default btn-login', :method => :get %>
     <%= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-signup', :method => :get %>
-    <% end %>
   </div>
+
+<% end %>
 
   <% if current_user_is_admin %>
   Olet administraattori, onneksi olkoon!
