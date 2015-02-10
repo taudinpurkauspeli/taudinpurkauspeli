@@ -27,7 +27,11 @@ FactoryGirl.define do
   factory :exercise_hypothesis do
     exercise_id 1
     hypothesis_id 1
-    end
+  end
+
+  factory :hypothesis_group do
+    name "Bakteeritaudit"
+  end
 
 
 end

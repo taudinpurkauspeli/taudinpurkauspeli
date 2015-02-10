@@ -1,4 +1,4 @@
-class HypothesisGroupController < ApplicationController
+class HypothesisGroupsController < ApplicationController
   before_action :set_hypothesis_group, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]

@@ -13,6 +13,36 @@ describe "Exercises page" do
 	expect(page).to have_button('Luo uusi tunnus')
   end
 
+  it "user should not be able to login with wrong password" do
+
+    FactoryGirl.create(:user)
+
+    visit signin_path
+    fill_in('username', with:"Testipoika")
+    fill_in('password', with:"Väärä salasana")
+    click_button('Kirjaudu sisään')
+
+    expect(current_path).to eq(signin_path)
+    expect(page).to have_content "Käyttäjätunnus tai salasana on väärin."
+
+  end
+
+  it "user should not be able to login with wrong username" do
+
+    FactoryGirl.create(:user)
+
+    visit signin_path
+    fill_in('username', with:"Testipoika!")
+    fill_in('password', with:"Salainen1")
+    click_button('Kirjaudu sisään')
+
+    expect(current_path).to eq(signin_path)
+    expect(page).to have_content "Käyttäjätunnus tai salasana on väärin."
+
+  end
+
+
+
   describe "when exercises exist and admin user is signed in" do
 
     let!(:exercise){FactoryGirl.create(:exercise)}
@@ -31,6 +61,16 @@ describe "Exercises page" do
 
       expect(page).to have_button 'Lihanautakuolemat'
       expect(page).to have_button 'Kanakuolema'
+
+    end
+
+    it "user should be able to logout" do
+
+      visit exercises_path
+
+      click_button "Kirjaudu ulos"
+
+      expect(current_path).to eq(root_path)
 
     end
 
