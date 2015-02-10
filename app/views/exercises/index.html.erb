@@ -1,23 +1,32 @@
-<!--<p id="notice"><%= notice %></p>-->
-
 <h1>Taudinpurkauspeli</h1>
+<% unless current_user.nil? %>
+  <p>Tervetuloa Taudinpurkauspelin pariin, <%= current_user.username %>! :)</p>
+<%= button_to 'Kirjaudu ulos', 'signout', :class => 'btn btn-default btn-logout', :method => :delete%>
 
-<% @exercises.each do |exercise| %>
+<%@exercises.each do |exercise| %>
   <div class="row">
     <div class="col-md-5">
       <%= button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get  %>
-      <%#= exercise.name %>
-      <%#= link_to 'Show', exercise %>
-      <%#= link_to 'Edit', edit_exercise_path(exercise) %>
     </div>
-    <div class="col-md-2">
-      <%= button_to 'Poista', exercise, :class => 'btn btn-default btn-del-exercise', :method => :delete, data: { confirm: 'Haluatko varmasti poistaa casen?' } %>
-      <%#= link_to 'Destroy', exercise, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </div>
+
+    <% if current_user_is_admin %>
+      <div class="col-md-2">
+        <%= button_to 'Poista', exercise, :class => 'btn btn-default btn-del-exercise', :method => :delete, data: { confirm: 'Haluatko varmasti poistaa casen?' } %>
+      </div>
+    <%end%>
   </div>
 <% end %>
-  
+
+<% else %>
+  <div class="row">
+    <div class="col-md-5">
+      <%= button_to 'Kirjaudu sisään', new_session_path, :class => 'btn btn-default btn-login', :method => :get %>
+      <%= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-signup', :method => :get %>
+    </div>
+  </div>  
+<% end %>
+
 <br />
 <br />
 
-<%= link_to 'Luo uusi case', new_exercise_path %>
+<%= link_to 'Luo uusi case', new_exercise_path if current_user_is_admin%>

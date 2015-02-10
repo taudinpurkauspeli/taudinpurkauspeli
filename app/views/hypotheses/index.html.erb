@@ -85,10 +85,4 @@
 <br />
 
 
-
-
-
-
-<br>
-
-<%= link_to 'Luo uusi työhypoteesi', new_hypothesis_path %>
+<%= link_to 'Luo uusi työhypoteesi', new_hypothesis_path if current_user_is_admin%>

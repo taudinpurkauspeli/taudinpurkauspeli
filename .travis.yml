@@ -25,7 +25,7 @@ deploy:
     - restart
     - "rake cleanup"
   app:
-    development: taudinpurkauspeli-development
+    /sprint-\d*/: taudinpurkauspeli-development
     master: taudinpurkauspeli
 
 notifications:
