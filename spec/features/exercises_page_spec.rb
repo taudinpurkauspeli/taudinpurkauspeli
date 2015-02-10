@@ -70,7 +70,7 @@ describe "Exercises page" do
 
       click_button "Kirjaudu ulos"
 
-      expect(curent_path).to eq(root_path)
+      expect(current_path).to eq(root_path)
 
     end
 
