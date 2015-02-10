@@ -30,7 +30,7 @@ class ExerciseHypothesesController < ApplicationController
 
     respond_to do |format|
       if @exercise_hypothesis.save
-        format.html { redirect_to @exercise_hypothesis, notice: 'Exercise hypothesis was successfully created.' }
+        format.html { redirect_to hypotheses_url}
         format.json { render :show, status: :created, location: @exercise_hypothesis }
       else
         format.html { render :new }
@@ -58,7 +58,7 @@ class ExerciseHypothesesController < ApplicationController
   def destroy
     @exercise_hypothesis.destroy
     respond_to do |format|
-      format.html { redirect_to exercise_hypotheses_url, notice: 'Exercise hypothesis was successfully destroyed.' }
+      format.html { redirect_to hypotheses_url}
       format.json { head :no_content }
     end
   end

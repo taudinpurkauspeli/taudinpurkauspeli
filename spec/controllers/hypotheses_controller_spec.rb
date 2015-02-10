@@ -27,6 +27,9 @@ RSpec.describe HypothesesController, :type => :controller do
   let(:valid_attributes) {
     {name: "Virustauti"}
   }
+  let!(:exercise){
+    FactoryGirl.create(:exercise)
+  }
 
 =begin
   let(:invalid_attributes) {
@@ -42,10 +45,10 @@ RSpec.describe HypothesesController, :type => :controller do
   } }
 
   describe "GET index" do
-    it "assigns all hypotheses as @hypotheses" do
+    it "assigns all hypotheses as @rest_hypotheses" do
       hypothesis = Hypothesis.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:hypotheses)).to eq([hypothesis])
+      expect(assigns(:rest_hypotheses)).to eq([hypothesis])
     end
   end
 
