@@ -2,9 +2,9 @@
 
 
 <!-- headers -->
-<div class="row" style = "border: 1px solid green">
+<div class="row">
   <div class="col-md-5">
-    <h2>Casen <%= @case.name %> työhypoteesit id: <%= @case.id %></h2>
+    <h2>Casen <%= @case.name %> työhypoteesit</h2>
   </div>
   <div class="col-md-2">
   </div>
@@ -14,13 +14,13 @@
 </div>
 
 <!-- lists of hypotheses -->
-<div class="row" style = "border: 1px solid red">
-  <div class="col-md-5" style = "border: 1px solid #ff9999">
-    <table>
-      <tbody>
+<div class="row">
+  <div class="col-md-5">
+
         <% @exercise_hypotheses.each do |exercise_hypothesis| %>
-          <tr>
-            <td><input class="btn btn-default btn-exercise" type="submit" value="<%= exercise_hypothesis.hypothesis.name %>" data-toggle="collapse" data-target="#collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>" />
+          <div class="row">
+            <div class="col-md-9">
+              <input class="btn btn-default btn-exercise" type="submit" value="<%= exercise_hypothesis.hypothesis.name %>" data-toggle="collapse" data-target="#collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>" />
 
               <div class="collapse" id="collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>">
                 <%= form_for(exercise_hypothesis) do |f| %>
@@ -34,49 +34,34 @@
                   <%= f.submit %>
                 </div>
                 <% end %>
-                <%= button_to 'Poista', exercise_hypothesis, :class => 'btn btn-default btn-del-exercise', method: :delete %>
+                <%= link_to 'Muokkaa', edit_exercise_hypothesis_path(exercise_hypothesis) %>
+                <%= link_to 'Poista', exercise_hypothesis, method: :delete %>
               </div>
-            </td>
-            
-            
-            
-            
-          </tr>
+            </div>
+          </div>
         <% end %>
-      </tbody>
-    </table>
-  </div>
-  <div class="col-md-2" style = "border: 1px solid #ff7777">
-  </div>
-  <div class="col-md-5" style = "border: 1px solid #ff5555">
-    <table>
-      <tbody>
-        <% @rest_hypotheses.each do |hypothesis| %>
-          <tr>
-            <td><%= hypothesis.name %></td>
-            <td><%= link_to 'Näytä', hypothesis %></td>
-            <td><%= link_to 'Muokkaa', edit_hypothesis_path(hypothesis) %></td>
-            <td><%= link_to 'Lisää', new_exercise_hypothesis_path() %></td>
-            <!-- <td><%= link_to 'Lisää', hypothesis, method: :delete, data: { confirm: 'Oletko varma?' } %></td> -->
-            <td>
 
+  </div>
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-5">
+
+        <% @rest_hypotheses.each do |hypothesis| %>
+
+          <div class="row">
+            <div class="col-md-9">
               <%= form_for(@new_exercise_hypothesis) do |f| %>
                 <%= f.hidden_field :exercise_id, :value => @case.id %>
                 <%= f.hidden_field :hypothesis_id, :value => hypothesis.id %>
-              <div class="field">
-                <%= f.label :explanation %><br>
-                <%= f.text_field :explanation %>
-              </div>
-              <div class="actions">
-                <%= f.submit "Lisää caseen" %>
-              </div>
+                <%= f.submit hypothesis.name, :class => 'btn btn-default btn-exercise' %>
               <% end %>
-              
-            </td>
-          </tr>
+            </div>
+            <div class="col-md-3">
+              <%= button_to 'Poista', hypothesis, method: :delete, :class => 'btn btn-default btn-del-exercise', data: { confirm: 'Oletko varma?' } %>
+            </div>
+          </div>
         <% end %>
-      </tbody>
-    </table>
+
   </div>
 </div>
 
@@ -85,4 +70,10 @@
 <br />
 
 
-<%= link_to 'Luo uusi työhypoteesi', new_hypothesis_path if current_user_is_admin%>
+
+
+
+
+<br>
+
+<%= link_to 'Luo uusi työhypoteesi', new_hypothesis_path %>
