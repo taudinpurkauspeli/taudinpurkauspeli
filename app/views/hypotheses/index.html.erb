@@ -20,10 +20,27 @@
       <tbody>
         <% @exercise_hypotheses.each do |exercise_hypothesis| %>
           <tr>
-            <td><%= exercise_hypothesis.hypothesis.name %></td>
-            <td><%= exercise_hypothesis.explanation %></td>
-            <td><%= link_to 'Muokkaa', edit_exercise_hypothesis_path(exercise_hypothesis) %></td>
-            <td><%= link_to 'Poista', exercise_hypothesis, method: :delete %></td>
+            <td><input class="btn btn-default btn-exercise" type="submit" value="<%= exercise_hypothesis.hypothesis.name %>" data-toggle="collapse" data-target="#collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>" />
+
+              <div class="collapse" id="collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>">
+                <%= form_for(exercise_hypothesis) do |f| %>
+                  <%= f.hidden_field :exercise_id, :value => exercise_hypothesis.exercise_id %>
+                  <%= f.hidden_field :hypothesis_id, :value => exercise_hypothesis.hypothesis_id %>
+                <div class="field">
+                  <%= f.label :explanation %><br>
+                  <%= f.text_field :explanation %>
+                </div>
+                <div class="actions">
+                  <%= f.submit %>
+                </div>
+                <% end %>
+                <%= button_to 'Poista', exercise_hypothesis, :class => 'btn btn-default btn-del-exercise', method: :delete %>
+              </div>
+            </td>
+            
+            
+            
+            
           </tr>
         <% end %>
       </tbody>
