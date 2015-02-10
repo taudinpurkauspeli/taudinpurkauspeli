@@ -36,9 +36,14 @@ fi:
              record_invalid: "Vääränlainen"
     models:
       user: "Käyttäjä"
+      exercise: "Case"
     attributes:
       user:
         username: "Käyttäjätunnus"
         password: "Salasana"
         password_confirmation: "Salasanan vahvistus"
         realname: "Nimi"
+      exercise:
+        name: "Nimi"
+        anamnesis: "Anamneesi"
+
