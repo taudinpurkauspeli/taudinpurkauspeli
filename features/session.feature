@@ -28,5 +28,5 @@ Feature: Session
     And I go to the front page
     When I click on the button "Kirjaudu sisään"
     And I enter my username and password
-    And I click on the button "Log in"
+    And I click on the button "Kirjaudu sisään"
     Then the page should show the content "Tervetuloa"
