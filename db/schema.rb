@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206121545) do
+ActiveRecord::Schema.define(version: 20150210133215) do
 
   create_table "exercise_hypotheses", force: :cascade do |t|
     t.integer  "exercise_id"
@@ -33,6 +33,10 @@ ActiveRecord::Schema.define(version: 20150206121545) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "count"
+  end
+
+  create_table "hypothesis_groups", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "tasks", force: :cascade do |t|
