@@ -21,12 +21,12 @@ class ApplicationController < ActionController::Base
   end
 
 def ensure_user_is_logged_in
-  redirect_to signin_path, notice: "you are not logged in" if current_user.nil?
+  redirect_to signin_path, notice: "Toiminto vaatii sisäänkirjautumisen" if current_user.nil?
 end
 
   def ensure_user_is_admin
     if current_user_is_admin == false
-        redirect_to signin_path, notice: "you are not signed in as admin"
+        redirect_to signin_path, notice: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia"
     end  
   end
 
