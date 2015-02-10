@@ -37,6 +37,8 @@ fi:
     models:
       user: "Käyttäjä"
       exercise: "Case"
+      hypothesis: "Työhypoteesi"
+      task: "Toimenpide"
     attributes:
       user:
         username: "Käyttäjätunnus"
