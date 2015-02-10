@@ -37,7 +37,7 @@ Given(/I have logged in as a student$/) do
   visit signin_path
   fill_in('username', with:"Testipoika")
   fill_in('password', with:"Salainen1")
-  click_button('Log in')
+  click_button('Kirjaudu sisään')
 end
 
 Given(/I have logged in as a teacher$/) do
@@ -45,7 +45,7 @@ Given(/I have logged in as a teacher$/) do
   visit signin_path
   fill_in('username', with:"Testipoika")
   fill_in('password', with:"Salainen1")
-  click_button('Log in')
+  click_button('Kirjaudu sisään')
 end
 
 Given(/^exercises have been added$/) do
