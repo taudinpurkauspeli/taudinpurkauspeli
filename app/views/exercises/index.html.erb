@@ -11,7 +11,7 @@
 
     <% if current_user_is_admin %>
       <div class="col-md-2">
-        <%= button_to 'Poista', exercise, :class => 'btn btn-default btn-del-exercise', :method => :delete, data: { confirm: 'Haluatko varmasti poistaa casen?' } %>
+        <%= button_to 'Poista', exercise, :class => 'btn btn-default btn-exercise btn-del', :method => :delete, data: { confirm: 'Haluatko varmasti poistaa casen?' } %>
       </div>
     <%end%>
   </div>

@@ -9,4 +9,4 @@ Feature: Hypothesis list feature
     And I go to the front page
     And I click on the button "Lihanautakuolemat"
     When I click on the link "Työhypoteesit"
-    Then the page should show the content "Nautaflunssa"
+    Then the page should have button "Nautaflunssa"

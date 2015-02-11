@@ -7,6 +7,7 @@
 $MediumGrey           : #dbdbdb;
 $BtnExerciseBorderClr : #999;
 $LightGreen           : #74ad61;
+$MediumGreen          : #446739;
 $LightRed             : #ae6161;
 $DarkRed              : #692f2f;
 $DarkGreen            : #232e1e;
@@ -145,9 +146,8 @@ img {
 
 //Buttons
 
-.btn-exercise{
+.btn-default{
   width: 100%;
-  height: 45px;
   text-align: left;
   background-color: $MediumGrey;
   border-color: $BtnExerciseBorderClr;
@@ -155,26 +155,38 @@ img {
   margin-bottom: 5px;
   border-width: 0px;
 }
-.btn-exercise:hover{
+.btn-default:hover{
   background-color: $LightGreen;
   color: #fff;
 }
-
-.btn-del-exercise{
-  //width: 10px;
-  height: 45px;
-  text-align: left;
+.btn-del{
+  width: auto;
   color: #fff;
   background-color: $LightRed;
-  border-color: $BtnExerciseBorderClr;
-  border-radius: 7px;
-  margin-bottom: 5px;
-  border-width: 0px;
 }
-.btn-del-exercise:hover{
+.btn-del:hover{
   background-color: $DarkRed;
   color: #fff;
 }
+
+.btn-save{
+  background-color: $LightGreen;
+  color: #fff;
+}
+.btn-save:hover{
+  background-color: $MediumGreen;
+  color: #fff;
+}
+
+.btn-exercise{
+  height: 45px;
+}
+
+.btn-hypothesis{
+  //height: 30px;
+}
+
+
 
 
 //New anamnesis
