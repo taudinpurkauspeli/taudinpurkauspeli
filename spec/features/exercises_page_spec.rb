@@ -46,7 +46,7 @@ describe "Exercises page" do
   describe "when exercises exist and admin user is signed in" do
 
     let!(:exercise){FactoryGirl.create(:exercise)}
-    let!(:exercise2){FactoryGirl.create(:exercise, name: "Kanakuolema", anamnesis:"Kuollut kana")}
+    
     let!(:user){FactoryGirl.create(:user)}
 
     before :each do
@@ -55,6 +55,7 @@ describe "Exercises page" do
 
     it "user should be able to visit exercises page and see exercises" do
 
+      FactoryGirl.create(:exercise, name: "Kanakuolema", anamnesis:"Kuollut kana")
       visit exercises_path
 
       expect(current_path).to eq(exercises_path)
