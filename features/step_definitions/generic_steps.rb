@@ -34,7 +34,7 @@ end
 
 Given(/I have logged in as a student$/) do
   user = FactoryGirl.create(:user, admin: false)
-  visit signin_path
+  visit exercises_path
   fill_in('username', with:"Testipoika")
   fill_in('password', with:"Salainen1")
   click_button('Kirjaudu sisään')
@@ -42,7 +42,7 @@ end
 
 Given(/I have logged in as a teacher$/) do
   user = FactoryGirl.create(:user, admin: true)
-  visit signin_path
+  visit exercises_path
   fill_in('username', with:"Testipoika")
   fill_in('password', with:"Salainen1")
   click_button('Kirjaudu sisään')
