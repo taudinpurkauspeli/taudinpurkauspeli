@@ -56,6 +56,7 @@ end
 Given(/^hypotheses have been added$/)  do
   Hypothesis.create name:"Nautaflunssa"
   Hypothesis.create name:"Hevosheikkous"
+  ExerciseHypothesis.create exercise_id:1, hypothesis_id:1
 end
 
 Given(/^tasks have been added$/)  do
