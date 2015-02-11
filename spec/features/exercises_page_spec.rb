@@ -46,7 +46,7 @@ describe "Exercises page" do
   describe "when exercises exist and admin user is signed in" do
 
     let!(:exercise){FactoryGirl.create(:exercise)}
-    let!(:exercise2){FactoryGirl.create(:exercise, name: "Kanakuolema", anamnesis:"Kuollut kana")}
+    
     let!(:user){FactoryGirl.create(:user)}
 
     before :each do
@@ -54,6 +54,55 @@ describe "Exercises page" do
     end
 
     it "user should be able to visit exercises page and see exercises" do
+
+      FactoryGirl.create(:exercise, name: "Kanakuolema", anamnesis:"Kuollut kana")
+      visit exercises_path
+
+      expect(current_path).to eq(exercises_path)
+
+      expect(page).to have_button 'Lihanautakuolemat'
+      expect(page).to have_button 'Kanakuolema'
+
+    end
+
+    it "user should be able to logout" do
+
+      visit exercises_path
+
+      click_button "Kirjaudu ulos"
+
+      expect(current_path).to eq(root_path)
+
+    end
+
+    it "user should be able to delete exercise" do
+
+      visit exercises_path
+
+      click_button "Poista"
+
+      expect(current_path).to eq(exercises_path)
+
+      expect(page).to have_content "Casen poistaminen onnistui!"
+      expect(page).not_to have_content "Lihanautakuolemat"
+
+    end
+
+
+  end
+
+   describe "when exercises exist and normal user is signed in" do
+
+    let!(:exercise){FactoryGirl.create(:exercise)}
+    
+    let!(:user){FactoryGirl.create(:user, admin: false)}
+
+    before :each do
+      sign_in(username:"Testipoika", password:"Salainen1")
+    end
+
+    it "user should be able to visit exercises page and see exercises" do
+      FactoryGirl.create(:exercise, name: "Kanakuolema", anamnesis:"Kuollut kana")
 
       visit exercises_path
 
@@ -71,6 +120,14 @@ describe "Exercises page" do
       click_button "Kirjaudu ulos"
 
       expect(current_path).to eq(root_path)
+
+    end
+
+    it "user should not be able to delete exercise" do
+
+      visit exercises_path
+
+      expect(page).not_to have_content "Poista"
 
     end
 
