@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Edit Exercise page" do
 
-	describe "if user is signed in as admin user" do
+	describe "if user is signed in as admin" do
 
 		let!(:user){FactoryGirl.create(:user)}
 		let!(:exercise){FactoryGirl.create(:exercise)}
@@ -32,7 +32,7 @@ describe "Edit Exercise page" do
 
 			click_button('Tallenna')
 
-			expect(current_path).to eq(edit_exercise_path(exercise))
+			expect(current_path).to eq(exercise_path(exercise))
 			expect(page).to have_content 'prohibited'
 		end
 
