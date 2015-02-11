@@ -17,12 +17,12 @@ describe "Exercises page" do
 
     FactoryGirl.create(:user)
 
-    visit signin_path
+    visit exercises_path
     fill_in('username', with:"Testipoika")
     fill_in('password', with:"Väärä salasana")
     click_button('Kirjaudu sisään')
 
-    expect(current_path).to eq(signin_path)
+    expect(current_path).to eq(exercises_path)
     expect(page).to have_content "Käyttäjätunnus tai salasana on väärin."
 
   end
@@ -31,12 +31,12 @@ describe "Exercises page" do
 
     FactoryGirl.create(:user)
 
-    visit signin_path
+    visit exercises_path
     fill_in('username', with:"Testipoika!")
     fill_in('password', with:"Salainen1")
     click_button('Kirjaudu sisään')
 
-    expect(current_path).to eq(signin_path)
+    expect(current_path).to eq(exercises_path)
     expect(page).to have_content "Käyttäjätunnus tai salasana on väärin."
 
   end
