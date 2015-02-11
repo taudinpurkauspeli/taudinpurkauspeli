@@ -44,13 +44,13 @@ RSpec.describe HypothesesController, :type => :controller do
       user_id: 1
   } }
 
-  describe "GET index" do
-    it "assigns all hypotheses as @rest_hypotheses" do
-      hypothesis = Hypothesis.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:rest_hypotheses)).to eq([hypothesis])
-    end
-  end
+  # describe "GET index" do
+  #   it "assigns all hypotheses as @rest_hypotheses" do
+  #     hypothesis = Hypothesis.create! valid_attributes
+  #     get :index, {}, valid_session
+  #     expect(assigns(:rest_hypotheses)).to eq([hypothesis])
+  #   end
+  # end
 
   describe "GET show" do
     it "assigns the requested hypothesis as @hypothesis" do
