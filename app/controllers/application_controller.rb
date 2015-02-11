@@ -5,7 +5,13 @@ class ApplicationController < ActionController::Base
 
   # määritellään, että metodit tulevat käyttöön myös näkymissä
   helper_method :current_user
+  helper_method :current_exercise
   helper_method :current_user_is_admin
+
+  def current_exercise
+    return nil if session[:exercise_id].nil?
+    Exercise.find(session[:exercise_id])
+  end
 
   def current_user
     return nil if session[:user_id].nil? 
