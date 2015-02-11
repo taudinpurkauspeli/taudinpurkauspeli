@@ -74,6 +74,19 @@ describe "Exercises page" do
 
     end
 
+    it "user should be able to delete exercise" do
+
+      visit exercises_path
+
+      click_button "Poista"
+
+      expect(current_path).to eq(exercises_path)
+
+      expect(page).to have_content "Casen poistaminen onnistui!"
+      expect(page).not_to have_content "Lihanautakuolemat"
+
+    end
+
 
   end
 
