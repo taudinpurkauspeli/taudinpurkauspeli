@@ -12,6 +12,9 @@ $LightRed             : #ae6161;
 $DarkRed              : #692f2f;
 $DarkGreen            : #232e1e;
 
+//These are not in palette.png and should be refactored later
+$DisabledButtonText   : #666;
+
 
 // make all images responsive by default
 img {
@@ -155,6 +158,23 @@ img {
   margin-bottom: 5px;
   border-width: 0px;
 }
+
+.btn-disabled{
+  width: 100%;
+  text-align: left;
+  color: $DisabledButtonText;
+  background-color: $MediumGrey;
+  border-color: $BtnExerciseBorderClr;
+  border-radius: 7px;
+  margin-bottom: 5px;
+  border-width: 0px;
+}
+
+.btn-disabled:hover{
+  color: $DisabledButtonText;
+  cursor:default;
+}
+
 .btn-default:hover{
   background-color: $LightGreen;
   color: #fff;

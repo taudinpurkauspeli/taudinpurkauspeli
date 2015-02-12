@@ -2,7 +2,11 @@
 <%@exercises.each do |exercise| %>
   <div class="row">
     <div class="col-md-5">
-      <%= button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get  %>
+      <% if current_user.nil? %>
+        <%= button_to exercise.name, '#', :class => 'btn btn-disabled btn-exercise', :method => :get %>
+      <% else %>
+        <%= button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get  %>
+      <% end %>
     </div>
 
     <% if current_user_is_admin %>
