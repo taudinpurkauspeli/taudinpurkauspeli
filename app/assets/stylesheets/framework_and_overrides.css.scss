@@ -6,6 +6,7 @@
 //Colors
 $MediumGrey           : #dbdbdb;
 $BtnExerciseBorderClr : #999;
+$PaleLightGreen       : #b2dca5;
 $LightGreen           : #74ad61;
 $MediumGreen          : #446739;
 $LightRed             : #ae6161;
@@ -170,11 +171,10 @@ img {
 }
 
 .btn-save{
-  background-color: $LightGreen;
-  color: #fff;
+  background-color: $PaleLightGreen;
 }
-.btn-save:hover{
-  background-color: $MediumGreen;
+.btn-save:hover, .btn-save:active{
+  background-color: $LightGreen;
   color: #fff;
 }
 
