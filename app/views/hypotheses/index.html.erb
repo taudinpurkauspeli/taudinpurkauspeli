@@ -7,7 +7,11 @@
   <div class="col-md-2">
   </div>
   <div class="col-md-5">
-    <h2>Työhypoteesipankki</h2>
+    <% if current_user_is_admin %>
+
+        <h2>Työhypoteesipankki</h2>
+
+    <% end %>
   </div>
 </div>
 
@@ -16,45 +20,48 @@
   <div class="col-md-5">
     <%# hypothesis_groups %>
     <% @hypothesis_groups.each do |group| %>
-      <div class="row">
-        <div class="col-md-9">
-          <input class="btn btn-default btn-hypothesis-group" type="button" value="<%= group.name %>" />
-        </div>
-      </div>
-
-        <%# hypotheses that belongs to current exercise and group%>
-      <% @exercise_hypotheses.each do |exercise_hypothesis| %>
-        <% if exercise_hypothesis.hypothesis.hypothesis_group_id == group.id %>
-          <div class="row">
-            <div class="col-md-9">
-              <input class="btn btn-default btn-hypothesis" type="button" value="<%= exercise_hypothesis.hypothesis.name %>" data-toggle="collapse" data-target="#collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>" />
-              <% if current_user_is_admin %>
-                <div class="collapse" id="collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>">
-                  <%= form_for(exercise_hypothesis) do |f| %>
-                    <%= f.hidden_field :exercise_id, :value => exercise_hypothesis.exercise_id %>
-                    <%= f.hidden_field :hypothesis_id, :value => exercise_hypothesis.hypothesis_id %>
-
-                    <div class="row">
-                      <div class="col-md-12">
-                        <%= f.text_area :explanation, placeholder: "Selite" %>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <%= f.submit :class => 'btn btn-default btn-save' %>
-                      </div>
-                      <div class="col-md-6">
-                        
-                      </div>
-                    </div>
-                  <% end %>
-                  <%= button_to 'Poista casesta', exercise_hypothesis, method: :delete, :class => 'btn btn-default btn-del' %>
-                </div>
-              <% end %>
-            </div>
+        <div class="row">
+          <div class="col-md-9">
+            <input class="btn btn-default btn-hypothesis-group" type="button" value="<%= group.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup1<%= group.id%>"/>
           </div>
-        <% end %>
-      <% end %>
+        </div>
+
+        <div class="collapse in" id="collapseHypothesisGroup1<%= group.id%>" >
+          <%# hypotheses that belongs to current exercise and group%>
+          <% @exercise_hypotheses.each do |exercise_hypothesis| %>
+              <% if exercise_hypothesis.hypothesis.hypothesis_group_id == group.id %>
+                  <div class="row">
+                    <div class="col-md-9">
+                      <input class="btn btn-default btn-hypothesis" type="button" value="<%= exercise_hypothesis.hypothesis.name %>" data-toggle="collapse" data-target="#collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>" />
+                      <% if current_user_is_admin %>
+                          <div class="collapse" id="collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>">
+                            <%= form_for(exercise_hypothesis) do |f| %>
+                                <%= f.hidden_field :exercise_id, :value => exercise_hypothesis.exercise_id %>
+                                <%= f.hidden_field :hypothesis_id, :value => exercise_hypothesis.hypothesis_id %>
+
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <%= f.text_area :explanation, placeholder: "Selite" %>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <%= f.submit :class => 'btn btn-default btn-save' %>
+                                  </div>
+                                  <div class="col-md-6">
+
+                                  </div>
+                                </div>
+                            <% end %>
+                            <%= button_to 'Poista casesta', exercise_hypothesis, method: :delete, :class => 'btn btn-default btn-del' %>
+                          </div>
+                      <% end %>
+                    </div>
+                  </div>
+              <% end %>
+          <% end %>
+
+        </div>
     <% end %>
   </div>
   <div class="col-md-2">
@@ -62,87 +69,87 @@
   <div class="col-md-5">
     <% if current_user_is_admin %>
 
-      <% @hypothesis_groups.each do |group| %>
-        <div class="row">
-          <div class="col-md-9">
-            <input class="btn btn-default btn-hypothesis-group" type="button" value="<%= group.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup<%= group.id%>" />
-          </div>
-          <div class="col-md-3">
-            <%= button_to 'Poista', group, method: :delete, :class => 'btn btn-default btn-del', data: { confirm: 'Oletko varma?' } %>
-          </div>
-        </div>
-        <div class="collapse in" id="collapseHypothesisGroup<%= group.id%>" >
-          <% @hypotheses_bank.each do |hypothesis| %>
+        <% @hypothesis_groups.each do |group| %>
+            <div class="row">
+              <div class="col-md-9">
+                <input class="btn btn-default btn-hypothesis-group" type="button" value="<%= group.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup<%= group.id%>" />
+              </div>
+              <div class="col-md-3">
+                <%= button_to 'Poista', group, method: :delete, :class => 'btn btn-default btn-del', data: { confirm: 'Oletko varma?' } %>
+              </div>
+            </div>
+            <div class="collapse in" id="collapseHypothesisGroup<%= group.id%>" >
+              <% @hypotheses_bank.each do |hypothesis| %>
 
-            <%#hypotheses that belongs to current group%>
-            <% if hypothesis.hypothesis_group_id == group.id %>
+                  <%#hypotheses that belongs to current group%>
+                  <% if hypothesis.hypothesis_group_id == group.id %>
+                      <div class="row">
+                        <div class="col-md-9">
+                          <%= form_for(@new_exercise_hypothesis) do |f| %>
+                              <%= f.hidden_field :exercise_id, :value => @exercise.id %>
+                              <%= f.hidden_field :hypothesis_id, :value => hypothesis.id %>
+                              <%= f.submit hypothesis.name, :class => 'btn btn-default btn-hypothesis' %>
+                          <% end %>
+                        </div>
+                        <div class="col-md-3">
+                          <%= button_to 'Poista', hypothesis, method: :delete, :class => 'btn btn-default btn-del', data: { confirm: 'Oletko varma?' } %>
+                        </div>
+                      </div>
+                  <% end %>
+              <% end %>
               <div class="row">
                 <div class="col-md-9">
-                  <%= form_for(@new_exercise_hypothesis) do |f| %>
-                    <%= f.hidden_field :exercise_id, :value => @exercise.id %>
-                    <%= f.hidden_field :hypothesis_id, :value => hypothesis.id %>
-                    <%= f.submit hypothesis.name, :class => 'btn btn-default btn-hypothesis' %>
-                  <% end %>
-                </div>
-                <div class="col-md-3">
-                  <%= button_to 'Poista', hypothesis, method: :delete, :class => 'btn btn-default btn-del', data: { confirm: 'Oletko varma?' } %>
+
+                  <%# new hypothesis%>
+                  <%#= button_to '+ Uusi työhypoteesi', new_hypothesis_path, method: :get, :class => 'btn btn-default btn-save btn-hypothesis' %>
+                  <input class="btn btn-default btn-hypothesis btn-save" type="button" value="+ Uusi työhypoteesi" data-toggle="collapse" data-target="#collapseNewHypothesis<%= group.id%>" />
+
+                  <div class="collapse" id="collapseNewHypothesis<%= group.id%>">
+                    <%= form_for(@new_hypothesis) do |f| %>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <%= f.text_field :name, placeholder: "Nimi" %>
+                            <%= f.hidden_field :hypothesis_group_id, :value => group.id %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <%= f.submit :class => 'btn btn-default btn-save' %>
+                          </div>
+                        </div>
+                    <% end %>
+                  </div>
+
                 </div>
               </div>
-            <% end %>
-          <% end %>
-          <div class="row">
-            <div class="col-md-9">
+            </div>
 
-              <%# new hypothesis%>
-              <%#= button_to '+ Uusi työhypoteesi', new_hypothesis_path, method: :get, :class => 'btn btn-default btn-save btn-hypothesis' %>
-              <input class="btn btn-default btn-hypothesis btn-save" type="button" value="+ Uusi työhypoteesi" data-toggle="collapse" data-target="#collapseNewHypothesis<%= group.id%>" />
+        <% end %>
 
-              <div class="collapse" id="collapseNewHypothesis<%= group.id%>">
-                <%= form_for(@new_hypothesis) do |f| %>
+        <%# new hypothesis_group %>
+        <div class="row">
+          <div class="col-md-9">
+            <input class="btn btn-default btn-hypothesis-group btn-save" type="button" value="+ Uusi työhypoteesiryhmä" data-toggle="collapse" data-target="#collapseNewHypothesisGroup" />
+
+            <div class="collapse" id="collapseNewHypothesisGroup">
+              <%= form_for(@new_hypothesis_group) do |f| %>
                   <div class="row">
                     <div class="col-md-12">
                       <%= f.text_field :name, placeholder: "Nimi" %>
-                      <%= f.hidden_field :hypothesis_group_id, :value => group.id %>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
                       <%= f.submit :class => 'btn btn-default btn-save' %>
                     </div>
-                  </div>
-                <% end %>
-              </div>
+                    <div class="col-md-6">
 
+                    </div>
+                  </div>
+              <% end %>
             </div>
           </div>
         </div>
-
-      <% end %>
-
-      <%# new hypothesis_group %>
-      <div class="row">
-        <div class="col-md-9">
-          <input class="btn btn-default btn-hypothesis-group btn-save" type="button" value="+ Uusi työhypoteesiryhmä" data-toggle="collapse" data-target="#collapseNewHypothesisGroup" />
-
-          <div class="collapse" id="collapseNewHypothesisGroup">
-            <%= form_for(@new_hypothesis_group) do |f| %>
-              <div class="row">
-                <div class="col-md-12">
-                  <%= f.text_field :name, placeholder: "Nimi" %>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <%= f.submit :class => 'btn btn-default btn-save' %>
-                </div>
-                <div class="col-md-6">
-                  
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
     <% end %>
   </div>
 </div>
