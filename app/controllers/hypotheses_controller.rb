@@ -8,12 +8,15 @@ class HypothesesController < ApplicationController
   def index
     cu_ex = current_exercise
     if cu_ex
-      @case = cu_ex
-      @case_hypotheses = @case.hypotheses
-      @rest_hypotheses = Hypothesis.all - @case_hypotheses
+      @exercise = cu_ex
+      @hypotheses_of_exercise = @exercise.hypotheses
+      @hypotheses_bank = Hypothesis.all - @hypotheses_of_exercise
+      @hypothesis_groups = HypothesisGroup.all
 
-      @exercise_hypotheses = ExerciseHypothesis.where(exercise_id: @case.id)
+      @exercise_hypotheses = ExerciseHypothesis.where(exercise_id: @exercise.id)
       @new_exercise_hypothesis = ExerciseHypothesis.new
+      @new_hypothesis_group = HypothesisGroup.new
+      @new_hypothesis =Hypothesis.new
 
     else
       redirect_to exercises_path, notice: 'Valitse ensin case, jota haluat tarkastella!'
@@ -42,7 +45,7 @@ class HypothesesController < ApplicationController
 
     respond_to do |format|
       if @hypothesis.save
-        format.html { redirect_to @hypothesis, notice: 'Hypothesis was successfully created.' }
+        format.html { redirect_to hypotheses_path, notice: 'Hypothesis was successfully created.' }
         format.json { render :show, status: :created, location: @hypothesis }
       else
         format.html { render :new }
@@ -83,6 +86,6 @@ class HypothesesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hypothesis_params
-      params.require(:hypothesis).permit(:name)
+      params.require(:hypothesis).permit(:name, :hypothesis_group_id)
     end
 end

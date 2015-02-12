@@ -53,9 +53,14 @@ Given(/^exercises have been added$/) do
   Exercise.create name:"Heikko hevonen", anamnesis:"Hevosella on heikot polvet"
 end
 
+Given(/^hypothesis groups have been added$/)  do
+  HypothesisGroup.create name:"Nautataudit"
+  HypothesisGroup.create name:"Hevostaudit"
+end
+
 Given(/^hypotheses have been added$/)  do
-  Hypothesis.create name:"Nautaflunssa"
-  Hypothesis.create name:"Hevosheikkous"
+  Hypothesis.create name:"Nautaflunssa", hypothesis_group_id:1
+  Hypothesis.create name:"Hevosheikkous", hypothesis_group_id:2
   ExerciseHypothesis.create exercise_id:1, hypothesis_id:1
 end
 
