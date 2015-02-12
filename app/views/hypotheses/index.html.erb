@@ -4,7 +4,7 @@
 <!-- headers -->
 <div class="row">
   <div class="col-md-5">
-    <h2>Casen <%= @case.name %> työhypoteesit</h2>
+    <h2>Casen <%= @exercise.name %> työhypoteesit</h2>
   </div>
   <div class="col-md-2">
   </div>
@@ -53,26 +53,40 @@
   </div>
   <div class="col-md-5">
     <% if current_user_is_admin %>
-        <% @rest_hypotheses.each do |hypothesis| %>
 
-          <div class="row">
-            <div class="col-md-9">
-              <%= form_for(@new_exercise_hypothesis) do |f| %>
-                <%= f.hidden_field :exercise_id, :value => @case.id %>
-                <%= f.hidden_field :hypothesis_id, :value => hypothesis.id %>
-                <%= f.submit hypothesis.name, :class => 'btn btn-default btn-hypothesis' %>
-              <% end %>
-            </div>
-            <div class="col-md-3">
-              <%= button_to 'Poista', hypothesis, method: :delete, :class => 'btn btn-default btn-del', data: { confirm: 'Oletko varma?' } %>
-            </div>
+      <% @hypothesis_groups.each do |group| %>
+        <div class="row">
+          <div class="col-md-9">
+            <input class="btn btn-default btn-hypothesis" type="button" value="<%= group.name %>" />
           </div>
-        <% end %>
-      <div class="row">
-        <div class="col-md-9">
-          <%= button_to '+ | Luo uusi työhypoteesi', new_hypothesis_path, method: :get, :class => 'btn btn-default btn-save' %>
+          <div class="col-md-3">
+            <%= button_to 'Poista', group, method: :delete, :class => 'btn btn-default btn-del', data: { confirm: 'Oletko varma?' } %>
+          </div>
         </div>
-      </div>
+        <% @hypotheses_bank.each do |hypothesis| %>
+
+          <%#hypotheses that belongs to current group%>
+          <% if hypothesis.hypothesis_group_id == group.id %>
+            <div class="row">
+              <div class="col-md-9">
+                <%= form_for(@new_exercise_hypothesis) do |f| %>
+                  <%= f.hidden_field :exercise_id, :value => @exercise.id %>
+                  <%= f.hidden_field :hypothesis_id, :value => hypothesis.id %>
+                  <%= f.submit hypothesis.name, :class => 'btn btn-default btn-hypothesis' %>
+                <% end %>
+              </div>
+              <div class="col-md-3">
+                <%= button_to 'Poista', hypothesis, method: :delete, :class => 'btn btn-default btn-del', data: { confirm: 'Oletko varma?' } %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <div class="row">
+          <div class="col-md-9">
+            <%= button_to '+ | Luo uusi työhypoteesi', new_hypothesis_path, method: :get, :class => 'btn btn-default btn-save' %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

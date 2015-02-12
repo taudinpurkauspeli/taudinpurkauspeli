@@ -8,11 +8,12 @@ class HypothesesController < ApplicationController
   def index
     cu_ex = current_exercise
     if cu_ex
-      @case = cu_ex
-      @case_hypotheses = @case.hypotheses
-      @rest_hypotheses = Hypothesis.all - @case_hypotheses
+      @exercise = cu_ex
+      @hypotheses_of_exercise = @exercise.hypotheses
+      @hypotheses_bank = Hypothesis.all - @hypotheses_of_exercise
+      @hypothesis_groups = HypothesisGroup.all
 
-      @exercise_hypotheses = ExerciseHypothesis.where(exercise_id: @case.id)
+      @exercise_hypotheses = ExerciseHypothesis.where(exercise_id: @exercise.id)
       @new_exercise_hypothesis = ExerciseHypothesis.new
 
     else
