@@ -6,12 +6,19 @@ class HypothesesController < ApplicationController
   # GET /hypotheses
   # GET /hypotheses.json
   def index
-    @case = current_exercise
-    @case_hypotheses = @case.hypotheses
-    @rest_hypotheses = Hypothesis.all - @case_hypotheses
+    cu_ex = current_exercise
+    if cu_ex
+      @case = cu_ex
+      @case_hypotheses = @case.hypotheses
+      @rest_hypotheses = Hypothesis.all - @case_hypotheses
 
-    @exercise_hypotheses = ExerciseHypothesis.where(exercise_id: @case.id)
-    @new_exercise_hypothesis = ExerciseHypothesis.new
+      @exercise_hypotheses = ExerciseHypothesis.where(exercise_id: @case.id)
+      @new_exercise_hypothesis = ExerciseHypothesis.new
+
+    else
+      redirect_to exercises_path, notice: 'Valitse ensin case, jota haluat tarkastella!'
+    end
+
   end
 
   # GET /hypotheses/1
