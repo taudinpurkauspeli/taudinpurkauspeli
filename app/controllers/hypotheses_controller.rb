@@ -15,6 +15,7 @@ class HypothesesController < ApplicationController
 
       @exercise_hypotheses = ExerciseHypothesis.where(exercise_id: @exercise.id)
       @new_exercise_hypothesis = ExerciseHypothesis.new
+      @new_hypothesis_group = HypothesisGroup.new
 
     else
       redirect_to exercises_path, notice: 'Valitse ensin case, jota haluat tarkastella!'
