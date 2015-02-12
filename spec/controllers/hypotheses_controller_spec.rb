@@ -91,7 +91,7 @@ RSpec.describe HypothesesController, :type => :controller do
 
       it "redirects to the created hypothesis" do
         post :create, {:hypothesis => valid_attributes}, valid_session
-        expect(response).to redirect_to(Hypothesis.last)
+        expect(response).to redirect_to(hypotheses_path)
       end
     end
 
