@@ -16,8 +16,20 @@
 <!-- lists of hypotheses -->
 <div class="row">
   <div class="col-md-5">
+    <%# hypothesis_groups %>
+    <% @hypothesis_groups.each do |group| %>
+      <div class="row">
+        <div class="col-md-9">
+          <input class="btn btn-default btn-hypothesis-group" type="button" value="<%= group.name %>" />
+        </div>
+        <div class="col-md-3">
+          <%= button_to 'Poista', group, method: :delete, :class => 'btn btn-default btn-del', data: { confirm: 'Oletko varma?' } %>
+        </div>
+      </div>
 
-        <% @exercise_hypotheses.each do |exercise_hypothesis| %>
+        <%# hypotheses that belongs to current exercise and group%>
+      <% @exercise_hypotheses.each do |exercise_hypothesis| %>
+        <% if exercise_hypothesis.hypothesis.hypothesis_group_id == group.id %>
           <div class="row">
             <div class="col-md-9">
               <input class="btn btn-default btn-hypothesis" type="button" value="<%= exercise_hypothesis.hypothesis.name %>" data-toggle="collapse" data-target="#collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>" />
@@ -47,7 +59,8 @@
             </div>
           </div>
         <% end %>
-
+      <% end %>
+    <% end %>
   </div>
   <div class="col-md-2">
   </div>
@@ -57,7 +70,7 @@
       <% @hypothesis_groups.each do |group| %>
         <div class="row">
           <div class="col-md-9">
-            <input class="btn btn-default btn-hypothesis" type="button" value="<%= group.name %>" />
+            <input class="btn btn-default btn-hypothesis-group" type="button" value="<%= group.name %>" />
           </div>
           <div class="col-md-3">
             <%= button_to 'Poista', group, method: :delete, :class => 'btn btn-default btn-del', data: { confirm: 'Oletko varma?' } %>
