@@ -26,7 +26,7 @@
         <% end %>
         <%= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-signup', :method => :get %>
       <% else %>
-        <%= button_to 'Kirjaudu ulos', 'signout', :class => 'btn btn-default btn-logout', :method => :delete unless current_user.nil?%>
+        <%= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-logout', :method => :delete unless current_user.nil?%>
       <% end %>
     </div>
   </div>
