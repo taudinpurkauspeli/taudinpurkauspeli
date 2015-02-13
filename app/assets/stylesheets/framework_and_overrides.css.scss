@@ -201,9 +201,19 @@ img {
 .btn-save{
   background-color: $PaleLightGreen;
 }
+
 .btn-save:hover, .btn-save:active{
   background-color: $LightGreen;
   color: #fff;
+}
+
+.btn-checked{
+  color: #fff;
+  background-color: $LightRed;
+}
+
+.btn-checked:hover, .btn-checked:active{
+  background-color: $DarkRed;
 }
 
 .btn-exercise{

@@ -5,6 +5,6 @@ class User < ActiveRecord::Base
 
   has_secure_password
   
-  has_many :checked_hypotheses
+  has_many :checked_hypotheses, dependent: :destroy
   has_many :exercise_hypotheses, through: :checked_hypotheses
 end

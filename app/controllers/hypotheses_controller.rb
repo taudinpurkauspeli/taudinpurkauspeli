@@ -1,6 +1,6 @@
 class HypothesesController < ApplicationController
   before_action :set_hypothesis, only: [:show, :edit, :update, :destroy]
-    before_action :ensure_user_is_logged_in
+  before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
 
   # GET /hypotheses
@@ -8,15 +8,25 @@ class HypothesesController < ApplicationController
   def index
     cu_ex = current_exercise
     if cu_ex
+
       @exercise = cu_ex
+      @user = current_user
       @hypotheses_of_exercise = @exercise.hypotheses
+
+      #all hypotheses and hypotheses for current exercise
       @hypotheses_bank = Hypothesis.all - @hypotheses_of_exercise
       @hypothesis_groups = HypothesisGroup.all
-
       @exercise_hypotheses = ExerciseHypothesis.where(exercise_id: @exercise.id)
+
+      #checked hypotheses for current user
+      @checked_hypotheses = @user.checked_hypotheses
+      @not_checked_hypotheses = @exercise_hypotheses - @user.exercise_hypotheses
+
+      #new instances
       @new_exercise_hypothesis = ExerciseHypothesis.new
       @new_hypothesis_group = HypothesisGroup.new
       @new_hypothesis =Hypothesis.new
+      @new_checked_hypothesis = CheckedHypothesis.new
 
     else
       redirect_to exercises_path, notice: 'Valitse ensin case, jota haluat tarkastella!'
@@ -79,13 +89,13 @@ class HypothesesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_hypothesis
-      @hypothesis = Hypothesis.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_hypothesis
+    @hypothesis = Hypothesis.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def hypothesis_params
-      params.require(:hypothesis).permit(:name, :hypothesis_group_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def hypothesis_params
+    params.require(:hypothesis).permit(:name, :hypothesis_group_id)
+  end
 end
