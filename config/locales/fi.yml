@@ -41,13 +41,18 @@ fi:
               blank: "on pakollinen"
             realname:
               blank: "on pakollinen"
-              too_short: "pituus vähintään 4 merkkiä"
+              too_short: "on liian lyhyt"
             email:
               blank: "on pakollinen"
             password:
               blank: "on pakollinen"
             password_confirmation:
               confirmation: "ei vastannut salasanaa"
+        hypothesis:
+          attributes:
+            name:
+              blank: "on pakollinen"
+              taken: "on jo käytössä"
       messages: 
         record_invalid: "Vääränlainen"
     models:

@@ -10,9 +10,9 @@ RSpec.describe HypothesisGroup, :type => :model do
   end
 
   it "is not saved without a name" do
-    hypothesis_group = HypothesisGroup.new name:"Bakteeritaudit"
+    hypothesis_group = HypothesisGroup.create name:""
 
-    expect(hypothesis_group).to be_valid
+    expect(hypothesis_group).not_to be_valid
     expect(HypothesisGroup.count).to eq(0)
 
   end
