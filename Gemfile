@@ -60,6 +60,9 @@ group :development do
   # For Bootstrap
   gem 'rails_layout'
 
+  # For creating a seed from database
+  gem 'seed_dump'
+
 end
 
 group :development, :test do
@@ -89,6 +92,4 @@ group :production do
   # This gem is also required for Heroku
   gem 'rails_12factor'
 
-# For creating a seed from database
-  gem 'seed_dump'
 end
