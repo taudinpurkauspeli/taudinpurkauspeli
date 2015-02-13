@@ -30,7 +30,7 @@ class CheckedHypothesesController < ApplicationController
 
     respond_to do |format|
       if @checked_hypothesis.save
-        format.html { redirect_to hypotheses_url, notice: "Uusi chekhyp"}
+        format.html { redirect_to hypotheses_url, notice: "Hypoteesi poistettu casesta!"}
         format.json { render :show, status: :created, location: @checked_hypothesis }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class CheckedHypothesesController < ApplicationController
   def update
     respond_to do |format|
       if @checked_hypothesis.update(checked_hypothesis_params)
-        format.html { redirect_to hypotheses_url, notice: 'Chekattu hypoteesi päivitetty' }
+        format.html { redirect_to hypotheses_url, notice: 'Chekattu hypoteesi päivitetty!' }
         format.json { render :show, status: :ok, location: @checked_hypothesis }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class CheckedHypothesesController < ApplicationController
   def destroy
     @checked_hypothesis.destroy
     respond_to do |format|
-      format.html { redirect_to hypotheses_url, notice: 'Cheked ei chekattu.'}
+      format.html { redirect_to hypotheses_url, notice: 'Hypoteesi lisätty caseen!'}
       format.json { head :no_content }
     end
   end
