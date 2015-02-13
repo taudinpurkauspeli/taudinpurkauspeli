@@ -18,16 +18,31 @@
       <% unless current_page?(root_path) %>
         <%= link_to 'Palaa pääsivulle', root_path, class: 'navbar-brand' %>
       <% end %>
-      <% if current_user.nil? %>
-        <%= form_tag sessions_path do %> 
-          <%= text_field_tag :username, params[:username], placeholder: 'Käyttäjätunnus' %>
-          <%= password_field_tag :password, params[:password], placeholder: 'Salasana' %>  
-          <%= submit_tag "Kirjaudu sisään" %>
-        <% end %>
-        <%= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-signup', :method => :get %>
-      <% else %>
-        <%= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-logout', :method => :delete unless current_user.nil?%>
-      <% end %>
+      
     </div>
+  </div>
+  <div class="login-container">
+    <% if current_user.nil? %>
+      <div class="row">
+        
+          <%= form_tag sessions_path do %> 
+          <div class="col-md-3">
+            <%= text_field_tag :username, params[:username], placeholder: 'Käyttäjätunnus', :class => 'width100' %>
+          </div>
+          <div class="col-md-3">
+            <%= password_field_tag :password, params[:password], placeholder: 'Salasana', :class => 'width100' %>
+          </div>
+          <div class="col-md-3">
+            <%= submit_tag "Kirjaudu sisään", :class => 'btn btn-default btn-signup' %>
+          </div>
+        <% end %>
+        
+        <div class="col-md-3">
+          <%= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-signup', :method => :get %>
+        </div>
+      </div>
+    <% else %>
+      <%= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-logout', :method => :delete unless current_user.nil?%>
+    <% end %>
   </div>
 </nav>
