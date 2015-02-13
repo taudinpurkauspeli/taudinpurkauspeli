@@ -6,6 +6,7 @@ class ExercisesController < ApplicationController
   # GET /exercises.json
   def index
     @exercises = Exercise.all
+    @excercise_page_rendered = true
     session[:exercise_id] = nil
   end
 
