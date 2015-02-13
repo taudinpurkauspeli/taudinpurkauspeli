@@ -21,3 +21,7 @@
 
 en:
   hello: "Hello world"
+  #activerecord:
+    #errors:
+      #template:
+        #header: "Following errors prohibited the object from being saved:"

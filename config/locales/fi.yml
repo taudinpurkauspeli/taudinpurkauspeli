@@ -27,6 +27,8 @@ fi:
       update: "Päivitä"
   activerecord:
     errors:
+      template:
+        header: "Seuraavat virheet estivät tallennuksen:"
       models:
         exercise:
           attributes:
