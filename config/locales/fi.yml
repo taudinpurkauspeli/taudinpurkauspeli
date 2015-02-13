@@ -38,6 +38,16 @@ fi:
           attributes:
             username:
               taken: "on jo käytössä"
+              blank: "on pakollinen"
+            realname:
+              blank: "on pakollinen"
+              too_short: "pituus vähintään 4 merkkiä"
+            email:
+              blank: "on pakollinen"
+            password:
+              blank: "on pakollinen"
+            password_confirmation:
+              confirmation: "ei vastannut salasanaa"
       messages: 
         record_invalid: "Vääränlainen"
     models:
