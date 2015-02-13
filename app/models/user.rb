@@ -3,5 +3,8 @@ class User < ActiveRecord::Base
 	validates :realname, presence: true, length: {minimum: 4}
 	validates :email, presence: true
 
-	has_secure_password
+  has_secure_password
+  
+  has_many :checked_hypotheses
+  has_many :exercise_hypotheses, through: :checked_hypotheses
 end
