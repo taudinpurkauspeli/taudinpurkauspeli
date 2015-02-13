@@ -65,19 +65,19 @@
                 <% end %>
               </div>
 
-          <%# delete hypothesis from case for normal user%>
-          <% else %>
 
+          <% else %>
+            <%# check hypothesis from case for normal user%>
               <div class="margin2em">
-                <% @not_checked_exercise_hypotheses.each do |not_checked_exercise_hypothesis| %>
-                    <% if not_checked_exercise_hypothesis.hypothesis.hypothesis_group_id == group.id %>
+                <% @not_checked_hypotheses.each do |not_checked_hypothesis| %>
+                    <% if not_checked_hypothesis.hypothesis.hypothesis_group_id == group.id %>
                         <div class="row">
                           <div class="col-md-9">
 
                             <%= form_for(@new_checked_hypothesis) do |f| %>
-                                <%= f.hidden_field :exercise_hypothesis_id, :value => not_checked_exercise_hypothesis.id %>
+                                <%= f.hidden_field :exercise_hypothesis_id, :value => not_checked_hypothesis.id %>
                                 <%= f.hidden_field :user_id, :value => @user.id %>
-                                <%= f.submit not_checked_exercise_hypothesis.hypothesis.name, :class => 'btn btn-default btn-hypothesis' %>
+                                <%= f.submit not_checked_hypothesis.hypothesis.name, :class => 'btn btn-default btn-save' %>
                             <% end %>
 
                           </div>
@@ -90,13 +90,13 @@
                 <% end %>
               </div>
 
-
+              <%# add hypothesis back to case for normal user%>
               <div class="margin2em">
                 <% @checked_hypotheses.each do |checked_hypothesis| %>
                     <% if checked_hypothesis.hypothesis.hypothesis_group_id == group.id %>
                         <div class="row">
                           <div class="col-md-9">
-                            <%= button_to checked_hypothesis.hypothesis.name, checked_hypothesis, method: :delete, :class => 'btn btn-default btn-del' %>
+                            <%= button_to checked_hypothesis.hypothesis.name, checked_hypothesis, method: :delete, :class => 'btn btn-default btn-checked' %>
 
                           </div>
 
@@ -110,7 +110,7 @@
 
 
 
-        <% end %>
+          <% end %>
         </div>
     <% end %>
   </div>
