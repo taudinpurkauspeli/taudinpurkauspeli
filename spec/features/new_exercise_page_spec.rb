@@ -32,7 +32,7 @@ describe "New Exercise page" do
 			click_button('Tallenna')
 			
 			expect(current_path).to eq(exercises_path)
-			expect(page).to have_content 'prohibited'
+			expect(page).to have_content 'estivät tallennuksen'
 		end
 
 

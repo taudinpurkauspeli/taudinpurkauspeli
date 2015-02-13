@@ -17,5 +17,5 @@ Feature: New exercise feature
     And I click on the link "Luo uusi"
     And I do not fill in all the fields with correct input values
     When I press "Tallenna"
-    Then page should have message: "prohibited this exercise from being saved"
+    Then page should have message: "Seuraavat virheet estivät tallennuksen:"
     And the exercise should not be in the database

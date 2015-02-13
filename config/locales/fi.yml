@@ -27,6 +27,8 @@ fi:
       update: "Päivitä"
   activerecord:
     errors:
+      template:
+        header: "Seuraavat virheet estivät tallennuksen:"
       models:
         exercise:
           attributes:
@@ -37,6 +39,21 @@ fi:
         user:
           attributes:
             username:
+              taken: "on jo käytössä"
+              blank: "on pakollinen"
+            realname:
+              blank: "on pakollinen"
+              too_short: "on liian lyhyt"
+            email:
+              blank: "on pakollinen"
+            password:
+              blank: "on pakollinen"
+            password_confirmation:
+              confirmation: "ei vastannut salasanaa"
+        hypothesis:
+          attributes:
+            name:
+              blank: "on pakollinen"
               taken: "on jo käytössä"
       messages: 
         record_invalid: "Vääränlainen"
