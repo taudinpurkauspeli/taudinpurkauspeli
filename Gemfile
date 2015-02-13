@@ -88,4 +88,7 @@ group :production do
 
   # This gem is also required for Heroku
   gem 'rails_12factor'
+
+# For creating a seed from database
+  gem 'seed_dump'
 end
