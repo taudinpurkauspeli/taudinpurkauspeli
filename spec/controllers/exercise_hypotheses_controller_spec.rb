@@ -133,7 +133,7 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
       it "redirects to the exercise_hypothesis" do
         exercise_hypothesis = ExerciseHypothesis.create! valid_attributes
         put :update, {:id => exercise_hypothesis.to_param, :exercise_hypothesis => valid_attributes}, valid_session
-        expect(response).to redirect_to(exercise_hypothesis)
+        expect(response).to redirect_to(hypotheses_url)
       end
     end
 

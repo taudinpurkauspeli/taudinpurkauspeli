@@ -44,7 +44,7 @@ class ExerciseHypothesesController < ApplicationController
   def update
     respond_to do |format|
       if @exercise_hypothesis.update(exercise_hypothesis_params)
-        format.html { redirect_to @exercise_hypothesis, notice: 'Exercise hypothesis was successfully updated.' }
+        format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin selite päivitetty.' }
         format.json { render :show, status: :ok, location: @exercise_hypothesis }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class ExerciseHypothesesController < ApplicationController
   def destroy
     @exercise_hypothesis.destroy
     respond_to do |format|
-      format.html { redirect_to hypotheses_url}
+      format.html { redirect_to hypotheses_url, notice: 'Työhypoteesi poistettu casesta.'}
       format.json { head :no_content }
     end
   end
