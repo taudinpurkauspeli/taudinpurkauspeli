@@ -1,7 +1,7 @@
 class CheckedHypothesesController < ApplicationController
   before_action :set_checked_hypothesis, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin, except: [:index, :show]
+  #before_action :ensure_user_is_admin, except: [:index, :show]
 
   # GET /checked_hypotheses
   # GET /checked_hypotheses.json

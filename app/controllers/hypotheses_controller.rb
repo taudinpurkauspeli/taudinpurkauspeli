@@ -9,14 +9,21 @@ class HypothesesController < ApplicationController
     cu_ex = current_exercise
     if cu_ex
       @exercise = cu_ex
+      @user = current_user
       @hypotheses_of_exercise = @exercise.hypotheses
       @hypotheses_bank = Hypothesis.all - @hypotheses_of_exercise
       @hypothesis_groups = HypothesisGroup.all
 
       @exercise_hypotheses = ExerciseHypothesis.where(exercise_id: @exercise.id)
+
+      @checked_hypotheses = @user.checked_hypotheses
+      @not_checked_exercise_hypotheses = @exercise_hypotheses - @user.exercise_hypotheses
+
+
       @new_exercise_hypothesis = ExerciseHypothesis.new
       @new_hypothesis_group = HypothesisGroup.new
       @new_hypothesis =Hypothesis.new
+      @new_checked_hypothesis = CheckedHypothesis.new
 
     else
       redirect_to exercises_path, notice: 'Valitse ensin case, jota haluat tarkastella!'
