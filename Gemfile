@@ -42,6 +42,8 @@ gem 'bootstrap-sass'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'rack-mini-profiler'
+
 group :test do
   
   gem 'factory_girl_rails'
