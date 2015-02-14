@@ -2,6 +2,9 @@
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
 require File.expand_path('../config/application', __FILE__)
-require 'seed_dump'
+
+task :seed_dump do
+  require 'seed_dump'
+end
 
 Rails.application.load_tasks
