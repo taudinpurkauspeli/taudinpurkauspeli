@@ -42,8 +42,6 @@ gem 'bootstrap-sass'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'rack-mini-profiler'
-
 group :test do
   
   gem 'factory_girl_rails'
@@ -64,6 +62,9 @@ group :development do
 
   # For creating a seed from database
   gem 'seed_dump'
+
+  # For showing speed/database queries
+  gem 'rack-mini-profiler'
 
 end
 

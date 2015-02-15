@@ -16,12 +16,11 @@ class HypothesesController < ApplicationController
       #all hypotheses and hypotheses for current exercise
       @hypotheses_bank = (Hypothesis.all - @hypotheses_of_exercise).group_by(&:hypothesis_group_id)
       @hypothesis_groups = HypothesisGroup.all
-      @exercise_hypotheses_first = @exercise.exercise_hypotheses
-      @exercise_hypotheses = @exercise_hypotheses_first.group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
+      @exercise_hypotheses = @exercise.exercise_hypotheses.includes(:hypothesis_group).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
 
       #checked hypotheses for current user
-      @checked_hypotheses = @user.checked_hypotheses.group_by(&:hypothesis_group_id)
-      @not_checked_hypotheses = (@exercise.exercise_hypotheses - @user.exercise_hypotheses).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
+      @checked_hypotheses = @user.checked_hypotheses.includes(:hypothesis).group_by{|checkhyp| checkhyp.hypothesis.hypothesis_group_id }
+      @not_checked_hypotheses = (@exercise.exercise_hypotheses.includes(:hypothesis_group) - @user.exercise_hypotheses).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
 
       #new instances
       @new_exercise_hypothesis = ExerciseHypothesis.new
