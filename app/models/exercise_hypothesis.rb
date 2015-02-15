@@ -7,4 +7,6 @@ class ExerciseHypothesis < ActiveRecord::Base
 
   has_many :checked_hypotheses, dependent: :destroy
   has_many :users, through: :checked_hypotheses
+
+  has_one :hypothesis_group, through: :hypothesis
 end

@@ -7,4 +7,5 @@ class CheckedHypothesis < ActiveRecord::Base
 
   has_one :hypothesis,  through: :exercise_hypothesis
   has_one :exercise,  through: :exercise_hypothesis
+  has_one :hypothesis_group, through: :exercise_hypothesis and :hypothesis
 end

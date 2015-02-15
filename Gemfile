@@ -63,6 +63,9 @@ group :development do
   # For creating a seed from database
   gem 'seed_dump'
 
+  # For showing speed/database queries
+ # gem 'rack-mini-profiler'
+
 end
 
 group :development, :test do
