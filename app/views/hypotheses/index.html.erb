@@ -1,5 +1,5 @@
 
-<!-- headers -->
+<%# headers %>
 <div class="row">
   <div class="col-md-5">
     <h2>Casen <%= @exercise.name %> työhypoteesit</h2>
@@ -23,7 +23,6 @@
           <input class="btn btn-default btn-hypothesis-group" type="button" value="<%= group.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup1<%= group.id%>"/>
         </div>
       </div>
-
       <div class="collapse in" id="collapseHypothesisGroup1<%= group.id%>" >
         <%# hypotheses that belong to current exercise and group%>
         <% if current_user_is_admin %>
