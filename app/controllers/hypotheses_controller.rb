@@ -14,7 +14,7 @@ class HypothesesController < ApplicationController
       @hypotheses_of_exercise = @exercise.hypotheses
 
       #all hypotheses and hypotheses for current exercise
-      @hypotheses_bank = (Hypothesis.all - @hypotheses_of_exercise).group_by(&:hypothesis_group_id)
+      @hypothesis_bank = (Hypothesis.all - @hypotheses_of_exercise).group_by(&:hypothesis_group_id)
       @hypothesis_groups = HypothesisGroup.all
       @exercise_hypotheses = exercise.exercise_hypotheses.includes(:hypothesis_group).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
 
