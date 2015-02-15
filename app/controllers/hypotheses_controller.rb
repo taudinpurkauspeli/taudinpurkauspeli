@@ -6,10 +6,10 @@ class HypothesesController < ApplicationController
   # GET /hypotheses
   # GET /hypotheses.json
   def index
-    cu_ex = current_exercise
-    if cu_ex
+    exercise = current_exercise
+    if exercise
 
-      @exercise = cu_ex
+      @exercise = exercise
       @user = current_user
       @hypotheses_of_exercise = @exercise.hypotheses
 
@@ -20,7 +20,7 @@ class HypothesesController < ApplicationController
 
       #checked hypotheses for current user
       @checked_hypotheses = @exercise.checked_hypotheses.where(user_id: @user.id).includes(:hypothesis).group_by{|checkhyp| checkhyp.hypothesis.hypothesis_group_id }
-      @not_checked_hypotheses = (@exercise.exercise_hypotheses.includes(:hypothesis_group) - @user.exercise_hypotheses).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
+      @unchecked_hypotheses = (@exercise.exercise_hypotheses.includes(:hypothesis_group) - @user.exercise_hypotheses).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
 
       #new instances
       @new_exercise_hypothesis = ExerciseHypothesis.new
@@ -89,6 +89,7 @@ class HypothesesController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_hypothesis
     @hypothesis = Hypothesis.find(params[:id])
