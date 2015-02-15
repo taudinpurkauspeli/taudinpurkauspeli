@@ -19,7 +19,7 @@ class HypothesesController < ApplicationController
       @exercise_hypotheses = @exercise.exercise_hypotheses.includes(:hypothesis_group).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
 
       #checked hypotheses for current user
-      @checked_hypotheses = @user.checked_hypotheses.includes(:hypothesis).group_by{|checkhyp| checkhyp.hypothesis.hypothesis_group_id }
+      @checked_hypotheses = @exercise.checked_hypotheses.where(user_id: @user.id).includes(:hypothesis).group_by{|checkhyp| checkhyp.hypothesis.hypothesis_group_id }
       @not_checked_hypotheses = (@exercise.exercise_hypotheses.includes(:hypothesis_group) - @user.exercise_hypotheses).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
 
       #new instances
