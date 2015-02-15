@@ -25,7 +25,6 @@ class HypothesisGroupsController < ApplicationController
   # POST /hypothesis_group.json
   def create
     @hypothesis_group = HypothesisGroup.new(hypothesis_group_params)
-
     respond_to do |format|
       if @hypothesis_group.save
         format.html { redirect_to hypotheses_url}
