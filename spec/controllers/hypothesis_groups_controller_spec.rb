@@ -85,20 +85,14 @@ RSpec.describe HypothesisGroupsController, :type => :controller do
     end
 
 
-=begin
+
     describe "with invalid params" do
       it "assigns a newly created but unsaved hypothesis group as @hypothesis_group" do
         post :create, {:hypothesis_group => invalid_attributes}, valid_session
         expect(assigns(:hypothesis_group)).to be_a_new(HypothesisGroup)
       end
-
-
-      it "re-renders the 'new' template" do
-        post :create, {:hypothesis => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
     end
-=end
+
 
   end
 
