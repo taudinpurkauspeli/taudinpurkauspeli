@@ -19,7 +19,7 @@
   <div class="col-md-5">
     <%# hypothesis_groups %>
     <% @hypothesis_groups.each do |group| %>
-      <% unless @unchecked_hypotheses[group.id].nil? %> 
+      <% unless @exercise_hypotheses[group.id].nil? %>
         <div class="row">
           <div class="col-md-9">
             <input class="btn btn-default btn-hypothesis-group" type="button" value="<%= group.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup1<%= group.id%>"/>
