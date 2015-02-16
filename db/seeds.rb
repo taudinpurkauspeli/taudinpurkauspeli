@@ -32,6 +32,6 @@ Task.create!([
   {name: "Soita lääkärille", exercise_id: nil}
 ])
 User.create!([
-  {username: "Eläinlääkepelle", admin: false, email: "Lääke", realname: "Eläin", password_digest: "$2a$10$y6w8oDECUJQY0Hv5.UuEN.WMjWSraK67k6LBWs3Lfb2Z7kMd.lc7K"},
-  {username: "Mr. Aggressiivinen", admin: true, email: "Aggro", realname: "Mr Koira", password_digest: "$2a$10$.XMfy39wwO73McrGe5hGEOoYNpF9Z1zPXxoQ8tr0JmfzjE1cc0a8."}
+  {username: "Opiskelija", admin: false, email: "opiskelija@eläin.fi", realname: "Ellu Eläinlääketietelijä", password_digest: "$2a$10$y6w8oDECUJQY0Hv5.UuEN.WMjWSraK67k6LBWs3Lfb2Z7kMd.lc7K"},
+  {username: "Opettaja", admin: true, email: "opettaja@eläin.fi", realname: "Olli Opettaja", password_digest: "$2a$10$.XMfy39wwO73McrGe5hGEOoYNpF9Z1zPXxoQ8tr0JmfzjE1cc0a8."}
 ])
