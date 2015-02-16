@@ -7,9 +7,9 @@ describe "Hypothesis list page" do
   let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis)}
   let!(:hypothesis_group){FactoryGirl.create(:hypothesis_group)}
 
-	describe "if user is signed in as student" do
+  describe "if user is signed in as student" do
 
-		let!(:user){FactoryGirl.create(:student)}
+    let!(:user){FactoryGirl.create(:student)}
 
     before :each do
       sign_in(username:"Opiskelija", password:"Salainen1")
@@ -20,7 +20,7 @@ describe "Hypothesis list page" do
       click_link('Työhypoteesit')
     end
 
-   it "user should be able to view the hypotheses of an exercise" do
+    it "user should be able to view the hypotheses of an exercise" do
       expect(page).to have_button 'Bakteeritaudit'
       expect(page).to have_button 'Virustauti'
     end
@@ -29,8 +29,8 @@ describe "Hypothesis list page" do
       click_button('Virustauti')
       expect(CheckedHypothesis.count).to eq(1)
    #   expect(page).to have_content 'Anamneesin mukaan tauti on virustauti'
-    end
   end
+end
 
   describe "if user is signed in as teacher" do
     let!(:user){FactoryGirl.create(:user)}
@@ -45,10 +45,26 @@ describe "Hypothesis list page" do
       click_link('Työhypoteesit')
     end
 
+    it "user should be able to create a new hypothesis" do
+      fill_in('hypothesis_name', with: 'Sorkkaihottuma')
+      expect {
+        first(:button, 'Tallenna').click
+      }.to change(Hypothesis, :count).by(1)
+      expect(page).to have_button 'Sorkkaihottuma'
+    end
+
+    it "user should be able to create a new hypothesis group" do
+      fill_in('hypothesis_group_name', with: 'Sorkkaeläinten ihotaudit')
+      expect {
+        all(:button, 'Tallenna')[1].click
+      }.to change(HypothesisGroup, :count).by(1)
+      expect(page).to have_button 'Sorkkaeläinten ihotaudit'
+    end
+
     it "user should be able to add hypotheses to an exercise" do
       expect {
         click_button('Sorkkatauti')
-      }.to change(ExerciseHypothesis, :count).by(1)
+        }.to change(ExerciseHypothesis, :count).by(1)
     end
 
     it "user should be able to edit the explanation of a hypothesis added to an exercise" do
