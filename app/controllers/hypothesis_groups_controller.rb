@@ -3,24 +3,6 @@ class HypothesisGroupsController < ApplicationController
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
 
-  def index
-    @hypothesis_group = HypothesisGroup.all
-  end
-
-  # GET /hypothesis_group/1
-  # GET /hypothesis_group/1.json
-  def show
-  end
-
-  # GET /hypothesis_group/new
-  def new
-    @hypothesis_group = HypothesisGroup.new
-  end
-
-  # GET /hypothesis_group/1/edit
-  def edit
-  end
-
   # POST /hypothesis_group
   # POST /hypothesis_group.json
   def create
