@@ -31,10 +31,10 @@ Then(/^the new hypothesis should be created$/) do
   expect(hg.hypotheses.first.name).to eq('Suu- ja sorkkatauti')
 end
 
-
 When(/^I click on a hypothesis button$/) do
    click_button('Hevosheikkous')
 end
+
 
 Then(/^the hypothesis should be added to the case$/) do
 	e = Exercise.first
