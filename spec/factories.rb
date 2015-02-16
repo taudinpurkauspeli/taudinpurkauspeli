@@ -33,9 +33,15 @@ FactoryGirl.define do
     hypothesis_group_id 1
   end
 
+  factory :banked_hypothesis, class: Hypothesis do
+    name "Sorkkatauti"
+    hypothesis_group_id 1
+  end
+
   factory :exercise_hypothesis do
     exercise_id 1
     hypothesis_id 1
+    explanation "Anamneesin mukaan tauti on virustauti"
   end
 
   factory :hypothesis_group do
