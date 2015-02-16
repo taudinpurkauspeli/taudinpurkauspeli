@@ -10,6 +10,14 @@ FactoryGirl.define do
     admin true
   end
 
+  factory :student, class: User do
+    username "Opiskelija"
+    realname "Olli Testailija"
+    email "teppo.testailija@gmail.com"
+    password "Salainen1"
+    password_confirmation "Salainen1"
+    admin false
+  end
 
   factory :exercise do
     name "Lihanautakuolemat"
@@ -22,11 +30,18 @@ FactoryGirl.define do
  
   factory :hypothesis do
     name "Virustauti"
+    hypothesis_group_id 1
+  end
+
+  factory :banked_hypothesis, class: Hypothesis do
+    name "Sorkkatauti"
+    hypothesis_group_id 1
   end
 
   factory :exercise_hypothesis do
     exercise_id 1
     hypothesis_id 1
+    explanation "Anamneesin mukaan tauti on virustauti"
   end
 
   factory :hypothesis_group do

@@ -198,11 +198,11 @@ img {
   color: #fff;
 }
 
-.btn-save{
+.btn-save, .btn-save:focus{
   background-color: $PaleLightGreen;
 }
 
-.btn-save:hover, .btn-save:active{
+.btn-save:hover{
   background-color: $LightGreen;
   color: #fff;
 }
@@ -222,6 +222,8 @@ img {
 
 .btn-hypothesis-group{
   //height: 30px;
+  font-style: italic;
+  font-weight: bold;
 }
 
 

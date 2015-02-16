@@ -2,11 +2,6 @@ class CheckedHypothesesController < ApplicationController
   before_action :set_checked_hypothesis, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in
 
-  # GET /checked_hypotheses/new
-  def new
-    @checked_hypothesis = CheckedHypothesis.new
-  end
-
   # POST /checked_hypotheses
   # POST /checked_hypotheses.json
   def create
@@ -17,8 +12,7 @@ class CheckedHypothesesController < ApplicationController
         format.html { redirect_to hypotheses_url, notice: get_explanation(@checked_hypothesis)}
         format.json { render :show, status: :created, location: @checked_hypothesis }
       else
-        format.html { render :new }
-        format.json { render json: @checked_hypothesis.errors, status: :unprocessable_entity }
+        format.html { redirect_to hypotheses_url, notice: "Hypoteesin poisto epäonnistui" }
       end
     end
   end

@@ -3,26 +3,6 @@ class ExerciseHypothesesController < ApplicationController
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
 
-  # GET /exercise_hypotheses
-  # GET /exercise_hypotheses.json
-  def index
-    @exercise_hypotheses = ExerciseHypothesis.all
-  end
-
-  # GET /exercise_hypotheses/1
-  # GET /exercise_hypotheses/1.json
-  def show
-  end
-
-  # GET /exercise_hypotheses/new
-  def new
-    @exercise_hypothesis = ExerciseHypothesis.new
-  end
-
-  # GET /exercise_hypotheses/1/edit
-  def edit
-  end
-
   # POST /exercise_hypotheses
   # POST /exercise_hypotheses.json
   def create
@@ -33,8 +13,7 @@ class ExerciseHypothesesController < ApplicationController
         format.html { redirect_to hypotheses_url}
         format.json { render :show, status: :created, location: @exercise_hypothesis }
       else
-        format.html { render :new }
-        format.json { render json: @exercise_hypothesis.errors, status: :unprocessable_entity }
+         format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin liittäminen caseen epäonnistui.' }
       end
     end
   end
@@ -47,8 +26,7 @@ class ExerciseHypothesesController < ApplicationController
         format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin selite päivitetty.' }
         format.json { render :show, status: :ok, location: @exercise_hypothesis }
       else
-        format.html { render :edit }
-        format.json { render json: @exercise_hypothesis.errors, status: :unprocessable_entity }
+         format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin päivittäminen epäonnistui.' }
       end
     end
   end
