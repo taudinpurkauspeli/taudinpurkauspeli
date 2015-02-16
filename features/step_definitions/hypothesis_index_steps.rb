@@ -13,6 +13,7 @@ Given(/^I am on the front page with preexisting exercises which have hypotheses$
   visit exercises_path
 end 
 
+
 When(/^I click on a button "(.*?)"$/) do |arg1|
 	first(:button, arg1).click
 end
@@ -35,6 +36,14 @@ When(/^I click on a hypothesis button$/) do
    click_button('Hevosheikkous')
 end
 
+When(/^I click on one of the hypotheses of the case$/) do
+  click_button('Hevosheikkous')
+end
+
+When(/^I fill in the name field with a correct name$/) do
+    fill_in('hypothesis_group_name', with: 'Koirasairaudet', :match => :prefer_exact)
+end
+
 
 Then(/^the hypothesis should be added to the case$/) do
 	e = Exercise.first
@@ -42,4 +51,9 @@ Then(/^the hypothesis should be added to the case$/) do
 	#this should be revisited sometime
 	save_and_open_page
 	expect(page).to have_button 'Hevosheikkous'
+end
+
+Then(/^the new hypothesis group should be created$/) do
+  expect(page).to have_button 'Koirasairaudet'
+
 end
