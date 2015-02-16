@@ -5,8 +5,9 @@ Feature: Hypothesis list feature
   Scenario: Student can view the hypothesis list of an exercise
     Given I have logged in as a student
     And exercises have been added
+    #Hypotheses without a group assigned will not be shown
     And hypothesis groups have been added
-    And hypotheses have been added
+    And hypotheses have been added to case
     And I go to the front page
     And I click on the button "Lihanautakuolemat"
     When I click on the link "Työhypoteesit"
