@@ -19,18 +19,20 @@
   <div class="col-md-5">
     <%# hypothesis_groups %>
     <% @hypothesis_groups.each do |group| %>
-      <div class="row">
-        <div class="col-md-9">
-          <input class="btn btn-default btn-hypothesis-group" type="button" value="<%= group.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup1<%= group.id%>"/>
+      <% unless @unchecked_hypotheses[group.id].nil? %> 
+        <div class="row">
+          <div class="col-md-9">
+            <input class="btn btn-default btn-hypothesis-group" type="button" value="<%= group.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup1<%= group.id%>"/>
+          </div>
         </div>
-      </div>
-      <div class="collapse in" id="collapseHypothesisGroup1<%= group.id%>" >
-        <%# hypotheses that belong to current exercise and group%>
-        <%= if current_user_is_admin
-          then render 'edit_hypotheses_of_group', { group: group }
-          else render 'check_hypotheses_of_group', { group: group }
-          end %>
-      </div>
+        <div class="collapse in" id="collapseHypothesisGroup1<%= group.id%>" >
+          <%# hypotheses that belong to current exercise and group%>
+          <%= if current_user_is_admin
+            then render 'edit_hypotheses_of_group', { group: group }
+            else render 'check_hypotheses_of_group', { group: group }
+            end %>
+        </div>
+      <% end %>
     <% end %>
   </div>
   <div class="col-md-2">
