@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127151336) do
+ActiveRecord::Schema.define(version: 20150213112936) do
+
+  create_table "checked_hypotheses", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "exercise_hypothesis_id"
+  end
 
   create_table "exercise_hypotheses", force: :cascade do |t|
     t.integer  "exercise_id"
@@ -30,9 +35,14 @@ ActiveRecord::Schema.define(version: 20150127151336) do
 
   create_table "hypotheses", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "count"
+    t.integer  "hypothesis_group_id"
+  end
+
+  create_table "hypothesis_groups", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -40,6 +50,16 @@ ActiveRecord::Schema.define(version: 20150127151336) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "exercise_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "username"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "admin",           default: false
+    t.string   "email"
+    t.string   "realname"
+    t.string   "password_digest"
   end
 
 end

@@ -1,23 +1,21 @@
-<!--<p id="notice"><%= notice %></p>-->
-
 <h1>Taudinpurkauspeli</h1>
-
-<% @exercises.each do |exercise| %>
+<%@exercises.each do |exercise| %>
   <div class="row">
     <div class="col-md-5">
-      <%= button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get  %>
-      <%#= exercise.name %>
-      <%#= link_to 'Show', exercise %>
-      <%#= link_to 'Edit', edit_exercise_path(exercise) %>
+      <%=if current_user.nil? 
+        then button_to exercise.name, '#', :class => 'btn btn-disabled btn-exercise', :method => :get 
+        else button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get 
+        end%>
     </div>
-    <div class="col-md-2">
-      <%= button_to 'Poista', exercise, :class => 'btn btn-default btn-del-exercise', :method => :delete, data: { confirm: 'Haluatko varmasti poistaa casen?' } %>
-      <%#= link_to 'Destroy', exercise, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </div>
+    <% if current_user_is_admin %>
+      <div class="col-md-2">
+        <%= button_to 'Poista', exercise, :class => 'btn btn-default btn-exercise btn-del', :method => :delete, data: { confirm: 'Haluatko varmasti poistaa casen?' } %>
+      </div>
+    <%end%>
   </div>
 <% end %>
-  
+
 <br />
 <br />
 
-<%= link_to 'Luo uusi case', new_exercise_path %>
+<%= link_to 'Luo uusi case', new_exercise_path if current_user_is_admin%>

@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-
+  before_action :ensure_user_is_logged_in
+  before_action :ensure_user_is_admin, except: [:index, :show]
   # GET /tasks
   # GET /tasks.json
   def index
@@ -25,7 +26,6 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: 'Task was successfully created.' }

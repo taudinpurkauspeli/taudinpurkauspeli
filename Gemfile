@@ -30,8 +30,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Twitter Boostrap
 gem 'bootstrap-sass'
 
+# Password encryption
+#gem 'bcrypt-ruby', '~> 3.1.2'
+
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+ gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -49,12 +52,19 @@ group :test do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
+  gem 'rspec-mocks'
 
 end
 
 group :development do
   # For Bootstrap
   gem 'rails_layout'
+
+  # For creating a seed from database
+  gem 'seed_dump'
+
+  # For showing speed/database queries
+ # gem 'rack-mini-profiler'
 
 end
 
@@ -84,4 +94,5 @@ group :production do
 
   # This gem is also required for Heroku
   gem 'rails_12factor'
+
 end

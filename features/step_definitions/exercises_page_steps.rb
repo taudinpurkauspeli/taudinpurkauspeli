@@ -6,14 +6,18 @@ end
 require 'cucumber/formatter/unicode'
 $:.unshift(File.dirname(__FILE__) + '/../../lib')
 
-Given(/^no exercises have been added$/) do
+Given(/^user has not logged in$/) do
+  #nothing
+end
 
+Given(/^no exercises have been added$/) do
+  #hehe
 end
 
 When(/^I go to the page that shows exercises$/) do
   visit exercises_path
 end
 
-Then(/^the page should show the content "(.*?)"$/) do |string|
-  expect(page).to have_content string
+When(/^I go to the front page$/) do
+  visit exercises_path
 end

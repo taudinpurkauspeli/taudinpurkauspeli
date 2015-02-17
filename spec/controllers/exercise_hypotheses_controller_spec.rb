@@ -20,6 +20,7 @@ require 'rails_helper'
 
 RSpec.describe ExerciseHypothesesController, :type => :controller do
 
+  let!(:user){FactoryGirl.create(:user)}
   # This should return the minimal set of attributes required to create a valid
   # ExerciseHypothesis. As you add validations to ExerciseHypothesis, be sure to
   # adjust the attributes here as well.
@@ -27,39 +28,21 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
     {exercise_id: 1, hypothesis_id: 1, explanation: "Oikea poisto!"}
   }
 
-=begin
+
   let(:invalid_attributes) {
-    {}
+    {exercise_id: 0}
   }
-=end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ExerciseHypothesesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all exercise_hypotheses as @exercise_hypotheses" do
-      exercise_hypothesis = ExerciseHypothesis.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:exercise_hypotheses)).to eq([exercise_hypothesis])
-    end
-  end
 
-  describe "GET show" do
-    it "assigns the requested exercise_hypothesis as @exercise_hypothesis" do
-      exercise_hypothesis = ExerciseHypothesis.create! valid_attributes
-      get :show, {:id => exercise_hypothesis.to_param}, valid_session
-      expect(assigns(:exercise_hypothesis)).to eq(exercise_hypothesis)
-    end
-  end
+  let(:valid_session) { {
+      user_id: 1
+  } }
 
-  describe "GET new" do
-    it "assigns a new exercise_hypothesis as @exercise_hypothesis" do
-      get :new, {}, valid_session
-      expect(assigns(:exercise_hypothesis)).to be_a_new(ExerciseHypothesis)
-    end
-  end
+
 
   describe "GET edit" do
     it "assigns the requested exercise_hypothesis as @exercise_hypothesis" do
@@ -85,23 +68,16 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
 
       it "redirects to the created exercise_hypothesis" do
         post :create, {:exercise_hypothesis => valid_attributes}, valid_session
-        expect(response).to redirect_to(ExerciseHypothesis.last)
+        expect(response).to redirect_to(Hypothesis)
       end
     end
 
-=begin
     describe "with invalid params" do
       it "assigns a newly created but unsaved exercise_hypothesis as @exercise_hypothesis" do
         post :create, {:exercise_hypothesis => invalid_attributes}, valid_session
         expect(assigns(:exercise_hypothesis)).to be_a_new(ExerciseHypothesis)
       end
-
-      it "re-renders the 'new' template" do
-        post :create, {:exercise_hypothesis => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
     end
-=end
   end
 
 
@@ -128,25 +104,18 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
       it "redirects to the exercise_hypothesis" do
         exercise_hypothesis = ExerciseHypothesis.create! valid_attributes
         put :update, {:id => exercise_hypothesis.to_param, :exercise_hypothesis => valid_attributes}, valid_session
-        expect(response).to redirect_to(exercise_hypothesis)
+        expect(response).to redirect_to(hypotheses_url)
       end
     end
 
-=begin
+
     describe "with invalid params" do
       it "assigns the exercise_hypothesis as @exercise_hypothesis" do
         exercise_hypothesis = ExerciseHypothesis.create! valid_attributes
         put :update, {:id => exercise_hypothesis.to_param, :exercise_hypothesis => invalid_attributes}, valid_session
         expect(assigns(:exercise_hypothesis)).to eq(exercise_hypothesis)
       end
-
-      it "re-renders the 'edit' template" do
-        exercise_hypothesis = ExerciseHypothesis.create! valid_attributes
-        put :update, {:id => exercise_hypothesis.to_param, :exercise_hypothesis => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
-      end
     end
-=end
   end
 
 
@@ -161,7 +130,7 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
     it "redirects to the exercise_hypotheses list" do
       exercise_hypothesis = ExerciseHypothesis.create! valid_attributes
       delete :destroy, {:id => exercise_hypothesis.to_param}, valid_session
-      expect(response).to redirect_to(exercise_hypotheses_url)
+      expect(response).to redirect_to(hypotheses_url)
     end
   end
 

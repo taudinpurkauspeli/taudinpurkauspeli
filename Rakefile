@@ -3,4 +3,8 @@
 
 require File.expand_path('../config/application', __FILE__)
 
+task :seed_dump do
+  require 'seed_dump'
+end
+
 Rails.application.load_tasks

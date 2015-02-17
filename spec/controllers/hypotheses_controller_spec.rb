@@ -20,11 +20,15 @@ require 'rails_helper'
 
 RSpec.describe HypothesesController, :type => :controller do
 
+  let!(:user){FactoryGirl.create(:user)}
   # This should return the minimal set of attributes required to create a valid
   # Hypothesis. As you add validations to Hypothesis, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     {name: "Virustauti"}
+  }
+  let!(:exercise){
+    FactoryGirl.create(:exercise)
   }
 
 =begin
@@ -36,15 +40,17 @@ RSpec.describe HypothesesController, :type => :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # HypothesesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { {
+      user_id: 1
+  } }
 
-  describe "GET index" do
-    it "assigns all hypotheses as @hypotheses" do
-      hypothesis = Hypothesis.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:hypotheses)).to eq([hypothesis])
-    end
-  end
+  # describe "GET index" do
+  #   it "assigns all hypotheses as @rest_hypotheses" do
+  #     hypothesis = Hypothesis.create! valid_attributes
+  #     get :index, {}, valid_session
+  #     expect(assigns(:rest_hypotheses)).to eq([hypothesis])
+  #   end
+  # end
 
   describe "GET show" do
     it "assigns the requested hypothesis as @hypothesis" do
@@ -85,7 +91,7 @@ RSpec.describe HypothesesController, :type => :controller do
 
       it "redirects to the created hypothesis" do
         post :create, {:hypothesis => valid_attributes}, valid_session
-        expect(response).to redirect_to(Hypothesis.last)
+        expect(response).to redirect_to(hypotheses_path)
       end
     end
 

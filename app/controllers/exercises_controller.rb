@@ -1,15 +1,19 @@
 class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
-
+  before_action :ensure_user_is_logged_in, except: [:index]
+  before_action :ensure_user_is_admin, except: [:index, :show]
   # GET /exercises
   # GET /exercises.json
   def index
     @exercises = Exercise.all
+    @excercise_page_rendered = true
+    session[:exercise_id] = nil
   end
 
   # GET /exercises/1
   # GET /exercises/1.json
   def show
+    session[:exercise_id] = params[:id]
   end
 
   # GET /exercises/new
@@ -25,7 +29,6 @@ class ExercisesController < ApplicationController
   # POST /exercises.json
   def create
     @exercise = Exercise.new(exercise_params)
-
     respond_to do |format|
       if @exercise.save
         format.html { redirect_to @exercise, notice: 'Casen luominen onnistui!' }
