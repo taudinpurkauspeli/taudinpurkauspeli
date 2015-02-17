@@ -61,7 +61,6 @@ Then(/^the hypothesis should be added to the case$/) do
 	e = Exercise.first
 	expect(e.hypotheses.first.name).to eq('Hevosheikkous')
 	#this should be revisited sometime
-	save_and_open_page
 	expect(page).to have_button 'Hevosheikkous'
 end
 
