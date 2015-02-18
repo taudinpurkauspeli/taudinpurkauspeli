@@ -48,5 +48,10 @@ FactoryGirl.define do
     name "Bakteeritaudit"
   end
 
+  factory :completed_task do 
+    user_id 1
+    task_id 1
+  end
+
 
 end
