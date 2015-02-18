@@ -56,3 +56,5 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+#Require all helper methods from rspec
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
