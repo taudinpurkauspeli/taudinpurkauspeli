@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   resources :checked_hypotheses, only: [:new, :create, :destroy]
 
+  resources :completed_tasks, only: [:create]
+
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   

@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213112936) do
+ActiveRecord::Schema.define(version: 20150218114021) do
 
   create_table "checked_hypotheses", force: :cascade do |t|
     t.integer "user_id"
     t.integer "exercise_hypothesis_id"
+  end
+
+  create_table "completed_tasks", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "exercise_hypotheses", force: :cascade do |t|
