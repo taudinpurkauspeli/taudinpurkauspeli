@@ -6,12 +6,6 @@ end
 require 'cucumber/formatter/unicode'
 $:.unshift(File.dirname(__FILE__) + '/../../lib')
 
-def createSomeHypotheses
-  Hypothesis.create name:"Nautaflunssa", hypothesis_group_id:1, id:1
-  Hypothesis.create name:"Sikatartunta", hypothesis_group_id:1, id:2
-  Hypothesis.create name:"Aivokuume", hypothesis_group_id:1, id:3
-end
-
 Given(/^there is an exercise that has multiple hypotheses$/) do
 	Exercise.create name:"Lihanautakuolemat", anamnesis:"Lihanautoja on menehtynyt lukuisia"
 
