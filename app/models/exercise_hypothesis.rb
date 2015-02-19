@@ -2,6 +2,9 @@ class ExerciseHypothesis < ActiveRecord::Base
   validates :exercise_id, presence: true
   validates :hypothesis_id, presence: true
 
+ # default_scope {includes(:hypothesis)}
+ # default_scope {order('hypothesis.name ASC')}
+
 	belongs_to :exercise
 	belongs_to :hypothesis
 
