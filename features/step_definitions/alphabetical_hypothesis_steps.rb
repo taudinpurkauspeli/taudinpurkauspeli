@@ -6,12 +6,16 @@ end
 require 'cucumber/formatter/unicode'
 $:.unshift(File.dirname(__FILE__) + '/../../lib')
 
+def createSomeHypotheses
+  Hypothesis.create name:"Nautaflunssa", hypothesis_group_id:1, id:1
+  Hypothesis.create name:"Sikatartunta", hypothesis_group_id:1, id:2
+  Hypothesis.create name:"Aivokuume", hypothesis_group_id:1, id:3
+end
+
 Given(/^there is an exercise that has multiple hypotheses$/) do
 	Exercise.create name:"Lihanautakuolemat", anamnesis:"Lihanautoja on menehtynyt lukuisia"
 
-	Hypothesis.create name:"Nautaflunssa", hypothesis_group_id:1, id:1
-	Hypothesis.create name:"Sikatartunta", hypothesis_group_id:1, id:2
-	Hypothesis.create name:"Aivokuume", hypothesis_group_id:1, id:3
+  createSomeHypotheses()	
 
 	HypothesisGroup.create name:"Taudit", id:1
 	for i in 1..3
@@ -25,6 +29,12 @@ Given(/^I go to the hypothesis list of that exercise$/) do
 	click_link('Työhypoteesit')
 end
 
+Given(/^those hypotheses are all checked$/) do
+  for i in 1..3
+    CheckedHypothesis.create exercise_hypothesis_id:i, user_id:1
+  end
+end
+
 Then(/^the hypothesis list should be in alphabetical order$/) do
 	actual = all("input[type='submit']")[1].value
 	expect( actual ).to eq('Aivokuume')
@@ -32,4 +42,19 @@ Then(/^the hypothesis list should be in alphabetical order$/) do
 	expect( actual ).to eq('Nautaflunssa')
 	actual = all("input[type='submit']")[3].value
 	expect( actual ).to eq('Sikatartunta')
+end
+
+Given(/^there are multiple hypotheses that are not added to any exercise$/) do
+  createSomeHypotheses()  
+end
+
+Then(/^the hypothesis bank should be in alphabetical order$/) do
+  #This is very arbitrary and could break even though the list is in correct order
+  save_and_open_page
+  actual = all("input[type='submit']")[4].value
+  expect( actual ).to eq('Aivokuume')
+  actual = all("input[type='submit']")[6].value
+  expect( actual ).to eq('Nautaflunssa')
+  actual = all("input[type='submit']")[8].value
+  expect( actual ).to eq('Sikatartunta')
 end
