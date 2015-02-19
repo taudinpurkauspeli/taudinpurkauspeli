@@ -9,3 +9,18 @@ Feature: Hypothesis list feature
     Then the page should have buttons
       | Nautaflunssa |
       | Hevosheikkous |
+
+
+  Scenario: Unchecked hypotheses will be in alphabetical order
+    Given I have logged in as a student
+    And there is an exercise that has multiple hypotheses
+    And I go to the hypothesis list of that exercise
+    Then the hypothesis list should be in alphabetical order
+
+  Scenario: Checked hypotheses will be in alphabetical order
+    Given I have logged in as a student
+    And there is an exercise that has multiple hypotheses
+    And those hypotheses are all checked
+    And I go to the hypothesis list of that exercise
+    Then the hypothesis list should be in alphabetical order
+

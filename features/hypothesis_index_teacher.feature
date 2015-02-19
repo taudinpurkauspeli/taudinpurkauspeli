@@ -53,4 +53,9 @@ Feature: Hypothesis list feature
     And I click on button "Tallenna"
     Then the new hypothesis group should be created
 
-
+Scenario: Hypotheses in the hypothesis bank will be in alphabetical order
+    Given I have logged in as a teacher
+    And there are exercises and hypothesis groups
+    And there are multiple hypotheses that are not added to any exercise
+    And I go to the hypothesis list of that exercise
+    Then the hypothesis bank should be in alphabetical order
