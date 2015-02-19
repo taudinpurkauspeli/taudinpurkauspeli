@@ -18,7 +18,7 @@ When(/^I fill in the form with correct values$/) do
   fill_in('user_email', with: 'nauta@on.koullut')
 end
 
-Given(/^I have an user account$/) do
+Given(/^I have a user account$/) do
   User.create username:'Testikäyttäjä', password:'Nauta on koullut', password_confirmation:'Nauta on koullut', realname:'Teppo Testaaja', email:'nauta@on.koullut'
 end
 

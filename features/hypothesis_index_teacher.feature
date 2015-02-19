@@ -12,7 +12,7 @@ Feature: Hypothesis list feature
 
   Scenario: Teacher can create a new hypothesis
     Given I have logged in as a teacher
-    And a case and hypothesis groups have been created
+    And cases and hypothesis groups have been created
     And I visit the "Työhypoteesit" page of the case "Lihanautakuolemat"
     When I click on a button "+ Uusi työhypoteesi"
     And I fill in the hypothesis name field with correct value
@@ -21,7 +21,7 @@ Feature: Hypothesis list feature
 
   Scenario: Teacher can add hypothesis to a case
     Given I have logged in as a teacher
-    And a case, hypothesis groups and hypotheses have been created
+    And cases, hypothesis groups and hypotheses have been created
     And I visit the "Työhypoteesit" page of the case "Lihanautakuolemat"
     When I click on the hypothesis button "Hevosheikkous"
     Then the hypothesis should be added to the case
@@ -46,7 +46,7 @@ Feature: Hypothesis list feature
 
  Scenario: Teacher can create a new hypothesis group
     Given I have logged in as a teacher
-    And a case, hypothesis groups and hypotheses have been created
+    And cases, hypothesis groups and hypotheses have been created
     And I visit the "Työhypoteesit" page of the case "Lihanautakuolemat"
     When I click on the button "+ Uusi työhypoteesiryhmä"
     And I fill in the hypothesis group name field with a correct name

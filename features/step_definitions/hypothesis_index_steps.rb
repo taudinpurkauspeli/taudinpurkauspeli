@@ -16,22 +16,13 @@ Given(/^some hypotheses have been added to case$/) do
   add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2)
 end
 
-Given(/^a case and hypothesis groups have been created$/) do
+Given(/^cases and hypothesis groups have been created$/) do
   create_exercises
   create_hypothesis_groups
 end
 
-Given(/^a case, hypothesis groups and hypotheses have been created$/) do
+Given(/^cases, hypothesis groups and hypotheses have been created$/) do
   create_all_hypotheses_for_case
-end
-
-
-Given(/^I visit the "(.*?)" page of the case "(.*?)"$/) do |arg1, arg2|
-  create_exercises
-  create_hypothesis_groups
-
-  go_to_case(arg2)
-  click_link(arg1)
 end
 
 

@@ -5,3 +5,4 @@ rescue LoadError;
 end
 require 'cucumber/formatter/unicode'
 $:.unshift(File.dirname(__FILE__) + '/../../lib')
+

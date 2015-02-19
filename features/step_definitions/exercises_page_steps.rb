@@ -10,6 +10,10 @@ Given(/^no exercises have been added$/) do
   #hehe
 end
 
+Given(/^exercises have been added$/) do
+  create_exercises
+end
+
 When(/^I go to the page that shows exercises$/) do
   visit exercises_path
 end

@@ -10,7 +10,7 @@ Given(/^I am on the front page$/) do
   visit exercises_path
 end
 
-Given(/^I do fill in all the fields with correct input values$/) do
+Given(/^I fill in all the fields with correct input values$/) do
   fill_in('exercise_name', with: 'Lihanautakuolemat')
   fill_in('exercise_anamnesis', with: 'Nauta on koullut')
 end
@@ -18,6 +18,14 @@ end
 Given(/^I do not fill in all the fields with correct input values$/) do
   fill_in('exercise_name', with: '')
   fill_in('exercise_anamnesis', with: 'Nauta on koullut')
+end
+
+When(/^I press the button "(.*?)"$/) do |arg1|
+  click_button(arg1)
+end
+
+Then(/^page should have a message: "(.*?)"$/) do |arg1|
+  expect(page).to have_content arg1
 end
 
 Then(/^the exercise should be in the database$/) do
