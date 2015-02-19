@@ -6,15 +6,7 @@ end
 require 'cucumber/formatter/unicode'
 $:.unshift(File.dirname(__FILE__) + '/../../lib')
 
- #Given(/^I am on the front page with preexisting exercises which have hypotheses$/) do
-  #Exercise.create name:"Lihanautakuolemat", anamnesis:"Lihanautoja on kuollut"
-  #Hypothesis.create name:"Nautaflunssa"
-
- # visit exercises_path
-#end
-
 Given(/^some hypotheses have been added to case$/) do
-
   create_exercises
   create_hypothesis_groups
 
@@ -22,50 +14,64 @@ Given(/^some hypotheses have been added to case$/) do
 
   add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1)
   add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2)
-
 end
 
-Given(/^I go to the case "(.*?)"$/) do |arg1|
-  visit exercises_path
-  click_button(arg1)
+Given(/^a case and hypothesis groups have been created$/) do
+  create_exercises
+  create_hypothesis_groups
 end
+
+Given(/^a case, hypothesis groups and hypotheses have been created$/) do
+  create_all_hypotheses_for_case
+end
+
+
+Given(/^I visit the "(.*?)" page of the case "(.*?)"$/) do |arg1, arg2|
+  create_exercises
+  create_hypothesis_groups
+
+  go_to_case(arg2)
+  click_link(arg1)
+end
+
+
+
+
+
 
 When(/^I click on a button "(.*?)"$/) do |arg1|
 	first(:button, arg1).click
 end
 
-
 When(/^I click on button "(.*?)"$/) do |arg1|
  all(:button, 'Tallenna')[2].click
 end
 
-When(/^I click on corresponding button "(.*?)"$/) do |arg1|
-   all(:button, 'Päivitä')[0].click
-end
-
-
-When(/^I fill in name field with correct value$/) do
+When(/^I fill in the hypothesis name field with correct value$/) do
 	fill_in('hypothesis_name', with: 'Suu- ja sorkkatauti', :match => :prefer_exact)
 end
 
-When(/^I click on the corresponding button "(.*?)"$/) do |arg1|
-	first(:button, arg1).click
+When(/^I save the new hypothesis with button "(.*?)"$/) do |arg1|
+  all(:button, 'Tallenna')[0].click
+  end
+
+When(/^I save changes with button "(.*?)"$/) do |arg1|
+  all(:button, 'Päivitä')[0].click
 end
 
+When(/^I click on the delete button "(.*?)"$/) do |arg1|
+  all(:button, 'Poista casesta')[0].click
+end
 
-When(/^I click on a hypothesis button$/) do
-   click_button('Hevosheikkous')
+When(/^I click on the hypothesis button "(.*?)"$/) do |arg1|
+   click_button(arg1)
 end
 
 When(/^I click on one of the hypotheses of the case$/) do
   click_button('Nautaflunssa')
 end
 
-When(/^I fill in the name field with a correct name$/) do
-    fill_in('hypothesis_group_name', with: 'Koirasairaudet', :match => :prefer_exact)
-end
-
-When(/^I navigate to the hypotheses page$/) do
+When(/^I fill in the hypothesis group name field with a correct name$/) do
     fill_in('hypothesis_group_name', with: 'Koirasairaudet', :match => :prefer_exact)
 end
 
@@ -73,32 +79,38 @@ When(/^I fill in the explanation field$/) do
   fill_in('exercise_hypothesis_explanation', with: 'Hevosen hauraat luut', :match => :prefer_exact)
 end
 
+
+
+
+
 Then(/^the hypothesis should be added to the case$/) do
 	e = Exercise.first
 	expect(e.hypotheses.first.name).to eq('Hevosheikkous')
-	#this should be revisited sometime
 	expect(page).to have_button 'Hevosheikkous'
+  expect(ExerciseHypothesis.count).to eq(1)
 end
 
 Then(/^the new hypothesis group should be created$/) do
   expect(page).to have_button 'Koirasairaudet'
-end
+  expect(HypothesisGroup.count).to eq(3)
+ end
 
 Then(/^the explanation should be added to the hypothesis$/) do
   expect(ExerciseHypothesis.first.explanation).to include('Hevosen hauraat luut')
 end
 
 Then(/^the hypothesis should be removed from the case$/) do
-  e = ExerciseHypothesis.first
-  expect(e).to eq(nil)
+  exercise_hypotheses = Exercise.first.exercise_hypotheses
+  expect(exercise_hypotheses.count).to eq(1)
+  expect(exercise_hypotheses.first.hypothesis.name).not_to eq("Nautaflunssa")
 end
-
 
 Then(/^the new hypothesis should be created$/) do
   expect(page).to have_button 'Suu- ja sorkkatauti'
-  hg = HypothesisGroup.first
-  expect(hg.hypotheses.first.name).to eq('Suu- ja sorkkatauti')
-end
+  hypothesis_group = HypothesisGroup.first
+  expect(hypothesis_group.hypotheses.first.name).to eq('Suu- ja sorkkatauti')
+  expect(Hypothesis.count).to eq(1)
+  end
 
 Then(/^the page should have buttons$/) do |table|
   table.raw.each do |row|

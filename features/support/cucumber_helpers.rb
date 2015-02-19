@@ -20,10 +20,21 @@ module CucumberHelpers
     Task.create name:"Lääkitse hevonen"
   end
 
+  def create_all_hypotheses_for_case
+    create_exercises
+    create_hypothesis_groups
+    create_hypotheses
+  end
+
   def add_hypothesis_to_case(ids)
 
     ExerciseHypothesis.create exercise_id:ids[:exercise_id], hypothesis_id:ids[:hypothesis_id]
 
+  end
+
+  def go_to_case(exercise)
+    visit exercises_path
+    click_button(exercise)
   end
 
 

@@ -48,19 +48,9 @@ Given(/^exercises have been added$/) do
   create_exercises
 end
 
-Given(/^there are exercises and hypothesis groups$/) do
-  create_exercises
-
-  create_hypothesis_groups
-end
 
 Given(/^hypotheses have been created$/) do
   create_hypotheses
-end
-
-Given(/^hypotheses have been added to case$/)  do
-  create_hypotheses
-  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1)
 end
 
 Given(/^tasks have been added$/)  do
