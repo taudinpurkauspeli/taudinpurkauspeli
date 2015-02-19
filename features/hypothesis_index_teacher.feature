@@ -55,7 +55,7 @@ Feature: Hypothesis list feature
 
 Scenario: Hypotheses in the hypothesis bank will be in alphabetical order
     Given I have logged in as a teacher
-    And there are exercises and hypothesis groups
+    And cases and hypothesis groups have been created
     And there are multiple hypotheses that are not added to any exercise
     And I go to the hypothesis list of that exercise
     Then the hypothesis bank should be in alphabetical order

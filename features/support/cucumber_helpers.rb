@@ -26,6 +26,12 @@ module CucumberHelpers
     create_hypotheses
   end
 
+  def createSomeHypotheses
+    Hypothesis.create name:"Nautaflunssa", hypothesis_group_id:1, id:1
+    Hypothesis.create name:"Sikatartunta", hypothesis_group_id:1, id:2
+    Hypothesis.create name:"Aivokuume", hypothesis_group_id:1, id:3
+  end
+
   def add_hypothesis_to_case(ids)
 
     ExerciseHypothesis.create exercise_id:ids[:exercise_id], hypothesis_id:ids[:hypothesis_id]

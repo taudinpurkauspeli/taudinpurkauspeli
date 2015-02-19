@@ -59,7 +59,7 @@ When(/^I click on the hypothesis button "(.*?)"$/) do |arg1|
 end
 
 When(/^I click on one of the hypotheses of the case$/) do
-  click_button('Nautaflunssa')
+  click_button('Hevosheikkous')
 end
 
 When(/^I fill in the hypothesis group name field with a correct name$/) do
@@ -87,13 +87,13 @@ Then(/^the new hypothesis group should be created$/) do
  end
 
 Then(/^the explanation should be added to the hypothesis$/) do
-  expect(ExerciseHypothesis.first.explanation).to include('Hevosen hauraat luut')
+  expect(ExerciseHypothesis.find(2).explanation).to include('Hevosen hauraat luut')
 end
 
 Then(/^the hypothesis should be removed from the case$/) do
   exercise_hypotheses = Exercise.first.exercise_hypotheses
   expect(exercise_hypotheses.count).to eq(1)
-  expect(exercise_hypotheses.first.hypothesis.name).not_to eq("Nautaflunssa")
+  expect(exercise_hypotheses.first.hypothesis.name).not_to eq("Hevosheikkous")
 end
 
 Then(/^the new hypothesis should be created$/) do
