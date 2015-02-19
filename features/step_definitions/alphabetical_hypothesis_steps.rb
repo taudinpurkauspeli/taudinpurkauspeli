@@ -50,7 +50,6 @@ end
 
 Then(/^the hypothesis bank should be in alphabetical order$/) do
   #This is very arbitrary and could break even though the list is in correct order
-  save_and_open_page
   actual = all("input[type='submit']")[4].value
   expect( actual ).to eq('Aivokuume')
   actual = all("input[type='submit']")[6].value
