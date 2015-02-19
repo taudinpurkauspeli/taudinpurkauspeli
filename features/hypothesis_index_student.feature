@@ -4,9 +4,9 @@ Feature: Hypothesis list feature
 
   Scenario: Student can view the hypothesis list of an exercise
     Given I have logged in as a student
-    Given there are exercises and hypothesis groups
-    And hypotheses have been added to case
-    And I go to the front page
-    And I click on the button "Lihanautakuolemat"
+    And some hypotheses have been added to case
+    And I go to the case "Lihanautakuolemat"
     When I click on the link "Työhypoteesit"
-    Then the page should have button "Nautaflunssa"
+    Then the page should have buttons
+      | Nautaflunssa |
+      | Hevosheikkous |

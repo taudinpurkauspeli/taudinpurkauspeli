@@ -13,6 +13,22 @@ $:.unshift(File.dirname(__FILE__) + '/../../lib')
  # visit exercises_path
 #end
 
+Given(/^some hypotheses have been added to case$/) do
+
+  create_exercises
+  create_hypothesis_groups
+
+  create_hypotheses
+
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2)
+
+end
+
+Given(/^I go to the case "(.*?)"$/) do |arg1|
+  visit exercises_path
+  click_button(arg1)
+end
 
 When(/^I click on a button "(.*?)"$/) do |arg1|
 	first(:button, arg1).click
@@ -82,4 +98,12 @@ Then(/^the new hypothesis should be created$/) do
   expect(page).to have_button 'Suu- ja sorkkatauti'
   hg = HypothesisGroup.first
   expect(hg.hypotheses.first.name).to eq('Suu- ja sorkkatauti')
+end
+
+Then(/^the page should have buttons$/) do |table|
+  table.raw.each do |row|
+    row.each do |content|
+      expect(page).to have_button content
+    end
+  end
 end

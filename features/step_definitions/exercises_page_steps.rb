@@ -6,10 +6,6 @@ end
 require 'cucumber/formatter/unicode'
 $:.unshift(File.dirname(__FILE__) + '/../../lib')
 
-Given(/^user has not logged in$/) do
-  #nothing
-end
-
 Given(/^no exercises have been added$/) do
   #hehe
 end
@@ -20,4 +16,12 @@ end
 
 When(/^I go to the front page$/) do
   visit exercises_path
+end
+
+Then(/^I should see the following buttons$/) do |table|
+  table.raw.each do |row|
+    row.each do |content|
+      expect(page).to have_button content
+    end
+  end
 end

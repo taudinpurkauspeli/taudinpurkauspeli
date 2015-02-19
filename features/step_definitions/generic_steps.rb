@@ -46,7 +46,6 @@ end
 
 Given(/^exercises have been added$/) do
   create_exercises
-
 end
 
 Given(/^there are exercises and hypothesis groups$/) do
