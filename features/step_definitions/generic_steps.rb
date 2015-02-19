@@ -45,31 +45,25 @@ Given(/I have logged in as a teacher$/) do
 end
 
 Given(/^exercises have been added$/) do
-  Exercise.create name:"Lihanautakuolemat", anamnesis:"Lihanautoja on menehtynyt lukuisia"
-  Exercise.create name:"Heikko hevonen", anamnesis:"Hevosella on heikot polvet"
+  create_exercises
 
 end
 
 Given(/^there are exercises and hypothesis groups$/) do
-  Exercise.create name:"Lihanautakuolemat", anamnesis:"Lihanautoja on menehtynyt lukuisia"
-  Exercise.create name:"Heikko hevonen", anamnesis:"Hevosella on heikot polvet"
+  create_exercises
 
-  HypothesisGroup.create name:"Nautataudit"
-  HypothesisGroup.create name:"Hevostaudit"
+  create_hypothesis_groups
 end
 
 Given(/^hypotheses have been created$/) do
-  Hypothesis.create name:"Nautaflunssa", hypothesis_group_id:1
-  Hypothesis.create name:"Hevosheikkous", hypothesis_group_id:2
+  create_hypotheses
 end
 
 Given(/^hypotheses have been added to case$/)  do
-  Hypothesis.create name:"Nautaflunssa", hypothesis_group_id:1
-  Hypothesis.create name:"Hevosheikkous", hypothesis_group_id:2
-  ExerciseHypothesis.create exercise_id:1, hypothesis_id:1
+  create_hypotheses
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1)
 end
 
 Given(/^tasks have been added$/)  do
-  Task.create name:"Soita lääkärille"
-  Task.create name:"Lääkitse hevonen"
+  create_tasks
 end
