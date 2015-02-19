@@ -4,12 +4,12 @@ Feature: Hypothesis list feature
 
   Scenario: Student can view the hypothesis list of an exercise
     Given I have logged in as a student
-    Given there are exercises and hypothesis groups
-    And hypotheses have been added to case
-    And I go to the front page
-    And I click on the button "Lihanautakuolemat"
-    When I click on the link "Työhypoteesit"
-    Then the page should have button "Nautaflunssa"
+    And some hypotheses have been added to case
+    When I visit the "Työhypoteesit" page of the case "Lihanautakuolemat"
+    Then the page should have buttons
+      | Nautaflunssa |
+      | Hevosheikkous |
+
 
   Scenario: Unchecked hypotheses will be in alphabetical order
     Given I have logged in as a student
@@ -23,3 +23,4 @@ Feature: Hypothesis list feature
     And those hypotheses are all checked
     And I go to the hypothesis list of that exercise
     Then the hypothesis list should be in alphabetical order
+
