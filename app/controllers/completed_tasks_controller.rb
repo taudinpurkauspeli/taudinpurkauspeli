@@ -4,7 +4,9 @@ class CompletedTasksController < ApplicationController
   # POST /completed_tasks
   # POST /completed_tasks.json
   def create
+
     @completed_task = CompletedTask.new(completed_task_params)
+    session[:task_id] = nil
 
     respond_to do |format|
       if @completed_task.save

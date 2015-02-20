@@ -6,4 +6,4 @@ Feature: Task list feature
     Given I have logged in as a student
     And cases and tasks have been created
     When I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
-    Then the page should show the content "Soita lääkärille"
+    Then the page should have button "Soita lääkärille"
