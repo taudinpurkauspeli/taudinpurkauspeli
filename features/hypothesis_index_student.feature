@@ -10,6 +10,20 @@ Feature: Hypothesis list feature
       | Nautaflunssa |
       | Hevosheikkous |
 
+  Scenario: Student cannot view the hypothesis list of an exercise if no exercise has been chosen
+    Given I have logged in as a student
+    And some hypotheses have been added to case
+    When I try to visit the "Työhypoteesit" page of the case "Lihanautakuolemat"
+    Then I should be redirected back to the front page
+    And the page should show the content "Valitse ensin case, jota haluat tarkastella!"
+
+  Scenario: Student can uncheck a hypothesis from an exercise
+    Given I have logged in as a student
+    And some hypotheses have been added to case
+    And I visit the "Työhypoteesit" page of the case "Lihanautakuolemat"
+    When I click on the hypothesis button "Nautaflunssa"
+    Then the page should show the content "Työhypoteesi "Nautaflunssa" poissuljettu. Perustelu: Nauta oli kipeä"
+    And "Nautaflunssa" should be checked from exercise
 
   Scenario: Unchecked hypotheses will be in alphabetical order
     Given I have logged in as a student

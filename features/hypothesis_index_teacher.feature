@@ -15,9 +15,18 @@ Feature: Hypothesis list feature
     And cases and hypothesis groups have been created
     And I visit the "Työhypoteesit" page of the case "Lihanautakuolemat"
     When I click on a button "+ Uusi työhypoteesi"
-    And I fill in the hypothesis name field with correct value
+    And I fill in the hypothesis name field with a correct value
     And I save the new hypothesis with button "Tallenna"
     Then the new hypothesis should be created
+
+  Scenario: Teacher cannot create a new hypothesis with wrong parameters
+    Given I have logged in as a teacher
+    And cases and hypothesis groups have been created
+    And I visit the "Työhypoteesit" page of the case "Lihanautakuolemat"
+    When I click on a button "+ Uusi työhypoteesi"
+    And I fill in the hypothesis name field with an incorrect value
+    And I save the new hypothesis with button "Tallenna"
+    Then the new hypothesis should not be created
 
   Scenario: Teacher can add hypothesis to a case
     Given I have logged in as a teacher
@@ -33,7 +42,6 @@ Feature: Hypothesis list feature
     When I click on one of the hypotheses of the case
     And I click on the delete button "Poista casesta"
     Then the hypothesis should be removed from the case
-
 
  Scenario: Teacher can update the explanation of a hypothesis
     Given I have logged in as a teacher

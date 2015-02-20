@@ -7,6 +7,8 @@ require 'cucumber/formatter/unicode'
 $:.unshift(File.dirname(__FILE__) + '/../../lib')
 
 Given(/^some tasks have been added to case$/) do
+  create_exercises
+  create_hypothesis_groups
   create_tasks
 end
 
