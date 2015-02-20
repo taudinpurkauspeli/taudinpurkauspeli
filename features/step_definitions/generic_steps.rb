@@ -22,7 +22,6 @@ Given(/^I visit the "(.*?)" page of the case "(.*?)"$/) do |arg1, arg2|
 
   go_to_case(arg2)
   click_link(arg1)
-  save_and_open_page
 end
 
 When(/^I click on the link "(.*?)"$/) do |arg1|
