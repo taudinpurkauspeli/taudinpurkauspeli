@@ -23,5 +23,16 @@ describe "Task list page" do
       expect(page).to have_button 'Soita asiakkaalle'
       expect(page).to have_button 'Ota näyte'
     end
+
+    describe "and clicks on an enabled task" do
+      
+      before :each do
+        click_button('Soita asiakkaalle')
+      end
+
+      it "that task should open as a new tab" do
+        save_and_open_page
+      end
+    end
   end
 end
