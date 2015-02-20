@@ -16,8 +16,8 @@ module CucumberHelpers
   end
 
   def create_tasks
-    Task.create name:"Soita lääkärille"
-    Task.create name:"Lääkitse hevonen"
+    Task.create name:"Soita lääkärille", exercise_id:1
+    Task.create name:"Lääkitse hevonen", exercise_id:2
   end
 
   def create_all_hypotheses_for_case
