@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
       # nollataan sessio
       session[:user_id] = nil
       session[:exercise_id] = nil
+      session[:task_id] = nil
       # uudelleenohjataan sovellus pääsivulle 
       redirect_to :root
     end

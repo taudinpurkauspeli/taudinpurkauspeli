@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_task
   helper_method :current_exercise
   helper_method :current_user_is_admin
-
+  
   def current_exercise
     return nil if session[:exercise_id].nil?
     Exercise.find(session[:exercise_id])
