@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   # määritellään, että metodit tulevat käyttöön myös näkymissä
   helper_method :current_user
+  helper_method :current_task
   helper_method :current_exercise
   helper_method :current_user_is_admin
 
@@ -16,6 +17,11 @@ class ApplicationController < ActionController::Base
   def current_user
     return nil if session[:user_id].nil? 
     User.find(session[:user_id]) 
+  end
+
+  def current_task
+    return nil if session[:task_id].nil? 
+    Task.find(session[:task_id]) 
   end
 
   def current_user_is_admin

@@ -5,3 +5,7 @@
 <%= link_to 'Toimenpiteet', tasks_path, class: if current_page?(tasks_path) then 'active navbar-brand' else 'navbar-brand' end %>
 
 <%= link_to 'Työhypoteesit', hypotheses_path, class: if current_page?(hypotheses_path) then 'active navbar-brand' else 'navbar-brand' end %>
+
+<% unless current_task.nil? %>
+  <%= link_to 'Työhypoteesit', hypotheses_path, class: if current_page?(hypotheses_path) then 'active navbar-brand' else 'navbar-brand' end %>
+<% end %>
