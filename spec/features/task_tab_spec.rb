@@ -31,7 +31,7 @@ describe "Task list page" do
       end
 
       it "that task should open as a new tab" do
-        save_and_open_page
+        expect(page).to have_link 'Soita asiakkaalle'
       end
     end
   end
