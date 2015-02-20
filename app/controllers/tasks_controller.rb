@@ -12,6 +12,12 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
     session[:task_id] = params[:id]
+
+    @task = current_task
+    @user = current_user
+
+    #new instances
+    @new_completed_task = CompletedTask.new
   end
 
   # GET /tasks/new

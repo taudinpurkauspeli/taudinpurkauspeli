@@ -15,5 +15,7 @@ When(/^I choose a text task "(.*?)"$/) do |arg1|
 end
 
 Then(/^the task can be completed by clicking the button "(.*?)"$/) do |arg1|
-  expect(CompletedTask.count).to eq(1)
+  expect{
+  	click_button(arg1)
+  }.to change(CompletedTask, :count).by(1)
 end
