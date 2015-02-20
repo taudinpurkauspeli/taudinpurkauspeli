@@ -20,7 +20,7 @@ describe "Task list page" do
     end
 
     it "user should be able to view the tasks of an exercise" do
-      expect(page).to have_button 'Soita lääkärille'
+      expect(page).to have_button 'Soita asiakkaalle'
       expect(page).to have_button 'Ota näyte'
     end
   end
