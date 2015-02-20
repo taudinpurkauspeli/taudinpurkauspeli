@@ -17,9 +17,6 @@ Given(/I have logged in as a teacher$/) do
 end
 
 Given(/^I visit the "(.*?)" page of the case "(.*?)"$/) do |arg1, arg2|
-  create_exercises
-  create_hypothesis_groups
-
   go_to_case(arg2)
   click_link(arg1)
 end

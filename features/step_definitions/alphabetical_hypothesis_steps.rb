@@ -29,15 +29,6 @@ Given(/^those hypotheses are all checked$/) do
   end
 end
 
-Then(/^the hypothesis list should be in alphabetical order$/) do
-	actual = all("input[type='submit']")[1].value
-	expect( actual ).to eq('Aivokuume')
-	actual = all("input[type='submit']")[2].value
-	expect( actual ).to eq('Nautaflunssa')
-	actual = all("input[type='submit']")[3].value
-	expect( actual ).to eq('Sikatartunta')
-end
-
 Given(/^there are multiple hypotheses that are not added to any exercise$/) do
   createSomeHypotheses()  
 end
@@ -50,4 +41,13 @@ Then(/^the hypothesis bank should be in alphabetical order$/) do
   expect( actual ).to eq('Nautaflunssa')
   actual = all("input[type='submit']")[8].value
   expect( actual ).to eq('Sikatartunta')
+end
+
+Then(/^the hypothesis list should be in alphabetical order$/) do
+	actual = all("input[type='submit']")[1].value
+	expect( actual ).to eq('Aivokuume')
+	actual = all("input[type='submit']")[2].value
+	expect( actual ).to eq('Nautaflunssa')
+	actual = all("input[type='submit']")[3].value
+	expect( actual ).to eq('Sikatartunta')
 end

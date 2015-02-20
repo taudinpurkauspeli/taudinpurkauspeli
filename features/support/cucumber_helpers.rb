@@ -32,9 +32,9 @@ module CucumberHelpers
     Hypothesis.create name:"Aivokuume", hypothesis_group_id:1, id:3
   end
 
-  def add_hypothesis_to_case(ids)
+  def add_hypothesis_to_case(fields)
 
-    ExerciseHypothesis.create exercise_id:ids[:exercise_id], hypothesis_id:ids[:hypothesis_id]
+    ExerciseHypothesis.create exercise_id:fields[:exercise_id], hypothesis_id:fields[:hypothesis_id], explanation:fields[:explanation]
 
   end
 

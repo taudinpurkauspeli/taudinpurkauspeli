@@ -12,8 +12,8 @@ Given(/^some hypotheses have been added to case$/) do
 
   create_hypotheses
 
-  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1)
-  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1, explanation: "Nauta oli kipeä",)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2, explanation: "Hevonen oli kipeä",)
 end
 
 Given(/^cases and hypothesis groups have been created$/) do
@@ -38,8 +38,12 @@ When(/^I click on button "(.*?)"$/) do |arg1|
  all(:button, 'Tallenna')[2].click
 end
 
-When(/^I fill in the hypothesis name field with correct value$/) do
+When(/^I fill in the hypothesis name field with a correct value$/) do
 	fill_in('hypothesis_name', with: 'Suu- ja sorkkatauti', :match => :prefer_exact)
+end
+
+When(/^I fill in the hypothesis name field with an incorrect value$/) do
+	fill_in('hypothesis_name', with: '', :match => :prefer_exact)
 end
 
 When(/^I save the new hypothesis with button "(.*?)"$/) do |arg1|
@@ -68,6 +72,10 @@ end
 
 When(/^I fill in the explanation field$/) do
   fill_in('exercise_hypothesis_explanation', with: 'Hevosen hauraat luut', :match => :prefer_exact)
+end
+
+Given(/^I try to visit the "(.*?)" page of the case "(.*?)"$/) do |arg1, arg2|
+  visit hypotheses_path
 end
 
 
@@ -101,7 +109,11 @@ Then(/^the new hypothesis should be created$/) do
   hypothesis_group = HypothesisGroup.first
   expect(hypothesis_group.hypotheses.first.name).to eq('Suu- ja sorkkatauti')
   expect(Hypothesis.count).to eq(1)
-  end
+end
+
+Then(/^the new hypothesis should not be created$/) do
+  expect(Hypothesis.count).to eq(0)
+end
 
 Then(/^the page should have buttons$/) do |table|
   table.raw.each do |row|
@@ -109,4 +121,13 @@ Then(/^the page should have buttons$/) do |table|
       expect(page).to have_button content
     end
   end
+end
+
+Then(/^"(.*?)" should be checked from exercise$/) do |arg1|
+  expect(User.first.checked_hypotheses.first.exercise_hypothesis.hypothesis.name).to eq(arg1)
+  expect(User.first.checked_hypotheses.count).to eq(1)
+end
+
+Then(/^I should be redirected back to the front page$/) do
+  expect(current_path).to eq(exercises_path)
 end
