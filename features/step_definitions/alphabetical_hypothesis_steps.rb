@@ -12,6 +12,7 @@ Given(/^there is an exercise that has multiple hypotheses$/) do
   createSomeHypotheses()	
 
 	HypothesisGroup.create name:"Taudit", id:1
+
 	for i in 1..3
 		ExerciseHypothesis.create exercise_id:1, hypothesis_id:i
 	end
