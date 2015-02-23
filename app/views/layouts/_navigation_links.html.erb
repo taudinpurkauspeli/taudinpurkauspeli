@@ -9,7 +9,9 @@
 <%#
   Only show the current task tab if both of these is true:
       1. Current task is set in session
-      2. User has not completed current task
+      2. User has not completed current task'
+
+      # TODO replace database query with helper method
 %>
 <% unless current_task.nil? || !(current_user.completed_tasks.find_by(task_id: current_task.id)).nil? %>
   <%= link_to current_task.name, current_task, class: if current_page?(current_task) then 'active navbar-brand' else 'navbar-brand' end %>

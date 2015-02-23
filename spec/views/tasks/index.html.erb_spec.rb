@@ -1,3 +1,4 @@
+=begin
 require 'rails_helper'
 
 RSpec.describe "tasks/index", :type => :view do
@@ -15,6 +16,7 @@ RSpec.describe "tasks/index", :type => :view do
   it "renders a list of tasks" do
     render
     #assert_select "tr>td", :text => "Name".to_s, :count => 2
-    assert_select ".btn-default", :count => 2
+    assert_select ".btn", :count => 2
   end
 end
+=end

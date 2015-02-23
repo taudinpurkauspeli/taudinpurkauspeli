@@ -234,6 +234,20 @@ img {
 }
 
 
+.btn-available-task{
+  //height: 30px;
+  //width: 100%;
+  //margin-left: 2em;
+}
+
+.btn-completed-task{
+  background-color: $PaleLightGreen;
+}
+
+.btn-completed-task:hover{
+  background-color: $LightGreen;
+  color: #fff;
+}
 
 
 //New anamnesis
