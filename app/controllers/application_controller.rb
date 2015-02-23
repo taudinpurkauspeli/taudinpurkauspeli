@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     return nil if session[:user_id].nil? 
     User.find(session[:user_id]) 
   end
-
+  
   def current_task
     return nil if session[:task_id].nil? 
     Task.find(session[:task_id]) 
@@ -32,13 +32,13 @@ class ApplicationController < ActionController::Base
   	return false
   end
 
-def ensure_user_is_logged_in
-  redirect_to signin_path, notice: "Toiminto vaatii sisäänkirjautumisen" if current_user.nil?
-end
+  def ensure_user_is_logged_in
+    redirect_to signin_path, notice: "Toiminto vaatii sisäänkirjautumisen" if current_user.nil?
+  end
 
   def ensure_user_is_admin
     if current_user_is_admin == false
-        redirect_to signin_path, notice: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia"
+      redirect_to signin_path, notice: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia"
     end  
   end
 

@@ -11,15 +11,37 @@
   </thead>
 
   <tbody>
+
+<%#
+    Available tasks
+%>
     <% @tasks.each do |task| %>
-      <tr>
-        <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default' %></td>
-        <% if current_user_is_admin %>
-          <td><%= link_to 'Muokkaa', edit_task_path(task) %></td>
-          <td><%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
-        <%end%>
-      </tr>
+      <% if (current_user.completed_tasks.find_by(task_id: task.id)).nil? %>
+        <tr>
+          <td><%= button_to task.name, task, method: :get, :class => 'btn btn-available-task' %></td>
+          <% if current_user_is_admin %>
+            <td><%= link_to 'Muokkaa', edit_task_path(task) %></td>
+            <td><%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+          <%end%>
+        </tr>
+      <% end %>
     <% end %>
+
+<%#
+  Completed tasks
+%>
+    <% @tasks.each do |task| %>
+      <% if !(current_user.completed_tasks.find_by(task_id: task.id)).nil? %>
+        <tr>
+          <td><%= button_to task.name, task, method: :get, :class => 'btn btn-completed-task' %></td>
+          <% if current_user_is_admin %>
+            <td><%= link_to 'Muokkaa', edit_task_path(task) %></td>
+            <td><%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+          <%end%>
+        </tr>
+      <% end %>
+    <% end %>
+
   </tbody>
 </table>
 
