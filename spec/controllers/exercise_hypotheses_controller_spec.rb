@@ -30,7 +30,7 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
 
 
   let(:invalid_attributes) {
-    {exercise_id: 0}
+    {exercise_id: nil}
   }
 
   # This should return the minimal set of values that should be in the session
