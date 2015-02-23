@@ -55,4 +55,13 @@ FactoryGirl.define do
     user_id 1
     task_id 1
   end
+
+  factory :subtask do
+    task_id 4
+    task_text_id 11
+  end
+
+  factory :task_text do 
+    content "Lääkäri kertoo mikä on totuus"
+  end
 end

@@ -18,4 +18,14 @@ RSpec.describe Task, :type => :model do
     end
   end
 
+  describe "with incorrect name" do
+
+    let!(:task){Task.create name:""}
+
+    it "is not saved" do
+      expect(task).not_to be_valid
+      expect(Task.count).to eq(0)
+    end
+  end
+
 end
