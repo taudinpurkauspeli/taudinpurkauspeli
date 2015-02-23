@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   resources :completed_tasks, only: [:create]
 
+  resources :subtasks
+
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   
