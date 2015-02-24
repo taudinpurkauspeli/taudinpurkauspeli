@@ -49,5 +49,6 @@ HypothesisGroup.create!([
 ])
 User.create!([
   {username: "Opettaja", admin: true, email: "olli@opettaja.fi", realname: "Olli Opettaja", password_digest: "$2a$10$pZqHqBmkdODnYefBwBQ7euDHObifSp10sQ3Df0VLwZFFtr7XILBiG"},
-  {username: "Oppilas", admin: false, email: "olli@oppilas.fi", realname: "Olli Oppilas", password_digest: "$2a$10$DjqwIIdns5oigOieda.KN.vln/csSJp/H0W/8ExNofYrAJ4W7jIR6"}
+  {username: "Oppilas", admin: false, email: "olli@oppilas.fi", realname: "Olli Oppilas", password_digest: "$2a$10$DjqwIIdns5oigOieda.KN.vln/csSJp/H0W/8ExNofYrAJ4W7jIR6"},
+  {username: "Opiskelija", admin: false, email: "ellu@eläin.fi", realname: "Ellu Eläinlääkeopiskelija", password_digest: "$2a$10$O6S6LohLxPYcT3vTUkA7pOvrrI15VyDux9zhL7h2YxEcjQO.tslEC"}
 ])
