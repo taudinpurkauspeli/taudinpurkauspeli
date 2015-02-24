@@ -1,5 +1,13 @@
 <h1>New Task</h1>
 
-<%= render 'form' %>
+<%#= render 'form' %>
+<%= form_tag(controller: "tasks", action: "create", method: "post") do %>
+	<%= label_tag(:name, 'Nimi') %>
+    <%= text_field_tag(:name) %>
+  	<%= text_field_tag(:content) %>
+  
+    <%= submit_tag('Muahahahah') %>
+  
+<% end %>
 
 <%= link_to 'Back', tasks_path %>
