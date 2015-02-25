@@ -32,10 +32,18 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(name:task_params[:name])
+    @task = Task.new(name:task_params[:name], exercise_id:task_params[:exercise_id])
     respond_to do |format|
       if @task.save
-        create_task_text(task_id:@task.id, content:task_params[:content])
+        #create_task_text(task_id:@task.id, content:task_params[:content])
+
+        unless task_params[:content].empty?
+          subtask = @task.subtasks.create
+          subtask.create_task_text(content:task_params[:content])
+
+          #@task.subtasks.create.create_task_text(content:task_params[:content])
+        end
+
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
@@ -78,6 +86,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.permit(:name, :content)
+      params.permit(:name, :content, :exercise_id)
     end
 end

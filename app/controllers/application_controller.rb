@@ -42,6 +42,8 @@ class ApplicationController < ActionController::Base
     end  
   end
 
+=begin
+
   def create_subtask(parameters)
     subtask = Subtask.new(task_id:parameters[:task_id], task_text_id:parameters[:task_text_id])
     respond_to do |format|
@@ -57,16 +59,13 @@ class ApplicationController < ActionController::Base
     task_text = TaskText.new(content:parameters[:content])
     respond_to do |format|
       if task_text.save
-        if create_subtask(task_id:parameters[:task_id], task_text_id:task_text.id)
-          return true
-        else
-          return false
-        end
+        return create_subtask(task_id:parameters[:task_id], task_text_id:task_text.id)
       else
         return false
       end
     end
 
   end
+=end
 
 end
