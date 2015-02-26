@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   resources :subtasks
 
+  resources :task_texts
+
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   

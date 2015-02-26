@@ -1,6 +1,11 @@
-<h1>Editing Task</h1>
+<h1>Toimenpiteen muokkaus</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @task %> |
+<% @task.subtasks.each do |subtask| %>
+   <%= link_to 'Näytä joku subtask', edit_subtask_path(subtask) %>
+<% end %>
+
+<br>
+<%= link_to 'Esikatsele', @task %> |
 <%= link_to 'Back', tasks_path %>

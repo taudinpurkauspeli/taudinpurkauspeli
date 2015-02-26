@@ -11,37 +11,49 @@
   </thead>
 
   <tbody>
+<%#
+    Admin tasks
 
+    TODO REFARTCTOR THIS TO BE NICE AND EASY TO MAINTAINS
+%>
+
+    <% if current_user_is_admin %>
+      <% @tasks.each do |task| %>
+        <% if !current_user_has_completed_task(task.id) %>
+          <tr>
+            <td><%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-available-task' %></td>
+            <% if current_user_is_admin %>
+              <td><%= link_to 'Esikatsele', task %></td>
+              <td><%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+            <%end%>
+          </tr>
+        <% end %>
+      <% end %>
+    <% else %>
 <%#
     Available tasks
+
+    TODO REFARTCTOR THIS TO BE NICE AND EASY TO MAINTAINS
 %>
-    <% @tasks.each do |task| %>
-      <% if !current_user_has_completed_task(task.id) %>
-        <tr>
-          <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-available-task' %></td>
-          <% if current_user_is_admin %>
-            <td><%= link_to 'Muokkaa', edit_task_path(task) %></td>
-            <td><%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
-          <%end%>
-        </tr>
+      <% @tasks.each do |task| %>
+        <% if !current_user_has_completed_task(task.id) %>
+          <tr>
+            <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-available-task' %></td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
 
 <%#
   Completed tasks
 %>
-    <% @tasks.each do |task| %>
-      <% if current_user_has_completed_task(task.id) %>
-        <tr>
-          <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task' %></td>
-          <% if current_user_is_admin %>
-            <td><%= link_to 'Muokkaa', edit_task_path(task) %></td>
-            <td><%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
-          <%end%>
-        </tr>
+      <% @tasks.each do |task| %>
+        <% if current_user_has_completed_task(task.id) %>
+          <tr>
+            <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task' %></td>
+          </tr>
+        <% end %>
       <% end %>
     <% end %>
-
   </tbody>
 </table>
 

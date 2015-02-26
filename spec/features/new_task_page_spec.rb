@@ -9,7 +9,7 @@ describe "New Task page" do
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
     end
-
+=begin
 
     it "user should be able to create a new task without a task text-subtask" do
       visit new_task_path
@@ -58,7 +58,7 @@ describe "New Task page" do
     end
 
 
-
+=end
 
 
   end
