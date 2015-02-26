@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
   # GET /tasks
@@ -11,9 +11,14 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    session[:task_id] = params[:id]
 
-    @task = current_task
+    unless current_user_is_admin
+      session[:task_id] = params[:id]
+      @task = current_task
+    else
+      @task = Task.find(params[:id])
+    end
+
     @user = current_user
 
     @subtasks = @task.subtasks
@@ -38,16 +43,13 @@ class TasksController < ApplicationController
     @task = Task.new(name:task_params[:name], exercise_id:task_params[:exercise_id])
     respond_to do |format|
       if @task.save
-        #create_task_text(task_id:@task.id, content:task_params[:content])
 
         unless task_params[:content].empty?
           subtask = @task.subtasks.create
           subtask.create_task_text(content:task_params[:content])
-
-          #@task.subtasks.create.create_task_text(content:task_params[:content])
         end
 
-        format.html { redirect_to @task, notice: 'Toimenpiteen luominen onnistui!' }
+        format.html { redirect_to tasks_path, notice: 'Toimenpiteen luominen onnistui!' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -73,7 +75,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    session[:task_id] = nil 
+    session[:task_id] = nil
     @task.destroy
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
@@ -82,13 +84,13 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task
+    @task = Task.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def task_params
-      params.require(:task).permit(:name, :content, :exercise_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def task_params
+    params.require(:task).permit(:name, :content, :exercise_id)
+  end
 end
