@@ -8,22 +8,18 @@
 <% if current_user_is_admin %>
 
 <% else %>
-	<% @subtasks.each do |subtask| %>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title"></h3>
-			</div>
-			<div class="panel-body">
-				<%= subtask.task_text.content %>
-			</div>
+<% @subtasks.each do |subtask| %>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"></h3>
 		</div>
-	<% end %>
-  <%# TODO refactorrr #%>
-  <% if (current_user.completed_tasks.find_by(current_task.id)).nil? %>
-  	<%= form_for(@new_completed_task) do |f| %>
-  		<%= f.hidden_field :task_id, :value => @task.id %>
-  		<%= f.hidden_field :user_id, :value => @user.id %>
-  		<%= f.submit "Jatka", :class => 'btn btn-default btn-save' %>
-  	<% end %>
-  <% end %>
+		<div class="panel-body">
+			<%= subtask.task_text.content %>
+		</div>
+	</div>
+<% end %>
+  <%= if !current_user_has_completed_task(@task.id)
+      then render 'continue_button'
+      else 
+      end %>
 <% end %>

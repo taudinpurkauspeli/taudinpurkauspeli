@@ -14,11 +14,9 @@
 
 <%#
     Available tasks
-
-    TODO Refactor this shiz
 %>
     <% @tasks.each do |task| %>
-      <% if (current_user.completed_tasks.find_by(task_id: task.id)).nil? %>
+      <% if !current_user_has_completed_task(task.id) %>
         <tr>
           <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-available-task' %></td>
           <% if current_user_is_admin %>
@@ -33,7 +31,7 @@
   Completed tasks
 %>
     <% @tasks.each do |task| %>
-      <% if !(current_user.completed_tasks.find_by(task_id: task.id)).nil? %>
+      <% if current_user_has_completed_task(task.id) %>
         <tr>
           <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task' %></td>
           <% if current_user_is_admin %>
