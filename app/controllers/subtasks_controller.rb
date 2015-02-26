@@ -16,6 +16,7 @@ class SubtasksController < ApplicationController
   # GET /tasks/1/edit
   def edit
     @subtask = Subtask.find(params[:id])
+    redirect_to edit_task_text_path(@subtask.task_text.id)
   end
 
   # POST /subtasks
