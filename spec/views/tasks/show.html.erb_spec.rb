@@ -6,9 +6,10 @@ RSpec.describe "tasks/show", :type => :view do
       :name => "Name"
     ))
   end
-
+=begin
   it "renders attributes in <p>" do
     render
     expect(rendered).to match(/Name/)
   end
+=end
 end
