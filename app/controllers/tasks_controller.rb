@@ -44,7 +44,7 @@ class TasksController < ApplicationController
           #@task.subtasks.create.create_task_text(content:task_params[:content])
         end
 
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to @task, notice: 'Toimenpiteen luominen onnistui!' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
