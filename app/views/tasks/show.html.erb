@@ -9,14 +9,9 @@
 
 <% else %>
 	<% @subtasks.each do |subtask| %>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title"></h3>
-			</div>
-			<div class="panel-body">
-				<%= subtask.task_text.content %>
-			</div>
-		</div>
+		<% if !subtask.task_text.nil? %>
+			<%= render 'task_text', {subtask: subtask} %>
+		<% end %>
 	<% end %>
 	<%= form_for(@new_completed_task) do |f| %>
 		<%= f.hidden_field :task_id, :value => @task.id %>
