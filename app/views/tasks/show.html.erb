@@ -8,18 +8,15 @@
 <% if current_user_is_admin %>
 
 <% else %>
-<% @subtasks.each do |subtask| %>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title"></h3>
-		</div>
-		<div class="panel-body">
-			<%= subtask.task_text.content %>
-		</div>
-	</div>
-<% end %>
-  <%= if !current_user_has_completed_task(@task.id)
-      then render 'continue_button'
-      else 
-      end %>
+	<% @subtasks.each do |subtask| %>
+		<% if !subtask.task_text.nil? %>
+			<%= render 'task_text', {subtask: subtask} %>
+		<%# Tähän tulee elsenä ne muut subtask-tyypit%>
+		<% end %>
+	<% end %>
+
+	<%= if !current_user_has_completed_task(@task.id)
+	  then render 'continue_button'
+	  else 
+	  end %>
 <% end %>
