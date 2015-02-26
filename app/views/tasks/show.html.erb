@@ -11,10 +11,10 @@
 	<% @subtasks.each do |subtask| %>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title"><%= subtask.task_text.content %></h3>
+				<h3 class="panel-title"></h3>
 			</div>
 			<div class="panel-body">
-				Panel content
+				<%= subtask.task_text.content %>
 			</div>
 		</div>
 	<% end %>
