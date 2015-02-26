@@ -16,6 +16,8 @@ class TasksController < ApplicationController
     @task = current_task
     @user = current_user
 
+    @subtasks = @task.subtasks
+
     #new instances
     @new_completed_task = CompletedTask.new
   end

@@ -8,6 +8,16 @@
 <% if current_user_is_admin %>
 
 <% else %>
+	<% @subtasks.each do |subtask| %>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><%= subtask.task_text.content %></h3>
+			</div>
+			<div class="panel-body">
+				Panel content
+			</div>
+		</div>
+	<% end %>
 	<%= form_for(@new_completed_task) do |f| %>
 		<%= f.hidden_field :task_id, :value => @task.id %>
 		<%= f.hidden_field :user_id, :value => @user.id %>
