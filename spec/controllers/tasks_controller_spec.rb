@@ -74,27 +74,6 @@ RSpec.describe TasksController, :type => :controller do
 
   describe "POST create" do
 =begin
-    describe "with valid params" do
-      it "creates a new Task" do
-        expect {
-          post :create, {:task => valid_attributes}, valid_session
-        }.to change(Task, :count).by(1)
-      end
-
-      it "assigns a newly created task as @task" do
-        post :create, {:task => valid_attributes}, valid_session
-        expect(assigns(:task)).to be_a(Task)
-        expect(assigns(:task)).to be_persisted
-      end
-
-      it "redirects to the created task" do
-        post :create, {:task => valid_attributes}, valid_session
-        expect(response).to redirect_to(Task.last)
-      end
-    end
-=end
-
-=begin
     describe "with invalid params" do
       it "assigns a newly created but unsaved task as @task" do
         post :create, {:task => invalid_attributes}, valid_session

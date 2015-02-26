@@ -19,7 +19,7 @@ describe "New Task page" do
       click_button('Tallenna')
 
       expect(page).to have_content 'Toimenpiteen luominen onnistui!'
-      expect(page).to have_content 'Soita asiakkaalle'
+      expect(page).to have_button 'Soita asiakkaalle'
       expect(Task.count).to eq(1)
       expect(TaskText.count).to eq(0)
       expect(Subtask.count).to eq(0)
@@ -34,7 +34,7 @@ describe "New Task page" do
       click_button('Tallenna')
 
       expect(page).to have_content 'Toimenpiteen luominen onnistui!'
-      expect(page).to have_content 'Soita asiakkaalle'
+      expect(page).to have_button 'Soita asiakkaalle'
       expect(Task.count).to eq(1)
       expect(TaskText.count).to eq(1)
       expect(Subtask.count).to eq(1)
