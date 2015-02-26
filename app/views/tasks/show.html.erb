@@ -11,11 +11,12 @@
 	<% @subtasks.each do |subtask| %>
 		<% if !subtask.task_text.nil? %>
 			<%= render 'task_text', {subtask: subtask} %>
+		<%# Tähän tulee elsenä ne muut subtask-tyypit%>
 		<% end %>
 	<% end %>
-	<%= form_for(@new_completed_task) do |f| %>
-		<%= f.hidden_field :task_id, :value => @task.id %>
-		<%= f.hidden_field :user_id, :value => @user.id %>
-		<%= f.submit "Jatka", :class => 'btn btn-default btn-save' %>
-	<% end %>
+
+	<%= if !current_user_has_completed_task(@task.id)
+	  then render 'continue_button'
+	  else 
+	  end %>
 <% end %>
