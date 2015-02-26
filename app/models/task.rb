@@ -4,7 +4,7 @@ class Task < ActiveRecord::Base
   
   has_many :users, through: :completed_tasks
 
-  has_many :subtasks
+  has_many :subtasks, dependent: :destroy
 
   has_many :task_texts, through: :subtasks
 end
