@@ -1,5 +1,5 @@
-class TextTasksController < ApplicationController
- # before_action :set_task, only: [:show, :edit, :update, :destroy]
+class TaskTextsController < ApplicationController
+ before_action :set_task_text, only: [:show, :edit, :update, :destroy]
  # before_action :ensure_user_is_logged_in
  # before_action :ensure_user_is_admin, except: [:index, :show]
   # GET /tasks
@@ -15,6 +15,7 @@ class TextTasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    @task_text = TaskText.find(params[:id])
   end
 
   # POST /task_texts
@@ -37,8 +38,7 @@ class TextTasksController < ApplicationController
   def update
     respond_to do |format|
       if @task_text.update(task_text_params)
-        format.html { redirect_to @task_text, notice: 'TaskText was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task_text }
+        format.html { redirect_to edit_task_path(@task_text.subtask.task.id), notice: 'TaskText was successfully updated.' }
       else
         format.html { render :edit }
         format.json { render json: @task_text.errors, status: :unprocessable_entity }

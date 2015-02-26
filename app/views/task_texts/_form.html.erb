@@ -1,0 +1,23 @@
+<%= form_for(@task_text) do |f| %>
+  <% if @task_text.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= t('activerecord.errors.template.header')%></h2>
+
+      <ul>
+      <% @task_text.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :content%><br>
+    <%= f.text_field :content %>
+  </div>
+  <br>
+
+  <div class="actions">
+    <%= f.submit "Tallenna"%>
+  </div>
+<% end %>

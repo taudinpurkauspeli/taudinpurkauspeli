@@ -29,6 +29,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    @subtasks = @task.subtasks
   end
 
   # POST /tasks
@@ -88,6 +89,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.permit(:name, :content, :exercise_id)
+      params.require(:task).permit(:name, :content, :exercise_id)
     end
 end

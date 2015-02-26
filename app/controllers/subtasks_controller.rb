@@ -15,6 +15,7 @@ class SubtasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    @subtask = Subtask.find(params[:id])
   end
 
   # POST /subtasks
