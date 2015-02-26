@@ -24,14 +24,23 @@ describe "Task list page" do
       expect(page).to have_button 'Ota näyte'
     end
 
-    describe "and clicks on an enabled task" do
-      
+    describe "and clicks on an available task" do
+
       before :each do
         click_button('Soita asiakkaalle')
       end
 
       it "that task should open as a new tab" do
         expect(page).to have_link 'Soita asiakkaalle'
+      end
+
+      describe "user is able to complete that task" do
+
+        it "and a completed_task is added to the database" do
+          expect {
+              first(:button, 'Jatka').click
+            }.to change(CompletedTask, :count).by(1)
+        end
       end
     end
   end
