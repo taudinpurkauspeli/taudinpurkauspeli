@@ -5,9 +5,7 @@
   <%= @task.name %>
 </p>
 
-<% if current_user_is_admin %>
 
-<% else %>
 	<% @subtasks.each do |subtask| %>
 		<% if !subtask.task_text.nil? %>
 			<%= render 'task_text', {subtask: subtask} %>
@@ -15,8 +13,7 @@
 		<% end %>
 	<% end %>
 
-	<%= if !current_user_has_completed_task(@task.id)
+	<%= if !current_user_has_completed_task(@task.id) && !current_user_is_admin
 	  then render 'continue_button'
 	  else 
 	  end %>
-<% end %>
