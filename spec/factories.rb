@@ -25,6 +25,7 @@ FactoryGirl.define do
 
   factory :task do
     name "Soita asiakkaalle"
+    exercise_id 1
   end
 
   factory :sample, class: Task do
@@ -57,11 +58,12 @@ FactoryGirl.define do
   end
 
   factory :subtask do
-    task_id 4
-    task_text_id 11
+    task_id 1
+    task_text_id 1
   end
 
   factory :task_text do 
+    subtask_id 1
     content "Lääkäri kertoo mikä on totuus"
   end
 end
