@@ -3,7 +3,7 @@ module CucumberHelpers
   def create_exercises
     Exercise.create name:"Lihanautakuolemat", anamnesis:"Lihanautoja on menehtynyt lukuisia"
     Exercise.create name:"Heikko hevonen", anamnesis:"Hevosella on heikot polvet"
-    end
+  end
 
   def create_hypothesis_groups
     HypothesisGroup.create name:"Nautataudit"
