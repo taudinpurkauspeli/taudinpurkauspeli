@@ -21,11 +21,15 @@ class TaskTextsController < ApplicationController
   # POST /task_texts
   # POST /task_texts.json
   def create
-    @task_text = TaskText.new(task_text_params)
+    @task = Task.find(session[:task_id])
+
+    subtask = @task.subtasks.create
+    task_text = subtask.create_task_text(content:task_text_params[:content])
+
     respond_to do |format|
-      if @task_text.save
-        format.html { redirect_to @task_text, notice: 'TaskText was successfully created.' }
-        format.json { render :show, status: :created, location: @task_text }
+      if task_text.save
+        format.html { redirect_to task_text.subtask.task, notice: 'TaskText was successfully created.' }
+        format.json { render :show, status: :created, location: task_text }
       else
         format.html { render :new }
         format.json { render json: @task_text.errors, status: :unprocessable_entity }

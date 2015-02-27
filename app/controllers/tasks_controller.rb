@@ -34,6 +34,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    session[:task_id] = params[:id]
     @subtasks = @task.subtasks
   end
 
