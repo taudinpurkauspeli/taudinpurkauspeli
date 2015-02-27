@@ -1,22 +1,5 @@
 <h1>Uusi toimenpide</h1>
 
-<%#= render 'form' %>
-<%= form_tag(controller: "tasks", action: "create", method: "post") do %>
-	<%= label_tag(:name, 'Nimi') %>
-    <br/>
-    <%= text_field_tag(:name) %>
-    <br/>
-    <br/>
-    <%= label_tag(:content, 'Tekstikysymyksen vastaus') %>
+<%= render 'form' %>
 
-    <br/>
-    <p>Täytä vain jos haluat liittää toimenpiteeseen tekstikysymyksen</p>
-    <br/>
-  	<%= text_field_tag(:content) %>
-    <%= hidden_field_tag(:exercise_id, session[:exercise_id])  %>
-    <br/>
-    <br/>
-    <%= submit_tag('Tallenna') %>
-  
-<% end %>
-
+<%= link_to 'Takaisin', exercises_path %>
