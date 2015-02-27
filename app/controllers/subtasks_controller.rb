@@ -34,19 +34,7 @@ class SubtasksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /subtasks/1
-  # PATCH/PUT /subtasks/1.json
-  def update
-    respond_to do |format|
-      if @subtask.update(subtask_params)
-        format.html { redirect_to @subtask, notice: 'Subtask was successfully updated.' }
-        format.json { render :show, status: :ok, location: @subtask }
-      else
-        format.html { render :edit }
-        format.json { render json: @subtask.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  
 
   # DELETE /subtasks/1
   # DELETE /subtasks/1.json
