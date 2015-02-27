@@ -11,7 +11,6 @@ class CompletedTasksController < ApplicationController
     respond_to do |format|
       if @completed_task.save
         format.html { redirect_to tasks_url }
-        format.json { render :show, status: :created, location: @completed_task }
       else
         format.html { redirect_to tasks_url, notice: "Toimenpiteen suoritus epäonnistui." }
       end
