@@ -18,4 +18,13 @@ RSpec.describe Subtask, type: :model do
       expect(Subtask.count).to eq(1)
     end
   end
+
+  describe "with incorrect id" do
+
+    it "is not saved" do
+      subtask = Subtask.create task_id: nil
+      expect(subtask).not_to be_valid
+      expect(Subtask.count).to eq(0)
+    end
+  end
 end
