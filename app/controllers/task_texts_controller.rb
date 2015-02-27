@@ -54,15 +54,6 @@ class TaskTextsController < ApplicationController
     end
   end
 
-  # DELETE /task_texts/1
-  # DELETE /task_texts/1.json
-  def destroy
-    @task_text.destroy
-    respond_to do |format|
-      format.html { redirect_to task_texts_url, notice: 'TaskText was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
