@@ -70,9 +70,10 @@ fi:
         name: "Nimi"
       task:
         name: "Nimi"
+      task_text:
+        content: "Sisältö"
       user:
         username: "Käyttäjätunnus"
         password: "Salasana"
         password_confirmation: "Salasanan vahvistus"
         realname: "Nimi"
-
