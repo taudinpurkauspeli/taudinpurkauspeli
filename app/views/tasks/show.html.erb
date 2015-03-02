@@ -1,7 +1,7 @@
-<p id="notice"><%= notice %></p>
 <% if current_user_is_admin %>
     <%=link_to 'Muokkaa', edit_task_path(@task)%>
 <% end %>
+
 <h1>
     Toimenpide: 
     <%= @task.name %>

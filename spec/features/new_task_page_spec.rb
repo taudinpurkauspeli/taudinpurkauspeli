@@ -22,7 +22,7 @@ describe "New Task page" do
 
       click_button('Tallenna')
 
-      expect(page).to have_content 'Task was successfully created.'
+      expect(page).to have_content 'Toimenpide luotiin onnistuneesti.'
       #expect(page).to have_button 'Soita asiakkaalle'
       expect(Task.count).to eq(1)
       expect(TaskText.count).to eq(0)
