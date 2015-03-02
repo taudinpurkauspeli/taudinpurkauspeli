@@ -34,22 +34,17 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    session[:task_id] = params[:id]
     @subtasks = @task.subtasks
   end
 
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(name:task_params[:name], exercise_id:task_params[:exercise_id])
+    @task = Task.new(task_params)
     respond_to do |format|
       if @task.save
-
-        unless task_params[:content].empty?
-          subtask = @task.subtasks.create
-          subtask.create_task_text(content:task_params[:content])
-        end
-
-        format.html { redirect_to tasks_path, notice: 'Toimenpiteen luominen onnistui!' }
+        format.html { redirect_to edit_task_path(@task.id), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -91,6 +86,6 @@ class TasksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    params.require(:task).permit(:name, :content, :exercise_id)
+    params.require(:task).permit(:name)
   end
 end

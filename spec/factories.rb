@@ -52,17 +52,16 @@ FactoryGirl.define do
     name "Bakteeritaudit"
   end
 
-  factory :completed_task do 
+  factory :completed_task do
     user_id 1
     task_id 1
   end
 
   factory :subtask do
     task_id 1
-    task_text_id 1
   end
 
-  factory :task_text do 
+  factory :task_text do
     subtask_id 1
     content "Lääkäri kertoo mikä on totuus"
   end

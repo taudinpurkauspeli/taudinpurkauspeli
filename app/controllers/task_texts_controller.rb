@@ -1,7 +1,7 @@
 class TaskTextsController < ApplicationController
- before_action :set_task_text, only: [:show, :edit, :update, :destroy]
- # before_action :ensure_user_is_logged_in
- # before_action :ensure_user_is_admin, except: [:index, :show]
+  before_action :set_task_text, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_user_is_logged_in
+  before_action :ensure_user_is_admin
   # GET /tasks
   # GET /tasks.json
 
@@ -21,10 +21,16 @@ class TaskTextsController < ApplicationController
   # POST /task_texts
   # POST /task_texts.json
   def create
-    @task_text = TaskText.new(task_text_params)
+    @task = Task.find(session[:task_id])
+
+    # This can be done for each different type of subtask in their respective controllers
+    subtask = @task.subtasks.build
+    @task_text = subtask.build_task_text(content:task_text_params[:content])
+
     respond_to do |format|
       if @task_text.save
-        format.html { redirect_to @task_text, notice: 'TaskText was successfully created.' }
+        subtask.save
+        format.html { redirect_to @task_text.subtask.task, notice: 'TaskText was successfully created.' }
         format.json { render :show, status: :created, location: @task_text }
       else
         format.html { render :new }
@@ -46,24 +52,15 @@ class TaskTextsController < ApplicationController
     end
   end
 
-  # DELETE /task_texts/1
-  # DELETE /task_texts/1.json
-  def destroy
-    @task_text.destroy
-    respond_to do |format|
-      format.html { redirect_to task_texts_url, notice: 'TaskText was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task_text
-      @task_text = TaskText.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task_text
+    @task_text = TaskText.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def task_text_params
-      params.require(:task_text).permit(:task_id, :content)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def task_text_params
+    params.require(:task_text).permit(:content)
+  end
 end

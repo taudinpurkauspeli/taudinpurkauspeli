@@ -31,11 +31,11 @@ RSpec.describe HypothesesController, :type => :controller do
     FactoryGirl.create(:exercise)
   }
 
-=begin
+
   let(:invalid_attributes) {
-    {}
+    {name: ""}
   }
-=end
+
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -43,14 +43,6 @@ RSpec.describe HypothesesController, :type => :controller do
   let(:valid_session) { {
       user_id: 1
   } }
-
-  # describe "GET index" do
-  #   it "assigns all hypotheses as @rest_hypotheses" do
-  #     hypothesis = Hypothesis.create! valid_attributes
-  #     get :index, {}, valid_session
-  #     expect(assigns(:rest_hypotheses)).to eq([hypothesis])
-  #   end
-  # end
 
   describe "GET show" do
     it "assigns the requested hypothesis as @hypothesis" do
@@ -137,7 +129,7 @@ RSpec.describe HypothesesController, :type => :controller do
       end
     end
 
-=begin
+
     describe "with invalid params" do
       it "assigns the hypothesis as @hypothesis" do
         hypothesis = Hypothesis.create! valid_attributes
@@ -151,7 +143,7 @@ RSpec.describe HypothesesController, :type => :controller do
         expect(response).to render_template("edit")
       end
     end
-=end
+
   end
 
 

@@ -63,15 +63,15 @@ describe "Task list page" do
       expect(page).to have_button 'Ota näyte'
     end
 
-    describe "and clicks on a task" do
+  #  describe "and clicks on a task" do
 
-      before :each do
-        click_button('Soita asiakkaalle')
-      end
+   #   before :each do
+  #      click_button('Soita asiakkaalle')
+   #   end
 
-      it "that task should not open as a new tab" do
-        expect(page).not_to have_link 'Soita asiakkaalle'
-      end
-    end
+    #  it "that task should not open as a new tab" do
+    #    expect(page).not_to have_link 'Soita asiakkaalle'
+    #  end
+ #   end
   end
 end

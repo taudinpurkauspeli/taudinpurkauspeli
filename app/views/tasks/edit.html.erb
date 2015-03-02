@@ -1,11 +1,16 @@
 <h1>Toimenpiteen muokkaus</h1>
+<%= link_to 'Esikatsele', @task %> |
+<%= link_to 'Takaisin', tasks_path %>
+
+<br>
+<br>
 
 <%= render 'form' %>
 
 <% @task.subtasks.each do |subtask| %>
-   <%= link_to 'Näytä joku subtask', edit_subtask_path(subtask) %>
+    <%= button_to 'Tekstimuotoinen alitoimenpide', edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise', :method => :get %>
 <% end %>
 
+<%= button_to 'Luo uusi tekstimuotoinen alitoimenpide', new_task_text_path,  :class => 'btn btn-default btn-exercise', :method => :get  %>
+
 <br>
-<%= link_to 'Esikatsele', @task %> |
-<%= link_to 'Back', tasks_path %>
