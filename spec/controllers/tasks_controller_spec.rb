@@ -113,7 +113,7 @@ RSpec.describe TasksController, :type => :controller do
       it "redirects to the task" do
         task = Task.create! valid_attributes
         put :update, {:id => task.to_param, :task => valid_attributes}, valid_session
-        expect(response).to redirect_to(task)
+        expect(response).to redirect_to(edit_task_path(task.id))
       end
     end
 

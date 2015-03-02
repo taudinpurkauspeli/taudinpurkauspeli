@@ -9,7 +9,7 @@
     And I click on the link "Luo uusi toimenpide"
     When I fill in task name
     And I press the button "Tallenna"
-     Then page should have a message: "Task was successfully created."
+     Then page should have a message: "Toimenpide luotiin onnistuneesti."
    And new task should be in the database
 
   Scenario: Teacher can create a task with task text
