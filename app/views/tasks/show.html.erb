@@ -1,10 +1,11 @@
 <% if current_user_is_admin %>
     <%=link_to 'Muokkaa', edit_task_path(@task)%>
 <% end %>
-<p>
-  <strong>Nimi:</strong>
-  <%= @task.name %>
-</p>
+
+<h1>
+    Toimenpide: 
+    <%= @task.name %>
+</h1>
 
 
 <% @subtasks.each do |subtask| %>
