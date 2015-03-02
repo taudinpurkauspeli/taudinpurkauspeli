@@ -28,6 +28,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
+        @user.authenticate(params[:password])
+        session[:user_id] = @user.id
         format.html { redirect_to :root, notice: 'Käyttäjätunnuksen luominen onnistui!' }
         format.json { render :show, status: :created, location: @user }
       else
