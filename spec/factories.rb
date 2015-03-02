@@ -1,6 +1,5 @@
 FactoryGirl.define do
 
-
   factory :user do
     username "Testipoika"
     realname "Teppo Testailija"
@@ -26,8 +25,13 @@ FactoryGirl.define do
 
   factory :task do
     name "Soita asiakkaalle"
+    exercise_id 1
   end
- 
+
+  factory :sample, class: Task do
+    name "Ota näyte"
+  end
+
   factory :hypothesis do
     name "Virustauti"
     hypothesis_group_id 1
@@ -48,5 +52,17 @@ FactoryGirl.define do
     name "Bakteeritaudit"
   end
 
+  factory :completed_task do
+    user_id 1
+    task_id 1
+  end
 
+  factory :subtask do
+    task_id 1
+  end
+
+  factory :task_text do
+    subtask_id 1
+    content "Lääkäri kertoo mikä on totuus"
+  end
 end

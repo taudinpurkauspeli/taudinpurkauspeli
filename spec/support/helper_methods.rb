@@ -13,9 +13,9 @@ module HelperMethods
 
     return user
   end
-
+  
   def current_user_is_admin
-    return false
+    return true
   end
 
 end

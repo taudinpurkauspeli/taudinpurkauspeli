@@ -23,6 +23,11 @@ img {
   margin: 0 auto;
   }
 
+h3{
+  margin-top: 2px;
+  margin-bottom: 2px
+}
+
 .navbar-collapse{
   float: left;
 }
@@ -156,6 +161,24 @@ img {
 }
 
 
+
+//Panels
+
+.panel-default{
+  border-radius: 10px;
+  border-width: 0px
+
+}
+.panel-heading{
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-width: 0px
+}
+.panel-heading-tasks{
+  padding: 3px 15px
+}
+
+
 //Buttons
 
 .btn-default{
@@ -234,6 +257,20 @@ img {
 }
 
 
+.btn-available-task{
+  //height: 30px;
+  //width: 100%;
+  //margin-left: 2em;
+}
+
+.btn-completed-task{
+  background-color: $PaleLightGreen;
+}
+
+.btn-completed-task:hover{
+  background-color: $LightGreen;
+  color: #fff;
+}
 
 
 //New anamnesis
@@ -252,6 +289,14 @@ img {
 }
 .width100{
   width: 100%;
+}
+
+.widthAuto{
+  width: auto;
+}
+
+.floatRight{
+  float: right;
 }
 
 // THESE ARE EXAMPLES YOU CAN MODIFY

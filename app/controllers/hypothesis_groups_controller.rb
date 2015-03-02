@@ -1,7 +1,7 @@
 class HypothesisGroupsController < ApplicationController
-  before_action :set_hypothesis_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_hypothesis_group, only: [:destroy]
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin, except: [:index, :show]
+  before_action :ensure_user_is_admin
 
   # POST /hypothesis_group
   # POST /hypothesis_group.json
@@ -10,7 +10,6 @@ class HypothesisGroupsController < ApplicationController
     respond_to do |format|
       if @hypothesis_group.save
         format.html { redirect_to hypotheses_url}
-        format.json { render :show, status: :created, location: @hypothesis_group }
       else
         format.html { redirect_to hypotheses_url, notice: "Työhypoteesiryhmän luominen epäonnistui."}
       end

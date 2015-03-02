@@ -1,9 +1,22 @@
-<p id="notice"><%= notice %></p>
+<% if current_user_is_admin %>
+    <%=link_to 'Muokkaa', edit_task_path(@task)%>
+<% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @task.name %>
-</p>
+<h1>
+    Toimenpide: 
+    <%= @task.name %>
+</h1>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+
+<% @subtasks.each do |subtask| %>
+    <% if !subtask.task_text.nil? %>
+        <%= render 'task_text', {subtask: subtask} %>
+        <%# Tähän tulee elsenä ne muut subtask-tyypit%>
+    <% end %>
+<% end %>
+
+<%= if !current_user_has_completed_task(@task.id) && !current_user_is_admin
+    then render 'continue_button'
+    else
+    end %>
+

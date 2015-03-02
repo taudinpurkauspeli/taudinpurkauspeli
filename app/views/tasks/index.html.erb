@@ -1,27 +1,82 @@
-<p id="notice"><%= notice %></p>
+<h1>Toimenpiteet</h1>
 
-<h1>Toimenpidelista</h1>
+<%#
+    Admin tasks
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    TODO REFARTCTOR THIS TO BE NICE AND EASY TO MAINTAINS
+%>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= link_to task.name, task %></td>
-        <% if current_user_is_admin %>
-          <td><%= link_to 'Muokkaa', edit_task_path(task) %></td>
-          <td><%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
-        <%end%>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <% if current_user_is_admin %>
+      <% @tasks.each do |task| %>
+        <% if !current_user_has_completed_task(task.id) %>
+          <table>
+            <tbody>
+              <tr>
+                <td><%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-available-task' %></td>
+                <% if current_user_is_admin %>
+                  <td><%= link_to 'Esikatsele', task %></td>
+                  <td><%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+                <%end%>
+              </tr>
+            </tbody>
+          </table>
+        <% end %>
+      <% end %>
+    <% else %>
+<%#
+    Available tasks
+
+    TODO REFARTCTOR THIS TO BE NICE AND EASY TO MAINTAINS
+%>    <div class="panel panel-default">
+        <div class="panel-heading panel-heading-tasks">
+          <a data-toggle="collapse" href="#collapse-available-tasks">
+            <h3>Valitse suoritettava toiminpide</h3>
+          </a>
+        </div>
+        <div id="collapse-available-tasks" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <table>
+              <tbody>
+                <% @tasks.each do |task| %>
+                  <% if !current_user_has_completed_task(task.id) %>
+                    <tr>
+                      <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-available-task' %></td>
+                    </tr>              
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>    
+          </div>
+        </div>
+      </div>
+
+<%#
+  Completed tasks
+%>
+      <div class="panel panel-default">
+        <div class="panel-heading panel-heading-tasks">
+          <a data-toggle="collapse" href="#collapse-done-tasks">
+            <h3>Tehdyt toimenpiteet</h3>
+          </a>
+        </div>
+        <div id="collapse-done-tasks" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <table>
+              <tbody>
+                <% @tasks.each do |task| %>
+                  <% if current_user_has_completed_task(task.id) %>
+                    <tr>
+                      <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task' %></td>
+                    </tr>                    
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>    
+          </div>
+        </div>
+      </div>
+  
+  <% end %>
 
 <br>
 

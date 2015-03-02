@@ -5,9 +5,11 @@ class ApplicationController < ActionController::Base
 
   # määritellään, että metodit tulevat käyttöön myös näkymissä
   helper_method :current_user
+  helper_method :current_task
   helper_method :current_exercise
   helper_method :current_user_is_admin
-
+  helper_method :current_user_has_completed_task
+  
   def current_exercise
     return nil if session[:exercise_id].nil?
     Exercise.find(session[:exercise_id])
@@ -16,6 +18,15 @@ class ApplicationController < ActionController::Base
   def current_user
     return nil if session[:user_id].nil? 
     User.find(session[:user_id]) 
+  end
+  
+  def current_task
+    return nil if session[:task_id].nil? 
+    Task.find(session[:task_id]) 
+  end
+
+  def current_user_has_completed_task (task_id) 
+    return !(current_user.completed_tasks.find_by(task_id: task_id)).nil?
   end
 
   def current_user_is_admin
@@ -26,13 +37,13 @@ class ApplicationController < ActionController::Base
   	return false
   end
 
-def ensure_user_is_logged_in
-  redirect_to signin_path, notice: "Toiminto vaatii sisäänkirjautumisen" if current_user.nil?
-end
+  def ensure_user_is_logged_in
+    redirect_to signin_path, notice: "Toiminto vaatii sisäänkirjautumisen" if current_user.nil?
+  end
 
   def ensure_user_is_admin
     if current_user_is_admin == false
-        redirect_to signin_path, notice: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia"
+      redirect_to signin_path, notice: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia"
     end  
   end
 

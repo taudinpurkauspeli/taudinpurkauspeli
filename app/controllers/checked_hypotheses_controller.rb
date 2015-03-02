@@ -1,5 +1,5 @@
 class CheckedHypothesesController < ApplicationController
-  before_action :set_checked_hypothesis, only: [:show, :edit, :update, :destroy]
+  before_action :set_checked_hypothesis, only: [:destroy]
   before_action :ensure_user_is_logged_in
 
   # POST /checked_hypotheses
@@ -10,7 +10,6 @@ class CheckedHypothesesController < ApplicationController
     respond_to do |format|
       if @checked_hypothesis.save
         format.html { redirect_to hypotheses_url, notice: get_explanation(@checked_hypothesis)}
-        format.json { render :show, status: :created, location: @checked_hypothesis }
       else
         format.html { redirect_to hypotheses_url, notice: "Hypoteesin poisto epäonnistui" }
       end
@@ -44,7 +43,7 @@ class CheckedHypothesesController < ApplicationController
     notice = "Työhypoteesi \"" + ex_hyp.hypothesis.name + "\" poissuljettu."
     unless ex_hyp.explanation.nil?
       notice += " Perustelu: " + ex_hyp.explanation
-    end    
+    end
     return notice
   end
 end

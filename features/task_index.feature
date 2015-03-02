@@ -4,9 +4,6 @@ Feature: Task list feature
 
   Scenario: Student can view the task list of an exercise
     Given I have logged in as a student
-    And exercises have been added
-    And tasks have been added
-    When I go to the front page
-    And I click on the button "Lihanautakuolemat"
-    And I click on the link "Toimenpiteet"
-    Then the page should show the content "Soita lääkärille"
+    And cases and tasks have been created
+    When I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
+    Then the page should have button "Soita lääkärille"

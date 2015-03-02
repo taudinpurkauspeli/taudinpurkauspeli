@@ -18,7 +18,7 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
-
+# fi.activerecord.errors.models.task_text.attributes.content.blank
 # 
 fi:
   helpers:
@@ -55,6 +55,10 @@ fi:
             name:
               blank: "on pakollinen"
               taken: "on jo käytössä"
+        task_text:
+          attributes:
+            content:
+              blank: "on pakollinen"
       messages: 
         record_invalid: "Vääränlainen"
     models:
@@ -70,9 +74,10 @@ fi:
         name: "Nimi"
       task:
         name: "Nimi"
+      task_text:
+        content: "Sisältö"
       user:
         username: "Käyttäjätunnus"
         password: "Salasana"
         password_confirmation: "Salasanan vahvistus"
         realname: "Nimi"
-

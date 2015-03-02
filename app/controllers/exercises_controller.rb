@@ -57,6 +57,7 @@ class ExercisesController < ApplicationController
   # DELETE /exercises/1
   # DELETE /exercises/1.json
   def destroy
+    
     @exercise.destroy
     respond_to do |format|
       format.html { redirect_to exercises_url, notice: 'Casen poistaminen onnistui!' }

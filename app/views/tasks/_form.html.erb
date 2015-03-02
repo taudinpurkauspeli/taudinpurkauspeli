@@ -2,8 +2,6 @@
   <% if @task.errors.any? %>
     <div id="error_explanation">
       <h2><%= t('activerecord.errors.template.header')%></h2>
-
-
       <ul>
       <% @task.errors.full_messages.each do |message| %>
         <li><%= message %></li>
