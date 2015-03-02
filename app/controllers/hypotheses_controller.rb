@@ -15,11 +15,14 @@ class HypothesesController < ApplicationController
       #all hypotheses and hypotheses for current exercise
       @hypothesis_bank = (Hypothesis.all - @hypotheses_of_exercise).group_by(&:hypothesis_group_id)
       @hypothesis_groups = HypothesisGroup.all
-      @exercise_hypotheses = exercise.exercise_hypotheses.includes(:hypothesis_group).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
+      @exercise_hypotheses = exercise.exercise_hypotheses.group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
 
-      #checked hypotheses for current user
-      @checked_hypotheses = exercise.checked_hypotheses.where(user_id: @user.id).includes(:hypothesis).group_by{|checkhyp| checkhyp.hypothesis.hypothesis_group_id }
-      @unchecked_hypotheses = (exercise.exercise_hypotheses.includes(:hypothesis_group) - @user.exercise_hypotheses).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
+      unless @user.admin
+        #checked hypotheses for current user
+        @checked_hypotheses = exercise.checked_hypotheses.where(user_id: @user.id).group_by{|checkhyp| checkhyp.hypothesis.hypothesis_group_id }
+        @unchecked_hypotheses = (exercise.exercise_hypotheses - @user.exercise_hypotheses).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
+      end
+
       #new instances
       @new_exercise_hypothesis = ExerciseHypothesis.new
       @new_hypothesis_group = HypothesisGroup.new
