@@ -5,4 +5,5 @@ class Subtask < ActiveRecord::Base
 	belongs_to :task
 
 	has_one :task_text, dependent: :destroy
+	has_one :multichoice, dependent: :destroy
 end
