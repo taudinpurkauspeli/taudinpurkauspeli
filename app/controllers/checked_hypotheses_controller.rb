@@ -5,14 +5,19 @@ class CheckedHypothesesController < ApplicationController
   # POST /checked_hypotheses
   # POST /checked_hypotheses.json
   def create
-    @checked_hypothesis = CheckedHypothesis.new(checked_hypothesis_params)
+    exHyp = ExerciseHypothesis.find(checked_hypothesis_params[:exercise_hypothesis_id])
+    if(exHyp.user_meets_requirements(current_user))
 
-    respond_to do |format|
-      if @checked_hypothesis.save
-        format.html { redirect_to hypotheses_url, notice: get_explanation(@checked_hypothesis)}
-      else
-        format.html { redirect_to hypotheses_url, notice: "Hypoteesin poisto epäonnistui" }
+      @checked_hypothesis = CheckedHypothesis.new(checked_hypothesis_params)
+      respond_to do |format|
+        if @checked_hypothesis.save
+          format.html { redirect_to hypotheses_url, notice: get_explanation(@checked_hypothesis)}
+        else
+          format.html { redirect_to hypotheses_url, notice: "Hypoteesin poisto epäonnistui" }
+        end
       end
+    else
+      redirect_to hypotheses_url, notice: "Hypoteesin poisto epäonnistui"
     end
   end
 
