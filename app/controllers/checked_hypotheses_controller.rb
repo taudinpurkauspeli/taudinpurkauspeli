@@ -17,7 +17,7 @@ class CheckedHypothesesController < ApplicationController
         end
       end
     else
-      redirect_to hypotheses_url, notice: "Hypoteesin poisto epäonnistui"
+      redirect_to hypotheses_url, notice: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
     end
   end
 
