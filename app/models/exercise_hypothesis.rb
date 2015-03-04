@@ -14,4 +14,11 @@ class ExerciseHypothesis < ActiveRecord::Base
   def get_prerequisite
     return task
   end
+
+  def user_meets_requirements (user)
+    if(user.completed_tasks.where(task_id: task_id).empty?)
+      return false
+    end
+    return true
+  end
 end
