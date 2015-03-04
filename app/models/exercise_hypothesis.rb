@@ -4,9 +4,14 @@ class ExerciseHypothesis < ActiveRecord::Base
 
 	belongs_to :exercise
 	belongs_to :hypothesis
-
+  belongs_to :task, :class_name => "prerequisite"
+  
   has_many :checked_hypotheses, dependent: :destroy
   has_many :users, through: :checked_hypotheses
 
   has_one :hypothesis_group, through: :hypothesis
+
+  def prerequisite
+    return task
+  end
 end
