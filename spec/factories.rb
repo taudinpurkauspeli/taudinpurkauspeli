@@ -45,6 +45,7 @@ FactoryGirl.define do
   factory :exercise_hypothesis do
     exercise_id 1
     hypothesis_id 1
+    task_id 1
     explanation "Anamneesin mukaan tauti on virustauti"
   end
 

@@ -28,10 +28,10 @@ describe "Hypothesis list page" do
       expect(page).to have_button 'Virustauti'
     end
 
-    it "user should be able check hypotheses of an exercise" do
-      click_button('Virustauti')
-      expect(CheckedHypothesis.count).to eq(1)
-      #   expect(page).to have_content 'Anamneesin mukaan tauti on virustauti'
+    it "user should not be able check hypotheses of an exercise" do
+      expect {
+        click_button('Virustauti')
+      }.to change(CheckedHypothesis, :count).by (0)
     end
   end
 
