@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   resources :multichoices
 
+  resources :options
+
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   

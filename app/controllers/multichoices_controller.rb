@@ -6,11 +6,12 @@ class MultichoicesController < ApplicationController
   #  def index
   #   @multichoices = Multichoice.all
   # end
-
+  def show
+  end
 
  # GET /multichoices/1/edit
   def edit
-    @Multichoice = Multichoice.find(params[:id])
+    @multichoice = Multichoice.find(params[:id])
   end
 
   def create
@@ -26,7 +27,7 @@ class MultichoicesController < ApplicationController
         format.html { redirect_to @multichoice.subtask.task, notice: 'Kysymys lisättiin onnistuneesti.' }
         #format.json { render :show, status: :created, location: @multichoice }
       else
-        #format.html { render :new }
+        format.html { render :new }
         format.json { render json: @multichoice.errors, status: :unprocessable_entity }
       end
     end
@@ -39,7 +40,7 @@ class MultichoicesController < ApplicationController
       if @multichoice.update(multichoice_params)
         format.html { redirect_to edit_task_path(@multichoice.subtask.task.id), notice: 'Kysymys päivitettiin onnistuneesti.' }
       else
-        #format.html { render :edit }
+        format.html { render :edit }
         format.json { render json: @multichoice.errors, status: :unprocessable_entity }
       end
     end

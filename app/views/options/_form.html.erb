@@ -1,0 +1,29 @@
+<%= form_for(@option) do |f| %>
+  <% if @option.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= t('activerecord.errors.template.header')%></h2>
+
+      <ul>
+      <% @option.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :content%><br>
+    <%= f.text_field :content %>
+  </div>
+  <br>
+
+  <div class="field">
+    <%= f.label :explanation%><br>
+    <%= f.text_field :explanation %>
+  </div>
+  <br>
+
+  <div class="actions">
+    <%= f.submit "Tallenna"%>
+  </div>
+<% end %>
