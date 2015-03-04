@@ -128,6 +128,12 @@ Then(/^"(.*?)" should be checked from exercise$/) do |arg1|
   expect(User.first.checked_hypotheses.count).to eq(1)
 end
 
+
+Then(/^"(.*?)" should not be checked from exercise$/) do |arg1|
+  expect(User.first.checked_hypotheses.count).to eq(0)
+end
+
+
 Then(/^I should be redirected back to the front page$/) do
   expect(current_path).to eq(exercises_path)
 end
