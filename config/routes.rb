@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   resources :task_texts
 
+  resources :multichoices
+
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   
