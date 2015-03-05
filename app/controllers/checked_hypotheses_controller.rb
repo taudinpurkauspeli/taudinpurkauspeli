@@ -11,12 +11,12 @@ class CheckedHypothesesController < ApplicationController
       if(exHyp.user_meets_requirements(current_user))
         respond_to do |format|
           if @checked_hypothesis.save
-            format.html { redirect_to hypotheses_url, notice: get_explanation(@checked_hypothesis)}
+            format.html { redirect_to hypotheses_url, notice: @checked_hypothesis.get_explanation}
           else
             format.html { redirect_to hypotheses_url, notice: "Hypoteesin poisto epäonnistui" }
           end
         end
-      else
+      else  
         redirect_to hypotheses_url, notice: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
       end
     else
@@ -43,15 +43,5 @@ class CheckedHypothesesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def checked_hypothesis_params
     params.require(:checked_hypothesis).permit(:exercise_hypothesis_id, :user_id)
-  end
-
-  # Returns a string that contains hypothesis name and explanation if any
-  def get_explanation (checked_hypothesis)
-    ex_hyp = @checked_hypothesis.exercise_hypothesis
-    notice = "Työhypoteesi \"" + ex_hyp.hypothesis.name + "\" poissuljettu."
-    unless ex_hyp.explanation.nil?
-      notice += " Perustelu: " + ex_hyp.explanation
-    end
-    return notice
   end
 end
