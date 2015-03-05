@@ -1,25 +1,8 @@
 <%# navigation styled for Bootstrap 3.0 %>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <% unless @excercise_page_rendered or current_user.nil? %>
-          <%= render 'layouts/navigation_links' %>
-        <% end %>
-      </ul>
-    </div>
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <% unless @excercise_page_rendered %>
-        <%= link_to 'Palaa pääsivulle', root_path, class: 'navbar-brand' %>
-      <% end %>
-    </div>
-  </div>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <%= render 'layouts/navigation_links' %>
+
   <% if @excercise_page_rendered or !current_user.nil?%>
     <div class="login-container">
       <% if current_user.nil? %>
@@ -39,9 +22,9 @@
             <%= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-signup', :method => :get %>
           </div>
         </div>
-      <% else %>
-        <%= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-logout', :method => :delete unless current_user.nil?%>
+        <% else %>
+          <%= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-logout', :method => :delete unless current_user.nil?%>
       <% end %>
     </div>
   <% end %>
-</nav>
+</ul>

@@ -9,12 +9,23 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
-    <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
-    </main>
+    <div role="tabpanel">
+      <header>
+        <%= render 'layouts/navigation' %>
+      </header>
+      <main role="main">
+        <div class="tab-content">
+          <%= render 'layouts/messages' %>
+          <div role="tabpanel" class="tab-pane active" id="anamnesisTab">
+            <%= yield %>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="taskTab"></div>
+          <div role="tabpanel" class="tab-pane" id="hypothesisTab"></div>
+          <div role="tabpanel" class="tab-pane" id="currentTask"></div>
+        </div>
+         
+         
+      </main>
+    </div>
   </body>
 </html>
