@@ -36,7 +36,7 @@ function loadView(url, element){
 
 	element.load(url + "?layout=false", function(responseTxt, statusTxt, xhr){
       if(statusTxt == "error"){
-          element.html("<h1>Virhe sivua ladattaessa.</h1>");
+          element.html("<h1>Virhe sivua ladattaessa.</h1><p>"+responseTxt+"</p><p>"+statusTxt+"</p><p>"+xhr+"</p>");
       }else if(statusTxt == "success"){
       	//setAjaxSubmits(element.find("form"));
 

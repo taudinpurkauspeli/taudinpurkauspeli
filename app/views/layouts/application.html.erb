@@ -23,8 +23,9 @@
           <div role="tabpanel" class="tab-pane" id="hypothesisTab"></div>
           <div role="tabpanel" class="tab-pane" id="currentTask"></div>
         </div>
-        <%= render 'layouts/tab_contents' %>
-         
+          <% unless current_user.nil? %>
+            <%= render 'layouts/tab_contents' %>
+          <% end %>
       </main>
     </div>
   </body>

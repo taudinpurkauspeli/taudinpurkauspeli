@@ -1,7 +1,9 @@
 <%# navigation styled for Bootstrap 3.0 %>
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
-  <%= render 'layouts/navigation_links' %>
+  <% unless current_user.nil? %>
+    <%= render 'layouts/navigation_links' %>
+  <% end %>
 
   <% if @excercise_page_rendered or !current_user.nil?%>
     <div class="login-container">
