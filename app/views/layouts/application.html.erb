@@ -23,7 +23,7 @@
           <div role="tabpanel" class="tab-pane" id="hypothesisTab"></div>
           <div role="tabpanel" class="tab-pane" id="currentTask"></div>
         </div>
-          <% unless current_user.nil? %>
+          <% if !current_user.nil? && !current_exercise.nil? %>
             <%= render 'layouts/tab_contents' %>
           <% end %>
       </main>

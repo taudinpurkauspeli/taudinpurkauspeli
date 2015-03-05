@@ -1,7 +1,7 @@
 <%# navigation styled for Bootstrap 3.0 %>
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
-  <% unless current_user.nil? %>
+  <% if !current_user.nil? && !current_exercise.nil? %>
     <%= render 'layouts/navigation_links' %>
   <% end %>
 
