@@ -31,6 +31,10 @@ class HypothesesController < ApplicationController
     else
       redirect_to exercises_path, notice: 'Valitse ensin case, jota haluat tarkastella!'
     end
+    
+    if params[:layout] === "false"
+      render :layout => false
+    end
 
   end
 

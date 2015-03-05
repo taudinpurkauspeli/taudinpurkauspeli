@@ -6,6 +6,10 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @tasks = Task.all
+
+    if params[:layout] === "false"
+      render :layout => false
+    end
   end
 
   # GET /tasks/1
