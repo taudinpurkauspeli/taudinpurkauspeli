@@ -14,8 +14,7 @@ class HypothesesController < ApplicationController
       #all hypotheses and hypotheses for current exercise
       @hypothesis_bank = @exercise.get_hypothesis_bank
       @hypothesis_groups = HypothesisGroup.all
-      @exercise_hypotheses = @exercise.get_exercise_hypotheses
-
+      
       #new instances
       @new_exercise_hypothesis = ExerciseHypothesis.new
       @new_hypothesis_group = HypothesisGroup.new

@@ -7,7 +7,7 @@ class Exercise < ActiveRecord::Base
 	has_many :exercise_hypotheses, -> { includes(:hypothesis).order('hypotheses.name')}, dependent: :destroy
 	has_many :checked_hypotheses,  -> { includes(:hypothesis).order('hypotheses.name')}, through: :exercise_hypotheses
 
-  def get_exercise_hypotheses
+  def get_hypotheses
     return exercise_hypotheses.group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
   end
 

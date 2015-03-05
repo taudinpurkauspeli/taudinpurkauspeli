@@ -1,5 +1,5 @@
 <div class="collapse in" id="collapseHypothesisGroup<%= group.id%>" >
-    <% @hypothesis_bank[group.id].to_a.each do |hypothesis| %>
+    <% @exercise.get_hypothesis_bank[group.id].to_a.each do |hypothesis| %>
       <%#hypotheses that belongs to current group%>
       <div class="row">
         <div class="col-md-1"></div>
