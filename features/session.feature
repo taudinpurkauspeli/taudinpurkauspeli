@@ -1,3 +1,4 @@
+@javascript
 Feature: Session
   As a user
   I want to log in and out of the system

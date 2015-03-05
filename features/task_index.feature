@@ -1,3 +1,4 @@
+@javascript
 Feature: Task list feature
   As a student
   I want to view the task list of an exercise

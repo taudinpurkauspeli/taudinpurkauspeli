@@ -1,3 +1,4 @@
+@javascript
 Feature: Exercises page
   As a user
   I want to visit the exercises page

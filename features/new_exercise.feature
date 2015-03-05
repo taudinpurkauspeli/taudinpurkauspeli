@@ -1,3 +1,4 @@
+@javascript
 Feature: New exercise feature
   As a teacher
   I want to create a new exercise

@@ -1,3 +1,4 @@
+@javascript
 Feature: Hypothesis list feature
   As a teacher
   I want to view the hypothesis list of an exercise
