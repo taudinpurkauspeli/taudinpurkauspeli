@@ -19,7 +19,7 @@ class HypothesesController < ApplicationController
       unless @user.admin
         #checked hypotheses for current user
         @checked_hypotheses = @exercise.get_checked_hypotheses_for(@user)
-        @unchecked_hypotheses = (@exercise.exercise_hypotheses - @user.exercise_hypotheses).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
+        @unchecked_hypotheses = @exercise.get_unchecked_hypotheses_for(@user)
       end
 
       #new instances

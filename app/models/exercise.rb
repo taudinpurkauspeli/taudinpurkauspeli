@@ -18,4 +18,8 @@ class Exercise < ActiveRecord::Base
   def get_checked_hypotheses_for(user)
     return checked_hypotheses.where(user_id: user.id).group_by{|checkhyp| checkhyp.hypothesis.hypothesis_group_id }
   end
+
+  def get_unchecked_hypotheses_for(user)
+    return (exercise_hypotheses - user.exercise_hypotheses).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
+  end
 end
