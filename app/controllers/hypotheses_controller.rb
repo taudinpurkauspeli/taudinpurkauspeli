@@ -18,7 +18,7 @@ class HypothesesController < ApplicationController
 
       unless @user.admin
         #checked hypotheses for current user
-        @checked_hypotheses = @exercise.checked_hypotheses.where(user_id: @user.id).group_by{|checkhyp| checkhyp.hypothesis.hypothesis_group_id }
+        @checked_hypotheses = @exercise.get_checked_hypotheses_for(@user)
         @unchecked_hypotheses = (@exercise.exercise_hypotheses - @user.exercise_hypotheses).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
       end
 
