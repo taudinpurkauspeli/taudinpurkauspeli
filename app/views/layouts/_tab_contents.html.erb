@@ -1,6 +1,8 @@
 <script>
+  loadView("<%= exercise_path(current_exercise) %>", $("#anamnesisTab"));
   loadView("/hypotheses", $("#hypothesisTab"));
   loadView("/tasks", $("#taskTab"));
 </script>
 
 <h1>MUFASA EI OLE KUNINGAS</h1>
+<h1><%= exercise_path(current_exercise) %></h1>

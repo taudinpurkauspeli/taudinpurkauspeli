@@ -14,6 +14,10 @@ class ExercisesController < ApplicationController
   # GET /exercises/1.json
   def show
     session[:exercise_id] = params[:id]
+
+    if params[:layout] === "false"
+      render :layout => false
+    end
   end
 
   # GET /exercises/new

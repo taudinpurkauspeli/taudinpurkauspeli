@@ -14,18 +14,19 @@
         <%= render 'layouts/navigation' %>
       </header>
       <main role="main">
-        <div class="tab-content">
-          <%= render 'layouts/messages' %>
-          <div role="tabpanel" class="tab-pane active" id="anamnesisTab">
-            <%= yield %>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="taskTab"></div>
-          <div role="tabpanel" class="tab-pane" id="hypothesisTab"></div>
-          <div role="tabpanel" class="tab-pane" id="currentTask"></div>
-        </div>
-          <% if !current_user.nil? && !current_exercise.nil? %>
+        <%= render 'layouts/messages' %>
+        <% if !current_user.nil? && !current_exercise.nil? %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="anamnesisTab"></div>
+            <div role="tabpanel" class="tab-pane" id="taskTab"></div>
+            <div role="tabpanel" class="tab-pane" id="hypothesisTab"></div>
+            <div role="tabpanel" class="tab-pane" id="currentTask"></div>
             <%= render 'layouts/tab_contents' %>
-          <% end %>
+          </div>
+        <% else %>
+          <%= yield %>
+        <% end %>            
       </main>
     </div>
   </body>
