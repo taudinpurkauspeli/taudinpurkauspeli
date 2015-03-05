@@ -34,7 +34,7 @@ module CucumberHelpers
 
   def add_hypothesis_to_case(fields)
 
-    ExerciseHypothesis.create exercise_id:fields[:exercise_id], hypothesis_id:fields[:hypothesis_id], explanation:fields[:explanation]
+    ExerciseHypothesis.create exercise_id:fields[:exercise_id], hypothesis_id:fields[:hypothesis_id], explanation:fields[:explanation], task_id:fields[:task_id]
 
   end
 
