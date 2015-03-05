@@ -10,11 +10,9 @@ class HypothesesController < ApplicationController
     if @exercise
 
       @user = current_user
-      @hypotheses_of_exercise = @exercise.hypotheses
-      #all hypotheses and hypotheses for current exercise
-      @hypothesis_bank = @exercise.get_hypothesis_bank
-      @hypothesis_groups = HypothesisGroup.all
       
+      @hypothesis_groups = HypothesisGroup.all
+
       #new instances
       @new_exercise_hypothesis = ExerciseHypothesis.new
       @new_hypothesis_group = HypothesisGroup.new
