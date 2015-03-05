@@ -6,13 +6,15 @@ RSpec.describe OptionsController, :type => :controller do
   let!(:task){FactoryGirl.create(:task)}
   let!(:multichoice){FactoryGirl.create(:multichoice)}
 
-  let(:valid_attributes) {{content: "4 jalkaa", explanation: "Normaalilla lehmällä on kaksi etujalkaa ja kaksi takajalkaa", value: true, multichoice_id: 1
+  let(:valid_attributes) {{content: "4 jalkaa", explanation: "Normaalilla lehmällä on kaksi etujalkaa ja kaksi takajalkaa",
+  	value: true, multichoice_id: 1
   }}
 
-  let(:invalid_attributes) {{content: nil, explanation: "Normaalilla lehmällä on kaksi etujalkaa ja kaksi takajalkaa"}}
+  let(:invalid_attributes) {{content: nil, explanation: nil,
+  	value: true, multichoice_id: nil}}
 
     let(:valid_session) { {
-      user_id: 1
+      user_id: 1, task_id: 1
   } }
 
     describe "GET edit" do
@@ -37,7 +39,7 @@ RSpec.describe OptionsController, :type => :controller do
 
 		describe "POST create" do
 			describe "with invalid params" do
-				it "does not creates a new Option" do
+				it "does not create a new Option" do
 					expect {
 						post :create, {:option => invalid_attributes}, valid_session
 						}.not_to change(Option, :count)

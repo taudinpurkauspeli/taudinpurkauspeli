@@ -11,33 +11,39 @@ class OptionsController < ApplicationController
     @option = Option.find(params[:id])
   end
 
-  # def create
-  #   @task = Task.find(session[:task_id])
+  def create
+    @task = Task.find(session[:task_id])
 
-  #   # This can be done for each different type of subtask in their respective controllers
-  #   subtask = @task.subtasks.build
-  #   @multichoice = subtask.build_multichoice(question:multichoice_params[:question])
+    # This can be done for each different type of subtask in their respective controllers
+    #subtask = @task.subtasks.build
+    
+    #multichoice = @task.subtasks.multichoice.build
+    
+   # @option = multichoice.build_option(content:option_params[:content], value:option_params[:value],
+    #  explanation:option_params[:explanation], multichoice_id:option_params[:multichoice_id])
 
-  #   respond_to do |format|
-  #     if @multichoice.save
-  #       subtask.save
-  #       format.html { redirect_to @multichoice.subtask.task, notice: 'Kysymys lisättiin onnistuneesti.' }
-  #       #format.json { render :show, status: :created, location: @multichoice }
-  #     else
-  #       #format.html { render :new }
-  #       format.json { render json: @multichoice.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+    @option = Option.new(option_params)
+
+    respond_to do |format|
+      if @option.save
+        #subtask.save
+        format.html { redirect_to edit_multichoice_path(@option.multichoice.id), notice: 'Vaihtoehto lisättiin onnistuneesti.' }
+        format.json { render :show, status: :created, location: @option }
+      else
+        format.html { render :new }
+        format.json { render json: @option.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # PATCH/PUT /task_texts/1
   # PATCH/PUT /task_texts/1.json
   def update
     respond_to do |format|
       if @option.update(option_params)
-        format.html { redirect_to edit_task_path(@option.multichoice.subtask.task.id), notice: 'Vaihtoehto päivitettiin onnistuneesti.' }
+          format.html { redirect_to edit_multichoice_path(@option.multichoice.id), notice: 'Vaihtoehto päivitettiin onnistuneesti.' }
       else
-        #format.html { render :edit }
+        format.html { render :edit }
         format.json { render json: @option.errors, status: :unprocessable_entity }
       end
     end
@@ -51,7 +57,7 @@ class OptionsController < ApplicationController
   	end
    # Never trust parameters from the scary internet, only allow the white list through.
   	def option_params
-    	params.require(:option).permit(:content, :value, :explanation)
+    	params.require(:option).permit(:content, :value, :explanation, :multichoice_id )
   end
 
  end
