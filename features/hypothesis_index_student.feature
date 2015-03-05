@@ -17,13 +17,22 @@ Feature: Hypothesis list feature
     Then I should be redirected back to the front page
     And the page should show the content "Valitse ensin case, jota haluat tarkastella!"
 
-  Scenario: Student can't uncheck a hypothesis from an exercise when prerequisite task not done
+  Scenario: Student can't check a hypothesis from an exercise when prerequisite task not done
     Given I have logged in as a student
     And some hypotheses have been added to case
     And I visit the "Työhypoteesit" page of the case "Lihanautakuolemat"
     When I click on the hypothesis button "Nautaflunssa"
     Then the page should show the content "Sinulla ei ole vielä"
     And "Nautaflunssa" should not be checked from exercise
+
+  Scenario: Student can check a hypothesis from an exercise when prerequisite task not done
+    Given I have logged in as a student
+    And hypotheses with prerequisite tasks have been added to case
+    And I have completed all the tasks
+    And I visit the "Työhypoteesit" page of the case "Lihanautakuolemat"
+    When I click on the hypothesis button "Nautaflunssa"
+    Then the page should show the content "poissuljettu"
+    And "Nautaflunssa" should be checked from exercise
 
   Scenario: Unchecked hypotheses will be in alphabetical order
     Given I have logged in as a student
