@@ -4,7 +4,7 @@
       <div class="col-md-9">
         <%= form_for(@new_checked_hypothesis) do |f| %>
           <%= f.hidden_field :exercise_hypothesis_id, :value => unchecked_hypothesis.id %>
-          <%= f.hidden_field :user_id, :value => @user.id %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
           <%= f.submit unchecked_hypothesis.hypothesis.name, :class => 'btn btn-default btn-save' %>
         <% end %>
       </div>

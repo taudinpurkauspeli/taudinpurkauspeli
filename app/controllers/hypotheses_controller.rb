@@ -8,9 +8,6 @@ class HypothesesController < ApplicationController
   def index
     @exercise = current_exercise
     if @exercise
-
-      @user = current_user
-      
       @hypothesis_groups = HypothesisGroup.all
 
       #new instances
