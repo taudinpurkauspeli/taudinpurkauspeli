@@ -10,7 +10,6 @@ class SubtasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    @subtask = Subtask.find(params[:id])
     redirect_to edit_task_text_path(@subtask.task_text.id)
   end
 
@@ -28,8 +27,6 @@ class SubtasksController < ApplicationController
       end
     end
   end
-
-
 
   # DELETE /subtasks/1
   # DELETE /subtasks/1.json

@@ -15,7 +15,6 @@ class TaskTextsController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    @task_text = TaskText.find(params[:id])
   end
 
   # POST /task_texts

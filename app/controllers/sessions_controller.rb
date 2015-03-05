@@ -13,7 +13,6 @@ class SessionsController < ApplicationController
       end
     end
 
-
     def destroy
       # nollataan sessio
       session[:user_id] = nil
