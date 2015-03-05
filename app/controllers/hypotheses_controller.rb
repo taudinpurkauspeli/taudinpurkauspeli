@@ -16,12 +16,6 @@ class HypothesesController < ApplicationController
       @hypothesis_groups = HypothesisGroup.all
       @exercise_hypotheses = @exercise.get_exercise_hypotheses
 
-      unless @user.admin
-        #checked hypotheses for current user
-        @checked_hypotheses = @exercise.get_checked_hypotheses_for(@user)
-        @unchecked_hypotheses = @exercise.get_unchecked_hypotheses_for(@user)
-      end
-
       #new instances
       @new_exercise_hypothesis = ExerciseHypothesis.new
       @new_hypothesis_group = HypothesisGroup.new
