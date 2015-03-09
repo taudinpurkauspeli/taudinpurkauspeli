@@ -1,6 +1,7 @@
- Feature: New task feature
-   As a teacher
-   I want to create a new task
+@javascript
+Feature: New task feature
+  As a teacher
+  I want to create a new task
 
   Scenario: Teacher can create a task without task text
     Given I have logged in as a teacher
@@ -9,8 +10,8 @@
     And I click on the link "Luo uusi toimenpide"
     When I fill in task name
     And I press the button "Tallenna"
-     Then page should have a message: "Toimenpide luotiin onnistuneesti."
-   And new task should be in the database
+    Then page should have a message: "Toimenpide luotiin onnistuneesti."
+    And new task should be in the database
 
   Scenario: Teacher can create a task with task text
     Given I have logged in as a teacher
