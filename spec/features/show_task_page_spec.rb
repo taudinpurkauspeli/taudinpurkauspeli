@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Task show page" do
+describe "Task show page", js:true do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
   let!(:task){FactoryGirl.create(:task)}

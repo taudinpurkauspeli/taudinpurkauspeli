@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Hypothesis list page" do
+describe "Hypothesis list page", js:true do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
   let!(:hypothesis){FactoryGirl.create(:hypothesis)}

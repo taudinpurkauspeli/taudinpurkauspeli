@@ -1,3 +1,4 @@
+@javascript
 Feature: Complete task feature
   As a student
   I want to complete a task from a task list

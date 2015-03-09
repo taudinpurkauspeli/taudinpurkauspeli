@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "New Exercise page" do
+describe "New Exercise page", js:true do
 
 	describe "if user is signed in as admin" do
 
