@@ -1,5 +1,5 @@
 class OptionsController < ApplicationController
-  before_action :set_option, only: [:show, :edit, :update]
+  before_action :set_option, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
 
@@ -34,7 +34,7 @@ end
         format.html { redirect_to edit_multichoice_path(@option.multichoice.id), notice: 'Vaihtoehto lisättiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @option }
       else
-        format.html { render :new }
+        format.html { redirect_to edit_multichoice_path(@option.multichoice.id), notice: 'Vaihtoehdonn tiedot puuttelliset.' }
         format.json { render json: @option.errors, status: :unprocessable_entity }
       end
     end
@@ -53,6 +53,15 @@ end
     end
   end
 
+  def destroy
+    parent_id = @option.multichoice_id
+    @option.destroy
+    respond_to do |format|
+
+      format.html { redirect_to edit_multichoice_path(parent_id), notice: 'Vastausvaihtoehdon poisto onnistui!' }
+      format.json { head :no_content }
+    end
+  end
 
  private
   # Use callbacks to share common setup or constraints between actions.

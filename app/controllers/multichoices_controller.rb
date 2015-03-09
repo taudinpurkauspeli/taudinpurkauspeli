@@ -43,7 +43,7 @@ class MultichoicesController < ApplicationController
   def update
     respond_to do |format|
       if @multichoice.update(multichoice_params)
-        format.html { redirect_to edit_task_path(@multichoice.subtask.task.id), notice: 'Kysymys päivitettiin onnistuneesti.' }
+        format.html { redirect_to edit_multichoice_path(@multichoice.id), notice: 'Kysymys päivitettiin onnistuneesti.' }
       else
         format.html { render :edit }
         format.json { render json: @multichoice.errors, status: :unprocessable_entity }
