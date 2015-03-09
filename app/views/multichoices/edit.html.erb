@@ -1,3 +1,23 @@
 <h1>Muokkaa monivalintakysymystä</h1>
 
 <%= render 'form' %>
+
+<% @multichoice.options.each do |option| %>
+    <%= button_to 'Vastausvaihtoehto', edit_option_path(option), :class => 'btn btn-default btn-exercise', :method => :get %>
+<% end %>
+
+<%= button_to 'Uusi vastausvaihtoehto', new_option_path,  :class => 'btn btn-default btn-exercise', :method => :get  %>
+
+ <%= form_for(@new_option) do |f| %>
+ 			<%= f.label :content %>
+ 			<%= f.text_field :content %>
+
+ 			<%= f.label :explanation %>
+ 			<%= f.text_field :explanation %>
+
+ 			<%= f.label :value %>
+ 			<%= f.check_box :value %>
+
+            <%= f.hidden_field :multichoice_id, :value => @multichoice.id %>
+            <%= f.submit 'Tallenna', :class => 'btn btn-default btn-hypothesis' %>
+          <% end %>

@@ -16,6 +16,7 @@ class MultichoicesController < ApplicationController
  # GET /multichoices/1/edit
   def edit
     @multichoice = Multichoice.find(params[:id])
+    @new_option = Option.new
   end
 
   def create
