@@ -8,9 +8,11 @@
 <%= render 'form' %>
 
 <% @task.subtasks.each do |subtask| %>
-    <%= button_to 'Tekstimuotoinen alitoimenpide', edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise', :method => :get %>
+    <%= button_to 'Alitoimenpide', edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise', :method => :get %>
 <% end %>
 
 <%= button_to 'Luo uusi tekstimuotoinen alitoimenpide', new_task_text_path,  :class => 'btn btn-default btn-exercise', :method => :get  %>
+<%= button_to 'Luo uusi monivalinta-alitoimenpide', new_multichoice_path,  :class => 'btn btn-default btn-exercise', :method => :get  %>
+
 
 <br>
