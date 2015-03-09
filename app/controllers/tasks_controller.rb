@@ -16,12 +16,12 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
 
-    unless current_user_is_admin
+    #unless current_user_is_admin
       session[:task_id] = params[:id]
       @task = current_task
-    else
-      @task = Task.find(params[:id])
-    end
+    #else
+     # @task = Task.find(params[:id])
+    #end
 
     @user = current_user
 

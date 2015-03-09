@@ -31,17 +31,34 @@ function setAjaxSubmits(forms){
 
 }
 
+function clickToOpenTab(link, targetTabLink, url, containerElement){
+	alert("nappeja" + link.length);
+	link.click(function(e){
+
+		e.preventDefault;
+		loadView(url, containerElement);
+		targetTabLink.tab('show');
+		//$('#navigationTabs a[href="#currentTask"]')
+	});
+
+}
+
 //Loads given url and inserts it inside given element with AJAX call
-function loadView(url, element){
+function loadView(url, element, callback){
 
 	element.load(url + "?layout=false", function(responseTxt, statusTxt, xhr){
       if(statusTxt == "error"){
           element.html("<h1>Virhe sivua ladattaessa.</h1><p>"+responseTxt+"</p><p>"+statusTxt+"</p><p>"+xhr+"</p>");
       }else if(statusTxt == "success"){
       	//setAjaxSubmits(element.find("form"));
+      	if(callback != undefined){
+			  	clickToOpenTab($('.btn-available-task'), $('#navigationTabs a[href="#currentTask"]'), url, element);
+			 		alert("teki jotain");
+			  }
 
       }
   });
+  
 }
 
 /*
