@@ -1,6 +1,6 @@
 
 //Warns if AJAX call returns error
-$( document ).ajaxError(function( event, jqxhr, settings, thrownError ) {
+$(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
 	alert("Ajax error: " + jqxhr.status + " " + jqxhr.statusText);
 });
 
