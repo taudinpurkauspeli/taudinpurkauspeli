@@ -7,6 +7,10 @@ class OptionsController < ApplicationController
  def show
   end
   
+def new
+  @option = Option.new
+end
+
  def edit
     @option = Option.find(params[:id])
   end

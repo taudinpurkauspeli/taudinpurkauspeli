@@ -28,7 +28,7 @@ class MultichoicesController < ApplicationController
     respond_to do |format|
       if @multichoice.save
         subtask.save
-        format.html { redirect_to @multichoice.subtask.task, notice: 'Kysymys lisättiin onnistuneesti.' }
+        format.html { redirect_to edit_multichoice_path(@multichoice.id), notice: 'Kysymys lisättiin onnistuneesti.' }
         #format.json { render :show, status: :created, location: @multichoice }
       else
         format.html { render :new }
