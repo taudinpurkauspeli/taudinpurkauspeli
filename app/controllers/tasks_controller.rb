@@ -42,6 +42,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.level = Task.find_highest_level + 1
     respond_to do |format|
       if @task.save
         format.html { redirect_to edit_task_path(@task.id), notice: 'Toimenpide luotiin onnistuneesti.' }

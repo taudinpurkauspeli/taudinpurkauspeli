@@ -26,6 +26,7 @@ FactoryGirl.define do
   factory :task do
     name "Soita asiakkaalle"
     exercise_id 1
+    level 1
   end
 
   factory :sample, class: Task do
