@@ -8,4 +8,13 @@ class Task < ActiveRecord::Base
   has_many :subtasks, dependent: :destroy
 
   has_many :task_texts, through: :subtasks
+
+  def find_highest_level
+    Task.maximum("level")
+  end
+
+  def find_highest_level(exercise)
+    e = exercise.tasks
+    e.maximum("level")
+  end
 end
