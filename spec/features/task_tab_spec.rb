@@ -4,7 +4,7 @@ describe "Task list page" do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
   let!(:task1){FactoryGirl.create(:task)}
-  let!(:task2){FactoryGirl.create(:sample)}
+  let!(:task2){FactoryGirl.create(:task, name: "Ota näyte")}
 
   describe "if user is signed in as student" do
 

@@ -5,7 +5,13 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @exercise = current_exercise
+    if @exercise
+      @tasks = @exercise.tasks
+
+    else
+      redirect_to exercises_path, notice: 'Valitse ensin case, jota haluat tarkastella!'
+    end
   end
 
   # GET /tasks/1
