@@ -29,6 +29,10 @@ class TasksController < ApplicationController
 
     #new instances
     @new_completed_task = CompletedTask.new
+
+    if params[:layout] === "false"
+      render :layout => false
+    end
   end
 
   # GET /tasks/new

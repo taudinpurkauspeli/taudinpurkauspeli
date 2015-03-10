@@ -40,7 +40,7 @@
                 <% @tasks.each do |task| %>
                   <% if !current_user_has_completed_task(task.id) %>
                     <tr>
-                      <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-available-task' %></td>
+                      <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-available-task', :form_class => "form-button_to-task" %></td>
                     </tr>              
                   <% end %>
                 <% end %>

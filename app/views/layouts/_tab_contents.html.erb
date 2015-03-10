@@ -1,7 +1,9 @@
 <script>
   loadView("<%= exercise_path(current_exercise) %>", $("#anamnesisTab"));
   loadView("/hypotheses", $("#hypothesisTab"));
-  loadView("/tasks", $("#taskTab"), true);
+  loadView("/tasks", $("#taskTab"), function(){
+  	clickToOpenTaskTab($('.form-button_to-task'), $("#currentTask"));
+  });
 </script>
 
 <h1>MUFASA EI OLE KUNINGAS</h1>

@@ -31,14 +31,28 @@ function setAjaxSubmits(forms){
 
 }
 
-function clickToOpenTab(link, targetTabLink, url, containerElement){
-	alert("nappeja" + link.length);
-	link.click(function(e){
+function clickToOpenTaskTab(link, containerElement){
+	//alert("nappeja" + link.length);
+	link.submit(function(e){
+		var actionUrl = $(this).attr("action");
+		var taskName = $(this).find('input[type="submit"]').attr("value");
+		//alert("urli: " + actionUrl);
+		//e.preventDefault;
+		//alert($('#navigationTabs a[href="#currentTask"]').length);
+		var targetTabLink = $('#navigationTabs a[href="#currentTask"]')
 
-		e.preventDefault;
-		loadView(url, containerElement);
+		if(!targetTabLink.length){
+			$("#navigationTabs").append("<li role='presentation'><a href='#currentTask' aria-controls='currentTask' role='tab' data-toggle='tab'>"+taskName+"</a></li>");
+			targetTabLink = $('#navigationTabs a[href="#currentTask"]');
+		}else{
+			targetTabLink.html(taskName);
+		}
+
+		loadView(actionUrl, containerElement);
 		targetTabLink.tab('show');
 		//$('#navigationTabs a[href="#currentTask"]')
+		//alert("klikkasit nappia");
+		return false;
 	});
 
 }
@@ -52,8 +66,9 @@ function loadView(url, element, callback){
       }else if(statusTxt == "success"){
       	//setAjaxSubmits(element.find("form"));
       	if(callback != undefined){
-			  	clickToOpenTab($('.btn-available-task'), $('#navigationTabs a[href="#currentTask"]'), url, element);
-			 		alert("teki jotain");
+			  	//clickToOpenTab($('.btn-available-task'), $('#navigationTabs a[href="#currentTask"]'), url, element);
+			 		//alert("teki jotain");
+			 		callback();
 			  }
 
       }
