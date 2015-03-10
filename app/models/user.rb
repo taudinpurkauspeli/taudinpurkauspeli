@@ -16,5 +16,6 @@ class User < ActiveRecord::Base
       latest_completed_task.task.level
     else
       return 0
+    end
   end
 end

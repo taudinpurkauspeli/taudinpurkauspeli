@@ -13,13 +13,16 @@ class TasksController < ApplicationController
   def show
 
     unless current_user_is_admin
+      if current_user.get_level(current_exercise) + 1 >= @task.level
       session[:task_id] = params[:id]
       @task = current_task
+
+      else
+        format.html { redirect_to tasks_url, notice: 'Et voi vielä suorittaa tätä toimenpidettä.' }
+      end
     else
       @task = Task.find(params[:id])
     end
-
-    @user = current_user
 
     @subtasks = @task.subtasks
 
