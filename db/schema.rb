@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150304114232) do
+ActiveRecord::Schema.define(version: 20150304120112) do
 
   create_table "checked_hypotheses", force: :cascade do |t|
     t.integer "user_id"
@@ -51,6 +51,22 @@ ActiveRecord::Schema.define(version: 20150304114232) do
 
   create_table "hypothesis_groups", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "multichoices", force: :cascade do |t|
+    t.string   "question"
+    t.integer  "subtask_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.integer  "multichoice_id"
+    t.string   "content"
+    t.string   "explanation"
+    t.boolean  "value"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "subtasks", force: :cascade do |t|
