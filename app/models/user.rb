@@ -9,13 +9,17 @@ class User < ActiveRecord::Base
   has_many :completed_tasks, dependent: :destroy
   has_many :exercise_hypotheses, through: :checked_hypotheses
 
-  def get_level(exercise)
+  def get_number_of_tasks_by_level(exercise, level)
     # TODO fix to only check tasks of parameter exercise
-    latest_completed_task = completed_tasks.last
-    unless latest_completed_task.nil?
-      latest_completed_task.task.level
-    else
-      return 0
+    number_of_tasks = 0
+
+    completed_tasks.each do |c|
+      unless c.task.nil? 
+        if(c.task.level == level)
+          number_of_tasks += 1
+        end
+      end
     end
+    return number_of_tasks
   end
 end
