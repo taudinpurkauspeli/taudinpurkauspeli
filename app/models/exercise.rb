@@ -22,4 +22,9 @@ class Exercise < ActiveRecord::Base
   def get_unchecked_hypotheses_for(user)
     return (exercise_hypotheses - user.exercise_hypotheses).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
   end
+
+  def get_number_of_tasks_by_level(level)
+    # TODO fix to only check tasks of parameter exercise
+    Task.where(level: level).count
+  end
 end
