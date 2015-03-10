@@ -9,6 +9,7 @@ class HypothesesController < ApplicationController
     @exercise = current_exercise
     if @exercise
       @hypothesis_groups = HypothesisGroup.all
+      @tasks = @exercise.tasks
 
       #new instances
       @new_exercise_hypothesis = ExerciseHypothesis.new

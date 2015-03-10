@@ -29,10 +29,6 @@ FactoryGirl.define do
     level 1
   end
 
-  factory :sample, class: Task do
-    name "Ota näyte"
-  end
-
   factory :hypothesis do
     name "Virustauti"
     hypothesis_group_id 1
