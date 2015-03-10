@@ -191,7 +191,7 @@ h3{
   border-width: 0px;
 }
 
-.btn-disabled{
+.disabled{
   width: 100%;
   text-align: left;
   color: $DisabledButtonText;
@@ -200,11 +200,6 @@ h3{
   border-radius: 7px;
   margin-bottom: 5px;
   border-width: 0px;
-}
-
-.btn-disabled:hover{
-  color: $DisabledButtonText;
-  cursor:default;
 }
 
 .btn-default:hover{

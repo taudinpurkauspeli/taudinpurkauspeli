@@ -6,22 +6,10 @@ class HypothesesController < ApplicationController
   # GET /hypotheses
   # GET /hypotheses.json
   def index
-    exercise = current_exercise
-    if exercise
-
-      @exercise = exercise
-      @user = current_user
-      @hypotheses_of_exercise = @exercise.hypotheses
-      #all hypotheses and hypotheses for current exercise
-      @hypothesis_bank = (Hypothesis.all - @hypotheses_of_exercise).group_by(&:hypothesis_group_id)
+    @exercise = current_exercise
+    if @exercise
       @hypothesis_groups = HypothesisGroup.all
-      @exercise_hypotheses = exercise.exercise_hypotheses.group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
-
-      unless @user.admin
-        #checked hypotheses for current user
-        @checked_hypotheses = exercise.checked_hypotheses.where(user_id: @user.id).group_by{|checkhyp| checkhyp.hypothesis.hypothesis_group_id }
-        @unchecked_hypotheses = (exercise.exercise_hypotheses - @user.exercise_hypotheses).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
-      end
+      @tasks = @exercise.tasks
 
       #new instances
       @new_exercise_hypothesis = ExerciseHypothesis.new

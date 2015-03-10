@@ -5,7 +5,13 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @exercise = current_exercise
+    if @exercise
+      @tasks = @exercise.tasks
+
+    else
+      redirect_to exercises_path, notice: 'Valitse ensin case, jota haluat tarkastella!'
+    end
   end
 
   # GET /tasks/1
@@ -42,6 +48,9 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.exercise_id = session[:exercise_id]
+    @task.level = Task.find_highest_level + 1
+
     respond_to do |format|
       if @task.save
         format.html { redirect_to edit_task_path(@task.id), notice: 'Toimenpide luotiin onnistuneesti.' }

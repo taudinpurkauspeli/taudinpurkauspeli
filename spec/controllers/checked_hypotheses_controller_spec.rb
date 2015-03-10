@@ -13,12 +13,16 @@ RSpec.describe CheckedHypothesesController, :type => :controller do
   }
 
   let(:invalid_attributes) {
-    {user_id: 1}
+    {user_id: 1, exercise_hypothesis_id:nil}
   }
 
   let(:valid_session) { {
     user_id: 1
     } }
+
+    before :each do
+      user.completed_tasks.create task_id:1
+    end
 
     describe "POST create" do
      describe "with valid params" do

@@ -26,10 +26,7 @@ FactoryGirl.define do
   factory :task do
     name "Soita asiakkaalle"
     exercise_id 1
-  end
-
-  factory :sample, class: Task do
-    name "Ota näyte"
+    level 1
   end
 
   factory :hypothesis do
@@ -45,6 +42,7 @@ FactoryGirl.define do
   factory :exercise_hypothesis do
     exercise_id 1
     hypothesis_id 1
+    task_id 1
     explanation "Anamneesin mukaan tauti on virustauti"
   end
 
