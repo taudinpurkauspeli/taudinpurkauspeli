@@ -44,6 +44,10 @@ class TasksController < ApplicationController
   def edit
     session[:task_id] = params[:id]
     @subtasks = @task.subtasks
+
+    if params[:layout] === "false"
+      render :layout => false
+    end
   end
 
   # POST /tasks
