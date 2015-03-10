@@ -29,11 +29,10 @@ RSpec.describe TasksController, :type => :controller do
     {name: "Soita asiakkaalle", exercise_id: 1}
   }
 
-=begin
+
   let(:invalid_attributes) {
-    {}
+    {name: nil, exercise_id: 1}
   }
-=end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -74,7 +73,16 @@ RSpec.describe TasksController, :type => :controller do
   end
 
   describe "POST create" do
-=begin
+
+    describe "with valid params" do
+      it "assigns correct level" do
+        for i in 1..5
+          post :create, {:task => valid_attributes}, valid_session
+        end
+        expect(Task.find_highest_level).to eq(5)
+      end
+    end
+
     describe "with invalid params" do
       it "assigns a newly created but unsaved task as @task" do
         post :create, {:task => invalid_attributes}, valid_session
@@ -86,7 +94,6 @@ RSpec.describe TasksController, :type => :controller do
         expect(response).to render_template("new")
       end
     end
-=end
   end
 
 

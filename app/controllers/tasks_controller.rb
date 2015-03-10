@@ -49,6 +49,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.exercise_id = session[:exercise_id]
+    @task.level = Task.find_highest_level + 1
 
     respond_to do |format|
       if @task.save
