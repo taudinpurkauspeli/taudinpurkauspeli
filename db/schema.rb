@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20150304120112) do
     t.string   "explanation"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "task_id"
   end
 
   create_table "exercises", force: :cascade do |t|

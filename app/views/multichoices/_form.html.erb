@@ -1,23 +1,23 @@
 <%= form_for(@multichoice) do |f| %>
-  <% if @multichoice.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= t('activerecord.errors.template.header')%></h2>
+    <% if @multichoice.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= t('activerecord.errors.template.header')%></h2>
 
-      <ul>
-      <% @multichoice.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @multichoice.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :question%><br>
+      <%= f.text_field :question %>
     </div>
-  <% end %>
+    <br>
 
-  <div class="field">
-    <%= f.label :question%><br>
-    <%= f.text_field :question %>
-  </div>
-  <br>
-
-  <div class="actions">
-    <%= f.submit "Tallenna kysymys"%>
-  </div>
+    <div class="actions">
+      <%= f.submit "Tallenna kysymys"%>
+    </div>
 <% end %>
