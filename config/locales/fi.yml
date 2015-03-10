@@ -67,6 +67,8 @@ fi:
       task: "Toimenpide"
       user: "Käyttäjä"
     attributes:
+      exercise_hypothesis:
+        task_id: "Esivaatimustoimenpide"
       exercise:
         name: "Nimi"
         anamnesis: "Anamneesi"
