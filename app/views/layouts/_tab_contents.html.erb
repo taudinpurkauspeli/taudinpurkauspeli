@@ -1,8 +1,10 @@
 <script>
   loadView("<%= exercise_path(current_exercise) %>", $("#anamnesisTab"));
-  loadView("/hypotheses", $("#hypothesisTab"));
+  loadView("/hypotheses", $("#hypothesisTab"), function(){
+  	setAjaxSubmits($("#hypothesisTab form"));
+  });
   loadView("/tasks", $("#taskTab"), function(){
-  	clickToOpenTaskTab($('.form-button_to-task'), $("#currentTask"));
+  	clickToOpenTaskTab($('.form-button_to-task'), $("#currentTaskTab"));
   });
 </script>
 

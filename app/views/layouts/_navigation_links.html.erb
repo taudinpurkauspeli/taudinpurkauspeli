@@ -3,7 +3,7 @@
 <li role="presentation"><a href="#taskTab" aria-controls="tasks" role="tab" data-toggle="tab">Toimenpiteet</a></li>
 <li role="presentation"><a href="#hypothesisTab" aria-controls="hypotheses" role="tab" data-toggle="tab">Työhypoteesit</a></li>
 <% unless current_task.nil? || current_user_has_completed_task(current_task.id) %>
-	<li role="presentation"><a href="#currentTask" aria-controls="currentTask" role="tab" data-toggle="tab"><%= current_task.name %></a></li>
+	<li role="presentation"><a href="#currentTaskTab" aria-controls="currentTask" role="tab" data-toggle="tab"><%= current_task.name %></a></li>
 <% end %>
 <!--
 <%= link_to 'Anamneesi', current_exercise, class: if current_page?(current_exercise) then 'active navbar-brand' else 'navbar-brand' end %>

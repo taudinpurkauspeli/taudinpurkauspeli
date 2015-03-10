@@ -14,7 +14,7 @@ function setAjaxSubmits(forms){
 		alert("klikkasit submittia!");
 		alert("action: " + clickedForm.attr("action"));
 		//alert($(this).attr("id"));
-		
+		/*
 		$.post(postUrl, clickedForm.serialize())
     	.done(function(data) {
 				alert("palaute: /n" + data);
@@ -25,7 +25,7 @@ function setAjaxSubmits(forms){
 			.always(function() {
 				alert("Pyyntö valmis, onnistui tai ei");
     	});
-		
+		*/
     return false;
 	});
 
@@ -39,16 +39,18 @@ function clickToOpenTaskTab(link, containerElement){
 		//alert("urli: " + actionUrl);
 		//e.preventDefault;
 		//alert($('#navigationTabs a[href="#currentTask"]').length);
-		var targetTabLink = $('#navigationTabs a[href="#currentTask"]')
+		var targetTabLink = $('#navigationTabs a[href="#currentTaskTab"]')
 
 		if(!targetTabLink.length){
-			$("#navigationTabs").append("<li role='presentation'><a href='#currentTask' aria-controls='currentTask' role='tab' data-toggle='tab'>"+taskName+"</a></li>");
-			targetTabLink = $('#navigationTabs a[href="#currentTask"]');
+			$("#navigationTabs").append("<li role='presentation'><a href='#currentTaskTab' aria-controls='currentTask' role='tab' data-toggle='tab'>"+taskName+"</a></li>");
+			targetTabLink = $('#navigationTabs a[href="#currentTaskTab"]');
 		}else{
 			targetTabLink.html(taskName);
 		}
 
-		loadView(actionUrl, containerElement);
+		loadView(actionUrl, containerElement, function(){
+			//setAjaxSubmits($("#currentTaskTab form"));
+		});
 		targetTabLink.tab('show');
 		//$('#navigationTabs a[href="#currentTask"]')
 		//alert("klikkasit nappia");
