@@ -86,7 +86,11 @@ class HypothesesController < ApplicationController
   def destroy
     @hypothesis.destroy
     respond_to do |format|
-      format.html { redirect_to hypotheses_url, notice: 'Hypoteesin poisto onnistui!' }
+      if params[:layout] === "false"
+        format.html { redirect_to hypotheses_url(:layout => false), notice: 'Hypoteesin poisto onnistui!' }
+      else
+        format.html { redirect_to hypotheses_url, notice: 'Hypoteesin poisto onnistui!' }
+      end
       format.json { head :no_content }
     end
   end

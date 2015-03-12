@@ -7,25 +7,25 @@ $(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
 
 //TODO
 //Overrides defaut submits with AJAX submits
-function setAjaxSubmits(forms){
+function setAjaxSubmits(forms, containerElement){
 	forms.submit(function(){
 		var clickedForm = $(this);
 		var postUrl = clickedForm.attr("action") + "?layout=false";
-		alert("klikkasit submittia!");
-		alert("action: " + clickedForm.attr("action"));
+		//alert("klikkasit submittia!");
+		//alert("action: " + postUrl);
 		//alert($(this).attr("id"));
-		/*
+		
 		$.post(postUrl, clickedForm.serialize())
     	.done(function(data) {
-				alert("palaute: /n" + data);
+				containerElement.html(data);
 			})
 			.fail(function(data) {
-				alert("Virhe tallentaessa. Yritä uudelleen./n" + data);
+				//alert("Virhe tallentaessa. Yritä uudelleen./n" + data);
 			})
 			.always(function() {
-				alert("Pyyntö valmis, onnistui tai ei");
+				//alert("Pyyntö valmis, onnistui tai ei");
     	});
-		*/
+		
     return false;
 	});
 
