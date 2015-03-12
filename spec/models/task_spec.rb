@@ -28,17 +28,17 @@ describe "with incorrect name" do
   end
 end
 
-describe "find_highest_level returns 0"  do
+describe "get_highest_level returns 0"  do
   it "when no tasks are created" do
-    expect(Task.find_highest_level).to eq(0)
+    expect(Task.get_highest_level).to eq(0)
   end
 end
 
-describe "find_highest_level returns correct value" do
+describe "get_highest_level returns correct value" do
 
   let!(:task){FactoryGirl.create(:task)}
   it "when tasks are created" do
-    expect(Task.find_highest_level).to eq(1)
+    expect(Task.get_highest_level).to eq(1)
   end
 end
 end

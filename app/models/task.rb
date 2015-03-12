@@ -9,7 +9,7 @@ class Task < ActiveRecord::Base
 
   has_many :task_texts, through: :subtasks
 
-  def self.find_highest_level
+  def self.get_highest_level
     highest_level = Task.maximum("level")
     unless highest_level.nil?
       return highest_level
@@ -18,7 +18,7 @@ class Task < ActiveRecord::Base
     end
   end
 
-#  def find_highest_level(exercise)
+#  def get_highest_level(exercise)
 #    e = exercise.tasks
 #    e.maximum("level")
 #  end
