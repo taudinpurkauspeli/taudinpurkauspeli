@@ -21,6 +21,7 @@ end
 describe "with incorrect name" do
 
   let!(:task){Task.create name:""}
+  let!(:exercise){FactoryGirl.create(:exercise)}
 
   it "is not saved" do
     expect(task).not_to be_valid
@@ -29,16 +30,18 @@ describe "with incorrect name" do
 end
 
 describe "get_highest_level returns 0"  do
+  let!(:exercise){FactoryGirl.create(:exercise)}
   it "when no tasks are created" do
-    expect(Task.get_highest_level).to eq(0)
+    expect(Task.get_highest_level(exercise)).to eq(0)
   end
 end
 
 describe "get_highest_level returns correct value" do
+  let!(:exercise){FactoryGirl.create(:exercise)}
 
   let!(:task){FactoryGirl.create(:task)}
   it "when tasks are created" do
-    expect(Task.get_highest_level).to eq(1)
+    expect(Task.get_highest_level(exercise)).to eq(1)
   end
 end
 end

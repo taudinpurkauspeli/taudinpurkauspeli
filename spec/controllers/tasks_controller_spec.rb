@@ -79,7 +79,7 @@ RSpec.describe TasksController, :type => :controller do
         for i in 1..5
           post :create, {:task => valid_attributes}, valid_session
         end
-        expect(Task.get_highest_level).to eq(5)
+        expect(Task.get_highest_level(exercise)).to eq(5)
       end
     end
 

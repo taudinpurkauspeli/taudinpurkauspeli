@@ -5,9 +5,11 @@ describe "New Task page" do
   describe "if user is signed in as admin" do
 
     let!(:user){FactoryGirl.create(:user)}
+    let!(:exercise){FactoryGirl.create(:exercise)}
 
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
+      click_button(exercise.name)
     end
 
 
