@@ -55,8 +55,8 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-    @task.level = Task.get_highest_level + 1
     @task.exercise_id = session[:exercise_id]
+    @task.level = Task.get_highest_level(@task.exercise) + 1
 
     respond_to do |format|
       if @task.save
