@@ -30,7 +30,7 @@ class TasksController < ApplicationController
     @new_completed_task = CompletedTask.new
   end
 
-  def user_can_start_task(user, exercise, level)
+  def user_can_start_task(user, exercise, level)  
     return user.get_number_of_tasks_by_level(exercise, level - 1) == exercise.get_number_of_tasks_by_level(level - 1)
   end
 
