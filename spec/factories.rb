@@ -29,10 +29,6 @@ FactoryGirl.define do
     level 1
   end
 
-  factory :sample, class: Task do
-    name "Ota näyte"
-  end
-
   factory :hypothesis do
     name "Virustauti"
     hypothesis_group_id 1
@@ -66,5 +62,10 @@ FactoryGirl.define do
   factory :task_text do
     subtask_id 1
     content "Lääkäri kertoo mikä on totuus"
+  end
+
+    factory :multichoice do
+    subtask_id 1
+    question "Tykkääkö koira nappuloista?"
   end
 end

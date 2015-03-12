@@ -10,7 +10,15 @@ class SubtasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    redirect_to edit_task_text_path(@subtask.task_text.id)
+
+    @subtask = Subtask.find(params[:id])
+    unless (@subtask.task_text.nil?)
+      redirect_to edit_task_text_path(@subtask.task_text.id)
+    end
+    unless (@subtask.multichoice.nil?)
+      redirect_to edit_multichoice_path(@subtask.multichoice.id)
+    end
+
   end
 
   # POST /subtasks

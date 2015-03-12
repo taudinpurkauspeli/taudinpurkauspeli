@@ -88,7 +88,7 @@ describe "New Task page" do
 
 
       click_link('Muokkaa')
-      click_button('Tekstimuotoinen alitoimenpide')
+      click_button('Teksti: Asiakas kertoo, että ...')
       fill_in('task_text_content', with: "Asiakas kertoo, että koira ei ole kipeä!")
       click_button('Tallenna')
 
@@ -156,7 +156,7 @@ describe "New Task page" do
 
 
       click_link('Muokkaa')
-      click_button('Tekstimuotoinen alitoimenpide')
+      click_button('Asiakas kertoo, että ...')
       fill_in('task_text_content', with: "")
       click_button('Tallenna')
 

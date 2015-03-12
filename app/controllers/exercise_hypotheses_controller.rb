@@ -49,6 +49,6 @@ class ExerciseHypothesesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exercise_hypothesis_params
-      params.require(:exercise_hypothesis).permit(:exercise_id, :hypothesis_id, :explanation)
+      params.require(:exercise_hypothesis).permit(:exercise_id, :hypothesis_id, :explanation, :task_id)
     end
 end
