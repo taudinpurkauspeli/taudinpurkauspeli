@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
     completed_tasks.each do |c|
       unless c.task.nil? 
-        if(c.task.level == level)
+        if(c.task.level == level && c.task.exercise == exercise.id)
           number_of_tasks += 1
         end
       end
