@@ -29,7 +29,11 @@ class HypothesisGroupsController < ApplicationController
   def destroy
     @hypothesis_group.destroy
     respond_to do |format|
-      format.html { redirect_to hypotheses_url}
+      if params[:layout] === "false"
+        format.html { redirect_to hypotheses_url(:layout => false)}
+      else
+        format.html { redirect_to hypotheses_url}
+      end
       format.json { head :no_content }
     end
   end

@@ -5,11 +5,15 @@ $(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
 });
 
 
-//TODO
-//Overrides defaut submits with AJAX submits
+/**
+* Overrides defaut submits with AJAX submits
+*
+* formsSelector: Selector string for forms to be overrided
+* containerElementSelector: Selector string for element to be refreshed 
+*/
 function setAjaxSubmits(formsSelector, containerElementSelector){
-	forms = $(formsSelector);
-	containerElement = $(containerElementSelector);
+	var forms = $(formsSelector);
+	var containerElement = $(containerElementSelector);
 	forms.submit(function(){
 		var clickedForm = $(this);
 		var postUrl = clickedForm.attr("action") + "?layout=false";
@@ -34,9 +38,11 @@ function setAjaxSubmits(formsSelector, containerElementSelector){
 
 }
 
-function clickToOpenTaskTab(link, containerElement){
-	//alert("nappeja" + link.length);
-	link.submit(function(e){
+function clickToOpenTaskTab(formsSelector, containerElementSelector){
+	var containerElement = $(containerElementSelector);
+	var forms = $(formsSelector)
+	alert("nappeja" + forms.length);
+	forms.submit(function(e){
 		var actionUrl = $(this).attr("action");
 		var taskName = $(this).find('input[type="submit"]').attr("value");
 		//alert("urli: " + actionUrl);
@@ -51,7 +57,7 @@ function clickToOpenTaskTab(link, containerElement){
 			targetTabLink.html(taskName);
 		}
 
-		loadView(actionUrl, containerElement, function(){
+		loadView(actionUrl, containerElementSelector, function(){
 			//setAjaxSubmits($("#currentTaskTab form"));
 		});
 		targetTabLink.tab('show');
@@ -63,7 +69,8 @@ function clickToOpenTaskTab(link, containerElement){
 }
 
 //Loads given url and inserts it inside given element with AJAX call
-function loadView(url, element, callback){
+function loadView(url, elementSelector, callback){
+	var element = $(elementSelector);
 
 	element.load(url + "?layout=false", function(responseTxt, statusTxt, xhr){
       if(statusTxt == "error"){
