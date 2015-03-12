@@ -10,12 +10,11 @@ class User < ActiveRecord::Base
   has_many :exercise_hypotheses, through: :checked_hypotheses
 
   def get_number_of_tasks_by_level(exercise, level)
-    # TODO fix to only check tasks of parameter exercise
     number_of_tasks = 0
 
     completed_tasks.each do |c|
       unless c.task.nil? 
-        if(c.task.level == level && c.task.exercise == exercise.id)
+        if(c.task.level == level && c.task.exercise_id == exercise.id)
           number_of_tasks += 1
         end
       end
