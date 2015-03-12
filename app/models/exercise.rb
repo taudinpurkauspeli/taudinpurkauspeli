@@ -24,7 +24,6 @@ class Exercise < ActiveRecord::Base
   end
 
   def get_number_of_tasks_by_level(level)
-    # TODO fix to only check tasks of parameter exercise
-    Task.where(level: level).count
+    tasks.where(level: level).count
   end
 end
