@@ -63,9 +63,14 @@ class HypothesesController < ApplicationController
         else
           format.html { redirect_to hypotheses_path, notice: 'Hypoteesin luominen onnistui!' }
         end
-        format.json { render :show, status: :created, location: @hypothesis }
+        #format.json { render :show, status: :created, location: @hypothesis }
       else
-        format.html { render :new }
+        if params[:layout] === "false"
+          format.html { redirect_to hypotheses_path(:layout => false), notice: 'Hypoteesin luominen epäonnistui!' }
+        else
+          format.html { redirect_to hypotheses_path, notice: 'Hypoteesin luominen epäonnistui!' }
+        end
+        #format.html { render :new }
         format.json { render json: @hypothesis.errors, status: :unprocessable_entity }
       end
     end
