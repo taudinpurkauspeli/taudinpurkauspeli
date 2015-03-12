@@ -58,7 +58,11 @@ class HypothesesController < ApplicationController
     @hypothesis = Hypothesis.new(hypothesis_params)
     respond_to do |format|
       if @hypothesis.save
-        format.html { redirect_to hypotheses_path, notice: 'Hypoteesin luominen onnistui!' }
+        if params[:layout] === "false"
+          format.html { redirect_to hypotheses_path(:layout => false), notice: 'Hypoteesin luominen onnistui!' }
+        else
+          format.html { redirect_to hypotheses_path, notice: 'Hypoteesin luominen onnistui!' }
+        end
         format.json { render :show, status: :created, location: @hypothesis }
       else
         format.html { render :new }

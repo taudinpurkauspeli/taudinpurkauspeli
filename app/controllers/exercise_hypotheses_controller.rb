@@ -10,7 +10,11 @@ class ExerciseHypothesesController < ApplicationController
 
     respond_to do |format|
       if @exercise_hypothesis.save
-        format.html { redirect_to hypotheses_url}
+        if params[:layout] === "false"
+          format.html { redirect_to hypotheses_url(:layout => false)}
+        else
+          format.html { redirect_to hypotheses_url}
+        end
         format.json { render :show, status: :created, location: @exercise_hypothesis }
       else
          format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin liittäminen caseen epäonnistui.' }
@@ -23,7 +27,11 @@ class ExerciseHypothesesController < ApplicationController
   def update
     respond_to do |format|
       if @exercise_hypothesis.update(exercise_hypothesis_params)
-        format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin selite päivitetty.' }
+        if params[:layout] === "false"
+          format.html { redirect_to hypotheses_url(:layout => false), notice: 'Työhypoteesin selite päivitetty.' }
+        else
+          format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin selite päivitetty.' }
+        end
         format.json { render :show, status: :ok, location: @exercise_hypothesis }
       else
          format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin päivittäminen epäonnistui.' }
@@ -36,7 +44,11 @@ class ExerciseHypothesesController < ApplicationController
   def destroy
     @exercise_hypothesis.destroy
     respond_to do |format|
-      format.html { redirect_to hypotheses_url, notice: 'Työhypoteesi poistettu casesta.'}
+      if params[:layout] === "false"
+        format.html { redirect_to hypotheses_url(:layout => false), notice: 'Työhypoteesi poistettu casesta.'}
+      else
+        format.html { redirect_to hypotheses_url, notice: 'Työhypoteesi poistettu casesta.'}
+      end
       format.json { head :no_content }
     end
   end

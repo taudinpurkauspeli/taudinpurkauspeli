@@ -7,7 +7,9 @@ $(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
 
 //TODO
 //Overrides defaut submits with AJAX submits
-function setAjaxSubmits(forms, containerElement){
+function setAjaxSubmits(formsSelector, containerElementSelector){
+	forms = $(formsSelector);
+	containerElement = $(containerElementSelector);
 	forms.submit(function(){
 		var clickedForm = $(this);
 		var postUrl = clickedForm.attr("action") + "?layout=false";
@@ -18,6 +20,7 @@ function setAjaxSubmits(forms, containerElement){
 		$.post(postUrl, clickedForm.serialize())
     	.done(function(data) {
 				containerElement.html(data);
+				setAjaxSubmits(formsSelector, containerElementSelector);
 			})
 			.fail(function(data) {
 				//alert("Virhe tallentaessa. Yritä uudelleen./n" + data);

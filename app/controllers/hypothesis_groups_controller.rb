@@ -9,9 +9,17 @@ class HypothesisGroupsController < ApplicationController
     @hypothesis_group = HypothesisGroup.new(hypothesis_group_params)
     respond_to do |format|
       if @hypothesis_group.save
-        format.html { redirect_to hypotheses_url}
+        if params[:layout] === "false"
+          format.html { redirect_to hypotheses_url(:layout => false)}
+        else
+          format.html { redirect_to hypotheses_url}
+        end
       else
-        format.html { redirect_to hypotheses_url, notice: "Työhypoteesiryhmän luominen epäonnistui."}
+        if params[:layout] === "false"
+          format.html { redirect_to hypotheses_url(:layout => false), notice: "Työhypoteesiryhmän luominen epäonnistui."}
+        else
+          format.html { redirect_to hypotheses_url, notice: "Työhypoteesiryhmän luominen epäonnistui."}
+        end
       end
     end
   end
