@@ -19,23 +19,22 @@ class Task < ActiveRecord::Base
   end
 
   def move_up
-    children = exercise.tasks.where("level > ?", level)
-    siblings = exercise.tasks.where level:level
-    if siblings.count > 1
-      children.each do |task|
-        task.level += 1
-        task.save
-      end
-      siblings.each do |task|
-        task.level += 1
-        task.save
-      end
-      level -= 1
-      save
-    else
-      children.each do |task|
-        task.level -= 1
-        task.save
+    if level > 1
+      children = exercise.tasks.where("level > ?", level)
+      siblings = exercise.tasks.where level:level
+      if siblings.count > 1 then
+        children.each do |task|
+          task.update(level: task.level + 1)
+        end
+        siblings.each do |task|
+          task.update(level: task.level + 1)
+        end
+        update(level: level - 1)
+      else
+        children.each do |task|
+          task.update(level: task.level - 1)
+        end
+        update(level: level - 1)
       end
     end
   end
@@ -43,17 +42,14 @@ class Task < ActiveRecord::Base
   def move_down
     children = exercise.tasks.where("level > ?", level)
     siblings = exercise.tasks.where level:level
-    if siblings.count > 1
+    if siblings.count > 1 then
       children.each do |task|
-        task.level += 1
-        task.save
+        task.update(level: task.level + 1)
       end
-      level += 1
-      save
+      update(level: level+1)
     else
       children.each do |task|
-        task.level -= 1
-        task.save
+        task.update(level: task.level - 1)
       end  
     end
   end
