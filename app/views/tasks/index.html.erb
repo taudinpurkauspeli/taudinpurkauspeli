@@ -18,12 +18,12 @@
                 <td>
 
                   <%= button_to 'tasks/' + task.id.to_s + '/down', method: :post, :class => 'btn btn-default btn-available-task' do %> 
-                  <span class="glyphicon glyphicon-arrow-down"></span>
+                  <span class="glyphicon glyphicon-chevron-down"></span>
                   <% end %>
 
                 </td>
                   <td>  <%= button_to 'tasks/' + task.id.to_s + '/up', method: :post, :class => 'btn btn-default btn-available-task' do %> 
-                  <span class="glyphicon glyphicon-arrow-up"></span>
+                  <span class="glyphicon glyphicon-chevron-up"></span>
                   <% end %>
                   </td>
             
