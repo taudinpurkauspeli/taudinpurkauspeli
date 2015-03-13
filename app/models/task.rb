@@ -24,14 +24,18 @@ class Task < ActiveRecord::Base
     if siblings.count > 1
       children.each do |task|
         task.level += 1
+        task.save
       end
       siblings.each do |task|
         task.level += 1
+        task.save
       end
       level -= 1
+      save
     else
-      siblings.each do |task|
+      children.each do |task|
         task.level -= 1
+        task.save
       end
     end
   end
@@ -42,14 +46,14 @@ class Task < ActiveRecord::Base
     if siblings.count > 1
       children.each do |task|
         task.level += 1
-        # task.save
+        task.save
       end
       level += 1
-      # save
+      save
     else
       children.each do |task|
         task.level -= 1
-        # task.save
+        task.save
       end  
     end
   end

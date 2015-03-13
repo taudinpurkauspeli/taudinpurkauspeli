@@ -12,11 +12,13 @@
           <table>
             <tbody>
               <tr>
-                <td><%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-available-task' %></td>
+                <td><%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-available-task' %>
+                <%= task.level %> <br><br></td>
                 <% if current_user_is_admin %>
                   <td><%= link_to 'Esikatsele', task %></td>
                   <td><%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
                 <%end%>
+
               </tr>
             </tbody>
           </table>
