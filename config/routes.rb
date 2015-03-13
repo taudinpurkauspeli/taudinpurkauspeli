@@ -30,6 +30,11 @@ Rails.application.routes.draw do
 
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
+
+  post 'tasks/:id/up', to: 'tasks#level_up'
+  post 'tasks/:id/down', to: 'tasks#level_down'
+
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
