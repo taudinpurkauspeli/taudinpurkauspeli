@@ -18,6 +18,42 @@ class Task < ActiveRecord::Base
     end
   end
 
+  def move_up
+    children = exercise.tasks.where("level > ?", level)
+    siblings = exercise.tasks.where level:level
+    if siblings.count > 1
+      children.each do |task|
+        task.level += 1
+      end
+      siblings.each do |task|
+        task.level += 1
+      end
+      level -= 1
+    else
+      siblings.each do |task|
+        task.level -= 1
+      end
+    end
+  end
+
+  def move_down
+    children = exercise.tasks.where("level > ?", level)
+    siblings = exercise.tasks.where level:level
+    if siblings.count > 1
+      children.each do |task|
+        task.level += 1
+        # task.save
+      end
+      level += 1
+      # save
+    else
+      children.each do |task|
+        task.level -= 1
+        # task.save
+      end  
+    end
+  end
+
 #  def get_highest_level(exercise)
 #    e = exercise.tasks
 #    e.maximum("level")
