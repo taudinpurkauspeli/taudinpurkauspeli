@@ -15,8 +15,17 @@
                 <td><%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-available-task' %>
                 <%= task.level %> <br><br></td>
                 <% if current_user_is_admin %>
-                <td><%= button_to 'V ALAS V', 'tasks/' + task.id.to_s + '/down', method: :post, :class => 'btn btn-default btn-available-task' %></td>
-                  <td><%= button_to '^ YLÖS ^', 'tasks/' + task.id.to_s + '/up', method: :post, :class => 'btn btn-default btn-available-task' %></td>
+                <td>
+
+                  <%= button_to 'tasks/' + task.id.to_s + '/down', method: :post, :class => 'btn btn-default btn-available-task' do %> 
+                  <span class="glyphicon glyphicon-arrow-down"></span>
+                  <% end %>
+
+                </td>
+                  <td>  <%= button_to 'tasks/' + task.id.to_s + '/up', method: :post, :class => 'btn btn-default btn-available-task' do %> 
+                  <span class="glyphicon glyphicon-arrow-up"></span>
+                  <% end %>
+                  </td>
             
                   <td><%= link_to 'Esikatsele', task %></td>
                   <td><%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
