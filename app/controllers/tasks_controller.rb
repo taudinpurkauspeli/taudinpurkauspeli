@@ -97,17 +97,17 @@ class TasksController < ApplicationController
   def level_up
     @task.move_up
 
-     respond_to do |format|
-          format.html { redirect_to tasks_url }
-        end
+    respond_to do |format|
+      format.html { redirect_to tasks_url }
+    end
   end
 
   def level_down
     @task.move_down
 
-        respond_to do |format|
-          format.html { redirect_to tasks_url }
-        end
+    respond_to do |format|
+      format.html { redirect_to tasks_url }
+    end
   end
 
   private

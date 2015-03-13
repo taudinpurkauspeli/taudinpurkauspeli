@@ -31,8 +31,8 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
 
-  get 'tasks/:id/up', to: 'tasks#level_up'
-  get 'tasks/:id/down', to: 'tasks#level_down'
+  post 'tasks/:id/up', to: 'tasks#level_up'
+  post 'tasks/:id/down', to: 'tasks#level_down'
 
 
   
