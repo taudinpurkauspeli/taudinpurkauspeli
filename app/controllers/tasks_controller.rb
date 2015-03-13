@@ -7,8 +7,7 @@ class TasksController < ApplicationController
   def index
     @exercise = current_exercise
     if @exercise
-      @tasks = @exercise.tasks
-
+      @tasks = @exercise.tasks.order("level")
     else
       redirect_to exercises_path, notice: 'Valitse ensin case, jota haluat tarkastella!'
     end
