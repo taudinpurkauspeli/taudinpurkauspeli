@@ -19,22 +19,23 @@ class Task < ActiveRecord::Base
   end
 
   def move_up
-    if level > 1
-      children = exercise.tasks.where("level > ?", level)
-      siblings = exercise.tasks.where level:level
-      if siblings.count > 1 then
-        children.each do |task|
+    children = exercise.tasks.where("level > ?", level)
+    siblings = exercise.tasks.where level:level
+    if siblings.count > 1 then
+      children.each do |task|
+        task.update(level: task.level + 1)
+      end
+      siblings.each do |task|
+        if task != self
           task.update(level: task.level + 1)
         end
-        siblings.each do |task|
-          task.update(level: task.level + 1)
-        end
-        update(level: level - 1)
-      else
+      end
+    else 
+      if level > 1 then
         children.each do |task|
           task.update(level: task.level - 1)
         end
-        update(level: level - 1)
+      update(level: level - 1)
       end
     end
   end
@@ -53,9 +54,4 @@ class Task < ActiveRecord::Base
       end  
     end
   end
-
-#  def get_highest_level(exercise)
-#    e = exercise.tasks
-#    e.maximum("level")
-#  end
 end
