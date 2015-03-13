@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy, :show]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
   # GET /tasks
@@ -19,18 +19,25 @@ class TasksController < ApplicationController
   def show
 
     unless current_user_is_admin
-      session[:task_id] = params[:id]
-      @task = current_task
+      if user_can_start_task(current_user, current_exercise, @task.level)
+        session[:task_id] = params[:id]
+      else
+        respond_to do |format|
+          format.html { redirect_to tasks_url, notice: 'Et voi vielä suorittaa tätä toimenpidettä.' }
+        end
+      end
     else
       @task = Task.find(params[:id])
     end
-
-    @user = current_user
 
     @subtasks = @task.subtasks
 
     #new instances
     @new_completed_task = CompletedTask.new
+  end
+
+  def user_can_start_task(user, exercise, level)  
+    return user.get_number_of_tasks_by_level(exercise, level - 1) == exercise.get_number_of_tasks_by_level(level - 1)
   end
 
   # GET /tasks/new
@@ -49,7 +56,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.exercise_id = session[:exercise_id]
-    @task.level = Task.find_highest_level + 1
+    @task.level = Task.get_highest_level(@task.exercise) + 1
 
     respond_to do |format|
       if @task.save

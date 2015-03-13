@@ -23,5 +23,7 @@ class Exercise < ActiveRecord::Base
     return (exercise_hypotheses - user.exercise_hypotheses).group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
   end
 
-
+  def get_number_of_tasks_by_level(level)
+    tasks.where(level: level).count
+  end
 end
