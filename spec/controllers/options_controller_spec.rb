@@ -16,6 +16,13 @@ RSpec.describe OptionsController, :type => :controller do
 			user_id: 1, task_id: 1
 	} }
 
+	describe "GET new" do
+		it "assigns a new option as @option" do
+			get :new, {}, valid_session
+			expect(assigns(:option)).to be_a_new(Option)
+		end
+	end
+
 	describe "GET edit" do
 		it "assigns the requested option as @option" do
 			option = Option.create! valid_attributes
@@ -59,13 +66,36 @@ RSpec.describe OptionsController, :type => :controller do
 				expect(assigns(:option)).to eq(option)
 			end
 
-			#it "redirects to the task" do
-			#	multichoice = Multichoice.create! valid_attributes
-			#	put :update, {:id => multichoice.to_param, :multichoice => valid_attributes}, valid_session
-			#	expect(response).to redirect_to(edit_task_path(task.id))
-			#end
 		end
 
+		describe "with invalid params" do
+			let(:new_attributes) {
+				{content: "Lehmällä on 4 jalkaa", explanation: "Jos käyt laitumelta katsomassa niin huomaat että useimmilla lehmillä on 4 jalkaa."}
+			}
+
+			it "assigns the requested option as @option" do
+				option = Option.create! valid_attributes
+				put :update, {:id => option.to_param, :option => invalid_attributes}, valid_session
+				expect(assigns(:option)).to eq(option)
+			end
+
+		end
+
+	end
+
+	describe "DELETE destroy" do
+		it "destroys the requested option" do
+			option = Option.create! valid_attributes
+			expect {
+				delete :destroy, {:id => option.to_param}, valid_session
+			}.to change(Option, :count).by(-1)
+		end
+
+		it "redirects to the multichoice edit" do
+			option = Option.create! valid_attributes
+			delete :destroy, {:id => option.to_param}, valid_session
+			expect(response).to redirect_to(edit_multichoice_path)
+		end
 	end
 
 end

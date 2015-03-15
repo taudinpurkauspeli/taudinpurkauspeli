@@ -75,6 +75,18 @@ RSpec.describe MultichoicesController, :type => :controller do
 					#end
 				end
 
+				describe "with invalid params" do
+					let(:new_attributes) {
+						{question: "Montako jalkaa lehmällä?"}
+					}
+
+					it "assigns the requested multichoice as @multichoice" do
+						multichoice = Multichoice.create! valid_attributes
+						put :update, {:id => multichoice.to_param, :multichoice => invalid_attributes}, valid_session
+						expect(assigns(:multichoice)).to eq(multichoice)
+					end
+				end
+
 			end
 
 		end
