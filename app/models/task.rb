@@ -55,10 +55,13 @@ class Task < ActiveRecord::Base
     end
   end
 
-  def short_name
+  def short_name(words)
+    if words < 1
+      words = 1
+    end
     return_string = ''
-    if name.split.size > 3
-    then return_string += name.split[0...3].join(' ') + ' ...'
+    if name.split.size > words
+    then return_string += name.split[0...words].join(' ') + ' ...'
     else return name
     end
     return return_string
