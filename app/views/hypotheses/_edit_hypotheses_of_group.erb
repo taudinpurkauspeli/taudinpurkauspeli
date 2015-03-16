@@ -9,7 +9,7 @@
           <%= f.hidden_field :exercise_id, :value => exercise_hypothesis.exercise_id %>
           <%= f.hidden_field :hypothesis_id, :value => exercise_hypothesis.hypothesis_id %>
            <%= f.label :task_id %>
-           <%=f.select :task_id, options_from_collection_for_select(@exercise.tasks, :id, :name, selected: exercise_hypothesis.task_id) %>
+           <%=f.select :task_id, options_from_collection_for_select(@exercise.tasks, :id, :short_name, selected: exercise_hypothesis.task_id) %>
           <%= f.text_area :explanation, placeholder: "Selite", :class => 'width100' %>
           <%= f.submit :class => 'btn btn-default btn-save width50' %>
         <% end %>

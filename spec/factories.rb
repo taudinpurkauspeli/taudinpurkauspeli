@@ -28,7 +28,19 @@ FactoryGirl.define do
     exercise_id 1
     level 1
   end
+  
+  factory :task_with_long_name, class: Task do
+    name "Hoida"
+    exercise_id 1
+    level 1
+  end
 
+  factory :task_with_short_name, class: Task do
+    name "Soita jokaiselle mahdolliselle lääkärille ja asiakkaalle jonka tunnet"
+    exercise_id 1
+    level 1
+  end
+  
   factory :hypothesis do
     name "Virustauti"
     hypothesis_group_id 1
