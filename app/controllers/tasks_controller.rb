@@ -7,7 +7,11 @@ class TasksController < ApplicationController
   def index
     @exercise = current_exercise
     if @exercise
-      @tasks = @exercise.tasks.order("level")
+      if current_user_is_admin
+        @tasks = @exercise.tasks.order("level")
+      else
+        @tasks = @exercise.tasks.order("name")
+      end
     else
       redirect_to exercises_path, notice: 'Valitse ensin case, jota haluat tarkastella!'
     end
@@ -16,7 +20,6 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-
     unless current_user_is_admin
       if user_can_start_task(current_user, current_exercise, @task.level)
         session[:task_id] = params[:id]
