@@ -44,6 +44,19 @@ RSpec.describe Task, :type => :model do
     end
   end
 
+  describe "short_name" do
+    let!(:short){FactoryGirl.create(:task_with_long_name)}
+    let!(:long){FactoryGirl.create(:task_with_short_name)}
+
+    it "returns full name when it's short" do
+      expect(short.short_name).to eq(short.name)
+    end
+
+    it "shortens name when it's long" do
+      expect(long.short_name).to eq(long.name.split[0...3].join(' ') + ' ...')
+    end
+  end
+
 #  describe "moving a task's order up" do
 #    let!(:exercise){FactoryGirl.create(:exercise)}
 #    describe "changes its level correctly" do
