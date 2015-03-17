@@ -28,7 +28,7 @@ FactoryGirl.define do
     exercise_id 1
     level 1
   end
-  
+
   factory :task_with_long_name, class: Task do
     name "Hoida"
     exercise_id 1
@@ -40,7 +40,7 @@ FactoryGirl.define do
     exercise_id 1
     level 1
   end
-  
+
   factory :hypothesis do
     name "Virustauti"
     hypothesis_group_id 1
@@ -76,8 +76,15 @@ FactoryGirl.define do
     content "Lääkäri kertoo mikä on totuus"
   end
 
-    factory :multichoice do
+  factory :multichoice do
     subtask_id 1
     question "Tykkääkö koira nappuloista?"
+  end
+
+  factory :option do
+    multichoice_id 1
+    content "Tykkää"
+    explanation "Juuri oikea vastaus"
+    value true
   end
 end
