@@ -55,15 +55,10 @@ class MultichoicesController < ApplicationController
 
   def check_answers
 
-    byebug
-
     respond_to do |format|
-      #if @multichoice.check_right_answers(checked_options_params[:checked_options])
-      if @multichoice.check_right_answers(params[:checked_options])
+      if @multichoice.check_right_answers(checked_options_params[:checked_options].to_a)
 
         #laittaa explanationit ja jatka napin esiin
-
-
 
         format.html { redirect_to @multichoice.subtask.task, notice: 'Onnistui' }
 
@@ -91,7 +86,7 @@ class MultichoicesController < ApplicationController
   end
 
   def checked_options_params
-    params.require(:multichoice).permit(:checked_options)
+    params.permit(checked_options: [])
   end
 
 
