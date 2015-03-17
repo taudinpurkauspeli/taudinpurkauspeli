@@ -66,6 +66,8 @@ fi:
       hypothesis: "Työhypoteesi"
       task: "Toimenpide"
       user: "Käyttäjä"
+      multichoice: "Monivalintakysymys"
+      option: "Vaihtoehto"
     attributes:
       exercise_hypothesis:
         task_id: "Esivaatimustoimenpide"
@@ -74,6 +76,13 @@ fi:
         anamnesis: "Anamneesi"
       hypothesis:
         name: "Nimi"
+      multichoice:
+        question: "Kysymys"
+        is_radio_button: "Radio button -tyyppinen kysymys"
+      option:
+        content: "Vaihtoehto"
+        explanation: "Vastausteksti"
+        value: "Oikea vastaus"
       task:
         name: "Nimi"
       task_text:

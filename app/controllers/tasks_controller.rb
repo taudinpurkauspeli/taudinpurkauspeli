@@ -13,7 +13,7 @@ class TasksController < ApplicationController
         @tasks = @exercise.tasks.order("name")
       end
     else
-      redirect_to exercises_path, notice: 'Valitse ensin case, jota haluat tarkastella!'
+      redirect_to exercises_path, alert: 'Valitse ensin case, jota haluat tarkastella!'
     end
   end
 
@@ -25,7 +25,7 @@ class TasksController < ApplicationController
         session[:task_id] = params[:id]
       else
         respond_to do |format|
-          format.html { redirect_to tasks_url, notice: 'Et voi vielä suorittaa tätä toimenpidettä.' }
+          format.html { redirect_to tasks_url, alert: 'Et voi vielä suorittaa tätä toimenpidettä.' }
         end
       end
     else

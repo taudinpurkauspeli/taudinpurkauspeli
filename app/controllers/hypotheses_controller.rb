@@ -17,7 +17,7 @@ class HypothesesController < ApplicationController
       @new_hypothesis =Hypothesis.new
       @new_checked_hypothesis = CheckedHypothesis.new
     else
-      redirect_to exercises_path, notice: 'Valitse ensin case, jota haluat tarkastella!'
+      redirect_to exercises_path, alert: 'Valitse ensin case, jota haluat tarkastella!'
     end
 
   end

@@ -13,14 +13,14 @@ class CheckedHypothesesController < ApplicationController
           if @checked_hypothesis.save
             format.html { redirect_to hypotheses_url, notice: @checked_hypothesis.get_explanation}
           else
-            format.html { redirect_to hypotheses_url, notice: "Hypoteesin poisto epäonnistui" }
+            format.html { redirect_to hypotheses_url, alert: "Hypoteesin poisto epäonnistui" }
           end
         end
       else  
-        redirect_to hypotheses_url, notice: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
+        redirect_to hypotheses_url, alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
       end
     else
-      redirect_to hypotheses_url, notice: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
+      redirect_to hypotheses_url, alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
     end
   end
 

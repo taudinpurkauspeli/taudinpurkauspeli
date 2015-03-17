@@ -13,7 +13,7 @@ class ExerciseHypothesesController < ApplicationController
         format.html { redirect_to hypotheses_url}
         format.json { render :show, status: :created, location: @exercise_hypothesis }
       else
-         format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin liittäminen caseen epäonnistui.' }
+         format.html { redirect_to hypotheses_url, alert: 'Työhypoteesin liittäminen caseen epäonnistui.' }
       end
     end
   end
@@ -26,7 +26,7 @@ class ExerciseHypothesesController < ApplicationController
         format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin selite päivitetty.' }
         format.json { render :show, status: :ok, location: @exercise_hypothesis }
       else
-         format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin päivittäminen epäonnistui.' }
+         format.html { redirect_to hypotheses_url, alert: 'Työhypoteesin päivittäminen epäonnistui.' }
       end
     end
   end
