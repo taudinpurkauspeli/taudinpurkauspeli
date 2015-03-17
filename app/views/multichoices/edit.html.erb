@@ -1,42 +1,69 @@
 <h1>Muokkaa monivalintakysymystä</h1>
 
-<%= render 'form' %>
+<div class = "div-grey-container1">
+  <%= render 'form' %>
+</div>
+
+<h1>Vastausvaihtoehdot</h1>
 
 <% @multichoice.options.each do |option| %>
 
-    <input class="btn btn-default btn-hypothesis multiline" type="button" value="<%= option.content %>" data-toggle="collapse" data-target="#collapse-option-edit<%= option.id %>" />
+<div class="row div-grey-container1">
+  <div class = "nakki">
+    <%= form_for(option) do |f| %>
+      <div class="col-md-1">
+        <%= f.check_box :value %>
+      </div>
+      <div class="col-md-5">
+        <%= f.text_area :content, placeholder: "Vaihtoehto", :class => 'form-control' %>
 
-    <div class="collapse" id="collapse-option-edit<%= option.id %>">
-
-      <%= form_for(option) do |f| %>
-          <%= f.hidden_field :multichoice_id, :value => @multichoice.id%>
-          <%= f.hidden_field :option_id, :value => option.id %>
-          <%= f.text_area :content, placeholder: "Vastausvaihtoehto", :class => 'width100' %>
-          <%= f.text_area :explanation, placeholder: "Selite", :class => 'width100' %>
-          <%= f.submit :class => 'btn btn-default btn-save width50' %>
-      <% end %>
-      <%= button_to 'Poista vastausvaihtoehto', option, method: :delete, :class => 'btn btn-default btn-del width50' %>
+      </div>
+      <div class="col-md-5">
+        <%= f.text_area :explanation, placeholder: "Vastausteksti", :class => 'form-control' %>
+      </div>
+      <div class="col-md-1">
+        <%= f.submit :class => 'btn btn-default btn-save' %>
+        
+      </div>
+  
+      <%= f.hidden_field :option_id, :value => option.id %>
+      <%= f.hidden_field :multichoice_id, :value => @multichoice.id%>
+      
+    <% end %>
+    
+    <%# Bootsrapin layoutti tekee temppuja, kun rivin leveys yli 12: viimeiset kaksi oudosti päällekkäin %>
+    <div class="col-md-1">
+      <%= button_to 'Poista', option, method: :delete, :class => 'btn btn-default btn-del' %>
     </div>
+
+  </div>
+</div>
+
 <% end %>
 
 
-<input class="btn btn-default btn-hypothesis btn-save" type="button" value="Uusi vastausvaihtoehto" data-toggle="collapse" data-target="#new-option"/>
 
 
-<div class="collapse in" id="new-option">
-
-  <%= form_for(@new_option) do |f| %>
-      <%= f.label :content %>
-      <%= f.text_field :content %>
-
-      <%= f.label :explanation %>
-      <%= f.text_field :explanation %>
-
-      <%= f.label :value %>
-      <%= f.check_box :value, :value => true %>
+<div class="row div-green-container1">
+  <div class = "nakki">
+    <%= form_for(@new_option) do |f| %>
+      <div class="col-md-1">
+        <%= f.check_box :value, :value => true %>
+      </div>
+      <div class="col-md-5">
+        <%= f.text_area :content, placeholder: "Vaihtoehto", :class => 'form-control' %>
+      </div>
+      <div class="col-md-5">
+        <%= f.text_area :explanation, placeholder: "Vastausteksti", :class => 'form-control' %>
+      </div>
+      <div class="col-md-1">
+        <%= f.submit 'Tallenna', :class => 'btn btn-default btn-save' %>
+      </div>
+  
 
       <%= f.hidden_field :multichoice_id, :value => @multichoice.id %>
-      <%= f.submit 'Tallenna', :class => 'btn btn-default btn-hypothesis' %>
-  <% end %>
+      
+    <% end %>
 
+  </div>
 </div>

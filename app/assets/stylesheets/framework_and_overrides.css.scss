@@ -304,6 +304,22 @@ h3{
   padding: 2px;
 }
 
+.div-grey-container1{
+  //background-color: #acc7a0;
+  background-color: #dedede;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+.div-green-container1{
+  //background-color: #acc7a0;
+  background-color: #c2ecb5;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+
 //New anamnesis
 #exercise_anamnesis{
   width: 60%;
@@ -340,6 +356,9 @@ h3{
 }
 .multiline {
   white-space: normal;
+}
+.margin20px{
+  margin-left: 20px;
 }
 
 
