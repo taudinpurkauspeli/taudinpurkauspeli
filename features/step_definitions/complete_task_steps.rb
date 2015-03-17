@@ -10,6 +10,7 @@ Given(/^some tasks have been added to case$/) do
   create_exercises
   create_hypothesis_groups
   create_tasks
+  create_task_texts
 end
 
 When(/^I choose a text task "(.*?)"$/) do |arg1|
