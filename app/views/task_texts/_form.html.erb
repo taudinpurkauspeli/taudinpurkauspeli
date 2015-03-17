@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :content%><br>
-    <%= f.text_area :content, placeholder: "Sisältö", :class => 'width100', :rows => '10' %>
+    <%= f.text_area :content, placeholder: "Sisältö", :class => 'form-control', :rows => '10' %>
   </div>
   <br>
 
   <div class="actions">
-    <%= f.submit "Tallenna"%>
+    <%= f.submit "Tallenna", :class => "btn btn-default btn-save widthAuto" %>
   </div>
 <% end %>
