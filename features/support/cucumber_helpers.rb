@@ -20,6 +20,14 @@ module CucumberHelpers
     Task.create name:"Lääkitse hevonen", exercise_id:2, level:1
   end
 
+  def create_task_texts
+    FactoryGirl.create(:subtask)
+    FactoryGirl.create(:task_text)
+
+    FactoryGirl.create(:subtask, task_id: 2)
+    FactoryGirl.create(:task_text, subtask_id: 2, content:"Lääkitään")
+  end
+
   def create_all_hypotheses_for_case
     create_exercises
     create_hypothesis_groups

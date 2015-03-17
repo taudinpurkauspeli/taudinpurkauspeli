@@ -17,7 +17,7 @@
             else
             end %>
     <% elsif !subtask.multichoice.nil? %>
-        <% if params[:success].nil? %>
+        <% if params[:success].nil? && !current_user_has_completed_task(@task.id)%>
             <%= render 'multichoice', {subtask: subtask} %>
         <% else %>
 
