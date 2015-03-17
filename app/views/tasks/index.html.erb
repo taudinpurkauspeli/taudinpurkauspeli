@@ -12,24 +12,24 @@
         <% if !current_user_has_completed_task(task.id) %>
           <div class = "div-task-order-container <% if task.level > previous_level then %> clearLeft <% end %>">
             <div class = "div-task-order-taskbutton">
-                <%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-task-order' %>
+                <%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-task-order multiline', :form_class => "height100" %>
                 <% if current_user_is_admin %>
             </div>
             <div class = "div-task-order-updown">
 
-                  <%= button_to 'tasks/' + task.id.to_s + '/up', method: :post, :class => 'btn btn-default btn-task-up' do %> 
+                  <%= button_to 'tasks/' + task.id.to_s + '/up', method: :post, :class => 'btn btn-default btn-task-up', :form_class => "height50" do %> 
                   <span class="glyphicon glyphicon-chevron-up"></span>
                   <% end %>
-                  
-                  <%= button_to 'tasks/' + task.id.to_s + '/down', method: :post, :class => 'btn btn-default btn-task-down' do %> 
+
+                  <%= button_to 'tasks/' + task.id.to_s + '/down', method: :post, :class => 'btn btn-default btn-task-down', :form_class => "height50" do %> 
                   <span class="glyphicon glyphicon-chevron-down"></span>
                   <% end %>
 
                   
             
-                  <%= link_to 'Esikatsele', task %>
-                  <%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %>
-                  <%= previous_level = task.level %>
+                  <%#= link_to 'Esikatsele', task %>
+                  <%#= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %>
+                  <% previous_level = task.level %>
                 <%end%>
             </div>
           </div>
