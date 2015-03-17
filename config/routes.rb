@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   post 'tasks/:id/up', to: 'tasks#level_up'
   post 'tasks/:id/down', to: 'tasks#level_down'
 
+  post 'multichoices/:id/check_answers', to: 'multichoices#check_answers'
+
 
   
   # The priority is based upon order of creation: first created -> highest priority.
