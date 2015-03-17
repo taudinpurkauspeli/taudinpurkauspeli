@@ -267,9 +267,42 @@ h3{
   color: #fff;
 }
 
-.multiline {
-  white-space: normal;
+.btn-new-task{
+  height: 5em;
+  width: 20em;
+  float: left;
+  clear: left;
+  margin-left: 2px;
+  margin-top: 2px;
 }
+.btn-task-order{
+  height: 100%;
+  width: 20em;
+}
+.btn-task-down{
+  height: 98%;
+  margin-top: 2%;
+}
+.btn-task-up{
+  height: 98%;
+  margin-bottom: 2%;
+}
+
+//Layout divs
+.div-task-order-container{
+  float: left;
+  height: 5em;
+}
+.div-task-order-taskbutton{
+  float: left;
+  height: 100%;
+  padding: 2px;
+}
+.div-task-order-updown{
+  float: left;
+  height: 100%;
+  padding: 2px;
+
 
 //New anamnesis
 #exercise_anamnesis{
@@ -288,6 +321,12 @@ h3{
 .width100{
   width: 100%;
 }
+.height50{
+  height: 50%;
+}
+.height100{
+  height: 100%;
+}
 
 .widthAuto{
   width: auto;
@@ -296,6 +335,13 @@ h3{
 .floatRight{
   float: right;
 }
+.clearLeft{
+  clear: left;
+}
+.multiline {
+  white-space: normal;
+}
+
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes
