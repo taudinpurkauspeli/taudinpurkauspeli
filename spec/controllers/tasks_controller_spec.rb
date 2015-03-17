@@ -26,7 +26,7 @@ RSpec.describe TasksController, :type => :controller do
   # Task. As you add validations to Task, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {name: "Soita asiakkaalle", exercise_id: 1}
+    {name: "Soita asiakkaalle", exercise_id: 1, level: 2}
   }
 
 
@@ -40,6 +40,15 @@ RSpec.describe TasksController, :type => :controller do
   let(:valid_session) { {
       user_id: 1, exercise_id: 1
   } }
+
+   let(:tasktext_attributes) {
+    {content: "Sisältöä" }
+  }
+
+    let(:multichoice_attributes) {
+    {question: "Tykkääkö koira snabbuloist?" }
+  }
+
 
   describe "GET index" do
     it "assigns all tasks as @tasks" do
@@ -125,6 +134,23 @@ RSpec.describe TasksController, :type => :controller do
       end
     end
 
+describe "POST level_up" do
+
+
+        let!(:task2){FactoryGirl.create(:task_with_long_name)}
+        let!(:task3){FactoryGirl.create(:task_with_long_name)}
+       
+
+
+        it "changes the level when no siblings & no children" do
+        task = Task.create! valid_attributes
+
+        expect {
+         post :level_up, {:id => task.id}, valid_session
+      }.to change{task.level}.by(-1)
+      end
+
+end
 
 =begin
     describe "with invalid params" do
@@ -150,6 +176,15 @@ RSpec.describe TasksController, :type => :controller do
       expect {
         delete :destroy, {:id => task.to_param}, valid_session
       }.to change(Task, :count).by(-1)
+    end
+
+    it "destroys the requested tasks subtasks" do
+      task = Task.create! valid_attributes
+      subtask = task.subtasks.build
+      task_text = subtask.build_task_text(content:tasktext_attributes[:content])
+
+      expect {    delete :destroy, {:id => task.to_param}, valid_session
+      }.to change(task.subtasks, :count).by(-1)
     end
 
     it "redirects to the tasks list" do
