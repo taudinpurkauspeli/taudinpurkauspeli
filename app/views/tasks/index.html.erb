@@ -5,15 +5,15 @@
 
     TODO REFARTCTOR THIS TO BE NICE AND EASY TO MAINTAINS
 %>
-
-    <% if current_user_is_admin %> 
+  
+  <% if current_user_is_admin %>
+    <div class = "div-tasks-container-admin">
       <% previous_level = 0 %>
       <% @tasks.each do |task| %>
         <% if !current_user_has_completed_task(task.id) %>
           <div class = "div-task-order-container <% if task.level > previous_level then %> clearLeft <% end %>">
             <div class = "div-task-order-taskbutton">
                 <%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-task-order multiline', :form_class => "height100" %>
-                <% if current_user_is_admin %>
             </div>
             <div class = "div-task-order-updown">
 
@@ -30,12 +30,12 @@
                   <%#= link_to 'Esikatsele', task %>
                   <%#= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %>
                   <% previous_level = task.level %>
-                <%end%>
             </div>
           </div>
         <% end %>
       <% end %>
-    <% else %>
+    </div>
+  <% else %>
 <%#
     Available tasks
 
@@ -91,6 +91,6 @@
   
   <% end %>
 
-<br>
+<br />
 
-<%= link_to 'Luo uusi toimenpide', new_task_path if current_user_is_admin%>
+<%= button_to '+ Luo uusi toimenpide', new_task_path, :class => 'btn btn-default btn-save btn-new-task' if current_user_is_admin %>
