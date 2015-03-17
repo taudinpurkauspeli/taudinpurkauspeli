@@ -5,16 +5,41 @@
 
   <div class="panel-body">
 
+    <div class="row">
+      <div class="col-md-4">
 
-    <ul>
-      <% subtask.multichoice.options.each do |option| %>
-          <li>
+        <b>Vaihtoehto</b>
+      </div>
+
+      <div class="col-md-8">
+
+        <b>Selitys</b>
+      </div>
+
+    </div>
+
+
+    <% subtask.multichoice.options.each do |option| %>
+
+        <div class="row">
+          <div class="col-md-4">
 
             <%= option.content %>
-          </li>
-      <% end %>
-    </ul>
+          </div>
 
+          <div class="col-md-8">
+
+            <%= option.explanation %>
+          </div>
+
+        </div>
+
+    <% end %>
 
   </div>
 </div>
+
+<%= if !current_user_has_completed_task(@task.id) && !current_user_is_admin
+    then render 'continue_button'
+    else
+    end %>
