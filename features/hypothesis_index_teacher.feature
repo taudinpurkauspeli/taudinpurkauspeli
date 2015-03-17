@@ -20,7 +20,7 @@ Feature: Hypothesis list feature
     And I save the new hypothesis with button "Tallenna"
     Then the new hypothesis should be created
 
-  Scenario: Teacher cannot create a new hypothesis with wrong parameters
+Scenario: Teacher cannot create a new hypothesis with wrong parameters
     Given I have logged in as a teacher
     And cases and hypothesis groups have been created
     And I visit the "Työhypoteesit" page of the case "Lihanautakuolemat"
