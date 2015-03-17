@@ -93,4 +93,4 @@
 
 <br />
 
-<%= button_to '+ Luo uusi toimenpide', new_task_path, :class => 'btn btn-default btn-save btn-new-task' if current_user_is_admin %>
+<%= button_to '+ Luo uusi toimenpide', new_task_path, :class => 'btn btn-default btn-save btn-new-task', :method => :get if current_user_is_admin %>
