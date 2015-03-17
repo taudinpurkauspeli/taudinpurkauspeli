@@ -59,6 +59,6 @@ class MultichoicesController < ApplicationController
   	end
    # Never trust parameters from the scary internet, only allow the white list through.
   	def multichoice_params
-    	params.require(:multichoice).permit(:question)
+    	params.require(:multichoice).permit(:question, :is_radio_button)
   end
 end
