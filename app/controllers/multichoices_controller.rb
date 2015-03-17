@@ -59,9 +59,9 @@ class MultichoicesController < ApplicationController
       if @multichoice.check_right_answers(checked_options_params[:checked_options].to_a)
 
         #laittaa explanationit ja jatka napin esiin
+        #@right_answers = @multichoice.options.where(value:true)
 
-        format.html { redirect_to @multichoice.subtask.task, notice: 'Onnistui' }
-
+        format.html { redirect_to task_path(@multichoice.subtask.task, {success: ""}), notice: 'Onnistui' }
 
       else
         #ilmoita että vastaus virheellinen

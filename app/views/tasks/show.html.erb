@@ -17,7 +17,15 @@
             else
             end %>
     <% elsif !subtask.multichoice.nil? %>
-        <%= render 'multichoice', {subtask: subtask} %>
+        <% if params[:success].nil? %>
+            <%= render 'multichoice', {subtask: subtask} %>
+        <% else %>
+
+            <%= render 'right_answers', {subtask: subtask} %>
+
+        <% end %>
+
+
     <% end %>
 <% end %>
 

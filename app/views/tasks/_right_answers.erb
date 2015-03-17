@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Kysymys: <%= subtask.multichoice.question %></h3>
+  </div>
+
+  <div class="panel-body">
+
+
+    <ul>
+      <% subtask.multichoice.options.each do |option| %>
+          <li>
+
+            <%= option.content %>
+          </li>
+      <% end %>
+    </ul>
+
+
+  </div>
+</div>
