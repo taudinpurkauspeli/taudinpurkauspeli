@@ -12,17 +12,17 @@
           <table>
             <tbody>
               <tr>
-                <td><%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-available-task' %>
+                <td><%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-available-task multiline' %>
                 <%= task.level %> <br><br></td>
                 <% if current_user_is_admin %>
                 <td>
 
-                  <%= button_to 'tasks/' + task.id.to_s + '/down', method: :post, :class => 'btn btn-default btn-available-task' do %> 
+                  <%= button_to 'tasks/' + task.id.to_s + '/down', method: :post, :class => 'btn btn-default btn-available-task multiline' do %> 
                   <span class="glyphicon glyphicon-chevron-down"></span>
                   <% end %>
 
                 </td>
-                  <td>  <%= button_to 'tasks/' + task.id.to_s + '/up', method: :post, :class => 'btn btn-default btn-available-task' do %> 
+                  <td>  <%= button_to 'tasks/' + task.id.to_s + '/up', method: :post, :class => 'btn btn-default btn-available-task multiline' do %> 
                   <span class="glyphicon glyphicon-chevron-up"></span>
                   <% end %>
                   </td>
