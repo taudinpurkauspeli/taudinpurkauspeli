@@ -57,33 +57,98 @@ RSpec.describe Task, :type => :model do
     end
   end
 
-  describe "moving a task's order up" do
+  describe "changin task's order" do
     let!(:exercise){FactoryGirl.create(:exercise)}
 
-    describe "changes its level correctly" do
-     it "when it has no siblings" do
-      
-      for i in 1..5 
-        Task.create name:"Task"+i.to_s, level:i, exercise_id:1
-      end
-      
-      task = Task.find_by name:"Task2"
-      task.move_up
+    def get_values
       actual = Array.new(5)
-      expected = [1, 1, 2, 3, 4]
       i = 0
-      
       Task.all.each do |t|
         actual[i] = t.level
         i += 1
       end
-
-      expect(actual).to match_array(expected)
+      return actual
     end
-    
-    it "when it has siblings" do
 
+    before(:each) do
+      for i in 1..5 
+        Task.create name:"Task"+i.to_s, level:i, exercise_id:1
+      end
+    end
+
+    describe "by move_up changes its level correctly" do
+
+      it "when it has no siblings" do
+        task = Task.find_by name:"Task2"
+        task.move_up
+        expected = [1, 1, 2, 3, 4]
+        actual = get_values
+        expect(actual).to match_array(expected)
+      end
+
+      it "when it has siblings" do
+        task = Task.find_by name:"Task5"
+        task.update(level: 3)
+        task.move_up
+        expected = [1, 2, 3, 4, 5]
+        actual = get_values
+        expect(actual).to match_array(expected)
+      end
+
+      it "when it's top level and has no siblings"  do
+        task = Task.find_by name:"Task1"
+        task.move_up
+        expected = [1, 2, 3, 4, 5]
+        actual = get_values
+        expect(actual).to match_array(expected)
+      end
+
+      it "when it's top level and has siblings"  do
+        (Task.find_by name:"Task5").update(level:1)
+        task = Task.find_by name:"Task1"
+        task.move_up
+        expected = [1, 2, 3, 4, 5]
+        actual = get_values
+        expect(actual).to match_array(expected)
+      end
+    end
+
+
+    describe "by move_down changes its level correctly" do
+
+      it "when it has no siblings" do
+        task = Task.find_by name:"Task3"
+        task.move_down
+        expected = [1, 2, 3, 3, 4]
+        actual = get_values
+        expect(actual).to match_array(expected)
+      end
+
+      it "when it has siblings" do
+        task = Task.find_by name:"Task5"
+        task.update(level: 3)
+        task.move_down
+        expected = [1, 2, 3, 4, 5]
+        actual = get_values
+        expect(actual).to match_array(expected)
+      end
+
+      it "when it's bottom level and has no siblings"  do
+        task = Task.find_by name:"Task5"
+        task.move_down
+        expected = [1, 2, 3, 4, 5]
+        actual = get_values
+        expect(actual).to match_array(expected)
+      end
+
+      it "when it's bottom level and has siblings"  do
+        (Task.find_by name:"Task5").update(level:4)
+        task = Task.find_by name:"Task5"
+        task.move_up
+        expected = [1, 2, 3, 4, 5]
+        actual = get_values
+        expect(actual).to match_array(expected)
+      end
     end
   end
-end
 end
