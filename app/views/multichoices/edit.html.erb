@@ -1,14 +1,19 @@
 <h1>Muokkaa monivalintakysymystä</h1>
 
-<div class = "div-grey-container1">
-  <%= render 'form' %>
+<div class = "panel panel-default panel-grey">
+  <div class = "panel-heading panel-heading-grey">
+    Monivalintakysymyksen perustiedot
+  </div>
+  <div class = "panel-body">
+    <%= render 'form' %>
+  </div>
 </div>
 
 <h1>Vastausvaihtoehdot</h1>
 
 <% @multichoice.options.each do |option| %>
-
-<div class="row div-grey-container1">
+<div class = "panel panel-default panel-grey">
+<div class="row panel-body">
   <div class = "nakki">
     <%= form_for(option) do |f| %>
       <div class="col-md-1">
@@ -38,13 +43,14 @@
 
   </div>
 </div>
+</div>
 
 <% end %>
 
 
 
-
-<div class="row div-green-container1">
+<div class = "panel panel-default panel-green">
+<div class="row panel-body">
   <div class = "nakki">
     <%= form_for(@new_option) do |f| %>
       <div class="col-md-1">
@@ -66,4 +72,5 @@
     <% end %>
 
   </div>
+</div>
 </div>

@@ -4,15 +4,23 @@
 
 <br>
 <br>
+<div class="panel panel-default panel-grey">
+	<div class = "panel-heading panel-heading-grey">
+    Toimenpiteen perustiedot
+  </div>
+	<div class="panel-body">
+		<%= render 'form' %>
+	</div>
+</div>
 
-<%= render 'form' %>
+<h1>Alitoimenpiteet</h1>
 
 <% @task.subtasks.each do |subtask| %>
     <%= button_to subtask, edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise multiline', :method => :get %>
 <% end %>
 
-<%= button_to 'Luo uusi tekstimuotoinen alitoimenpide', new_task_text_path,  :class => 'btn btn-default btn-exercise', :method => :get  %>
-<%= button_to 'Luo uusi monivalinta-alitoimenpide', new_multichoice_path,  :class => 'btn btn-default btn-exercise', :method => :get  %>
+<%= button_to '+ Luo uusi tekstimuotoinen alitoimenpide', new_task_text_path,  :class => 'btn btn-default btn-exercise btn-save', :method => :get  %>
+<%= button_to '+ Luo uusi monivalinta-alitoimenpide', new_multichoice_path,  :class => 'btn btn-default btn-exercise btn-save', :method => :get  %>
 
 
 <br>
