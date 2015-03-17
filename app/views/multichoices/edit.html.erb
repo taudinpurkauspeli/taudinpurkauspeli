@@ -4,7 +4,7 @@
 
 <% @multichoice.options.each do |option| %>
 
-    <input class="btn btn-default btn-hypothesis" type="button" value="<%= option.content %>" data-toggle="collapse" data-target="#collapse-option-edit<%= option.id %>" />
+    <input class="btn btn-default btn-hypothesis multiline" type="button" value="<%= option.content %>" data-toggle="collapse" data-target="#collapse-option-edit<%= option.id %>" />
 
     <div class="collapse" id="collapse-option-edit<%= option.id %>">
 

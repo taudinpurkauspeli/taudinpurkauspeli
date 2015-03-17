@@ -3,7 +3,7 @@
     <div class="col-md-1"></div>
     <div class="col-md-8">
       <%# edit case hypothesis field for admin user%>
-      <input class="btn btn-default btn-hypothesis" type="button" value="<%= exercise_hypothesis.hypothesis.name %>" data-toggle="collapse" data-target="#collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>" />
+      <input class="btn btn-default btn-hypothesis multiline" type="button" value="<%= exercise_hypothesis.hypothesis.name %>" data-toggle="collapse" data-target="#collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>" />
       <div class="collapse" id="collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>">
         <%= form_for(exercise_hypothesis) do |f| %>
           <%= f.hidden_field :exercise_id, :value => exercise_hypothesis.exercise_id %>

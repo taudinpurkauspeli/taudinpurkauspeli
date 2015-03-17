@@ -302,7 +302,7 @@ h3{
   float: left;
   height: 100%;
   padding: 2px;
-}
+
 
 //New anamnesis
 #exercise_anamnesis{
@@ -337,6 +337,9 @@ h3{
 }
 .clearLeft{
   clear: left;
+}
+.multiline {
+  white-space: normal;
 }
 
 
