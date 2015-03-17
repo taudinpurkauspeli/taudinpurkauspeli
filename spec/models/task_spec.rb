@@ -57,27 +57,33 @@ RSpec.describe Task, :type => :model do
     end
   end
 
-#  describe "moving a task's order up" do
-#    let!(:exercise){FactoryGirl.create(:exercise)}
-#    describe "changes its level correctly" do
-#      it "when it has no siblings" do
-#        for i in 1..5 
- #         Task.create name:"Task"+i.to_s, level:i, exercise_id:1
- #       end
-  #      task = Task.find_by name:"Task2"
-   #     next_task = Task.find_by name:"Task3"
-   #     last_task = Task.find_by name:"Task5"
-    #    task.move_up
-#
- #       Task.all.each do |t|
-  #        puts t.level
-   #     end
-#
- #       expect(last_task.level).to eq(4)
-  #      expect(task.level).to eq(1)
-  #      expect(next_task.level).to eq(2)
-#
- #     end
-  #  end
- # end
+  describe "moving a task's order up" do
+    let!(:exercise){FactoryGirl.create(:exercise)}
+
+    describe "changes its level correctly" do
+     it "when it has no siblings" do
+      
+      for i in 1..5 
+        Task.create name:"Task"+i.to_s, level:i, exercise_id:1
+      end
+      
+      task = Task.find_by name:"Task2"
+      task.move_up
+      actual = Array.new(5)
+      expected = [1, 1, 2, 3, 4]
+      i = 0
+      
+      Task.all.each do |t|
+        actual[i] = t.level
+        i += 1
+      end
+
+      expect(actual).to match_array(expected)
+    end
+    
+    it "when it has siblings" do
+
+    end
+  end
+end
 end
