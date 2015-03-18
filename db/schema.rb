@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317110240) do
+ActiveRecord::Schema.define(version: 20150318134758) do
 
   create_table "checked_hypotheses", force: :cascade do |t|
     t.integer "user_id"
@@ -65,9 +65,9 @@ ActiveRecord::Schema.define(version: 20150317110240) do
     t.integer  "multichoice_id"
     t.string   "content"
     t.string   "explanation"
-    t.boolean  "value"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.boolean  "is_correct_answer"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "subtasks", force: :cascade do |t|

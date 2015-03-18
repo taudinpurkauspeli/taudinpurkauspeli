@@ -12,7 +12,6 @@ class OptionsController < ApplicationController
   end
 
   def edit
-    @option = Option.find(params[:id])
   end
 
   def create
@@ -23,7 +22,7 @@ class OptionsController < ApplicationController
 
     #multichoice = @task.subtasks.multichoice.build
 
-    # @option = multichoice.build_option(content:option_params[:content], value:option_params[:value],
+    # @option = multichoice.build_option(content:option_params[:content], is_correct_answer:option_params[:is_correct_answer],
     #  explanation:option_params[:explanation], multichoice_id:option_params[:multichoice_id])
 
     @option = Option.new(option_params)
@@ -57,7 +56,6 @@ class OptionsController < ApplicationController
     parent_id = @option.multichoice_id
     @option.destroy
     respond_to do |format|
-
       format.html { redirect_to edit_multichoice_path(parent_id), notice: 'Vastausvaihtoehdon poisto onnistui!' }
       format.json { head :no_content }
     end
@@ -70,7 +68,6 @@ class OptionsController < ApplicationController
   end
   # Never trust parameters from the scary internet, only allow the white list through.
   def option_params
-    params.require(:option).permit(:content, :value, :explanation, :multichoice_id )
+    params.require(:option).permit(:content, :is_correct_answer, :explanation, :multichoice_id )
   end
-
 end
