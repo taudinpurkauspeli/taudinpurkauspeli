@@ -15,7 +15,7 @@
               </li>
           <% end %>
         </ul>
-        <%= submit_tag("Tarkista") %>
+        <%= submit_tag("Tarkista") unless current_user_is_admin %>
     <% end %>
 
   </div>

@@ -15,12 +15,12 @@
 
     <% elsif !subtask.multichoice.nil? %>
 
-        <% if !current_user_has_completed_task(@task.id)%>
+        <% if !current_user_has_completed_task(@task.id) %>
             <%= render 'multichoice', {subtask: subtask} %>
+
+            <%= render 'right_answers', {subtask: subtask} if current_user_is_admin %>
         <% else %>
-
             <%= render 'right_answers', {subtask: subtask} %>
-
         <% end %>
 
 
