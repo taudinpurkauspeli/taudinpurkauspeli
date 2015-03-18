@@ -44,6 +44,16 @@ class OptionsController < ApplicationController
   def update
     respond_to do |format|
       if @option.update(option_params)
+
+        if @option.is_correct_answer == true
+          @option.multichoice.options.where.not(id: @option.id).each do |opt|
+            opt.is_correct_answer = false
+            opt.save
+          end
+        else
+
+        end
+
         format.html { redirect_to edit_multichoice_path(@option.multichoice.id), notice: 'Vaihtoehto päivitettiin onnistuneesti.' }
       else
         format.html { render :edit }
@@ -70,4 +80,5 @@ class OptionsController < ApplicationController
   def option_params
     params.require(:option).permit(:content, :is_correct_answer, :explanation, :multichoice_id )
   end
+
 end
