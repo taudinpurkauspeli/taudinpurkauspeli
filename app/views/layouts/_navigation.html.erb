@@ -15,9 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <% unless @excercise_page_rendered %>
-        <%= link_to 'Palaa pääsivulle', root_path, class: 'navbar-brand' %>
-      <% end %>
+
     </div>
   </div>
   <% if @excercise_page_rendered or !current_user.nil?%>
@@ -40,7 +38,15 @@
           </div>
         </div>
       <% else %>
+      <div class="col-md-5"></div>
+      <div class="col-md-4">
+      <% unless @excercise_page_rendered %>
+        <%= link_to 'Palaa pääsivulle', root_path, class: 'navbar-brand' %>
+      <% end %>
+      </div>
+      <div class="col-md-3 no-padding">
         <%= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-logout', :method => :delete unless current_user.nil?%>
+      </div>
       <% end %>
     </div>
   <% end %>
