@@ -11,11 +11,11 @@
           <% subtask.multichoice.options.each do |option| %>
               <li>
                 <%= check_box_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s %>
-                <%= option.content %>
+                <%= label_tag "checked_options_" + option.id.to_s, option.content %>
               </li>
           <% end %>
         </ul>
-        <%= submit_tag("Tarkista") %>
+        <%= submit_tag("Tarkista") unless current_user_is_admin %>
     <% end %>
 
   </div>
