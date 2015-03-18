@@ -10,7 +10,6 @@ describe "Task list page" do
   let!(:task_text){FactoryGirl.create(:task_text)}
 
 
-
   let!(:task2_1){FactoryGirl.create(:task, name: "Hoida", level: 2)}
   let!(:subtask2){FactoryGirl.create(:subtask, task_id: 2)}
   let!(:task_text2){FactoryGirl.create(:task_text, subtask_id:2, content:"Lääkäri hoitaa")}
@@ -18,10 +17,12 @@ describe "Task list page" do
 
   let!(:task2_2){FactoryGirl.create(:task, name: "Hoida eläintä", level: 2)}
   let!(:task_text3){FactoryGirl.create(:task_text, subtask_id:3, content:"Lääkäri hoitaa eläintä")}
-
   let!(:subtask3){FactoryGirl.create(:subtask, task_id: 3)}
 
+
   let!(:task3){FactoryGirl.create(:task, exercise_id: 2, name: "Soita asiakkaalle uudestaan")}
+
+  let!(:task4){FactoryGirl.create(:task, name: "Soita asiakkaalle eläimestä", level: 3)}
 
   describe "if user is signed in as student" do
     let!(:user){FactoryGirl.create(:student)}
@@ -89,4 +90,88 @@ describe "Task list page" do
       end
     end
   end
+
+  describe "if user is signed in as teacher" do
+    let!(:user){FactoryGirl.create(:user)}
+
+    before :each do
+      sign_in(username:"Testipoika", password:"Salainen1")
+      visit root_path
+      click_button('Lihanautakuolemat')
+      click_link('Toimenpiteet')
+    end
+
+    it "he should be able to move task one level up if it has no siblings or children" do
+      expect(task4.level).to eq(3)
+      expect(task.level).to eq(1)
+      expect(task2_1.level).to eq(2)
+      expect(task2_2.level).to eq(2)
+
+      click_on("tasks/5/up")
+      expect(Task.last.level).to eq(2)
+
+      expect(Task.first.level).to eq(1)
+      expect(Task.find(2).level).to eq(2)
+      expect(Task.find(3).level).to eq(2)
+    end
+
+
+    it "he should be able to move task one level up if it has siblings and children" do
+      click_on("tasks/5/up")
+      click_on("tasks/5/up")
+      expect(Task.last.level).to eq(2)
+
+      expect(Task.first.level).to eq(1)
+      expect(Task.find(2).level).to eq(3)
+      expect(Task.find(3).level).to eq(3)
+    end
+
+    it "he should be able to move task one level up if it has children but no siblings" do
+      click_on("tasks/5/up")
+      click_on("tasks/5/up")
+      click_on("tasks/5/up")
+      expect(Task.last.level).to eq(1)
+
+      expect(Task.first.level).to eq(1)
+      expect(Task.find(2).level).to eq(2)
+      expect(Task.find(3).level).to eq(2)
+    end
+
+    it "he should be able to move task one level down if it has children and siblings" do
+      click_on("tasks/5/up")
+      click_on("tasks/5/up")
+      click_on("tasks/5/up")
+      click_on("tasks/5/down")
+      expect(Task.last.level).to eq(2)
+
+      expect(Task.first.level).to eq(1)
+      expect(Task.find(2).level).to eq(3)
+      expect(Task.find(3).level).to eq(3)
+    end
+
+    it "he should be able to move task one level down if it has children and no siblings" do
+
+      click_on("tasks/5/up")
+      click_on("tasks/5/up")
+      click_on("tasks/5/down")
+      expect(Task.last.level).to eq(2)
+
+      expect(Task.first.level).to eq(1)
+      expect(Task.find(2).level).to eq(2)
+      expect(Task.find(3).level).to eq(2)
+    end
+
+    it "he should be able to move task one level down if it has siblings and no children" do
+
+      click_on("tasks/5/up")
+      click_on("tasks/5/down")
+      expect(Task.last.level).to eq(3)
+
+      expect(Task.first.level).to eq(1)
+      expect(Task.find(2).level).to eq(2)
+      expect(Task.find(3).level).to eq(2)
+    end
+
+  end
+
 end
