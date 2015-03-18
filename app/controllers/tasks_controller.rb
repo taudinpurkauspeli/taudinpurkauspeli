@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
+
   # GET /tasks
   # GET /tasks.json
   def index
@@ -31,10 +32,7 @@ class TasksController < ApplicationController
     else
       @task = Task.find(params[:id])
     end
-
     @subtasks = @task.subtasks
-
-    #new instances
     @new_completed_task = CompletedTask.new
   end
 
@@ -98,7 +96,6 @@ class TasksController < ApplicationController
 
   def level_up
     @task.move_up
-
     respond_to do |format|
       format.html { redirect_to tasks_url }
     end
@@ -106,7 +103,6 @@ class TasksController < ApplicationController
 
   def level_down
     @task.move_down
-
     respond_to do |format|
       format.html { redirect_to tasks_url }
     end
