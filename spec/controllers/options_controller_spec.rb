@@ -7,7 +7,7 @@ RSpec.describe OptionsController, :type => :controller do
 	let!(:multichoice){FactoryGirl.create(:multichoice)}
 
 	let(:valid_attributes) {{content: "4 jalkaa", explanation: "Normaalilla lehmällä on kaksi etujalkaa ja kaksi takajalkaa",
-													 value: true, multichoice_id: 1
+													 is_correct_answer: true, multichoice_id: 1
 	}}
 
 	let(:invalid_attributes) {{content: nil, explanation: nil, multichoice_id: 1}}
