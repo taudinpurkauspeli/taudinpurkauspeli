@@ -85,6 +85,6 @@ FactoryGirl.define do
     multichoice_id 1
     content "Tykkää"
     explanation "Juuri oikea vastaus"
-    value true
+    is_correct_answer true
   end
 end
