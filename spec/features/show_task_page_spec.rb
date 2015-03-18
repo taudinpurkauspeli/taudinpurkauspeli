@@ -17,9 +17,9 @@ describe "Task show page" do
   let!(:radiobutton_task){FactoryGirl.create(:task, name: "Mikä lääke oikea", level: 1)}
   let!(:radiobutton_subtask){FactoryGirl.create(:subtask, task_id:3)}
   let!(:radiobutton){FactoryGirl.create(:radiobutton, subtask_id: 3)}
-  let!(:option){FactoryGirl.create(:option, multichoice_id: 2, content: "Bakteeri")}
-  let!(:option2){FactoryGirl.create(:option, multichoice_id: 2, content: "Virus", is_correct_answer: false, explanation: "Ei oikea vastaus")}
-  let!(:option3){FactoryGirl.create(:option, multichoice_id: 2, content: "Joku muu", is_correct_answer: false, explanation: "Melkein oikea vastaus")}
+  let!(:option4){FactoryGirl.create(:option, multichoice_id: 2, content: "Bakteeri")}
+  let!(:option5){FactoryGirl.create(:option, multichoice_id: 2, content: "Virus", is_correct_answer: false, explanation: "Ei oikea vastaus")}
+  let!(:option6){FactoryGirl.create(:option, multichoice_id: 2, content: "Joku muu", is_correct_answer: false, explanation: "Melkein oikea vastaus")}
 
 
   describe "if user is signed in as a student" do
