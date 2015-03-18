@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
     def new
-      # renderöi kirjautumissivun
+      # Renders login page
     end
 
     def create
@@ -14,11 +14,10 @@ class SessionsController < ApplicationController
     end
 
     def destroy
-      # nollataan sessio
+      # Reset session
       session[:user_id] = nil
       session[:exercise_id] = nil
-      session[:task_id] = nil
-      # uudelleenohjataan sovellus pääsivulle 
+      session[:task_id] = nil 
       redirect_to :root
     end
 
