@@ -3,7 +3,6 @@ class OptionsController < ApplicationController
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
 
-
   def show
   end
 
@@ -16,15 +15,6 @@ class OptionsController < ApplicationController
 
   def create
     @task = Task.find(session[:task_id])
-
-    # This can be done for each different type of subtask in their respective controllers
-    #subtask = @task.subtasks.build
-
-    #multichoice = @task.subtasks.multichoice.build
-
-    # @option = multichoice.build_option(content:option_params[:content], is_correct_answer:option_params[:is_correct_answer],
-    #  explanation:option_params[:explanation], multichoice_id:option_params[:multichoice_id])
-
     @option = Option.new(option_params)
 
     respond_to do |format|

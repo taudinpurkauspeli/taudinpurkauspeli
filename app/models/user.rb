@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
 
   def get_number_of_tasks_by_level(exercise, level)
     number_of_tasks = 0
-
     completed_tasks.each do |c|
       unless c.task.nil? 
         if(c.task.level == level && c.task.exercise_id == exercise.id)

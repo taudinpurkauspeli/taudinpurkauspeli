@@ -1,5 +1,4 @@
 class Subtask < ActiveRecord::Base
-
 	validates :task_id, presence: true
 
 	belongs_to :task
@@ -14,14 +13,19 @@ class Subtask < ActiveRecord::Base
 		unless task_text.nil?
 			return_string = 'Teksti: '
 			content = task_text.content
-			
 		end
+
 		unless multichoice.nil?
 			return_string = 'Monivalintakysymys: '
 			content = multichoice.question
-
 		end
-		return_string += content.split[0...3].join(' ') + ' ...'
-		return return_string
+
+    if content.split.size > 3
+		  return_string += content.split[0...3].join(' ') + ' ...'
+		else
+      return_string += content
+    end
+
+    return return_string
 	end
 end
