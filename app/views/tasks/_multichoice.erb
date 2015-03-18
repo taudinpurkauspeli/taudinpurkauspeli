@@ -1,8 +1,22 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title"></h3>
+    <h3 class="panel-title">Kysymys: <%= subtask.multichoice.question %></h3>
   </div>
+
   <div class="panel-body">
-    <%= subtask.multichoice.question %>
+
+    <%= form_tag("/multichoices/" + subtask.multichoice.id.to_s + "/check_answers", method: "post") do %>
+
+        <ul>
+          <% subtask.multichoice.options.each do |option| %>
+              <li>
+                <%= check_box_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s %>
+                <%= label_tag "checked_options_" + option.id.to_s, option.content %>
+              </li>
+          <% end %>
+        </ul>
+        <%= submit_tag("Tarkista") unless current_user_is_admin %>
+    <% end %>
+
   </div>
 </div>

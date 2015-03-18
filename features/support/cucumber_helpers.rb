@@ -17,7 +17,27 @@ module CucumberHelpers
 
   def create_tasks
     Task.create name:"Soita lääkärille", exercise_id:1, level:1
-    Task.create name:"Lääkitse hevonen", exercise_id:2, level:1
+    Task.create name:"Lääkitse hevonen", exercise_id:1, level:1
+    Task.create name:"Lääkitse koira", exercise_id:2, level:1
+  end
+
+  def create_task_texts
+    FactoryGirl.create(:subtask)
+    FactoryGirl.create(:task_text)
+
+    FactoryGirl.create(:subtask, task_id: 2)
+    FactoryGirl.create(:task_text, subtask_id: 2, content:"Lääkitään")
+  end
+
+  def create_multichoices
+    FactoryGirl.create(:subtask)
+    FactoryGirl.create(:multichoice)
+
+    FactoryGirl.create(:subtask, task_id: 2)
+    FactoryGirl.create(:multichoice, subtask_id: 2, question:"Mitä lääkkeitä käytät?")
+    FactoryGirl.create(:option, multichoice_id: 2, content: "Bakteerilääke")
+    FactoryGirl.create(:option, multichoice_id: 2, content: "Astmalääke", value: false, explanation: "Ei oikea vastaus")
+    FactoryGirl.create(:option, multichoice_id: 2, content: "Kurkkulääke", explanation: "Melkein oikea vastaus")
   end
 
   def create_all_hypotheses_for_case

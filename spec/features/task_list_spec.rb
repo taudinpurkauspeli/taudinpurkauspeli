@@ -4,9 +4,23 @@ describe "Task list page" do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
   let!(:exercise2){FactoryGirl.create(:exercise, name: "Kanakuolemat")}
+
   let!(:task){FactoryGirl.create(:task)}
+  let!(:subtask){FactoryGirl.create(:subtask)}
+  let!(:task_text){FactoryGirl.create(:task_text)}
+
+
+
   let!(:task2_1){FactoryGirl.create(:task, name: "Hoida", level: 2)}
+  let!(:subtask2){FactoryGirl.create(:subtask, task_id: 2)}
+  let!(:task_text2){FactoryGirl.create(:task_text, subtask_id:2, content:"Lääkäri hoitaa")}
+
+
   let!(:task2_2){FactoryGirl.create(:task, name: "Hoida eläintä", level: 2)}
+  let!(:task_text3){FactoryGirl.create(:task_text, subtask_id:3, content:"Lääkäri hoitaa eläintä")}
+
+  let!(:subtask3){FactoryGirl.create(:subtask, task_id: 3)}
+
   let!(:task3){FactoryGirl.create(:task, exercise_id: 2, name: "Soita asiakkaalle uudestaan")}
 
   describe "if user is signed in as student" do

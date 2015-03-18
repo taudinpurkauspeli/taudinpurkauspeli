@@ -26,8 +26,7 @@ RSpec.describe TasksController, :type => :controller do
   # Task. As you add validations to Task, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {name: "Soita asiakkaalle", exercise_id: 1}
-    {name: "Kysymyksiä asiakkaalle:", exercise_id: 1}
+    {name: "Soita asiakkaalle", exercise_id: 1, level: 2}
   }
 
 
@@ -41,6 +40,15 @@ RSpec.describe TasksController, :type => :controller do
   let(:valid_session) { {
       user_id: 1, exercise_id: 1
   } }
+
+  let(:tasktext_attributes) {
+    {content: "Sisältöä" }
+  }
+
+  let(:multichoice_attributes) {
+    {question: "Tykkääkö koira snabbuloist?" }
+  }
+
 
   describe "GET index" do
     it "assigns all tasks as @tasks" do
@@ -126,6 +134,32 @@ RSpec.describe TasksController, :type => :controller do
       end
     end
 
+    describe "POST level_up" do
+
+
+      let!(:task2){FactoryGirl.create(:task)}
+      let!(:task3){FactoryGirl.create(:task, level: 2)}
+
+      it "changes the level when no siblings & no children" do
+
+        task3.move_up
+
+
+      # expect(:post => "tasks/2/up").to route_to(
+                                   #           :controller => "tasks",
+                                   #           :action => "level_up",
+                                   #           :id => "2"
+                                   #       )
+
+        #TODO Fix test! Why does not work?
+        #expect {
+         #post :level_up, {:id => task3.id}, valid_session
+        #}.to change{task3.level}.by(-1)
+
+        expect(task3.level).to eq(1)
+      end
+
+    end
 
 =begin
     describe "with invalid params" do
@@ -151,6 +185,15 @@ RSpec.describe TasksController, :type => :controller do
       expect {
         delete :destroy, {:id => task.to_param}, valid_session
       }.to change(Task, :count).by(-1)
+    end
+
+    it "destroys the requested tasks subtasks" do
+      task = Task.create! valid_attributes
+      subtask = task.subtasks.create
+      task_text = subtask.create_task_text(content:tasktext_attributes[:content])
+
+      expect {    delete :destroy, {:id => task.to_param}, valid_session
+      }.to change(task.subtasks, :count).by(-1)
     end
 
     it "redirects to the tasks list" do

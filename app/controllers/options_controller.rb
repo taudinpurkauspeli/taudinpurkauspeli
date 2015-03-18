@@ -12,7 +12,6 @@ class OptionsController < ApplicationController
   end
 
   def edit
-    @option = Option.find(params[:id])
   end
 
   def create
@@ -34,7 +33,7 @@ class OptionsController < ApplicationController
         format.html { redirect_to edit_multichoice_path(@option.multichoice.id), notice: 'Vaihtoehto lisättiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @option }
       else
-        format.html { redirect_to edit_multichoice_path(Multichoice.find(option_params[:multichoice_id])), notice: 'Vaihtoehdonn tiedot puuttelliset.' }
+        format.html { redirect_to edit_multichoice_path(Multichoice.find(option_params[:multichoice_id])), alert: 'Vaihtoehdonn tiedot puuttelliset.' }
         format.json { render json: @option.errors, status: :unprocessable_entity }
       end
     end
@@ -57,7 +56,6 @@ class OptionsController < ApplicationController
     parent_id = @option.multichoice_id
     @option.destroy
     respond_to do |format|
-
       format.html { redirect_to edit_multichoice_path(parent_id), notice: 'Vastausvaihtoehdon poisto onnistui!' }
       format.json { head :no_content }
     end
@@ -72,5 +70,4 @@ class OptionsController < ApplicationController
   def option_params
     params.require(:option).permit(:content, :value, :explanation, :multichoice_id )
   end
-
 end

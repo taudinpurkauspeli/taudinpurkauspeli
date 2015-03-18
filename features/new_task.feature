@@ -6,7 +6,7 @@
     Given I have logged in as a teacher
     And Cases have been created
     And I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
-    And I click on the link "Luo uusi toimenpide"
+    And I click on the button "Luo uusi toimenpide"
     When I fill in task name
     And I press the button "Tallenna"
     Then page should have a message: "Toimenpide luotiin onnistuneesti."
@@ -16,7 +16,7 @@
     Given I have logged in as a teacher
     And Cases have been created
     And I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
-    And I click on the link "Luo uusi toimenpide"
+    And I click on the button "Luo uusi toimenpide"
     When I fill in task name
     And I press the button "Tallenna"
     And I press the button "Luo uusi tekstimuotoinen alitoimenpide"

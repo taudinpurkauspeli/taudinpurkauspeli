@@ -3,20 +3,27 @@
 <% end %>
 
 <h1>
-    Toimenpide: 
-    <%= @task.name %>
+  Toimenpide:
+  <%= @task.name %>
 </h1>
 
-
 <% @subtasks.each do |subtask| %>
+
     <% if !subtask.task_text.nil? %>
         <%= render 'task_text', {subtask: subtask} %>
-        <%# Tähän tulee elsenä ne muut subtask-tyypit%>
+
+    <% elsif !subtask.multichoice.nil? %>
+
+        <% if !current_user_has_completed_task(@task.id) %>
+            <%= render 'multichoice', {subtask: subtask} %>
+
+            <%= render 'right_answers', {subtask: subtask} if current_user_is_admin %>
+        <% else %>
+            <%= render 'right_answers', {subtask: subtask} %>
+        <% end %>
+
     <% end %>
 <% end %>
 
-<%= if !current_user_has_completed_task(@task.id) && !current_user_is_admin
-    then render 'continue_button'
-    else
-    end %>
+
 

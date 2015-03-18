@@ -13,11 +13,17 @@
 
     <div class="field">
       <%= f.label :question%><br>
-      <%= f.text_field :question %>
+      <%= f.text_field :question, :class => "form-control" %>
+    </div>
+    <br>
+
+    <div class="field">
+      <%= f.label :is_radio_button%>
+      <%= f.check_box :is_radio_button %>
     </div>
     <br>
 
     <div class="actions">
-      <%= f.submit "Tallenna kysymys"%>
+      <%= f.submit "Tallenna kysymys", :class => 'btn btn-default btn-save widthAuto'%>
     </div>
 <% end %>
