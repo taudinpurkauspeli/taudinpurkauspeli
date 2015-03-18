@@ -29,6 +29,10 @@ class OptionsController < ApplicationController
 
     respond_to do |format|
       if @option.save
+        # if radio button type
+        if @option.multichoice.is_radio_button == true
+          uncheck_other_options(@option)
+        end
         #subtask.save
         format.html { redirect_to edit_multichoice_path(@option.multichoice.id), notice: 'Vaihtoehto lisättiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @option }
@@ -44,16 +48,10 @@ class OptionsController < ApplicationController
   def update
     respond_to do |format|
       if @option.update(option_params)
-
-        if @option.is_correct_answer == true
-          @option.multichoice.options.where.not(id: @option.id).each do |opt|
-            opt.is_correct_answer = false
-            opt.save
-          end
-        else
-
+        # if radio button type
+        if @option.multichoice.is_radio_button == true
+          uncheck_other_options(@option)
         end
-
         format.html { redirect_to edit_multichoice_path(@option.multichoice.id), notice: 'Vaihtoehto päivitettiin onnistuneesti.' }
       else
         format.html { render :edit }
@@ -79,6 +77,15 @@ class OptionsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def option_params
     params.require(:option).permit(:content, :is_correct_answer, :explanation, :multichoice_id )
+  end
+  # Unchecks other options when updated option is corrent answer
+  def uncheck_other_options(option)
+    if option.is_correct_answer == true
+      option.multichoice.options.where.not(id: @option.id).each do |opt|
+        opt.is_correct_answer = false
+        opt.save
+      end
+    end
   end
 
 end
