@@ -27,6 +27,7 @@ RSpec.describe TasksController, :type => :controller do
   # adjust the attributes here as well.
   let(:valid_attributes) {
     {name: "Soita asiakkaalle", exercise_id: 1}
+    {name: "Kysymyksiä asiakkaalle:", exercise_id: 1}
   }
 
 

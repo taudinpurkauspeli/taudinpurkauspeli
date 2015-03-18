@@ -17,7 +17,7 @@ describe "New Task page" do
 
 
 
-    it "user should be able to create a new task without a task text-subtask" do
+    it "user should be able to create a new task without a subtask" do
       visit new_task_path
 
       fill_in('task_name', with: "Soita asiakkaalle")
@@ -28,6 +28,7 @@ describe "New Task page" do
       #expect(page).to have_button 'Soita asiakkaalle'
       expect(Task.count).to eq(1)
       expect(TaskText.count).to eq(0)
+      expect(Multichoice.count).to eq(0)
       expect(Subtask.count).to eq(0)
     end
 
@@ -61,6 +62,7 @@ describe "New Task page" do
       expect(current_path).to eq(tasks_path)
       expect(Task.count).to eq(0)
       expect(TaskText.count).to eq(0)
+      expect(Multichoice.count).to eq(0)
       expect(Subtask.count).to eq(0)
 
 

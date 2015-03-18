@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310134423) do
+ActiveRecord::Schema.define(version: 20150317110240) do
 
   create_table "checked_hypotheses", force: :cascade do |t|
     t.integer "user_id"
@@ -56,8 +56,9 @@ ActiveRecord::Schema.define(version: 20150310134423) do
   create_table "multichoices", force: :cascade do |t|
     t.string   "question"
     t.integer  "subtask_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.boolean  "is_radio_button"
   end
 
   create_table "options", force: :cascade do |t|
