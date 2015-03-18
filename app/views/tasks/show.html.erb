@@ -7,7 +7,6 @@
   <%= @task.name %>
 </h1>
 
-
 <% @subtasks.each do |subtask| %>
 
     <% if !subtask.task_text.nil? %>
@@ -22,7 +21,6 @@
         <% else %>
             <%= render 'right_answers', {subtask: subtask} %>
         <% end %>
-
 
     <% end %>
 <% end %>

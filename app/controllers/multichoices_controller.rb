@@ -57,18 +57,13 @@ class MultichoicesController < ApplicationController
 
     respond_to do |format|
       if @multichoice.check_right_answers(checked_options_params[:checked_options].to_a)
-
         @multichoice.subtask.task.completed_tasks.create(user_id: current_user.id)
 
         format.html { redirect_to task_path(@multichoice.subtask.task), notice: 'Valitsit oikein!' }
-
       else
-
-        format.html { redirect_to @multichoice.subtask.task, notice: 'Valinnoissa oli vielä virheitä!' }
+        format.html { redirect_to @multichoice.subtask.task, alert: 'Valinnoissa oli vielä virheitä!' }
       end
-
     end
-
 
   end
 
