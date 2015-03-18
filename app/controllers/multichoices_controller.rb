@@ -53,9 +53,7 @@ class MultichoicesController < ApplicationController
   end
 
   # /multichoices/:id/check_answers'
-
   def check_answers
-
     respond_to do |format|
       if @multichoice.check_right_answers(checked_options_params[:checked_options].to_a)
         @multichoice.subtask.task.completed_tasks.create(user_id: current_user.id)
@@ -65,13 +63,11 @@ class MultichoicesController < ApplicationController
         format.html { redirect_to @multichoice.subtask.task, alert: 'Valinnoissa oli vielä virheitä!' }
       end
     end
-
   end
 
-
   private
+  
   # Use callbacks to share common setup or constraints between actions.
-
   def set_multichoice
     @multichoice = Multichoice.find(params[:id])
   end
@@ -85,6 +81,4 @@ class MultichoicesController < ApplicationController
   def checked_options_params
     params.permit(checked_options: [])
   end
-
-
 end
