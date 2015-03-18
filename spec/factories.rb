@@ -81,6 +81,12 @@ FactoryGirl.define do
     question "Tykkääkö koira nappuloista?"
   end
 
+  factory :radiobutton, class: Multichoice do
+    subtask_id 1
+    question "Kenelle pitää soittaa?"
+    is_radio_button true
+  end
+
   factory :option do
     multichoice_id 1
     content "Tykkää"

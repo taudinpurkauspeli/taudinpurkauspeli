@@ -20,6 +20,13 @@ Given(/^some multichoice tasks have been added to case$/) do
   create_multichoices
 end
 
+Given(/^some radiobutton tasks have been added to case$/) do
+  create_exercises
+  create_hypothesis_groups
+  create_tasks
+  create_radiobuttons
+end
+
 When(/^I choose a text task "(.*?)"$/) do |arg1|
   click_button(arg1)
 end
@@ -28,9 +35,21 @@ When(/^I choose a multichoice task "(.*?)"$/) do |arg1|
   click_button(arg1)
 end
 
+When(/^I choose a radiobutton task "(.*?)"$/) do |arg1|
+  click_button(arg1)
+end
+
 When(/^I check the right options$/) do
   check 'checked_options_1'
   check 'checked_options_3'
+end
+
+When(/^I choose the right option$/) do
+  choose 'checked_options_3'
+end
+
+When(/^I choose a wrong option$/) do
+  choose 'checked_options_1'
 end
 
 When(/^I check wrong options$/) do
@@ -40,10 +59,13 @@ When(/^I check wrong options$/) do
 end
 
 When(/^I don't check any options$/) do
-  check 'checked_options_3'
+end
+
+When(/^I don't choose any option$/) do
 end
 
 When(/^I don't check all right options$/) do
+  check 'checked_options_3'
 end
 
 

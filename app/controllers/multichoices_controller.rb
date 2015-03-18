@@ -24,7 +24,7 @@ class MultichoicesController < ApplicationController
 
     # This can be done for each different type of subtask in their respective controllers
     subtask = @task.subtasks.build
-    @multichoice = subtask.build_multichoice(question:multichoice_params[:question])
+    @multichoice = subtask.build_multichoice(question:multichoice_params[:question], is_radio_button:multichoice_params[:is_radio_button])
 
     respond_to do |format|
       if @multichoice.save
