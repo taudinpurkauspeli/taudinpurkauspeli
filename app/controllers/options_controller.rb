@@ -3,7 +3,6 @@ class OptionsController < ApplicationController
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
 
-
   def show
   end
 
@@ -16,15 +15,6 @@ class OptionsController < ApplicationController
 
   def create
     @task = Task.find(session[:task_id])
-
-    # This can be done for each different type of subtask in their respective controllers
-    #subtask = @task.subtasks.build
-
-    #multichoice = @task.subtasks.multichoice.build
-
-    # @option = multichoice.build_option(content:option_params[:content], value:option_params[:value],
-    #  explanation:option_params[:explanation], multichoice_id:option_params[:multichoice_id])
-
     @option = Option.new(option_params)
 
     respond_to do |format|
@@ -68,6 +58,6 @@ class OptionsController < ApplicationController
   end
   # Never trust parameters from the scary internet, only allow the white list through.
   def option_params
-    params.require(:option).permit(:content, :value, :explanation, :multichoice_id )
+    params.require(:option).permit(:content, :is_correct_answer, :explanation, :multichoice_id )
   end
 end

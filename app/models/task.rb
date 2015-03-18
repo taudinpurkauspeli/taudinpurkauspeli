@@ -4,9 +4,7 @@ class Task < ActiveRecord::Base
 
   has_many :completed_tasks, dependent: :destroy
   has_many :users, through: :completed_tasks
-
   has_many :subtasks, dependent: :destroy
-
   has_many :task_texts, through: :subtasks
 
   def self.get_highest_level(exercise)
@@ -58,8 +56,9 @@ class Task < ActiveRecord::Base
   def short_name
     return_string = ''
     if name.split.size > 3
-    then return_string += name.split[0...3].join(' ') + ' ...'
-    else return name
+      return_string += name.split[0...3].join(' ') + ' ...'
+    else
+      return name
     end
     return return_string
   end

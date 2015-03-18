@@ -158,10 +158,17 @@ label {
 
 //login
 .login-container{
-  
+
+  width: 555px;  
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+.no-padding{
+  margin: 0px;
+  padding: 0px;
+  padding-right: 3px;
 }
 
 
@@ -206,6 +213,7 @@ label {
   border-radius: 7px;
   margin-bottom: 5px;
   border-width: 0px;
+  padding-width: 5px;
 }
 
 .disabled{

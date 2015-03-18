@@ -17,7 +17,7 @@
   <div class = "nakki">
     <%= form_for(option) do |f| %>
       <div class="col-md-1">
-        <%= f.check_box :value %>
+        <%= f.check_box :is_correct_answer %>
       </div>
       <div class="col-md-5">
         <%= f.text_area :content, placeholder: "Vaihtoehto", :class => 'form-control' %>
@@ -54,7 +54,7 @@
   <div class = "nakki">
     <%= form_for(@new_option) do |f| %>
       <div class="col-md-1">
-        <%= f.check_box :value, :value => true %>
+        <%= f.check_box :is_correct_answer, :value => true %>
       </div>
       <div class="col-md-5">
         <%= f.text_area :content, placeholder: "Vaihtoehto", :class => 'form-control' %>

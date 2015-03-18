@@ -1,29 +1,18 @@
 <% if current_user_is_admin %>
-    <%=link_to 'Muokkaa', edit_task_path(@task)%>
+  <%=link_to 'Muokkaa', edit_task_path(@task)%>
 <% end %>
 
-<h1>
-  Toimenpide:
-  <%= @task.name %>
-</h1>
+<h1>Toimenpide: <%= @task.name %></h1>
 
 <% @subtasks.each do |subtask| %>
-
-    <% if !subtask.task_text.nil? %>
-        <%= render 'task_text', {subtask: subtask} %>
-
-    <% elsif !subtask.multichoice.nil? %>
-
-        <% if !current_user_has_completed_task(@task.id) %>
-            <%= render 'multichoice', {subtask: subtask} %>
-
-            <%= render 'right_answers', {subtask: subtask} if current_user_is_admin %>
-        <% else %>
-            <%= render 'right_answers', {subtask: subtask} %>
-        <% end %>
-
+  <% if !subtask.task_text.nil? %>
+    <%= render 'task_text', {subtask: subtask} %>
+  <% elsif !subtask.multichoice.nil? %>
+    <% if !current_user_has_completed_task(@task.id) %>
+      <%= render 'multichoice', {subtask: subtask} %>
+      <%= render 'right_answers', {subtask: subtask} if current_user_is_admin %>
+    <% else %>
+      <%= render 'right_answers', {subtask: subtask} %>
     <% end %>
+  <% end %>
 <% end %>
-
-
-

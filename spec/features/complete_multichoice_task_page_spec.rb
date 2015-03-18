@@ -8,7 +8,7 @@ describe "Multichoice page for student" do
   let!(:multichoice_subtask){FactoryGirl.create(:subtask)}
   let!(:multichoice){FactoryGirl.create(:multichoice)}
   let!(:option){FactoryGirl.create(:option)}
-  let!(:option2){FactoryGirl.create(:option, content: "Ei tykkää", value: false, explanation: "Ei oikea vastaus")}
+  let!(:option2){FactoryGirl.create(:option, content: "Ei tykkää", is_correct_answer: false, explanation: "Ei oikea vastaus")}
   let!(:option3){FactoryGirl.create(:option, content: "Ehkä tykkää", explanation: "Melkein oikea vastaus")}
 
 
