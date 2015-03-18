@@ -40,3 +40,15 @@ Then(/^multichoice should be in the database$/) do
   expect(Multichoice.count).to eq(1)
   expect(Subtask.count).to eq(1)
 end
+
+When(/^I fill in option content$/) do
+  fill_in('option_content', with: 'Soitan puhelimella')
+end
+
+When(/^I fill in option explanation$/) do
+  fill_in('option_explanation', with: 'Puhelimella soittaminen on nyt hyvin järkevää.')
+end
+
+Then(/^option should be in the database$/) do
+  expect(Option.count).to eq(1)
+end
