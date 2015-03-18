@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe SubtasksController, :type => :controller do
 
 	let!(:user){FactoryGirl.create(:user)}
-	let!(:task_text){FactoryGirl.create(:task_text)}
-	let!(:multichoice){FactoryGirl.create(:multichoice)}
+	#let!(:task_text){FactoryGirl.create(:task_text)}
+	#let!(:multichoice){FactoryGirl.create(:multichoice)}
 	let!(:task){FactoryGirl.create(:task)}
 
 	let(:valid_attributes) {
@@ -58,6 +58,5 @@ RSpec.describe SubtasksController, :type => :controller do
 			}.to change(Subtask, :count).by(-1)
 
 		end
-
 	end
 end

@@ -67,12 +67,6 @@ RSpec.describe MultichoicesController, :type => :controller do
 						put :update, {:id => multichoice.to_param, :multichoice => valid_attributes}, valid_session
 						expect(assigns(:multichoice)).to eq(multichoice)
 					end
-
-					#it "redirects to the task" do
-					#	multichoice = Multichoice.create! valid_attributes
-					#	put :update, {:id => multichoice.to_param, :multichoice => valid_attributes}, valid_session
-					#	expect(response).to redirect_to(edit_task_path(task.id))
-					#end
 				end
 
 				describe "with invalid params" do

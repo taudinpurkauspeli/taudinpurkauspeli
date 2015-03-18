@@ -8,7 +8,7 @@ class MultichoicesController < ApplicationController
   # end
   def show
   end
-  # GET /task_texts/new
+
   def new
     @multichoice = Multichoice.new
   end
