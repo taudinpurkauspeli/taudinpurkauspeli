@@ -68,4 +68,11 @@ FactoryGirl.define do
     subtask_id 1
     question "Tykkääkö koira nappuloista?"
   end
+
+  factory :option do
+    multichoice_id 1
+    content "Soitan asiakkaalle"
+    explanation "Kiva"
+    value "True"
+  end
 end
