@@ -12,7 +12,6 @@ class OptionsController < ApplicationController
   end
 
   def edit
-    @option = Option.find(params[:id])
   end
 
   def create
@@ -57,7 +56,6 @@ class OptionsController < ApplicationController
     parent_id = @option.multichoice_id
     @option.destroy
     respond_to do |format|
-
       format.html { redirect_to edit_multichoice_path(parent_id), notice: 'Vastausvaihtoehdon poisto onnistui!' }
       format.json { head :no_content }
     end
@@ -72,5 +70,4 @@ class OptionsController < ApplicationController
   def option_params
     params.require(:option).permit(:content, :value, :explanation, :multichoice_id )
   end
-
 end
