@@ -40,6 +40,17 @@ module CucumberHelpers
     FactoryGirl.create(:option, multichoice_id: 2, content: "Kurkkulääke", explanation: "Melkein oikea vastaus")
   end
 
+  def create_radiobuttons
+    FactoryGirl.create(:subtask)
+    FactoryGirl.create(:radiobutton)
+
+    FactoryGirl.create(:subtask, task_id: 2)
+    FactoryGirl.create(:radiobutton, subtask_id: 2, question:"Mitä lääkettä käytät?")
+    FactoryGirl.create(:option, multichoice_id: 2, content: "Bakteerilääke", is_correct_answer: false, explanation: "Ei oikein")
+    FactoryGirl.create(:option, multichoice_id: 2, content: "Astmalääke", is_correct_answer: false, explanation: "Ei oikea vastaus")
+    FactoryGirl.create(:option, multichoice_id: 2, content: "Kurkkulääke", explanation: "Oikea vastaus")
+  end
+
   def create_all_hypotheses_for_case
     create_exercises
     create_hypothesis_groups
