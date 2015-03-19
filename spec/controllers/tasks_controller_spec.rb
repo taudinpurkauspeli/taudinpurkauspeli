@@ -187,10 +187,12 @@ RSpec.describe TasksController, :type => :controller do
       }.to change(Task, :count).by(-1)
     end
 
+    #kuormitin subtaskia ja tämä toimii, vaikka ei periaatteessa pitäisi
     it "destroys the requested tasks subtasks" do
       task = Task.create! valid_attributes
       subtask = task.subtasks.create
       task_text = subtask.create_task_text(content:tasktext_attributes[:content])
+      multichoice = subtask.create_multichoice(question:multichoice_attributes[:question])
 
       expect {    delete :destroy, {:id => task.to_param}, valid_session
       }.to change(task.subtasks, :count).by(-1)
