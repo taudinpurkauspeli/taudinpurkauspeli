@@ -21,7 +21,7 @@ class TasksController < ApplicationController
 
     if params[:layout] === "false"
       render :layout => false
-
+    end
   end
 
   # GET /tasks/1
