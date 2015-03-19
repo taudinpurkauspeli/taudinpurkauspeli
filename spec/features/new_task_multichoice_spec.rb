@@ -75,8 +75,6 @@ describe "New Task page" do
 
       fill_in('multichoice_question', with: "Mitä kysyt asiakkaalta:")
       click_button('Tallenna kysymys')
-
-
       fill_in('multichoice_question', with: "")
       click_button('Tallenna kysymys')
 
