@@ -19,10 +19,10 @@
   <div class="col-md-5">
     <%# hypothesis_groups %>
     <% @hypothesis_groups.each do |group| %>
-      <% unless @exercise_hypotheses[group.id].nil? %>
+      <% unless @exercise.get_hypotheses[group.id].nil? %>
         <div class="row">
           <div class="col-md-9">
-            <input class="btn btn-default btn-hypothesis-group" type="button" value="<%= group.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup1<%= group.id%>"/>
+            <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= group.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup1<%= group.id%>"/>
           </div>
         </div>
         <div class="collapse in" id="collapseHypothesisGroup1<%= group.id%>" >
@@ -43,7 +43,7 @@
       <% @hypothesis_groups.each do |group| %>
         <div class="row">
           <div class="col-md-9">
-            <input class="btn btn-default btn-hypothesis-group" type="button" value="<%= group.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup<%= group.id%>" />
+            <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= group.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup<%= group.id%>" />
           </div>
           <div class="col-md-3">
             <%= button_to 'Poista', group, method: :delete, :class => 'btn btn-default btn-del', data: { confirm: 'Oletko varma?' } %>

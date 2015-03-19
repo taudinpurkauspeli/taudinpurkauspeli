@@ -2,9 +2,9 @@ class TaskTextsController < ApplicationController
   before_action :set_task_text, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
+
   # GET /tasks
   # GET /tasks.json
-
   def show
   end
 
@@ -15,7 +15,6 @@ class TaskTextsController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    @task_text = TaskText.find(params[:id])
   end
 
   # POST /task_texts
@@ -51,7 +50,6 @@ class TaskTextsController < ApplicationController
       end
     end
   end
-
 
   private
   # Use callbacks to share common setup or constraints between actions.

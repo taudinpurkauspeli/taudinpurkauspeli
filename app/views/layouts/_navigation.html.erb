@@ -1,4 +1,5 @@
 <%# navigation styled for Bootstrap 3.0 %>
+
 <!-- Nav tabs -->
 <ul id="navigationTabs" class="nav nav-tabs" role="tablist">
   <% if !current_user.nil? && !current_exercise.nil? %>
@@ -10,22 +11,28 @@
       <% if current_user.nil? %>
         <div class="row">
           <%= form_tag sessions_path do %>
-            <div class="col-md-3">
+            <div class="col-md-3 no-padding">
               <%= text_field_tag :username, params[:username], placeholder: 'Käyttäjätunnus', :class => 'width100' %>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 no-padding">
               <%= password_field_tag :password, params[:password], placeholder: 'Salasana', :class => 'width100' %>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 no-padding">
               <%= submit_tag "Kirjaudu sisään", :class => 'btn btn-default btn-signup' %>
             </div>
           <% end %>
-          <div class="col-md-3">
+          <div class="col-md-3 no-padding">
             <%= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-signup', :method => :get %>
           </div>
         </div>
+
         <% else %>
           <%= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-logout', :method => :delete unless current_user.nil?%>
+
+          <% unless @excercise_page_rendered %>
+            <%= link_to 'Palaa pääsivulle', root_path, class: 'navbar-brand' %>
+          <% end %>
+
       <% end %>
     </div>
   <% end %>

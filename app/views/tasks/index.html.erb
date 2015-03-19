@@ -1,83 +1,9 @@
 <h1>Toimenpiteet</h1>
 
-<%#
-    Admin tasks
-
-    TODO REFARTCTOR THIS TO BE NICE AND EASY TO MAINTAINS
-%>
-
-    <% if current_user_is_admin %>
-      <% @tasks.each do |task| %>
-        <% if !current_user_has_completed_task(task.id) %>
-          <table>
-            <tbody>
-              <tr>
-                <td><%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-available-task', :form_class => "form-button_to-task" %></td>
-                <% if current_user_is_admin %>
-                  <td><%= link_to 'Esikatsele', task %></td>
-                  <td><%= link_to 'Poista', task, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
-                <%end%>
-              </tr>
-            </tbody>
-          </table>
-        <% end %>
-      <% end %>
-    <% else %>
-<%#
-    Available tasks
-
-    TODO REFARTCTOR THIS TO BE NICE AND EASY TO MAINTAINS
-%>    <div class="panel panel-default">
-        <div class="panel-heading panel-heading-tasks">
-          <a data-toggle="collapse" href="#collapse-available-tasks">
-            <h3>Valitse suoritettava toiminpide</h3>
-          </a>
-        </div>
-        <div id="collapse-available-tasks" class="panel-collapse collapse in">
-          <div class="panel-body">
-            <table>
-              <tbody>
-                <% @tasks.each do |task| %>
-                  <% if !current_user_has_completed_task(task.id) %>
-                    <tr>
-                      <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-available-task', :form_class => "form-button_to-task" %></td>
-                    </tr>              
-                  <% end %>
-                <% end %>
-              </tbody>
-            </table>    
-          </div>
-        </div>
-      </div>
-
-<%#
-  Completed tasks
-%>
-      <div class="panel panel-default">
-        <div class="panel-heading panel-heading-tasks">
-          <a data-toggle="collapse" href="#collapse-done-tasks">
-            <h3>Tehdyt toimenpiteet</h3>
-          </a>
-        </div>
-        <div id="collapse-done-tasks" class="panel-collapse collapse in">
-          <div class="panel-body">
-            <table>
-              <tbody>
-                <% @tasks.each do |task| %>
-                  <% if current_user_has_completed_task(task.id) %>
-                    <tr>
-                      <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task' %></td>
-                    </tr>                    
-                  <% end %>
-                <% end %>
-              </tbody>
-            </table>    
-          </div>
-        </div>
-      </div>
-  
-  <% end %>
-
-<br>
-
-<%= link_to 'Luo uusi toimenpide', new_task_path if current_user_is_admin%>
+<% if current_user_is_admin %>
+  <%= render 'set_task_order' %>
+<% else %>
+  <%= render 'list_of_available_tasks' %>
+  <%= render 'list_of_completed_tasks' %>
+<% end %>
+<%= button_to '+ Luo uusi toimenpide', new_task_path, :class => 'btn btn-default btn-save btn-new-task', :method => :get if current_user_is_admin %>

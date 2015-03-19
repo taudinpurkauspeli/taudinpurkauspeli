@@ -2,16 +2,21 @@ class SubtasksController < ApplicationController
   before_action :set_subtask, only: [:show, :edit, :destroy]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
+
   # GET /tasks
   # GET /tasks.json
-
   def show
   end
 
   # GET /tasks/1/edit
   def edit
     @subtask = Subtask.find(params[:id])
-    redirect_to edit_task_text_path(@subtask.task_text.id)
+    unless (@subtask.task_text.nil?)
+      redirect_to edit_task_text_path(@subtask.task_text.id)
+    end
+    unless (@subtask.multichoice.nil?)
+      redirect_to edit_multichoice_path(@subtask.multichoice.id)
+    end
   end
 
   # POST /subtasks
@@ -28,8 +33,6 @@ class SubtasksController < ApplicationController
       end
     end
   end
-
-
 
   # DELETE /subtasks/1
   # DELETE /subtasks/1.json
@@ -49,6 +52,6 @@ class SubtasksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def subtask_params
-    params.require(:subtask).permit(:task_id, :task_text_id)
+    params.require(:subtask).permit(:task_id, :task_text_id, :multichoice_id)
   end
 end

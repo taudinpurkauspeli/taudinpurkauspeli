@@ -21,25 +21,34 @@ require 'rails_helper'
 RSpec.describe TasksController, :type => :controller do
 
   let!(:user){FactoryGirl.create(:user)}
+  let!(:exercise){FactoryGirl.create(:exercise)}
   # This should return the minimal set of attributes required to create a valid
   # Task. As you add validations to Task, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {name: "Soita asiakkaalle", exercise_id: 1}
+    {name: "Soita asiakkaalle", exercise_id: 1, level: 2}
   }
 
-=begin
+
   let(:invalid_attributes) {
-    {}
+    {name: nil, exercise_id: 1}
   }
-=end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # TasksController. Be sure to keep this updated too.
   let(:valid_session) { {
-      user_id: 1
+      user_id: 1, exercise_id: 1
   } }
+
+  let(:tasktext_attributes) {
+    {content: "Sisältöä" }
+  }
+
+  let(:multichoice_attributes) {
+    {question: "Tykkääkö koira snabbuloist?" }
+  }
+
 
   describe "GET index" do
     it "assigns all tasks as @tasks" do
@@ -73,7 +82,16 @@ RSpec.describe TasksController, :type => :controller do
   end
 
   describe "POST create" do
-=begin
+
+    describe "with valid params" do
+      it "assigns correct level" do
+        for i in 1..5
+          post :create, {:task => valid_attributes}, valid_session
+        end
+        expect(Task.get_highest_level(exercise)).to eq(5)
+      end
+    end
+
     describe "with invalid params" do
       it "assigns a newly created but unsaved task as @task" do
         post :create, {:task => invalid_attributes}, valid_session
@@ -85,7 +103,6 @@ RSpec.describe TasksController, :type => :controller do
         expect(response).to render_template("new")
       end
     end
-=end
   end
 
 
@@ -117,6 +134,32 @@ RSpec.describe TasksController, :type => :controller do
       end
     end
 
+    describe "POST level_up" do
+
+
+      let!(:task2){FactoryGirl.create(:task)}
+      let!(:task3){FactoryGirl.create(:task, level: 2)}
+
+      it "changes the level when no siblings & no children" do
+
+        task3.move_up
+
+
+      # expect(:post => "tasks/2/up").to route_to(
+                                   #           :controller => "tasks",
+                                   #           :action => "level_up",
+                                   #           :id => "2"
+                                   #       )
+
+        #TODO Fix test! Why does not work?
+        #expect {
+         #post :level_up, {:id => task3.id}, valid_session
+        #}.to change{task3.level}.by(-1)
+
+        expect(task3.level).to eq(1)
+      end
+
+    end
 
 =begin
     describe "with invalid params" do
@@ -142,6 +185,17 @@ RSpec.describe TasksController, :type => :controller do
       expect {
         delete :destroy, {:id => task.to_param}, valid_session
       }.to change(Task, :count).by(-1)
+    end
+
+    #kuormitin subtaskia ja tämä toimii, vaikka ei periaatteessa pitäisi
+    it "destroys the requested tasks subtasks" do
+      task = Task.create! valid_attributes
+      subtask = task.subtasks.create
+      task_text = subtask.create_task_text(content:tasktext_attributes[:content])
+      multichoice = subtask.create_multichoice(question:multichoice_attributes[:question])
+
+      expect {    delete :destroy, {:id => task.to_param}, valid_session
+      }.to change(task.subtasks, :count).by(-1)
     end
 
     it "redirects to the tasks list" do

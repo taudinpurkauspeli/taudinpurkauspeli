@@ -1,4 +1,4 @@
-class ExercisesController < ApplicationController
+ class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in, except: [:index]
   before_action :ensure_user_is_admin, except: [:index, :show]
@@ -61,7 +61,6 @@ class ExercisesController < ApplicationController
   # DELETE /exercises/1
   # DELETE /exercises/1.json
   def destroy
-    
     @exercise.destroy
     respond_to do |format|
       format.html { redirect_to exercises_url, notice: 'Casen poistaminen onnistui!' }

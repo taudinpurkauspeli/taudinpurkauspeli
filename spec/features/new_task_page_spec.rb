@@ -5,9 +5,11 @@ describe "New Task page" do
   describe "if user is signed in as admin" do
 
     let!(:user){FactoryGirl.create(:user)}
+    let!(:exercise){FactoryGirl.create(:exercise)}
 
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
+      click_button(exercise.name)
     end
 
 
@@ -15,7 +17,7 @@ describe "New Task page" do
 
 
 
-    it "user should be able to create a new task without a task text-subtask" do
+    it "user should be able to create a new task without a subtask" do
       visit new_task_path
 
       fill_in('task_name', with: "Soita asiakkaalle")
@@ -26,6 +28,7 @@ describe "New Task page" do
       #expect(page).to have_button 'Soita asiakkaalle'
       expect(Task.count).to eq(1)
       expect(TaskText.count).to eq(0)
+      expect(Multichoice.count).to eq(0)
       expect(Subtask.count).to eq(0)
     end
 
@@ -59,6 +62,7 @@ describe "New Task page" do
       expect(current_path).to eq(tasks_path)
       expect(Task.count).to eq(0)
       expect(TaskText.count).to eq(0)
+      expect(Multichoice.count).to eq(0)
       expect(Subtask.count).to eq(0)
 
 
@@ -88,7 +92,7 @@ describe "New Task page" do
 
 
       click_link('Muokkaa')
-      click_button('Tekstimuotoinen alitoimenpide')
+      click_button('Teksti: Asiakas kertoo, että ...')
       fill_in('task_text_content', with: "Asiakas kertoo, että koira ei ole kipeä!")
       click_button('Tallenna')
 
@@ -156,7 +160,7 @@ describe "New Task page" do
 
 
       click_link('Muokkaa')
-      click_button('Tekstimuotoinen alitoimenpide')
+      click_button('Asiakas kertoo, että ...')
       fill_in('task_text_content', with: "")
       click_button('Tallenna')
 
