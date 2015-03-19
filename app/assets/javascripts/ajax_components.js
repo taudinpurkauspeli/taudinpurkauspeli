@@ -41,7 +41,7 @@ function setAjaxSubmits(formsSelector, containerElementSelector){
 
 }
 
-function clickToOpenTaskTab(formsSelector, containerElementSelector){
+function clickToOpenTaskTab(formsSelector, containerElementSelector, callback){
 	var containerElement = $(containerElementSelector);
 	var forms = $(formsSelector)
 	alert("nappeja" + forms.length);
@@ -60,9 +60,7 @@ function clickToOpenTaskTab(formsSelector, containerElementSelector){
 			targetTabLink.html(taskName);
 		}
 
-		loadView(actionUrl, containerElementSelector, function(){
-			//setAjaxSubmits($("#currentTaskTab form"));
-		});
+		loadView(actionUrl, containerElementSelector, callback)
 		targetTabLink.tab('show');
 		//$('#navigationTabs a[href="#currentTask"]')
 		//alert("klikkasit nappia");

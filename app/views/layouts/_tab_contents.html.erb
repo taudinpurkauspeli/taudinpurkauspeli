@@ -1,10 +1,23 @@
 <script>
+	//anamnesisTab
   loadView("<%= exercise_path(current_exercise) %>", "#anamnesisTab");
+  
+  //hypothesesTab
   loadView("/hypotheses", "#hypothesisTab", function(){
   	setAjaxSubmits("#hypothesisTab form", "#hypothesisTab");
   });
+
+  //taskTab
   loadView("/tasks", "#taskTab", function(){
-  	clickToOpenTaskTab('.form-button_to-task', "#currentTaskTab");
+
+  	//submits for opening current/edit/new task Tab
+  	clickToOpenTaskTab('.form-button_to-task', "#currentTaskTab", function(){
+  		
+  		//ajax-submits for current/edit/new task Tab
+  		setAjaxSubmits("#currentTaskTab form", "#currentTaskTab");
+  	});
+
+  	//ajax-submits for up and down buttons
   	setAjaxSubmits("#taskTab form:not(.form-button_to-task)", "#taskTab");
   });
 </script>
