@@ -11,7 +11,8 @@ $(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
 * formsSelector: Selector string for forms to be overrided
 * containerElementSelector: Selector string for element to be refreshed 
 */
-function setAjaxSubmits(formsSelector, containerElementSelector){
+function setAjaxSubmits(formsSelector, containerElementSelector, post){
+	alert("setajaxsubmits: " + formsSelector + "; " + containerElementSelector);
 	var forms = $(formsSelector);
 	var containerElement = $(containerElementSelector);
 
@@ -22,19 +23,25 @@ function setAjaxSubmits(formsSelector, containerElementSelector){
 		//alert("klikkasit submittia!");
 		//alert("action: " + postUrl);
 		//alert($(this).attr("id"));
-		alert(postUrl);
+		//alert(postUrl);
+
+		if(post == true){
+			$.post(postUrl, clickedForm.serialize())
+	    	.done(function(data) {
+					containerElement.html(data);
+					//setAjaxSubmits(formsSelector, containerElementSelector);
+				})
+				.fail(function(data) {
+					alert("Virhe tallentaessa: \n" + data);
+				})
+				.always(function() {
+					//alert("Pyyntö valmis, onnistui tai ei");
+	    	});	
+			}else{
+				loadView(postUrl, containerElementSelector)
+			}
 		
-		$.post(postUrl, clickedForm.serialize())
-    	.done(function(data) {
-				containerElement.html(data);
-				setAjaxSubmits(formsSelector, containerElementSelector);
-			})
-			.fail(function(data) {
-				alert("Virhe tallentaessa: \n" + data);
-			})
-			.always(function() {
-				//alert("Pyyntö valmis, onnistui tai ei");
-    	});
+		
 		
     return false;
 	});
@@ -42,9 +49,10 @@ function setAjaxSubmits(formsSelector, containerElementSelector){
 }
 
 function clickToOpenTaskTab(formsSelector, containerElementSelector, callback){
+	alert("clickToOpenTaskTab: " + formsSelector + "; " + containerElementSelector);
 	var containerElement = $(containerElementSelector);
 	var forms = $(formsSelector)
-	alert("nappeja" + forms.length);
+	//alert("nappeja" + forms.length);
 	forms.submit(function(e){
 		var actionUrl = $(this).attr("action");
 		var taskName = $(this).find('input[type="submit"]').attr("value");
@@ -71,8 +79,9 @@ function clickToOpenTaskTab(formsSelector, containerElementSelector, callback){
 
 //Loads given url and inserts it inside given element with AJAX call
 function loadView(url, elementSelector, callback){
+	alert("loadView: " + url + "; " + elementSelector);
 	var element = $(elementSelector);
-	alert(fullUrlWithoutLayout(url));
+	//alert(fullUrlWithoutLayout(url));
 	element.load(fullUrlWithoutLayout(url), function(responseTxt, statusTxt, xhr){
       if(statusTxt == "error"){
           element.html("<h1>Virhe sivua ladattaessa.</h1><div>"+responseTxt+"</div><p>"+statusTxt+"</p><p>"+xhr+"</p>");
