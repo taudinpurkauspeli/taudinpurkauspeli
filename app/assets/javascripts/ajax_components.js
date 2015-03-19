@@ -14,12 +14,15 @@ $(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
 function setAjaxSubmits(formsSelector, containerElementSelector){
 	var forms = $(formsSelector);
 	var containerElement = $(containerElementSelector);
+
 	forms.submit(function(){
 		var clickedForm = $(this);
-		var postUrl = clickedForm.attr("action") + "?layout=false";
+		//alert(location.protocol + "//" + location.host);
+		var postUrl = fullUrlWithoutLayout(clickedForm.attr("action"));
 		//alert("klikkasit submittia!");
 		//alert("action: " + postUrl);
 		//alert($(this).attr("id"));
+		//alert(postUrl);
 		
 		$.post(postUrl, clickedForm.serialize())
     	.done(function(data) {
@@ -27,7 +30,7 @@ function setAjaxSubmits(formsSelector, containerElementSelector){
 				setAjaxSubmits(formsSelector, containerElementSelector);
 			})
 			.fail(function(data) {
-				//alert("Virhe tallentaessa. Yritä uudelleen./n" + data);
+				alert("Virhe tallentaessa: \n" + data);
 			})
 			.always(function() {
 				//alert("Pyyntö valmis, onnistui tai ei");
@@ -71,8 +74,8 @@ function clickToOpenTaskTab(formsSelector, containerElementSelector){
 //Loads given url and inserts it inside given element with AJAX call
 function loadView(url, elementSelector, callback){
 	var element = $(elementSelector);
-
-	element.load(url + "?layout=false", function(responseTxt, statusTxt, xhr){
+	alert(fullUrlWithoutLayout(url));
+	element.load(fullUrlWithoutLayout(url), function(responseTxt, statusTxt, xhr){
       if(statusTxt == "error"){
           element.html("<h1>Virhe sivua ladattaessa.</h1><div>"+responseTxt+"</div><p>"+statusTxt+"</p><p>"+xhr+"</p>");
       }else if(statusTxt == "success"){
@@ -86,6 +89,13 @@ function loadView(url, elementSelector, callback){
       }
   });
   
+}
+
+function fullUrlWithoutLayout(path){
+	if(path.charAt(0) == "/"){
+		path = path.substr(1);
+	}
+	return location.protocol + "//" + location.host + "/" + path + "?layout=false";
 }
 
 /*

@@ -5,8 +5,6 @@
   });
   loadView("/tasks", "#taskTab", function(){
   	clickToOpenTaskTab('.form-button_to-task', "#currentTaskTab");
+  	setAjaxSubmits("#taskTab form:not(.form-button_to-task)", "#taskTab");
   });
 </script>
-
-<h1>MUFASA EI OLE KUNINGAS</h1>
-<h1><%= exercise_path(current_exercise) %></h1>
