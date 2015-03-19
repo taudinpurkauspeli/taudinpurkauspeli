@@ -17,7 +17,7 @@ class ExerciseHypothesesController < ApplicationController
         end
         format.json { render :show, status: :created, location: @exercise_hypothesis }
       else
-         format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin liittäminen caseen epäonnistui.' }
+         format.html { redirect_to hypotheses_url, alert: 'Työhypoteesin liittäminen caseen epäonnistui.' }
       end
     end
   end
@@ -34,7 +34,7 @@ class ExerciseHypothesesController < ApplicationController
         end
         format.json { render :show, status: :ok, location: @exercise_hypothesis }
       else
-         format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin päivittäminen epäonnistui.' }
+         format.html { redirect_to hypotheses_url, alert: 'Työhypoteesin päivittäminen epäonnistui.' }
       end
     end
   end
@@ -61,6 +61,6 @@ class ExerciseHypothesesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exercise_hypothesis_params
-      params.require(:exercise_hypothesis).permit(:exercise_id, :hypothesis_id, :explanation)
+      params.require(:exercise_hypothesis).permit(:exercise_id, :hypothesis_id, :explanation, :task_id)
     end
 end

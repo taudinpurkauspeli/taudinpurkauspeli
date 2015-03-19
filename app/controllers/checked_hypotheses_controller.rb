@@ -44,14 +44,4 @@ class CheckedHypothesesController < ApplicationController
   def checked_hypothesis_params
     params.require(:checked_hypothesis).permit(:exercise_hypothesis_id, :user_id)
   end
-
-  # Returns a string that contains hypothesis name and explanation if any
-  def get_explanation (checked_hypothesis)
-    ex_hyp = @checked_hypothesis.exercise_hypothesis
-    notice = "Työhypoteesi \"" + ex_hyp.hypothesis.name + "\" poissuljettu."
-    unless ex_hyp.explanation.nil?
-      notice += " Perustelu: " + ex_hyp.explanation
-    end
-    return notice
-  end
 end

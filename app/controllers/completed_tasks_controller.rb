@@ -12,7 +12,7 @@ class CompletedTasksController < ApplicationController
       if @completed_task.save
         format.html { redirect_to tasks_url }
       else
-        format.html { redirect_to tasks_url, notice: "Toimenpiteen suoritus epäonnistui." }
+        format.html { redirect_to tasks_url, alert: "Toimenpiteen suoritus epäonnistui." }
       end
     end
   end
