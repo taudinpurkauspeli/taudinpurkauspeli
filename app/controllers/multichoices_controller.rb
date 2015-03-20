@@ -7,16 +7,21 @@ class MultichoicesController < ApplicationController
   #   @multichoices = Multichoice.all
   # end
   def show
+    set_view_layout
   end
 
   def new
     @multichoice = Multichoice.new
+
+    set_view_layout
   end
 
   # GET /multichoices/1/edit
   def edit
     @multichoice = Multichoice.find(params[:id])
     @new_option = Option.new
+
+    set_view_layout
   end
 
   def create

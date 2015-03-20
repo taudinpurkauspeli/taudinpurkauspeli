@@ -20,9 +20,7 @@ class HypothesesController < ApplicationController
       redirect_to exercises_path, alert: 'Valitse ensin case, jota haluat tarkastella!'
     end
     
-    if params[:layout] === "false"
-      render :layout => false
-    end
+    set_view_layout
 
   end
 

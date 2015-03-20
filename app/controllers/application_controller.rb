@@ -53,4 +53,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_view_layout
+    if params[:layout] === "false"
+      render :layout => false
+    end
+  end
 end

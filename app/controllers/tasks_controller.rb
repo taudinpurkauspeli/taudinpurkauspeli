@@ -19,9 +19,7 @@ class TasksController < ApplicationController
       redirect_to exercises_path, alert: 'Valitse ensin case, jota haluat tarkastella!'
     end
 
-    if params[:layout] === "false"
-      render :layout => false
-    end
+    set_view_layout
   end
 
   # GET /tasks/1
@@ -43,9 +41,7 @@ class TasksController < ApplicationController
     @subtasks = @task.subtasks
     @new_completed_task = CompletedTask.new
 
-    if params[:layout] === "false"
-      render :layout => false
-    end
+    set_view_layout
   end
 
   def user_can_start_task(user, exercise, level)  
@@ -55,6 +51,8 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+
+    set_view_layout
   end
 
   # GET /tasks/1/edit
@@ -62,9 +60,7 @@ class TasksController < ApplicationController
     session[:task_id] = params[:id]
     @subtasks = @task.subtasks
 
-    if params[:layout] === "false"
-      render :layout => false
-    end
+    set_view_layout
   end
 
   # POST /tasks

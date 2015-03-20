@@ -15,9 +15,7 @@
   def show
     session[:exercise_id] = params[:id]
 
-    if params[:layout] === "false"
-      render :layout => false
-    end
+    set_view_layout
   end
 
   # GET /exercises/new

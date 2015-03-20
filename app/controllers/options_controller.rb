@@ -4,13 +4,17 @@ class OptionsController < ApplicationController
   before_action :ensure_user_is_admin
 
   def show
+    set_view_layout
   end
 
   def new
     @option = Option.new
+
+    set_view_layout
   end
 
   def edit
+    set_view_layout
   end
 
   def create

@@ -6,15 +6,19 @@ class TaskTextsController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def show
+    set_view_layout
   end
 
   # GET /task_texts/new
   def new
     @task_text = TaskText.new
+
+    set_view_layout
   end
 
   # GET /tasks/1/edit
   def edit
+    set_view_layout
   end
 
   # POST /task_texts
