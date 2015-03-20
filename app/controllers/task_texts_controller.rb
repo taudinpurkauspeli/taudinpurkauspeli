@@ -29,7 +29,7 @@ class TaskTextsController < ApplicationController
     respond_to do |format|
       if @task_text.save
         subtask.save
-        format.html { redirect_to @task_text.subtask.task, notice: 'Kysymys lisättiin onnistuneesti.' }
+        format.html { redirect_to @task_text.subtask.task, layout: get_layout, notice: 'Kysymys lisättiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @task_text }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class TaskTextsController < ApplicationController
   def update
     respond_to do |format|
       if @task_text.update(task_text_params)
-        format.html { redirect_to edit_task_path(@task_text.subtask.task.id), notice: 'Kysymys päivitettiin onnistuneesti.' }
+        format.html { redirect_to edit_task_path(@task_text.subtask.task.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti.' }
       else
         format.html { render :edit }
         format.json { render json: @task_text.errors, status: :unprocessable_entity }

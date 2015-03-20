@@ -29,7 +29,7 @@ class MultichoicesController < ApplicationController
     respond_to do |format|
       if @multichoice.save
         subtask.save
-        format.html { redirect_to edit_multichoice_path(@multichoice.id), notice: 'Kysymys lisättiin onnistuneesti.' }
+        format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), notice: 'Kysymys lisättiin onnistuneesti.' }
         #format.json { render :show, status: :created, location: @multichoice }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class MultichoicesController < ApplicationController
   def update
     respond_to do |format|
       if @multichoice.update(multichoice_params)
-        format.html { redirect_to edit_multichoice_path(@multichoice.id), notice: 'Kysymys päivitettiin onnistuneesti.' }
+        format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti.' }
       else
         @new_option = Option.new
         format.html { render :edit }
@@ -58,9 +58,9 @@ class MultichoicesController < ApplicationController
       if @multichoice.check_right_answers(checked_options_params[:checked_options].to_a)
         @multichoice.subtask.task.completed_tasks.create(user_id: current_user.id)
 
-        format.html { redirect_to task_path(@multichoice.subtask.task), notice: 'Valitsit oikein!' }
+        format.html { redirect_to task_path(@multichoice.subtask.task, :layout => get_layout), notice: 'Valitsit oikein!' }
       else
-        format.html { redirect_to @multichoice.subtask.task, alert: 'Valinnoissa oli vielä virheitä!' }
+        format.html { redirect_to @multichoice.subtask.task, layout: get_layout, alert: 'Valinnoissa oli vielä virheitä!' }
       end
     end
   end

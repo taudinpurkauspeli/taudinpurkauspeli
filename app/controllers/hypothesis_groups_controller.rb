@@ -9,17 +9,9 @@ class HypothesisGroupsController < ApplicationController
     @hypothesis_group = HypothesisGroup.new(hypothesis_group_params)
     respond_to do |format|
       if @hypothesis_group.save
-        if params[:layout] === "false"
-          format.html { redirect_to hypotheses_url(:layout => false)}
-        else
-          format.html { redirect_to hypotheses_url}
-        end
+        format.html { redirect_to hypotheses_url(:layout => get_layout)}
       else
-        if params[:layout] === "false"
-          format.html { redirect_to hypotheses_url(:layout => false), notice: "Työhypoteesiryhmän luominen epäonnistui."}
-        else
-          format.html { redirect_to hypotheses_url, notice: "Työhypoteesiryhmän luominen epäonnistui."}
-        end
+        format.html { redirect_to hypotheses_url(:layout => get_layout), notice: "Työhypoteesiryhmän luominen epäonnistui."}
       end
     end
   end
@@ -29,11 +21,7 @@ class HypothesisGroupsController < ApplicationController
   def destroy
     @hypothesis_group.destroy
     respond_to do |format|
-      if params[:layout] === "false"
-        format.html { redirect_to hypotheses_url(:layout => false)}
-      else
-        format.html { redirect_to hypotheses_url}
-      end
+      format.html { redirect_to hypotheses_url(:layout => get_layout)}
       format.json { head :no_content }
     end
   end

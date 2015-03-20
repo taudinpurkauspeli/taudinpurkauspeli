@@ -33,7 +33,7 @@ class TasksController < ApplicationController
         session[:task_id] = params[:id]
       else
         respond_to do |format|
-          format.html { redirect_to tasks_url, alert: 'Et voi vielä suorittaa tätä toimenpidettä.' }
+          format.html { redirect_to tasks_url(:layout => get_layout), alert: 'Et voi vielä suorittaa tätä toimenpidettä.' }
         end
       end
     else
@@ -76,7 +76,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to edit_task_path(@task.id), notice: 'Toimenpide luotiin onnistuneesti.' }
+        format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide luotiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -90,11 +90,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        if params[:layout] === "false"
-          format.html { redirect_to edit_task_path(@task.id, :layout => false), notice: 'Toimenpide päivitettiin onnistuneesti.' }
-        else
-          format.html { redirect_to edit_task_path(@task.id), notice: 'Toimenpide päivitettiin onnistuneesti.' }
-        end  
+        format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide päivitettiin onnistuneesti.' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -109,7 +105,7 @@ class TasksController < ApplicationController
     session[:task_id] = nil
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to tasks_url(:layout => get_layout), notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -117,22 +113,14 @@ class TasksController < ApplicationController
   def level_up
     @task.move_up
     respond_to do |format|
-      if params[:layout] === "false"
-        format.html { redirect_to tasks_url(:layout => false) }
-      else
-        format.html { redirect_to tasks_url }
-      end    
+      format.html { redirect_to tasks_url(:layout => get_layout) }  
     end
   end
 
   def level_down
     @task.move_down
     respond_to do |format|
-      if params[:layout] === "false"
-        format.html { redirect_to tasks_url(:layout => false) }
-      else
-        format.html { redirect_to tasks_url }
-      end      
+      format.html { redirect_to tasks_url(:layout => get_layout) }  
     end
   end
 

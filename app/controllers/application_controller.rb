@@ -45,4 +45,12 @@ class ApplicationController < ActionController::Base
     redirect_to signin_path, alert: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia" unless current_user_is_admin  
   end
 
+  def get_layout
+    if params[:layout] === "false"
+      return false
+    else
+      return true
+    end
+  end
+
 end

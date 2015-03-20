@@ -12,10 +12,10 @@ class SubtasksController < ApplicationController
   def edit
     @subtask = Subtask.find(params[:id])
     unless (@subtask.task_text.nil?)
-      redirect_to edit_task_text_path(@subtask.task_text.id)
+      redirect_to edit_task_text_path(@subtask.task_text.id, :layout => get_layout)
     end
     unless (@subtask.multichoice.nil?)
-      redirect_to edit_multichoice_path(@subtask.multichoice.id)
+      redirect_to edit_multichoice_path(@subtask.multichoice.id, :layout => get_layout)
     end
   end
 
@@ -25,10 +25,10 @@ class SubtasksController < ApplicationController
     @subtask = Subtask.new(subtask_params)
     respond_to do |format|
       if @subtask.save
-        format.html { redirect_to @subtask, notice: 'Subtask was successfully created.' }
+        format.html { redirect_to @subtask, layout: get_layout, notice: 'Subtask was successfully created.' }
         format.json { render :show, status: :created, location: @subtask }
       else
-        format.html { redirect_to tasks_path }
+        format.html { redirect_to tasks_path(:layout => get_layout) }
         format.json { render json: @subtask.errors, status: :unprocessable_entity }
       end
     end
@@ -39,7 +39,7 @@ class SubtasksController < ApplicationController
   def destroy
     @subtask.destroy
     respond_to do |format|
-      format.html { redirect_to subtasks_url, notice: 'Subtask was successfully destroyed.' }
+      format.html { redirect_to subtasks_url(:layout => get_layout), notice: 'Subtask was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

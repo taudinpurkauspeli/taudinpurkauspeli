@@ -10,9 +10,9 @@ class CompletedTasksController < ApplicationController
 
     respond_to do |format|
       if @completed_task.save
-        format.html { redirect_to tasks_url }
+        format.html { redirect_to tasks_url(:layout => get_layout) }
       else
-        format.html { redirect_to tasks_url, alert: "Toimenpiteen suoritus epäonnistui." }
+        format.html { redirect_to tasks_url(:layout => get_layout), alert: "Toimenpiteen suoritus epäonnistui." }
       end
     end
   end
