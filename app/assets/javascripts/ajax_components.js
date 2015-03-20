@@ -23,7 +23,7 @@ function setAjaxSubmits(formsSelector, containerElementSelector, post){
 		//alert("klikkasit submittia!");
 		//alert("action: " + postUrl);
 		//alert($(this).attr("id"));
-		//alert(postUrl);
+		alert(postUrl);
 
 		if(post == true){
 			$.post(postUrl, clickedForm.serialize())

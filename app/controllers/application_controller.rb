@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_layout
-    if params[:layout] === "false"
+    if params[:layout] === "false" || params[:layout] == false
       return false
     else
       return true
@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_view_layout
-    if params[:layout] === "false"
+    if params[:layout] === "false" || params[:layout] == false
       render :layout => false
     end
   end
