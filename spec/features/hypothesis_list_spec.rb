@@ -125,40 +125,53 @@ describe "Hypothesis list page", js:true do
 
     end
 
-=begin
+
     describe "he should be able to manage hypotheses of an exercise" do
 
       it "user should be able to add hypotheses to an exercise" do
         expect {
           click_button('Sorkkatauti')
+          wait_for_ajax
         }.to change(ExerciseHypothesis, :count).by(1)
       end
 
       it "user should be able to edit the explanation of a hypothesis added to an exercise" do
+        click_button('Virustauti')
+        wait_for_ajax
         fill_in('exercise_hypothesis_explanation', with: 'Virus ei olekaan bakteeritauti')
         click_button('Päivitä')
+        wait_for_ajax
         expect(ExerciseHypothesis.first.explanation).to include('Virus ei olekaan bakteeritauti')
       end
 
       it "user should be able to add prerequisite task to a hypothesis added to an exercise" do
+        click_button('Virustauti')
+        wait_for_ajax
         select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]')
         click_button('Päivitä')
+        wait_for_ajax
         expect(ExerciseHypothesis.first.task.name).to eq(task2.name)
       end
 
       it "user should be able to change prerequisite task of a hypothesis added to an exercise" do
+        click_button('Virustauti')
+        wait_for_ajax
         select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]')
         click_button('Päivitä')
+        wait_for_ajax
         expect(ExerciseHypothesis.first.task.name).to eq(task2.name)
 
+        click_button('Virustauti')
+        wait_for_ajax
         select('Soita asiakkaalle', from:'exercise_hypothesis[task_id]')
         click_button('Päivitä')
+        wait_for_ajax
         expect(ExerciseHypothesis.first.task.name).to eq(task.name)
 
       end
 
     end
-=end
+
 
   end
 

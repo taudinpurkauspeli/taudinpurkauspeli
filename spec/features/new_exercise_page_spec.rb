@@ -18,18 +18,20 @@ describe "New Exercise page", js:true do
 			fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
 
 			click_button('Tallenna')
+			wait_for_ajax
 			
 			expect(page).to have_content 'Casen luominen onnistui!'
 			expect(page).to have_content 'Broilerimysteeri'
 		end
 
-		it "user should not be able to create a new exercise wrong" do
+		it "user should not be able to create a new exercise without a name" do
 			visit new_exercise_path
 
 			fill_in('exercise_name', with: "")
 			fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
 
 			click_button('Tallenna')
+			wait_for_ajax
 			
 			expect(current_path).to eq(exercises_path)
 			expect(page).to have_content 'estivät tallennuksen'

@@ -1,3 +1,4 @@
+=begin
 require 'rails_helper'
 
 describe "Edit Exercise page", js:true do
@@ -65,3 +66,4 @@ describe "Edit Exercise page", js:true do
 
 
 end
+=end

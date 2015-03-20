@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Exercises page" do
+describe "Exercises page", js:true do
 
   it "should have right title" do
     visit exercises_path

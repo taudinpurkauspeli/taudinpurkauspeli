@@ -1,6 +1,7 @@
+=begin
 require 'rails_helper'
 
-describe "New Task page" do
+describe "New Task page", js:true do
 
   describe "if user is signed in as admin" do
 
@@ -198,3 +199,4 @@ describe "New Task page" do
 
 
 end
+=end
