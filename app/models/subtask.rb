@@ -5,6 +5,7 @@ class Subtask < ActiveRecord::Base
 
 	has_one :task_text, dependent: :destroy
 	has_one :multichoice, dependent: :destroy
+	has_one :interview, dependent: :destroy
 
 	def to_s
 		return_string = 'Alitoimenpide'
@@ -18,6 +19,11 @@ class Subtask < ActiveRecord::Base
 		unless multichoice.nil?
 			return_string = 'Monivalintakysymys: '
 			content = multichoice.question
+		end
+
+		unless interview.nil?
+			return_string = ''
+			content = interview.title
 		end
 
     if content.split.size > 3
