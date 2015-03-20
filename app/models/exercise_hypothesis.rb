@@ -4,9 +4,21 @@ class ExerciseHypothesis < ActiveRecord::Base
 
 	belongs_to :exercise
 	belongs_to :hypothesis
+  belongs_to :task
 
   has_many :checked_hypotheses, dependent: :destroy
   has_many :users, through: :checked_hypotheses
 
   has_one :hypothesis_group, through: :hypothesis
+
+  def get_prerequisite
+    return task
+  end
+
+  def user_meets_requirements (user)
+    if(user.completed_tasks.where(task_id: task_id).empty?)
+      return false
+    end
+    return true
+  end
 end

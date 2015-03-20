@@ -58,4 +58,12 @@ RSpec.describe User, :type => :model do
     expect(user).not_to be_valid
   	expect(User.count).to eq(1)
   end
+
+  it "returns correct number of completed tasks" do
+    exercise = FactoryGirl.create(:exercise)
+    user = FactoryGirl.create(:user, admin: false)
+    task = FactoryGirl.create(:task)
+    user.completed_tasks.create(task_id:task.id)
+    expect(user.get_number_of_tasks_by_level(exercise, task.level)).to eq(1)
+  end
 end

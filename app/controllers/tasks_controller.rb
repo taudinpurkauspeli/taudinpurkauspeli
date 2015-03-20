@@ -1,30 +1,43 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
+
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @exercise = current_exercise
+    if @exercise
+      if current_user_is_admin
+        @tasks = @exercise.tasks.order("level")
+      else
+        @tasks = @exercise.tasks.order("name")
+      end
+    else
+      redirect_to exercises_path, alert: 'Valitse ensin case, jota haluat tarkastella!'
+    end
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-
     unless current_user_is_admin
-      session[:task_id] = params[:id]
-      @task = current_task
+      if user_can_start_task(current_user, current_exercise, @task.level)
+        session[:task_id] = params[:id]
+      else
+        respond_to do |format|
+          format.html { redirect_to tasks_url, alert: 'Et voi vielä suorittaa tätä toimenpidettä.' }
+        end
+      end
     else
       @task = Task.find(params[:id])
     end
-
-    @user = current_user
-
     @subtasks = @task.subtasks
-
-    #new instances
     @new_completed_task = CompletedTask.new
+  end
+
+  def user_can_start_task(user, exercise, level)  
+    return user.get_number_of_tasks_by_level(exercise, level - 1) == exercise.get_number_of_tasks_by_level(level - 1)
   end
 
   # GET /tasks/new
@@ -42,6 +55,9 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.exercise_id = session[:exercise_id]
+    @task.level = Task.get_highest_level(@task.exercise) + 1
+
     respond_to do |format|
       if @task.save
         format.html { redirect_to edit_task_path(@task.id), notice: 'Toimenpide luotiin onnistuneesti.' }
@@ -75,6 +91,20 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def level_up
+    @task.move_up
+    respond_to do |format|
+      format.html { redirect_to tasks_url }
+    end
+  end
+
+  def level_down
+    @task.move_down
+    respond_to do |format|
+      format.html { redirect_to tasks_url }
     end
   end
 

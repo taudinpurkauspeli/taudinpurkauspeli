@@ -1,5 +1,5 @@
 <div class="collapse in" id="collapseHypothesisGroup<%= group.id%>" >
-    <% @hypothesis_bank[group.id].to_a.each do |hypothesis| %>
+    <% @exercise.get_hypothesis_bank[group.id].to_a.each do |hypothesis| %>
       <%#hypotheses that belongs to current group%>
       <div class="row">
         <div class="col-md-1"></div>
@@ -7,7 +7,7 @@
           <%= form_for(@new_exercise_hypothesis) do |f| %>
             <%= f.hidden_field :exercise_id, :value => @exercise.id %>
             <%= f.hidden_field :hypothesis_id, :value => hypothesis.id %>
-            <%= f.submit hypothesis.name, :class => 'btn btn-default btn-hypothesis' %>
+            <%= f.submit hypothesis.name, :class => 'btn btn-default btn-hypothesis multiline' %>
           <% end %>
         </div>
         <div class="col-md-3">

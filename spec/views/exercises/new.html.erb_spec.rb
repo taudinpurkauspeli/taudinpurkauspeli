@@ -1,5 +1,5 @@
+=begin
 require 'rails_helper'
-
 RSpec.describe "exercises/new", :type => :view do
   before(:each) do
     assign(:exercise, Exercise.new(
@@ -16,3 +16,4 @@ RSpec.describe "exercises/new", :type => :view do
     end
   end
 end
+=end

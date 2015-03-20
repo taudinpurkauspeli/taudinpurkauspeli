@@ -12,8 +12,8 @@ Given(/^some hypotheses have been added to case$/) do
 
   create_hypotheses
 
-  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1, explanation: "Nauta oli kipeä",)
-  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2, explanation: "Hevonen oli kipeä",)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1, explanation: "Nauta oli kipeä", task_id:1)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2, explanation: "Hevonen oli kipeä", task_id:1)
 end
 
 Given(/^cases and hypothesis groups have been created$/) do
@@ -25,10 +25,20 @@ Given(/^cases, hypothesis groups and hypotheses have been created$/) do
   create_all_hypotheses_for_case
 end
 
+Given(/^hypotheses with prerequisite tasks have been added to case$/) do
+  create_exercises
+  create_hypothesis_groups
+  create_tasks
+  create_hypotheses
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1, explanation: "Nauta katkesi keskeltä", task_id:1)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2, explanation: "Hevonen katkesi keskeltä", task_id:1)
+end
 
-
-
-
+Given(/^I have completed all the tasks$/) do
+  Task.all.each do |task|
+    CompletedTask.create user_id:1, task_id:task.id
+  end
+end
 
 When(/^I click on a button "(.*?)"$/) do |arg1|
 	first(:button, arg1).click
@@ -127,6 +137,12 @@ Then(/^"(.*?)" should be checked from exercise$/) do |arg1|
   expect(User.first.checked_hypotheses.first.exercise_hypothesis.hypothesis.name).to eq(arg1)
   expect(User.first.checked_hypotheses.count).to eq(1)
 end
+
+
+Then(/^"(.*?)" should not be checked from exercise$/) do |arg1|
+  expect(User.first.checked_hypotheses.count).to eq(0)
+end
+
 
 Then(/^I should be redirected back to the front page$/) do
   expect(current_path).to eq(exercises_path)
