@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318134758) do
+ActiveRecord::Schema.define(version: 20150320123556) do
 
   create_table "checked_hypotheses", force: :cascade do |t|
     t.integer "user_id"
@@ -53,6 +53,12 @@ ActiveRecord::Schema.define(version: 20150318134758) do
     t.string "name"
   end
 
+  create_table "interviews", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "multichoices", force: :cascade do |t|
     t.string   "question"
     t.integer  "subtask_id"
@@ -68,6 +74,22 @@ ActiveRecord::Schema.define(version: 20150318134758) do
     t.boolean  "is_correct_answer"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+  end
+
+  create_table "question_groups", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "interview_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "title"
+    t.string   "content"
+    t.boolean  "required"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "question_group_id"
   end
 
   create_table "subtasks", force: :cascade do |t|
