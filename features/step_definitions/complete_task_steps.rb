@@ -29,14 +29,17 @@ end
 
 When(/^I choose a text task "(.*?)"$/) do |arg1|
   click_button(arg1)
+  wait_for_ajax
 end
 
 When(/^I choose a multichoice task "(.*?)"$/) do |arg1|
   click_button(arg1)
+  wait_for_ajax
 end
 
 When(/^I choose a radiobutton task "(.*?)"$/) do |arg1|
   click_button(arg1)
+  wait_for_ajax
 end
 
 When(/^I check the right options$/) do
@@ -72,12 +75,14 @@ end
 Then(/^the task can be completed by clicking the button "(.*?)"$/) do |arg1|
   expect{
     click_button(arg1)
+    wait_for_ajax
   }.to change(CompletedTask, :count).by(1)
 end
 
 Then(/^the task cannot be completed by clicking the button "(.*?)"$/) do |arg1|
   expect{
     click_button(arg1)
+    wait_for_ajax
   }.to change(CompletedTask, :count).by(0)
 end
 

@@ -94,7 +94,7 @@ RSpec.describe OptionsController, :type => :controller do
 		it "redirects to the multichoice edit" do
 			option = Option.create! valid_attributes
 			delete :destroy, {:id => option.to_param}, valid_session
-			expect(response).to redirect_to(edit_multichoice_path)
+			expect(response).to redirect_to(edit_multichoice_path(:layout => true))
 		end
 	end
 
