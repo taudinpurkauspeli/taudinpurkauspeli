@@ -4,7 +4,7 @@
         <% if !current_user_has_completed_task(task.id) %>
           <div class = "div-task-order-container <% if task.level > previous_level then %> clearLeft <% end %>">
             <div class = "div-task-order-taskbutton">
-              <%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-task-order multiline', :form_class => "form-button_to-task height100" %>
+              <%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-task-order multiline', :form_class => "form-button-to-task height100" %>
             </div>
             <div class = "div-task-order-updown">
 
