@@ -23,6 +23,7 @@ end
 ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 
 Capybara.javascript_driver = :poltergeist
+Capybara.default_wait_time = 5
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -44,6 +45,7 @@ Capybara.javascript_driver = :poltergeist
 
 #HelperMethods module for mocks and features
 include HelperMethods
+include WaitForAjax
 
 I18n.enforce_available_locales = false
 
@@ -74,7 +76,6 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
-
 
 end
 
