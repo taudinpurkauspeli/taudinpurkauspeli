@@ -77,4 +77,5 @@ describe "Task list page", js:true do
         end
       end
     end
-  end=end
+  end
+=end
