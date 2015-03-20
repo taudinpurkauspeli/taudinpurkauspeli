@@ -93,4 +93,15 @@ FactoryGirl.define do
     explanation "Juuri oikea vastaus"
     is_correct_answer true
   end
+
+    factory :question do
+    question_group_id 1
+    title "Oliko lehmällä veljiä?"
+    content "Asiakas vastaa, että lehmällä ei ollut veljiä."
+    required true
+  end
+
+    factory :interview do
+    title "Omistajan haastattelu"
+  end
 end
