@@ -16,14 +16,15 @@
 <h1>Alitoimenpiteet</h1>
 
 <% @task.subtasks.each do |subtask| %>
-    <%= button_to subtask, edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise multiline', :method => :get %>
+    <%= button_to subtask, edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise multiline', :form_class => "form-subtask", :method => :get %>
 <% end %>
 
-<%= button_to '+ Luo uusi tekstimuotoinen alitoimenpide', new_task_text_path,  :class => 'btn btn-default btn-exercise btn-save', :method => :get  %>
-<%= button_to '+ Luo uusi monivalinta-alitoimenpide', new_multichoice_path,  :class => 'btn btn-default btn-exercise btn-save', :method => :get  %>
+<%= button_to '+ Luo uusi tekstimuotoinen alitoimenpide', new_task_text_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
+<%= button_to '+ Luo uusi monivalinta-alitoimenpide', new_multichoice_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
 
 <br>
 
 <script>
-	setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", true);
+	setAjaxSubmits("#currentTaskTab #form-save-task-name", "#currentTaskTab", true);
+	setAjaxSubmits("#currentTaskTab .form-subtask", "#currentTaskTab", false);
 </script>

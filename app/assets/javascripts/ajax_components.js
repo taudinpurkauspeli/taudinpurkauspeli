@@ -99,6 +99,9 @@ function loadView(url, elementSelector, callback){
 }
 
 function fullUrlWithoutLayout(path){
+	if(path.indexOf("http:") > -1 && path.indexOf("?layout=false") > -1){
+		return path;
+	}
 	if(path.charAt(0) == "/"){
 		path = path.substr(1);
 	}
