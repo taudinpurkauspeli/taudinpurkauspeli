@@ -19,14 +19,17 @@ end
 Given(/^I visit the "(.*?)" page of the case "(.*?)"$/) do |arg1, arg2|
   go_to_case(arg2)
   click_link(arg1)
+  wait_for_ajax
 end
 
 When(/^I click on the link "(.*?)"$/) do |arg1|
   click_link(arg1)
+  wait_for_ajax
 end
 
 When(/^I click on the button "(.*?)"$/) do |arg1|
   click_button(arg1)
+  wait_for_ajax
 end
 
 Then(/^the page should show the content "(.*?)"$/) do |string|
@@ -34,7 +37,7 @@ Then(/^the page should show the content "(.*?)"$/) do |string|
 end
 
 Then(/the page should have button "(.*?)"$/) do |arg1|
-	expect(page). to have_button arg1
+	expect(page).to have_button arg1
 end
 
 
