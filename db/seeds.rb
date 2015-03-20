@@ -52,13 +52,13 @@ Multichoice.create!([
   {question: "Tapausmääritelmä", subtask_id: 2}
 ])
 Option.create!([
-  {multichoice_id: 1, content: "Tapaus on äkillisesti kuollut eläin", explanation: "Oikein. Tässä tapauksessa kannattaa lukea tähän kaikki kuolleet. Tapausmääritelmään luetellaan kaikki ne oireet, jotka oleellisia ja sitä voi tarkentaa vielä laboratoriotutkimusten jälkeen, mutta tässä pelissä näin ei tehdä. ", value: true},
-  {multichoice_id: 1, content: "Tapaus on tiettyjen oireiden jälkeen akuutisti kuollut eläin", explanation: "Oikein. Tässä tapauksessa kannattaa lukea tähän kuitenkin kaikki kuolleet. Tapausmääritelmään luetellaan kaikki ne oireet, jotka oleellisia ja sitä voi tarkentaa vielä laboratoriotutkimusten jälkeen, mutta tässä pelissä näin ei tehdä.", value: true},
-  {multichoice_id: 1, content: "Tapaus on tiettyjen pitkittyneiden oireiden jälkeen kuollut eläin", explanation: "väärin", value: false},
-  {multichoice_id: 1, content: "Tapaus on tietyillä oireilla sairastunut eläin", explanation: "vääärin", value: false},
-  {multichoice_id: 1, content: "Tapaus on tietyillä oireilla sairastunut, mutta itsestään toipunut eläin ", explanation: "väärin", value: false},
-  {multichoice_id: 1, content: "Tapaus on tietyillä oireilla sairastunut hoidolla toipunut eläin", explanation: "väärin", value: false},
-  {multichoice_id: 1, content: "Ei mikään edellisistä", explanation: "väärin", value: false}
+  {multichoice_id: 1, content: "Tapaus on äkillisesti kuollut eläin", explanation: "Oikein. Tässä tapauksessa kannattaa lukea tähän kaikki kuolleet. Tapausmääritelmään luetellaan kaikki ne oireet, jotka oleellisia ja sitä voi tarkentaa vielä laboratoriotutkimusten jälkeen, mutta tässä pelissä näin ei tehdä. ", is_correct_answer: true},
+  {multichoice_id: 1, content: "Tapaus on tiettyjen oireiden jälkeen akuutisti kuollut eläin", explanation: "Oikein. Tässä tapauksessa kannattaa lukea tähän kuitenkin kaikki kuolleet. Tapausmääritelmään luetellaan kaikki ne oireet, jotka oleellisia ja sitä voi tarkentaa vielä laboratoriotutkimusten jälkeen, mutta tässä pelissä näin ei tehdä.", is_correct_answer: true},
+  {multichoice_id: 1, content: "Tapaus on tiettyjen pitkittyneiden oireiden jälkeen kuollut eläin", explanation: "väärin", is_correct_answer: false},
+  {multichoice_id: 1, content: "Tapaus on tietyillä oireilla sairastunut eläin", explanation: "vääärin", is_correct_answer: false},
+  {multichoice_id: 1, content: "Tapaus on tietyillä oireilla sairastunut, mutta itsestään toipunut eläin ", explanation: "väärin", is_correct_answer: false},
+  {multichoice_id: 1, content: "Tapaus on tietyillä oireilla sairastunut hoidolla toipunut eläin", explanation: "väärin", is_correct_answer: false},
+  {multichoice_id: 1, content: "Ei mikään edellisistä", explanation: "väärin", is_correct_answer: false}
 ])
 Subtask.create!([
   {task_id: 2, task_text_id: nil},
