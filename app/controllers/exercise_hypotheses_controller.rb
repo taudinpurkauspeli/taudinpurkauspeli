@@ -23,7 +23,7 @@ class ExerciseHypothesesController < ApplicationController
   def update
     respond_to do |format|
       if @exercise_hypothesis.update(exercise_hypothesis_params)
-        format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Työhypoteesin selite päivitetty.' }
+        format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Työhypoteesin tiedot on päivitetty.' }
         format.json { render :show, status: :ok, location: @exercise_hypothesis }
       else
          format.html { redirect_to hypotheses_url, alert: 'Työhypoteesin päivittäminen epäonnistui.' }
