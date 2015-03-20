@@ -1,3 +1,4 @@
 class QuestionGroup < ActiveRecord::Base
-	has_many :questions
+	belongs_to :interview
+	has_many :questions, dependent: :destroy
 end

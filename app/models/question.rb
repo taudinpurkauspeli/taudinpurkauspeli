@@ -4,4 +4,5 @@ class Question < ActiveRecord::Base
 	validates :required, presence: true
 
 	belongs_to :question_group
+	belongs_to :interview, through :question_group
 end
