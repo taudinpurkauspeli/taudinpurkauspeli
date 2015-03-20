@@ -48,7 +48,7 @@ class OptionsController < ApplicationController
         end
         format.html { redirect_to edit_multichoice_path(@option.multichoice.id, :layout => get_layout), notice: 'Vaihtoehto päivitettiin onnistuneesti.' }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_multichoice_path(@option.multichoice.id, :layout => get_layout), notice: 'Vaihtoehdon päivitys epäonnistui!.' }
         format.json { render json: @option.errors, status: :unprocessable_entity }
       end
     end
