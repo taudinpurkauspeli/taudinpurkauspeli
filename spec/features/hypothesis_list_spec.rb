@@ -149,7 +149,6 @@ describe "Hypothesis list page", js:true do
       it "user should be able to remove hypotheses from an exercise" do
         click_button('Virustauti')
         wait_for_ajax
-
         expect {
           click_button('Poista casesta')
           wait_for_ajax
@@ -181,11 +180,10 @@ describe "Hypothesis list page", js:true do
       end
 
       it "user should be able to change prerequisite task of a hypothesis added to an exercise" do
-        click_button('Virustauti')
-        wait_for_ajax
-        select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]')
-        click_button('Päivitä')
-        wait_for_ajax
+        ex_hyp = ExerciseHypothesis.first
+        ex_hyp.task = task2
+        ex_hyp.save
+
         expect(ExerciseHypothesis.first.task.name).to eq(task2.name)
 
         click_button('Virustauti')
@@ -193,6 +191,7 @@ describe "Hypothesis list page", js:true do
         select('Soita asiakkaalle', from:'exercise_hypothesis[task_id]')
         click_button('Päivitä')
         wait_for_ajax
+
         expect(ExerciseHypothesis.first.task.name).to eq(task.name)
       end
 
