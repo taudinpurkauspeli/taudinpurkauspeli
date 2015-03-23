@@ -1,0 +1,38 @@
+class QuestionsController < ApplicationController
+  before_action :set_option, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_user_is_logged_in
+  before_action :ensure_user_is_admin
+
+  def new
+    @question = Question.new
+  end
+
+  def edit
+  end
+
+  def create
+    @task = Task.find(session[:task_id])
+    @question = Question.new(question_params)
+
+    respond_to do |format|
+      if @question.save
+        format.html { redirect_to edit_interview_path(@question.interview.id), notice: 'Kysymysvaihtoehto lisättiin onnistuneesti.' }
+        format.json { render :show, status: :created, location: @question }
+      else
+        format.html { redirect_to edit_interview_path(Interview.find(question_params[:interview_id])), alert: 'Kysymyksen tiedot puuttelliset.' }
+        format.json { render json: @option.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+
+  def set_question
+    @question = Question.find(params[:id])
+  end
+
+   def question_params
+    params.require(:question).permit(:title, :content, :required, :interview_id )
+  end
+
+end

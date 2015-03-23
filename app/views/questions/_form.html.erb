@@ -1,0 +1,35 @@
+<%= form_for(@questions) do |f| %>
+  <% if @question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= t('activerecord.errors.template.header')%></h2>
+
+      <ul>
+      <% @question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title%><br>
+    <%= f.text_field :title %>
+  </div>
+  <br>
+
+  <div class="field">
+    <%= f.label :content%><br>
+    <%= f.text_field :content %>
+  </div>
+  <br>
+
+<div class="field">
+    <%= f.label :required %>
+      <%= f.check_box :required %>
+    </div>
+
+
+  <div class="actions">
+    <%= f.submit "Tallenna"%>
+  </div>
+<% end %>
