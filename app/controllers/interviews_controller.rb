@@ -12,6 +12,7 @@ class InterviewsController < ApplicationController
   def edit
   	@new_question = Question.new
   	@new_question_group = QuestionGroup.new
+  	@question_groups = QuestionGroup.all
   end
 
 
