@@ -10,6 +10,7 @@ class InterviewsController < ApplicationController
 
   # GET /interviews/1/edit
   def edit
+  	@new_question = Question.new
   end
 
 

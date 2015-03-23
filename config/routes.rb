@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
   resources :interviews
 
+  resources :questions
+
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy', as: :level_up
 
