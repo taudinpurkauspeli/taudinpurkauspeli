@@ -2,7 +2,7 @@
 <%@exercises.each do |exercise| %>
 <div class="row">
   <div class="col-md-5">
-    <%=if current_user.nil? 
+    <%=if current_user.nil? || exercise.hidden?
       then button_to exercise.name, '', :class => 'btn disabled btn-exercise', :method => :get 
     else button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get 
       end%>
