@@ -9,9 +9,9 @@ class TasksController < ApplicationController
     @exercise = current_exercise
     if @exercise
       if current_user_is_admin
-        @tasks = @exercise.tasks.order("level")
+        @tasks = @exercise.tasks.where("level > ?", 0).order("level")
       else
-        @tasks = @exercise.tasks.order("name")
+        @tasks = @exercise.tasks.where("level > ?", 0).order("name")
       end
     else
       redirect_to exercises_path, alert: 'Valitse ensin case, jota haluat tarkastella!'
