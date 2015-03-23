@@ -11,6 +11,7 @@ class InterviewsController < ApplicationController
   # GET /interviews/1/edit
   def edit
   	@new_question = Question.new
+  	@new_question_group = QuestionGroup.new
   end
 
 

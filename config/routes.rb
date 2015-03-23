@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
   resources :questions
 
+  resources :question_groups
+
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy', as: :level_up
 
