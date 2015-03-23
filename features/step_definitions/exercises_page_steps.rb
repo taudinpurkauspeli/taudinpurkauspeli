@@ -14,6 +14,10 @@ Given(/^exercises have been added$/) do
   create_exercises
 end
 
+Given(/^exercise "(.*?)" has been hidden$/) do |arg1|
+  (Exercise.find_by name:arg1).update(hidden:true)
+end
+
 When(/^I go to the page that shows exercises$/) do
   visit exercises_path
 end

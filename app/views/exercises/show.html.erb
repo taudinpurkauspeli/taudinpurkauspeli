@@ -1,7 +1,9 @@
 <!--<p id="notice"><%= notice %></p>-->
 
 <h1> Case: <%= @exercise.name %> </h1>
-
+<% if @exercise.hidden? %>
+  <p>Tämä case on piilotettu opiskelijoilta. <%= link_to 'Muokkaa', edit_exercise_path(@exercise) %> casea tehdäksesi siitä näkyvä.</p>
+<% end %>
 <div class="panel panel-default">
   <div class="panel-heading">
     <a data-toggle="collapse" href="#collapse0">
