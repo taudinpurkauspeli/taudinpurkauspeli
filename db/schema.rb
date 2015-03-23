@@ -34,8 +34,13 @@ ActiveRecord::Schema.define(version: 20150323125609) do
     t.integer  "task_id"
   end
 
-# Could not dump table "exercises" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "exercises", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text     "anamnesis"
+    t.boolean  "hidden"
+  end
 
   create_table "hypotheses", force: :cascade do |t|
     t.string   "name"
