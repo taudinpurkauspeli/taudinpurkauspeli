@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe CheckedHypothesesController, :type => :controller do
 
   let!(:user){FactoryGirl.create(:user, id: 1)}
+  let!(:task){FactoryGirl.create(:task, id: 1)}
   let!(:hypothesis){FactoryGirl.create(:hypothesis)}
-  let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, id: 1, exercise_id: 1)}
   let!(:exercise){FactoryGirl.create(:exercise, id: 1)}
+  let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, id: 1, exercise_id: 1)}
   let!(:hypothesis_group){FactoryGirl.create(:hypothesis_group)}
 
   let(:valid_attributes) {

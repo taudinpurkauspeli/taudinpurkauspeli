@@ -7,7 +7,8 @@ class ExerciseHypothesesController < ApplicationController
   # POST /exercise_hypotheses.json
   def create
     @exercise_hypothesis = ExerciseHypothesis.new(exercise_hypothesis_params)
-    @exercise_hypothesis.task_id = current_exercise.tasks.find_by(level:0).id
+    # Set anamnesis id
+    @exercise_hypothesis.task_id = @exercise_hypothesis.exercise.tasks.find_by(level:0).id
 
     respond_to do |format|
       if @exercise_hypothesis.save
