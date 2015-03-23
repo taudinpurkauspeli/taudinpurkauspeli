@@ -25,6 +25,18 @@ class QuestionsController < ApplicationController
     end
   end
 
+
+    def update
+    respond_to do |format|
+      if @question.update(question_params)
+        format.html { redirect_to edit_interview_path(@question.interview.id), notice: 'Kysymys päivitettiin onnistuneesti.' }
+      else
+        format.html { render :edit }
+        format.json { render json: @question.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def destroy
     parent_id = @question.interview_id
     @question.destroy
@@ -35,6 +47,7 @@ class QuestionsController < ApplicationController
   end
 
 
+private
   def set_question
     @question = Question.find(params[:id])
   end
