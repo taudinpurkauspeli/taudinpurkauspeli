@@ -7,11 +7,13 @@ class QuestionGroupsController < ApplicationController
   # POST /hypothesis_group.json
   def create
     @question_group = QuestionGroup.new(question_group_params)
+
     respond_to do |format|
       if @question_group.save
-        format.html { redirect_to questions_url}
+        format.html { redirect_to edit_interview_path(Interview.find(question_group_params[:interview_id])), notice: 'Ryhmä lisättiin onnistuneesti.' }
+        format.json { render :show, status: :created, location: @question }
       else
-        format.html { redirect_to questions_url, alert: "Ryhmän luominen epäonnistui."}
+        format.html { redirect_to edit_interview_path(Interview.find(question_group_params[:interview_id])), alert: "Ryhmän luominen epäonnistui."}
       end
     end
   end
@@ -32,6 +34,6 @@ class QuestionGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_group_params
-      params.require(:question_group).permit(:title)
+      params.require(:question_group).permit(:title, :interview_id)
     end
 end

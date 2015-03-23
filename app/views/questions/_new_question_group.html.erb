@@ -6,6 +6,8 @@
       <div class="row">
         <div class="col-md-12">
           <%= f.text_field :title, placeholder: "Nimi", :class => 'width100' %>
+
+           <%= f.hidden_field :interview_id, :value => interview.id %>
         </div>
       </div>
       <div class="row">

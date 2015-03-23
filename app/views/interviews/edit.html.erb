@@ -79,19 +79,7 @@
 <div class = "panel panel-default panel-green">
   <p>Ryhmät</p>
 <div class="row panel-body">
-  <div class = "nakki">
-   <%= form_for(@new_question_group) do |f| %>
-      <div class="col-md-5">
-        <%= f.text_area :title, placeholder: "Otsikko", :class => 'form-control' %>
-      </div>
-      <div class="col-md-1">
-        <%= f.submit 'Tallenna', :class => 'btn btn-default btn-save' %>
-      </div>
-  
-      <%= f.hidden_field :interview_id, :value => @interview.id %>
-      
-    <% end %> 
+    <%= render 'questions/new_question_group', {interview: @interview} %>
 
-  </div>
 </div>
 </div>
