@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320123556) do
+ActiveRecord::Schema.define(version: 20150323125609) do
 
   create_table "checked_hypotheses", force: :cascade do |t|
     t.integer "user_id"
@@ -34,12 +34,8 @@ ActiveRecord::Schema.define(version: 20150320123556) do
     t.integer  "task_id"
   end
 
-  create_table "exercises", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text     "anamnesis"
-  end
+# Could not dump table "exercises" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "hypotheses", force: :cascade do |t|
     t.string   "name"
@@ -57,6 +53,7 @@ ActiveRecord::Schema.define(version: 20150320123556) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "subtask_id"
   end
 
   create_table "multichoices", force: :cascade do |t|
