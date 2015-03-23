@@ -17,6 +17,7 @@
   <div class = "nakki">
     <%= form_for(question) do |f| %>
       <div class="col-md-1">
+           <p>Pakollinen</p>
         <%= f.check_box :required %>
       </div>
       <div class="col-md-5">
@@ -54,10 +55,11 @@
   <div class = "nakki">
    <%= form_for(@new_question) do |f| %>
       <div class="col-md-1">
+        <p>Pakollinen</p>
         <%= f.check_box :required, :value => true %>
       </div>
       <div class="col-md-5">
-        <%= f.text_area :title, placeholder: "Kysmys", :class => 'form-control' %>
+        <%= f.text_area :title, placeholder: "Kysymys", :class => 'form-control' %>
       </div>
       <div class="col-md-5">
         <%= f.text_area :content, placeholder: "Vastausteksti", :class => 'form-control' %>
