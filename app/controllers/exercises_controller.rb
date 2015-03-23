@@ -31,6 +31,7 @@
     @exercise = Exercise.new(exercise_params)
     respond_to do |format|
       if @exercise.save
+        @exercise.tasks.create(name:"Anamneesi", level:0)
         format.html { redirect_to @exercise, notice: 'Casen luominen onnistui!' }
         format.json { render :show, status: :created, location: @exercise }
       else
