@@ -7,7 +7,8 @@
 <% @subtasks.each do |subtask| %>
   <% if !subtask.task_text.nil? %>
     <%= render 'task_text', {subtask: subtask} %>
-  <% elsif !subtask.multichoice.nil? %>
+  <% end %>
+  <% if !subtask.multichoice.nil? %>
     <% if !current_user_has_completed_task(@task.id) %>
       <%= render 'multichoice', {subtask: subtask} %>
       <%= render 'right_answers', {subtask: subtask} if current_user_is_admin %>
@@ -15,4 +16,8 @@
       <%= render 'right_answers', {subtask: subtask} %>
     <% end %>
   <% end %>
+  <% if !subtask.interview.nil? %>
+    <%= render 'interview', {subtask: subtask} %>
+  <% end %>
+
 <% end %>
