@@ -62,8 +62,8 @@ RSpec.describe User, :type => :model do
   it "returns correct number of completed tasks" do
     exercise = FactoryGirl.create(:exercise)
     user = FactoryGirl.create(:user, admin: false)
-    task = FactoryGirl.create(:task)
-    user.completed_tasks.create(task_id:task.id)
+    task = FactoryGirl.create(:task, exercise:exercise)
+    user.completed_tasks.create(task:task)
     expect(user.get_number_of_tasks_by_level(exercise, task.level)).to eq(1)
   end
 end

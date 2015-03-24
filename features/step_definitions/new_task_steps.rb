@@ -18,7 +18,7 @@ When(/^I fill in task text content$/) do
 end
 
 Then(/^new task should be in the database$/) do
-  expect(Task.count).to eq(1)
+  expect(Task.where(level:1...999).count).to eq(1)
   expect(TaskText.count).to eq(0)
   expect(Subtask.count).to eq(0)
 end
