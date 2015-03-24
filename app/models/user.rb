@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
   
+  has_many :asked_questions, dependent: :destroy
   has_many :checked_hypotheses, dependent: :destroy
   has_many :completed_tasks, dependent: :destroy
   has_many :exercise_hypotheses, through: :checked_hypotheses

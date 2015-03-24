@@ -16,11 +16,13 @@
       </div>
     </div>
 
+ <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/check_answers", method: "post") do %>
     <% subtask.interview.questions.each do |question| %>
     <div class="row">
 
       <div class="col-md-4 text-padding">
-
+         <%= check_box_tag 'checked_questions[]', question.id, nil, id: "checked_questions_" + question.id.to_s %>
+             
        <%= question.title %>
      </div>
      <div class="col-md-4 text-padding">
@@ -32,6 +34,7 @@
   <% end %> 
 
 </div>
+<% end %>
 
 <%= if !current_user_has_completed_task(@task.id) && !current_user_is_admin
   then render 'continue_button'
