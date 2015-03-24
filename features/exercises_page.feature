@@ -24,6 +24,14 @@ Feature: Exercises page
       | Lihanautakuolemat |
       | Heikko hevonen |
 
+  Scenario: Student can't see hidden exercises
+    Given I have logged in as a student
+    And exercises have been added
+    And exercise "Lihanautakuolemat" has been hidden
+    When I go to the front page
+    Then I should see the following buttons
+      | Heikko hevonen |
+
   Scenario: Teacher can view the exercises page
     Given I have logged in as a teacher
     And exercises have been added

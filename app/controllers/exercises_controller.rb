@@ -72,7 +72,7 @@
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exercise_params
-      params.require(:exercise).permit(:name, :anamnesis)
+      params.require(:exercise).permit(:name, :anamnesis, :hidden)
 
     end
 end
