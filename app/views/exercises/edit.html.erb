@@ -2,11 +2,10 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Näytä', @exercise %> |
-<%= link_to 'Takaisin', exercises_path %>
+<%= button_to 'Takaisin', exercises_path, :class => "btn btn-default" %>
 
 
 <script>
   //edit exercise form
-  setAjaxSubmits("#anamnesisTab form", "#anamnesisTab", "get");
+  setAjaxSubmits("#anamnesisTab form", "#anamnesisTab", "post");
 </script>
