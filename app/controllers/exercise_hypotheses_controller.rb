@@ -36,8 +36,10 @@ class ExerciseHypothesesController < ApplicationController
   # DELETE /exercise_hypotheses/1
   # DELETE /exercise_hypotheses/1.json
   def destroy
+    puts "Kavin poistamassa ex_hypin casesta"
     @exercise_hypothesis.destroy
     respond_to do |format|
+      puts "ja onnistuin ex_hypin poistamisessa"
       format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Työhypoteesi poistettu casesta.'}
       format.json { head :no_content }
     end
