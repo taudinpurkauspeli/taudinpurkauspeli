@@ -7,6 +7,10 @@ describe "New Task page" do
     let!(:user){FactoryGirl.create(:user)}
     let!(:exercise){FactoryGirl.create(:exercise)}
 
+    def number_of_ex_tasks
+      return exercise.tasks.where(level:1...999).count
+    end
+
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
       click_button(exercise.name)
@@ -24,7 +28,7 @@ describe "New Task page" do
       click_button('Tallenna kysymys')
 
       expect(page).to have_content 'Kysymys lisättiin onnistuneesti.'
-      expect(Task.count).to eq(1)
+      expect(number_of_ex_tasks).to eq(1)
       expect(Multichoice.count).to eq(1)
       expect(Subtask.count).to eq(1)
       expect(Multichoice.first.question).to eq("Mitä kysyt asiakkaalta:")
@@ -45,7 +49,7 @@ describe "New Task page" do
       click_button('Tallenna kysymys')
 
       expect(current_path).to eq(edit_multichoice_path(1))
-      expect(Task.count).to eq(1)
+      expect(number_of_ex_tasks).to eq(1)
       expect(Multichoice.count).to eq(1)
       expect(Subtask.count).to eq(1)
       expect(Multichoice.first.question).to eq("Useita kysymyksiä asiakkaalle:")
@@ -62,7 +66,7 @@ describe "New Task page" do
       click_button('Tallenna kysymys')
 
       expect(page).to have_content 'Seuraavat virheet estivät tallennuksen:'
-      expect(Task.count).to eq(1)
+      expect(number_of_ex_tasks).to eq(1)
       expect(Multichoice.count).to eq(0)
       expect(Subtask.count).to eq(0)
     end
@@ -79,7 +83,7 @@ describe "New Task page" do
       click_button('Tallenna kysymys')
 
       expect(page).to have_content 'Seuraavat virheet estivät tallennuksen:'
-      expect(Task.first.name).to eq("Kysymyksiä asiakkaalle")
+      expect(Task.where(name:"Kysymyksiä asiakkaalle").count).to eq(1)
     end
 
   end

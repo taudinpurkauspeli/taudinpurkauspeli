@@ -4,12 +4,12 @@ describe "Multichoice page for student" do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
 
-  let!(:multichoice_task){FactoryGirl.create(:task, name: "Valitse kenelle soitat")}
-  let!(:multichoice_subtask){FactoryGirl.create(:subtask)}
-  let!(:multichoice){FactoryGirl.create(:multichoice)}
-  let!(:option){FactoryGirl.create(:option)}
-  let!(:option2){FactoryGirl.create(:option, content: "Ei tykkää", is_correct_answer: false, explanation: "Ei oikea vastaus")}
-  let!(:option3){FactoryGirl.create(:option, content: "Ehkä tykkää", explanation: "Melkein oikea vastaus")}
+  let!(:multichoice_task){FactoryGirl.create(:task, name: "Valitse kenelle soitat", exercise_id:exercise.id)}
+  let!(:multichoice_subtask){FactoryGirl.create(:subtask, task_id:multichoice_task.id)}
+  let!(:multichoice){FactoryGirl.create(:multichoice, subtask_id:multichoice_subtask.id)}
+  let!(:option){FactoryGirl.create(:option, multichoice_id:multichoice.id)}
+  let!(:option2){FactoryGirl.create(:option, multichoice_id:multichoice.id, content: "Ei tykkää", is_correct_answer: false, explanation: "Ei oikea vastaus")}
+  let!(:option3){FactoryGirl.create(:option, multichoice_id:multichoice.id, content: "Ehkä tykkää", explanation: "Melkein oikea vastaus")}
 
 
   describe "if student is signed in" do
