@@ -19,9 +19,10 @@ Feature: Hypothesis list feature
 
   Scenario: Student can't check a hypothesis from an exercise when prerequisite task not done
     Given I have logged in as a student
-    And some hypotheses have been added to case
+    And hypotheses with prerequisite tasks have been added to case
     And I visit the "Työhypoteesit" page of the case "Lihanautakuolemat"
     When I click on the hypothesis button "Nautaflunssa"
+    Then the caveman debug will happen
     Then the page should show the content "Sinulla ei ole vielä"
     And "Nautaflunssa" should not be checked from exercise
 

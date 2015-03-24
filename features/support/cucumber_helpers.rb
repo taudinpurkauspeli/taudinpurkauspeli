@@ -22,18 +22,18 @@ module CucumberHelpers
   end
 
   def create_task_texts
-    FactoryGirl.create(:subtask)
-    FactoryGirl.create(:task_text)
+    FactoryGirl.create(:subtask, task_id:3)
+    FactoryGirl.create(:task_text, subtask_id: 1)
 
-    FactoryGirl.create(:subtask, task_id: 2)
+    FactoryGirl.create(:subtask, task_id: 4)
     FactoryGirl.create(:task_text, subtask_id: 2, content:"Lääkitään")
   end
 
   def create_multichoices
-    FactoryGirl.create(:subtask)
-    FactoryGirl.create(:multichoice)
+    FactoryGirl.create(:subtask, task_id:3)
+    FactoryGirl.create(:multichoice, subtask_id:1)
 
-    FactoryGirl.create(:subtask, task_id: 2)
+    FactoryGirl.create(:subtask, task_id: 4)
     FactoryGirl.create(:multichoice, subtask_id: 2, question:"Mitä lääkkeitä käytät?")
     FactoryGirl.create(:option, multichoice_id: 2, content: "Bakteerilääke")
     FactoryGirl.create(:option, multichoice_id: 2, content: "Astmalääke", is_correct_answer: false, explanation: "Ei oikea vastaus")
@@ -41,10 +41,10 @@ module CucumberHelpers
   end
 
   def create_radiobuttons
-    FactoryGirl.create(:subtask)
-    FactoryGirl.create(:radiobutton)
+    FactoryGirl.create(:subtask, task_id:3)
+    FactoryGirl.create(:radiobutton, subtask_id:1)
 
-    FactoryGirl.create(:subtask, task_id: 2)
+    FactoryGirl.create(:subtask, task_id: 4)
     FactoryGirl.create(:radiobutton, subtask_id: 2, question:"Mitä lääkettä käytät?")
     FactoryGirl.create(:option, multichoice_id: 2, content: "Bakteerilääke", is_correct_answer: false, explanation: "Ei oikein")
     FactoryGirl.create(:option, multichoice_id: 2, content: "Astmalääke", is_correct_answer: false, explanation: "Ei oikea vastaus")
@@ -64,9 +64,7 @@ module CucumberHelpers
   end
 
   def add_hypothesis_to_case(fields)
-
     ExerciseHypothesis.create exercise_id:fields[:exercise_id], hypothesis_id:fields[:hypothesis_id], explanation:fields[:explanation], task_id:fields[:task_id]
-
   end
 
   def go_to_case(exercise)
