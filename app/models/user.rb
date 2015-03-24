@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
     end
     return number_of_tasks
   end
+
+  def has_completed_task(id)
+    return completed_tasks.where(id:id).nil?
+  end
 end

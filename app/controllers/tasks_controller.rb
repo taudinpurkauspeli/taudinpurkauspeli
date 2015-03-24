@@ -22,7 +22,7 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
     unless current_user_is_admin
-      if user_can_start_task(current_user, current_exercise, @task.level)
+      if user_can_start_task(current_user, current_exercise, @task)
         session[:task_id] = params[:id]
       else
         respond_to do |format|
@@ -36,9 +36,10 @@ class TasksController < ApplicationController
     @new_completed_task = CompletedTask.new
   end
 
-  def user_can_start_task(user, exercise, level) 
-    return true if level <= 1
-    return user.get_number_of_tasks_by_level(exercise, level - 1) == exercise.get_number_of_tasks_by_level(level - 1)
+  def user_can_start_task(user, exercise, task)
+    return true if user.has_completed_task(task.id)
+    return true if task.level <= 1
+    return user.get_number_of_tasks_by_level(exercise, task.level - 1) == exercise.get_number_of_tasks_by_level(task.level - 1)
   end
 
   # GET /tasks/new
