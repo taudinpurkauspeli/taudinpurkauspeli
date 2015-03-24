@@ -10,14 +10,9 @@
   //taskTab
   loadView("/tasks", "#taskTab", function(){
 
-  	//submits for opening current/edit/new task Tab
-  	//clickToOpenTaskTab('.form-button_to-task', "#currentTaskTab", function(){
-  		
-  		//ajax-submits for current/edit/new task Tab
-  		//setAjaxSubmits("#currentTaskTab form", "#currentTaskTab");
-  	//});
-
-  	//ajax-submits for up and down buttons
-  	//setAjaxSubmits("#taskTab form:not(.form-button_to-task)", "#taskTab");
   });
+
+  <% unless current_task.nil? %>
+    loadView("/tasks/<%= current_task.id %>/edit", "#currentTaskTab")
+  <% end %>
 </script>

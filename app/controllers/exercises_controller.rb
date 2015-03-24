@@ -8,6 +8,9 @@
     @exercises = Exercise.all
     @excercise_page_rendered = true
     session[:exercise_id] = nil
+    session[:task_id] = nil
+
+    set_view_layout
   end
 
   # GET /exercises/1
@@ -25,6 +28,7 @@
 
   # GET /exercises/1/edit
   def edit
+    set_view_layout
   end
 
   # POST /exercises
@@ -33,10 +37,10 @@
     @exercise = Exercise.new(exercise_params)
     respond_to do |format|
       if @exercise.save
-        format.html { redirect_to @exercise, notice: 'Casen luominen onnistui!' }
+        format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen luominen onnistui!' }
         format.json { render :show, status: :created, location: @exercise }
       else
-        format.html { render :new }
+        format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen päivitys epäonnistui!' }
         format.json { render json: @exercise.errors, status: :unprocessable_entity }
       end
     end
@@ -47,10 +51,10 @@
   def update
     respond_to do |format|
       if @exercise.update(exercise_params)
-        format.html { redirect_to @exercise, notice: 'Casen päivitys onnistui!' }
+        format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen päivitys onnistui!' }
         format.json { render :show, status: :ok, location: @exercise }
       else
-        format.html { render :edit }
+        format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen päivitys epäonnistui!' }
         format.json { render json: @exercise.errors, status: :unprocessable_entity }
       end
     end
