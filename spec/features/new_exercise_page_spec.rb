@@ -10,7 +10,7 @@ describe "New Exercise page", js:true do
 			sign_in(username:"Testipoika", password:"Salainen1")
 		end
 
-		it "user should be able to create a new exercise" do
+		it "he should be able to create a new exercise" do
 			visit new_exercise_path
 
 			fill_in('exercise_name', with: "Broilerimysteeri")
@@ -27,7 +27,7 @@ describe "New Exercise page", js:true do
 			expect(Exercise.first.anamnesis).to eq('Mitä kanoille on tapahtunut??')
 		end
 
-		it "user should not be able to create a new exercise without a name" do
+		it "he should not be able to create a new exercise without a name" do
 			visit new_exercise_path
 
 			fill_in('exercise_name', with: "")
@@ -35,11 +35,10 @@ describe "New Exercise page", js:true do
 
 			expect{
 				click_button('Tallenna')
-				wait_for_ajax
 			}.to change(Exercise, :count).by(0)
 
-			expect(current_path).to eq(exercises_path)
-			expect(page).to have_content 'estivät tallennuksen'
+			expect(current_path).to eq(new_exercise_path)
+			expect(page).to have_content 'Casen luominen epäonnistui!'
 		end
 
 	end
@@ -51,7 +50,7 @@ describe "New Exercise page", js:true do
 			sign_in(username:"Opiskelija", password:"Salainen1")
 		end
 
-		it "user should not be able to visit new exercise page" do
+		it "he should not be able to visit new exercise page" do
 			visit new_exercise_path
 			expect(current_path).to eq(signin_path)
 			expect(page).to have_content('Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia')

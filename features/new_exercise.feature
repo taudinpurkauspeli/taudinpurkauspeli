@@ -18,5 +18,5 @@ Feature: New exercise feature
     And I click on the button "Luo uusi"
     And I do not fill in all the fields with correct input values
     When I press the button "Tallenna"
-    Then page should have a message: "Seuraavat virheet estivät tallennuksen:"
+    Then page should have a message: "Casen luominen epäonnistui!"
     And the exercise should not be in the database

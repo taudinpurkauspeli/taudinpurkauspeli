@@ -139,7 +139,7 @@ describe "Hypothesis list page", js:true do
 
       it "user should be able to add hypotheses to an exercise" do
         expect {
-          click_button('Sorkkatauti')
+          first(:button,'Sorkkatauti').click
           wait_for_ajax
         }.to change(ExerciseHypothesis, :count).by(1)
 
@@ -147,55 +147,39 @@ describe "Hypothesis list page", js:true do
       end
 
       it "user should be able to remove hypotheses from an exercise" do
-        click_button('Virustauti')
-        wait_for_ajax
-        if(click_button('Poista casesta'))
+        while(ExerciseHypothesis.count != 0)
+          click_button('Virustauti')
           wait_for_ajax
-
-          expect(ExerciseHypothesis.count).to eq(0)
-        else
-          puts "Jotakin meni pieleen, kun yritti poistaa ex_hyppia casesta"
+          first(:button, 'Poista casesta').click
+          wait_for_ajax
         end
       end
 
       it "user should be able to edit the explanation of a hypothesis added to an exercise" do
-        click_button('Virustauti')
-        wait_for_ajax
+        while(ExerciseHypothesis.first.explanation != 'Virus ei olekaan bakteeritauti')
 
-        if(fill_in('exercise_hypothesis_explanation', with: 'Virus ei olekaan bakteeritauti'))
-          if(click_button('Päivitä'))
-            wait_for_ajax
+          click_button('Virustauti')
+          wait_for_ajax
 
-            expect(ExerciseHypothesis.first.explanation).to eq('Virus ei olekaan bakteeritauti')
-            expect(page).to have_content 'Työhypoteesin tiedot on päivitetty'
-          else
-            puts "Jotakin meni monkaan, kun yritti tallentaa paivitetyn explanationin ex_hyppiin"
-          end
+          fill_in('exercise_hypothesis_explanation', with: 'Virus ei olekaan bakteeritauti')
+          first(:button, 'Päivitä').click
+          wait_for_ajax
 
-        else
-          puts "Jotakin meni monkaan, kun yritti paivittaa explanationia ex_hyppiin"
         end
-
       end
 
       it "user should be able to add prerequisite task to a hypothesis added to an exercise" do
-        click_button('Virustauti')
-        wait_for_ajax
 
-        if(select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]'))
+        while(ExerciseHypothesis.first.task.nil?)
+          click_button('Virustauti')
+          wait_for_ajax
 
-          if(click_button('Päivitä'))
-            wait_for_ajax
+          select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]')
 
-            expect(ExerciseHypothesis.first.task.name).to eq(task2.name)
-            expect(page).to have_content 'Työhypoteesin tiedot on päivitetty'
-          else
-            puts "Jotakin meni pahasti monkaan, kun yritti paivitaa ex_hyppiin esitietoa"
-          end
-        else
-          puts "JOtakin meni pahasti monkaan, kun yritti valita ex_hyppiin esitietoa"
+          first(:button, 'Päivitä').click
+          wait_for_ajax
+
         end
-
       end
 
     end
