@@ -9,6 +9,8 @@
     @excercise_page_rendered = true
     session[:exercise_id] = nil
     session[:task_id] = nil
+
+    set_view_layout
   end
 
   # GET /exercises/1
