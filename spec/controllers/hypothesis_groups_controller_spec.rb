@@ -80,7 +80,7 @@ RSpec.describe HypothesisGroupsController, :type => :controller do
 
       it "redirects to the created hypothesis group" do
         post :create, {:hypothesis_group => valid_attributes}, valid_session
-        expect(response).to redirect_to(hypotheses_path)
+        expect(response).to redirect_to(hypotheses_path(:layout => true))
       end
     end
 
@@ -154,7 +154,7 @@ RSpec.describe HypothesisGroupsController, :type => :controller do
     it "redirects to the hypotheses list" do
       hypothesis_group = HypothesisGroup.create! valid_attributes
       delete :destroy, {:id => hypothesis_group.to_param}, valid_session
-      expect(response).to redirect_to(hypotheses_url)
+      expect(response).to redirect_to(hypotheses_path(:layout => true))
     end
   end
 

@@ -41,47 +41,54 @@ Given(/^I have completed all the tasks$/) do
 end
 
 When(/^I click on a button "(.*?)"$/) do |arg1|
-	first(:button, arg1).click
+  first(:button, arg1).click
+  wait_for_ajax
 end
 
 When(/^I click on button "(.*?)"$/) do |arg1|
- all(:button, 'Tallenna')[2].click
+  click_button arg1
+  wait_for_ajax
 end
 
 When(/^I fill in the hypothesis name field with a correct value$/) do
-	fill_in('hypothesis_name', with: 'Suu- ja sorkkatauti', :match => :prefer_exact)
+  fill_in('hypothesis_name', with: 'Suu- ja sorkkatauti', :match => :prefer_exact)
 end
 
 When(/^I fill in the hypothesis name field with an incorrect value$/) do
-	fill_in('hypothesis_name', with: '', :match => :prefer_exact)
+  fill_in('hypothesis_name', with: '', :match => :prefer_exact)
 end
 
 When(/^I save the new hypothesis with button "(.*?)"$/) do |arg1|
   all(:button, 'Tallenna')[0].click
-  end
+  wait_for_ajax
+end
 
 When(/^I save changes with button "(.*?)"$/) do |arg1|
   all(:button, 'Päivitä')[0].click
+  wait_for_ajax
 end
 
 When(/^I click on the delete button "(.*?)"$/) do |arg1|
   all(:button, 'Poista casesta')[0].click
+  wait_for_ajax
 end
 
 When(/^I click on the hypothesis button "(.*?)"$/) do |arg1|
-   click_button(arg1)
+  click_button(arg1)
+  wait_for_ajax
 end
 
 When(/^I click on one of the hypotheses of the case$/) do
   click_button('Hevosheikkous')
+  wait_for_ajax
 end
 
 When(/^I fill in the hypothesis group name field with a correct name$/) do
-    fill_in('hypothesis_group_name', with: 'Koirasairaudet', :match => :prefer_exact)
+  fill_in('hypothesis_group_name', with: 'Koirasairaudet', :match => :prefer_exact)
 end
 
 When(/^I fill in the explanation field$/) do
-  fill_in('exercise_hypothesis_explanation', with: 'Hevosen hauraat luut', :match => :prefer_exact)
+  fill_in('exercise_hypothesis_explanation', with: 'Hevosen hauraat luut')
 end
 
 Given(/^I try to visit the "(.*?)" page of the case "(.*?)"$/) do |arg1, arg2|
@@ -93,16 +100,16 @@ end
 
 
 Then(/^the hypothesis should be added to the case$/) do
-	e = Exercise.first
-	expect(e.hypotheses.first.name).to eq('Hevosheikkous')
-	expect(page).to have_button 'Hevosheikkous'
+  e = Exercise.first
+  expect(e.hypotheses.first.name).to eq('Hevosheikkous')
+  expect(page).to have_button 'Hevosheikkous'
   expect(ExerciseHypothesis.count).to eq(1)
 end
 
 Then(/^the new hypothesis group should be created$/) do
   expect(page).to have_button 'Koirasairaudet'
   expect(HypothesisGroup.count).to eq(3)
- end
+end
 
 Then(/^the explanation should be added to the hypothesis$/) do
   expect(ExerciseHypothesis.find(2).explanation).to include('Hevosen hauraat luut')

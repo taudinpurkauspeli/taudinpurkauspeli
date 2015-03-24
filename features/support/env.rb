@@ -64,3 +64,4 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 World(HelperMethods)
+World(WaitForAjax)

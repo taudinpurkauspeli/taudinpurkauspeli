@@ -22,6 +22,7 @@ Given(/^I go to the hypothesis list of that exercise$/) do
 	visit exercises_path
 	click_button('Lihanautakuolemat')
 	click_link('Työhypoteesit')
+	wait_for_ajax
 end
 
 Given(/^those hypotheses are all checked$/) do

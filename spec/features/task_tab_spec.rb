@@ -1,3 +1,4 @@
+=begin
 require 'rails_helper'
 
 describe "Task list page", js:true do
@@ -77,3 +78,4 @@ describe "Task list page", js:true do
       end
     end
   end
+=end
