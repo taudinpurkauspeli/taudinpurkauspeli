@@ -54,7 +54,7 @@ group :test do
   gem 'database_cleaner'
   gem 'rspec-mocks'
   gem 'poltergeist'
-  #gem 'phantomjs'
+  gem 'phantomjs'
 
 end
 

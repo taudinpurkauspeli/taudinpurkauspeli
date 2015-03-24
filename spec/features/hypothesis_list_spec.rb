@@ -149,17 +149,13 @@ describe "Hypothesis list page", js:true do
       it "user should be able to remove hypotheses from an exercise" do
         click_button('Virustauti')
         wait_for_ajax
-        #expect {
         if(click_button('Poista casesta'))
           wait_for_ajax
 
           expect(ExerciseHypothesis.count).to eq(0)
-
         else
-          puts "joku meni pieleen kun yritti poistaa ex_hyppia casesta"
+          puts "Jotakin meni pieleen, kun yritti poistaa ex_hyppia casesta"
         end
-
-        #}.to change(ExerciseHypothesis, :count).by(-1)
       end
 
       it "user should be able to edit the explanation of a hypothesis added to an exercise" do
@@ -170,16 +166,14 @@ describe "Hypothesis list page", js:true do
           if(click_button('Päivitä'))
             wait_for_ajax
 
-            expect(ExerciseHypothesis.first.explanation).to include('Virus ei olekaan bakteeritauti')
+            expect(ExerciseHypothesis.first.explanation).to eq('Virus ei olekaan bakteeritauti')
             expect(page).to have_content 'Työhypoteesin tiedot on päivitetty'
           else
-            puts "joku meni monkaan kun yritti tallentaa paivitetyn explanationin ex_hyppiin"
-
+            puts "Jotakin meni monkaan, kun yritti tallentaa paivitetyn explanationin ex_hyppiin"
           end
 
         else
-          puts "joku meni monkaan kun yritti paivittaa explanationia ex_hyppiin"
-
+          puts "Jotakin meni monkaan, kun yritti paivittaa explanationia ex_hyppiin"
         end
 
       end
@@ -191,21 +185,15 @@ describe "Hypothesis list page", js:true do
         if(select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]'))
 
           if(click_button('Päivitä'))
-
             wait_for_ajax
 
             expect(ExerciseHypothesis.first.task.name).to eq(task2.name)
             expect(page).to have_content 'Työhypoteesin tiedot on päivitetty'
           else
-
-            puts "joku meni pahasti monkaan kun yritti paivitaa ex_hyppiin esitietoa"
-
+            puts "Jotakin meni pahasti monkaan, kun yritti paivitaa ex_hyppiin esitietoa"
           end
-
         else
-          puts "joku meni pahasti monkaan kun yritti valita ex_hyppiin esitietoa"
-
-
+          puts "JOtakin meni pahasti monkaan, kun yritti valita ex_hyppiin esitietoa"
         end
 
       end

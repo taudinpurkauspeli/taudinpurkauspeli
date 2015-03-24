@@ -21,7 +21,7 @@ class ExerciseHypothesesController < ApplicationController
   # PATCH/PUT /exercise_hypotheses/1
   # PATCH/PUT /exercise_hypotheses/1.json
   def update
-    puts "Kavin ex_hyp-kontrollerissa"
+    puts "Kavin paivittamassa ex_hyp-kontrollerissa"
     respond_to do |format|
       if @exercise_hypothesis.update(exercise_hypothesis_params)
         puts "ja onnistuin tallennuksessa ex_hyp-kontrollerissa"
