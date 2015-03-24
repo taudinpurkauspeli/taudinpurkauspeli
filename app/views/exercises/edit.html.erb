@@ -4,3 +4,9 @@
 
 <%= link_to 'Näytä', @exercise %> |
 <%= link_to 'Takaisin', exercises_path %>
+
+
+<script>
+  //edit exercise form
+  setAjaxSubmits("#anamnesisTab form", "#anamnesisTab", "get");
+</script>
