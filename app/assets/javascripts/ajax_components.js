@@ -11,7 +11,7 @@ $(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
 * formsSelector: Selector string for forms to be overrided
 * containerElementSelector: Selector string for element to be refreshed 
 */
-function setAjaxSubmits(formsSelector, containerElementSelector, post){
+function setAjaxSubmits(formsSelector, containerElementSelector, type, submitCallback){
 	alert("setajaxsubmits: " + formsSelector + "; " + containerElementSelector);
 	var forms = $(formsSelector);
 	var containerElement = $(containerElementSelector);
@@ -25,7 +25,7 @@ function setAjaxSubmits(formsSelector, containerElementSelector, post){
 		//alert($(this).attr("id"));
 		alert(postUrl);
 
-		if(post == true){
+		if(type == "post"){
 			$.post(postUrl, clickedForm.serialize())
 	    	.done(function(data) {
 					containerElement.html(data);
@@ -35,10 +35,12 @@ function setAjaxSubmits(formsSelector, containerElementSelector, post){
 					alert("Virhe tallentaessa: \n" + data);
 				})
 				.always(function() {
-					//alert("Pyyntö valmis, onnistui tai ei");
+					if(submitCallback != undefined){
+				 		submitCallback();
+				  }
 	    	});	
 			}else{
-				loadView(postUrl, containerElementSelector)
+				loadView(postUrl, containerElementSelector, submitCallback)
 			}
 		
 		
