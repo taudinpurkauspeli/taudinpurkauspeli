@@ -23,7 +23,6 @@ describe "Radiobutton page for student" do
 
       click_button('Lihanautakuolemat')
       click_link('Toimenpiteet')
-      save_and_open_page
       click_button(radiobutton_task.name)
 
     end

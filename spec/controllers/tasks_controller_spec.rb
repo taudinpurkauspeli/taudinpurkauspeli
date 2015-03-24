@@ -26,19 +26,19 @@ RSpec.describe TasksController, :type => :controller do
   # Task. As you add validations to Task, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {name: "Soita asiakkaalle", exercise_id: 1, level: 2}
+    {name: "Soita asiakkaalle", exercise_id: exercise.id, level: 2}
   }
 
 
   let(:invalid_attributes) {
-    {name: nil, exercise_id: 1}
+    {name: nil, exercise_id: exercise.id}
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # TasksController. Be sure to keep this updated too.
   let(:valid_session) { {
-      user_id: 1, exercise_id: 1
+      user_id: user.id, exercise_id: exercise.id
   } }
 
   let(:tasktext_attributes) {
@@ -137,8 +137,8 @@ RSpec.describe TasksController, :type => :controller do
     describe "POST level_up" do
 
 
-      let!(:task2){FactoryGirl.create(:task)}
-      let!(:task3){FactoryGirl.create(:task, level: 2)}
+      let!(:task2){FactoryGirl.create(:task, exercise:exercise, level: 1)}
+      let!(:task3){FactoryGirl.create(:task, exercise:exercise, level: 2)}
 
       it "changes the level when no siblings & no children" do
 

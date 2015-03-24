@@ -2,27 +2,28 @@ require 'rails_helper'
 
 RSpec.describe CheckedHypothesesController, :type => :controller do
 
-  let!(:user){FactoryGirl.create(:user, id: 1)}
-  let!(:task){FactoryGirl.create(:task, id: 1)}
-  let!(:hypothesis){FactoryGirl.create(:hypothesis)}
-  let!(:exercise){FactoryGirl.create(:exercise, id: 1)}
-  let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, id: 1, exercise_id: 1)}
+  let!(:user){FactoryGirl.create(:user)}
+  let!(:exercise){FactoryGirl.create(:exercise)}
+  let!(:task){FactoryGirl.create(:task, exercise:exercise, level:1)}
   let!(:hypothesis_group){FactoryGirl.create(:hypothesis_group)}
+  let!(:hypothesis){FactoryGirl.create(:hypothesis, hypothesis_group:hypothesis_group)}
+  let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, exercise:exercise, hypothesis:hypothesis, task:task)}
+
 
   let(:valid_attributes) {
-    {user_id: 1, exercise_hypothesis_id: 1}
+    {user_id: user.id, exercise_hypothesis_id: exercise_hypothesis.id}
   }
 
   let(:invalid_attributes) {
-    {user_id: 1, exercise_hypothesis_id:nil}
+    {user_id: user.id, exercise_hypothesis_id:nil}
   }
 
-  let(:valid_session) { {
-    user_id: 1
-    } }
+  let(:valid_session) {
+    { user_id: user.id }
+  }
 
     before :each do
-      user.completed_tasks.create task_id:1
+      user.completed_tasks.create task_id:task.id
     end
 
     describe "POST create" do

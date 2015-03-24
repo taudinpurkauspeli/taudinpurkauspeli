@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe CompletedTasksController, :type => :controller do
 
-  let!(:user){FactoryGirl.create(:user, id: 1)}
-  let!(:hypothesis){FactoryGirl.create(:hypothesis)}
-  let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, id: 1, exercise_id: 1)}
-  let!(:exercise){FactoryGirl.create(:exercise, id: 1)}
+  let!(:user){FactoryGirl.create(:user)}
   let!(:hypothesis_group){FactoryGirl.create(:hypothesis_group)}
+  let!(:hypothesis){FactoryGirl.create(:hypothesis, hypothesis_group:hypothesis_group)}
+  let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, exercise:exercise, hypothesis:hypothesis)}
+  let!(:exercise){FactoryGirl.create(:exercise)}
 
   let(:valid_attributes) {
     { user_id: 1, task_id: 1 }

@@ -2,12 +2,13 @@ require 'rails_helper'
 
 RSpec.describe MultichoicesController, :type => :controller do
 
+  let!(:exercise){FactoryGirl.create(:exercise)}
 	let!(:user){FactoryGirl.create(:user)}
-	let!(:task){FactoryGirl.create(:task)}
-	let!(:subtask){FactoryGirl.create(:subtask)}
+	let!(:task){FactoryGirl.create(:task, exercise:exercise)}
+	let!(:subtask){FactoryGirl.create(:subtask, task:task)}
 
 	let(:valid_attributes) {
-		{subtask_id: 1, question: "joku kysymys"}
+		{subtask_id: subtask.id, question: "joku kysymys"}
 	}
 
 	let(:invalid_attributes) {
@@ -15,7 +16,7 @@ RSpec.describe MultichoicesController, :type => :controller do
 	}
 
 	let(:valid_session) { {
-		user_id: 1, task_id: 1}
+		user_id: user.id, task_id: task.id}
 	}
 
 	describe "GET new" do
