@@ -9,28 +9,32 @@
 
 
       <div class="col-md-4 text-padding">
-        <%= if current_user.has_asked_question(question.id)
-          then render 'question_button', {question: question}
+        <% if current_user.has_asked_question(question.id) %>
+        <%= render 'question_button', {question: question} %>
+        <% else %>
 
-        else button_to question.title, question, method: :get, :class => 'btn btn-default btn-del' 
-          end %>
-
-        </div>
-
-        <div class="col-md-4 text-padding">
-          <%= question.content %>
-        </div>
-
+        <%= button_to question.title, question, method: :get, :class => 'btn btn-default btn-del' %>
+        <%end %>
       </div>
 
 
-    </div>
-    <% end %>
+      <% if current_user_is_admin %>
+      <div class="col-md-4 text-padding">
+        <%= question.content %>
 
-    <%= if !current_user_is_admin then render 'continue_button'
-    else
-      end %>
+      </div>
+      <%end%>
+
     </div>
+
+
+  </div>
+  <% end %>
+
+  <%= if !current_user_is_admin then render 'continue_button'
+  else
+    end %>
+  </div>
 
 
 

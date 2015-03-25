@@ -6,9 +6,10 @@ class AskedQuestionsController < ApplicationController
 
     @asked_question = AskedQuestion.new(asked_question_params)
      @task = Task.find(session[:task_id])
-
+     
      respond_to do |format|
       if @asked_question.save
+        byebug
         format.html { redirect_to @asked_question.question.interview.subtask.task }
       else
         format.html { redirect_to tasks_url, @asked_question.question.interview.subtask.task, alert: "=(" }
@@ -18,7 +19,6 @@ class AskedQuestionsController < ApplicationController
 
 
   private
-
   # Never trust parameters from the scary internet, only allow the white list through.
   def asked_question_params
     params.require(:asked_question).permit(:user_id, :question_id)
