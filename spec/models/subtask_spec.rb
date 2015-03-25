@@ -27,20 +27,34 @@ RSpec.describe Subtask, type: :model do
     end
   end
 
-  describe "is created with correct level" do
+  describe "level" do
     let!(:task){FactoryGirl.create(:task, exercise_id:1, level:1)}
 
-    it "when no subtasks exist" do
+    it "is set correctly when no subtasks exist" do
       subtask = Subtask.create task_id:task.id
       expect(subtask.level).to eq(1)
     end
 
-    it "when prior subtasks exist" do
+    it "is set correctly when prior subtasks exist" do
       for i in 0...3
         Subtask.create task_id:task.id
       end
       subtask = Subtask.create task_id:task.id
       expect(subtask.level).to eq(4)
+    end
+
+    it "sorts subtasks correctly" do
+      actual = Array.new(5)
+      for i in 0...5
+        actual[i] = Subtask.create task_id:task. id
+      end
+      actual[1].update(level:5)
+      actual[4].update(level:2)
+
+      actual = task.subtasks.map(&:level)
+      expected = [1, 2, 3, 4, 5]
+
+      expect(actual).to eq expected
     end
   end
 end
