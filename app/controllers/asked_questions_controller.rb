@@ -11,7 +11,7 @@ class AskedQuestionsController < ApplicationController
       if @asked_question.save
         format.html { redirect_to @asked_question.question.interview.subtask.task }
       else
-        format.html { redirect_to tasks_url, alert: "Toimenpiteen suoritus epäonnistui." }
+        format.html { redirect_to tasks_url, @asked_question.question.interview.subtask.task, alert: "=(" }
       end
     end
   end

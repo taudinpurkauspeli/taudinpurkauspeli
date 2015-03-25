@@ -4,6 +4,7 @@ class InterviewsController < ApplicationController
 	before_action :set_interview, only: [:edit, :update, :destroy]
 
 
+
 	def new
 		@interview = Interview.new
 	end
@@ -48,6 +49,7 @@ def update
 	end
 end
 
+private
 	def set_interview
 		@interview = Interview.find(params[:id])
 	end

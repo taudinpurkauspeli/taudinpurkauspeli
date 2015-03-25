@@ -9,18 +9,20 @@
 
 
       <div class="col-md-4 text-padding">
-        <%= if !current_user_is_admin
+        <%= if current_user.has_asked_question(question.id)
           then render 'question_button', {question: question}
-         end %>
 
-      </div>
+        else button_to question.title, question, method: :get, :class => 'btn btn-default btn-del' 
+          end %>
 
-      <div class="col-md-4 text-padding">
+        </div>
+
+        <div class="col-md-4 text-padding">
           <%= question.content %>
+        </div>
+
       </div>
 
-     </div>
-   
 
     </div>
     <% end %>
