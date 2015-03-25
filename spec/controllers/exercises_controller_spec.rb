@@ -88,7 +88,7 @@ RSpec.describe ExercisesController, :type => :controller do
 
       it "redirects to the created exercise" do
         post :create, {:exercise => valid_attributes}, valid_session
-        expect(response).to redirect_to(Exercise.last)
+        expect(response).to redirect_to(exercise_path(Exercise.last, :layout => true))
       end
     end
 
@@ -99,9 +99,9 @@ RSpec.describe ExercisesController, :type => :controller do
         expect(assigns(:exercise)).to be_a_new(Exercise)
       end
 
-      it "re-renders the 'new' template" do
+      it "redirects to the 'new' template" do
         post :create, {:exercise => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+        expect(response).to redirect_to(new_exercise_path(:layout => true))
       end
     end
 
@@ -129,7 +129,7 @@ RSpec.describe ExercisesController, :type => :controller do
       it "redirects to the exercise" do
         exercise = Exercise.create! valid_attributes
         put :update, {:id => exercise.to_param, :exercise => valid_attributes}, valid_session
-        expect(response).to redirect_to(exercise)
+        expect(response).to redirect_to(exercise_path(exercise, :layout => true))
       end
     end
 
@@ -141,10 +141,10 @@ RSpec.describe ExercisesController, :type => :controller do
         expect(assigns(:exercise)).to eq(exercise)
       end
 
-      it "re-renders the 'edit' template" do
+      it "redirects to the 'edit' template" do
         exercise = Exercise.create! valid_attributes
         put :update, {:id => exercise.to_param, :exercise => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+        expect(response).to redirect_to(exercise_path(exercise, :layout => true))
       end
     end
 
