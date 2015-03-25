@@ -1,3 +1,4 @@
+
 class User < ActiveRecord::Base
 	validates :username, presence: true, uniqueness: true
 	validates :realname, presence: true, length: { minimum: 4 }
@@ -15,6 +16,10 @@ class User < ActiveRecord::Base
   
   has_many :subtasks, through: :completed_subtasks
 
+  def has_completed?(subtask)
+    return completed_subtasks.where(subtask:subtask).nil?
+  end
+
   def complete_subtask(subtask)
     completed_subtasks.create(subtask:subtask)
     task_in_progress = subtask.task
@@ -29,12 +34,11 @@ class User < ActiveRecord::Base
 
   def can_complete_subtask?(task, subtask)
     last_subtask_level = subtasks.where(task:task).maximum("level")
-
     # user has completed some subtasks
     unless last_subtask_level.nil?
       # get first subtasks whose level >= user's last completed subtask
       next_sub = (task.subtasks.where(level:last_subtask_level + 1...999).limit 1)[0]
-      if next_sub == subtask
+      if next_sub == subtask || last_subtask_level >= subtask.level
         return true
       else
         return false
