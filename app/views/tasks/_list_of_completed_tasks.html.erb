@@ -6,17 +6,17 @@
   </div>
   <div id="collapse-done-tasks" class="panel-collapse collapse in">
     <div class="panel-body">
-      <table>
-        <tbody>
-          <% @tasks.each do |task| %>
-            <% if current_user_has_completed_task(task.id) %>
-              <tr>
-                <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task', :form_class => "form-completed-task" %></td>
-              </tr> 
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>    
+
+      <% @tasks.each do |task| %>
+        <% if current_user_has_completed_task(task.id) %>
+          <div class="row">
+            <div class="col-md-4">
+              <%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task', :form_class => "form-completed-task" %>
+            </div>
+          </div>  
+        <% end %>
+      <% end %>
+   
     </div>
   </div>
 </div>
