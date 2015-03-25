@@ -10,8 +10,7 @@ RSpec.describe Subtask, type: :model do
   end
 
   describe "with correct ids" do
-
-    let!(:subtask){FactoryGirl.create(:subtask)}
+    let!(:subtask){FactoryGirl.create(:subtask, task_id:1)}
 
     it "is saved" do
       expect(subtask).to be_valid

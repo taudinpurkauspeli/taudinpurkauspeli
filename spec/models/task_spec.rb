@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Task, :type => :model do
+  let!(:exercise){FactoryGirl.create(:exercise)}
   it "has the name set correctly" do
     task = Task.new name:"Soita asiakkaalle"
 
@@ -9,44 +10,30 @@ RSpec.describe Task, :type => :model do
 
   describe "with correct name" do
 
-    let!(:task){FactoryGirl.create(:task)}
+    let!(:task){FactoryGirl.create(:task, exercise:exercise)}
 
     it "is saved" do
       expect(task).to be_valid
-      expect(Task.count).to eq(1)
-    end
-  end
-
-  describe "with incorrect name" do
-
-    let!(:task){Task.create name:""}
-    let!(:exercise){FactoryGirl.create(:exercise)}
-
-    it "is not saved" do
-      expect(task).not_to be_valid
-      expect(Task.count).to eq(0)
+      expect(Task.where(level:1...999).count).to eq(1)
     end
   end
 
   describe "get_highest_level returns 0"  do
-    let!(:exercise){FactoryGirl.create(:exercise)}
     it "when no tasks are created" do
       expect(Task.get_highest_level(exercise)).to eq(0)
     end
   end
 
   describe "get_highest_level returns correct value" do
-    let!(:exercise){FactoryGirl.create(:exercise)}
-
-    let!(:task){FactoryGirl.create(:task)}
+    let!(:task){FactoryGirl.create(:task, exercise:exercise)}
     it "when tasks are created" do
       expect(Task.get_highest_level(exercise)).to eq(1)
     end
   end
 
   describe "short_name" do
-    let!(:short){FactoryGirl.create(:task_with_long_name)}
-    let!(:long){FactoryGirl.create(:task_with_short_name)}
+    let!(:short){FactoryGirl.create(:task_with_long_name, exercise:exercise)}
+    let!(:long){FactoryGirl.create(:task_with_short_name, exercise:exercise)}
 
     it "returns full name when it's short" do
       expect(short.short_name).to eq(short.name)
@@ -57,13 +44,12 @@ RSpec.describe Task, :type => :model do
     end
   end
 
-  describe "changin task's order" do
-    let!(:exercise){FactoryGirl.create(:exercise)}
+  describe "changing task's order" do
 
     def get_values
       actual = Array.new(5)
       i = 0
-      Task.all.each do |t|
+      Task.where(level:1...999).each do |t|
         actual[i] = t.level
         i += 1
       end

@@ -37,4 +37,7 @@ Then(/the page should have button "(.*?)"$/) do |arg1|
 	expect(page). to have_button arg1
 end
 
+Then(/^the caveman debug will happen$/) do
+  save_and_open_page
+end
 

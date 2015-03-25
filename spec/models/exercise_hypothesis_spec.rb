@@ -11,7 +11,10 @@ RSpec.describe ExerciseHypothesis, :type => :model do
 
   describe "with correct ids" do
 
-    let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis)}
+    let!(:exercise){FactoryGirl.create(:exercise)}
+    let!(:hypothesis){FactoryGirl.create(:hypothesis)}
+
+    let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, exercise:exercise, hypothesis:hypothesis)}
 
     it "is saved" do
       expect(exercise_hypothesis).to be_valid
@@ -20,10 +23,12 @@ RSpec.describe ExerciseHypothesis, :type => :model do
   end
 
   describe "has prerequisite set"  do
-    let!(:task){FactoryGirl.create(:task)}
+    let!(:exercise){FactoryGirl.create(:exercise)}
+    let!(:hypothesis){FactoryGirl.create(:hypothesis)}
+    let!(:task){FactoryGirl.create(:task, exercise:exercise, level:1)}
 
     it "and it is returned" do
-      exercise_hypothesis = ExerciseHypothesis.new exercise_id: 1, hypothesis_id: 1
+      exercise_hypothesis = ExerciseHypothesis.new exercise: exercise, hypothesis: hypothesis
       exercise_hypothesis.task = task
       expect(exercise_hypothesis.get_prerequisite).to eq(task)
     end
