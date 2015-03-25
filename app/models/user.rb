@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :checked_hypotheses, dependent: :destroy
   has_many :completed_tasks, dependent: :destroy
   has_many :exercise_hypotheses, through: :checked_hypotheses
+  has_many :completed_subtasks, dependent: :destroy
+  has_many :subtasks, through: :completed_subtasks
 
   def get_number_of_tasks_by_level(exercise, level)
     number_of_tasks = 0
