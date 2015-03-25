@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_exercise
   helper_method :current_user_is_admin
   helper_method :current_user_has_completed_task
+  helper_method :user_can_start_task
   
   def current_exercise
     return nil if session[:exercise_id].nil?
@@ -27,6 +28,10 @@ class ApplicationController < ActionController::Base
 
   def current_user_has_completed_task (task_id) 
     return !(current_user.completed_tasks.find_by(task_id: task_id)).nil?
+  end
+
+  def user_can_start_task(user, exercise, level)  
+    return user.get_number_of_tasks_by_level(exercise, level - 1) == exercise.get_number_of_tasks_by_level(level - 1)
   end
 
   def current_user_is_admin

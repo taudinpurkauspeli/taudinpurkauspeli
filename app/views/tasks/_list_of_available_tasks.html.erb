@@ -6,17 +6,19 @@
 	</div>
 	<div id="collapse-available-tasks" class="panel-collapse collapse in">
 	  <div class="panel-body">
-	    <table>
-	      <tbody>
-	        <% @tasks.each do |task| %>
-	          <% if !current_user_has_completed_task(task.id) %>
-	          <tr>
-              	<td><%= button_to task.name, task, method: :get, :class => "btn btn-default btn-available-task", :form_class => "form-button-to-task-student" %></td>
-	          </tr>              
-	        <% end %>
+	    <% @tasks.each do |task| %>
+	      <% if !current_user_has_completed_task(task.id) %>
+	        <div class = "row">
+	        	<div class="col-md-5">
+		        	<% if user_can_start_task(@user, @exercise, task.level) %>
+		          	<%= button_to task.name, task, method: :get, :class => "btn btn-default btn-available-task", :form_class => "form-to-task-student" %>
+		          <% else %>
+		          	<%= button_to task.name, task, method: :get, :class => "btn btn-default btn-available-task", :form_class => "form-cannot-task-student" %>
+		          <% end %>
+		        </div>
+	        </div>
 	      <% end %>
-        </tbody>
-      </table>    
+	    <% end %>      
     </div>
   </div>
 </div>

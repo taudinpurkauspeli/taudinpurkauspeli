@@ -8,7 +8,13 @@
   //taskTab
   loadView("/tasks", "#taskTab");
 
-  <% unless current_task.nil? %>
-    loadView("/tasks/<%= current_task.id %>/edit", "#currentTaskTab")
+  <% if current_user_is_admin %>
+    <% unless current_task.nil? %>
+      loadView("/tasks/<%= current_task.id %>/edit", "#currentTaskTab")
+    <% end %>
+  <% else %>
+    <% unless current_task.nil? %>
+      loadView("/tasks/<%= current_task.id %>", "#currentTaskTab")
+    <% end %>
   <% end %>
 </script>

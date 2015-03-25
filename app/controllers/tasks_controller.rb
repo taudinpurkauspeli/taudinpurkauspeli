@@ -7,6 +7,7 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @tasks = Task.all
+    @user = current_user
 
     @exercise = current_exercise
     if @exercise
@@ -44,10 +45,6 @@ class TasksController < ApplicationController
     set_view_layout
   end
 
-  def user_can_start_task(user, exercise, level)  
-    return user.get_number_of_tasks_by_level(exercise, level - 1) == exercise.get_number_of_tasks_by_level(level - 1)
-  end
-
   # GET /tasks/new
   def new
     @task = Task.new
@@ -75,7 +72,7 @@ class TasksController < ApplicationController
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide luotiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @task }
       else
-        format.html { render :new }
+        format.html { redirect_to tasks_url(:layout => get_layout), notice: 'Toimenpiteen luonti epäonnistui.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -89,7 +86,7 @@ class TasksController < ApplicationController
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide päivitettiin onnistuneesti.' }
         format.json { render :show, status: :ok, location: @task }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpiteen päivitys epäonnistui.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
