@@ -6,11 +6,22 @@ class User < ActiveRecord::Base
   has_secure_password
   
   has_many :checked_hypotheses, dependent: :destroy
+  has_many :exercise_hypotheses, through: :checked_hypotheses
+  
   has_many :completed_tasks, dependent: :destroy
   has_many :tasks, through: :completed_tasks
-  has_many :exercise_hypotheses, through: :checked_hypotheses
+
   has_many :completed_subtasks, dependent: :destroy
+  
   has_many :subtasks, through: :completed_subtasks
+
+  def complete_subtask(subtask)
+    completed_subtasks.create(subtask:subtask)
+  end
+
+  def complete_task(task)
+    completed_tasks.create(task:task)
+  end
 
   def can_complete_subtask?(task, subtask)
     last_subtask_level = subtasks.where(task:task).maximum("level")
