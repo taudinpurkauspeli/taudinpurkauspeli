@@ -7,7 +7,7 @@
   <% end %>
 
   <% if @excercise_page_rendered or !current_user.nil?%>
-    <div class="login-container">
+    <div class="login-container" >
       <% if current_user.nil? %>
         <div class="row">
           <%= form_tag sessions_path do %>
@@ -26,13 +26,12 @@
           </div>
         </div>
 
-        <% else %>
-          <%= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-logout', :method => :delete unless current_user.nil?%>
-
-          <% unless @excercise_page_rendered %>
-            <%= link_to 'Palaa pääsivulle', root_path, class: 'navbar-brand' %>
-          <% end %>
-
+      <% else %>
+      <% unless @excercise_page_rendered %>
+          <span class = "a-mainpage" ><%= link_to 'Palaa pääsivulle', root_path, :class => "" %></span>
+        <% end %>
+        <%= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-logout widthAuto', :method => :delete unless current_user.nil?%>
+        
       <% end %>
     </div>
   <% end %>
