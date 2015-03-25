@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   
   has_many :checked_hypotheses, dependent: :destroy
   has_many :completed_tasks, dependent: :destroy
+  has_many :tasks, through: :completed_tasks
   has_many :exercise_hypotheses, through: :checked_hypotheses
   has_many :completed_subtasks, dependent: :destroy
   has_many :subtasks, through: :completed_subtasks
@@ -29,7 +30,7 @@ class User < ActiveRecord::Base
       if subtask.level == task.subtasks.minimum("level")
         return true
       end
-    end
+    end  
     return false
   end
 
