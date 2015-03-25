@@ -31,7 +31,7 @@ class TasksController < ApplicationController
         session[:task_id] = params[:id]
       else
         respond_to do |format|
-          format.html { redirect_to tasks_url(:layout => get_layout), alert: 'Et voi vielä suorittaa tätä toimenpidettä.' }
+          format.html { redirect_to tasks_url(:layout => get_layout), alert: 'Et voi vielä suorittaa tätä toimenpidettä.' and return }
         end
       end
     else

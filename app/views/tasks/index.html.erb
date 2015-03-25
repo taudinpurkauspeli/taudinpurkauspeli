@@ -12,9 +12,9 @@
 
 <script>
 	//open task button
-	clickToOpenTaskTab("#taskTab .form-button-to-task", "#currentTaskTab");
+	setNewTabSubmits("#taskTab .form-button-to-task", "#currentTaskTab");
 	//move task up and down buttons
   setAjaxSubmits("#taskTab form:not(.form-button-to-task, .form-new-task)", "#taskTab", "post");
   //new task button
-  clickToOpenTaskTab("#taskTab .form-new-task", "#currentTaskTab");
+  setNewTabSubmits("#taskTab .form-new-task", "#currentTaskTab");
 </script>

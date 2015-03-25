@@ -50,7 +50,13 @@ function setAjaxSubmits(formsSelector, containerElementSelector, type, submitCal
 
 }
 
-function clickToOpenTaskTab(formsSelector, containerElementSelector, callback){
+/**
+*
+*
+*
+*
+*/
+function setNewTabSubmits(formsSelector, containerElementSelector, callback){
 	alert("clickToOpenTaskTab: " + formsSelector + "; " + containerElementSelector);
 	var containerElement = $(containerElementSelector);
 	var forms = $(formsSelector)
@@ -58,20 +64,10 @@ function clickToOpenTaskTab(formsSelector, containerElementSelector, callback){
 	forms.submit(function(e){
 		var actionUrl = $(this).attr("action");
 		var taskName = $(this).find('input[type="submit"]').attr("value");
-		//alert("urli: " + actionUrl);
+		alert("urli: " + actionUrl);
 		//e.preventDefault;
 		//alert($('#navigationTabs a[href="#currentTask"]').length);
-		var targetTabLink = $('#navigationTabs a[href="#currentTaskTab"]')
-
-		if(!targetTabLink.length){
-			$("#navigationTabs").append("<li role='presentation'><a href='#currentTaskTab' aria-controls='currentTask' role='tab' data-toggle='tab'>"+taskName+"</a></li>");
-			targetTabLink = $('#navigationTabs a[href="#currentTaskTab"]');
-		}else{
-			targetTabLink.html(taskName);
-		}
-
-		loadView(actionUrl, containerElementSelector, callback)
-		targetTabLink.tab('show');
+		openNewTab(actionUrl, containerElementSelector, taskName, callback);		
 		//$('#navigationTabs a[href="#currentTask"]')
 		//alert("klikkasit nappia");
 		return false;
@@ -79,7 +75,28 @@ function clickToOpenTaskTab(formsSelector, containerElementSelector, callback){
 
 }
 
-//Loads given url and inserts it inside given element with AJAX call
+function openNewTab(url, containerElementSelector, taskName, callback){
+	var targetTabLink = $('#navigationTabs a[href="'+containerElementSelector+'"]')
+
+	if(!targetTabLink.length){
+		$("#navigationTabs").append("<li role='presentation'><a href='"+containerElementSelector+"' aria-controls='currentTask' role='tab' data-toggle='tab'>"+taskName+"</a></li>");
+		targetTabLink = $('#navigationTabs a[href="'+containerElementSelector+'"]');
+	}else{
+		targetTabLink.html(taskName);
+	}
+	alert("pääsee openNewTabiin");
+
+	loadView(url, containerElementSelector, callback)
+	targetTabLink.tab('show');
+} 
+
+/**
+* Loads given url and inserts it inside given element with AJAX call
+*
+*
+*
+*
+*/
 function loadView(url, elementSelector, callback){
 	alert("loadView: " + url + "; " + elementSelector);
 	var element = $(elementSelector);
