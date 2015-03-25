@@ -58,25 +58,15 @@ RSpec.describe Subtask, type: :model do
       expect(actual).to eq expected
     end
 
-    def populate_task
-      subs = Array.new(10)
-      for i in 0...10
-        subs[i] = Subtask.create task_id:task. id
-      end
-      return subs
-    end
+   
 
-    def populate_user_with(array)
-      for i in 0...3
-        user.completed_subtasks.create(subtask:array[i])
-      end
-    end
+ 
 
     describe "prevents user from starting" do
 
            
       it "other than the first subtask" do
-        subs = populate_task
+        subs = populate_task(task)
         
         actual = user.can_complete_subtask?(task, subs[5])
         expected = false
@@ -85,8 +75,8 @@ RSpec.describe Subtask, type: :model do
       end
 
       it "the wrong subtask when user has completed some already" do
-        subs = populate_task
-        populate_user_with(subs)
+        subs = populate_task(task)
+        populate_user_with_subtasks(user, subs)
 
         actual = user.can_complete_subtask?(task, subs[8])
         expected = false
@@ -98,7 +88,7 @@ RSpec.describe Subtask, type: :model do
     describe "lets user start" do
 
       it "the first subtask" do
-        subs = populate_task
+        subs = populate_task(task)
         actual = user.can_complete_subtask?(task, subs[0])
         expected = true
 
@@ -106,8 +96,8 @@ RSpec.describe Subtask, type: :model do
       end
 
       it "the next subtask" do
-        subs = populate_task
-        populate_user_with(subs)
+        subs = populate_task(task)
+        populate_user_with_subtasks(user, subs)
 
         actual = user.can_complete_subtask?(task, subs[3])
         expected = true
