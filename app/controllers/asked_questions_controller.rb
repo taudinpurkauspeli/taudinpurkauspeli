@@ -3,7 +3,7 @@ class AskedQuestionsController < ApplicationController
 
 
   def create
-  
+
     @asked_question = AskedQuestion.new(asked_question_params)
      @task = Task.find(session[:task_id])
 
