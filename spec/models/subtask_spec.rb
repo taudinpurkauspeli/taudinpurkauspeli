@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Subtask, type: :model do
 	it "has the ids set correctly" do
-     subtask = Subtask.new task_id: 1, task_text_id: 1
+     subtask = Subtask.new task_id: 1
 
     expect(subtask.task_id).to eq(1)
-    expect(subtask.task_text_id).to eq(1)
 
   end
 
