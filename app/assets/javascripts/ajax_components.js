@@ -12,27 +12,22 @@ $(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
 * containerElementSelector: Selector string for element to be refreshed 
 */
 function setAjaxSubmits(formsSelector, containerElementSelector, type, submitCallback){
-	alert("setajaxsubmits: " + formsSelector + "; " + containerElementSelector);
+	//alert("setajaxsubmits: " + formsSelector + "; " + containerElementSelector);
 	var forms = $(formsSelector);
 	var containerElement = $(containerElementSelector);
 
 	forms.submit(function(){
 		var clickedForm = $(this);
-		//alert(location.protocol + "//" + location.host);
 		var postUrl = fullUrlWithoutLayout(clickedForm.attr("action"));
-		//alert("klikkasit submittia!");
-		//alert("action: " + postUrl);
-		//alert($(this).attr("id"));
-		alert(postUrl);
+		//alert(postUrl);
 
 		if(type == "post"){
 			$.post(postUrl, clickedForm.serialize())
 	    	.done(function(data) {
-					containerElement.html(data);
-					//setAjaxSubmits(formsSelector, containerElementSelector);
+					containerElement.html(data);					
 				})
 				.fail(function(data) {
-					alert("Virhe tallentaessa: \n" + data);
+					alert("Vihe post-pyynnössä: \n" + data);
 				})
 				.always(function() {
 					if(submitCallback != undefined){
@@ -42,8 +37,6 @@ function setAjaxSubmits(formsSelector, containerElementSelector, type, submitCal
 			}else{
 				loadView(postUrl, containerElementSelector, submitCallback)
 			}
-		
-		
 		
     return false;
 	});
@@ -57,19 +50,17 @@ function setAjaxSubmits(formsSelector, containerElementSelector, type, submitCal
 *
 */
 function setNewTabSubmits(formsSelector, containerElementSelector, callback){
-	alert("clickToOpenTaskTab: " + formsSelector + "; " + containerElementSelector);
+	//alert("clickToOpenTaskTab: " + formsSelector + "; " + containerElementSelector);
 	var containerElement = $(containerElementSelector);
 	var forms = $(formsSelector)
-	//alert("nappeja" + forms.length);
+
 	forms.submit(function(e){
 		var actionUrl = $(this).attr("action");
 		var taskName = $(this).find('input[type="submit"]').attr("value");
-		alert("urli: " + actionUrl);
-		//e.preventDefault;
-		//alert($('#navigationTabs a[href="#currentTask"]').length);
+		//alert("urli: " + actionUrl);
+		
 		openNewTab(actionUrl, containerElementSelector, taskName, callback);		
-		//$('#navigationTabs a[href="#currentTask"]')
-		//alert("klikkasit nappia");
+		
 		return false;
 	});
 
@@ -84,7 +75,6 @@ function openNewTab(url, containerElementSelector, taskName, callback){
 	}else{
 		targetTabLink.html(taskName);
 	}
-	alert("pääsee openNewTabiin");
 
 	loadView(url, containerElementSelector, callback)
 	targetTabLink.tab('show');
@@ -98,17 +88,13 @@ function openNewTab(url, containerElementSelector, taskName, callback){
 *
 */
 function loadView(url, elementSelector, callback){
-	alert("loadView: " + url + "; " + elementSelector);
+	//alert("loadView: " + url + "; " + elementSelector);
 	var element = $(elementSelector);
-	//alert(fullUrlWithoutLayout(url));
 	element.load(fullUrlWithoutLayout(url), function(responseTxt, statusTxt, xhr){
       if(statusTxt == "error"){
           element.html("<h1>Virhe sivua ladattaessa.</h1><div>"+responseTxt+"</div><p>"+statusTxt+"</p><p>"+xhr+"</p>");
       }else if(statusTxt == "success"){
-      	//setAjaxSubmits(element.find("form"));
       	if(callback != undefined){
-			  	//clickToOpenTab($('.btn-available-task'), $('#navigationTabs a[href="#currentTask"]'), url, element);
-			 		//alert("teki jotain");
 			 		callback();
 			  }
 

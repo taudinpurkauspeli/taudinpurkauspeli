@@ -37,7 +37,7 @@ class MultichoicesController < ApplicationController
         format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), notice: 'Kysymys lisättiin onnistuneesti.' }
         #format.json { render :show, status: :created, location: @multichoice }
       else
-        format.html { render :new }
+        format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), alert: 'Kysymyksen lisääminen epäonnistui.' }
         format.json { render json: @multichoice.errors, status: :unprocessable_entity }
       end
     end
@@ -51,7 +51,7 @@ class MultichoicesController < ApplicationController
         format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti.' }
       else
         @new_option = Option.new
-        format.html { render :edit }
+        format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), alert: 'Kysymyksen päivitys epäonnistui.' }
         format.json { render json: @multichoice.errors, status: :unprocessable_entity }
       end
     end

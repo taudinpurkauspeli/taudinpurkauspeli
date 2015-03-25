@@ -25,10 +25,10 @@ class SubtasksController < ApplicationController
     @subtask = Subtask.new(subtask_params)
     respond_to do |format|
       if @subtask.save
-        format.html { redirect_to @subtask, layout: get_layout, notice: 'Subtask was successfully created.' }
+        format.html { redirect_to @subtask, layout: get_layout, notice: 'Alitoimenpiteen luonti onnistui!' }
         format.json { render :show, status: :created, location: @subtask }
       else
-        format.html { redirect_to tasks_path(:layout => get_layout) }
+        format.html { redirect_to tasks_path(:layout => get_layout),  alert: 'Alitoimenpiteen luonti epäonnistui!' }
         format.json { render json: @subtask.errors, status: :unprocessable_entity }
       end
     end
@@ -39,7 +39,7 @@ class SubtasksController < ApplicationController
   def destroy
     @subtask.destroy
     respond_to do |format|
-      format.html { redirect_to subtasks_url(:layout => get_layout), notice: 'Subtask was successfully destroyed.' }
+      format.html { redirect_to subtasks_url(:layout => get_layout), notice: 'Alitoimenpide poistettu.' }
       format.json { head :no_content }
     end
   end

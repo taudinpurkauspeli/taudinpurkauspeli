@@ -72,7 +72,7 @@ class TasksController < ApplicationController
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide luotiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @task }
       else
-        format.html { redirect_to tasks_url(:layout => get_layout), notice: 'Toimenpiteen luonti epäonnistui.' }
+        format.html { redirect_to tasks_url(:layout => get_layout), alert: 'Toimenpiteen luonti epäonnistui.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -86,7 +86,7 @@ class TasksController < ApplicationController
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide päivitettiin onnistuneesti.' }
         format.json { render :show, status: :ok, location: @task }
       else
-        format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpiteen päivitys epäonnistui.' }
+        format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), alert: 'Toimenpiteen päivitys epäonnistui.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -98,7 +98,7 @@ class TasksController < ApplicationController
     session[:task_id] = nil
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url(:layout => get_layout), notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to tasks_url(:layout => get_layout), notice: 'Toimenpide poistettu.' }
       format.json { head :no_content }
     end
   end
