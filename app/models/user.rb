@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
 
   def complete_subtask(subtask)
     completed_subtasks.create(subtask:subtask)
+    task_in_progress = subtask.task
+    if task_in_progress.last_subtask?(subtask)
+      complete_task(task_in_progress)
+    end
   end
 
   def complete_task(task)
