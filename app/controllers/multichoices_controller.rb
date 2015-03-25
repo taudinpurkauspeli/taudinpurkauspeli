@@ -65,7 +65,7 @@ class MultichoicesController < ApplicationController
 
         format.html { redirect_to task_path(@multichoice.subtask.task, :layout => get_layout), notice: 'Valitsit oikein!' }
       else
-        format.html { redirect_to @multichoice.subtask.task, layout: get_layout, alert: 'Valinnoissa oli vielä virheitä!' }
+        format.html { redirect_to task_path(@multichoice.subtask.task, :layout => get_layout), alert: 'Valinnoissa oli vielä virheitä!' }
       end
     end
   end
