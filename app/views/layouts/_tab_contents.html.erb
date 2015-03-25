@@ -3,14 +3,10 @@
   loadView("<%= exercise_path(current_exercise) %>", "#anamnesisTab");
   
   //hypothesesTab
-  loadView("/hypotheses", "#hypothesisTab", function(){
-  	//setAjaxSubmits("#hypothesisTab form", "#hypothesisTab");
-  });
+  loadView("/hypotheses", "#hypothesisTab");
 
   //taskTab
-  loadView("/tasks", "#taskTab", function(){
-
-  });
+  loadView("/tasks", "#taskTab");
 
   <% unless current_task.nil? %>
     loadView("/tasks/<%= current_task.id %>/edit", "#currentTaskTab")
