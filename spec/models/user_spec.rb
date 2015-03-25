@@ -66,4 +66,27 @@ RSpec.describe User, :type => :model do
     user.completed_tasks.create(task:task)
     expect(user.get_number_of_tasks_by_level(exercise, task.level)).to eq(1)
   end
+
+  describe "completed subtasks" do
+  let!(:user){FactoryGirl.create(:user)}
+
+    it "can be added" do
+      subtask = Subtask.create
+      expect {
+        user.complete_subtask(subtask)
+      }.to change{user.subtasks.count}.by(1)
+    end
+  end
+
+    describe "completed tasks" do
+  let!(:user){FactoryGirl.create(:user)}
+
+    it "can be added" do
+      subtask = Task.create name:"Tasque"
+      expect {
+        user.complete_task(task)
+      }.to change{user.tasks.count}.by(1)
+    end
+  end
+
 end

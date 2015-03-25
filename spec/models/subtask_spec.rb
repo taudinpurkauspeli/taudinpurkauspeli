@@ -29,6 +29,7 @@ RSpec.describe Subtask, type: :model do
 
   describe "level" do
     let!(:task){FactoryGirl.create(:task, exercise_id:1, level:1)}
+    let!(:user){FactoryGirl.create(:user)}
 
     it "is set correctly when no subtasks exist" do
       subtask = Subtask.create task_id:task.id
@@ -55,6 +56,64 @@ RSpec.describe Subtask, type: :model do
       expected = [1, 2, 3, 4, 5]
 
       expect(actual).to eq expected
+    end
+
+    def populate_task
+      subs = Array.new(10)
+      for i in 0...10
+        subs[i] = Subtask.create task_id:task. id
+      end
+      return subs
+    end
+
+    def populate_user_with(array)
+      for i in 0...3
+        user.completed_subtasks.create(subtask:array[i])
+      end
+    end
+
+    describe "prevents user from starting" do
+
+           
+      it "other than the first subtask" do
+        subs = populate_task
+        
+        actual = user.can_complete_subtask?(task, subs[5])
+        expected = false
+
+        expect(actual).to eq expected
+      end
+
+      it "the wrong subtask when user has completed some already" do
+        subs = populate_task
+        populate_user_with(subs)
+
+        actual = user.can_complete_subtask?(task, subs[8])
+        expected = false
+
+        expect(actual).to eq expected
+      end
+    end
+
+    describe "lets user start" do
+
+      it "the first subtask" do
+        subs = populate_task
+        actual = user.can_complete_subtask?(task, subs[0])
+        expected = true
+
+        expect(actual).to eq expected
+      end
+
+      it "the next subtask" do
+        subs = populate_task
+        populate_user_with(subs)
+
+        actual = user.can_complete_subtask?(task, subs[3])
+        expected = true
+
+        expect(actual).to eq expected
+      end
     end
   end
 end
