@@ -22,7 +22,7 @@
 
 <script>
   
-  setAjaxSubmits("#currentTaskTab .form-mutichoice-answers", "#currentTaskTab", "post", function(){
+  setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post", function(){
     alert("NAKKIII");
     loadView("/tasks", "#taskTab");
   });

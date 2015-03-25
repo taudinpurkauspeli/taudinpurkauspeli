@@ -12,14 +12,19 @@
 <%= button_to '+ Luo uusi toimenpide', new_task_path, :class => 'btn btn-default btn-save btn-new-task', :form_class => "form-new-task", :method => :get if current_user_is_admin %>
 
 <script>
+	//STUDENT
 	//open task button for student
 	setNewTabSubmits("#taskTab .form-to-task-student", "#currentTaskTab");
 	//submits for task that cannot be done
 	setAjaxSubmits("#taskTab .form-cannot-task-student", "#taskTab", "get");
+	//
+	setNewTabSubmits("#taskTab .form-completed-task", "#currentTaskTab");
+
+	//TEACHER
 	//open task button for teacher
 	setNewTabSubmits("#taskTab .form-button-to-task", "#currentTaskTab");
 	//move task up and down buttons
-  setAjaxSubmits("#taskTab form:not(.form-button-to-task, .form-new-task, .form-cannot-task-student, .form-to-task-student)", "#taskTab", "post");
+  setAjaxSubmits("#taskTab form:not(.form-button-to-task, .form-new-task, .form-cannot-task-student, .form-to-task-student, .form-completed-task)", "#taskTab", "post");
   //new task button
   setNewTabSubmits("#taskTab .form-new-task", "#currentTaskTab");
 </script>
