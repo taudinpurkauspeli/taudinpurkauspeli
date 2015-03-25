@@ -4,45 +4,31 @@
   </div>
 
   <div class="panel-body"  padding-left: 200px>
-
-
-
-   <div class="row">
-    <div class="col-md-4">
-      <p class="panel-title"> Kysymys</h3></div>
-
-      <div class="col-md-4">
-        <p class="panel-title"> Sisältö</h3></div>
-      </div>
-    </div>
-
     <% subtask.interview.questions.each do |question| %>
     <div class="row">
 
+
       <div class="col-md-4 text-padding">
+        <%= if !current_user_is_admin
+          then render 'question_button', {question: question}
+         end %>
 
+      </div>
 
-          <%= if !current_user_is_admin
-  then render 'question_button'
-else
-  end %>
-    
+      <div class="col-md-4 text-padding">
+          <%= question.content %>
+      </div>
+
      </div>
-     <div class="col-md-4 text-padding">
-      <%= question.content %>
+   
+
     </div>
-  </div>
-  <br />
+    <% end %>
 
-
-</div>
-<% end %>
-
-<%= if !current_user_has_completed_task(@task.id) && !current_user_is_admin
-  then render 'continue_button'
-else
-  end %>
-</div>
+    <%= if !current_user_is_admin then render 'continue_button'
+    else
+      end %>
+    </div>
 
 
 

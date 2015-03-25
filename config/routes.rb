@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 
   resources :question_groups
 
-  resources :asked_questions
+  resources :asked_questions, only: [:create]
 
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy', as: :level_up
