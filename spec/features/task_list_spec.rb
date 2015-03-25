@@ -56,7 +56,7 @@ describe "Task list page" do
         expect {
           click_button('Jatka')
         }.to change(CompletedTask, :count).by (1)
-        expect(current_path).to eq(tasks_path)
+        expect(current_path).to eq(task_path(task.id))
       end
 
 
@@ -64,22 +64,24 @@ describe "Task list page" do
         FactoryGirl.create(:completed_task, task:task, user:user)
         click_button(task2_1.name)
         click_button('Jatka')
+        click_link('Toimenpiteet')
         click_button(task2_2.name)
         expect {
           click_button('Jatka')
         }.to change(CompletedTask, :count).by (1)
-        expect(current_path).to eq(tasks_path)
+        expect(current_path).to eq(task_path(task2_2.id))
       end
 
       it "user should be able to do the tasks of same level in any order (case b)" do
         FactoryGirl.create(:completed_task, task:task, user:user)
         click_button(task2_2.name)
         click_button('Jatka')
+        click_link('Toimenpiteet')
         click_button(task2_1.name)
         expect {
           click_button('Jatka')
         }.to change(CompletedTask, :count).by (1)
-        expect(current_path).to eq(tasks_path)
+        expect(current_path).to eq(task_path(task2_1.id))
       end
 
       describe "has not completed required prerequisite tasks" do
