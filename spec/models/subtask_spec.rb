@@ -9,6 +9,7 @@ RSpec.describe Subtask, type: :model do
   end
 
   describe "with correct ids" do
+    let!(:task){FactoryGirl.create(:task, exercise_id:1, level:1)}
     let!(:subtask){FactoryGirl.create(:subtask, task_id:1)}
 
     it "is saved" do
@@ -23,6 +24,23 @@ RSpec.describe Subtask, type: :model do
       subtask = Subtask.create task_id: nil
       expect(subtask).not_to be_valid
       expect(Subtask.count).to eq(0)
+    end
+  end
+
+  describe "is created with correct level" do
+    let!(:task){FactoryGirl.create(:task, exercise_id:1, level:1)}
+
+    it "when no subtasks exist" do
+      subtask = Subtask.create task_id:task.id
+      expect(subtask.level).to eq(1)
+    end
+
+    it "when prior subtasks exist" do
+      for i in 0...3
+        Subtask.create task_id:task.id
+      end
+      subtask = Subtask.create task_id:task.id
+      expect(subtask.level).to eq(4)
     end
   end
 end
