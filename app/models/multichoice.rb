@@ -4,7 +4,7 @@ class Multichoice < ActiveRecord::Base
 	belongs_to :subtask
 	has_many :options, dependent: :destroy
 
-	def check_right_answers(user, checked_options)
+	def user_answered_correctly?(user, checked_options)
 		right_answers = options.where(is_correct_answer:true).map(&:id).map!(&:to_s)
 		if (right_answers - checked_options).empty?
 			if(checked_options - right_answers).empty?
