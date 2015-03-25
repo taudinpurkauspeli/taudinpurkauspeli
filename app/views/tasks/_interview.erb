@@ -16,14 +16,13 @@
       </div>
     </div>
 
- <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/check_answers", method: "post") do %>
     <% subtask.interview.questions.each do |question| %>
     <div class="row">
 
       <div class="col-md-4 text-padding">
-         <%= check_box_tag 'checked_questions[]', question.id, nil, id: "checked_questions_" + question.id.to_s %>
-             
-       <%= question.title %>
+ 
+          <%= button_to question.title, question_path, :class => 'btn btn-default btn-save btn-new-task', :method => :get  %>
+      
      </div>
      <div class="col-md-4 text-padding">
       <%= question.content %>
@@ -31,7 +30,6 @@
   </div>
   <br />
 
-  <% end %> 
 
 </div>
 <% end %>

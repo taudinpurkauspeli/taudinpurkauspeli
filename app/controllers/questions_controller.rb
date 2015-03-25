@@ -1,13 +1,16 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin
+  before_action :ensure_user_is_admin, except: [:show]
 
   def new
     @question = Question.new
   end
 
   def edit
+  end
+
+  def show
   end
 
   def create

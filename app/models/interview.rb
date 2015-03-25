@@ -3,4 +3,6 @@ class Interview < ActiveRecord::Base
 
 	belongs_to :subtask
 	has_many :questions, dependent: :destroy
+
+	
 end
