@@ -51,6 +51,14 @@ class TaskTextsController < ApplicationController
     end
   end
 
+  # /task_texts/:id/check_answers'
+  def check_answers
+    @task_text.user_answered_correctly?(user)
+    respond_to do |format|
+      format.html { redirect_to task_path(@multichoice.subtask.task), notice: 'Valitsit oikein!' }
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_task_text
