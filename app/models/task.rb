@@ -7,10 +7,6 @@ class Task < ActiveRecord::Base
   has_many :subtasks, -> {order('level')}, dependent: :destroy
   has_many :task_texts, through: :subtasks
 
-  def last_subtask?(subtask)
-    return subtasks.last == subtask
-  end
-
   def self.get_highest_level(exercise)
     highest_level = exercise.tasks.maximum("level")
     unless highest_level.nil?

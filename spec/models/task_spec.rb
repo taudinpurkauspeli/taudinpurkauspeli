@@ -44,7 +44,6 @@ RSpec.describe Task, :type => :model do
     end
   end
 
-
   describe "changing task's order" do
 
     def get_values
