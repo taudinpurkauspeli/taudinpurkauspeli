@@ -16,7 +16,16 @@
                 <%= render 'question_button', {question: question} %>
               <% else %>
 
-                <%= button_to question.title, question, method: :get, :class => 'btn btn-default btn-del' %>
+
+                  <div class="row">
+                      <div class="col-md-9">
+                        <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
+                      </div>
+                 </div>
+                  <div class="collapse" id="collapseQuestionContent<%= question.id%>" >
+                      <p><%= question.content %></p>
+                  </div>
+
               <%end %>
           </div>
 
