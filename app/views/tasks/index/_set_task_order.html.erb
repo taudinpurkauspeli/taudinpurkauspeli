@@ -8,9 +8,9 @@
             </div>
             <div class = "div-task-order-updown">
 
-	        <%= button_to 'tasks/' + task.id.to_s + '/up', method: :post, :class => 'btn btn-default btn-task-up multiline', :form_class => "height50", id: 'tasks/' + task.id.to_s + '/up' do %>
-	          <span class="glyphicon glyphicon-chevron-up"></span>
-	        <% end %>
+    	        <%= button_to 'tasks/' + task.id.to_s + '/up', method: :post, :class => 'btn btn-default btn-task-up multiline', :form_class => "height50", id: 'tasks/' + task.id.to_s + '/up' do %>
+    	          <span class="glyphicon glyphicon-chevron-up"></span>
+    	        <% end %>
 
               <%= button_to 'tasks/' + task.id.to_s + '/down', method: :post, :class => 'btn btn-default btn-task-down multiline', :form_class => "height50", id: 'tasks/' + task.id.to_s + '/down' do %>
                 <span class="glyphicon glyphicon-chevron-down"></span>

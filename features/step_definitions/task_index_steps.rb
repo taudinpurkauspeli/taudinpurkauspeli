@@ -12,13 +12,19 @@ Given(/^cases and tasks have been created$/) do
 end
 
 When(/^I click on the fancy\-ass chevron up beside button "(.*?)"$/) do |arg1|
-	buttons = all(:button)
-	buttons[6].click
+	task_id = Task.where(name: arg1).first.id
+	button = find_by_id("tasks/" + task_id.to_s + "/up")
+
+	button.click
+	wait_for_ajax
 end
 
 When(/^I click on the down chevron beside button "(.*?)"$/) do |arg1|
-	buttons = all(:button)
-	buttons[7].click
+	task_id = Task.where(name: arg1).first.id
+	button = find_by_id("tasks/" + task_id.to_s + "/down")
+
+	button.click
+	wait_for_ajax
 
 end
 

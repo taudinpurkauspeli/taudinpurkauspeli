@@ -15,6 +15,9 @@
       </header>
       <main role="main">
         <%#= render 'layouts/messages' %>
+        <p id="notice"><%= notice %></p>
+        <p id="alert"><%= alert %></p>
+        
         <% if !current_user.nil? && !current_exercise.nil? %>
 
           <div class="tab-content">

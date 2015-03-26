@@ -45,7 +45,7 @@ describe "Hypothesis list page", js:true do
           expect(page).to have_content 'Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin.'
         end
       end
-
+    end
 
     describe "and has completed required task" do
       before :each do
