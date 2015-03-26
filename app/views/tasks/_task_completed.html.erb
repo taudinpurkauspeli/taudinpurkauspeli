@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Toimenpide suoritettu!</h3>
+  </div>
+  <div class="panel-body">
+  	<p>Nyt voit mennä poissulkemaan työhypoteeseja tai suorittamaan lisää toimenpiteitä.</p>
+	  <div class="row">
+	    <div class="col-md-3">
+	      <%= button_to 'Työhypoteesilista', hypotheses_path, :class => 'btn btn-default widthAuto', :method => :get %>
+	    </div>
+	    <div class="col-md-3">
+	      <%= button_to 'Toimenpidelista', tasks_path, :class => 'btn btn-default widthAuto', :method => :get %>
+	  </div>
+ 	</div>
+  </div>
+</div>

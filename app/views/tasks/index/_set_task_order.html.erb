@@ -1,7 +1,7 @@
 <div class = "div-tasks-container-admin">
       <% previous_level = 0 %>
       <% @tasks.each do |task| %>
-        <% if !current_user_has_completed_task(task.id) %>
+        <% if !current_user.has_completed?(task) %>
           <div class = "div-task-order-container <% if task.level > previous_level then %> clearLeft <% end %>">
             <div class = "div-task-order-taskbutton">
               <%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-task-order multiline', :form_class => "form-button-to-task height100" %>

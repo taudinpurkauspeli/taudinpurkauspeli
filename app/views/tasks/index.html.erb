@@ -4,10 +4,10 @@
 <h1>Toimenpiteet</h1>
 
 <% if current_user_is_admin %>
-  <%= render 'set_task_order' %>
+  <%= render 'tasks/index/set_task_order' %>
 <% else %>
-  <%= render 'list_of_available_tasks' %>
-  <%= render 'list_of_completed_tasks' %>
+  <%= render 'tasks/index/list_of_available_tasks' %>
+  <%= render 'tasks/index/list_of_completed_tasks' %>
 <% end %>
 <%= button_to '+ Luo uusi toimenpide', new_task_path, :class => 'btn btn-default btn-save btn-new-task', :form_class => "form-new-task", :method => :get if current_user_is_admin %>
 

@@ -1,7 +1,7 @@
 class TaskTextsController < ApplicationController
-  before_action :set_task_text, only: [:show, :edit, :update, :destroy]
+  before_action :set_task_text, only: [:show, :edit, :update, :destroy, :check_answers]
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin
+  before_action :ensure_user_is_admin, except: [:check_answers]
 
   # GET /tasks
   # GET /tasks.json
@@ -52,6 +52,14 @@ class TaskTextsController < ApplicationController
         format.html { redirect_to edit_task_path(@task_text.subtask.task.id, :layout => get_layout), notice: 'Kysymys päivitys epäonnistui!' }
         format.json { render json: @task_text.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # /task_texts/:id/check_answers'
+  def check_answers
+    @task_text.user_answered_correctly?(current_user  )
+    respond_to do |format|
+      format.html { redirect_to task_path(@task_text.subtask.task), notice: 'Valitsit oikein!' }
     end
   end
 

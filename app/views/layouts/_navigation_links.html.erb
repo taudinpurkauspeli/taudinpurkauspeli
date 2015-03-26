@@ -2,6 +2,7 @@
 <li role="presentation" class="active"><a href="#anamnesisTab" aria-controls="home" role="tab" data-toggle="tab">Anamneesi</a></li>
 <li role="presentation"><a href="#taskTab" aria-controls="tasks" role="tab" data-toggle="tab">Toimenpiteet</a></li>
 <li role="presentation"><a href="#hypothesisTab" aria-controls="hypotheses" role="tab" data-toggle="tab">Työhypoteesit</a></li>
-<% unless current_task.nil? || current_user_has_completed_task(current_task.id) %>
+<% unless current_task.nil? || current_user.has_completed?(current_task) %>
 	<li role="presentation"><a href="#currentTaskTab" aria-controls="currentTask" role="tab" data-toggle="tab"><%= current_task.name %></a></li>
 <% end %>
+

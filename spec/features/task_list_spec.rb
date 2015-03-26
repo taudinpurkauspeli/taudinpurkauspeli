@@ -69,8 +69,8 @@ describe "Task list page", js:true do
           wait_for_ajax
         }.to change(CompletedTask, :count).by (1)
 
-        expect(current_path).to eq(tasks_path)
         expect(CompletedTask.first.task.name).to eq(task.name)
+
       end
 
       it "user should be able to do the tasks of same level in any order (case a)" do
@@ -82,7 +82,8 @@ describe "Task list page", js:true do
 
         click_button('Jatka')
         wait_for_ajax
-
+        click_link('Toimenpiteet')
+        wait_for_ajax
         click_button(task2_2.name)
         wait_for_ajax
 
@@ -91,8 +92,8 @@ describe "Task list page", js:true do
           wait_for_ajax
         }.to change(CompletedTask, :count).by (1)
 
-        expect(current_path).to eq(tasks_path)
         expect(CompletedTask.last.task.name).to eq(task2_2.name)
+
       end
 
       it "user should be able to do the tasks of same level in any order (case b)" do
@@ -104,7 +105,8 @@ describe "Task list page", js:true do
 
         click_button('Jatka')
         wait_for_ajax
-
+        click_link('Toimenpiteet')
+        wait_for_ajax
         click_button(task2_1.name)
         wait_for_ajax
 
@@ -113,7 +115,6 @@ describe "Task list page", js:true do
           wait_for_ajax
         }.to change(CompletedTask, :count).by (1)
 
-        expect(current_path).to eq(tasks_path)
         expect(CompletedTask.last.task.name).to eq(task2_2.name)
       end
 

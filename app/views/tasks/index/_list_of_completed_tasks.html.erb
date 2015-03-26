@@ -6,9 +6,8 @@
   </div>
   <div id="collapse-done-tasks" class="panel-collapse collapse in">
     <div class="panel-body">
-
       <% @tasks.each do |task| %>
-        <% if current_user_has_completed_task(task.id) %>
+        <% if current_user.has_completed?(task) %>
           <div class="row">
             <div class="col-md-5">
               <%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task', :form_class => "form-completed-task" %>
@@ -16,7 +15,6 @@
           </div>  
         <% end %>
       <% end %>
-   
     </div>
   </div>
 </div>

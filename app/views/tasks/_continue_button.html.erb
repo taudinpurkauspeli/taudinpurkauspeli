@@ -1,5 +1,0 @@
-<%= form_for(@new_completed_task) do |f| %>
-	<%= f.hidden_field :task_id, :value => @task.id %>
-	<%= f.hidden_field :user_id, :value => current_user.id %>
-	<%= f.submit "Jatka", :class => 'btn btn-default btn-save widthAuto' %>
-<% end %>

@@ -25,7 +25,7 @@ RSpec.describe CompletedTasksController, :type => :controller do
        it "creates a new CompletedTask" do
          expect {
             post :create, { :completed_task => valid_attributes }, valid_session
-           }.to change(CompletedTask, :count).by(1)
+         }.to change(CompletedTask, :count).by(1)
          end
        end
 
