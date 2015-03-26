@@ -6,15 +6,6 @@
 
 <% @subtasks.each do |subtask| %>
   <% if current_user.can_complete_subtask?(@task, subtask) %>
-    <% if !subtask.task_text.nil? %>
-      <%= render 'task_text', {subtask: subtask} %>
-    <% elsif !subtask.multichoice.nil? %>
-      <% if !current_user_has_completed_task(@task.id) %>
-        <%= render 'multichoice', {subtask: subtask} %>
-        <%= render 'right_answers', {subtask: subtask} if current_user_is_admin %>
-      <% else %>
-        <%= render 'right_answers', {subtask: subtask} %>
-      <% end %>
-    <% end %>
+    <%= render subtask.template, { subtask:subtask } %>
   <% end %>
 <% end %>

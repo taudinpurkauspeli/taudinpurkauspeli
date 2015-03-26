@@ -1,4 +1,3 @@
-
 class User < ActiveRecord::Base
 	validates :username, presence: true, uniqueness: true
 	validates :realname, presence: true, length: { minimum: 4 }
@@ -17,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :subtasks, through: :completed_subtasks
 
   def has_completed?(subtask)
-    return completed_subtasks.where(subtask:subtask).nil?
+    return !completed_subtasks.where(subtask:subtask).nil?
   end
 
   def complete_subtask(subtask)
