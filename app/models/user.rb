@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
   
+  has_many :asked_questions, dependent: :destroy
+  has_many :questions, through: :asked_questions
   has_many :checked_hypotheses, dependent: :destroy
   has_many :exercise_hypotheses, through: :checked_hypotheses
   
@@ -80,4 +82,10 @@ class User < ActiveRecord::Base
   def has_completed_task(id)
     return completed_tasks.where(id:id).nil?
   end
+
+  def has_asked_question?(question)
+    return !asked_questions.where(question:question).empty?
+  end
+
+
 end
