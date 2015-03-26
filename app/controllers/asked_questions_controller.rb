@@ -9,10 +9,9 @@ class AskedQuestionsController < ApplicationController
      
      respond_to do |format|
       if @asked_question.save
-        byebug
-        format.html { redirect_to @asked_question.question.interview.subtask.task }
+        format.html { redirect_to @task }
       else
-        format.html { redirect_to tasks_url, @asked_question.question.interview.subtask.task, alert: "=(" }
+        format.html { redirect_to tasks_url, @task, alert: "=(" }
       end
     end
   end

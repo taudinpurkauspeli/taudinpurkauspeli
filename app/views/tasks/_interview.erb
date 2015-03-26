@@ -12,7 +12,7 @@
 
 
            <div class="col-md-4 text-padding">
-              <% if !current_user.has_asked_question(question) %>
+              <% if !current_user.has_asked_question?(question) %>
                 <%= render 'question_button', {question: question} %>
               <% else %>
 
