@@ -4,12 +4,12 @@ describe "Hypothesis list page", js:true do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
   let!(:hypothesis_group){FactoryGirl.create(:hypothesis_group)}
-  let!(:hypothesis){FactoryGirl.create(:hypothesis)}
-  let!(:task){FactoryGirl.create(:task)}
+  let!(:task){FactoryGirl.create(:task, exercise:exercise, level:1)}
+  let!(:hypothesis){FactoryGirl.create(:hypothesis, hypothesis_group:hypothesis_group)}
+  let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, exercise:exercise, hypothesis:hypothesis, task:task)}
 
   describe "if user is signed in as student" do
     let!(:user){FactoryGirl.create(:student)}
-    let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis)}
 
     before :each do
       sign_in(username:"Opiskelija", password:"Salainen1")
@@ -46,17 +46,20 @@ describe "Hypothesis list page", js:true do
         end
       end
 
-      describe "and has completed required task" do
-        let!(:completed_task){FactoryGirl.create(:completed_task)}
 
-        it "user should be able to check hypotheses of an exercise" do
-          expect {
-            click_button('Virustauti')
-            wait_for_ajax
-          }.to change(CheckedHypothesis, :count).by (1)
-          expect(page).to have_content 'poissuljettu'
-          expect(CheckedHypothesis.first.hypothesis.name).to eq('Virustauti')
-        end
+    describe "and has completed required task" do
+      before :each do
+        click_button('Lihanautakuolemat')
+        wait_for_ajax
+        click_link('Työhypoteesit')
+        wait_for_ajax
+      end
+      it "user should be able to check hypotheses of an exercise" do
+        user.completed_tasks.create task_id:task.id
+        expect {
+          click_button('Virustauti')
+          wait_for_ajax
+        }.to change(CheckedHypothesis, :count).by (1)
       end
     end
 
@@ -64,9 +67,9 @@ describe "Hypothesis list page", js:true do
 
   describe "if user is signed in as teacher" do
     let!(:user){FactoryGirl.create(:user)}
-    let!(:hypothesis2){FactoryGirl.create(:banked_hypothesis)}
-    let!(:task2){FactoryGirl.create(:task, name: "Asiakkaan soitto")}
-    let!(:exercise_hypothesis2){FactoryGirl.create(:exercise_hypothesis, task_id:nil)}
+    let!(:hyp){FactoryGirl.create(:banked_hypothesis)}
+    let!(:task2){FactoryGirl.create(:task, name: "Asiakkaan soitto", exercise_id:exercise.id)}
+    let!(:exercise_hypothesis2){FactoryGirl.create(:exercise_hypothesis, task_id:nil, exercise_id:exercise.id, hypothesis_id:hyp.id)}
 
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
@@ -154,7 +157,7 @@ describe "Hypothesis list page", js:true do
           wait_for_ajax
         end
       end
-
+      
       it "user should be able to edit the explanation of a hypothesis added to an exercise" do
         while(ExerciseHypothesis.first.explanation != 'Virus ei olekaan bakteeritauti')
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318134758) do
+ActiveRecord::Schema.define(version: 20150325115507) do
 
   create_table "checked_hypotheses", force: :cascade do |t|
     t.integer "user_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150318134758) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text     "anamnesis"
+    t.boolean  "hidden"
   end
 
   create_table "hypotheses", force: :cascade do |t|
@@ -51,6 +52,13 @@ ActiveRecord::Schema.define(version: 20150318134758) do
 
   create_table "hypothesis_groups", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "interviews", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "subtask_id"
   end
 
   create_table "multichoices", force: :cascade do |t|
@@ -70,11 +78,27 @@ ActiveRecord::Schema.define(version: 20150318134758) do
     t.datetime "updated_at",        null: false
   end
 
-  create_table "subtasks", force: :cascade do |t|
-    t.integer  "task_id"
-    t.integer  "task_text_id"
+  create_table "question_groups", force: :cascade do |t|
+    t.string   "title"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "interview_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "title"
+    t.string   "content"
+    t.boolean  "required"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "question_group_id"
+  end
+
+  create_table "subtasks", force: :cascade do |t|
+    t.integer  "task_id"
+    t.integer  "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "task_texts", force: :cascade do |t|

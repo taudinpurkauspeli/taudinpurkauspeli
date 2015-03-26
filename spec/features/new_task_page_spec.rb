@@ -1,18 +1,22 @@
-=begin
+
 require 'rails_helper'
 
+
 describe "New Task page", js:true do
+    let!(:exercise){FactoryGirl.create(:exercise)}
 
   describe "if user is signed in as admin" do
 
     let!(:user){FactoryGirl.create(:user)}
-    let!(:exercise){FactoryGirl.create(:exercise)}
 
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
       click_button(exercise.name)
     end
 
+    def get_task_count
+      return Task.where(level:1...999).count
+    end
 
 
 
@@ -27,7 +31,7 @@ describe "New Task page", js:true do
 
       expect(page).to have_content 'Toimenpide luotiin onnistuneesti.'
       #expect(page).to have_button 'Soita asiakkaalle'
-      expect(Task.count).to eq(1)
+      expect(get_task_count).to eq(1)
       expect(TaskText.count).to eq(0)
       expect(Multichoice.count).to eq(0)
       expect(Subtask.count).to eq(0)
@@ -46,11 +50,11 @@ describe "New Task page", js:true do
        click_button('Tallenna')
       #expect(page).to have_content 'Toimenpiteen luominen onnistui!'
       expect(page).to have_content 'Asiakas kertoo, että koira on kipeä.'
-      expect(Task.count).to eq(1)
+      expect(get_task_count).to eq(1)
       expect(TaskText.count).to eq(1)
       expect(Subtask.count).to eq(1)
 
-      expect(Task.first.task_texts.first.content).to eq("Asiakas kertoo, että koira on kipeä.")
+      expect(Task.where(level:1...999).first.task_texts.first.content).to eq("Asiakas kertoo, että koira on kipeä.")
     end
 
     it "user should not be able to create a new task without a name" do
@@ -61,7 +65,7 @@ describe "New Task page", js:true do
       click_button('Tallenna')
 
       expect(current_path).to eq(tasks_path)
-      expect(Task.count).to eq(0)
+      expect(get_task_count).to eq(0)
       expect(TaskText.count).to eq(0)
       expect(Multichoice.count).to eq(0)
       expect(Subtask.count).to eq(0)
@@ -97,12 +101,12 @@ describe "New Task page", js:true do
       fill_in('task_text_content', with: "Asiakas kertoo, että koira ei ole kipeä!")
       click_button('Tallenna')
 
-      expect(current_path).to eq(edit_task_path(1))
-      expect(Task.count).to eq(1)
+      expect(current_path).to eq(edit_task_path(2))
+      expect(get_task_count).to eq(1)
       expect(TaskText.count).to eq(1)
       expect(Subtask.count).to eq(1)
 
-      expect(Task.first.task_texts.first.content).to eq("Asiakas kertoo, että koira ei ole kipeä!")
+      expect(Task.where(level:1...999).first.task_texts.first.content).to eq("Asiakas kertoo, että koira ei ole kipeä!")
 
       
     end
@@ -120,7 +124,7 @@ describe "New Task page", js:true do
        click_button('Tallenna')
       #expect(page).to have_content 'Toimenpiteen luominen onnistui!'
       expect(page).to have_content 'Seuraavat virheet estivät tallennuksen:'
-      expect(Task.count).to eq(1)
+      expect(get_task_count).to eq(1)
       expect(TaskText.count).to eq(0)
       expect(Subtask.count).to eq(0)
 
@@ -140,7 +144,7 @@ describe "New Task page", js:true do
        click_button('Päivitä')
 
        expect(page).to have_content 'Seuraavat virheet estivät tallennuksen:'
-       expect(Task.first.name).to eq("Soita asiakkaalle")
+       expect(Task.where(level:1...999).first.name).to eq("Soita asiakkaalle")
 
 
 
@@ -166,7 +170,7 @@ describe "New Task page", js:true do
       click_button('Tallenna')
 
       expect(page).to have_content("Seuraavat virheet estivät tallennuksen:")
-      expect(Task.first.task_texts.first.content).to eq("Asiakas kertoo, että koira on kipeä.")
+      expect(Task.where(level:1...999).first.task_texts.first.content).to eq("Asiakas kertoo, että koira on kipeä.")
     end
 
 
@@ -199,4 +203,4 @@ describe "New Task page", js:true do
 
 
 end
-=end
+

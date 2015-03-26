@@ -12,8 +12,8 @@ Given(/^some hypotheses have been added to case$/) do
 
   create_hypotheses
 
-  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1, explanation: "Nauta oli kipeä", task_id:1)
-  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2, explanation: "Hevonen oli kipeä", task_id:1)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1, explanation: "Nauta oli kipeä", task_id:3)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2, explanation: "Hevonen oli kipeä", task_id:3)
 end
 
 Given(/^cases and hypothesis groups have been created$/) do
@@ -30,8 +30,8 @@ Given(/^hypotheses with prerequisite tasks have been added to case$/) do
   create_hypothesis_groups
   create_tasks
   create_hypotheses
-  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1, explanation: "Nauta katkesi keskeltä", task_id:1)
-  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2, explanation: "Hevonen katkesi keskeltä", task_id:1)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1, explanation: "Nauta katkesi keskeltä", task_id:3)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2, explanation: "Hevonen katkesi keskeltä", task_id:3)
 end
 
 Given(/^I have completed all the tasks$/) do

@@ -4,7 +4,7 @@ class Task < ActiveRecord::Base
 
   has_many :completed_tasks, dependent: :destroy
   has_many :users, through: :completed_tasks
-  has_many :subtasks, dependent: :destroy
+  has_many :subtasks, -> {order('level')}, dependent: :destroy
   has_many :task_texts, through: :subtasks
 
   def self.get_highest_level(exercise)

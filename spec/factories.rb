@@ -25,36 +25,36 @@ FactoryGirl.define do
 
   factory :task do
     name "Soita asiakkaalle"
-    exercise_id 1
+    exercise_id nil
     level 1
   end
 
   factory :task_with_long_name, class: Task do
     name "Hoida"
-    exercise_id 1
+    exercise_id nil
     level 1
   end
 
   factory :task_with_short_name, class: Task do
     name "Soita jokaiselle mahdolliselle lääkärille ja asiakkaalle jonka tunnet"
-    exercise_id 1
+    exercise_id nil
     level 1
   end
 
   factory :hypothesis do
     name "Virustauti"
-    hypothesis_group_id 1
+    hypothesis_group_id nil
   end
 
   factory :banked_hypothesis, class: Hypothesis do
     name "Sorkkatauti"
-    hypothesis_group_id 1
+    hypothesis_group_id nil
   end
 
   factory :exercise_hypothesis do
-    exercise_id 1
-    hypothesis_id 1
-    task_id 1
+    exercise_id nil
+    hypothesis_id nil
+    task_id nil
     explanation "Anamneesin mukaan tauti on virustauti"
   end
 
@@ -63,34 +63,45 @@ FactoryGirl.define do
   end
 
   factory :completed_task do
-    user_id 1
-    task_id 1
+    user_id nil
+    task_id nil
   end
 
   factory :subtask do
-    task_id 1
+    task_id nil
   end
 
   factory :task_text do
-    subtask_id 1
+    subtask_id nil
     content "Lääkäri kertoo mikä on totuus"
   end
 
   factory :multichoice do
-    subtask_id 1
+    subtask_id nil
     question "Tykkääkö koira nappuloista?"
   end
 
   factory :radiobutton, class: Multichoice do
-    subtask_id 1
+    subtask_id nil
     question "Kenelle pitää soittaa?"
     is_radio_button true
   end
 
   factory :option do
-    multichoice_id 1
+    multichoice_id nil
     content "Tykkää"
     explanation "Juuri oikea vastaus"
     is_correct_answer true
+  end
+
+    factory :question do
+    question_group_id nil
+    title "Oliko lehmällä veljiä?"
+    content "Asiakas vastaa, että lehmällä ei ollut veljiä."
+    required true
+  end
+
+    factory :interview do
+    title "Omistajan haastattelu"
   end
 end

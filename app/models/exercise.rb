@@ -1,6 +1,6 @@
 class Exercise < ActiveRecord::Base
 	validates :name, presence: true, uniqueness: true, length: {minimum: 2}
-
+  after_create :create_anamnesis
 	has_many :tasks
   
   has_many :hypotheses, through: :exercise_hypotheses
@@ -25,5 +25,10 @@ class Exercise < ActiveRecord::Base
 
   def get_number_of_tasks_by_level(level)
     tasks.where(level: level).count
+  end
+
+  private
+  def create_anamnesis
+    tasks.create(name:"Anamneesi", level:0)
   end
 end

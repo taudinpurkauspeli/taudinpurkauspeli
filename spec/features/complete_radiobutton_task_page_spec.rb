@@ -5,12 +5,12 @@ describe "Radiobutton page for student", js:true do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
 
-  let!(:radiobutton_task){FactoryGirl.create(:task, name: "Valitse kenelle soitat")}
-  let!(:radiobutton_subtask){FactoryGirl.create(:subtask)}
-  let!(:radiobutton){FactoryGirl.create(:radiobutton)}
-  let!(:option){FactoryGirl.create(:option, content: "Asiakkaan isälle", is_correct_answer: false, explanation: "Ei oikein!")}
-  let!(:option2){FactoryGirl.create(:option, content: "Asiakkaan äidille", is_correct_answer: false, explanation: "Ei oikea vastaus")}
-  let!(:option3){FactoryGirl.create(:option, content: "Asiakkaalles", explanation: "Oikea vastaus")}
+  let!(:radiobutton_task){FactoryGirl.create(:task, name: "Valitse kenelle soitat", exercise_id:exercise.id)}
+  let!(:radiobutton_subtask){FactoryGirl.create(:subtask, task_id:radiobutton_task.id)}
+  let!(:radiobutton){FactoryGirl.create(:radiobutton, subtask_id:radiobutton_subtask.id)}
+  let!(:option){FactoryGirl.create(:option, multichoice_id:radiobutton.id, content: "Asiakkaan isälle", is_correct_answer: false, explanation: "Ei oikein!")}
+  let!(:option2){FactoryGirl.create(:option, multichoice_id:radiobutton.id, content: "Asiakkaan äidille", is_correct_answer: false, explanation: "Ei oikea vastaus")}
+  let!(:option3){FactoryGirl.create(:option, multichoice_id:radiobutton.id, content: "Asiakkaalles", explanation: "Oikea vastaus")}
 
 
   describe "if student is signed in" do

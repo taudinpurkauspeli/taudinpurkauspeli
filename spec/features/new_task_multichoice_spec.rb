@@ -40,11 +40,13 @@ describe "New Task page", js:true do
           wait_for_ajax
         }.to change(Multichoice, :count).by(1)
 
-        #expect(page).to have_content 'Kysymys lisättiin onnistuneesti.'
+        expect(page).to have_content 'Kysymys lisättiin onnistuneesti.'
         expect(Subtask.count).to eq(1)
+        expect(number_of_ex_tasks).to eq(1)
         expect(Multichoice.first.question).to eq("Mitä kysyt asiakkaalta:")
         expect(Multichoice.first.subtask.task.name).to eq("Kysymyksiä asiakkaalle")
       end
+
 
 =begin
       it "user should not be able to create a new multichoice subtask without question" do
@@ -57,15 +59,14 @@ describe "New Task page", js:true do
         }.to change(Multichoice, :count).by(0)
 
         expect(page).to have_content 'Seuraavat virheet estivät tallennuksen:'
-        expect(Task.count).to eq(1)
+        expect(number_of_ex_tasks).to eq(1)
         expect(Multichoice.count).to eq(0)
         expect(Subtask.count).to eq(0)
       end
 =end
 
-
     end
-
+    
 
     describe "when multichoice subtask already exists" do
 
@@ -99,7 +100,6 @@ describe "New Task page", js:true do
         click_button('Tallenna kysymys')
         wait_for_ajax
 
-        expect(current_path).to eq(exercise_path(Exercise.first))
         expect(Multichoice.first.question).to eq("Useita kysymyksiä asiakkaalle:")
       end
 
@@ -113,9 +113,10 @@ describe "New Task page", js:true do
         wait_for_ajax
 
         expect(page).to have_content 'Seuraavat virheet estivät tallennuksen:'
-        expect(Task.first.name).to eq("Kysymyksiä asiakkaalle")
+        expect(Task.where(name:"Kysymyksiä asiakkaalle").count).to eq(1)
       end
 =end
+
     end
 
   end

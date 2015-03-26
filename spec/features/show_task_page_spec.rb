@@ -4,23 +4,23 @@ require 'rails_helper'
 describe "Task show page", js:true do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
-  let!(:task){FactoryGirl.create(:task)}
-  let!(:subtask){FactoryGirl.create(:subtask)}
-  let!(:task_text){FactoryGirl.create(:task_text)}
+  let!(:task){FactoryGirl.create(:task, exercise:exercise, level:1)}
+  let!(:subtask){FactoryGirl.create(:subtask, task:task)}
+  let!(:task_text){FactoryGirl.create(:task_text, subtask:subtask)}
 
-  let!(:multichoice_task){FactoryGirl.create(:task, name: "Valitse kenelle soitat", level: 1)}
-  let!(:multichoice_subtask){FactoryGirl.create(:subtask, task_id:2)}
-  let!(:multichoice){FactoryGirl.create(:multichoice, subtask_id: 2)}
-  let!(:option){FactoryGirl.create(:option)}
-  let!(:option2){FactoryGirl.create(:option, content: "Ei tykkää", is_correct_answer: false, explanation: "Ei oikea vastaus")}
-  let!(:option3){FactoryGirl.create(:option, content: "Ehkä tykkää", explanation: "Melkein oikea vastaus")}
+  let!(:multichoice_task){FactoryGirl.create(:task, name: "Valitse kenelle soitat", level: 1, exercise:exercise)}
+  let!(:multichoice_subtask){FactoryGirl.create(:subtask, task:multichoice_task)}
+  let!(:multichoice){FactoryGirl.create(:multichoice, subtask:multichoice_subtask)}
+  let!(:option){FactoryGirl.create(:option, multichoice:multichoice)}
+  let!(:option2){FactoryGirl.create(:option, multichoice:multichoice, content: "Ei tykkää", is_correct_answer: false, explanation: "Ei oikea vastaus")}
+  let!(:option3){FactoryGirl.create(:option, multichoice:multichoice, content: "Ehkä tykkää", explanation: "Melkein oikea vastaus")}
 
-  let!(:radiobutton_task){FactoryGirl.create(:task, name: "Mikä lääke oikea", level: 1)}
-  let!(:radiobutton_subtask){FactoryGirl.create(:subtask, task_id:3)}
-  let!(:radiobutton){FactoryGirl.create(:radiobutton, subtask_id: 3)}
-  let!(:option4){FactoryGirl.create(:option, multichoice_id: 2, content: "Bakteeri")}
-  let!(:option5){FactoryGirl.create(:option, multichoice_id: 2, content: "Virus", is_correct_answer: false, explanation: "Ei oikea vastaus")}
-  let!(:option6){FactoryGirl.create(:option, multichoice_id: 2, content: "Joku muu", is_correct_answer: false, explanation: "Melkein oikea vastaus")}
+  let!(:radiobutton_task){FactoryGirl.create(:task, name: "Mikä lääke oikea", level: 1, exercise:exercise)}
+  let!(:radiobutton_subtask){FactoryGirl.create(:subtask, task:radiobutton_task)}
+  let!(:radiobutton){FactoryGirl.create(:radiobutton, subtask:radiobutton_subtask)}
+  let!(:option4){FactoryGirl.create(:option, multichoice:radiobutton, content: "Bakteeri")}
+  let!(:option5){FactoryGirl.create(:option, multichoice:radiobutton, content: "Virus", is_correct_answer: false, explanation: "Ei oikea vastaus")}
+  let!(:option6){FactoryGirl.create(:option, multichoice:radiobutton, content: "Joku muu", is_correct_answer: false, explanation: "Melkein oikea vastaus")}
 
 
   describe "if user is signed in as a student" do
