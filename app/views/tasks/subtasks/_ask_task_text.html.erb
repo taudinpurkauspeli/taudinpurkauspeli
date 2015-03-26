@@ -1,0 +1,5 @@
+<p><%= subtask.task_text.content %></p>
+
+<%= form_tag("/task_texts/" + subtask.task_text.id.to_s + "/check_answers", method: "post") do %>
+  <%= submit_tag("Jatka", :class => "btn btn-default btn-save widthAuto") %>
+<% end %>

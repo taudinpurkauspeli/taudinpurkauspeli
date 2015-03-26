@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325112253) do
+ActiveRecord::Schema.define(version: 20150325124202) do
 
   create_table "asked_questions", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -23,6 +23,11 @@ ActiveRecord::Schema.define(version: 20150325112253) do
   create_table "checked_hypotheses", force: :cascade do |t|
     t.integer "user_id"
     t.integer "exercise_hypothesis_id"
+  end
+
+  create_table "completed_subtasks", force: :cascade do |t|
+    t.integer "subtask_id"
+    t.integer "user_id"
   end
 
   create_table "completed_tasks", force: :cascade do |t|
@@ -104,9 +109,9 @@ ActiveRecord::Schema.define(version: 20150325112253) do
 
   create_table "subtasks", force: :cascade do |t|
     t.integer  "task_id"
-    t.integer  "task_text_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "task_texts", force: :cascade do |t|
