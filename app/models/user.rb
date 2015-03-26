@@ -24,6 +24,14 @@ class User < ActiveRecord::Base
     end
   end
   
+  def can_start?(task)
+    if task.level == 1
+      return true
+    else
+      get_number_of_tasks_by_level(task.exercise, task.level - 1) == task.exercise.get_number_of_tasks_by_level(task.level - 1)
+    end
+  end
+
   def complete_subtask(subtask)
     completed_subtasks.create(subtask:subtask)
     task_in_progress = subtask.task
