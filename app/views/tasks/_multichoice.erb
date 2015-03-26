@@ -2,9 +2,8 @@
   <div class="panel-heading">
     <h3 class="panel-title">Kysymys: <%= subtask.multichoice.question %></h3>
   </div>
-
   <div class="panel-body">
-    <% if current_user.has_completed?(subtask) %>
+    <% if current_user.has_completed?(subtask) || current_user_is_admin %>
       <%= render 'completed_multichoice', { subtask:subtask} %>
     <% else %>
       <%= render 'ask_multichoice', { subtask:subtask } %>
