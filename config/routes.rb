@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   resources :asked_questions, only: [:create]
 
   get 'signin', to: 'sessions#new'
-  delete 'signout', to: 'sessions#destroy', as: :level_up
+  delete 'signout', to: 'sessions#destroy'
 
   post 'tasks/:id/up', to: 'tasks#level_up'
   post 'tasks/:id/down', to: 'tasks#level_down'
