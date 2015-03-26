@@ -27,9 +27,9 @@ class User < ActiveRecord::Base
     return completed_tasks.where(id:id).nil?
   end
 
-  def has_asked_question(question_id)
-  return !questions.where(question_id = question_id).nil?
-end
+  def has_asked_question(question)
+    return !asked_questions.where(question:question).empty?
+  end
 
 
 end
