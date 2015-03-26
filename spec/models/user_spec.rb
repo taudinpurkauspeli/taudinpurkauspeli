@@ -67,6 +67,25 @@ RSpec.describe User, :type => :model do
     expect(user.get_number_of_tasks_by_level(exercise, task.level)).to eq(1)
   end
 
+  describe "has_completed" do
+    let!(:user){FactoryGirl.create(:user)}
+    let!(:task){FactoryGirl.create(:task, exercise_id:1)}
+    let!(:subtask){FactoryGirl.create(:subtask, task:task)}
+
+    before(:each) do
+      user.complete_subtask(subtask)
+      user.complete_task(task)
+    end
+
+    it "finds completed task" do
+      expect(user.has_completed?(task)).to eq(true)
+    end
+
+    it "finds completed subtask" do
+      expect(user.has_completed?(subtask)).to eq(true)
+    end
+  end
+
   describe "completed" do
     let!(:user){FactoryGirl.create(:user)}
     let!(:task){FactoryGirl.create(:task, exercise_id:1)}

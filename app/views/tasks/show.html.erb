@@ -10,6 +10,6 @@
   <% end %>
 <% end %>
 
-<% if current_user_has_completed_task(@task.id) %>
+<% if current_user.has_completed?(@task) %>
   <%= render 'task_completed' %>
 <% end %>
