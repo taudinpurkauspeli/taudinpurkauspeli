@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :subtasks, through: :completed_subtasks
 
   def has_completed?(subtask)
-    return !completed_subtasks.where(subtask:subtask).nil?
+    return !completed_subtasks.where(subtask:subtask).empty?
   end
 
   def complete_subtask(subtask)

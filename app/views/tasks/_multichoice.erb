@@ -4,6 +4,10 @@
   </div>
 
   <div class="panel-body">
-    <%= render 'ask_multichoice', { subtask:subtask } %>
+    <% if current_user.has_completed?(subtask) %>
+      <%= render 'completed_multichoice', { subtask:subtask} %>
+    <% else %>
+      <%= render 'ask_multichoice', { subtask:subtask } %>
+    <% end %>
   </div>
 </div>
