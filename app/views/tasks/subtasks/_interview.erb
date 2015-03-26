@@ -45,7 +45,9 @@
         </div>
 
     <% end %>
-
+    <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/check_answers", method: "post") do %>
+                <%= submit_tag("Lopeta haastattelu", :class => "btn btn-default btn-save widthAuto") unless current_user_is_admin %>
+                <% end %>
   </div>
 
 </div>

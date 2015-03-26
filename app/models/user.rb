@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   
   has_many :asked_questions, dependent: :destroy
   has_many :questions, through: :asked_questions
+
   has_many :checked_hypotheses, dependent: :destroy
   has_many :exercise_hypotheses, through: :checked_hypotheses
   
@@ -16,6 +17,12 @@ class User < ActiveRecord::Base
   has_many :completed_subtasks, dependent: :destroy
   
   has_many :subtasks, through: :completed_subtasks
+
+  def has_asked_all_required_questions_of(interview)
+    asked = questions.where(interview:interview).where(required:true)
+    required = interview.questions.where(required:true)
+    return (asked - required).empty? && (required - asked).empty?
+  end
 
   def has_completed?(completable_task)
     if completable_task.class == Subtask
