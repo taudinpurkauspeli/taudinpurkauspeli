@@ -86,6 +86,27 @@ RSpec.describe User, :type => :model do
     end
   end
 
+  describe "can_start?" do
+    let!(:exercise){FactoryGirl.create(:exercise)}
+    let!(:user){FactoryGirl.create(:user)}
+    let!(:task1){FactoryGirl.create(:task, exercise:exercise, level:1)}
+    let!(:task2){FactoryGirl.create(:task, name:"Alt", exercise:exercise, level:2)}
+    let!(:task3){FactoryGirl.create(:task, name:"Alter", exercise:exercise, level:3)}
+
+    it "lets user start first task" do
+      expect(user.can_start?(task1)).to eq(true)
+    end
+
+    it "prevents user from starting wrong task" do
+      expect(user.can_start?(task2)).to eq(false)
+    end
+
+    it "lets user start any correct task" do
+      user.complete_task(task1)
+      expect(user.can_start?(task2)).to eq(true)
+    end
+  end
+
   describe "completed" do
     let!(:user){FactoryGirl.create(:user)}
     let!(:task){FactoryGirl.create(:task, exercise_id:1)}
