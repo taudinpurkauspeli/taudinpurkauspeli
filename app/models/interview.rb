@@ -4,5 +4,7 @@ class Interview < ActiveRecord::Base
 	belongs_to :subtask
 	has_many :questions, dependent: :destroy
 
-	
+	def user_has_asked_all_required(user)
+    user.questions
+  end
 end

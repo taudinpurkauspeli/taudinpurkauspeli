@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   post 'tasks/:id/down', to: 'tasks#level_down'
 
   post 'multichoices/:id/check_answers', to: 'multichoices#check_answers'
+  post 'interviews/:id/ask_question', to: 'interviews#ask_question'
+  post 'interviews/:id/check_answers', to: 'interviews#check_answers'
   post 'task_texts/:id/check_answers', to: 'task_texts#check_answers'
 
   

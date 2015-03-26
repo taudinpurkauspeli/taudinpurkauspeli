@@ -1,53 +1,12 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title"> <%= subtask.interview.title %></h3>
+    <h3 class="panel-title"><%= subtask.interview.title %></h3>
   </div>
-
   <div class="panel-body">
-
-
-
-    <% subtask.interview.questions.each do |question| %>
-        <div class="row">
-
-
-           <div class="col-md-4 text-padding">
-              <% if !current_user.has_asked_question?(question) %>
-                <%= render 'question_button', {question: question} %>
-              <% else %>
-
-
-                  <div class="row">
-                      <div class="col-md-9">
-                        <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
-                      </div>
-                 </div>
-                  <div class="collapse" id="collapseQuestionContent<%= question.id%>" >
-                      <p><%= question.content %></p>
-                  </div>
-
-              <%end %>
-          </div>
-
-          <!--<div class="col-md-4 text-padding">
-              <#% if current_user_is_admin %>
-                  <div class="col-md-4 text-padding">
-                    <#%= question.content %>
-
-                  </div>
-              <#%end%>
-
-          </div>-->
-
-        </div>
-
+    <% if current_user.has_completed?(subtask) || current_user_is_admin %>
+      <%= render 'tasks/subtasks/completed_interview', { subtask:subtask} %>
+    <% else %>
+      <%= render 'tasks/subtasks/ask_interview', { subtask:subtask } %>
     <% end %>
-
   </div>
-
 </div>
-
-
-
-
-

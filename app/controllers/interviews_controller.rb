@@ -1,9 +1,7 @@
 class InterviewsController < ApplicationController
 	before_action :ensure_user_is_logged_in
-	before_action :ensure_user_is_admin, except: [:index, :show]
-	before_action :set_interview, only: [:edit, :update, :destroy]
-
-
+	before_action :ensure_user_is_admin, except: [:index, :show, :ask_question, :check_answers]
+	before_action :set_interview, only: [:edit, :update, :destroy, :ask_question, :check_answers]
 
 	def new
 		@interview = Interview.new
@@ -49,15 +47,35 @@ def update
 	end
 end
 
+def ask_question
+  current_user.ask_question(Question.find(question_params[:question_id]))
+
+  respond_to do |format|
+    format.html { redirect_to @interview.subtask.task }
+  end
+end
+
+def check_answers
+  respond_to do |format|
+    if current_user.has_asked_all_required_questions_of(@interview)
+      current_user.complete_subtask(@interview.subtask)
+      format.html { redirect_to task_path(@interview.subtask.task) }
+    else
+      format.html { redirect_to @interview.subtask.task, alert: 'Et ole vielä kysynyt kaikkia tarpeellisia kysymyksiä!' }
+    end
+  end
+end
+
 private
 	def set_interview
 		@interview = Interview.find(params[:id])
 	end
 
+  def question_params
+    params.permit(:question_id)
+  end
+
 	def interview_params
 		params.require(:interview).permit(:title)
-
 	end
-
-
 end
