@@ -4,9 +4,9 @@
   </div>
   <div class="panel-body">
     <% if current_user.has_completed?(subtask) || current_user_is_admin %>
-      <%= render 'completed_multichoice', { subtask:subtask} %>
+      <%= render 'tasks/subtasks/completed_multichoice', { subtask:subtask} %>
     <% else %>
-      <%= render 'ask_multichoice', { subtask:subtask } %>
+      <%= render 'tasks/subtasks/ask_multichoice', { subtask:subtask } %>
     <% end %>
   </div>
 </div>

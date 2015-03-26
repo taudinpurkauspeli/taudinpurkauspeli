@@ -6,6 +6,6 @@
 
 <% @subtasks.each do |subtask| %>
   <% if current_user.can_complete_subtask?(@task, subtask) || current_user_is_admin %>
-    <%= render subtask.template, { subtask:subtask } %>
+    <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask } %>
   <% end %>
 <% end %>
