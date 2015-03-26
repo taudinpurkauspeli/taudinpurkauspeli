@@ -24,6 +24,20 @@ RSpec.describe Task, :type => :model do
     end
   end
 
+  describe "gets completed" do
+    let!(:task){FactoryGirl.create(:task, exercise:exercise)}
+    let!(:user){FactoryGirl.create(:user)}
+    
+    it "if last subtask is done" do 
+      populate_task(task)
+      expect{
+        task.subtasks.each do |subtask|
+          user.complete_subtask(subtask)
+        end
+      }.to change{user.completed_tasks.count}.by(1)
+    end
+  end
+
   describe "get_highest_level returns correct value" do
     let!(:task){FactoryGirl.create(:task, exercise:exercise)}
     it "when tasks are created" do

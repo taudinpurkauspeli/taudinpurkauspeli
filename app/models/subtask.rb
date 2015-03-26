@@ -8,6 +8,18 @@ class Subtask < ActiveRecord::Base
 	has_one :multichoice, dependent: :destroy
 	has_one :interview, dependent: :destroy
 
+  def template
+    unless task_text.nil?
+      return 'task_text'
+    end
+    unless multichoice.nil?
+      return 'multichoice'
+    end
+    unless interview.nil?
+      return 'interview'
+    end
+  end
+
   def set_level
     highest_level = task.subtasks.maximum("level")
     unless highest_level.nil?

@@ -27,8 +27,32 @@ RSpec.describe Subtask, type: :model do
     end
   end
 
+  describe "template" do
+
+    describe "returns correct template for" do
+      let!(:task){FactoryGirl.create(:task, exercise_id:1, level:1)}
+      let!(:subtask){FactoryGirl.create(:subtask, task:task)}
+
+      it "multichoice" do
+        subtask.create_multichoice
+        expect(subtask.template). to eq("multichoice")
+      end
+
+      it "task_text" do
+        subtask.create_task_text
+        expect(subtask.template). to eq("task_text")
+      end
+
+ #     it "interview" do
+ #       subtask.create_interview
+ #       expect(subtask.template). to eq("interview")
+ #     end
+    end
+  end
+
   describe "level" do
     let!(:task){FactoryGirl.create(:task, exercise_id:1, level:1)}
+    let!(:user){FactoryGirl.create(:user)}
 
     it "is set correctly when no subtasks exist" do
       subtask = Subtask.create task_id:task.id
@@ -55,6 +79,54 @@ RSpec.describe Subtask, type: :model do
       expected = [1, 2, 3, 4, 5]
 
       expect(actual).to eq expected
+    end
+
+   
+
+ 
+
+    describe "prevents user from starting" do
+
+           
+      it "other than the first subtask" do
+        subs = populate_task(task)
+        
+        actual = user.can_complete_subtask?(task, subs[5])
+        expected = false
+
+        expect(actual).to eq expected
+      end
+
+      it "the wrong subtask when user has completed some already" do
+        subs = populate_task(task)
+        populate_user_with_subtasks(user, subs)
+
+        actual = user.can_complete_subtask?(task, subs[8])
+        expected = false
+
+        expect(actual).to eq expected
+      end
+    end
+
+    describe "lets user start" do
+
+      it "the first subtask" do
+        subs = populate_task(task)
+        actual = user.can_complete_subtask?(task, subs[0])
+        expected = true
+
+        expect(actual).to eq expected
+      end
+
+      it "the next subtask" do
+        subs = populate_task(task)
+        populate_user_with_subtasks(user, subs)
+
+        actual = user.can_complete_subtask?(task, subs[3])
+        expected = true
+
+        expect(actual).to eq expected
+      end
     end
   end
 end

@@ -1,0 +1,17 @@
+ <%= form_tag("/multichoices/" + subtask.multichoice.id.to_s + "/check_answers", method: "post") do %>
+
+    <% subtask.multichoice.options.each do |option| %>
+        <div class="row">
+          <div class="col-md-4">
+            <% if subtask.multichoice.is_radio_button %>
+                <%= radio_button_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s %>
+            <% else %>
+                <%= check_box_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s %>
+            <% end %>
+            <%= label_tag "checked_options_" + option.id.to_s, option.content %>
+          </div>
+        </div>
+    <% end %>
+    <br />
+    <%= submit_tag("Tarkista", :class => "btn btn-default btn-save widthAuto") unless current_user_is_admin %>
+<% end %>

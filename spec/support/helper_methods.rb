@@ -18,4 +18,17 @@ module HelperMethods
     return true
   end
 
+  def populate_task(task)
+    subs = Array.new(10)
+    for i in 0...10
+      subs[i] = Subtask.create task:task
+    end
+    return subs
+  end
+
+  def populate_user_with_subtasks(user, array)
+    for i in 0...3
+      user.completed_subtasks.create(subtask:array[i])
+    end
+  end
 end
