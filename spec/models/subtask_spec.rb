@@ -30,8 +30,8 @@ RSpec.describe Subtask, type: :model do
   describe "template" do
 
     describe "returns correct template for" do
-
-      let!(:subtask){FactoryGirl.create(:subtask, task_id:1)}
+      let!(:task){FactoryGirl.create(:task, exercise_id:1, level:1)}
+      let!(:subtask){FactoryGirl.create(:subtask, task:task)}
 
       it "multichoice" do
         subtask.create_multichoice
