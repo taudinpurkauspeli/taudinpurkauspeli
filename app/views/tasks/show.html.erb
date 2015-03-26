@@ -9,3 +9,7 @@
     <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask } %>
   <% end %>
 <% end %>
+
+<% if current_user_has_completed_task(@task.id) %>
+  <%= render 'task_completed' %>
+<% end %>
