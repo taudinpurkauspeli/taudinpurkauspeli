@@ -15,10 +15,15 @@ class User < ActiveRecord::Base
   
   has_many :subtasks, through: :completed_subtasks
 
-  def has_completed?(subtask)
-    return !completed_subtasks.where(subtask:subtask).empty?
+  def has_completed?(completable_task)
+    if completable_task.class == Subtask
+      return !completed_subtasks.where(subtask:completable_task).empty?
+    end
+    if completable_task.class == Task
+      return !completed_tasks.where(task:completable_task).empty?
+    end
   end
-
+  
   def complete_subtask(subtask)
     completed_subtasks.create(subtask:subtask)
     task_in_progress = subtask.task

@@ -9,7 +9,7 @@
       <table>
         <tbody>
           <% @tasks.each do |task| %>
-            <% if current_user_has_completed_task(task.id) %>
+            <% if current_user.has_completed?(task) %>
               <tr>
                 <td><%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task' %></td>
               </tr> 
