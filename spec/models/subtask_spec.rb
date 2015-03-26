@@ -27,6 +27,29 @@ RSpec.describe Subtask, type: :model do
     end
   end
 
+  describe "template" do
+
+    describe "returns correct template for" do
+
+      let!(:subtask){FactoryGirl.create(:subtask, task_id:1)}
+
+      it "multichoice" do
+        subtask.create_multichoice
+        expect(subtask.template). to eq("multichoice")
+      end
+
+      it "task_text" do
+        subtask.create_task_text
+        expect(subtask.template). to eq("task_text")
+      end
+
+ #     it "interview" do
+ #       subtask.create_interview
+ #       expect(subtask.template). to eq("interview")
+ #     end
+    end
+  end
+
   describe "level" do
     let!(:task){FactoryGirl.create(:task, exercise_id:1, level:1)}
     let!(:user){FactoryGirl.create(:user)}
