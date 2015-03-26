@@ -25,10 +25,10 @@ class User < ActiveRecord::Base
   end
   
   def can_start?(task)
-    return task.level == 1
-    user_completed_tasks = tasks.where(exercise:task.exercise)
-    unless user_completed_tasks.nil?
-      return task.level <= user_completed_tasks.maximum("task.level") + 1
+    if task.level == 1
+      return true
+    else
+      get_number_of_tasks_by_level(task.exercise, task.level - 1) == task.exercise.get_number_of_tasks_by_level(task.level - 1)
     end
   end
 
