@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
     completed_tasks.create(task:task)
   end
 
+  def ask_question(question)
+    asked_questions.create(question:question)
+  end
+
   def can_complete_subtask?(task, subtask)
     last_subtask_level = subtasks.where(task:task).maximum("level")
     # user has completed some subtasks

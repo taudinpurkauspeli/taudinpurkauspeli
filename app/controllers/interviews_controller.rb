@@ -1,9 +1,7 @@
 class InterviewsController < ApplicationController
 	before_action :ensure_user_is_logged_in
-	before_action :ensure_user_is_admin, except: [:index, :show]
+	before_action :ensure_user_is_admin, except: [:index, :show, :ask_question]
 	before_action :set_interview, only: [:edit, :update, :destroy]
-
-
 
 	def new
 		@interview = Interview.new
@@ -49,15 +47,23 @@ def update
 	end
 end
 
+def ask_question
+  current_user.ask_question(Question.find(question_params[:question_id]))
+  respond_to do |format|
+    format.html { redirect_to current_task }
+  end
+end
+
 private
 	def set_interview
 		@interview = Interview.find(params[:id])
 	end
 
+  def question_params
+    params.permit(:question_id)
+  end
+
 	def interview_params
 		params.require(:interview).permit(:title)
-
 	end
-
-
 end

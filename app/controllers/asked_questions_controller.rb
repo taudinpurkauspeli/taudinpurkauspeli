@@ -4,7 +4,7 @@ class AskedQuestionsController < ApplicationController
 
   def create
 
-    @asked_question = AskedQuestion.new(asked_question_params)
+    current_user.ask_question(params[:asked_question])
      @task = Task.find(session[:task_id])
      
      respond_to do |format|
