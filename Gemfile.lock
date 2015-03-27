@@ -236,7 +236,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   pg
-  rails (~> 4.2.0, = 4.2.0)
+  rails (~> 4.2.0)
   rails_12factor
   rails_layout
   rb-readline
