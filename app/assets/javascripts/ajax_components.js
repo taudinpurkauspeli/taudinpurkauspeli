@@ -19,7 +19,7 @@ function setAjaxSubmits(formsSelector, containerElementSelector, type, submitCal
 	forms.submit(function(){
 		var clickedForm = $(this);
 		var postUrl = fullUrlWithoutLayout(clickedForm.attr("action"));
-		//alert(postUrl);
+		alert(postUrl);
 
 		if(type == "post"){
 			$.post(postUrl, clickedForm.serialize())

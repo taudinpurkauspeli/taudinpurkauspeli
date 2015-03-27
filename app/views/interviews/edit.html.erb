@@ -87,3 +87,7 @@
       <%= render 'questions/new_question_group', {interview: @interview} %>
 
   </div>
+
+  <script>
+    setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post");
+  </script>

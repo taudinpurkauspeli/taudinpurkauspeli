@@ -1,3 +1,7 @@
 <h1>Uusi haastattelutyyppinen toimenpide</h1>
 
 <%= render 'form' %>
+
+<script>
+	setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post");
+</script>

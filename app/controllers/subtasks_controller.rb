@@ -18,7 +18,7 @@ class SubtasksController < ApplicationController
       redirect_to edit_multichoice_path(@subtask.multichoice.id, :layout => get_layout)
     end
     unless (@subtask.interview.nil?)
-      redirect_to edit_interview_path(@subtask.interview.id)
+      redirect_to edit_interview_path(@subtask.interview.id, :layout => get_layout)
     end
   end
 

@@ -10,10 +10,10 @@ class QuestionGroupsController < ApplicationController
 
     respond_to do |format|
       if @question_group.save
-        format.html { redirect_to edit_interview_path(Interview.find(question_group_params[:interview_id])), notice: 'Ryhmä lisättiin onnistuneesti.' }
+        format.html { redirect_to edit_interview_path(Interview.find(question_group_params[:interview_id]), :layout => get_layout), notice: 'Ryhmä lisättiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @question }
       else
-        format.html { redirect_to edit_interview_path(Interview.find(question_group_params[:interview_id])), alert: "Ryhmän luominen epäonnistui."}
+        format.html { redirect_to edit_interview_path(Interview.find(question_group_params[:interview_id]), :layout => get_layout), alert: "Ryhmän luominen epäonnistui."}
       end
     end
   end
@@ -21,7 +21,7 @@ class QuestionGroupsController < ApplicationController
   def destroy
     @question_group.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url}
+      format.html { redirect_to questions_url(:layout => get_layout)}
       format.json { head :no_content }
     end
   end
