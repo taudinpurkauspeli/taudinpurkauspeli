@@ -19,7 +19,7 @@ function setAjaxSubmits(formsSelector, containerElementSelector, type, submitCal
 	forms.submit(function(){
 		var clickedForm = $(this);
 		var postUrl = fullUrlWithoutLayout(clickedForm.attr("action"));
-		alert(postUrl);
+		//alert(postUrl);
 
 		if(type == "post"){
 			$.post(postUrl, clickedForm.serialize())
@@ -66,6 +66,12 @@ function setNewTabSubmits(formsSelector, containerElementSelector, callback){
 
 }
 
+/**
+*
+*
+*
+*
+*/
 function openNewTab(url, containerElementSelector, taskName, callback){
 	var targetTabLink = $('#navigationTabs a[href="'+containerElementSelector+'"]')
 
@@ -103,6 +109,12 @@ function loadView(url, elementSelector, callback){
   
 }
 
+/**
+*
+*
+*
+*
+*/
 function fullUrlWithoutLayout(path){
 	if(path.indexOf("http:") > -1 && path.indexOf("?layout=false") > -1){
 		return path;
@@ -111,6 +123,28 @@ function fullUrlWithoutLayout(path){
 		path = path.substr(1);
 	}
 	return location.protocol + "//" + location.host + "/" + path + "?layout=false";
+}
+
+/**
+*
+*
+*
+*
+*/
+function setGoToTab(formSelector, tabElementSelector){
+
+	var forms = $(formSelector);
+
+	forms.submit(function(e){
+		//alert($(this).attr("action") + ", openTab: " + $(this).attr("openTab"));
+		
+		var targetTabLink = $('#navigationTabs a[href="'+tabElementSelector+'"]')
+
+		targetTabLink.tab("show");
+
+		return false;
+	});
+	
 }
 
 /*

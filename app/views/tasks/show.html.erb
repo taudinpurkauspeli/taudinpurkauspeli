@@ -19,7 +19,10 @@
 
 <script>
   
-  setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post", function(){
+  setAjaxSubmits("#currentTaskTab form:not(.form-task-completed)", "#currentTaskTab", "post", function(){
     loadView("/tasks", "#taskTab");
   });
+
+  setGoToTab("#form-open-hypotheses-tab", "#hypothesisTab");
+  setGoToTab("#form-open-tasks-tab", "#taskTab");
 </script>
