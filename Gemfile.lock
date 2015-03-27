@@ -38,17 +38,17 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.7)
     arel (6.0.0)
-    autoprefixer-rails (5.1.7)
+    autoprefixer-rails (5.1.8)
       execjs
       json
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.4)
+    bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     builder (3.2.2)
-    byebug (4.0.2)
+    byebug (4.0.3)
       columnize (= 0.9.0)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -93,7 +93,7 @@ GEM
       activesupport (>= 4.1.0)
     hike (1.2.3)
     i18n (0.7.0)
-    jbuilder (2.2.11)
+    jbuilder (2.2.12)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.3)
@@ -236,7 +236,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   pg
-  rails (= 4.2.0)
+  rails (~> 4.2.0, = 4.2.0)
   rails_12factor
   rails_layout
   rb-readline
