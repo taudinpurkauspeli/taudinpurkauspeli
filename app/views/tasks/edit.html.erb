@@ -6,10 +6,10 @@
 		<h1>Toimenpiteen muokkaus</h1>
 	</div>
 	<div class = "col-md-2">
-		<%= button_to 'Takaisin', tasks_path, :class => 'btn btn-default btn-exercise floatRight', :method => :delete %>
+		<%= button_to 'Takaisin', tasks_path, :class => 'btn btn-default btn-exercise floatRight', :method => :get %>
 	</div>
 	<div class = "col-md-2">
-		<%= button_to 'Esikatsele', @task, :class => 'btn btn-default btn-exercise floatRight', :method => :delete %>
+		<%= button_to 'Esikatsele', @task, :class => 'btn btn-default btn-exercise floatRight',:form_class => "form-show-task", :method => :get %>
 	</div>
 	<div class = "col-md-2">
 		<%= button_to 'Poista toimenpide', @task, :class => 'btn btn-default btn-exercise btn-del width100', :form => {id: "form-delete-task"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa toimenpiteen ja sen kaikki alitoimenpiteet?' } %>
@@ -47,4 +47,5 @@
 
 	});
 	setAjaxSubmits("#currentTaskTab .form-subtask", "#currentTaskTab", "get");
+	setAjaxSubmits("#currentTaskTab .form-show-task", "#currentTaskTab", "get");
 </script>
