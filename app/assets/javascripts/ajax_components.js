@@ -138,13 +138,21 @@ function setGoToTab(formSelector, tabElementSelector){
 	forms.submit(function(e){
 		//alert($(this).attr("action") + ", openTab: " + $(this).attr("openTab"));
 		
-		var targetTabLink = $('#navigationTabs a[href="'+tabElementSelector+'"]')
-
-		targetTabLink.tab("show");
+		showTab(tabElementSelector);
 
 		return false;
 	});
 	
+}
+
+function closeTab(tabElementSelector){
+	
+	var targetTabLink = $('#navigationTabs [href="'+tabElementSelector+'"]').parent();
+	targetTabLink.remove();
+}
+function showTab(tabElementSelector){
+	var targetTabLink = $('#navigationTabs a[href="'+tabElementSelector+'"]')
+	targetTabLink.tab("show");
 }
 
 /*
