@@ -46,9 +46,8 @@ describe "Task list page", js:true do
     describe "and chooses an exercise" do
 
       before :each do
-        click_button('Lihanautakuolemat')
-        click_link('Toimenpiteet')
-        wait_for_ajax
+        click_and_wait('Lihanautakuolemat')
+        click_and_wait('Toimenpiteet')
       end
 
       it "user should be able to view the tasks of an exercise" do
@@ -61,12 +60,10 @@ describe "Task list page", js:true do
 
 
       it "user should be able to complete the first correct task of an exercise" do
-        click_button(task.name)
-        wait_for_ajax
+        click_and_wait(task.name)
 
         expect {
-          click_button('Jatka')
-          wait_for_ajax
+          click_and_wait('Jatka')
         }.to change(CompletedTask, :count).by (1)
 
         expect(CompletedTask.first.task.name).to eq(task.name)
@@ -77,19 +74,14 @@ describe "Task list page", js:true do
 
         FactoryGirl.create(:completed_task, task:task, user:user)
 
-        click_button(task2_1.name)
-        wait_for_ajax
+        click_and_wait(task2_1.name)
 
-        click_button('Jatka')
-        wait_for_ajax
-        click_link('Toimenpiteet')
-        wait_for_ajax
-        click_button(task2_2.name)
-        wait_for_ajax
+        click_and_wait('Jatka')
+        click_and_wait('Toimenpiteet')
+        click_and_wait(task2_2.name)
 
         expect {
-          click_button('Jatka')
-          wait_for_ajax
+          click_and_wait('Jatka')
         }.to change(CompletedTask, :count).by (1)
 
         expect(CompletedTask.last.task.name).to eq(task2_2.name)
@@ -100,19 +92,14 @@ describe "Task list page", js:true do
 
         FactoryGirl.create(:completed_task, task:task, user:user)
 
-        click_button(task2_2.name)
-        wait_for_ajax
+        click_and_wait(task2_2.name)
 
-        click_button('Jatka')
-        wait_for_ajax
-        click_link('Toimenpiteet')
-        wait_for_ajax
-        click_button(task2_1.name)
-        wait_for_ajax
+        click_and_wait('Jatka')
+        click_and_wait('Toimenpiteet')
+        click_and_wait(task2_1.name)
 
         expect {
-          click_button('Jatka')
-          wait_for_ajax
+          click_and_wait('Jatka')
         }.to change(CompletedTask, :count).by (1)
 
         expect(CompletedTask.last.task.name).to eq(task2_2.name)
@@ -120,8 +107,7 @@ describe "Task list page", js:true do
 
       describe "has not completed required prerequisite tasks" do
         it "user should not be able to complete task" do
-          click_button('Hoida')
-          wait_for_ajax
+          click_and_wait('Hoida')
           expect(page).to have_content('Et voi vielä suorittaa tätä toimenpidettä.')
         end
       end
@@ -138,9 +124,8 @@ describe "Task list page", js:true do
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
       visit root_path
-      click_button('Lihanautakuolemat')
-      click_link('Toimenpiteet')
-      wait_for_ajax
+      click_and_wait('Lihanautakuolemat')
+      click_and_wait('Toimenpiteet')
     end
 
     it "he should be able to move task one level up if it has no siblings or children" do

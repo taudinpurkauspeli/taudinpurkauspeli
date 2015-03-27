@@ -18,8 +18,7 @@ describe "Edit Exercise page", js:true do
 			fill_in('exercise_name', with: "Broilerimysteeri")
 			fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
 
-			click_button('Tallenna')
-			wait_for_ajax
+			click_and_wait('Tallenna')
 
 			expect(current_path).to eq(exercise_path(exercise))
 			expect(page).to have_content 'Broilerimysteeri'
@@ -33,8 +32,7 @@ describe "Edit Exercise page", js:true do
 			fill_in('exercise_name', with: "")
 			fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
 
-			click_button('Tallenna')
-			wait_for_ajax
+			click_and_wait('Tallenna')
 
 			expect(current_path).to eq(exercise_path(exercise))
 			#expect(page).to have_content 'estivät tallennuksen'
@@ -54,7 +52,6 @@ describe "Edit Exercise page", js:true do
 
 		it "user should not be able to visit edit exercise page" do
 			visit edit_exercise_path(exercise)
-			wait_for_ajax
 
 			#expect(current_path).to eq(signin_path)
 			expect(page).to have_content 'Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia'

@@ -17,8 +17,7 @@ describe "New Exercise page", js:true do
 			fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
 
 			expect{
-				click_button('Tallenna')
-				wait_for_ajax
+				click_and_wait('Tallenna')
 			}.to change(Exercise, :count).by(1)
 
 			expect(page).to have_content 'Casen luominen onnistui!'
@@ -34,7 +33,7 @@ describe "New Exercise page", js:true do
 			fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
 
 			expect{
-				click_button('Tallenna')
+				click_and_wait('Tallenna')
 			}.to change(Exercise, :count).by(0)
 
 			expect(current_path).to eq(new_exercise_path)

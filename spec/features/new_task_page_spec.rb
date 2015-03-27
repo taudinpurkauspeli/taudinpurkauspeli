@@ -11,7 +11,7 @@ describe "New Task page", js:true do
 
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
-      click_button(exercise.name)
+      click_and_wait(exercise.name)
     end
 
     def get_task_count
