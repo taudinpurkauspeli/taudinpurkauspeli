@@ -5,12 +5,18 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+
+    set_view_layout
   end
 
   def edit
+
+    set_view_layout
   end
 
   def show
+
+    set_view_layout
   end
 
   def create
@@ -19,10 +25,10 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to edit_interview_path(@question.interview.id), notice: 'Kysymysvaihtoehto lisättiin onnistuneesti.' }
+        format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), notice: 'Kysymysvaihtoehto lisättiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @question }
       else
-        format.html { redirect_to edit_interview_path(Interview.find(question_params[:interview_id])), alert: 'Kysymyksen tiedot puuttelliset.' }
+        format.html { redirect_to edit_interview_path(Interview.find(question_params[:interview_id]), :layout => get_layout), alert: 'Kysymyksen tiedot puuttelliset.' }
         format.json { render json: @option.errors, status: :unprocessable_entity }
       end
     end
@@ -32,9 +38,9 @@ class QuestionsController < ApplicationController
     def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to edit_interview_path(@question.interview.id), notice: 'Kysymys päivitettiin onnistuneesti.' }
+        format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti.' }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), notice: 'Kysymyksen päivitys epäonnistui.' }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
@@ -44,7 +50,7 @@ class QuestionsController < ApplicationController
     parent_id = @question.interview_id
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to edit_interview_path(parent_id), notice: 'Kysymyksen poisto onnistui!' }
+      format.html { redirect_to edit_interview_path(parent_id, :layout => get_layout), notice: 'Kysymyksen poisto onnistui!' }
       format.json { head :no_content }
     end
   end

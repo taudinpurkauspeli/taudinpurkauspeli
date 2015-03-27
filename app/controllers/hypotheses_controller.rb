@@ -19,6 +19,8 @@ class HypothesesController < ApplicationController
     else
       redirect_to exercises_path, alert: 'Valitse ensin case, jota haluat tarkastella!'
     end
+    
+    set_view_layout
 
   end
 
@@ -42,10 +44,11 @@ class HypothesesController < ApplicationController
     @hypothesis = Hypothesis.new(hypothesis_params)
     respond_to do |format|
       if @hypothesis.save
-        format.html { redirect_to hypotheses_path, notice: 'Hypoteesin luominen onnistui!' }
-        format.json { render :show, status: :created, location: @hypothesis }
+        format.html { redirect_to hypotheses_path(:layout => get_layout), notice: 'Hypoteesin luominen onnistui!' }
+        #format.json { render :show, status: :created, location: @hypothesis }
       else
-        format.html { render :new }
+        format.html { redirect_to hypotheses_path(:layout => get_layout), alert: 'Hypoteesin luominen epäonnistui!' }
+        #format.html { render :new }
         format.json { render json: @hypothesis.errors, status: :unprocessable_entity }
       end
     end
@@ -56,10 +59,10 @@ class HypothesesController < ApplicationController
   def update
     respond_to do |format|
       if @hypothesis.update(hypothesis_params)
-        format.html { redirect_to @hypothesis, notice: 'Hypoteesin päivitys onnistui!' }
+        format.html { redirect_to @hypothesis, layout: get_layout, notice: 'Hypoteesin päivitys onnistui!' }
         format.json { render :show, status: :ok, location: @hypothesis }
       else
-        format.html { render :edit }
+        format.html { redirect_to @hypothesis, layout: get_layout, alert: 'Hypoteesin päivitys epäonnistui!' }
         format.json { render json: @hypothesis.errors, status: :unprocessable_entity }
       end
     end
@@ -70,7 +73,7 @@ class HypothesesController < ApplicationController
   def destroy
     @hypothesis.destroy
     respond_to do |format|
-      format.html { redirect_to hypotheses_url, notice: 'Hypoteesin poisto onnistui!' }
+      format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Hypoteesin poisto onnistui!' }
       format.json { head :no_content }
     end
   end

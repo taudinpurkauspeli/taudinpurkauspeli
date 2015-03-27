@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
 
 <%# headers %>
 <div class="row">
@@ -57,3 +59,7 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  setAjaxSubmits("#hypothesisTab form", "#hypothesisTab", "post");
+</script>

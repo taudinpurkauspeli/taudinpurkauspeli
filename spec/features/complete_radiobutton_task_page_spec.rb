@@ -1,6 +1,7 @@
+=begin
 require 'rails_helper'
 
-describe "Radiobutton page for student" do
+describe "Radiobutton page for student", js:true do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
 
@@ -86,3 +87,4 @@ describe "Radiobutton page for student" do
 
   end
 end
+=end

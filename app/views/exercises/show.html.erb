@@ -1,4 +1,5 @@
-<!--<p id="notice"><%= notice %></p>-->
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
 
 <h1> Case: <%= @exercise.name %> </h1>
 <% if @exercise.hidden? %>
@@ -22,6 +23,10 @@
 </div>
 
 
-<%= link_to 'Muokkaa', edit_exercise_path(@exercise) if current_user_is_admin %> <!-- |
+<%= button_to 'Muokkaa', edit_exercise_path(@exercise), :class => "btn btn-default btn-save widthAuto" if current_user_is_admin %> <!-- |
 <%= link_to 'Takaisin', exercises_path %> -->
  
+<script>
+  //edit exercise form
+  setAjaxSubmits("#anamnesisTab form", "#anamnesisTab", "get");
+</script>

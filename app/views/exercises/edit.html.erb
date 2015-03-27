@@ -1,6 +1,16 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
 <h1>Muokkaa casea</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Näytä', @exercise %> |
-<%= link_to 'Takaisin', exercises_path %>
+<%= button_to 'Takaisin', exercise_path(@exercise.id), :method => :get, :class => "btn btn-default widthAuto", :form_class => "form-back-to-exercise" %>
+
+
+<script>
+  //edit exercise form
+  setAjaxSubmits("#anamnesisTab #form-save-exercise", "#anamnesisTab", "post");
+  //back to exercise form
+  setAjaxSubmits("#anamnesisTab .form-back-to-exercise", "#anamnesisTab", "get");
+</script>

@@ -4,7 +4,11 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
+require 'capybara/poltergeist'
+
 require 'cucumber/rails'
+
+Capybara.javascript_driver = :poltergeist
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -60,3 +64,4 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 World(HelperMethods)
+World(WaitForAjax)

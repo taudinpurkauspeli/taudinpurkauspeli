@@ -1,25 +1,13 @@
 <%# navigation styled for Bootstrap 3.0 %>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <% unless @excercise_page_rendered or current_user.nil? %>
-          <%= render 'layouts/navigation_links' %>
-        <% end %>
-      </ul>
-    </div>
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
 
-    </div>
-  </div>
+<!-- Nav tabs -->
+<ul id="navigationTabs" class="nav nav-tabs" role="tablist">
+  <% if !current_user.nil? && !current_exercise.nil? %>
+    <%= render 'layouts/navigation_links' %>
+  <% end %>
+
   <% if @excercise_page_rendered or !current_user.nil?%>
-    <div class="login-container">
+    <div class="login-container" >
       <% if current_user.nil? %>
         <div class="row">
           <%= form_tag sessions_path do %>
@@ -37,17 +25,14 @@
             <%= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-signup', :method => :get %>
           </div>
         </div>
+
       <% else %>
-      <div class="col-md-5"></div>
-      <div class="col-md-4">
       <% unless @excercise_page_rendered %>
-        <%= link_to 'Palaa pääsivulle', root_path, class: 'navbar-brand' %>
-      <% end %>
-      </div>
-      <div class="col-md-3 no-padding">
-        <%= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-logout', :method => :delete unless current_user.nil?%>
-      </div>
+          <span class = "a-mainpage" ><%= link_to 'Palaa pääsivulle', root_path, :class => "" %></span>
+        <% end %>
+        <%= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-logout widthAuto', :method => :delete unless current_user.nil?%>
+        
       <% end %>
     </div>
   <% end %>
-</nav>
+</ul>

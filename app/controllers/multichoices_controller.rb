@@ -7,16 +7,21 @@ class MultichoicesController < ApplicationController
   #   @multichoices = Multichoice.all
   # end
   def show
+    set_view_layout
   end
 
   def new
     @multichoice = Multichoice.new
+
+    set_view_layout
   end
 
   # GET /multichoices/1/edit
   def edit
     @multichoice = Multichoice.find(params[:id])
     @new_option = Option.new
+
+    set_view_layout
   end
 
   def create
@@ -29,10 +34,10 @@ class MultichoicesController < ApplicationController
     respond_to do |format|
       if @multichoice.save
         subtask.save
-        format.html { redirect_to edit_multichoice_path(@multichoice.id), notice: 'Kysymys lisättiin onnistuneesti.' }
+        format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), notice: 'Kysymys lisättiin onnistuneesti.' }
         #format.json { render :show, status: :created, location: @multichoice }
       else
-        format.html { render :new }
+        format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), alert: 'Kysymyksen lisääminen epäonnistui.' }
         format.json { render json: @multichoice.errors, status: :unprocessable_entity }
       end
     end
@@ -43,10 +48,10 @@ class MultichoicesController < ApplicationController
   def update
     respond_to do |format|
       if @multichoice.update(multichoice_params)
-        format.html { redirect_to edit_multichoice_path(@multichoice.id), notice: 'Kysymys päivitettiin onnistuneesti.' }
+        format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti.' }
       else
         @new_option = Option.new
-        format.html { render :edit }
+        format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), alert: 'Kysymyksen päivitys epäonnistui.' }
         format.json { render json: @multichoice.errors, status: :unprocessable_entity }
       end
     end
@@ -56,9 +61,9 @@ class MultichoicesController < ApplicationController
   def check_answers
     respond_to do |format|
       if @multichoice.user_answered_correctly?(current_user, checked_options_params[:checked_options].to_a)
-        format.html { redirect_to task_path(@multichoice.subtask.task), notice: 'Valitsit oikein!' }
+        format.html { redirect_to task_path(@multichoice.subtask.task, :layout => get_layout), notice: 'Valitsit oikein!' }
       else
-        format.html { redirect_to @multichoice.subtask.task, alert: 'Valinnoissa oli vielä virheitä!' }
+        format.html { redirect_to task_path(@multichoice.subtask.task, :layout => get_layout), alert: 'Valinnoissa oli vielä virheitä!' }
       end
     end
   end

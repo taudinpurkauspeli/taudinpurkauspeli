@@ -6,15 +6,19 @@ class TaskTextsController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def show
+    set_view_layout
   end
 
   # GET /task_texts/new
   def new
     @task_text = TaskText.new
+
+    set_view_layout
   end
 
   # GET /tasks/1/edit
   def edit
+    set_view_layout
   end
 
   # POST /task_texts
@@ -29,10 +33,10 @@ class TaskTextsController < ApplicationController
     respond_to do |format|
       if @task_text.save
         subtask.save
-        format.html { redirect_to @task_text.subtask.task, notice: 'Kysymys lisättiin onnistuneesti.' }
+        format.html { redirect_to edit_task_path(@task_text.subtask.task.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti!' }
         format.json { render :show, status: :created, location: @task_text }
       else
-        format.html { render :new }
+        format.html { redirect_to edit_task_path(@task_text.subtask.task.id, :layout => get_layout), alert: 'Kysymyksen päivitys epäonnistui!' }
         format.json { render json: @task_text.errors, status: :unprocessable_entity }
       end
     end
@@ -43,9 +47,9 @@ class TaskTextsController < ApplicationController
   def update
     respond_to do |format|
       if @task_text.update(task_text_params)
-        format.html { redirect_to edit_task_path(@task_text.subtask.task.id), notice: 'Kysymys päivitettiin onnistuneesti.' }
+        format.html { redirect_to edit_task_path(@task_text.subtask.task.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti!' }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_task_path(@task_text.subtask.task.id, :layout => get_layout), notice: 'Kysymys päivitys epäonnistui!' }
         format.json { render json: @task_text.errors, status: :unprocessable_entity }
       end
     end

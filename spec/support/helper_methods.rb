@@ -7,6 +7,10 @@ module HelperMethods
     click_button('Kirjaudu sisään')
   end
 
+  def number_of_ex_tasks
+    return exercise.tasks.where(level:1...999).count
+  end
+
   def current_user
 
     user = instance_double("User", :username => "Testi", :realname => "Pekka", :password => "Salasana1", :password_confirmation => "Salasana1", :email => "pekka@pera.com")

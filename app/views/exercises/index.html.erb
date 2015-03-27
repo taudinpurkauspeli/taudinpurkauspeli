@@ -1,5 +1,9 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
 <h1>Taudinpurkauspeli</h1>
 <%@exercises.each do |exercise| %>
+
 <div class="row">
   <div class="col-md-5">
     <% if !exercise.hidden? || current_user_is_admin %>

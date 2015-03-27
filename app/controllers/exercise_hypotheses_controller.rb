@@ -12,7 +12,7 @@ class ExerciseHypothesesController < ApplicationController
 
     respond_to do |format|
       if @exercise_hypothesis.save
-        format.html { redirect_to hypotheses_url}
+        format.html { redirect_to hypotheses_url(:layout => get_layout)}
         format.json { render :show, status: :created, location: @exercise_hypothesis }
       else
          format.html { redirect_to hypotheses_url, alert: 'Työhypoteesin liittäminen caseen epäonnistui.' }
@@ -23,9 +23,11 @@ class ExerciseHypothesesController < ApplicationController
   # PATCH/PUT /exercise_hypotheses/1
   # PATCH/PUT /exercise_hypotheses/1.json
   def update
+    puts "Kavin paivittamassa ex_hyp-kontrollerissa"
     respond_to do |format|
       if @exercise_hypothesis.update(exercise_hypothesis_params)
-        format.html { redirect_to hypotheses_url, notice: 'Työhypoteesin selite päivitetty.' }
+        puts "ja onnistuin tallennuksessa ex_hyp-kontrollerissa"
+        format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Työhypoteesin tiedot on päivitetty.' }
         format.json { render :show, status: :ok, location: @exercise_hypothesis }
       else
          format.html { redirect_to hypotheses_url, alert: 'Työhypoteesin päivittäminen epäonnistui.' }
@@ -36,9 +38,11 @@ class ExerciseHypothesesController < ApplicationController
   # DELETE /exercise_hypotheses/1
   # DELETE /exercise_hypotheses/1.json
   def destroy
+    puts "Kavin poistamassa ex_hypin casesta"
     @exercise_hypothesis.destroy
     respond_to do |format|
-      format.html { redirect_to hypotheses_url, notice: 'Työhypoteesi poistettu casesta.'}
+      puts "ja onnistuin ex_hypin poistamisessa"
+      format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Työhypoteesi poistettu casesta.'}
       format.json { head :no_content }
     end
   end

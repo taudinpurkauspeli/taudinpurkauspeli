@@ -1,4 +1,4 @@
-<%= form_for(@exercise) do |f| %>
+<%= form_for(@exercise, :html => {:id => "form-save-exercise"}) do |f| %>
   <% if @exercise.errors.any? %>
     <div id="error_explanation">
       <h2><%= t('activerecord.errors.template.header')%></h2>
@@ -28,6 +28,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Tallenna"%>
+    <%= f.submit "Tallenna", :class => "btn btn-default btn-save widthAuto"%>
   </div>
 <% end %>

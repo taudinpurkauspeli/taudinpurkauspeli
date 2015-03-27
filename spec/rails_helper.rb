@@ -3,10 +3,27 @@ ENV["RAILS_ENV"] ||= 'test'
 
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
+require 'capybara/poltergeist'
 require 'rspec/rails'
 
 #Mock include thing
 include RSpec::Mocks::ExampleMethods
+
+class ActiveRecord::Base
+  mattr_accessor :shared_connection
+  @@shared_connection = nil
+
+  def self.connection
+    @@shared_connection || retrieve_connection
+  end
+end
+
+# Forces all threads to share the same connection. This works on
+# Capybara because it starts the web server in a thread.
+ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
+
+Capybara.javascript_driver = :poltergeist
+Capybara.default_wait_time = 5
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -28,6 +45,7 @@ include RSpec::Mocks::ExampleMethods
 
 #HelperMethods module for mocks and features
 include HelperMethods
+include WaitForAjax
 
 I18n.enforce_available_locales = false
 
@@ -58,7 +76,6 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
-
 
 end
 

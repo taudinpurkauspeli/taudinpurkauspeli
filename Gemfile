@@ -53,6 +53,8 @@ group :test do
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
   gem 'rspec-mocks'
+  gem 'poltergeist'
+  gem 'phantomjs'
 
 end
 

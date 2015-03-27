@@ -22,6 +22,7 @@ end
 
 When(/^I press the button "(.*?)"$/) do |arg1|
   click_button(arg1)
+  wait_for_ajax
 end
 
 Then(/^page should have a message: "(.*?)"$/) do |arg1|

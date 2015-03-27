@@ -70,7 +70,7 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
 
       it "redirects to the created exercise_hypothesis" do
         post :create, {:exercise_hypothesis => valid_attributes}, valid_session
-        expect(response).to redirect_to(Hypothesis)
+        expect(response).to redirect_to(hypotheses_path(:layout => true))
       end
     end
 
@@ -106,7 +106,7 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
       it "redirects to the exercise_hypothesis" do
         exercise_hypothesis = ExerciseHypothesis.create! valid_attributes
         put :update, {:id => exercise_hypothesis.to_param, :exercise_hypothesis => valid_attributes}, valid_session
-        expect(response).to redirect_to(hypotheses_url)
+        expect(response).to redirect_to(hypotheses_path(:layout => true))
       end
     end
 
@@ -132,7 +132,7 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
     it "redirects to the exercise_hypotheses list" do
       exercise_hypothesis = ExerciseHypothesis.create! valid_attributes
       delete :destroy, {:id => exercise_hypothesis.to_param}, valid_session
-      expect(response).to redirect_to(hypotheses_url)
+      expect(response).to redirect_to(hypotheses_path(:layout => true))
     end
   end
 

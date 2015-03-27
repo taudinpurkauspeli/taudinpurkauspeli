@@ -1,6 +1,7 @@
+=begin
 require 'rails_helper'
 
-describe "Multichoice page for student" do
+describe "Multichoice page for student", js:true do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
 
@@ -100,3 +101,4 @@ describe "Multichoice page for student" do
 
   end
 end
+=end

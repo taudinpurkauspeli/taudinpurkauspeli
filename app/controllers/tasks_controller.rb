@@ -6,6 +6,9 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
+    @tasks = Task.all
+    @user = current_user
+
     @exercise = current_exercise
     if @exercise
       if current_user_is_admin
@@ -16,25 +19,32 @@ class TasksController < ApplicationController
     else
       redirect_to exercises_path, alert: 'Valitse ensin case, jota haluat tarkastella!'
     end
+
+    set_view_layout
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+
     unless current_user_is_admin
       if user_can_start_task(current_user, current_exercise, @task)
         session[:task_id] = params[:id]
       else
         respond_to do |format|
-          format.html { redirect_to tasks_url, alert: 'Et voi vielä suorittaa tätä toimenpidettä.' }
+          format.html { redirect_to tasks_url(:layout => get_layout), alert: 'Et voi vielä suorittaa tätä toimenpidettä.' and return }
         end
       end
     else
       @task = Task.find(params[:id])
     end
+
     @subtasks = @task.subtasks
     @new_completed_task = CompletedTask.new
     @new_asked_question = AskedQuestion.new
+
+    set_view_layout
+    
   end
 
   def user_can_start_task(user, exercise, task)
@@ -46,12 +56,16 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+
+    set_view_layout
   end
 
   # GET /tasks/1/edit
   def edit
     session[:task_id] = params[:id]
     @subtasks = @task.subtasks
+
+    set_view_layout
   end
 
   # POST /tasks
@@ -63,10 +77,10 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to edit_task_path(@task.id), notice: 'Toimenpide luotiin onnistuneesti.' }
+        format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide luotiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @task }
       else
-        format.html { render :new }
+        format.html { redirect_to tasks_url(:layout => get_layout), alert: 'Toimenpiteen luonti epäonnistui.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -77,10 +91,10 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to edit_task_path(@task.id), notice: 'Toimenpide päivitettiin onnistuneesti.' }
+        format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide päivitettiin onnistuneesti.' }
         format.json { render :show, status: :ok, location: @task }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), alert: 'Toimenpiteen päivitys epäonnistui.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -92,7 +106,7 @@ class TasksController < ApplicationController
     session[:task_id] = nil
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to tasks_url(:layout => get_layout), notice: 'Toimenpide poistettu.' }
       format.json { head :no_content }
     end
   end
@@ -100,14 +114,14 @@ class TasksController < ApplicationController
   def level_up
     @task.move_up
     respond_to do |format|
-      format.html { redirect_to tasks_url }
+      format.html { redirect_to tasks_url(:layout => get_layout) }  
     end
   end
 
   def level_down
     @task.move_down
     respond_to do |format|
-      format.html { redirect_to tasks_url }
+      format.html { redirect_to tasks_url(:layout => get_layout) }  
     end
   end
 
