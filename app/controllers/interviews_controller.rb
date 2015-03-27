@@ -34,7 +34,7 @@ class InterviewsController < ApplicationController
         #format.json { render :show, status: :created, location: @multichoice }
     else
       ## TODO redirect task show
-    	format.html { render :new }
+    	format.html { redirect_to new_interview_path(:layout => get_layout), alert: 'Haastattelun lisääminen epäonnistui.' }
     	format.json { render json: @interview.errors, status: :unprocessable_entity }
     end
 end
@@ -46,7 +46,7 @@ def update
 			format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Haastattelu päivitettiin onnistuneesti.' }
 		else
 			@new_question = Question.new
-			format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Haastattelun päivitys epäonnistui.' }
+			format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), alert: 'Haastattelun päivitys epäonnistui.' }
 			format.json { render json: @interview.errors, status: :unprocessable_entity }
 		end
 	end
