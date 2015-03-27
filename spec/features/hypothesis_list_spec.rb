@@ -25,9 +25,8 @@ describe "Hypothesis list page", js:true do
     describe "and chooses an exercise" do
 
       before :each do
-        click_button('Lihanautakuolemat')
-        click_link('Työhypoteesit')
-        wait_for_ajax
+        click_and_wait('Lihanautakuolemat')
+        click_and_wait('Työhypoteesit')
       end
 
       it "he should be able to view the hypotheses of an exercise" do
@@ -39,8 +38,7 @@ describe "Hypothesis list page", js:true do
 
         it "he should not be able check hypotheses of an exercise" do
           expect {
-            click_button('Virustauti')
-            wait_for_ajax
+            click_and_wait('Virustauti')
           }.to change(CheckedHypothesis, :count).by (0)
           expect(page).to have_content 'Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin.'
         end
@@ -49,16 +47,13 @@ describe "Hypothesis list page", js:true do
 
     describe "and has completed required task" do
       before :each do
-        click_button('Lihanautakuolemat')
-        wait_for_ajax
-        click_link('Työhypoteesit')
-        wait_for_ajax
+        click_and_wait('Lihanautakuolemat')
+        click_and_wait('Työhypoteesit')
       end
       it "user should be able to check hypotheses of an exercise" do
         user.completed_tasks.create task_id:task.id
         expect {
-          click_button('Virustauti')
-          wait_for_ajax
+          click_and_wait('Virustauti')
         }.to change(CheckedHypothesis, :count).by (1)
       end
     end
@@ -74,16 +69,14 @@ describe "Hypothesis list page", js:true do
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
       visit root_path
-      click_button('Lihanautakuolemat')
-      click_link('Työhypoteesit')
-      wait_for_ajax
+      click_and_wait('Lihanautakuolemat')
+      click_and_wait('Työhypoteesit')
     end
 
     describe "he should be able to edit hypotheses and hypothesis groups" do
 
       it "user should be able to create a new hypothesis" do
-        click_button('+ Uusi työhypoteesi')
-        wait_for_ajax
+        click_and_wait('+ Uusi työhypoteesi')
 
         fill_in('hypothesis_name', with: 'Sorkkaihottuma')
         expect {
@@ -97,8 +90,7 @@ describe "Hypothesis list page", js:true do
       end
 
       it "user should not be able to create a new hypothesis without a name" do
-        click_button('+ Uusi työhypoteesi')
-        wait_for_ajax
+        click_and_wait('+ Uusi työhypoteesi')
 
         fill_in('hypothesis_name', with: '')
         expect {
@@ -110,8 +102,7 @@ describe "Hypothesis list page", js:true do
       end
 
       it "user should be able to create a new hypothesis group" do
-        click_button('+ Uusi työhypoteesiryhmä')
-        wait_for_ajax
+        click_and_wait('+ Uusi työhypoteesiryhmä')
 
         fill_in('hypothesis_group_name', with: 'Sorkkaeläinten ihotaudit')
 
@@ -125,8 +116,7 @@ describe "Hypothesis list page", js:true do
       end
 
       it "user should not be able to create a new hypothesis group without a name" do
-        click_button('+ Uusi työhypoteesiryhmä')
-        wait_for_ajax
+        click_and_wait('+ Uusi työhypoteesiryhmä')
 
         fill_in('hypothesis_group_name', with: '')
         expect {
@@ -151,8 +141,7 @@ describe "Hypothesis list page", js:true do
 
       it "user should be able to remove hypotheses from an exercise" do
         while(ExerciseHypothesis.count != 0)
-          click_button('Virustauti')
-          wait_for_ajax
+          click_and_wait('Virustauti')
           first(:button, 'Poista casesta').click
           wait_for_ajax
         end
@@ -161,8 +150,7 @@ describe "Hypothesis list page", js:true do
       it "user should be able to edit the explanation of a hypothesis added to an exercise" do
         while(ExerciseHypothesis.first.explanation != 'Virus ei olekaan bakteeritauti')
 
-          click_button('Virustauti')
-          wait_for_ajax
+          click_and_wait('Virustauti')
 
           fill_in('exercise_hypothesis_explanation', with: 'Virus ei olekaan bakteeritauti')
           first(:button, 'Päivitä').click
@@ -174,8 +162,7 @@ describe "Hypothesis list page", js:true do
       it "user should be able to add prerequisite task to a hypothesis added to an exercise" do
 
         while(ExerciseHypothesis.first.task.nil?)
-          click_button('Virustauti')
-          wait_for_ajax
+          click_and_wait('Virustauti')
 
           select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]')
 
