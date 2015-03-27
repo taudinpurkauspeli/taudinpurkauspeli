@@ -13,6 +13,13 @@
 
 ActiveRecord::Schema.define(version: 20150325124202) do
 
+  create_table "asked_questions", force: :cascade do |t|
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.integer  "question_id"
+  end
+
   create_table "checked_hypotheses", force: :cascade do |t|
     t.integer "user_id"
     t.integer "exercise_hypothesis_id"
@@ -97,6 +104,7 @@ ActiveRecord::Schema.define(version: 20150325124202) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "question_group_id"
+    t.integer  "interview_id"
   end
 
   create_table "subtasks", force: :cascade do |t|

@@ -1,0 +1,21 @@
+<% subtask.interview.questions.each do |question| %>
+    <div class="row">
+       <div class="col-md-4 text-padding">
+          <% if !current_user.has_asked_question?(question) && !current_user_is_admin %>
+            <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
+            <%= hidden_field_tag 'question_id', question.id %>
+            <%= submit_tag(question.title, :class => "btn btn-default btn-save disabled widthAuto") unless current_user_is_admin %>
+            <% end %>
+          <% else %>
+              <div class="row">
+                  <div class="col-md-9">
+                    <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
+                  </div>
+             </div>
+              <div class="collapse" id="collapseQuestionContent<%= question.id%>" >
+                  <p><%= question.content %></p>
+              </div>
+          <%end %>
+      </div>
+    </div>
+<% end %>

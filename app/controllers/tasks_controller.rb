@@ -41,8 +41,10 @@ class TasksController < ApplicationController
 
     @subtasks = @task.subtasks
     @new_completed_task = CompletedTask.new
+    @new_asked_question = AskedQuestion.new
 
     set_view_layout
+    
   end
 
   def user_can_start_task(user, exercise, task)
