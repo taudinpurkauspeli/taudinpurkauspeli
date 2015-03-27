@@ -11,24 +11,19 @@ describe "New Task page", js:true do
       before :each do
         sign_in(username:"Testipoika", password:"Salainen1")
 
-        click_button(exercise.name)
-        wait_for_ajax
+        click_and_wait(exercise.name)
 
         click_link('Toimenpiteet')
-        wait_for_ajax
 
-        click_button('+ Luo uusi toimenpide')
-        wait_for_ajax
+        click_and_wait('+ Luo uusi toimenpide')
 
         fill_in('task_name', with: "Kysymyksiä asiakkaalle")
 
         expect{
-          click_button('Tallenna')
-          wait_for_ajax
+          click_and_wait('Tallenna')
         }.to change(Task, :count).by(1)
 
-        click_button('+ Luo uusi monivalinta-alitoimenpide')
-        wait_for_ajax
+        click_and_wait('+ Luo uusi monivalinta-alitoimenpide')
       end
 
       it "user should be able to create a new task with a multichoice subtask" do
@@ -36,8 +31,7 @@ describe "New Task page", js:true do
         fill_in('multichoice_question', with: "Mitä kysyt asiakkaalta:")
 
         expect{
-          click_button('Tallenna kysymys')
-          wait_for_ajax
+          click_and_wait('Tallenna kysymys')
         }.to change(Multichoice, :count).by(1)
 
         expect(page).to have_content 'Kysymys lisättiin onnistuneesti.'
@@ -54,7 +48,7 @@ describe "New Task page", js:true do
         fill_in('multichoice_question', with: "")
 
         expect{
-          click_button('Tallenna kysymys')
+          click_and_wait('Tallenna kysymys')
           wait_for_ajax
         }.to change(Multichoice, :count).by(0)
 
@@ -78,17 +72,10 @@ describe "New Task page", js:true do
       before :each do
         sign_in(username:"Testipoika", password:"Salainen1")
 
-        click_button(exercise.name)
-        wait_for_ajax
-
+        click_and_wait(exercise.name)
         click_link('Toimenpiteet')
-        wait_for_ajax
-
-        click_button(task.name)
-        wait_for_ajax
-
-        click_button(subtask.to_s)
-        wait_for_ajax
+        click_and_wait(task.name)
+        click_and_wait(subtask.to_s)
 
         expect(page).to have_content 'Muokkaa monivalintakysymystä'
       end
@@ -97,8 +84,7 @@ describe "New Task page", js:true do
 
         fill_in('multichoice_question', with: "Useita kysymyksiä asiakkaalle:")
 
-        click_button('Tallenna kysymys')
-        wait_for_ajax
+        click_and_wait('Tallenna kysymys')
 
         expect(Multichoice.first.question).to eq("Useita kysymyksiä asiakkaalle:")
       end
@@ -109,16 +95,13 @@ describe "New Task page", js:true do
 
         fill_in('multichoice_question', with: "")
 
-        click_button('Tallenna kysymys')
+        click_and_wait('Tallenna kysymys')
         wait_for_ajax
 
         expect(page).to have_content 'Seuraavat virheet estivät tallennuksen:'
         expect(Task.where(name:"Kysymyksiä asiakkaalle").count).to eq(1)
       end
 =end
-
     end
-
   end
-
 end
