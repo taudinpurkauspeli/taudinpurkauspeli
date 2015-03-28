@@ -49,7 +49,7 @@ class TaskTextsController < ApplicationController
       if @task_text.update(task_text_params)
         format.html { redirect_to edit_task_path(@task_text.subtask.task.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti!' }
       else
-        format.html { redirect_to edit_task_path(@task_text.subtask.task.id, :layout => get_layout), alert: 'Kysymys päivitys epäonnistui!' }
+        format.html { redirect_to edit_task_path(@task_text.subtask.task.id, :layout => get_layout), alert: 'Kysymyksen päivitys epäonnistui!' }
         format.json { render json: @task_text.errors, status: :unprocessable_entity }
       end
     end

@@ -17,7 +17,7 @@ module HelperMethods
 
     return user
   end
-  
+
   def current_user_is_admin
     return true
   end
@@ -36,6 +36,10 @@ module HelperMethods
     end
   end
 
+  def get_task_count
+    return Task.where(level:1...999).count
+  end
+
   def click_and_wait(element_text)
     begin
       click_button(element_text)
@@ -48,8 +52,8 @@ module HelperMethods
       click_link(element_text)
       wait_for_ajax
       return
-    rescue 
-    end 
+    rescue
+    end
 
     raise "Element containing text '" + element_text + "' not found"
   end

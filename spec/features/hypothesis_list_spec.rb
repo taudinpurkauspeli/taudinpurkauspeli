@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "In hypothesis list page", js:true do
+describe "Hypothesis list page", js:true do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
   let!(:hypothesis_group){FactoryGirl.create(:hypothesis_group)}
@@ -127,7 +127,7 @@ describe "In hypothesis list page", js:true do
         end
       end
 
-      it "user should be able to add prerequisite task to a hypothesis added to an exercise" do
+      it "add prerequisite task to a hypothesis added to an exercise" do
 
         while(ExerciseHypothesis.first.task.nil?)
           click_and_wait('Virustauti')
