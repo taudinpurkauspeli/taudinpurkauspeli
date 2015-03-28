@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe MultichoicesController, :type => :controller do
 
-  let!(:exercise){FactoryGirl.create(:exercise)}
+	let!(:exercise){FactoryGirl.create(:exercise)}
 	let!(:user){FactoryGirl.create(:user)}
 	let!(:task){FactoryGirl.create(:task, exercise:exercise)}
 	let!(:subtask){FactoryGirl.create(:subtask, task:task)}
@@ -12,11 +12,11 @@ RSpec.describe MultichoicesController, :type => :controller do
 	}
 
 	let(:invalid_attributes) {
-		{subtask_id: nil, question: nil}
+		{subtask_id: nil, question: ""}
 	}
 
 	let(:valid_session) { {
-		user_id: user.id, task_id: task.id}
+			user_id: user.id, task_id: task.id}
 	}
 
 	describe "GET new" do
@@ -39,49 +39,45 @@ RSpec.describe MultichoicesController, :type => :controller do
 			it "creates a new Multichoice" do
 				expect {
 					post :create, {:multichoice => valid_attributes}, valid_session
-					}.to change(Multichoice, :count).by(1)
-				end
+				}.to change(Multichoice, :count).by(1)
 			end
-
 		end
 
-		describe "POST create" do
-			describe "with invalid params" do
-				it "does not creates a new Multichoice" do
-					expect {
-						post :create, {:multichoice => invalid_attributes}, valid_session
-						}.not_to change(Multichoice, :count)
-					end
-				end
-
+		describe "with invalid params" do
+			it "does not create a new Multichoice" do
+				expect {
+					post :create, {:multichoice => invalid_attributes}, valid_session
+				}.not_to change(Multichoice, :count)
 			end
-
-
-			describe "PUT update" do
-				describe "with valid params" do
-					let(:new_attributes) {
-						{question: "Montako jalkaa lehmällä?"}
-					}
-
-					it "assigns the requested multichoice as @multichoice" do
-						multichoice = Multichoice.create! valid_attributes
-						put :update, {:id => multichoice.to_param, :multichoice => valid_attributes}, valid_session
-						expect(assigns(:multichoice)).to eq(multichoice)
-					end
-				end
-
-				describe "with invalid params" do
-					let(:new_attributes) {
-						{question: "Montako jalkaa lehmällä?"}
-					}
-
-					it "assigns the requested multichoice as @multichoice" do
-						multichoice = Multichoice.create! valid_attributes
-						put :update, {:id => multichoice.to_param, :multichoice => invalid_attributes}, valid_session
-						expect(assigns(:multichoice)).to eq(multichoice)
-					end
-				end
-
-			end
-
 		end
+
+	end
+
+	describe "PUT update" do
+		describe "with valid params" do
+			let(:new_attributes) {
+				{question: "Montako jalkaa lehmällä?"}
+			}
+
+			it "assigns the requested multichoice as @multichoice" do
+				multichoice = Multichoice.create! valid_attributes
+				put :update, {:id => multichoice.to_param, :multichoice => valid_attributes}, valid_session
+				expect(assigns(:multichoice)).to eq(multichoice)
+			end
+		end
+
+		describe "with invalid params" do
+			let(:new_attributes) {
+				{question: "Montako jalkaa lehmällä?"}
+			}
+
+			it "assigns the requested multichoice as @multichoice" do
+				multichoice = Multichoice.create! valid_attributes
+				put :update, {:id => multichoice.to_param, :multichoice => invalid_attributes}, valid_session
+				expect(assigns(:multichoice)).to eq(multichoice)
+			end
+		end
+
+	end
+
+end
