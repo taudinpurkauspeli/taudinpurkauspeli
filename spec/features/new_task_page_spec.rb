@@ -32,9 +32,6 @@ describe "New Task page", js:true do
       expect(number_of_ex_tasks).to eq(0)
     end
 
-
-
-
     describe "when a task exists" do
 
       before :each do
@@ -49,9 +46,6 @@ describe "New Task page", js:true do
 
         expect(Task.where(level:1...999).first.name).to eq("Soita asiakkaalle")
       end
-
-
-
 
       describe "should be able to add a" do
 
@@ -88,11 +82,6 @@ describe "New Task page", js:true do
         end
       end
 
-
-
-
-
-
       describe "should not be able to add a" do
         it "task text subtask without content" do
 
@@ -121,10 +110,6 @@ describe "New Task page", js:true do
         end
       end
 
-
-
-
-
       describe "with task text subtask" do
         before :each do
           click_and_wait('+ Luo uusi tekstimuotoinen alitoimenpide')
@@ -151,10 +136,6 @@ describe "New Task page", js:true do
           expect(page).to have_content 'Kysymyksen päivitys epäonnistui!'
         end
       end
-
-
-
-
 
       describe "with multichoice subtask" do
         before :each do
@@ -185,8 +166,6 @@ describe "New Task page", js:true do
       end
     end
   end
-
-
 
   describe "student" do
     let!(:user){FactoryGirl.create(:user, admin: false)}

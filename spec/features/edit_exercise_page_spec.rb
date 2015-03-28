@@ -1,4 +1,3 @@
-
 require 'rails_helper'
 
 describe "Edit Exercise page", js:true do

@@ -168,7 +168,6 @@ describe "Hypothesis list page", js:true do
       end
     end
 
-
   end
 
 end

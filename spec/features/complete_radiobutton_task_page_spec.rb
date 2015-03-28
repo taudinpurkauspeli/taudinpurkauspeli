@@ -13,7 +13,6 @@ describe "Radiobutton page for student", js:true do
   let!(:option2){FactoryGirl.create(:option, multichoice_id:radiobutton.id, content: "Asiakkaan äidille", is_correct_answer: false, explanation: "Ei oikea vastaus")}
   let!(:option3){FactoryGirl.create(:option, multichoice_id:radiobutton.id, content: "Asiakkaalles", explanation: "Oikea vastaus")}
 
-
   describe "student" do
 
     before :each do

@@ -111,7 +111,6 @@ describe "Task list page", js:true do
     end
   end
 
-
   describe "teacher" do
 
     # CODE HARD

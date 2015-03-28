@@ -1,4 +1,3 @@
-
 require 'rails_helper'
 
 describe "Task tab spec", js:true do

@@ -1,4 +1,3 @@
-
 require 'rails_helper'
 
 describe "Task show page", js:true do
