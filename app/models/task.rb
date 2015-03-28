@@ -6,6 +6,8 @@ class Task < ActiveRecord::Base
   has_many :users, through: :completed_tasks
   has_many :subtasks, -> {order('level')}, dependent: :destroy
   has_many :task_texts, through: :subtasks
+  has_many :multichoices, through: :subtasks
+  has_many :interviews, through: :subtasks
 
   def self.get_highest_level(exercise)
     highest_level = exercise.tasks.maximum("level")
