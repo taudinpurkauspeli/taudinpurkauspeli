@@ -1,15 +1,16 @@
-=begin
 require 'rails_helper'
 
-describe "Task list page", js:true do
+describe "Task tab spec", js:true do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
+
   let!(:task1){FactoryGirl.create(:task, exercise:exercise, level:1)}
   let!(:subtask){FactoryGirl.create(:subtask, task:task1)}
   let!(:task_text){FactoryGirl.create(:task_text, subtask:subtask)}
+
   let!(:task2){FactoryGirl.create(:task, exercise:exercise, level:1, name: "Ota näyte")}
 
-  describe "if user is signed in as student" do
+  describe "student" do
 
     let!(:user){FactoryGirl.create(:student)}
 
@@ -18,64 +19,44 @@ describe "Task list page", js:true do
 
       visit root_path
 
-      click_button('Lihanautakuolemat')
-      click_link('Toimenpiteet')
+      click_and_wait('Lihanautakuolemat')
+      click_and_wait('Toimenpiteet')
     end
 
-    it "user should be able to view the tasks of an exercise" do
-      expect(page).to have_button 'Soita asiakkaalle'
-      expect(page).to have_button 'Ota näyte'
-    end
-
-    describe "and clicks on an available task" do
+    describe "clicks on an available task" do
 
       before :each do
-        click_button('Soita asiakkaalle')
+        click_and_wait('Soita asiakkaalle')
       end
 
       it "that task should open as a new tab" do
         expect(page).to have_link 'Soita asiakkaalle'
       end
+    end
+  end
 
-      describe "user is able to complete that task" do
+  describe "teacher" do
 
-        it "and a completed_task is added to the database" do
-          expect {
-            first(:button, 'Jatka').click
-            }.to change(CompletedTask, :count).by(1)
-          end
-        end
-      end
+    let!(:user){FactoryGirl.create(:user)}
+
+    before :each do
+      sign_in(username:"Testipoika", password:"Salainen1")
+
+      visit root_path
+
+      click_and_wait('Lihanautakuolemat')
+      click_and_wait('Toimenpiteet')
     end
 
-    describe "if user is signed in as teacher" do
-
-      let!(:user){FactoryGirl.create(:user)}
+    describe "clicks on a task" do
 
       before :each do
-        sign_in(username:"Testipoika", password:"Salainen1")
-
-        visit root_path
-
-        click_button('Lihanautakuolemat')
-        click_link('Toimenpiteet')
+        click_and_wait('Soita asiakkaalle')
       end
 
-      it "user should be able to view the tasks of an exercise" do
-        expect(page).to have_button 'Soita asiakkaalle'
-        expect(page).to have_button 'Ota näyte'
-      end
-
-      describe "and clicks on a task" do
-
-        before :each do
-          click_button('Soita asiakkaalle')
-        end
-
-        it "that task should not open as a new tab" do
-          expect(page).not_to have_link 'Soita asiakkaalle'
-        end
+      it "that task should open as a new tab" do
+        expect(page).to have_link 'Soita asiakkaalle'
       end
     end
   end
-=end
+end

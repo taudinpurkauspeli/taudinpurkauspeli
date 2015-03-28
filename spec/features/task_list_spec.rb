@@ -18,8 +18,8 @@ describe "Task list page", js:true do
 
   #Third task with task_text
   let!(:task2_2){FactoryGirl.create(:task, exercise:exercise, name: "Hoida eläintä", level: 2)}
-  let!(:task_text3){FactoryGirl.create(:task_text, subtask:subtask3, content:"Lääkäri hoitaa eläintä")}
   let!(:subtask3){FactoryGirl.create(:subtask, task:task2_2)}
+  let!(:task_text3){FactoryGirl.create(:task_text, subtask:subtask3, content:"Lääkäri hoitaa eläintä")}
 
   #Fourth task with no subtasks
   let!(:task3){FactoryGirl.create(:task, exercise:exercise2, name: "Soita asiakkaalle uudestaan")}
@@ -27,9 +27,7 @@ describe "Task list page", js:true do
   #Fifth task with task_text
   let!(:task4){FactoryGirl.create(:task, exercise:exercise, name: "Soita asiakkaalle eläimestä", level: 3)}
 
-
-
-  describe "if user is signed in as student" do
+  describe "student" do
     let!(:user){FactoryGirl.create(:student)}
 
     before :each do
@@ -37,76 +35,75 @@ describe "Task list page", js:true do
       visit root_path
     end
 
-    it "he should not be able to view the tasks of an exercise if exercise has not been chosen" do
+    it "should not be able to view tasks of an unchosen exercise" do
       visit tasks_path
       expect(current_path).to eq(exercises_path)
       expect(page).to have_content "Valitse ensin case, jota haluat tarkastella!"
     end
 
-    describe "and chooses an exercise" do
+    describe "has chosen an exercise" do
 
       before :each do
         click_and_wait('Lihanautakuolemat')
         click_and_wait('Toimenpiteet')
       end
 
-      it "user should be able to view the tasks of an exercise" do
-        expect(page).to have_button task.name
-        expect(page).to have_button task2_1.name
-        expect(page).to have_button task2_2.name
-        expect(page).to have_button task4.name
-        expect(page).not_to have_button task3.name
-      end
+      describe "then he should be able to" do
 
+        it "view the tasks of an exercise" do
+          expect(page).to have_button task.name
+          expect(page).to have_button task2_1.name
+          expect(page).to have_button task2_2.name
+          expect(page).to have_button task4.name
+          expect(page).not_to have_button task3.name
+        end
 
-      it "user should be able to complete the first correct task of an exercise" do
-        click_and_wait(task.name)
+        it "complete the first correct task of an exercise" do
+          click_and_wait(task.name)
 
-        expect {
+          expect {
+            click_and_wait('Jatka')
+          }.to change(CompletedTask, :count).by (1)
+
+          expect(CompletedTask.first.task.name).to eq(task.name)
+        end
+
+        it "do the tasks of same level in any order (case a)" do
+          FactoryGirl.create(:completed_task, task:task, user:user)
+
+          click_and_wait(task2_1.name)
+
           click_and_wait('Jatka')
-        }.to change(CompletedTask, :count).by (1)
+          click_and_wait('Toimenpiteet')
+          click_and_wait(task2_2.name)
 
-        expect(CompletedTask.first.task.name).to eq(task.name)
+          expect {
+            click_and_wait('Jatka')
+          }.to change(CompletedTask, :count).by (1)
 
-      end
+          expect(CompletedTask.count).to eq(3)
+        end
 
-      it "user should be able to do the tasks of same level in any order (case a)" do
+        it "do the tasks of same level in any order (case b)" do
+          FactoryGirl.create(:completed_task, task:task, user:user)
 
-        FactoryGirl.create(:completed_task, task:task, user:user)
+          click_and_wait(task2_2.name)
 
-        click_and_wait(task2_1.name)
-
-        click_and_wait('Jatka')
-        click_and_wait('Toimenpiteet')
-        click_and_wait(task2_2.name)
-
-        expect {
           click_and_wait('Jatka')
-        }.to change(CompletedTask, :count).by (1)
+          click_and_wait('Toimenpiteet')
+          click_and_wait(task2_1.name)
 
-        expect(CompletedTask.last.task.name).to eq(task2_2.name)
+          expect {
+            click_and_wait('Jatka')
+          }.to change(CompletedTask, :count).by (1)
+
+          expect(CompletedTask.count).to eq(3)
+        end
 
       end
 
-      it "user should be able to do the tasks of same level in any order (case b)" do
-
-        FactoryGirl.create(:completed_task, task:task, user:user)
-
-        click_and_wait(task2_2.name)
-
-        click_and_wait('Jatka')
-        click_and_wait('Toimenpiteet')
-        click_and_wait(task2_1.name)
-
-        expect {
-          click_and_wait('Jatka')
-        }.to change(CompletedTask, :count).by (1)
-
-        expect(CompletedTask.last.task.name).to eq(task2_2.name)
-      end
-
-      describe "has not completed required prerequisite tasks" do
-        it "user should not be able to complete task" do
+      describe "but has not completed required prerequisite tasks" do
+        it "he should not be able to complete task" do
           click_and_wait('Hoida')
           expect(page).to have_content('Et voi vielä suorittaa tätä toimenpidettä.')
         end
@@ -114,8 +111,7 @@ describe "Task list page", js:true do
     end
   end
 
-
-  describe "if user is signed in as teacher" do
+  describe "teacher" do
 
     # CODE HARD
 
@@ -128,92 +124,93 @@ describe "Task list page", js:true do
       click_and_wait('Toimenpiteet')
     end
 
-    it "he should be able to move task one level up if it has no siblings or children" do
-      expect(task4.level).to eq(3)
-      expect(task.level).to eq(1)
-      expect(task2_1.level).to eq(2)
-      expect(task2_2.level).to eq(2)
-
-
-      click_on("tasks/7/up")
-      wait_for_ajax
-      expect(Task.last.level).to eq(2)
-
-      expect(Task.where(level:1...9999).first.level).to eq(1)
-      expect(Task.find(4).level).to eq(2)
-      expect(Task.find(5).level).to eq(2)
+    it "should be able to view the tasks of an exercise" do
+      expect(page).to have_button task.name
+      expect(page).to have_button task2_1.name
+      expect(page).to have_button task2_2.name
+      expect(page).to have_button task4.name
+      expect(page).not_to have_button task3.name
     end
 
-    it "he should be able to move task one level up if it has siblings and children" do
-      click_on("tasks/7/up")
-      wait_for_ajax
-      click_on("tasks/7/up")
-      wait_for_ajax
-      expect(Task.last.level).to eq(2)
+    describe "should be able to move task one level" do
 
-      expect(Task.where(level:1...9999).first.level).to eq(1)
-      expect(Task.find(4).level).to eq(3)
-      expect(Task.find(5).level).to eq(3)
+      describe "up if it has" do
+        it "siblings or children" do
+          expect(task4.level).to eq(3)
+          expect(task.level).to eq(1)
+          expect(task2_1.level).to eq(2)
+          expect(task2_2.level).to eq(2)
+
+          click_and_wait("tasks/7/up")
+          expect(Task.last.level).to eq(2)
+
+          expect(Task.where(level:1...9999).first.level).to eq(1)
+          expect(Task.find(4).level).to eq(2)
+          expect(Task.find(5).level).to eq(2)
+        end
+
+        it "siblings and children" do
+          click_and_wait("tasks/7/up")
+          click_and_wait("tasks/7/up")
+          expect(Task.last.level).to eq(2)
+
+          expect(Task.where(level:1...9999).first.level).to eq(1)
+          expect(Task.find(4).level).to eq(3)
+          expect(Task.find(5).level).to eq(3)
+        end
+
+        it "children but no siblings" do
+          click_and_wait("tasks/7/up")
+          click_and_wait("tasks/7/up")
+          click_and_wait("tasks/7/up")
+          expect(Task.last.level).to eq(1)
+
+          expect(Task.where(level:1...9999).first.level).to eq(1)
+          expect(Task.find(4).level).to eq(2)
+          expect(Task.find(5).level).to eq(2)
+        end
+      end
+
+      describe "down if it has" do
+        it "children and siblings" do
+          click_and_wait("tasks/7/up")
+          click_and_wait("tasks/7/up")
+          click_and_wait("tasks/7/up")
+          click_and_wait("tasks/7/down")
+
+          expect(Task.last.level).to eq(2)
+
+          expect(Task.where(level:1...9999).first.level).to eq(1)
+          expect(Task.find(4).level).to eq(3)
+          expect(Task.find(5).level).to eq(3)
+        end
+
+        it "children and no siblings" do
+
+          click_and_wait("tasks/7/up")
+          click_and_wait("tasks/7/up")
+          click_and_wait("tasks/7/down")
+          expect(Task.last.level).to eq(2)
+
+          expect(Task.where(level:1...9999).first.level).to eq(1)
+          expect(Task.find(4).level).to eq(2)
+          expect(Task.find(5).level).to eq(2)
+        end
+
+
+        it "siblings and no children" do
+
+          click_and_wait("tasks/7/up")
+          click_and_wait("tasks/7/down")
+          expect(Task.last.level).to eq(3)
+
+          expect(Task.where(level:1...9999).first.level).to eq(1)
+          expect(Task.find(4).level).to eq(2)
+          expect(Task.find(5).level).to eq(2)
+        end
+      end
+
     end
-
-    it "he should be able to move task one level up if it has children but no siblings" do
-      click_on("tasks/7/up")
-      wait_for_ajax
-      click_on("tasks/7/up")
-      wait_for_ajax
-      click_on("tasks/7/up")
-      wait_for_ajax
-      expect(Task.last.level).to eq(1)
-
-      expect(Task.where(level:1...9999).first.level).to eq(1)
-      expect(Task.find(4).level).to eq(2)
-      expect(Task.find(5).level).to eq(2)
-    end
-
-    it "he should be able to move task one level down if it has children and siblings" do
-      click_on("tasks/7/up")
-      wait_for_ajax
-      click_on("tasks/7/up")
-      wait_for_ajax
-      click_on("tasks/7/up")
-      wait_for_ajax
-      click_on("tasks/7/down")
-      wait_for_ajax
-      expect(Task.last.level).to eq(2)
-
-      expect(Task.where(level:1...9999).first.level).to eq(1)
-      expect(Task.find(4).level).to eq(3)
-      expect(Task.find(5).level).to eq(3)
-    end
-
-    it "he should be able to move task one level down if it has children and no siblings" do
-
-      click_on("tasks/7/up")
-      wait_for_ajax
-      click_on("tasks/7/up")
-      wait_for_ajax
-      click_on("tasks/7/down")
-      wait_for_ajax
-      expect(Task.last.level).to eq(2)
-
-      expect(Task.where(level:1...9999).first.level).to eq(1)
-      expect(Task.find(4).level).to eq(2)
-      expect(Task.find(5).level).to eq(2)
-    end
-
-    it "he should be able to move task one level down if it has siblings and no children" do
-
-      click_on("tasks/7/up")
-      wait_for_ajax
-      click_on("tasks/7/down")
-      wait_for_ajax
-      expect(Task.last.level).to eq(3)
-
-      expect(Task.where(level:1...9999).first.level).to eq(1)
-      expect(Task.find(4).level).to eq(2)
-      expect(Task.find(5).level).to eq(2)
-    end
-
   end
 
 end

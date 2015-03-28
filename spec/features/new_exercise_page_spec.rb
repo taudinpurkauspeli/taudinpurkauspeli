@@ -2,17 +2,16 @@ require 'rails_helper'
 
 describe "New Exercise page", js:true do
 
-	describe "if user is signed in as admin" do
+	describe "teacher" do
 
 		let!(:user){FactoryGirl.create(:user)}
 
 		before :each do
 			sign_in(username:"Testipoika", password:"Salainen1")
+			visit new_exercise_path
 		end
 
-		it "he should be able to create a new exercise" do
-			visit new_exercise_path
-
+		it "should be able to create a new exercise" do
 			fill_in('exercise_name', with: "Broilerimysteeri")
 			fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
 
@@ -26,9 +25,7 @@ describe "New Exercise page", js:true do
 			expect(Exercise.first.anamnesis).to eq('Mitä kanoille on tapahtunut??')
 		end
 
-		it "he should not be able to create a new exercise without a name" do
-			visit new_exercise_path
-
+		it "should not be able to create a new exercise without a name" do
 			fill_in('exercise_name', with: "")
 			fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
 
@@ -42,7 +39,7 @@ describe "New Exercise page", js:true do
 
 	end
 
-	describe "if user is signed in as normal user" do
+	describe "student" do
 		let!(:user){FactoryGirl.create(:student)}
 
 		before :each do

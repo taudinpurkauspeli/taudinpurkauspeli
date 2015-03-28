@@ -137,10 +137,10 @@ RSpec.describe HypothesesController, :type => :controller do
         expect(assigns(:hypothesis)).to eq(hypothesis)
       end
 
-      it "re-renders the 'edit' template" do
+      it "redirects to the hypothesis" do
         hypothesis = Hypothesis.create! valid_attributes
         put :update, {:id => hypothesis.to_param, :hypothesis => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+        expect(response).to redirect_to(hypothesis)
       end
     end
 
