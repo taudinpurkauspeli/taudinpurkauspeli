@@ -2,77 +2,75 @@ require 'rails_helper'
 
 describe "Exercises page", js:true do
 
-  it "should have right title" do
-    visit exercises_path
-    expect(page).to have_content 'Taudinpurkauspeli'
+  let!(:exercise){FactoryGirl.create(:exercise)}
+  let!(:exercise2){FactoryGirl.create(:exercise, name: "Kanakuolema", anamnesis:"Kuollut kana")}
+
+  let!(:teacher){FactoryGirl.create(:user)}
+  let!(:student){FactoryGirl.create(:student)}
+
+  describe "when user is not logged in" do
+    before :each do
+      visit exercises_path
+    end
+
+    it "page should have right title" do
+      expect(page).to have_content 'Taudinpurkauspeli'
+    end
+
+    it "page should have login and signup buttons" do
+      expect(page).to have_button('Kirjaudu sisään')
+      expect(page).to have_button('Luo uusi tunnus')
+    end
+
+    describe "he should not be able to login with wrong" do
+
+
+      it "password" do
+
+        fill_in('username', with:"Testipoika")
+        fill_in('password', with:"Väärä salasana")
+        click_and_wait('Kirjaudu sisään')
+
+        expect(current_path).to eq(exercises_path)
+        expect(page).to have_content "Käyttäjätunnus tai salasana on väärin."
+
+      end
+
+      it "username" do
+
+        fill_in('username', with:"Testipoika!")
+        fill_in('password', with:"Salainen1")
+        click_and_wait('Kirjaudu sisään')
+
+        expect(current_path).to eq(exercises_path)
+        expect(page).to have_content "Käyttäjätunnus tai salasana on väärin."
+
+      end
+    end
+
   end
 
-  it "should have login and signup buttons for a user that hasn't logged in" do
-    visit exercises_path
-    expect(page).to have_button('Kirjaudu sisään')
-    expect(page).to have_button('Luo uusi tunnus')
-  end
-
-  it "user should not be able to login with wrong password" do
-
-    FactoryGirl.create(:user)
-
-    visit exercises_path
-    fill_in('username', with:"Testipoika")
-    fill_in('password', with:"Väärä salasana")
-    click_and_wait('Kirjaudu sisään')
-
-    expect(current_path).to eq(exercises_path)
-    expect(page).to have_content "Käyttäjätunnus tai salasana on väärin."
-
-  end
-
-  it "user should not be able to login with wrong username" do
-
-    FactoryGirl.create(:user)
-
-    visit exercises_path
-    fill_in('username', with:"Testipoika!")
-    fill_in('password', with:"Salainen1")
-    click_and_wait('Kirjaudu sisään')
-
-    expect(current_path).to eq(exercises_path)
-    expect(page).to have_content "Käyttäjätunnus tai salasana on väärin."
-
-  end
-
-  describe "when exercises exist and admin user is signed in" do
-
-    let!(:exercise){FactoryGirl.create(:exercise)}
-    let!(:exercise2){FactoryGirl.create(:exercise, name: "Kanakuolema", anamnesis:"Kuollut kana")}
-
-    let!(:user){FactoryGirl.create(:user)}
+  describe "teacher" do
 
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
     end
 
-    it "user should be able to visit exercises page and see exercises" do
-      visit exercises_path
+    it "should be able to visit exercises page and see exercises" do
 
-      expect(current_path).to eq(exercises_path)
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_button 'Lihanautakuolemat'
       expect(page).to have_button 'Kanakuolema'
-
     end
 
-    it "user should be able to logout" do
-      visit exercises_path
-
+    it "should be able to logout" do
       click_and_wait "Kirjaudu ulos"
 
       expect(current_path).to eq(root_path)
     end
 
-    it "user should be able to delete exercise" do
-      visit exercises_path
-
+    it "should be able to delete an exercise" do
       expect {
         first(:button, "Poista").click
         wait_for_ajax
@@ -86,40 +84,27 @@ describe "Exercises page", js:true do
 
   end
 
-  describe "when exercises exist and normal user is signed in" do
-
-    let!(:exercise){FactoryGirl.create(:exercise)}
-    let!(:exercise2){FactoryGirl.create(:exercise, name: "Kanakuolema", anamnesis:"Kuollut kana")}
-
-    let!(:user){FactoryGirl.create(:student)}
+  describe "student" do
 
     before :each do
       sign_in(username:"Opiskelija", password:"Salainen1")
     end
 
-    it "user should be able to visit exercises page and see exercises" do
-      visit exercises_path
-
-      expect(current_path).to eq(exercises_path)
+    it "should be able to visit exercises page and see exercises" do
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_button 'Lihanautakuolemat'
       expect(page).to have_button 'Kanakuolema'
-
     end
 
-    it "user should be able to logout" do
-      visit exercises_path
+    it "should be able to logout" do
       click_and_wait "Kirjaudu ulos"
       expect(current_path).to eq(root_path)
     end
 
-    it "user should not be able to delete exercise" do
-      visit exercises_path
+    it "should not be able to delete exercise" do
       expect(page).not_to have_content "Poista"
     end
 
-
   end
-
-
 end
