@@ -125,6 +125,14 @@ describe "Task list page", js:true do
       click_and_wait('Toimenpiteet')
     end
 
+    it "should be able to view the tasks of an exercise" do
+      expect(page).to have_button task.name
+      expect(page).to have_button task2_1.name
+      expect(page).to have_button task2_2.name
+      expect(page).to have_button task4.name
+      expect(page).not_to have_button task3.name
+    end
+
     describe "should be able to move task one level" do
 
       describe "up if it has" do
