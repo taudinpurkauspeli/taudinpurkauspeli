@@ -98,9 +98,9 @@ RSpec.describe TasksController, :type => :controller do
         expect(assigns(:task)).to be_a_new(Task)
       end
 
-      it "re-renders the 'new' template" do
+      it "redirects to the task list" do
         post :create, {:task => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+        expect(response).to redirect_to(tasks_path(:layout => true))
       end
     end
   end
