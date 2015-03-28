@@ -46,10 +46,17 @@ module HelperMethods
       wait_for_ajax
       return
     rescue
-    end
+      end
 
     begin
       click_link(element_text)
+      wait_for_ajax
+      return
+    rescue
+    end
+
+    begin
+      click_on(element_text)
       wait_for_ajax
       return
     rescue
