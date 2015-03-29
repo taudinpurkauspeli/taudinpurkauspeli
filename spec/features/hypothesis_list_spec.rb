@@ -108,35 +108,25 @@ describe "Hypothesis list page", js:true do
       end
 
       it "remove hypotheses from an exercise" do
-        backdoor = 0
+
         while(ExerciseHypothesis.count != 0)
-          if backdoor > 50 then
-            break
-          end
 
           click_and_wait('Virustauti')
           first(:button, 'Poista casesta').click
           wait_for_ajax
 
-          backdoor += 1
         end
         expect(ExerciseHypothesis.count).to eq(0)
       end
 
       it "edit the explanation of a hypothesis added to an exercise" do
-        backdoor = 0
-        while(ExerciseHypothesis.first.explanation != 'Virus ei olekaan bakteeritauti')
-          if backdoor > 50 then
-            break
-          end
 
+        while(ExerciseHypothesis.first.explanation != 'Virus ei olekaan bakteeritauti')
           click_and_wait('Virustauti')
 
           fill_in('exercise_hypothesis_explanation', with: 'Virus ei olekaan bakteeritauti')
           first(:button, 'Päivitä').click
           wait_for_ajax
-
-          backdoor += 1
         end
 
         expect(ExerciseHypothesis.first.explanation).to eq('Virus ei olekaan bakteeritauti')
