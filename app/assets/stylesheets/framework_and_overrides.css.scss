@@ -63,6 +63,9 @@ label {
 li.tabLink>a{
   color: white;
 }
+li.active>a{
+  background-color: #EEE !important;
+}
 
 //login
 .login-container{
@@ -70,7 +73,7 @@ li.tabLink>a{
   width: auto;  
   position: absolute;
   //top: 10px;
-  right: 10px;
+  right: 20px;
 }
 
 .login-container a, .login-container a:visited{
@@ -233,10 +236,12 @@ li.tabLink>a{
 }
 
 #btn-login{
-  background-color: 6666ff;
+  background-color: #6666cc;
+  color: white;
 }
 #btn-signup{
-  background-color: ff7755;
+  //background-color: #cc7755;
+  //color: white;
 }
 
 //***************
@@ -354,7 +359,7 @@ main {
   padding-bottom: 80px;
   width: 100%;
   max-width: 1170px;
-  margin-top: 50px; // accommodate the navbar
+  //margin-top: 50px; // accommodate the navbar
   }
 section {
   @extend .row;
