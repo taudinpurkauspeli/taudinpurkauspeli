@@ -47,8 +47,21 @@ label {
 
 
 //Override default navigation styles
-.nav-tabs{
+#navigationTabs{
   padding-top: 10px;
+  margin: auto;
+  max-width: 1170px;
+  border-width: 0px !important;
+}
+#navigationTabsContainer{
+  width: 100%;
+  min-height: 51px;
+  background-color: $MediumGreen;
+  border-bottom: 1px solid #DDD;
+}
+
+li.tabLink>a{
+  color: white;
 }
 
 //login
@@ -60,11 +73,11 @@ label {
   right: 10px;
 }
 
-.a-mainpage{
+.login-container a, .login-container a:visited{
   padding-right: 10px;
   vertical-align: middle;
   display: table-cell;
-
+  color: white;
 }
 
 .no-padding{
@@ -215,6 +228,16 @@ label {
   margin-bottom: 2%;
 }
 
+.btn-login{
+  border-radius: 3px;
+}
+
+#btn-login{
+  background-color: 6666ff;
+}
+#btn-signup{
+  background-color: ff7755;
+}
 
 //***************
 //*   Inputs    *
