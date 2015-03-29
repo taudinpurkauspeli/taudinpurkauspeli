@@ -109,23 +109,38 @@ Then(/^the new hypothesis group should be created$/) do
 end
 
 Then(/^the explanation should be added to the hypothesis$/) do
+  backdoor = 0
   while(ExerciseHypothesis.find(2).explanation != 'Hevosen hauraat luut')
+
+    if backdoor > 10 then
+      break
+    end
 
     click_and_wait('Hevosheikkous')
 
     fill_in('exercise_hypothesis_explanation', with: 'Hevosen hauraat luut')
     first(:button, 'Päivitä').click
     wait_for_ajax
+
+    backdoor += 1
   end
 
   expect(ExerciseHypothesis.last.explanation).to eq('Hevosen hauraat luut')
 end
 
 Then(/^the hypothesis should be removed from the case$/) do
+  backdoor = 0
   while(ExerciseHypothesis.count != 1)
+
+    if backdoor > 10 then
+      break
+    end
+
     click_and_wait('Hevosheikkous')
     first(:button, 'Poista casesta').click
     wait_for_ajax
+
+    backdoor += 1
   end
   exercise_hypotheses = Exercise.first.exercise_hypotheses
   expect(exercise_hypotheses.count).to eq(1)

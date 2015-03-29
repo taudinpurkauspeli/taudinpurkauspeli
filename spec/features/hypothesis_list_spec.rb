@@ -108,16 +108,27 @@ describe "Hypothesis list page", js:true do
       end
 
       it "remove hypotheses from an exercise" do
+        backdoor = 0
         while(ExerciseHypothesis.count != 0)
+          if backdoor > 10 then
+            break
+          end
+
           click_and_wait('Virustauti')
           first(:button, 'Poista casesta').click
           wait_for_ajax
+
+          backdoor += 1
         end
         expect(ExerciseHypothesis.count).to eq(0)
       end
 
       it "edit the explanation of a hypothesis added to an exercise" do
+        backdoor = 0
         while(ExerciseHypothesis.first.explanation != 'Virus ei olekaan bakteeritauti')
+          if backdoor > 10 then
+            break
+          end
 
           click_and_wait('Virustauti')
 
@@ -125,14 +136,19 @@ describe "Hypothesis list page", js:true do
           first(:button, 'Päivitä').click
           wait_for_ajax
 
+          backdoor += 1
         end
 
         expect(ExerciseHypothesis.first.explanation).to eq('Virus ei olekaan bakteeritauti')
       end
 
       it "add prerequisite task to a hypothesis added to an exercise" do
-
+        backdoor = 0
         while(ExerciseHypothesis.first.task.nil?)
+          if backdoor > 10 then
+            break
+          end
+
           click_and_wait('Virustauti')
 
           select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]')
@@ -140,6 +156,7 @@ describe "Hypothesis list page", js:true do
           first(:button, 'Päivitä').click
           wait_for_ajax
 
+          backdoor += 1
         end
         expect(ExerciseHypothesis.first.task.name).to eq('Asiakkaan soitto')
       end
