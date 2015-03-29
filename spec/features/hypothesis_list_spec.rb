@@ -113,6 +113,7 @@ describe "Hypothesis list page", js:true do
           first(:button, 'Poista casesta').click
           wait_for_ajax
         end
+        expect(ExerciseHypothesis.count).to eq(0)
       end
 
       it "edit the explanation of a hypothesis added to an exercise" do
@@ -125,6 +126,8 @@ describe "Hypothesis list page", js:true do
           wait_for_ajax
 
         end
+
+        expect(ExerciseHypothesis.first.explanation).to eq('Virus ei olekaan bakteeritauti')
       end
 
       it "add prerequisite task to a hypothesis added to an exercise" do
@@ -138,6 +141,7 @@ describe "Hypothesis list page", js:true do
           wait_for_ajax
 
         end
+        expect(ExerciseHypothesis.first.task.name).to eq('Asiakkaan soitto')
       end
     end
 
