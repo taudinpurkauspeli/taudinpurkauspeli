@@ -112,7 +112,7 @@ Then(/^the explanation should be added to the hypothesis$/) do
   backdoor = 0
   while(ExerciseHypothesis.find(2).explanation != 'Hevosen hauraat luut')
 
-    if backdoor > 10 then
+    if backdoor > 50 then
       break
     end
 
@@ -132,7 +132,7 @@ Then(/^the hypothesis should be removed from the case$/) do
   backdoor = 0
   while(ExerciseHypothesis.count != 1)
 
-    if backdoor > 10 then
+    if backdoor > 50 then
       break
     end
 
@@ -181,14 +181,12 @@ Then(/^I should be redirected back to the front page$/) do
   expect(current_path).to eq(exercises_path)
 end
 
-=begin
 Then(/^the teacher's hypothesis bank should be in alphabetical order$/) do
   #This is very arbitrary and could break even though the list is in correct order
-  actual = all("input[type='submit']")[4].value
+  actual = all("input[type='submit']")[3].value
   expect( actual ).to eq('Aivokuume')
-  actual = all("input[type='submit']")[6].value
+  actual = all("input[type='submit']")[5].value
   expect( actual ).to eq('Nautaflunssa')
-  actual = all("input[type='submit']")[8].value
+  actual = all("input[type='submit']")[7].value
   expect( actual ).to eq('Sikatartunta')
 end
-=end

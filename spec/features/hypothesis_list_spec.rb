@@ -110,7 +110,7 @@ describe "Hypothesis list page", js:true do
       it "remove hypotheses from an exercise" do
         backdoor = 0
         while(ExerciseHypothesis.count != 0)
-          if backdoor > 10 then
+          if backdoor > 50 then
             break
           end
 
@@ -126,7 +126,7 @@ describe "Hypothesis list page", js:true do
       it "edit the explanation of a hypothesis added to an exercise" do
         backdoor = 0
         while(ExerciseHypothesis.first.explanation != 'Virus ei olekaan bakteeritauti')
-          if backdoor > 10 then
+          if backdoor > 50 then
             break
           end
 
@@ -145,7 +145,7 @@ describe "Hypothesis list page", js:true do
       it "add prerequisite task to a hypothesis added to an exercise" do
         backdoor = 0
         while(ExerciseHypothesis.first.task.nil?)
-          if backdoor > 10 then
+          if backdoor > 50 then
             break
           end
 

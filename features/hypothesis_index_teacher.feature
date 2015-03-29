@@ -67,4 +67,4 @@ Feature: Hypothesis list feature
     And cases and hypothesis groups have been created
     And there are multiple hypotheses that are not added to any exercise
     And I go to the hypothesis list of that exercise
-#    Then the teacher's hypothesis bank should be in alphabetical order
+    Then the teacher's hypothesis bank should be in alphabetical order
