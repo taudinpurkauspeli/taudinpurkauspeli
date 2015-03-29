@@ -143,11 +143,7 @@ describe "Hypothesis list page", js:true do
       end
 
       it "add prerequisite task to a hypothesis added to an exercise" do
-        backdoor = 0
         while(ExerciseHypothesis.first.task.nil?)
-          if backdoor > 50 then
-            break
-          end
 
           click_and_wait('Virustauti')
 
@@ -155,8 +151,6 @@ describe "Hypothesis list page", js:true do
 
           first(:button, 'Päivitä').click
           wait_for_ajax
-
-          backdoor += 1
         end
         expect(ExerciseHypothesis.first.task.name).to eq('Asiakkaan soitto')
       end

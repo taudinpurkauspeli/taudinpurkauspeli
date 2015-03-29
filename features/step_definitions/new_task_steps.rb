@@ -10,11 +10,22 @@ Given(/^Cases have been created$/) do
   create_exercises
 end
 
+Given(/^Task with a multichoice has been created$/) do
+  create_tasks
+  create_multichoices
+end
+
 When(/^I fill in task name$/) do
   fill_in('task_name', with: 'Soita asiakkaalle')
-  end
+end
+
 When(/^I fill in task text content$/) do
   fill_in('task_text_content', with: 'Soita asiakkaalle puhelimella')
+end
+
+When(/^I go to the multichoice edit page$/) do
+  click_and_wait('Soita lääkärille')
+  click_and_wait('Monivalintakysymys: Tykkääkö koira nappuloista?')
 end
 
 Then(/^new task should be in the database$/) do
@@ -50,5 +61,6 @@ When(/^I fill in option explanation$/) do
 end
 
 Then(/^option should be in the database$/) do
-  expect(Option.count).to eq(1)
+  expect(Option.count).to eq(4)
+  expect(Option.last.content).to eq('Soitan puhelimella')
 end

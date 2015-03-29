@@ -42,15 +42,9 @@ Feature: New task feature
   Scenario: Teacher can create a task with multichoice and option
     Given I have logged in as a teacher
     And Cases have been created
+    And Task with a multichoice has been created
     And I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
-    And I press the button "Luo uusi toimenpide"
-    When I fill in task name
-    And I press the button "Tallenna"
-    And I press the button "Luo uusi monivalinta-alitoimenpide"
-    And I fill in multichoice question
-    And I press the button "Tallenna kysymys"
-    Then page should have a message: "Kysymys lisättiin onnistuneesti!"
-    And multichoice should be in the database
+    When I go to the multichoice edit page
     And I fill in option content
     And I fill in option explanation
     And I press the button "Tallenna"
