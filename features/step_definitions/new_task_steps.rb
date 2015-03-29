@@ -29,7 +29,7 @@ Then(/^task text should be in the database$/) do
 end
 
 Then(/^page should show the new task text content$/) do
-  expect(page).to have_content("Soita asiakkaalle puhelimella")
+  expect(page).to have_button("Teksti: Soita asiakkaalle puhelimella")
 end
 
 When(/^I fill in multichoice question$/) do
