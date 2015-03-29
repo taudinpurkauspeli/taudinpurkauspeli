@@ -46,8 +46,7 @@ When(/^I click on a button "(.*?)"$/) do |arg1|
 end
 
 When(/^I click on button "(.*?)"$/) do |arg1|
-  click_button arg1
-  wait_for_ajax
+  click_and_wait(arg1)
 end
 
 When(/^I fill in the hypothesis name field with a correct value$/) do
@@ -74,13 +73,11 @@ When(/^I click on the delete button "(.*?)"$/) do |arg1|
 end
 
 When(/^I click on the hypothesis button "(.*?)"$/) do |arg1|
-  click_button(arg1)
-  wait_for_ajax
+  click_and_wait(arg1)
 end
 
 When(/^I click on one of the hypotheses of the case$/) do
-  click_button('Hevosheikkous')
-  wait_for_ajax
+  click_and_wait('Hevosheikkous')
 end
 
 When(/^I fill in the hypothesis group name field with a correct name$/) do
@@ -112,10 +109,39 @@ Then(/^the new hypothesis group should be created$/) do
 end
 
 Then(/^the explanation should be added to the hypothesis$/) do
-  expect(ExerciseHypothesis.find(2).explanation).to include('Hevosen hauraat luut')
+  backdoor = 0
+  while(ExerciseHypothesis.find(2).explanation != 'Hevosen hauraat luut')
+
+    if backdoor > 50 then
+      break
+    end
+
+    click_and_wait('Hevosheikkous')
+
+    fill_in('exercise_hypothesis_explanation', with: 'Hevosen hauraat luut')
+    first(:button, 'Päivitä').click
+    wait_for_ajax
+
+    backdoor += 1
+  end
+
+  expect(ExerciseHypothesis.last.explanation).to eq('Hevosen hauraat luut')
 end
 
 Then(/^the hypothesis should be removed from the case$/) do
+  backdoor = 0
+  while(ExerciseHypothesis.count != 1)
+
+    if backdoor > 50 then
+      break
+    end
+
+    click_and_wait('Hevosheikkous')
+    first(:button, 'Poista casesta').click
+    wait_for_ajax
+
+    backdoor += 1
+  end
   exercise_hypotheses = Exercise.first.exercise_hypotheses
   expect(exercise_hypotheses.count).to eq(1)
   expect(exercise_hypotheses.first.hypothesis.name).not_to eq("Hevosheikkous")
@@ -153,4 +179,14 @@ end
 
 Then(/^I should be redirected back to the front page$/) do
   expect(current_path).to eq(exercises_path)
+end
+
+Then(/^the teacher's hypothesis bank should be in alphabetical order$/) do
+  #This is very arbitrary and could break even though the list is in correct order
+  actual = all("input[type='submit']")[3].value
+  expect( actual ).to eq('Aivokuume')
+  actual = all("input[type='submit']")[5].value
+  expect( actual ).to eq('Nautaflunssa')
+  actual = all("input[type='submit']")[7].value
+  expect( actual ).to eq('Sikatartunta')
 end

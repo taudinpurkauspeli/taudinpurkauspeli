@@ -35,16 +35,6 @@ Given(/^there are multiple hypotheses that are not added to any exercise$/) do
   createSomeHypotheses()  
 end
 
-Then(/^the hypothesis bank should be in alphabetical order$/) do
-  #This is very arbitrary and could break even though the list is in correct order
-  actual = all("input[type='submit']")[4].value
-  expect( actual ).to eq('Aivokuume')
-  actual = all("input[type='submit']")[6].value
-  expect( actual ).to eq('Nautaflunssa')
-  actual = all("input[type='submit']")[8].value
-  expect( actual ).to eq('Sikatartunta')
-end
-
 Then(/^the hypothesis list should be in alphabetical order$/) do
 	actual = all("input[type='submit']")[1].value
 	expect( actual ).to eq('Aivokuume')

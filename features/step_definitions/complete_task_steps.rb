@@ -28,18 +28,15 @@ Given(/^some radiobutton tasks have been added to case$/) do
 end
 
 When(/^I choose a text task "(.*?)"$/) do |arg1|
-  click_button(arg1)
-  wait_for_ajax
+  click_and_wait(arg1)
 end
 
 When(/^I choose a multichoice task "(.*?)"$/) do |arg1|
-  click_button(arg1)
-  wait_for_ajax
+  click_and_wait(arg1)
 end
 
 When(/^I choose a radiobutton task "(.*?)"$/) do |arg1|
-  click_button(arg1)
-  wait_for_ajax
+  click_and_wait(arg1)
 end
 
 When(/^I check the right options$/) do
@@ -81,8 +78,7 @@ end
 
 Then(/^the task cannot be completed by clicking the button "(.*?)"$/) do |arg1|
   expect{
-    click_button(arg1)
-    wait_for_ajax
+    click_and_wait(arg1)
   }.to change(CompletedTask, :count).by(0)
 end
 

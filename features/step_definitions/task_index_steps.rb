@@ -25,18 +25,16 @@ When(/^I click on the down chevron beside button "(.*?)"$/) do |arg1|
 
 	button.click
 	wait_for_ajax
-
 end
 
 Then(/^the page should have the button "(.*?)" bottommost$/) do |arg1|
 	buttons = all(:button)
-	expect(buttons[5].value).to eq(arg1)
+	expect(buttons[4].value).to eq(arg1)
 end
 
 Then(/^the page should have the button "(.*?)" topmost$/) do |arg1|
-
 	buttons = all(:button)
-	expect(buttons[2].value).to eq(arg1)
+	expect(buttons[1].value).to eq(arg1)
 end
 
 
