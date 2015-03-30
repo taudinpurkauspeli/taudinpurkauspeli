@@ -4,16 +4,16 @@
 
 <table>
   <thead>
-    <tr>
-      <th>Exercise</th>
-      <th>Hypothesis</th>
-      <th>Explanation</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Exercise</th>
+    <th>Hypothesis</th>
+    <th>Explanation</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @exercise_hypotheses.each do |exercise_hypothesis| %>
+  <% @exercise_hypotheses.each do |exercise_hypothesis| %>
       <tr>
         <td><%= exercise_hypothesis.exercise_id %></td>
         <td><%= exercise_hypothesis.hypothesis_id %></td>
@@ -22,7 +22,7 @@
         <td><%= link_to 'Edit', edit_exercise_hypothesis_path(exercise_hypothesis) %></td>
         <td><%= link_to 'Destroy', exercise_hypothesis, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 

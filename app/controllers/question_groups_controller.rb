@@ -17,7 +17,7 @@ class QuestionGroupsController < ApplicationController
       end
     end
   end
- 
+
   def destroy
     @question_group.destroy
     respond_to do |format|
@@ -27,13 +27,13 @@ class QuestionGroupsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_question_group
-      @question_group = QuestionGroup.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_question_group
+    @question_group = QuestionGroup.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def question_group_params
-      params.require(:question_group).permit(:title, :interview_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def question_group_params
+    params.require(:question_group).permit(:title, :interview_id)
+  end
 end

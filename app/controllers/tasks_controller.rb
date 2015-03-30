@@ -44,7 +44,7 @@ class TasksController < ApplicationController
     @new_asked_question = AskedQuestion.new
 
     set_view_layout
-    
+
   end
 
   def user_can_start_task(user, exercise, task)
@@ -114,14 +114,14 @@ class TasksController < ApplicationController
   def level_up
     @task.move_up
     respond_to do |format|
-      format.html { redirect_to tasks_url(:layout => get_layout) }  
+      format.html { redirect_to tasks_url(:layout => get_layout) }
     end
   end
 
   def level_down
     @task.move_down
     respond_to do |format|
-      format.html { redirect_to tasks_url(:layout => get_layout) }  
+      format.html { redirect_to tasks_url(:layout => get_layout) }
     end
   end
 

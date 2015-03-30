@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
-	validates :name, presence: true, length: {minimum: 2}
-	belongs_to :exercise
+  validates :name, presence: true, length: {minimum: 2}
+  belongs_to :exercise
 
   has_many :completed_tasks, dependent: :destroy
   has_many :users, through: :completed_tasks
@@ -30,12 +30,12 @@ class Task < ActiveRecord::Base
           task.update(level: task.level + 1)
         end
       end
-    else 
+    else
       if level > 1 then
         children.each do |task|
           task.update(level: task.level - 1)
         end
-      update(level: level - 1)
+        update(level: level - 1)
       end
     end
   end
@@ -51,7 +51,7 @@ class Task < ActiveRecord::Base
     else
       children.each do |task|
         task.update(level: task.level - 1)
-      end  
+      end
     end
   end
 

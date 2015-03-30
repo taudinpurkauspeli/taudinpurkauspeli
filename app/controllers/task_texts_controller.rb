@@ -57,7 +57,7 @@ class TaskTextsController < ApplicationController
 
   # /task_texts/:id/check_answers'
   def check_answers
-    @task_text.user_answered_correctly?(current_user  )
+    @task_text.user_answered_correctly?(current_user)
     respond_to do |format|
       format.html { redirect_to task_path(@task_text.subtask.task, :layout => get_layout), notice: 'Valitsit oikein!' }
     end

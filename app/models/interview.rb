@@ -6,6 +6,6 @@ class Interview < ActiveRecord::Base
 	has_many :question_groups, through: :questions
 
 	def user_has_asked_all_required(user)
-    user.questions
-  end
+		user.questions
+	end
 end
