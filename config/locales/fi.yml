@@ -83,7 +83,9 @@ fi:
       option:
         content: "Vaihtoehto"
         explanation: "Vastausteksti"
-        value: "Oikea vastaus"
+        is_correct_answer: "Oikea vastaus"
+      question:
+        required: "Pakollinen kysymys"
       task:
         name: "Nimi"
       task_text:

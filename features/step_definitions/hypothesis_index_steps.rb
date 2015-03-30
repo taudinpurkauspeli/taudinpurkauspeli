@@ -118,7 +118,7 @@ Then(/^the explanation should be added to the hypothesis$/) do
   while(ExerciseHypothesis.find(2).explanation != 'Hevosen hauraat luut')
 
     if backdoor > 50 then
-      break
+      raise "Loop error!"
     end
 
     click_and_wait('Hevosheikkous')
@@ -138,7 +138,7 @@ Then(/^the hypothesis should be removed from the case$/) do
   while(ExerciseHypothesis.count != 1)
 
     if backdoor > 50 then
-      break
+      raise "Loop error!"
     end
 
     click_and_wait('Hevosheikkous')
@@ -157,7 +157,7 @@ Then(/^the prerequisite task of the hypothesis should be updated$/) do
   while(ExerciseHypothesis.last.task.name == "Lääkitse hevonen")
 
     if backdoor > 50 then
-      break
+      raise "Loop error!"
     end
 
     click_and_wait('Hevosheikkous')

@@ -26,7 +26,7 @@
               </div>
 
               <div class="col-md-1">
-                <p>Pakollinen</p>
+                <%= f.label :required%><br>
                 <%= f.check_box :required %>
               </div>
               <div class="col-md-5">
@@ -65,7 +65,7 @@
     <div class = "nakki">
       <%= form_for(@new_question) do |f| %>
           <div class="col-md-1">
-            <p>Pakollinen</p>
+            <%= f.label :required%><br>
             <%= f.check_box :required, :value => true %>
           </div>
           <div class="col-md-5">

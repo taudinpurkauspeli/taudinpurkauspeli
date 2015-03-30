@@ -19,6 +19,7 @@
       <div class="row panel-body">
         <div class = "nakki">
           <%= form_for(option) do |f| %>
+              <%= f.label :is_correct_answer%><br>
               <div class="col-md-1">
                 <%= f.check_box :is_correct_answer %>
               </div>
@@ -56,6 +57,7 @@
   <div class="row panel-body">
     <div class = "nakki">
       <%= form_for(@new_option) do |f| %>
+          <%= f.label :is_correct_answer%><br>
           <div class="col-md-1">
             <%= f.check_box :is_correct_answer, :value => true %>
           </div>
