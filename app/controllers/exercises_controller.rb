@@ -1,4 +1,4 @@
- class ExercisesController < ApplicationController
+class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in, except: [:index]
   before_action :ensure_user_is_admin, except: [:index, :show]
@@ -71,14 +71,14 @@
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_exercise
-      @exercise = Exercise.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_exercise
+    @exercise = Exercise.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def exercise_params
-      params.require(:exercise).permit(:name, :anamnesis, :hidden)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def exercise_params
+    params.require(:exercise).permit(:name, :anamnesis, :hidden)
 
-    end
+  end
 end

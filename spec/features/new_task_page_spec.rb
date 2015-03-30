@@ -58,7 +58,7 @@ describe "New Task page", js:true do
             click_and_wait('Tallenna')
           }.to change(TaskText, :count).by(1)
 
-          expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
+          expect(page).to have_content 'Kysymys lisättiin onnistuneesti!'
           expect(page).to have_button 'Teksti: Asiakas kertoo, että ...'
           expect(Subtask.count).to eq(1)
 
@@ -92,7 +92,7 @@ describe "New Task page", js:true do
             click_and_wait('Tallenna')
           }.to change(TaskText, :count).by(0)
 
-          expect(page).to have_content 'Kysymyksen päivitys epäonnistui!'
+          expect(page).to have_content 'Kysymyksen lisääminen epäonnistui!'
           expect(Subtask.count).to eq(0)
         end
 

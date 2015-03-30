@@ -15,7 +15,7 @@ class ExerciseHypothesesController < ApplicationController
         format.html { redirect_to hypotheses_url(:layout => get_layout)}
         format.json { render :show, status: :created, location: @exercise_hypothesis }
       else
-         format.html { redirect_to hypotheses_url, alert: 'Työhypoteesin liittäminen caseen epäonnistui.' }
+        format.html { redirect_to hypotheses_url(:layout => get_layout), alert: 'Työhypoteesin liittäminen caseen epäonnistui.' }
       end
     end
   end
@@ -30,7 +30,7 @@ class ExerciseHypothesesController < ApplicationController
         format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Työhypoteesin tiedot on päivitetty.' }
         format.json { render :show, status: :ok, location: @exercise_hypothesis }
       else
-         format.html { redirect_to hypotheses_url, alert: 'Työhypoteesin päivittäminen epäonnistui.' }
+        format.html { redirect_to hypotheses_url(:layout => get_layout), alert: 'Työhypoteesin päivittäminen epäonnistui.' }
       end
     end
   end
@@ -48,13 +48,13 @@ class ExerciseHypothesesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_exercise_hypothesis
-      @exercise_hypothesis = ExerciseHypothesis.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_exercise_hypothesis
+    @exercise_hypothesis = ExerciseHypothesis.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def exercise_hypothesis_params
-      params.require(:exercise_hypothesis).permit(:exercise_id, :hypothesis_id, :explanation, :task_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def exercise_hypothesis_params
+    params.require(:exercise_hypothesis).permit(:exercise_id, :hypothesis_id, :explanation, :task_id)
+  end
 end
