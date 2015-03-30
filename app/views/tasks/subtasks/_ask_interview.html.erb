@@ -1,6 +1,6 @@
 
 
-<% subtask.interview.question_groups.each do |group|%>
+<% subtask.interview.question_groups.distinct.each do |group|%>
     <div class="row">
       <div class="col-md-4">
         <h4><%= group.title %></h4>

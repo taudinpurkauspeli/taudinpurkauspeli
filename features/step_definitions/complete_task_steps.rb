@@ -8,21 +8,18 @@ $:.unshift(File.dirname(__FILE__) + '/../../lib')
 
 Given(/^some text tasks have been added to case$/) do
   create_exercises
-  create_hypothesis_groups
   create_tasks
   create_task_texts
 end
 
 Given(/^some multichoice tasks have been added to case$/) do
   create_exercises
-  create_hypothesis_groups
   create_tasks
   create_multichoices
 end
 
 Given(/^some radiobutton tasks have been added to case$/) do
   create_exercises
-  create_hypothesis_groups
   create_tasks
   create_radiobuttons
 end

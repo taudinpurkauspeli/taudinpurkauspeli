@@ -53,6 +53,15 @@ Feature: Hypothesis list feature
     And I save changes with button "Tallenna"
     Then the explanation should be added to the hypothesis
 
+  Scenario: Teacher can change a prerequisite task to a hypothesis
+    Given I have logged in as a teacher
+    And hypotheses with prerequisite tasks have been added to case
+    And I visit the "Työhypoteesit" page of the case "Lihanautakuolemat"
+    When I click on one of the hypotheses of the case
+    And I change the prerequisite task
+    And I save changes with button "Tallenna"
+    Then the prerequisite task of the hypothesis should be updated
+
   Scenario: Teacher can create a new hypothesis group
     Given I have logged in as a teacher
     And cases, hypothesis groups and hypotheses have been created

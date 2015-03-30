@@ -26,7 +26,7 @@ Feature: Hypothesis list feature
     Then the page should show the content "Sinulla ei ole vielä"
     And "Nautaflunssa" should not be checked from exercise
 
-  Scenario: Student can check a hypothesis from an exercise when prerequisite task not done
+  Scenario: Student can check a hypothesis from an exercise when prerequisite task done
     Given I have logged in as a student
     And hypotheses with prerequisite tasks have been added to case
     And I have completed all the tasks
