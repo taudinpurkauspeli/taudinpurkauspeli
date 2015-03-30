@@ -40,6 +40,12 @@ Given(/^I have completed all the tasks$/) do
   end
 end
 
+Given(/^I try to visit the "(.*?)" page of the case "(.*?)"$/) do |arg1, arg2|
+  visit hypotheses_path
+end
+
+
+
 When(/^I click on a button "(.*?)"$/) do |arg1|
   first(:button, arg1).click
   wait_for_ajax
@@ -88,10 +94,9 @@ When(/^I fill in the explanation field$/) do
   fill_in('exercise_hypothesis_explanation', with: 'Hevosen hauraat luut')
 end
 
-Given(/^I try to visit the "(.*?)" page of the case "(.*?)"$/) do |arg1, arg2|
-  visit hypotheses_path
+When(/^I change the prerequisite task$/) do
+  select('Soita lääkärille', from:'exercise_hypothesis[task_id]')
 end
-
 
 
 
@@ -145,6 +150,27 @@ Then(/^the hypothesis should be removed from the case$/) do
   exercise_hypotheses = Exercise.first.exercise_hypotheses
   expect(exercise_hypotheses.count).to eq(1)
   expect(exercise_hypotheses.first.hypothesis.name).not_to eq("Hevosheikkous")
+end
+
+Then(/^the prerequisite task of the hypothesis should be updated$/) do
+  backdoor = 0
+  while(ExerciseHypothesis.last.task.name == "Lääkitse hevonen")
+
+    if backdoor > 50 then
+      break
+    end
+
+    click_and_wait('Hevosheikkous')
+
+    select('Soita lääkärille', from:'exercise_hypothesis[task_id]')
+
+    first(:button, 'Päivitä').click
+    wait_for_ajax
+
+    backdoor += 1
+  end
+  exercise_hypothesis = Exercise.first.exercise_hypotheses.last
+  expect(exercise_hypothesis.task.name).to eq("Soita lääkärille")
 end
 
 Then(/^the new hypothesis should be created$/) do
