@@ -1,4 +1,4 @@
- <%= form_tag("/multichoices/" + subtask.multichoice.id.to_s + "/check_answers", method: "post") do %>
+<%= form_tag("/multichoices/" + subtask.multichoice.id.to_s + "/check_answers", method: "post") do %>
 
     <% subtask.multichoice.options.each do |option| %>
         <div class="row">

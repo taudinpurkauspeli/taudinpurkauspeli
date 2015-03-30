@@ -29,6 +29,22 @@ RSpec.describe TasksController, :type => :routing do
 
     it "routes to #destroy" do
       expect(:delete => "/tasks/1").to route_to("tasks#destroy", :id => "1")
+      end
+
+    it "routes get #level_up" do
+      expect(:get => "tasks/1/up").to route_to("tasks#level_up", :id => "1")
+      end
+
+    it "routes get #level_down" do
+      expect(:get => "tasks/1/down").to route_to("tasks#level_down", :id => "1")
+    end
+
+    it "routes post #level_up" do
+      expect(:post => "tasks/1/up").to route_to("tasks#level_up", :id => "1")
+    end
+
+    it "routes post #level_down" do
+      expect(:post => "tasks/1/down").to route_to("tasks#level_down", :id => "1")
     end
 
   end

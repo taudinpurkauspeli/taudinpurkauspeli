@@ -1,21 +1,21 @@
 class User < ActiveRecord::Base
-	validates :username, presence: true, uniqueness: true
-	validates :realname, presence: true, length: { minimum: 4 }
-	validates :email, presence: true
+  validates :username, presence: true, uniqueness: true
+  validates :realname, presence: true, length: { minimum: 4 }
+  validates :email, presence: true
 
   has_secure_password
-  
+
   has_many :asked_questions, dependent: :destroy
   has_many :questions, through: :asked_questions
 
   has_many :checked_hypotheses, dependent: :destroy
   has_many :exercise_hypotheses, through: :checked_hypotheses
-  
+
   has_many :completed_tasks, dependent: :destroy
   has_many :tasks, through: :completed_tasks
 
   has_many :completed_subtasks, dependent: :destroy
-  
+
   has_many :subtasks, through: :completed_subtasks
 
   def has_asked_all_required_questions_of(interview)
@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
       return !completed_tasks.where(task:completable_task).empty?
     end
   end
-  
+
   def can_start?(task)
     if task.level == 1
       return true
@@ -68,20 +68,20 @@ class User < ActiveRecord::Base
       else
         return false
       end
-    # user has not completed any subtasks
+      # user has not completed any subtasks
     else
       # user is trying to do the first subtask of a task
       if subtask.level == task.subtasks.minimum("level")
         return true
       end
-    end  
+    end
     return false
   end
 
   def get_number_of_tasks_by_level(exercise, level)
     number_of_tasks = 0
     completed_tasks.each do |c|
-      unless c.task.nil? 
+      unless c.task.nil?
         if(c.task.level == level && c.task.exercise_id == exercise.id)
           number_of_tasks += 1
         end

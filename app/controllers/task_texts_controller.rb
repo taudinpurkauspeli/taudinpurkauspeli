@@ -33,10 +33,10 @@ class TaskTextsController < ApplicationController
     respond_to do |format|
       if @task_text.save
         subtask.save
-        format.html { redirect_to edit_task_path(@task_text.subtask.task.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti!' }
+        format.html { redirect_to edit_task_path(@task_text.subtask.task.id, :layout => get_layout), notice: 'Kysymys lisättiin onnistuneesti!' }
         format.json { render :show, status: :created, location: @task_text }
       else
-        format.html { redirect_to edit_task_path(@task_text.subtask.task.id, :layout => get_layout), alert: 'Kysymyksen päivitys epäonnistui!' }
+        format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), alert: 'Kysymyksen lisääminen epäonnistui!' }
         format.json { render json: @task_text.errors, status: :unprocessable_entity }
       end
     end
@@ -57,7 +57,7 @@ class TaskTextsController < ApplicationController
 
   # /task_texts/:id/check_answers'
   def check_answers
-    @task_text.user_answered_correctly?(current_user  )
+    @task_text.user_answered_correctly?(current_user)
     respond_to do |format|
       format.html { redirect_to task_path(@task_text.subtask.task, :layout => get_layout), notice: 'Valitsit oikein!' }
     end

@@ -35,7 +35,7 @@ class QuestionsController < ApplicationController
   end
 
 
-    def update
+  def update
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti.' }
@@ -56,7 +56,7 @@ class QuestionsController < ApplicationController
   end
 
 
-private
+  private
   def set_question
     @question = Question.find(params[:id])
   end
