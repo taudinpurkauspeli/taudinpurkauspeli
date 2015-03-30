@@ -42,10 +42,6 @@ label {
 
 
 
-
-
-
-
 //Override default navigation styles
 #navigationTabs{
   padding-top: 10px;
@@ -199,10 +195,12 @@ li.active>a{
   //height: 30px;
   //width: 100%;
   //margin-left: 2em;
+  height: 45px;
 }
 
 .btn-completed-task{
   background-color: $PaleLightGreen;
+  height: 45px;
 }
 
 .btn-completed-task:hover{
