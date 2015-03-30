@@ -96,9 +96,35 @@ RSpec.describe InterviewsController, :type => :controller do
     end
 
     describe "ask_question" do
+    	let(:interview){FactoryGirl.create(:interview, subtask:subtask)}
+    	let(:question){FactoryGirl.create(:question, interview:interview)}
 
-    	it "new asked question to current_user" do
+    	it "new asked question to user" do
+
+    		expect {
+    			post :ask_question, {:id => interview.to_param, :question_id => question.to_param}, valid_session
+    		}.to change(user.asked_questions, :count).by(1)
     	end
+
+    end
+
+    describe "check_answers" do
+    	let(:interview){FactoryGirl.create(:interview, subtask:subtask)}
+
+    	it "completes subtask" do
+			expect {
+    			post :check_answers, {:id => interview.to_param}, valid_session
+    		}.to change(CompletedSubtask, :count).by(1)
+    	end
+
+   #  	let(:question){FactoryGirl.create(:question, interview:interview)}
+    	
+
+   #  	 it "does not complete subtask if required questions not asked" do
+			# expect {
+   #  			post :check_answers, {:id => interview.to_param}, valid_session
+   #  		}.not_to change(CompletedSubtask, :count)
+   #  	end
 
     end
 
