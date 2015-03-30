@@ -102,6 +102,7 @@ FactoryGirl.define do
   end
 
     factory :interview do
+    subtask_id nil
     title "Omistajan haastattelu"
   end
 end
