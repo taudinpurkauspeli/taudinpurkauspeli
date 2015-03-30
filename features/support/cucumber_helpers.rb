@@ -67,6 +67,14 @@ module CucumberHelpers
     ExerciseHypothesis.create exercise_id:fields[:exercise_id], hypothesis_id:fields[:hypothesis_id], explanation:fields[:explanation], task_id:fields[:task_id]
   end
 
+  def complete_task(task, user)
+   CompletedTask.create user:user, task:task
+  end
+
+  def complete_subtask(subtask, user)
+   CompletedSubtask.create user:user, subtask:subtask
+  end
+
   def go_to_case(exercise)
     visit exercises_path
     click_button(exercise)
