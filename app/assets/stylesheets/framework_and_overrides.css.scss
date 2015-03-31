@@ -10,6 +10,7 @@ $PaleLightGreen       : #b2dca5;
 $LightGreen           : #74ad61;
 $MediumGreen          : #446739;
 $LightRed             : #ae6161;
+$PaleLightRed         : #be8181;
 $DarkRed              : #692f2f;
 $DarkGreen            : #232e1e;
 
@@ -250,15 +251,40 @@ li.active>a{
   position: absolute;
   padding: 5px;
   background-color: $PaleLightGreen;
-  border: 1px solid $MediumGreen;
+  //border: 1px solid $MediumGreen;
+  box-shadow: 0px 0px 10px $PaleLightGreen;
 }
+.info-checked-hypothesis:before {
+  content:"";
+  position: absolute;
+  right: 100%;
+  top: 7px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-right: 14px solid $PaleLightGreen;
+  border-bottom: 7px solid transparent;
+}
+
 .alert-unchecked-hypothesis{
   position: absolute;
   padding: 5px;
-  background-color: $LightRed;
-  border: 1px solid red; 
+  background-color: $PaleLightRed;
+  color: white;
+  //border: 1px solid red;
+  box-shadow: 0px 0px 10px $PaleLightRed;
 }
-
+.alert-unchecked-hypothesis:before {
+  content:"";
+  position: absolute;
+  right: 100%;
+  top: 7px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-right: 14px solid $PaleLightRed;
+  border-bottom: 7px solid transparent;
+}
 
 //***************
 //*   Inputs    *
