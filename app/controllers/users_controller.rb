@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'Käyttäjän tiedot päivitetty.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -58,19 +58,19 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'Käyttäjä poistettu.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username, :realname, :email, :admin, :password, :password_confirmation)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:username, :realname, :email, :admin, :password, :password_confirmation)
+  end
 end

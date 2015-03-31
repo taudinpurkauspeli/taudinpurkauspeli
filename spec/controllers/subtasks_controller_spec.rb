@@ -43,7 +43,7 @@ RSpec.describe SubtasksController, :type => :controller do
 
 			it "redirects to tasks index page" do
 				post :create, {:subtask => invalid_attributes}, valid_session
-				expect(response).to redirect_to(tasks_path)
+				expect(response).to redirect_to(tasks_path(:layout => true))
 			end
 		end
 

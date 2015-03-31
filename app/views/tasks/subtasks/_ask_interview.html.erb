@@ -1,0 +1,56 @@
+
+
+<% subtask.interview.question_groups.distinct.each do |group|%>
+    <div class="row">
+      <div class="col-md-4">
+        <h4><%= group.title %></h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 margin2em">
+        <% group.questions.where(interview: subtask.interview).each do |question| %>
+
+            <% if !current_user.has_asked_question?(question) %>
+
+                <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
+                    <%= hidden_field_tag 'question_id', question.id %>
+                    <%= submit_tag(question.title, :class => "btn btn-default btn-save widthAuto") unless current_user_is_admin %>
+                <% end %>
+
+            <% else %>
+                <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
+                <div class="collapse" id="collapseQuestionContent<%= question.id%>" >
+                  <p><%= question.content %></p>
+                </div>
+            <%end %>
+        <% end %>
+      </div>
+    </div>
+<% end %>
+
+<% subtask.interview.questions.where(question_group:nil).each do |question| %>
+    <div class="row">
+      <br>
+      <div class="col-md-4">
+        <% if !current_user.has_asked_question?(question) %>
+            <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
+                <%= hidden_field_tag 'question_id', question.id %>
+                <%= submit_tag(question.title, :class => "btn btn-default btn-save widthAuto") unless current_user_is_admin %>
+            <% end %>
+        <% else %>
+            <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
+            <div class="collapse" id="collapseQuestionContent<%= question.id%>" >
+              <p><%= question.content %></p>
+            </div>
+        <%end %>
+      </div>
+    </div>
+<% end %>
+
+
+<%= form_tag("/interviews/" + subtask.interview.id.to_s + "/check_answers", method: "post") do %>
+    <%= submit_tag("Lopeta haastattelu", :class => "btn btn-default btn-save widthAuto") unless current_user_is_admin %>
+<% end %>
+
+
+

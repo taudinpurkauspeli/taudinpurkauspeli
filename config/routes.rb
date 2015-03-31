@@ -28,15 +28,29 @@ Rails.application.routes.draw do
 
   resources :options
 
+  resources :interviews
+
+  resources :questions
+
+  resources :question_groups
+
+  #resources :asked_questions, only: [:create]
+
   get 'signin', to: 'sessions#new'
-  delete 'signout', to: 'sessions#destroy', as: :level_up
+  delete 'signout', to: 'sessions#destroy'
 
   post 'tasks/:id/up', to: 'tasks#level_up'
   post 'tasks/:id/down', to: 'tasks#level_down'
 
-  post 'multichoices/:id/check_answers', to: 'multichoices#check_answers'
+  get 'tasks/:id/up', to: 'tasks#level_up'
+  get 'tasks/:id/down', to: 'tasks#level_down'
 
-  
+  post 'multichoices/:id/check_answers', to: 'multichoices#check_answers'
+  post 'interviews/:id/ask_question', to: 'interviews#ask_question'
+  post 'interviews/:id/check_answers', to: 'interviews#check_answers'
+  post 'task_texts/:id/check_answers', to: 'task_texts#check_answers'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

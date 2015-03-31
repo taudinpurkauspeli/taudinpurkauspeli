@@ -1,53 +1,40 @@
 <%# navigation styled for Bootstrap 3.0 %>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <% unless @excercise_page_rendered or current_user.nil? %>
-          <%= render 'layouts/navigation_links' %>
-        <% end %>
-      </ul>
-    </div>
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
 
-    </div>
-  </div>
+<!-- Nav tabs -->
+<div id = "navigationTabsContainer">
+<ul id="navigationTabs" class="nav nav-tabs" role="tablist">
+  <% if !current_user.nil? && !current_exercise.nil? %>
+    <%= render 'layouts/navigation_links' %>
+  <% end %>
+
   <% if @excercise_page_rendered or !current_user.nil?%>
-    <div class="login-container">
+    <div class="login-container" >
       <% if current_user.nil? %>
         <div class="row">
           <%= form_tag sessions_path do %>
             <div class="col-md-3 no-padding">
-              <%= text_field_tag :username, params[:username], placeholder: 'Käyttäjätunnus', :class => 'width100' %>
+              <%= text_field_tag :username, params[:username], placeholder: 'Käyttäjätunnus', :class => 'form-control width100' %>
             </div>
             <div class="col-md-3 no-padding">
-              <%= password_field_tag :password, params[:password], placeholder: 'Salasana', :class => 'width100' %>
+              <%= password_field_tag :password, params[:password], placeholder: 'Salasana', :class => 'form-control width100' %>
             </div>
             <div class="col-md-3 no-padding">
-              <%= submit_tag "Kirjaudu sisään", :class => 'btn btn-default btn-signup' %>
+              <%= submit_tag "Kirjaudu sisään", :class => 'btn btn-default btn-login', :id => "btn-login" %>
             </div>
           <% end %>
           <div class="col-md-3 no-padding">
-            <%= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-signup', :method => :get %>
+            <%= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-login', :id => "btn-signup", :method => :get %>
           </div>
         </div>
+
       <% else %>
-      <div class="col-md-5"></div>
-      <div class="col-md-4">
       <% unless @excercise_page_rendered %>
-        <%= link_to 'Palaa pääsivulle', root_path, class: 'navbar-brand' %>
-      <% end %>
-      </div>
-      <div class="col-md-3 no-padding">
-        <%= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-logout', :method => :delete unless current_user.nil?%>
-      </div>
+          <%= link_to 'Palaa pääsivulle', root_path, :class => "" %>
+        <% end %>
+        <%= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-login widthAuto', :method => :delete unless current_user.nil?%>
+        
       <% end %>
     </div>
   <% end %>
-</nav>
+</ul>
+</div>

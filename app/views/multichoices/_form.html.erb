@@ -20,9 +20,9 @@
     <div class="field">
       <%= f.label :is_radio_button%><br />
       <% if @multichoice.options.where(is_correct_answer: true).size > 1 %>
-        <%= f.check_box :is_radio_button, :disabled => true %> <span>(Jätä vain yksi oikea vaihtoehto vaihtaaksesi tyyppi radio buttoniin.)</span>
+          <%= f.check_box :is_radio_button, :disabled => true %> <span>(Jätä vain yksi oikea vaihtoehto vaihtaaksesi tyyppi radio buttoniin.)</span>
       <% else %>
-        <%= f.check_box :is_radio_button %>
+          <%= f.check_box :is_radio_button %>
       <% end %>
     </div>
     <br>

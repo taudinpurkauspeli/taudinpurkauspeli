@@ -1,0 +1,20 @@
+<script>
+	//anamnesisTab
+  loadView("<%= exercise_path(current_exercise) %>", "#anamnesisTab");
+  
+  //hypothesesTab
+  loadView("/hypotheses", "#hypothesisTab");
+
+  //taskTab
+  loadView("/tasks", "#taskTab");
+
+  <% if current_user_is_admin %>
+    <% unless current_task.nil? %>
+      loadView("/tasks/<%= current_task.id %>/edit", "#currentTaskTab")
+    <% end %>
+  <% else %>
+    <% unless current_task.nil? %>
+      loadView("/tasks/<%= current_task.id %>", "#currentTaskTab")
+    <% end %>
+  <% end %>
+</script>

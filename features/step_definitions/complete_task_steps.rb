@@ -8,35 +8,32 @@ $:.unshift(File.dirname(__FILE__) + '/../../lib')
 
 Given(/^some text tasks have been added to case$/) do
   create_exercises
-  create_hypothesis_groups
   create_tasks
   create_task_texts
 end
 
 Given(/^some multichoice tasks have been added to case$/) do
   create_exercises
-  create_hypothesis_groups
   create_tasks
   create_multichoices
 end
 
 Given(/^some radiobutton tasks have been added to case$/) do
   create_exercises
-  create_hypothesis_groups
   create_tasks
   create_radiobuttons
 end
 
 When(/^I choose a text task "(.*?)"$/) do |arg1|
-  click_button(arg1)
+  click_and_wait(arg1)
 end
 
 When(/^I choose a multichoice task "(.*?)"$/) do |arg1|
-  click_button(arg1)
+  click_and_wait(arg1)
 end
 
 When(/^I choose a radiobutton task "(.*?)"$/) do |arg1|
-  click_button(arg1)
+  click_and_wait(arg1)
 end
 
 When(/^I check the right options$/) do
@@ -72,12 +69,13 @@ end
 Then(/^the task can be completed by clicking the button "(.*?)"$/) do |arg1|
   expect{
     click_button(arg1)
+    wait_for_ajax
   }.to change(CompletedTask, :count).by(1)
 end
 
 Then(/^the task cannot be completed by clicking the button "(.*?)"$/) do |arg1|
   expect{
-    click_button(arg1)
+    click_and_wait(arg1)
   }.to change(CompletedTask, :count).by(0)
 end
 

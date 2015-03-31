@@ -26,19 +26,19 @@ RSpec.describe TasksController, :type => :controller do
   # Task. As you add validations to Task, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {name: "Soita asiakkaalle", exercise_id: 1, level: 2}
+    {name: "Soita asiakkaalle", exercise_id: exercise.id, level: 2}
   }
 
 
   let(:invalid_attributes) {
-    {name: nil, exercise_id: 1}
+    {name: nil, exercise_id: exercise.id}
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # TasksController. Be sure to keep this updated too.
   let(:valid_session) { {
-      user_id: 1, exercise_id: 1
+      user_id: user.id, exercise_id: exercise.id
   } }
 
   let(:tasktext_attributes) {
@@ -98,9 +98,9 @@ RSpec.describe TasksController, :type => :controller do
         expect(assigns(:task)).to be_a_new(Task)
       end
 
-      it "re-renders the 'new' template" do
+      it "redirects to the task list" do
         post :create, {:task => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+        expect(response).to redirect_to(tasks_path(:layout => true))
       end
     end
   end
@@ -130,20 +130,17 @@ RSpec.describe TasksController, :type => :controller do
       it "redirects to the task" do
         task = Task.create! valid_attributes
         put :update, {:id => task.to_param, :task => valid_attributes}, valid_session
-        expect(response).to redirect_to(edit_task_path(task.id))
+        expect(response).to redirect_to(edit_task_path(task.id, :layout => true))
       end
     end
 
     describe "POST level_up" do
 
 
-      let!(:task2){FactoryGirl.create(:task)}
-      let!(:task3){FactoryGirl.create(:task, level: 2)}
+      let!(:task2){FactoryGirl.create(:task, exercise:exercise, level: 1)}
+      let!(:task3){FactoryGirl.create(:task, exercise:exercise, level: 2)}
 
       it "changes the level when no siblings & no children" do
-
-        task3.move_up
-
 
       # expect(:post => "tasks/2/up").to route_to(
                                    #           :controller => "tasks",
@@ -151,12 +148,11 @@ RSpec.describe TasksController, :type => :controller do
                                    #           :id => "2"
                                    #       )
 
-        #TODO Fix test! Why does not work?
-        #expect {
-         #post :level_up, {:id => task3.id}, valid_session
-        #}.to change{task3.level}.by(-1)
 
-        expect(task3.level).to eq(1)
+        expect {
+         post :level_up, {:id => task3.id}, valid_session
+        }.to change{Task.last.level}.by(-1)
+
       end
 
     end
@@ -201,7 +197,7 @@ RSpec.describe TasksController, :type => :controller do
     it "redirects to the tasks list" do
       task = Task.create! valid_attributes
       delete :destroy, {:id => task.to_param}, valid_session
-      expect(response).to redirect_to(tasks_url)
+      expect(response).to redirect_to(tasks_url(:layout => true))
     end
   end
 

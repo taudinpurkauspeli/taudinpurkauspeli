@@ -1,4 +1,4 @@
- class ExercisesController < ApplicationController
+class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in, except: [:index]
   before_action :ensure_user_is_admin, except: [:index, :show]
@@ -8,12 +8,17 @@
     @exercises = Exercise.all
     @excercise_page_rendered = true
     session[:exercise_id] = nil
+    session[:task_id] = nil
+
+    set_view_layout
   end
 
   # GET /exercises/1
   # GET /exercises/1.json
   def show
     session[:exercise_id] = params[:id]
+
+    set_view_layout
   end
 
   # GET /exercises/new
@@ -23,6 +28,7 @@
 
   # GET /exercises/1/edit
   def edit
+    set_view_layout
   end
 
   # POST /exercises
@@ -31,10 +37,10 @@
     @exercise = Exercise.new(exercise_params)
     respond_to do |format|
       if @exercise.save
-        format.html { redirect_to @exercise, notice: 'Casen luominen onnistui!' }
+        format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen luominen onnistui!' }
         format.json { render :show, status: :created, location: @exercise }
       else
-        format.html { render :new }
+        format.html { redirect_to new_exercise_path(:layout => get_layout), alert: 'Casen luominen epäonnistui!' }
         format.json { render json: @exercise.errors, status: :unprocessable_entity }
       end
     end
@@ -45,10 +51,10 @@
   def update
     respond_to do |format|
       if @exercise.update(exercise_params)
-        format.html { redirect_to @exercise, notice: 'Casen päivitys onnistui!' }
+        format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen päivitys onnistui!' }
         format.json { render :show, status: :ok, location: @exercise }
       else
-        format.html { render :edit }
+        format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), alert: 'Casen päivitys epäonnistui!' }
         format.json { render json: @exercise.errors, status: :unprocessable_entity }
       end
     end
@@ -65,14 +71,14 @@
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_exercise
-      @exercise = Exercise.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_exercise
+    @exercise = Exercise.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def exercise_params
-      params.require(:exercise).permit(:name, :anamnesis)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def exercise_params
+    params.require(:exercise).permit(:name, :anamnesis, :hidden)
 
-    end
+  end
 end

@@ -4,13 +4,17 @@ class OptionsController < ApplicationController
   before_action :ensure_user_is_admin
 
   def show
+    set_view_layout
   end
 
   def new
     @option = Option.new
+
+    set_view_layout
   end
 
   def edit
+    set_view_layout
   end
 
   def create
@@ -24,10 +28,10 @@ class OptionsController < ApplicationController
           uncheck_other_options(@option)
         end
         #subtask.save
-        format.html { redirect_to edit_multichoice_path(@option.multichoice.id), notice: 'Vaihtoehto lisättiin onnistuneesti.' }
+        format.html { redirect_to edit_multichoice_path(@option.multichoice.id, :layout => get_layout), notice: 'Vaihtoehto lisättiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @option }
       else
-        format.html { redirect_to edit_multichoice_path(Multichoice.find(option_params[:multichoice_id])), alert: 'Vaihtoehdonn tiedot puuttelliset.' }
+        format.html { redirect_to edit_multichoice_path(Multichoice.find(option_params[:multichoice_id]), :layout => get_layout), alert: 'Vaihtoehdonn tiedot puuttelliset.' }
         format.json { render json: @option.errors, status: :unprocessable_entity }
       end
     end
@@ -42,9 +46,9 @@ class OptionsController < ApplicationController
         if @option.multichoice.is_radio_button == true
           uncheck_other_options(@option)
         end
-        format.html { redirect_to edit_multichoice_path(@option.multichoice.id), notice: 'Vaihtoehto päivitettiin onnistuneesti.' }
+        format.html { redirect_to edit_multichoice_path(@option.multichoice.id, :layout => get_layout), notice: 'Vaihtoehto päivitettiin onnistuneesti.' }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_multichoice_path(@option.multichoice.id, :layout => get_layout), alert: 'Vaihtoehdon päivitys epäonnistui!.' }
         format.json { render json: @option.errors, status: :unprocessable_entity }
       end
     end
@@ -54,7 +58,7 @@ class OptionsController < ApplicationController
     parent_id = @option.multichoice_id
     @option.destroy
     respond_to do |format|
-      format.html { redirect_to edit_multichoice_path(parent_id), notice: 'Vastausvaihtoehdon poisto onnistui!' }
+      format.html { redirect_to edit_multichoice_path(parent_id, :layout => get_layout), notice: 'Vastausvaihtoehdon poisto onnistui!' }
       format.json { head :no_content }
     end
   end

@@ -1,18 +1,32 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
 <% if current_user_is_admin %>
-  <%=link_to 'Muokkaa', edit_task_path(@task)%>
+    <div class = "row">
+      <div class = "col-md-2">
+        <%= button_to 'Palaa muokkaamaan', edit_task_path(@task), :class => 'btn btn-default btn-exercise floatRight',:form_class => "form-edit-task", :method => :get %>
+      </div>
+    </div>
 <% end %>
 
 <h1>Toimenpide: <%= @task.name %></h1>
 
 <% @subtasks.each do |subtask| %>
-  <% if !subtask.task_text.nil? %>
-    <%= render 'task_text', {subtask: subtask} %>
-  <% elsif !subtask.multichoice.nil? %>
-    <% if !current_user_has_completed_task(@task.id) %>
-      <%= render 'multichoice', {subtask: subtask} %>
-      <%= render 'right_answers', {subtask: subtask} if current_user_is_admin %>
-    <% else %>
-      <%= render 'right_answers', {subtask: subtask} %>
+    <% if current_user.can_complete_subtask?(@task, subtask) || current_user_is_admin %>
+        <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask } %>
     <% end %>
-  <% end %>
 <% end %>
+
+<% if current_user.has_completed?(@task) %>
+    <%= render 'task_completed' %>
+<% end %>
+
+<script>
+
+    setAjaxSubmits("#currentTaskTab form:not(.form-task-completed, .form-edit-task)", "#currentTaskTab", "post", function(){
+        loadView("/tasks", "#taskTab");
+    });
+    setAjaxSubmits("#currentTaskTab .form-edit-task", "#currentTaskTab", "get");
+    setGoToTab("#form-open-hypotheses-tab", "#hypothesisTab");
+    setGoToTab("#form-open-tasks-tab", "#taskTab");
+</script>

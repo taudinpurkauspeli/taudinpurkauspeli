@@ -1,11 +1,13 @@
 class Task < ActiveRecord::Base
-	validates :name, presence: true, length: {minimum: 2}
-	belongs_to :exercise
+  validates :name, presence: true, length: {minimum: 2}
+  belongs_to :exercise
 
   has_many :completed_tasks, dependent: :destroy
   has_many :users, through: :completed_tasks
-  has_many :subtasks, dependent: :destroy
+  has_many :subtasks, -> {order('level')}, dependent: :destroy
   has_many :task_texts, through: :subtasks
+  has_many :multichoices, through: :subtasks
+  has_many :interviews, through: :subtasks
 
   def self.get_highest_level(exercise)
     highest_level = exercise.tasks.maximum("level")
@@ -28,12 +30,12 @@ class Task < ActiveRecord::Base
           task.update(level: task.level + 1)
         end
       end
-    else 
+    else
       if level > 1 then
         children.each do |task|
           task.update(level: task.level - 1)
         end
-      update(level: level - 1)
+        update(level: level - 1)
       end
     end
   end
@@ -49,7 +51,7 @@ class Task < ActiveRecord::Base
     else
       children.each do |task|
         task.update(level: task.level - 1)
-      end  
+      end
     end
   end
 

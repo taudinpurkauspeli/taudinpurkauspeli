@@ -12,8 +12,8 @@ Given(/^some hypotheses have been added to case$/) do
 
   create_hypotheses
 
-  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1, explanation: "Nauta oli kipeä", task_id:1)
-  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2, explanation: "Hevonen oli kipeä", task_id:1)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1, explanation: "Nauta oli kipeä", task_id:3)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2, explanation: "Hevonen oli kipeä", task_id:3)
 end
 
 Given(/^cases and hypothesis groups have been created$/) do
@@ -30,8 +30,8 @@ Given(/^hypotheses with prerequisite tasks have been added to case$/) do
   create_hypothesis_groups
   create_tasks
   create_hypotheses
-  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1, explanation: "Nauta katkesi keskeltä", task_id:1)
-  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2, explanation: "Hevonen katkesi keskeltä", task_id:1)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 1, explanation: "Nauta katkesi keskeltä", task_id:3)
+  add_hypothesis_to_case(exercise_id: 1, hypothesis_id: 2, explanation: "Hevonen katkesi keskeltä", task_id:3)
 end
 
 Given(/^I have completed all the tasks$/) do
@@ -40,78 +40,137 @@ Given(/^I have completed all the tasks$/) do
   end
 end
 
-When(/^I click on a button "(.*?)"$/) do |arg1|
-	first(:button, arg1).click
-end
-
-When(/^I click on button "(.*?)"$/) do |arg1|
- all(:button, 'Tallenna')[2].click
-end
-
-When(/^I fill in the hypothesis name field with a correct value$/) do
-	fill_in('hypothesis_name', with: 'Suu- ja sorkkatauti', :match => :prefer_exact)
-end
-
-When(/^I fill in the hypothesis name field with an incorrect value$/) do
-	fill_in('hypothesis_name', with: '', :match => :prefer_exact)
-end
-
-When(/^I save the new hypothesis with button "(.*?)"$/) do |arg1|
-  all(:button, 'Tallenna')[0].click
-  end
-
-When(/^I save changes with button "(.*?)"$/) do |arg1|
-  all(:button, 'Päivitä')[0].click
-end
-
-When(/^I click on the delete button "(.*?)"$/) do |arg1|
-  all(:button, 'Poista casesta')[0].click
-end
-
-When(/^I click on the hypothesis button "(.*?)"$/) do |arg1|
-   click_button(arg1)
-end
-
-When(/^I click on one of the hypotheses of the case$/) do
-  click_button('Hevosheikkous')
-end
-
-When(/^I fill in the hypothesis group name field with a correct name$/) do
-    fill_in('hypothesis_group_name', with: 'Koirasairaudet', :match => :prefer_exact)
-end
-
-When(/^I fill in the explanation field$/) do
-  fill_in('exercise_hypothesis_explanation', with: 'Hevosen hauraat luut', :match => :prefer_exact)
-end
-
 Given(/^I try to visit the "(.*?)" page of the case "(.*?)"$/) do |arg1, arg2|
   visit hypotheses_path
 end
 
 
 
+When(/^I click on a button "(.*?)"$/) do |arg1|
+  first(:button, arg1).click
+  wait_for_ajax
+end
+
+When(/^I click on button "(.*?)"$/) do |arg1|
+  click_and_wait(arg1)
+end
+
+When(/^I fill in the hypothesis name field with a correct value$/) do
+  fill_in('hypothesis_name', with: 'Suu- ja sorkkatauti', :match => :prefer_exact)
+end
+
+When(/^I fill in the hypothesis name field with an incorrect value$/) do
+  fill_in('hypothesis_name', with: '', :match => :prefer_exact)
+end
+
+When(/^I save the new hypothesis with button "(.*?)"$/) do |arg1|
+  all(:button, 'Tallenna')[0].click
+  wait_for_ajax
+end
+
+When(/^I save changes with button "(.*?)"$/) do |arg1|
+  all(:button, 'Päivitä')[0].click
+  wait_for_ajax
+end
+
+When(/^I click on the delete button "(.*?)"$/) do |arg1|
+  all(:button, 'Poista casesta')[0].click
+  wait_for_ajax
+end
+
+When(/^I click on the hypothesis button "(.*?)"$/) do |arg1|
+  click_and_wait(arg1)
+end
+
+When(/^I click on one of the hypotheses of the case$/) do
+  click_and_wait('Hevosheikkous')
+end
+
+When(/^I fill in the hypothesis group name field with a correct name$/) do
+  fill_in('hypothesis_group_name', with: 'Koirasairaudet', :match => :prefer_exact)
+end
+
+When(/^I fill in the explanation field$/) do
+  fill_in('exercise_hypothesis_explanation', with: 'Hevosen hauraat luut')
+end
+
+When(/^I change the prerequisite task$/) do
+  select('Soita lääkärille', from:'exercise_hypothesis[task_id]')
+end
+
+
 
 
 Then(/^the hypothesis should be added to the case$/) do
-	e = Exercise.first
-	expect(e.hypotheses.first.name).to eq('Hevosheikkous')
-	expect(page).to have_button 'Hevosheikkous'
+  e = Exercise.first
+  expect(e.hypotheses.first.name).to eq('Hevosheikkous')
+  expect(page).to have_button 'Hevosheikkous'
   expect(ExerciseHypothesis.count).to eq(1)
 end
 
 Then(/^the new hypothesis group should be created$/) do
   expect(page).to have_button 'Koirasairaudet'
   expect(HypothesisGroup.count).to eq(3)
- end
+end
 
 Then(/^the explanation should be added to the hypothesis$/) do
-  expect(ExerciseHypothesis.find(2).explanation).to include('Hevosen hauraat luut')
+  backdoor = 0
+  while(ExerciseHypothesis.find(2).explanation != 'Hevosen hauraat luut')
+
+    if backdoor > 50 then
+      raise "Loop error!"
+    end
+
+    click_and_wait('Hevosheikkous')
+
+    fill_in('exercise_hypothesis_explanation', with: 'Hevosen hauraat luut')
+    first(:button, 'Päivitä').click
+    wait_for_ajax
+
+    backdoor += 1
+  end
+
+  expect(ExerciseHypothesis.last.explanation).to eq('Hevosen hauraat luut')
 end
 
 Then(/^the hypothesis should be removed from the case$/) do
+  backdoor = 0
+  while(ExerciseHypothesis.count != 1)
+
+    if backdoor > 50 then
+      raise "Loop error!"
+    end
+
+    click_and_wait('Hevosheikkous')
+    first(:button, 'Poista casesta').click
+    wait_for_ajax
+
+    backdoor += 1
+  end
   exercise_hypotheses = Exercise.first.exercise_hypotheses
   expect(exercise_hypotheses.count).to eq(1)
   expect(exercise_hypotheses.first.hypothesis.name).not_to eq("Hevosheikkous")
+end
+
+Then(/^the prerequisite task of the hypothesis should be updated$/) do
+  backdoor = 0
+  while(ExerciseHypothesis.last.task.name == "Lääkitse hevonen")
+
+    if backdoor > 50 then
+      raise "Loop error!"
+    end
+
+    click_and_wait('Hevosheikkous')
+
+    select('Soita lääkärille', from:'exercise_hypothesis[task_id]')
+
+    first(:button, 'Päivitä').click
+    wait_for_ajax
+
+    backdoor += 1
+  end
+  exercise_hypothesis = Exercise.first.exercise_hypotheses.last
+  expect(exercise_hypothesis.task.name).to eq("Soita lääkärille")
 end
 
 Then(/^the new hypothesis should be created$/) do
@@ -146,4 +205,14 @@ end
 
 Then(/^I should be redirected back to the front page$/) do
   expect(current_path).to eq(exercises_path)
+end
+
+Then(/^the teacher's hypothesis bank should be in alphabetical order$/) do
+  #This is very arbitrary and could break even though the list is in correct order
+  actual = all("input[type='submit']")[3].value
+  expect( actual ).to eq('Aivokuume')
+  actual = all("input[type='submit']")[5].value
+  expect( actual ).to eq('Nautaflunssa')
+  actual = all("input[type='submit']")[7].value
+  expect( actual ).to eq('Sikatartunta')
 end

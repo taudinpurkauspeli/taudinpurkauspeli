@@ -1,19 +1,22 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
 <h1>Kirjaudu sisään</h1>
 
 <%= form_tag sessions_path do %>
 
-  <div class="field">
-    <p>Käyttäjätunnus</p>
-    <%= text_field_tag :username, params[:username] %>
-  </div>
+    <div class="field">
+      <p>Käyttäjätunnus</p>
+      <%= text_field_tag :username, params[:username] %>
+    </div>
 
-  <div class="field">  
-    <p>Salasana</p>
-    <%= password_field_tag :password, params[:password] %>  
-  </div>
+    <div class="field">
+      <p>Salasana</p>
+      <%= password_field_tag :password, params[:password] %>
+    </div>
 
-  <div class="field">  
-    <%= submit_tag "Kirjaudu sisään" %>
-  </div>
-  
+    <div class="field">
+      <%= submit_tag "Kirjaudu sisään" %>
+    </div>
+
 <% end %>

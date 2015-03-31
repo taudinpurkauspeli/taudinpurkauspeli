@@ -10,35 +10,43 @@ Given(/^Cases have been created$/) do
   create_exercises
 end
 
+Given(/^Task with a multichoice has been created$/) do
+  create_tasks
+  create_multichoices
+end
+
+Given(/^Task with a radiobutton has been created$/) do
+  create_tasks
+  create_radiobuttons
+end
+
+
+
 When(/^I fill in task name$/) do
   fill_in('task_name', with: 'Soita asiakkaalle')
-  end
+end
+
 When(/^I fill in task text content$/) do
   fill_in('task_text_content', with: 'Soita asiakkaalle puhelimella')
 end
 
-Then(/^new task should be in the database$/) do
-  expect(Task.count).to eq(1)
-  expect(TaskText.count).to eq(0)
-  expect(Subtask.count).to eq(0)
-end
+When(/^I go to the multichoice edit page$/) do
+  click_and_wait('Soita lääkärille')
+  click_and_wait('Monivalintakysymys: Tykkääkö koira nappuloista?')
+  end
 
-Then(/^task text should be in the database$/) do
-  expect(TaskText.count).to eq(1)
-  expect(Subtask.count).to eq(1)
-end
-
-Then(/^page should show the new task text content$/) do
-  expect(page).to have_content("Soita asiakkaalle puhelimella")
+When(/^I go to the radiobutton edit page$/) do
+  click_and_wait('Soita lääkärille')
+  click_and_wait('Monivalintakysymys: Kenelle pitää soittaa?')
 end
 
 When(/^I fill in multichoice question$/) do
   fill_in('multichoice_question', with: 'Soitatko asiakkaalle puhelimella?')
-end
+  end
 
-Then(/^multichoice should be in the database$/) do
-  expect(Multichoice.count).to eq(1)
-  expect(Subtask.count).to eq(1)
+When(/^I fill fill in radiobutton question and select radiobutton option$/) do
+  fill_in('multichoice_question', with: 'Onko tauti epidemia?')
+  check 'multichoice_is_radio_button'
 end
 
 When(/^I fill in option content$/) do
@@ -49,6 +57,46 @@ When(/^I fill in option explanation$/) do
   fill_in('option_explanation', with: 'Puhelimella soittaminen on nyt hyvin järkevää.')
 end
 
+When(/^I fill in option content, explanation and select right answer box$/) do
+  fill_in('option_content', with: 'On')
+  fill_in('option_explanation', with: 'Epidemia on yleinen.')
+  check 'option_is_correct_answer'
+end
+
+
+Then(/^new task should be in the database$/) do
+  expect(Task.where(level:1...999).count).to eq(1)
+  expect(TaskText.count).to eq(0)
+  expect(Subtask.count).to eq(0)
+end
+
+Then(/^task text should be in the database$/) do
+  expect(TaskText.count).to eq(1)
+  expect(Subtask.count).to eq(1)
+end
+
+Then(/^page should show the new task text content$/) do
+  expect(page).to have_button("Teksti: Soita asiakkaalle puhelimella")
+end
+
+Then(/^multichoice should be in the database$/) do
+  expect(Multichoice.count).to eq(1)
+  expect(Subtask.count).to eq(1)
+end
+
+Then(/^radiobutton should be in the database$/) do
+  expect(Multichoice.count).to eq(1)
+  expect(Multichoice.first.is_radio_button).to eq(true)
+  expect(Subtask.count).to eq(1)
+end
+
 Then(/^option should be in the database$/) do
-  expect(Option.count).to eq(1)
+  expect(Option.count).to eq(4)
+  expect(Option.last.content).to eq('Soitan puhelimella')
+  end
+
+Then(/^right radiobutton option should be in the database$/) do
+  expect(Option.count).to eq(4)
+  expect(Option.last.content).to eq('On')
+  expect(Option.last.explanation).to eq('Epidemia on yleinen.')
 end

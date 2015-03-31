@@ -1,137 +1,191 @@
 require 'rails_helper'
 
-describe "Hypothesis list page" do
+describe "Hypothesis list page", js:true do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
   let!(:hypothesis_group){FactoryGirl.create(:hypothesis_group)}
-  let!(:hypothesis){FactoryGirl.create(:hypothesis)}
-  let!(:task){FactoryGirl.create(:task)}
+  let!(:task){FactoryGirl.create(:task, exercise:exercise, level:1)}
+  let!(:hypothesis){FactoryGirl.create(:hypothesis, hypothesis_group:hypothesis_group)}
+  let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, exercise:exercise, hypothesis:hypothesis, task:task)}
 
-  describe "if user is signed in as student" do
+  describe "student" do
     let!(:user){FactoryGirl.create(:student)}
-    let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis)}
 
     before :each do
       sign_in(username:"Opiskelija", password:"Salainen1")
       visit root_path
     end
 
-    it "user should not be able to view the hypotheses of an exercise if no exercise has been chosen" do
+    it "should not be able to view hypotheses of an unchosen exercise" do
       visit hypotheses_path
       expect(current_path).to eq(exercises_path)
       expect(page).to have_content("Valitse ensin case, jota haluat tarkastella!")
     end
 
-    describe "and chooses an exercise" do
+    describe "has chosen an exercise" do
 
       before :each do
-        click_button('Lihanautakuolemat')
-        click_link('Työhypoteesit')
+        click_and_wait('Lihanautakuolemat')
+        click_and_wait('Työhypoteesit')
       end
 
-      it "user should be able to view the hypotheses of an exercise" do
+      it "then he should be able to view the hypotheses of an exercise" do
         expect(page).to have_button 'Bakteeritaudit'
         expect(page).to have_button 'Virustauti'
       end
 
-      describe "and has not completed required task" do
+      describe "but not completed required task" do
 
-        it "user should not be able check hypotheses of an exercise" do
+        it "then he should not be able check hypotheses of an exercise" do
           expect {
-            click_button('Virustauti')
+            click_and_wait('Virustauti')
           }.to change(CheckedHypothesis, :count).by (0)
+          expect(page).to have_content 'Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin.'
+        end
+      end
+
+      describe "and has completed required task" do
+        it "then he should be able to check hypotheses of an exercise" do
+          user.completed_tasks.create task_id:task.id
+          expect {
+            click_and_wait('Virustauti')
+          }.to change(CheckedHypothesis, :count).by (1)
         end
       end
     end
 
-    describe "and has completed required task" do
-      before :each do
-        click_button('Lihanautakuolemat')
-        click_link('Työhypoteesit')
-      end
-      it "user should be able to check hypotheses of an exercise" do
-        user.completed_tasks.create task_id:1
-        expect {
-          click_button('Virustauti')
-        }.to change(CheckedHypothesis, :count).by (1)
-      end
-    end
   end
 
-  describe "if user is signed in as teacher" do
+  describe "teacher" do
     let!(:user){FactoryGirl.create(:user)}
-    let!(:hyp){FactoryGirl.create(:banked_hypothesis)}
-    let!(:task2){FactoryGirl.create(:task, name: "Asiakkaan soitto")}
-    let!(:exercise_hypothesis2){FactoryGirl.create(:exercise_hypothesis, task_id:nil)}
+    let!(:hyp){FactoryGirl.create(:banked_hypothesis, hypothesis_group:hypothesis_group)}
+    let!(:task2){FactoryGirl.create(:task, name: "Asiakkaan soitto", exercise_id:exercise.id)}
 
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
       visit root_path
-      click_button('Lihanautakuolemat')
-      click_link('Työhypoteesit')
+      click_and_wait('Lihanautakuolemat')
+      click_and_wait('Työhypoteesit')
     end
 
-    describe "he should be able to edit hypotheses and hypothesis groups" do
+    describe "should be able to" do
 
-      it "user should be able to create a new hypothesis" do
+      it "create a new hypothesis" do
+        click_and_wait('+ Uusi työhypoteesi')
+
         fill_in('hypothesis_name', with: 'Sorkkaihottuma')
+        expect {
+          first(:button, 'Tallenna').click
+          wait_for_ajax
+        }.to change(Hypothesis, :count).by(1)
+
+        expect(Hypothesis.first.name).to eq('Sorkkaihottuma')
+        expect(page).to have_button 'Sorkkaihottuma'
+        expect(page).to have_content 'Hypoteesin luominen onnistui'
+      end
+
+      it "create a new hypothesis group" do
+        click_and_wait('+ Uusi työhypoteesiryhmä')
+
+        fill_in('hypothesis_group_name', with: 'Sorkkaeläinten ihotaudit')
 
         expect {
           first(:button, 'Tallenna').click
-        }.to change(Hypothesis, :count).by(1)
-        expect(page).to have_button 'Sorkkaihottuma'
+          wait_for_ajax
+        }.to change(HypothesisGroup, :count).by(1)
+
+        expect(page).to have_button 'Sorkkaeläinten ihotaudit'
+        expect(HypothesisGroup.last.name).to eq('Sorkkaeläinten ihotaudit')
       end
 
-      it "user should not be able to create a new hypothesis without name" do
+      it "add hypotheses to an exercise" do
+        expect {
+          first(:button,'Sorkkatauti').click
+          wait_for_ajax
+        }.to change(ExerciseHypothesis, :count).by(1)
+
+        expect(ExerciseHypothesis.last.hypothesis.name).to eq('Sorkkatauti')
+      end
+
+      it "remove hypotheses from an exercise" do
+        backdoor = 0
+        while(ExerciseHypothesis.count != 0)
+          if backdoor > 50 then
+            raise "Loop error!"
+          end
+
+          click_and_wait('Virustauti')
+          first(:button, 'Poista casesta').click
+          wait_for_ajax
+          backdoor += 1
+        end
+        expect(ExerciseHypothesis.count).to eq(0)
+      end
+
+      it "edit the explanation of a hypothesis added to an exercise" do
+        backdoor = 0
+        while(ExerciseHypothesis.first.explanation != 'Virus ei olekaan bakteeritauti')
+          if backdoor > 50 then
+            raise "Loop error!"
+          end
+
+          click_and_wait('Virustauti')
+
+          fill_in('exercise_hypothesis_explanation', with: 'Virus ei olekaan bakteeritauti')
+          first(:button, 'Päivitä').click
+          wait_for_ajax
+          backdoor += 1
+        end
+
+        expect(ExerciseHypothesis.first.explanation).to eq('Virus ei olekaan bakteeritauti')
+      end
+
+      it "add prerequisite task to a hypothesis added to an exercise" do
+        backdoor = 0
+        while(ExerciseHypothesis.first.task.name == task.name)
+          if backdoor > 50 then
+            raise "Loop error!"
+          end
+
+          click_and_wait('Virustauti')
+
+          select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]')
+
+          first(:button, 'Päivitä').click
+          wait_for_ajax
+          backdoor += 1
+        end
+        expect(ExerciseHypothesis.first.task.name).to eq('Asiakkaan soitto')
+      end
+    end
+
+    describe "should not be able to" do
+
+      it " create a new hypothesis without a name" do
+        click_and_wait('+ Uusi työhypoteesi')
+
         fill_in('hypothesis_name', with: '')
         expect {
           first(:button, 'Tallenna').click
+          wait_for_ajax
         }.to change(Hypothesis, :count).by(0)
-        expect(page).not_to have_button 'Sorkkaihottuma'
+
+        expect(page).to have_content 'Hypoteesin luominen epäonnistui'
       end
 
-      it "user should be able to create a new hypothesis group" do
-        fill_in('hypothesis_group_name', with: 'Sorkkaeläinten ihotaudit')
+      it "create a new hypothesis group without a name" do
+        click_and_wait('+ Uusi työhypoteesiryhmä')
+
+        fill_in('hypothesis_group_name', with: '')
         expect {
-          all(:button, 'Tallenna')[1].click
-        }.to change(HypothesisGroup, :count).by(1)
-        expect(page).to have_button 'Sorkkaeläinten ihotaudit'
+          first(:button, 'Tallenna').click
+          wait_for_ajax
+        }.to change(HypothesisGroup, :count).by(0)
+
+        expect(page).to have_content 'Työhypoteesiryhmän luominen epäonnistui'
       end
-
-    end
-
-    describe "he should be able to manage hypotheses of an exercise" do
-
-      it "user should be able to add hypotheses to an exercise" do
-        expect {
-          click_button('Sorkkatauti')
-        }.to change(ExerciseHypothesis, :count).by(1)
-      end
-
-      it "user should be able to edit the explanation of a hypothesis added to an exercise" do
-        fill_in('exercise_hypothesis_explanation', with: 'Virus ei olekaan bakteeritauti')
-        click_button('Päivitä')
-        expect(ExerciseHypothesis.first.explanation).to include('Virus ei olekaan bakteeritauti')
-      end
-
-      it "user should be able to add prerequisite task to a hypothesis added to an exercise" do
-        select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]')
-        click_button('Päivitä')
-        expect(ExerciseHypothesis.first.task.name).to eq(task2.name)
-      end
-
-      it "user should be able to change prerequisite task of a hypothesis added to an exercise" do
-        select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]')
-        click_button('Päivitä')
-        expect(ExerciseHypothesis.first.task.name).to eq(task2.name)
-
-        select('Soita asiakkaalle', from:'exercise_hypothesis[task_id]')
-        click_button('Päivitä')
-        expect(ExerciseHypothesis.first.task.name).to eq(task.name)
-
-      end
-
     end
 
   end
+
 end
