@@ -9,13 +9,10 @@
           <%= f.submit unchecked_hypothesis.hypothesis.name, :class => 'btn btn-default btn-save multiline' %>
         <% end %>
       </div>
-      <% if @last_checked_hypothesis_id == unchecked_hypothesis.id.to_s %>
+      <% if @last_clicked_hypothesis_id == unchecked_hypothesis.id.to_s %>
         <div class = "col-md-1">
           <div class="alert-unchecked-hypothesis"><%= alert %></div>
         </div>
-      <% else %>
-        <%= @last_checked_hypothesis_id %>
-        <%= unchecked_hypothesis.id %>
       <% end %>
     </div>  
   <% end %>
@@ -28,8 +25,10 @@
       <div class="col-md-8">
         <%= button_to checked_hypothesis.hypothesis.name, checked_hypothesis, method: :delete, :class => 'btn btn-default btn-checked multiline', :id => "checked_hypothesis_"+checked_hypothesis.id.to_s %>
       </div>
-      <div class = "col-md-1">
-        <div class="info-checked-hypothesis"><%= checked_hypothesis.get_explanation %></div>
-      </div>
+      <% if @last_clicked_hypothesis_id == checked_hypothesis.exercise_hypothesis.id.to_s %>
+        <div class = "col-md-1">
+          <div class="info-checked-hypothesis"><%= checked_hypothesis.get_explanation %></div>
+        </div>
+      <% end %>
     </div>
   <% end %>
