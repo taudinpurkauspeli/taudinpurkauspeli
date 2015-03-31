@@ -242,6 +242,24 @@ li.active>a{
   //color: white;
 }
 
+//*******************************
+//*   Notices and info fields   *
+//*******************************
+
+.info-checked-hypothesis{
+  position: absolute;
+  padding: 5px;
+  background-color: $PaleLightGreen;
+  border: 1px solid $MediumGreen;
+}
+.alert-unchecked-hypothesis{
+  position: absolute;
+  padding: 5px;
+  background-color: $LightRed;
+  border: 1px solid red; 
+}
+
+
 //***************
 //*   Inputs    *
 //***************

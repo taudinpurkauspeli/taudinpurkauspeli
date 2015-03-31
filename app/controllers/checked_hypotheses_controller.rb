@@ -17,10 +17,10 @@ class CheckedHypothesesController < ApplicationController
           end
         end
       else
-        redirect_to hypotheses_url(:layout => get_layout), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
+        redirect_to hypotheses_url(:layout => get_layout, :last_checked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id]), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
       end
     else
-      redirect_to hypotheses_url(:layout => get_layout), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
+      redirect_to hypotheses_url(:layout => get_layout, :last_checked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id]), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
     end
   end
 
