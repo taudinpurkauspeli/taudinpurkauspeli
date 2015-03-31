@@ -27,10 +27,15 @@ RSpec.describe MultichoicesController, :type => :controller do
 	end
 
 	describe "GET edit" do
-		it "assigns the requested task as @task" do
+		it "assigns the requested multichoice as @multichoice" do
 			multichoice = Multichoice.create! valid_attributes
 			get :edit, {:id => multichoice.to_param}, valid_session
 			expect(assigns(:multichoice)).to eq(multichoice)
+		end
+		it "assigns new option as @option" do
+			multichoice = Multichoice.create! valid_attributes
+			get :edit, {:id => multichoice.to_param}, valid_session
+			expect(assigns(:new_option)).to be_a_new(Option)
 		end
 	end
 
@@ -61,15 +66,12 @@ RSpec.describe MultichoicesController, :type => :controller do
 
 			it "assigns the requested multichoice as @multichoice" do
 				multichoice = Multichoice.create! valid_attributes
-				put :update, {:id => multichoice.to_param, :multichoice => valid_attributes}, valid_session
+				put :update, {:id => multichoice.to_param, :multichoice => new_attributes}, valid_session
 				expect(assigns(:multichoice)).to eq(multichoice)
 			end
 		end
 
 		describe "with invalid params" do
-			let(:new_attributes) {
-				{question: "Montako jalkaa lehmällä?"}
-			}
 
 			it "assigns the requested multichoice as @multichoice" do
 				multichoice = Multichoice.create! valid_attributes
