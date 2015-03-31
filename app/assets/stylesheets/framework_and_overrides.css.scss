@@ -42,13 +42,25 @@ label {
 
 
 
-
-
-
-
 //Override default navigation styles
-.nav-tabs{
+#navigationTabs{
   padding-top: 10px;
+  margin: auto;
+  max-width: 1170px;
+  border-width: 0px !important;
+}
+#navigationTabsContainer{
+  width: 100%;
+  min-height: 51px;
+  background-color: $MediumGreen;
+  border-bottom: 1px solid #DDD;
+}
+
+li.tabLink>a{
+  color: white;
+}
+li.active>a{
+  background-color: #EEE !important;
 }
 
 //login
@@ -57,14 +69,14 @@ label {
   width: auto;  
   position: absolute;
   //top: 10px;
-  right: 10px;
+  right: 20px;
 }
 
-.a-mainpage{
+.login-container a, .login-container a:visited{
   padding-right: 10px;
   vertical-align: middle;
   display: table-cell;
-
+  color: white;
 }
 
 .no-padding{
@@ -183,10 +195,12 @@ label {
   //height: 30px;
   //width: 100%;
   //margin-left: 2em;
+  height: 45px;
 }
 
 .btn-completed-task{
   background-color: $PaleLightGreen;
+  height: 45px;
 }
 
 .btn-completed-task:hover{
@@ -215,6 +229,18 @@ label {
   margin-bottom: 2%;
 }
 
+.btn-login{
+  border-radius: 3px;
+}
+
+#btn-login{
+  background-color: #6666cc;
+  color: white;
+}
+#btn-signup{
+  //background-color: #cc7755;
+  //color: white;
+}
 
 //***************
 //*   Inputs    *
@@ -331,7 +357,7 @@ main {
   padding-bottom: 80px;
   width: 100%;
   max-width: 1170px;
-  margin-top: 50px; // accommodate the navbar
+  //margin-top: 50px; // accommodate the navbar
   }
 section {
   @extend .row;

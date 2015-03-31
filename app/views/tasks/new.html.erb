@@ -6,9 +6,8 @@
 <%= render 'form' %>
 
 <script>
-    //save task form
-    setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post", function(){
-        alert("meni oikeeseen paikkaan");
-        loadView("/tasks", "#taskTab");
-    });
+	//save task form
+  setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post", function(){
+  	loadView("/tasks", "#taskTab");
+  });
 </script>
