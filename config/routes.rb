@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 
   resources :question_groups
 
-  resources :asked_questions, only: [:create]
+  #resources :asked_questions, only: [:create]
 
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   post 'interviews/:id/check_answers', to: 'interviews#check_answers'
   post 'task_texts/:id/check_answers', to: 'task_texts#check_answers'
 
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

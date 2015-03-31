@@ -10,12 +10,12 @@
 </div>
 
 <% subtask.multichoice.options.each do |option| %>
-  <div class="row">
-    <div class="col-md-4">
-      <%= option.content %>
+    <div class="row">
+      <div class="col-md-4">
+        <%= option.content %>
+      </div>
+      <div class="col-md-8">
+        <%= option.explanation %>
+      </div>
     </div>
-    <div class="col-md-8">
-      <%= option.explanation %>
-    </div>
-  </div>
 <% end %>

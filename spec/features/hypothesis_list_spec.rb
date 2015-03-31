@@ -111,7 +111,7 @@ describe "Hypothesis list page", js:true do
         backdoor = 0
         while(ExerciseHypothesis.count != 0)
           if backdoor > 50 then
-            break
+            raise "Loop error!"
           end
 
           click_and_wait('Virustauti')
@@ -126,7 +126,7 @@ describe "Hypothesis list page", js:true do
         backdoor = 0
         while(ExerciseHypothesis.first.explanation != 'Virus ei olekaan bakteeritauti')
           if backdoor > 50 then
-            break
+            raise "Loop error!"
           end
 
           click_and_wait('Virustauti')
@@ -144,7 +144,7 @@ describe "Hypothesis list page", js:true do
         backdoor = 0
         while(ExerciseHypothesis.first.task.name == task.name)
           if backdoor > 50 then
-            break
+            raise "Loop error!"
           end
 
           click_and_wait('Virustauti')

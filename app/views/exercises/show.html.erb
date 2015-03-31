@@ -3,7 +3,7 @@
 
 <h1> Case: <%= @exercise.name %> </h1>
 <% if @exercise.hidden? %>
-  <p>Tämä case on piilotettu opiskelijoilta. <%= link_to 'Muokkaa', edit_exercise_path(@exercise) %> casea tehdäksesi siitä näkyvä.</p>
+    <p>Tämä case on piilotettu opiskelijoilta. <%= link_to 'Muokkaa', edit_exercise_path(@exercise) %> casea tehdäksesi siitä näkyvä.</p>
 <% end %>
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -13,11 +13,11 @@
   </div>
   <div id="collapse0" class="panel-collapse collapse in">
     <div class="panel-body">
-		<% if @exercise.anamnesis.nil? || @exercise.anamnesis == "" %>
-			<%= link_to 'Casen anamneesia ei ole asetettu.', edit_exercise_path(@exercise) %>  
-		<% else %>
-			<%= @exercise.anamnesis %>
-		<% end %>
+      <% if @exercise.anamnesis.nil? || @exercise.anamnesis == "" %>
+          <%= link_to 'Casen anamneesia ei ole asetettu.', edit_exercise_path(@exercise) %>
+      <% else %>
+          <%= @exercise.anamnesis %>
+      <% end %>
     </div>
   </div>
 </div>
@@ -25,8 +25,8 @@
 
 <%= button_to 'Muokkaa', edit_exercise_path(@exercise), :class => "btn btn-default btn-save widthAuto" if current_user_is_admin %> <!-- |
 <%= link_to 'Takaisin', exercises_path %> -->
- 
+
 <script>
-  //edit exercise form
-  setAjaxSubmits("#anamnesisTab form", "#anamnesisTab", "get");
+    //edit exercise form
+    setAjaxSubmits("#anamnesisTab form", "#anamnesisTab", "get");
 </script>

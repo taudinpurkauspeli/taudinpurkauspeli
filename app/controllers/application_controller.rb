@@ -8,28 +8,28 @@ class ApplicationController < ActionController::Base
   helper_method :current_task
   helper_method :current_exercise
   helper_method :current_user_is_admin
-  
+
   def current_exercise
     return nil if session[:exercise_id].nil?
     Exercise.find(session[:exercise_id])
   end
 
   def current_user
-    return nil if session[:user_id].nil? 
-    User.find(session[:user_id]) 
+    return nil if session[:user_id].nil?
+    User.find(session[:user_id])
   end
-  
+
   def current_task
-    return nil if session[:task_id].nil? 
-    Task.find(session[:task_id]) 
+    return nil if session[:task_id].nil?
+    Task.find(session[:task_id])
   end
 
   def current_user_is_admin
-  	u = current_user
-  	unless u.nil?
-  		return u.admin
-  	end
-  	return false
+    u = current_user
+    unless u.nil?
+      return u.admin
+    end
+    return false
   end
 
   def ensure_user_is_logged_in
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_user_is_admin
-    redirect_to signin_path, alert: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia" unless current_user_is_admin  
+    redirect_to signin_path, alert: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia" unless current_user_is_admin
   end
 
   def get_layout

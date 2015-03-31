@@ -58,7 +58,7 @@ describe "New Task page", js:true do
             click_and_wait('Tallenna')
           }.to change(TaskText, :count).by(1)
 
-          expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
+          expect(page).to have_content 'Kysymys lisättiin onnistuneesti!'
           expect(page).to have_button 'Teksti: Asiakas kertoo, että ...'
           expect(Subtask.count).to eq(1)
 
@@ -92,7 +92,7 @@ describe "New Task page", js:true do
             click_and_wait('Tallenna')
           }.to change(TaskText, :count).by(0)
 
-          expect(page).to have_content 'Kysymyksen päivitys epäonnistui!'
+          expect(page).to have_content 'Kysymyksen lisääminen epäonnistui!'
           expect(Subtask.count).to eq(0)
         end
 
@@ -162,6 +162,73 @@ describe "New Task page", js:true do
 
           expect(page).to have_content 'Kysymyksen päivitys epäonnistui!'
           expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Mitä kysyt asiakkaalta:")
+        end
+
+        it "should be able to add option to a multichoice" do
+          fill_in('option_content', with: "Kysy taudeista")
+          fill_in('option_explanation', with: "Taudeista on hyvä kysyä!")
+          check 'option_is_correct_answer'
+
+          expect{
+            click_and_wait('Tallenna')
+          }.to change(Option, :count).by(1)
+
+          expect(page).to have_content 'Vaihtoehto lisättiin onnistuneesti'
+
+          expect(Multichoice.first.options.first.content).to eq('Kysy taudeista')
+          expect(Multichoice.first.options.first.explanation).to eq('Taudeista on hyvä kysyä!')
+          expect(Multichoice.first.options.first.is_correct_answer).to eq(true)
+        end
+
+      end
+
+      describe "with radiobutton subtask" do
+        before :each do
+          click_and_wait('+ Luo uusi monivalinta-alitoimenpide')
+          fill_in('multichoice_question', with: "Onko tauti epidemia?")
+          check 'multichoice_is_radio_button'
+          click_and_wait('Tallenna kysymys')
+          expect(page).to have_content 'Muokkaa monivalintakysymystä'
+        end
+
+        it "should be able to update the question of a radiobutton" do
+
+          fill_in('multichoice_question', with: "Mahtaako olla epidemiaa liikkeellä?")
+
+          click_and_wait('Tallenna kysymys')
+
+          expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
+          expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Mahtaako olla epidemiaa liikkeellä?")
+        end
+
+        it "should not be able to update radiobutton to have no question" do
+          fill_in('multichoice_question', with: "")
+
+          click_and_wait('Tallenna kysymys')
+
+          expect(page).to have_content 'Kysymyksen päivitys epäonnistui!'
+          expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Onko tauti epidemia?")
+        end
+
+        describe "with options" do
+          let!(:option1){FactoryGirl.create(:option, multichoice_id: 1, content: "Bakteerilääke", is_correct_answer: false, explanation: "Ei oikein")}
+          let!(:option2){FactoryGirl.create(:option, multichoice_id: 1, content: "Astmalääke", is_correct_answer: false, explanation: "Ei oikea vastaus")}
+          let!(:option3){FactoryGirl.create(:option, multichoice_id: 1, content: "Kurkkulääke", explanation: "Oikea vastaus")}
+
+          before :each do
+            click_and_wait("Toimenpiteet")
+            click_and_wait("Soita asiakkaalle")
+            click_and_wait("Monivalintakysymys: Onko tauti epidemia?")
+          end
+
+          it "should be able to change the right option" do
+            check 'is_correct_answer_2'
+            click_and_wait('save_2')
+
+            expect(Option.find(1).is_correct_answer).to eq(false)
+            expect(Option.find(2).is_correct_answer).to eq(true)
+            expect(Option.find(3).is_correct_answer).to eq(false)
+          end
         end
       end
     end

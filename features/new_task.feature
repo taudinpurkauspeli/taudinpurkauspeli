@@ -3,7 +3,7 @@ Feature: New task feature
   As a teacher
   I want to create a new task
 
-  Scenario: Teacher can create a task without task text
+  Scenario: Teacher can create a task without a subtask
     Given I have logged in as a teacher
     And Cases have been created
     And I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
@@ -50,3 +50,27 @@ Feature: New task feature
     And I press the button "Tallenna"
     Then page should have a message: "Vaihtoehto lisättiin onnistuneesti."
     And option should be in the database
+
+  Scenario: Teacher can create a task with radiobutton
+    Given I have logged in as a teacher
+    And Cases have been created
+    And I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
+    And I press the button "+ Luo uusi toimenpide"
+    When I fill in task name
+    And I press the button "Tallenna"
+    And I press the button "+ Luo uusi monivalinta-alitoimenpide"
+    And I fill fill in radiobutton question and select radiobutton option
+    And I press the button "Tallenna kysymys"
+    Then page should have a message: "Kysymys lisättiin onnistuneesti!"
+    And radiobutton should be in the database
+
+  Scenario: Teacher can create a task with radiobutton and one right option
+    Given I have logged in as a teacher
+    And Cases have been created
+    And Task with a radiobutton has been created
+    And I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
+    When I go to the radiobutton edit page
+    And I fill in option content, explanation and select right answer box
+    And I press the button "Tallenna"
+    Then page should have a message: "Vaihtoehto lisättiin onnistuneesti."
+    And right radiobutton option should be in the database

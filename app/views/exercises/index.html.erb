@@ -1,21 +1,21 @@
 <h1>Taudinpurkauspeli</h1>
 <%@exercises.each do |exercise| %>
 
-<div class="row">
-  <div class="col-md-5">
-    <% if !exercise.hidden? || current_user_is_admin %>
-      <%=if current_user.nil?
-        then button_to exercise.name, '', :class => 'btn disabled btn-exercise', :method => :get 
-      else button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get 
-        end%>
-    <% end %>
-  </div>
-  <% if current_user_is_admin %>
-  <div class="col-md-2">
-    <%= button_to 'Poista', exercise, :class => 'btn btn-default btn-exercise btn-del', :method => :delete, data: { confirm: 'Haluatko varmasti poistaa casen?' } %>
-  </div>
-  <%end%>
-</div>
+    <div class="row">
+      <div class="col-md-5">
+        <% if !exercise.hidden? || current_user_is_admin %>
+            <%=if current_user.nil?
+               then button_to exercise.name, '', :class => 'btn disabled btn-exercise', :method => :get
+               else button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get
+               end%>
+        <% end %>
+      </div>
+      <% if current_user_is_admin %>
+          <div class="col-md-2">
+            <%= button_to 'Poista', exercise, :class => 'btn btn-default btn-exercise btn-del', :method => :delete, data: { confirm: 'Haluatko varmasti poistaa casen?' } %>
+          </div>
+      <%end%>
+    </div>
 <% end %>
 <div class="row">
   <div class="col-md-5">
