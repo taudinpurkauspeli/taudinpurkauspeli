@@ -249,7 +249,9 @@ li.active>a{
 
 .info-checked-hypothesis{
   position: absolute;
-  padding: 5px;
+  min-width: 200px;
+  padding: 10px;
+  padding-right: 20px;
   background-color: $PaleLightGreen;
   //border: 1px solid $MediumGreen;
   box-shadow: 0px 0px 10px $PaleLightGreen;
@@ -268,7 +270,9 @@ li.active>a{
 
 .alert-unchecked-hypothesis{
   position: absolute;
-  padding: 5px;
+  min-width: 200px;
+  padding: 10px;
+  padding-right: 20px;
   background-color: $PaleLightRed;
   color: white;
   //border: 1px solid red;
