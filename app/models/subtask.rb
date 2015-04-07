@@ -1,4 +1,5 @@
 class Subtask < ActiveRecord::Base
+  validates :task_id, presence: true
 
   after_create :set_level
 
