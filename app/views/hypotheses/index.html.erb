@@ -1,5 +1,7 @@
-<p id="notice"><%= notice %></p>
-<p id="alert"><%= alert %></p>
+<% if current_user_is_admin %>
+  <p id="notice"><%= notice %></p>
+  <p id="alert"><%= alert %></p>
+<% end %>
 
 <%# headers %>
 <div class="row">
@@ -62,4 +64,5 @@
 
 <script>
     setAjaxSubmits("#hypothesisTab form", "#hypothesisTab", "post");
+    setRemovables();
 </script>

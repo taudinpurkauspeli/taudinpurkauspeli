@@ -11,16 +11,16 @@ class CheckedHypothesesController < ApplicationController
       if(exHyp.user_meets_requirements(current_user))
         respond_to do |format|
           if @checked_hypothesis.save
-            format.html { redirect_to hypotheses_url(:layout => false), notice: @checked_hypothesis.get_explanation}
+            format.html { redirect_to hypotheses_url(:layout => get_layout, :last_clicked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id]), notice: @checked_hypothesis.get_explanation}
           else
             format.html { redirect_to hypotheses_url(:layout => get_layout), alert: "Hypoteesin poisto epäonnistui" }
           end
         end
       else
-        redirect_to hypotheses_url(:layout => get_layout), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
+        redirect_to hypotheses_url(:layout => get_layout, :last_clicked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id]), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
       end
     else
-      redirect_to hypotheses_url(:layout => get_layout), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
+      redirect_to hypotheses_url(:layout => get_layout, :last_clicked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id]), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
     end
   end
 

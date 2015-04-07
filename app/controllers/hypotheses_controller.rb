@@ -11,6 +11,8 @@ class HypothesesController < ApplicationController
       @hypothesis_groups = HypothesisGroup.all
       @tasks = @exercise.tasks
 
+      @last_clicked_hypothesis_id = params[:last_clicked_hypothesis_id]
+
       #new instances
       @new_exercise_hypothesis = ExerciseHypothesis.new
       @new_hypothesis_group = HypothesisGroup.new
@@ -86,6 +88,6 @@ class HypothesesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def hypothesis_params
-    params.require(:hypothesis).permit(:name, :hypothesis_group_id)
+    params.require(:hypothesis).permit(:name, :hypothesis_group_id, :last_checked_hypothesis_id)
   end
 end
