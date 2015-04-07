@@ -36,6 +36,9 @@ gem 'bootstrap-sass'
 # Use ActiveModel has_secure_password
  gem 'bcrypt', '~> 3.1.7'
 
+# Cloning gem
+gem 'amoeba'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
