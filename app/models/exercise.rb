@@ -37,7 +37,10 @@ class Exercise < ActiveRecord::Base
     e_dup = exercise.amoeba_dup
     if e_dup.save
       e_dup.tasks.where(level:0).last.delete
+      return true
     end
+
+    return false
   end
 
   private
