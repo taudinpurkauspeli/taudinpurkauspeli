@@ -25,12 +25,17 @@ class Subtask < ActiveRecord::Base
   end
 
   def set_level
-    highest_level = task.subtasks.maximum("level")
-    unless highest_level.nil?
-      update(level:highest_level + 1)
+    unless task.nil?
+      highest_level = task.subtasks.maximum("level")
+      unless highest_level.nil?
+        update(level:highest_level + 1)
+      else
+        update(level:1)
+      end
     else
       update(level:1)
     end
+
   end
 
   def to_s
