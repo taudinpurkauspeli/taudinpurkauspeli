@@ -9,7 +9,7 @@ describe Exercise do
   end
 
 
-   it "is not saved without a name" do
+  it "is not saved without a name" do
     exercise = Exercise.create name:"", anamnesis:"Koira sairastaa :("
 
     expect(exercise).not_to be_valid
@@ -17,7 +17,7 @@ describe Exercise do
 
   end
 
-     it "is not saved with a too short name" do
+  it "is not saved with a too short name" do
     exercise = Exercise.create name:"h", anamnesis:"Koira sairastaa :("
 
     expect(exercise).not_to be_valid
@@ -26,7 +26,7 @@ describe Exercise do
   end
 
 
-   it "has the anamnesis set correctly" do
+  it "has the anamnesis set correctly" do
     exercise = Exercise.new name:"Ripuloiva koira", anamnesis:"Koira sairastaa :("
 
     expect(exercise.anamnesis).to eq("Koira sairastaa :(")
@@ -51,6 +51,18 @@ describe Exercise do
       expect(Exercise.count).to eq(1) 
     end
 =end
+
+    it "can be duplicated" do
+      expect{
+        exercise.create_duplicate(exercise)
+      }.to change(Exercise, :count).by(1)
+
+      new_exercise = Exercise.find(2)
+      expect(new_exercise.name).to eq(exercise.name)
+      expect(new_exercise.anamnesis).to eq(exercise.anamnesis)
+
+      expect(new_exercise.tasks.where(level:0).count).to eq(1)
+    end
   end
 
 end

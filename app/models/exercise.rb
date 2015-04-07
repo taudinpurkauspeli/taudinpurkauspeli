@@ -33,6 +33,13 @@ class Exercise < ActiveRecord::Base
     tasks.where(level: level).count
   end
 
+  def create_duplicate(exercise)
+    e_dup = exercise.amoeba_dup
+    if e_dup.save
+      e_dup.tasks.where(level:0).last.delete
+    end
+  end
+
   private
   def create_anamnesis
     tasks.create(name:"Anamneesi", level:0)
