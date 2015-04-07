@@ -4,4 +4,8 @@ class Question < ActiveRecord::Base
 
 	belongs_to :interview
 	belongs_to :question_group
+
+	amoeba do
+		enable
+	end
 end

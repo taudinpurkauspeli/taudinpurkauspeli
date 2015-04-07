@@ -1,5 +1,5 @@
 class Subtask < ActiveRecord::Base
-  validates :task_id, presence: true
+
   after_create :set_level
 
   belongs_to :task
@@ -7,6 +7,11 @@ class Subtask < ActiveRecord::Base
   has_one :task_text, dependent: :destroy
   has_one :multichoice, dependent: :destroy
   has_one :interview, dependent: :destroy
+
+  amoeba do
+    enable
+    recognize [:has_one]
+  end
 
   def template
     unless task_text.nil?

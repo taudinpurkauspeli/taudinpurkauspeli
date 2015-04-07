@@ -9,6 +9,11 @@ class Task < ActiveRecord::Base
   has_many :multichoices, through: :subtasks
   has_many :interviews, through: :subtasks
 
+  amoeba do
+    enable
+    include_association :subtasks
+  end
+
   def self.get_highest_level(exercise)
     highest_level = exercise.tasks.maximum("level")
     unless highest_level.nil?

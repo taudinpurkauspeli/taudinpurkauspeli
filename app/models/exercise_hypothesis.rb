@@ -1,6 +1,4 @@
 class ExerciseHypothesis < ActiveRecord::Base
-  validates :exercise_id, presence: true
-  validates :hypothesis_id, presence: true
 
 	belongs_to :exercise
 	belongs_to :hypothesis
