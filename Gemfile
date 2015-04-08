@@ -38,7 +38,7 @@ gem 'bootstrap-sass'
 
 # Paperclip for image use
 gem 'paperclip'
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
