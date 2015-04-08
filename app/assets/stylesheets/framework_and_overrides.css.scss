@@ -358,7 +358,14 @@ input[type="checkbox"]:checked {
   height: 100%;
   padding: 2px;
 }
-
+div.separator{
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid #CCC;
+  background-color: #DDD;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
 
 //New anamnesis
