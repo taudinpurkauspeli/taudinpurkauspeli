@@ -79,6 +79,11 @@ describe "Duplicate exercise page" do
       it "hypotheses" do
         expect(Hypothesis.count).to eq(2)
       end
+
+      it "hypotheses" do
+        expect(User.count).to eq(2)
+      end
+
     end
 
     describe "should have correct" do
@@ -92,6 +97,7 @@ describe "Duplicate exercise page" do
         expect(@new_exercise.tasks.where(name: "Tekstitehtävä").count).to eq(1)
         expect(@new_exercise.tasks.where(name: "Valitse kenelle soitat").count).to eq(1)
         expect(@new_exercise.tasks.where(name: "Haastattele asiakasta").count).to eq(1)
+        expect(Task.count).to eq(8)
       end
 
       describe "task text task" do
@@ -102,6 +108,7 @@ describe "Duplicate exercise page" do
 
         it "with right content" do
           expect(@new_task_text_task.task_texts.first.content).to eq(task_text.content)
+          expect(TaskText.count).to eq(2)
         end
 
       end
@@ -114,6 +121,7 @@ describe "Duplicate exercise page" do
 
         it "with right question" do
           expect(@new_multichoice_task.multichoices.first.question).to eq(multichoice.question)
+          expect(Multichoice.count).to eq(2)
         end
 
         it "with right options" do
@@ -125,6 +133,7 @@ describe "Duplicate exercise page" do
             expect(new_option.is_correct_answer).to eq(compare_option.is_correct_answer)
             index += 1
           end
+          expect(Option.count).to eq(6)
         end
 
       end
@@ -137,6 +146,7 @@ describe "Duplicate exercise page" do
 
         it "with right title" do
           expect(@new_interview_task.interviews.first.title).to eq(interview.title)
+          expect(Interview.count).to eq(2)
         end
 
         it "with right questions and question groups" do
@@ -150,6 +160,7 @@ describe "Duplicate exercise page" do
             expect(new_question.question_group_id).to eq(compare_question.question_group_id)
             index += 1
           end
+          expect(Question.count).to eq(6)
         end
 
       end
@@ -168,6 +179,7 @@ describe "Duplicate exercise page" do
 
             index += 1
           end
+          expect(ExerciseHypothesis.count).to eq(4)
         end
 
       end
