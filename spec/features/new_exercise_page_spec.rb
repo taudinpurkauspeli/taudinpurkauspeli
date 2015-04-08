@@ -19,7 +19,6 @@ describe "New Exercise page", js:true do
 				click_and_wait('Tallenna')
 			}.to change(Exercise, :count).by(1)
 
-			expect(page).to have_content 'Casen luominen onnistui!'
 			expect(page).to have_content 'Broilerimysteeri'
 			expect(Exercise.first.name).to eq('Broilerimysteeri')
 			expect(Exercise.first.anamnesis).to eq('Mitä kanoille on tapahtunut??')
