@@ -7,6 +7,8 @@ describe "Duplicate exercise page" do
 
   let!(:exercise){FactoryGirl.create(:exercise)}
 
+  let!(:question_group){FactoryGirl.create(:question_group)}
+
   #Task text task
   let!(:task_text_task){FactoryGirl.create(:task, name: "Tekstitehtävä", exercise_id:exercise.id)}
   let!(:task_text_subtask){FactoryGirl.create(:subtask, task_id:task_text_task.id)}
@@ -26,7 +28,7 @@ describe "Duplicate exercise page" do
   let!(:interview){FactoryGirl.create(:interview, subtask_id:interview_subtask.id)}
   let!(:question){FactoryGirl.create(:question, interview_id:interview.id)}
   let!(:question2){FactoryGirl.create(:question, interview_id:interview.id, title: "Onko ilma kylmä?", required: false, content: "Ilma ei ole kylmä.")}
-  let!(:question3){FactoryGirl.create(:question, interview_id:interview.id, title: "Onko muita eläimiä?", content: "Muita eläimiä ei ole")}
+  let!(:question3){FactoryGirl.create(:question, interview_id:interview.id, title: "Onko muita eläimiä?", content: "Muita eläimiä ei ole", question_group_id: question_group.id)}
 
 
   describe "teacher" do
@@ -115,7 +117,7 @@ describe "Duplicate exercise page" do
           expect(@new_interview_task.interviews.first.title).to eq(interview.title)
         end
 
-        it "with right questions" do
+        it "with right questions and question groups" do
           index = 0
           @new_interview_task.interviews.first.questions.each do |new_question|
             compare_question = interview_task.interviews.first.questions[index]
@@ -123,17 +125,14 @@ describe "Duplicate exercise page" do
             expect(new_question.title).to eq(compare_question.title)
             expect(new_question.content).to eq(compare_question.content)
             expect(new_question.required).to eq(compare_question.required)
+            expect(new_question.question_group_id).to eq(compare_question.question_group_id)
             index += 1
           end
         end
 
       end
 
-
-
     end
-
-
 
   end
 

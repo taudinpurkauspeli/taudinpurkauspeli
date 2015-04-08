@@ -101,6 +101,10 @@ FactoryGirl.define do
     required true
   end
 
+  factory :question_group do
+    title "Lehmätaudit"
+  end
+
   factory :interview do
     subtask_id nil
     title "Omistajan haastattelu"
