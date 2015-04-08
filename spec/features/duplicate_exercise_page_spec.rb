@@ -170,12 +170,12 @@ describe "Duplicate exercise page" do
         it "with right explanations and prerequisite tasks" do
 
           index = 0
-          anamnesis_task_id = @new_exercise.tasks.where(name: "Anamneesi").first.id
           @new_exercise.exercise_hypotheses.each do |new_exercise_hypothesis|
             compare_exercise_hypothesis = exercise.exercise_hypotheses[index]
+            compare_task_id = @new_exercise.tasks.where(name: compare_exercise_hypothesis.task.name).first.id
 
             expect(new_exercise_hypothesis.explanation).to eq(compare_exercise_hypothesis.explanation)
-            expect(new_exercise_hypothesis.task_id).to eq(anamnesis_task_id)
+            expect(new_exercise_hypothesis.task_id).to eq(compare_task_id)
 
             index += 1
           end

@@ -12,7 +12,6 @@ class ExerciseHypothesis < ActiveRecord::Base
   amoeba do
     enable
     exclude_association [:checked_hypotheses, :users, :hypothesis_group, :hypothesis, :exercise]
-    nullify :task_id
   end
 
   def get_prerequisite
