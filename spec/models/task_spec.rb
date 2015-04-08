@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Task, :type => :model do
   let!(:exercise){FactoryGirl.create(:exercise)}
+  let!(:exercise2){FactoryGirl.create(:exercise, name: "Kanakuolemat")}
+
   it "has the name set correctly" do
     task = Task.new name:"Soita asiakkaalle"
 
@@ -16,6 +18,25 @@ RSpec.describe Task, :type => :model do
       expect(task).to be_valid
       expect(Task.where(level:1...999).count).to eq(1)
     end
+
+    describe "in on exercise" do
+
+      it "cannot be two tasks with same name" do
+        expect{
+          Task.create name:"Soita asiakkaalle", exercise:exercise
+        }.to change(Task, :count).by(0)
+      end
+
+    end
+
+    describe "in different exercises" do
+      it "can be two tasks with same name" do
+        expect{
+          Task.create name:"Soita asiakkaalle", exercise:exercise2
+        }.to change(Task, :count).by(1)
+      end
+    end
+
   end
 
   describe "get_highest_level returns 0"  do
@@ -27,8 +48,8 @@ RSpec.describe Task, :type => :model do
   describe "gets completed" do
     let!(:task){FactoryGirl.create(:task, exercise:exercise)}
     let!(:user){FactoryGirl.create(:user)}
-    
-    it "if last subtask is done" do 
+
+    it "if last subtask is done" do
       populate_task(task)
       expect{
         task.subtasks.each do |subtask|
@@ -71,7 +92,7 @@ RSpec.describe Task, :type => :model do
     end
 
     before(:each) do
-      for i in 1..5 
+      for i in 1..5
         Task.create name:"Task"+i.to_s, level:i, exercise_id:1
       end
     end

@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  validates :name, presence: true, length: {minimum: 2}
+  validates :name, presence: true, length: {minimum: 2}, uniqueness: {scope: :exercise_id}
   belongs_to :exercise
 
   has_many :completed_tasks, dependent: :destroy
