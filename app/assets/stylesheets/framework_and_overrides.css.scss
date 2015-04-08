@@ -246,6 +246,28 @@ li.active>a{
 //*******************************
 //*   Notices and info fields   *
 //*******************************
+.messages{
+  position: fixed;
+  top: 60px;
+  right: 10px;
+  width: 300px;
+  padding: 10px;
+}
+.notice{
+  width: 100%;
+  padding: 10px;
+  background-color: $PaleLightGreen;
+  border: 2px solid $LightGreen;
+  //border-radius: 5px;
+}
+.alert{
+  color: white;
+  width: 100%;
+  padding: 10px;
+  background-color: $PaleLightRed;
+  border: 2px solid $LightRed;
+  //border-radius: 5px;
+}
 
 .info-checked-hypothesis{
   position: absolute;

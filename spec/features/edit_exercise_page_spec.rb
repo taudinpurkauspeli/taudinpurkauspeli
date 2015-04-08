@@ -10,7 +10,9 @@ describe "Edit Exercise page", js:true do
 
 		before :each do
 			sign_in(username:"Testipoika", password:"Salainen1")
-			visit edit_exercise_path(exercise)
+
+			click_and_wait(exercise.name)
+			click_and_wait('Muokkaa')
 		end
 
 		it "should be able to edit exercise" do
