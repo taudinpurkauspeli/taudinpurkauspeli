@@ -8,6 +8,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     @user = current_user
+    @last_clicked_task_id = params[:last_clicked_task_id]
 
     @exercise = current_exercise
     if @exercise
@@ -32,7 +33,7 @@ class TasksController < ApplicationController
         session[:task_id] = params[:id]
       else
         respond_to do |format|
-          format.html { redirect_to tasks_url(:layout => get_layout), alert: 'Et voi vielä suorittaa tätä toimenpidettä.' and return }
+          format.html { redirect_to tasks_url(:layout => get_layout, :last_clicked_task_id => params[:id]), alert: 'Et voi vielä suorittaa tätä toimenpidettä.' and return }
         end
       end
     else

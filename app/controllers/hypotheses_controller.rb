@@ -88,6 +88,6 @@ class HypothesesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def hypothesis_params
-    params.require(:hypothesis).permit(:name, :hypothesis_group_id, :last_checked_hypothesis_id)
+    params.require(:hypothesis).permit(:name, :hypothesis_group_id)
   end
 end

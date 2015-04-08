@@ -64,7 +64,10 @@ li.active>a{
   background-color: #EEE !important;
 }
 
-//login
+//************
+//*  Login   *
+//************
+
 .login-container{
   display: table;
   width: auto;  
@@ -290,7 +293,7 @@ li.active>a{
   border-bottom: 7px solid transparent;
 }
 
-.alert-unchecked-hypothesis{
+.alert-unchecked-hypothesis, .alert-unavailable-task{
   position: absolute;
   min-width: 200px;
   padding: 10px;
@@ -300,7 +303,7 @@ li.active>a{
   //border: 1px solid red;
   box-shadow: 0px 0px 10px $PaleLightRed;
 }
-.alert-unchecked-hypothesis:before {
+.alert-unchecked-hypothesis:before, .alert-unavailable-task:before {
   content:"";
   position: absolute;
   right: 100%;
@@ -337,8 +340,10 @@ input[type="checkbox"]:checked {
 
 
 
+//*******************
+//*   Layout divs   *
+//*******************
 
-//Layout divs
 .div-task-order-container{
   float: left;
   height: 5em;

@@ -16,6 +16,13 @@
                       <%= button_to task.name, task, method: :get, :class => "btn btn-default btn-available-task", :form_class => "form-cannot-task-student" %>
                   <% end %>
                 </div>
+                <% if @last_clicked_task_id == task.id.to_s %>
+                  <div class="col-md-5">
+                    <div class="alert-unavailable-task"><%= alert %></div>
+                  </div>
+                <% else %>
+                <%= @last_clicked_task_id %>
+                <% end %>
               </div>
           <% end %>
       <% end %>
