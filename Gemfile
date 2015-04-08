@@ -36,6 +36,10 @@ gem 'bootstrap-sass'
 # Use ActiveModel has_secure_password
  gem 'bcrypt', '~> 3.1.7'
 
+# Paperclip for image use
+gem 'paperclip'
+gem 'aws-sdk'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
