@@ -26,10 +26,19 @@ When(/^I go to the front page$/) do
   visit exercises_path
 end
 
+When(/^I click on the duplication button of case "(.*?)"$/) do |arg1|
+  click_and_wait('exercises/1/dup')
+end
+
 Then(/^I should see the following buttons$/) do |table|
   table.raw.each do |row|
     row.each do |content|
       expect(page).to have_button content
     end
   end
+end
+
+Then(/^the case should be duplicated$/) do
+  expect(page).to have_content("Casen kopioiminen onnistui!")
+  expect(Exercise.count).to eq(3)
 end

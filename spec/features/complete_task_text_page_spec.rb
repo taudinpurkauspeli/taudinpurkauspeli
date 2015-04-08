@@ -36,7 +36,7 @@ describe "Task text page for student", js:true do
       before :each do
         click_and_wait('Jatka')
         click_and_wait('Toimenpiteet')
-        click_button(task_text_task.name)
+        click_and_wait(task_text_task.name)
       end
 
       it "should be able to view the text" do

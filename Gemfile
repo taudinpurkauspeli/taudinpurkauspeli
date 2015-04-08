@@ -40,6 +40,10 @@ gem 'bootstrap-sass'
 gem 'paperclip'
 gem 'aws-sdk', '< 2.0'
 
+# Cloning gem
+gem 'amoeba'
+
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

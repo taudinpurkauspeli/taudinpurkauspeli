@@ -1,0 +1,15 @@
+<div class = "messages">
+	<% if notice %>
+		<div class="notice"><%= notice %></div>
+	<% end %>
+	<% if alert %>
+		<div class="alert"><%= alert %></div>
+	<% end %>
+</div>
+
+<script>
+	var notices = $(".notice");
+	var alerts = $(".alert");
+	notices.fadeOut(10000);
+	alerts.fadeOut(10000);
+</script>

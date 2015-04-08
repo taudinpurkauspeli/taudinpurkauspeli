@@ -6,7 +6,7 @@ class QuestionGroupsController < ApplicationController
   # POST /hypothesis_group
   # POST /hypothesis_group.json
   def create
-    @question_group = QuestionGroup.new(question_group_params)
+    @question_group = QuestionGroup.new(title: question_group_params[:title])
 
     respond_to do |format|
       if @question_group.save

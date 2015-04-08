@@ -1,6 +1,5 @@
 <% if current_user_is_admin %>
-  <p id="notice"><%= notice %></p>
-  <p id="alert"><%= alert %></p>
+  <%= render 'messages/messages' %>
 <% end %>
 
 <%# headers %>
