@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   post 'interviews/:id/check_answers', to: 'interviews#check_answers'
   post 'task_texts/:id/check_answers', to: 'task_texts#check_answers'
 
+  post 'exercises/:id/dup', to: 'exercises#duplicate_exercise'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

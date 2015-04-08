@@ -1,5 +1,4 @@
 class Subtask < ActiveRecord::Base
-  validates :task_id, presence: true
   after_create :set_level
 
   belongs_to :task
@@ -7,6 +6,11 @@ class Subtask < ActiveRecord::Base
   has_one :task_text, dependent: :destroy
   has_one :multichoice, dependent: :destroy
   has_one :interview, dependent: :destroy
+
+  amoeba do
+    enable
+    recognize [:has_one]
+  end
 
   def template
     unless task_text.nil?
@@ -21,12 +25,17 @@ class Subtask < ActiveRecord::Base
   end
 
   def set_level
-    highest_level = task.subtasks.maximum("level")
-    unless highest_level.nil?
-      update(level:highest_level + 1)
+    unless task.nil?
+      highest_level = task.subtasks.maximum("level")
+      unless highest_level.nil?
+        update(level:highest_level + 1)
+      else
+        update(level:1)
+      end
     else
       update(level:1)
     end
+
   end
 
   def to_s

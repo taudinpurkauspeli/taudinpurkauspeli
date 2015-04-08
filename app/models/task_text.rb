@@ -3,6 +3,10 @@ class TaskText < ActiveRecord::Base
 
   belongs_to :subtask
 
+  amoeba do
+    enable
+  end
+
   def user_answered_correctly?(user)
     user.complete_subtask(subtask)
     return true

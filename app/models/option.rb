@@ -3,4 +3,8 @@ class Option < ActiveRecord::Base
 	validates :explanation, presence: true
 
 	belongs_to :multichoice
+
+	amoeba do
+		enable
+	end
 end
