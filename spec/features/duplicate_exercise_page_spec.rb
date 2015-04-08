@@ -8,6 +8,10 @@ describe "Duplicate exercise page" do
   let!(:exercise){FactoryGirl.create(:exercise)}
 
   let!(:question_group){FactoryGirl.create(:question_group)}
+  let!(:hypothesis_group){FactoryGirl.create(:hypothesis_group)}
+
+  let!(:hypothesis){FactoryGirl.create(:hypothesis, hypothesis_group_id: hypothesis_group.id)}
+  let!(:hypothesis2){FactoryGirl.create(:hypothesis, name: "Sorkkatauti", hypothesis_group_id: hypothesis_group.id)}
 
   #Task text task
   let!(:task_text_task){FactoryGirl.create(:task, name: "Tekstitehtävä", exercise_id:exercise.id)}
@@ -29,6 +33,10 @@ describe "Duplicate exercise page" do
   let!(:question){FactoryGirl.create(:question, interview_id:interview.id)}
   let!(:question2){FactoryGirl.create(:question, interview_id:interview.id, title: "Onko ilma kylmä?", required: false, content: "Ilma ei ole kylmä.")}
   let!(:question3){FactoryGirl.create(:question, interview_id:interview.id, title: "Onko muita eläimiä?", content: "Muita eläimiä ei ole", question_group_id: question_group.id)}
+
+  #Exercise hypotheses
+  let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, exercise_id:exercise.id, hypothesis_id:hypothesis.id, task_id:1)}
+  let!(:exercise_hypothesis2){FactoryGirl.create(:exercise_hypothesis, exercise_id:exercise.id, hypothesis_id:hypothesis2.id, task_id:task_text_task.id, explanation: "Tauti on tauti")}
 
 
   describe "teacher" do
@@ -57,6 +65,20 @@ describe "Duplicate exercise page" do
       sign_in(username:"Testipoika", password:"Salainen1")
       first(:button, "Kopioi").click
       @new_exercise = Exercise.find(2)
+    end
+
+    describe "should not duplicate" do
+      it "question groups" do
+        expect(QuestionGroup.count).to eq(1)
+      end
+
+      it "hypothesis groups" do
+        expect(HypothesisGroup.count).to eq(1)
+      end
+
+      it "hypotheses" do
+        expect(Hypothesis.count).to eq(2)
+      end
     end
 
     describe "should have correct" do
@@ -126,6 +148,24 @@ describe "Duplicate exercise page" do
             expect(new_question.content).to eq(compare_question.content)
             expect(new_question.required).to eq(compare_question.required)
             expect(new_question.question_group_id).to eq(compare_question.question_group_id)
+            index += 1
+          end
+        end
+
+      end
+
+      describe "exercise hypotheses" do
+
+        it "with right explanations and prerequisite tasks" do
+
+          index = 0
+          anamnesis_task_id = @new_exercise.tasks.where(name: "Anamneesi").first.id
+          @new_exercise.exercise_hypotheses.each do |new_exercise_hypothesis|
+            compare_exercise_hypothesis = exercise.exercise_hypotheses[index]
+
+            expect(new_exercise_hypothesis.explanation).to eq(compare_exercise_hypothesis.explanation)
+            expect(new_exercise_hypothesis.task_id).to eq(anamnesis_task_id)
+
             index += 1
           end
         end

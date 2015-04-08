@@ -34,9 +34,16 @@ class Exercise < ActiveRecord::Base
   end
 
   def create_duplicate(exercise)
-    e_dup = exercise.amoeba_dup
-    if e_dup.save
-      e_dup.tasks.where(level:0).last.delete
+    exercise_dup = exercise.amoeba_dup
+    if exercise_dup.save
+      exercise_dup.tasks.where(level:0).last.delete
+
+      anamnesis_dup = exercise_dup.tasks.where(level:0).first
+
+      exercise_dup.exercise_hypotheses.each do |ex_hyp|
+        ex_hyp.update(task: anamnesis_dup)
+      end
+
       return true
     end
 

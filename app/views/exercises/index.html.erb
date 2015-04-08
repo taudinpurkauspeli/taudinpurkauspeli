@@ -11,12 +11,15 @@
         <% end %>
       </div>
       <% if current_user_is_admin %>
-          <div class="col-md-2">
+
+          <div class="col-md-1">
             <%= button_to 'Poista', exercise, :class => 'btn btn-default btn-exercise btn-del', :method => :delete, data: { confirm: 'Haluatko varmasti poistaa casen?' } %>
           </div>
-          <div class="col-md-2">
-            <%= button_to 'Kopioi', 'exercises/' + exercise.id.to_s + '/dup', :class => 'btn btn-default btn-exercise btn-save', :method => :post, data: { confirm: 'Haluatko varmasti kopioida koko casen?' } %>
+
+          <div class="col-md-1">
+            <%= button_to 'Kopioi', 'exercises/' + exercise.id.to_s + '/dup', :class => 'btn btn-default btn-exercise widthAuto', :method => :post, data: { confirm: 'Haluatko varmasti kopioida koko casen?' } %>
           </div>
+
       <%end%>
     </div>
 <% end %>
