@@ -2,7 +2,9 @@
 <p id="alert"><%= alert %></p>
 
 <h1> Case: <%= @exercise.name %> </h1>
-<%= image_tag @exercise.picture.url(:square) %>
+
+<%= image_tag @exercise.picture.url(:square) if @exercise.picture.file? %>
+
 <% if @exercise.hidden? %>
     <p>Tämä case on piilotettu opiskelijoilta. <%= link_to 'Muokkaa', edit_exercise_path(@exercise) %> casea tehdäksesi siitä näkyvä.</p>
 <% end %>
