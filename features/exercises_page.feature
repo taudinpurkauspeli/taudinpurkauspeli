@@ -41,3 +41,14 @@ Feature: Exercises page
       | Lihanautakuolemat |
       | Heikko hevonen |
 
+  Scenario: Teacher duplicate an exercise
+    Given I have logged in as a teacher
+    And exercises have been added
+    When I go to the front page
+    And I click on the duplication button of case "Lihanautakuolemat"
+    Then the case should be duplicated
+    Then I should see the following buttons
+      | Lihanautakuolemat |
+      | Heikko hevonen |
+      | Lihanautakuolemat |
+
