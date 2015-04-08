@@ -18,10 +18,8 @@
                 </div>
                 <% if @last_clicked_task_id == task.id.to_s %>
                   <div class="col-md-5">
-                    <div class="alert-unavailable-task"><%= alert %></div>
+                    <div class="alert-unavailable-task removable"><%= alert %></div>
                   </div>
-                <% else %>
-                <%= @last_clicked_task_id %>
                 <% end %>
               </div>
           <% end %>
