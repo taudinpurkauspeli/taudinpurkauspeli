@@ -60,8 +60,18 @@ describe Exercise do
       new_exercise = Exercise.find(2)
       expect(new_exercise.name).to eq(exercise.name)
       expect(new_exercise.anamnesis).to eq(exercise.anamnesis)
+    end
 
-      expect(new_exercise.tasks.where(level:0).count).to eq(1)
+    describe "after duplication" do
+      before :each do
+        exercise.create_duplicate(exercise)
+      end
+
+      it "new exercise has only one anamnesis task" do
+        new_exercise = Exercise.find(2)
+        expect(new_exercise.tasks.where(level:0).count).to eq(1)
+        expect(new_exercise.tasks.where(name: "Anamneesi").count).to eq(1)
+      end
     end
   end
 
