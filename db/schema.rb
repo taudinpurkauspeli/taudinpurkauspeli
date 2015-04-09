@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408104717) do
+ActiveRecord::Schema.define(version: 20150409101035) do
 
   create_table "asked_questions", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 20150408104717) do
     t.integer  "multichoice_id"
     t.string   "content"
     t.string   "explanation"
-    t.boolean  "is_correct_answer"
+    t.integer  "is_correct_answer"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
