@@ -211,8 +211,8 @@ describe "New Task page", js:true do
         end
 
         describe "with options" do
-          let!(:option1){FactoryGirl.create(:option, multichoice_id: 1, content: "Bakteerilääke", is_correct_answer: false, explanation: "Ei oikein")}
-          let!(:option2){FactoryGirl.create(:option, multichoice_id: 1, content: "Astmalääke", is_correct_answer: false, explanation: "Ei oikea vastaus")}
+          let!(:option1){FactoryGirl.create(:option, multichoice_id: 1, content: "Bakteerilääke", is_correct_answer: "wrong", explanation: "Ei oikein")}
+          let!(:option2){FactoryGirl.create(:option, multichoice_id: 1, content: "Astmalääke", is_correct_answer: "allowed", explanation: "Ei oikea vastaus")}
           let!(:option3){FactoryGirl.create(:option, multichoice_id: 1, content: "Kurkkulääke", explanation: "Oikea vastaus")}
 
           before :each do
@@ -225,7 +225,7 @@ describe "New Task page", js:true do
             select('Pakollinen', from:'is_correct_answer_2')
             click_and_wait('save_2')
 
-            expect(Option.find(1).is_correct_answer).to eq("allowed")
+            expect(Option.find(1).is_correct_answer).to eq("wrong")
             expect(Option.find(2).is_correct_answer).to eq("required")
             expect(Option.find(3).is_correct_answer).to eq("allowed")
           end

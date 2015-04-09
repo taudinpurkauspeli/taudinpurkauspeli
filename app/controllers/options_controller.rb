@@ -74,9 +74,9 @@ class OptionsController < ApplicationController
   end
   # Unchecks other options when updated option is corrent answer
   def uncheck_other_options(option)
-    if option.is_correct_answer == 1
-      option.multichoice.options.where.not(id: @option.id).each do |opt|
-        opt.is_correct_answer = 0
+    if option.is_correct_answer == "required"
+      option.multichoice.options.where.not(id: @option.id).required.each do |opt|
+        opt.is_correct_answer = "allowed"
         opt.save
       end
     end
