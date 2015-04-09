@@ -3,20 +3,16 @@ class TaskText < ActiveRecord::Base
     # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
 
-
   belongs_to :subtask
 
   has_attached_file :picture, styles: {
-    full: '1070>'
+    full: '1070>',
+    thumb: '100x100#'
   }
-
 
   amoeba do
     enable
   end
-
-
-
 
   def user_answered_correctly?(user)
     user.complete_subtask(subtask)
