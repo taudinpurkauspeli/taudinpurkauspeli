@@ -1,2 +1,2 @@
-<%= "TODO insert image here" %>
+<%= image_tag subtask.task_text.picture.url(:full) if subtask.task_text.picture.file?  %>
 <p><%= subtask.task_text.content %></p>

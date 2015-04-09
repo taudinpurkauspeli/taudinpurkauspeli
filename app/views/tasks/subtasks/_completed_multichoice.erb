@@ -15,7 +15,7 @@
         <%= option.content %>
       </div>
       <div class="col-md-8">
-        <%= "TODO insert image here" %>
+        <%= image_tag option.picture.url(:full) if option.picture.file? %>
         <%= option.explanation %>
       </div>
     </div>

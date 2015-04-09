@@ -22,7 +22,7 @@
                     </div>
                   </div>
                   <div class="collapse" id="collapseQuestionContent<%= question.id%>" >
-                    <%= "TODO insert image here" %>
+                    <%= image_tag question.picture.url(:full) if question.picture.file? %>
                     <p><%= question.content %></p>
                   </div>
               <%end %>
