@@ -1,21 +1,35 @@
-<div class="row">
-  <div class="col-md-4">
+<table class = "width100">
+<tr>
+  <td class="multichoice">
     <b>Vaihtoehto</b>
-  </div>
+  </td>
 
-  <div class="col-md-8">
+  <td class="multichoice">
     <b>Selitys</b>
-  </div>
+  </td>
 
-</div>
+</tr>
 
 <% subtask.multichoice.options.each do |option| %>
-    <div class="row">
-      <div class="col-md-4">
+    <tr>
+      <td class="multichoice 
+      <% if option.is_correct_answer %>
+        correct-answer
+      <% else %>
+        wrong-answer
+      <% end %>
+      ">
         <%= option.content %>
-      </div>
-      <div class="col-md-8">
+      </td>
+      <td class="multichoice 
+      <% if option.is_correct_answer %>
+        correct-answer
+      <% else %>
+        wrong-answer
+      <% end %>
+      ">
         <%= option.explanation %>
-      </div>
-    </div>
+      </td>
+    </tr>
 <% end %>
+</table>

@@ -64,7 +64,7 @@ class MultichoicesController < ApplicationController
       if @multichoice.user_answered_correctly?(current_user, checked_options_params[:checked_options].to_a)
         format.html { redirect_to task_path(@multichoice.subtask.task, :layout => get_layout), notice: 'Valitsit oikein!' }
       else
-        format.html { redirect_to task_path(@multichoice.subtask.task, :layout => get_layout), alert: 'Valinnoissa oli vielä virheitä!' }
+        format.html { redirect_to task_path(@multichoice.subtask.task, :layout => get_layout, :multichoice_checked_options => checked_options_params[:checked_options]), alert: 'Valinnoissa oli vielä virheitä!' }
       end
     end
   end
