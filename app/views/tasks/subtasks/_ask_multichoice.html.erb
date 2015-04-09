@@ -20,7 +20,7 @@
                   <% end %>
 
               <% else %>
-                  <% if @multichoice_checked_options.to_a.include? option.id.to_s and option.is_correct_answer != "wrong" %>
+                  <% if @multichoice_checked_options.to_a.include? option.id.to_s and option.is_correct_answer == "required" %>
                       <%= check_box_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s, :checked => true %>
                   <% else %>
                       <%= check_box_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s %>
