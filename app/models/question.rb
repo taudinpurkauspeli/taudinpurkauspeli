@@ -7,9 +7,10 @@ class Question < ActiveRecord::Base
 	belongs_to :interview
 	belongs_to :question_group
 
-	has_attached_file :picture, styles: {
-    	full: '1070>'
-  	}
+  has_attached_file :picture, styles: {
+    full: '1070>',
+    thumb: '100x100#'
+  }
 
 	amoeba do
 		enable
