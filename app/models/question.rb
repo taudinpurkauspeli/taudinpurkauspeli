@@ -6,7 +6,7 @@ class Question < ActiveRecord::Base
 	belongs_to :question_group
 
   has_attached_file :picture, styles: {
-    full: '1070>',
+    original: '1070>',
     thumb: '100x100#'
   }
     	# Validate the attached image is image/jpg, image/png, etc

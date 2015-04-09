@@ -9,7 +9,7 @@ class Option < ActiveRecord::Base
 	end
 
   has_attached_file :picture, styles: {
-    full: '1070>',
+    original: '1070>',
     thumb: '100x100#'
   }
 

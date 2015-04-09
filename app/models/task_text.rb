@@ -5,7 +5,7 @@ class TaskText < ActiveRecord::Base
   belongs_to :subtask
 
   has_attached_file :picture, styles: {
-    full: '1070>',
+    original: '1070>',
     thumb: '100x100#'
   }
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/

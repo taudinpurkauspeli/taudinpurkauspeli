@@ -8,7 +8,7 @@ class Exercise < ActiveRecord::Base
   has_many :hypotheses, through: :exercise_hypotheses
   has_many :checked_hypotheses,  -> { includes(:hypothesis).order('hypotheses.name')}, through: :exercise_hypotheses
   has_attached_file :picture, styles: {
-    full: '1070>',
+    original: '1070>',
     thumb: '100x100#'
   }
 
