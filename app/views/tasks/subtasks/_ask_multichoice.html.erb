@@ -1,17 +1,46 @@
 <%= form_tag("/multichoices/" + subtask.multichoice.id.to_s + "/check_answers", method: "post") do %>
-
+    <table class = "width100">
     <% subtask.multichoice.options.each do |option| %>
-        <div class="row">
-          <div class="col-md-4">
+        <tr>
+          <td class = "multichoice 
+            <% if @multichoice_checked_options.to_a.include? option.id.to_s %>
+              <% if option.is_correct_answer %>
+                correct-answer
+              <% else %>
+                wrong-answer
+              <% end %>
+            <% end %>">
             <% if subtask.multichoice.is_radio_button %>
+              <% if @multichoice_checked_options.to_a.include? option.id.to_s and option.is_correct_answer %>
+                <%= radio_button_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s, :checked => true %>
+              <% else %>
                 <%= radio_button_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s %>
+              <% end %>
+                
             <% else %>
+              <% if @multichoice_checked_options.to_a.include? option.id.to_s and option.is_correct_answer %>
+                <%= check_box_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s, :checked => true %>
+              <% else %>
                 <%= check_box_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s %>
+              <% end %>
             <% end %>
             <%= label_tag "checked_options_" + option.id.to_s, option.content %>
-          </div>
-        </div>
+          </td>
+          <td class = "multichoice 
+            <% if @multichoice_checked_options.to_a.include? option.id.to_s %>
+              <% if option.is_correct_answer %>
+                correct-answer
+              <% else %>
+                wrong-answer
+              <% end %>
+              "><%= option.explanation %>
+            <% else %>
+              ">
+            <% end %>
+          </td>
+        </tr>
     <% end %>
+    </table>
     <br />
     <%= submit_tag("Tarkista", :class => "btn btn-default btn-save widthAuto") unless current_user_is_admin %>
 <% end %>
