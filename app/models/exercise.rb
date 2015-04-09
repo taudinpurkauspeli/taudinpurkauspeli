@@ -1,24 +1,22 @@
 class Exercise < ActiveRecord::Base
   validates :name, presence: true, length: {minimum: 2}
+    # Validate the attached image is image/jpg, image/png, etc
+  validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
+
   after_create :create_anamnesis
 
   has_many :tasks, dependent: :destroy
   has_many :exercise_hypotheses, -> { includes(:hypothesis).order('hypotheses.name')}, dependent: :destroy
   has_many :hypotheses, through: :exercise_hypotheses
   has_many :checked_hypotheses,  -> { includes(:hypothesis).order('hypotheses.name')}, through: :exercise_hypotheses
-
+  has_attached_file :picture, styles: {
+    full: '1070>'
+  }
   amoeba do
     enable
     include_association :exercise_hypotheses
     include_association :tasks
   end
-
-  has_attached_file :picture, styles: {
-    full: '1070>'
-  }
-
-  # Validate the attached image is image/jpg, image/png, etc
-  validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
 
   def get_hypotheses
     return exercise_hypotheses.group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
