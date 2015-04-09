@@ -22,16 +22,22 @@
               <div class="col-md-1">
                 <%= f.check_box :is_correct_answer, :id => "is_correct_answer_" + option.id.to_s %>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <%= f.text_area :content, placeholder: "Vaihtoehto", :id => "content_" + option.id.to_s, :class => 'form-control' %>
 
               </div>
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <%= f.text_area :explanation, placeholder: "Vastausteksti", :id => "explanation_" + option.id.to_s, :class => 'form-control' %>
               </div>
               <div class="col-md-1">
                 <%= f.submit :class => 'btn btn-default btn-save', :id => "save_" + option.id.to_s %>
-
+              </div>
+              <div class="col-md-2">
+                    <%= image_tag option.picture.url(:full) if option.picture.file? %>
+                <div class="field">
+                    <%= f.label :picture %>
+                    <%= f.file_field :picture %>
+                </div>
               </div>
 
               <%= f.hidden_field :option_id, :value => option.id %>
@@ -60,12 +66,18 @@
           <div class="col-md-1">
             <%= f.check_box :is_correct_answer, :value => true %>
           </div>
-          <div class="col-md-5">
+          <div class="col-md-4">
             <%= f.text_area :content, placeholder: "Vaihtoehto", :class => 'form-control' %>
           </div>
-          <div class="col-md-5">
+          <div class="col-md-4">
             <%= f.text_area :explanation, placeholder: "Vastausteksti", :class => 'form-control' %>
           </div>
+          <div class="col-md-2">
+            <div class="field">
+                <%= f.label :picture %>
+                <%= f.file_field :picture %>
+          </div>
+        </div>
           <div class="col-md-1">
             <%= f.submit 'Tallenna', :class => 'btn btn-default btn-save' %>
           </div>
