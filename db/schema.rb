@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409101035) do
+ActiveRecord::Schema.define(version: 20150409101737) do
 
   create_table "asked_questions", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -89,9 +89,9 @@ ActiveRecord::Schema.define(version: 20150409101035) do
     t.integer  "multichoice_id"
     t.string   "content"
     t.string   "explanation"
-    t.integer  "is_correct_answer"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "is_correct_answer", default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "question_groups", force: :cascade do |t|
