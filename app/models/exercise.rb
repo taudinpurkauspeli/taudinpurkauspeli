@@ -1,7 +1,5 @@
 class Exercise < ActiveRecord::Base
   validates :name, presence: true, length: {minimum: 2}
-    # Validate the attached image is image/jpg, image/png, etc
-  validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
 
   after_create :create_anamnesis
 
@@ -13,6 +11,10 @@ class Exercise < ActiveRecord::Base
     full: '1070>',
     thumb: '100x100#'
   }
+
+      # Validate the attached image is image/jpg, image/png, etc
+  validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
+
   amoeba do
     enable
     include_association :exercise_hypotheses

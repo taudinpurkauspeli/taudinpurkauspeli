@@ -1,7 +1,6 @@
 class TaskText < ActiveRecord::Base
   validates :content, presence: true
     # Validate the attached image is image/jpg, image/png, etc
-  validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
 
   belongs_to :subtask
 
@@ -9,6 +8,7 @@ class TaskText < ActiveRecord::Base
     full: '1070>',
     thumb: '100x100#'
   }
+  validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
 
   amoeba do
     enable
