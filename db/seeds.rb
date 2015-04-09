@@ -80,20 +80,20 @@ Multichoice.create!([
   {question: "Rehun käyttökieltovastausvalikko", subtask_id: 14, is_radio_button: false}
 ])
 Option.create!([
-  {multichoice_id: 1, content: "On", explanation: "Oikein, on kyseessä epidemia, koska tapauksia on tavallista enemmän.", is_correct_answer: true},
-  {multichoice_id: 1, content: "Ei", explanation: "Yritä uudelleen!", is_correct_answer: false},
-  {multichoice_id: 1, content: "En osaa sanoa", explanation: "Yritä uudelleen", is_correct_answer: false},
-  {multichoice_id: 2, content: "Otan yhteyden läänineläinlääkäriin, koska epäilen lakisääteisesti vastustettavaa tautia", explanation: "Mieti uudestaan!", is_correct_answer: false},
-  {multichoice_id: 2, content: "Neuvottelen kaiken varalta läänineläinlääkärin kanssa", explanation: "Oikein!", is_correct_answer: true},
-  {multichoice_id: 2, content: "Ei tarvitse ottaa yhteyttä läänineläinlääkäriin", explanation: "Mieti uudestaan!", is_correct_answer: false},
-  {multichoice_id: 3, content: "Heinä", explanation: "Yritä uudestaan. Katso RR- ja AR-lukuja", is_correct_answer: false},
-  {multichoice_id: 3, content: "Juurikasmassa", explanation: "Käyttökielto tälle erälle, koska niillä, jotka söivät tätä rehua oli 32 kertaa suurempi riski kuolla kuin niillä, jotka eivät syöneet (RR). Lisäksi 97 % tätä rehua syöneiden kuolemista olisi voitu poistaa, jos eivät olisi syöneet juuri tätä rehua (AF). Tämä on siis suurin syyllinen kuolemiin.", is_correct_answer: true},
-  {multichoice_id: 3, content: "Kivennäisrehu", explanation: "Yritä uudestaan. Katso RR- ja AR-lukuja", is_correct_answer: false},
-  {multichoice_id: 3, content: "Melassileike", explanation: "Käyttökielto tälle erälle, koska niillä, jotka söivät tätä rehua oli 5 kertaa suurempi riski kuolla kuin niillä, jotka eivät syöneet (RR). Lisäksi 80 % tätä rehua syöneiden kuolemista olisi voitu poistaa, jos eivät olisi syöneet juuri tätä rehua (AF). ", is_correct_answer: true},
-  {multichoice_id: 3, content: "Ohra", explanation: "Yritä uudestaan. Katso RR- ja AR-lukuja", is_correct_answer: false},
-  {multichoice_id: 3, content: "Soijarouhe", explanation: "Yritä uudestaan. Katso RR- ja AR-lukuja", is_correct_answer: false},
-  {multichoice_id: 3, content: "Säilörehu", explanation: "Yritä uudestaan. Katso RR- ja AR-lukuja", is_correct_answer: false},
-  {multichoice_id: 3, content: "Vehnälese", explanation: "Käyttökielto tälle erälle, koska niillä, jotka söivät tätä rehua oli 7 kertaa suurempi riski kuolla kuin niillä, jotka eivät syöneet (RR). Lisäksi 85 % tätä rehua syöneiden kuolemista olisi voitu poistaa, jos eivät olisi syöneet juuri tätä rehua (AF).", is_correct_answer: true}
+  {multichoice_id: 1, content: "On", explanation: "Oikein, on kyseessä epidemia, koska tapauksia on tavallista enemmän.", is_correct_answer: "required"},
+  {multichoice_id: 1, content: "Ei", explanation: "Yritä uudelleen!", is_correct_answer: "wrong"},
+  {multichoice_id: 1, content: "En osaa sanoa", explanation: "Yritä uudelleen", is_correct_answer: "allowed"},
+  {multichoice_id: 2, content: "Otan yhteyden läänineläinlääkäriin, koska epäilen lakisääteisesti vastustettavaa tautia", explanation: "Mieti uudestaan!", is_correct_answer: "wrong"},
+  {multichoice_id: 2, content: "Neuvottelen kaiken varalta läänineläinlääkärin kanssa", explanation: "Oikein!", is_correct_answer: "required"},
+  {multichoice_id: 2, content: "Ei tarvitse ottaa yhteyttä läänineläinlääkäriin", explanation: "Mieti uudestaan!", is_correct_answer: "wrong"},
+  {multichoice_id: 3, content: "Heinä", explanation: "Yritä uudestaan. Katso RR- ja AR-lukuja", is_correct_answer: "wrong"},
+  {multichoice_id: 3, content: "Juurikasmassa", explanation: "Käyttökielto tälle erälle, koska niillä, jotka söivät tätä rehua oli 32 kertaa suurempi riski kuolla kuin niillä, jotka eivät syöneet (RR). Lisäksi 97 % tätä rehua syöneiden kuolemista olisi voitu poistaa, jos eivät olisi syöneet juuri tätä rehua (AF). Tämä on siis suurin syyllinen kuolemiin.", is_correct_answer: "required"},
+  {multichoice_id: 3, content: "Kivennäisrehu", explanation: "Yritä uudestaan. Katso RR- ja AR-lukuja", is_correct_answer: "wrong"},
+  {multichoice_id: 3, content: "Melassileike", explanation: "Käyttökielto tälle erälle, koska niillä, jotka söivät tätä rehua oli 5 kertaa suurempi riski kuolla kuin niillä, jotka eivät syöneet (RR). Lisäksi 80 % tätä rehua syöneiden kuolemista olisi voitu poistaa, jos eivät olisi syöneet juuri tätä rehua (AF). ", is_correct_answer: "required"},
+  {multichoice_id: 3, content: "Ohra", explanation: "Yritä uudestaan. Katso RR- ja AR-lukuja", is_correct_answer: "wrong"},
+  {multichoice_id: 3, content: "Soijarouhe", explanation: "Yritä uudestaan. Katso RR- ja AR-lukuja", is_correct_answer: "wrong"},
+  {multichoice_id: 3, content: "Säilörehu", explanation: "Yritä uudestaan. Katso RR- ja AR-lukuja", is_correct_answer: "wrong"},
+  {multichoice_id: 3, content: "Vehnälese", explanation: "Käyttökielto tälle erälle, koska niillä, jotka söivät tätä rehua oli 7 kertaa suurempi riski kuolla kuin niillä, jotka eivät syöneet (RR). Lisäksi 85 % tätä rehua syöneiden kuolemista olisi voitu poistaa, jos eivät olisi syöneet juuri tätä rehua (AF).", is_correct_answer: "required"}
 ])
 Question.create!([
   {title: "Tapaus on äkillisesti kuollut eläin", content: "Oikein. Tässä tapauksessa kannattaa lukea tähän kaikki kuolleet. Tapausmääritelmään luetellaan kaikki ne oireet, jotka oleellisia ja sitä voi tarkentaa vielä laboratoriotutkimusten jälkeen, mutta tässä pelissä näin ei tehdä. ", required: true, question_group_id: nil, interview_id: 1},
