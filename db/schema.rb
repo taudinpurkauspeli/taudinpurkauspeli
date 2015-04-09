@@ -89,9 +89,9 @@ ActiveRecord::Schema.define(version: 20150409101737) do
     t.integer  "multichoice_id"
     t.string   "content"
     t.string   "explanation"
-    t.integer  "is_correct_answer", default: 0
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.integer  "is_correct_answer", default: 0
   end
 
   create_table "question_groups", force: :cascade do |t|
