@@ -367,6 +367,17 @@ div.separator{
   margin-bottom: 10px;
 }
 
+td.multichoice{
+  width: 50%;
+  padding: 5px;
+}
+td.wrong-answer{
+  background-color: $PaleLightRed;
+}
+td.correct-answer{
+  background-color: $PaleLightGreen;
+}
+
 
 //New anamnesis
 #exercise_anamnesis{

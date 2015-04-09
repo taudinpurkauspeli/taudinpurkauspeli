@@ -14,7 +14,7 @@ describe "Task show page", js:true do
   let!(:multichoice_subtask){FactoryGirl.create(:subtask, task:multichoice_task)}
   let!(:multichoice){FactoryGirl.create(:multichoice, subtask:multichoice_subtask)}
   let!(:option){FactoryGirl.create(:option, multichoice:multichoice)}
-  let!(:option2){FactoryGirl.create(:option, multichoice:multichoice, content: "Ei tykkää", is_correct_answer: false, explanation: "Ei oikea vastaus")}
+  let!(:option2){FactoryGirl.create(:option, multichoice:multichoice, content: "Ei tykkää", is_correct_answer: "wrong", explanation: "Ei oikea vastaus")}
   let!(:option3){FactoryGirl.create(:option, multichoice:multichoice, content: "Ehkä tykkää", explanation: "Melkein oikea vastaus")}
 
   #Radiobutton
@@ -22,8 +22,8 @@ describe "Task show page", js:true do
   let!(:radiobutton_subtask){FactoryGirl.create(:subtask, task:radiobutton_task)}
   let!(:radiobutton){FactoryGirl.create(:radiobutton, subtask:radiobutton_subtask)}
   let!(:option4){FactoryGirl.create(:option, multichoice:radiobutton, content: "Bakteeri")}
-  let!(:option5){FactoryGirl.create(:option, multichoice:radiobutton, content: "Virus", is_correct_answer: false, explanation: "Ei oikea vastaus")}
-  let!(:option6){FactoryGirl.create(:option, multichoice:radiobutton, content: "Joku muu", is_correct_answer: false, explanation: "Melkein oikea vastaus")}
+  let!(:option5){FactoryGirl.create(:option, multichoice:radiobutton, content: "Virus", is_correct_answer: "wrong", explanation: "Ei oikea vastaus")}
+  let!(:option6){FactoryGirl.create(:option, multichoice:radiobutton, content: "Joku muu", is_correct_answer: "wrong", explanation: "Melkein oikea vastaus")}
 
 
   describe "student" do

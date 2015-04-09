@@ -60,7 +60,7 @@ end
 When(/^I fill in option content, explanation and select right answer box$/) do
   fill_in('option_content', with: 'On')
   fill_in('option_explanation', with: 'Epidemia on yleinen.')
-  check 'option_is_correct_answer'
+  select('Pakollinen', from:'option[is_correct_answer]')
 end
 
 
