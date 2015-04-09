@@ -13,7 +13,7 @@ class ChangeOptionIsCorrectAnswerTypeToInteger < ActiveRecord::Migration
     add_column :options, :is_correct_answer, :boolean
 
     Option.reset_column_information
-    Option.all.each { |c| c.update_attribute(:is_correct_answer, c.is_correct_answer_integer) }
+    Option.all.each { |c| c.update_attribute(:is_correct_answer, (c.is_correct_answer_integer == 1 ? true : false)) }
     remove_column :options, :is_correct_answer_integer
   end
 
