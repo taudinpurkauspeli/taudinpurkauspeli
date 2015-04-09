@@ -1,2 +1,2 @@
-<%= image_tag subtask.task_text.picture.url(:full) if subtask.task_text.picture.file?  %>
+<%= image_tag subtask.task_text.picture.url(:original) if subtask.task_text.picture.file?  %>
 <p><%= subtask.task_text.content %></p>

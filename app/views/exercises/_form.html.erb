@@ -16,7 +16,7 @@
       <%= f.text_area :name, placeholder: "Sisältö", :class => 'width100', :rows => '1' %>
     </div>
 
-    <%= image_tag @exercise.picture.url(:full) if @exercise.picture.file? %>
+    <%= image_tag @exercise.picture.url(:original) if @exercise.picture.file? %>
     <div class="field">
       <%= f.label :picture %>
       <%= f.file_field :picture %>

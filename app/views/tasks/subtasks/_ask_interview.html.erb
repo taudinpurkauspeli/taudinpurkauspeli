@@ -20,7 +20,7 @@
             <% else %>
                 <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
                 <div class="collapse" id="collapseQuestionContent<%= question.id%>" >
-                  <%= image_tag question.picture.url(:full) if @question.picture.file? %>
+                  <%= image_tag question.picture.url(:original) if @question.picture.file? %>
                   <p><%= question.content %></p>
                 </div>
             <%end %>

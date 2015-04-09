@@ -22,7 +22,7 @@
                     </div>
                   </div>
                   <div class="collapse" id="collapseQuestionContent<%= question.id%>" >
-                    <%= image_tag question.picture.url(:full) if question.picture.file? %>
+                    <%= image_tag question.picture.url(:original) if question.picture.file? %>
                     <p><%= question.content %></p>
                   </div>
               <%end %>
