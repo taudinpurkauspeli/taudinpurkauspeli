@@ -91,7 +91,7 @@ FactoryGirl.define do
     multichoice_id nil
     content "Tykkää"
     explanation "Juuri oikea vastaus"
-    is_correct_answer true
+    is_correct_answer "required"
   end
 
   factory :question do
