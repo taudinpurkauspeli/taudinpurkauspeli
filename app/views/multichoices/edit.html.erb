@@ -20,7 +20,7 @@
           <%= form_for(option) do |f| %>
               <%= f.label :is_correct_answer%><br>
               <div class="col-md-1">
-                <%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [answer[0].humanize, answer[0]] }, selected: option.is_correct_answer), class: "form-control", :id => "is_correct_answer_" + option.id.to_s %>
+                <%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [t("activerecord.attributes.option.is_correct_answers.#{answer[0]}"), answer[0]] }, selected: option.is_correct_answer), class: "form-control", :id => "is_correct_answer_" + option.id.to_s %>
               </div>
               <div class="col-md-5">
                 <%= f.text_area :content, placeholder: "Vaihtoehto", :id => "content_" + option.id.to_s, :class => 'form-control' %>
@@ -58,7 +58,7 @@
       <%= form_for(@new_option) do |f| %>
           <%= f.label :is_correct_answer%><br>
           <div class="col-md-1">
-            <%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [answer[0].humanize, answer[0]] }, selected: @new_option.is_correct_answer), class: "form-control" %>
+            <%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [t("activerecord.attributes.option.is_correct_answers.#{answer[0]}"), answer[0]] }, selected: @new_option.is_correct_answer), class: "form-control" %>
           </div>
           <div class="col-md-5">
             <%= f.text_area :content, placeholder: "Vaihtoehto", :class => 'form-control' %>
