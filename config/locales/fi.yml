@@ -85,7 +85,7 @@ fi:
         explanation: "Vastausteksti"
         is_correct_answer: "Oikea vastaus"
         is_correct_answers:
-          allowed: "Oikein"
+          allowed: "Sallittu"
           required: "Pakollinen"
           wrong: "Väärin"
       question:

@@ -80,7 +80,7 @@ describe "Duplicate exercise page" do
         expect(Hypothesis.count).to eq(2)
       end
 
-      it "hypotheses" do
+      it "users" do
         expect(User.count).to eq(2)
       end
 
