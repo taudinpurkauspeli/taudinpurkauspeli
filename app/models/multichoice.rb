@@ -18,4 +18,6 @@ class Multichoice < ActiveRecord::Base
 			return false
 		end
 	end
+
+	
 end

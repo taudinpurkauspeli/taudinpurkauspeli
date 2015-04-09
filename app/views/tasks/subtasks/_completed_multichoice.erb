@@ -1,35 +1,39 @@
 <table class = "width100">
-<tr>
-  <td class="multichoice">
-    <b>Vaihtoehto</b>
-  </td>
+  <tr>
+    <td class="multichoice">
+      <b>Vaihtoehto</b>
+    </td>
 
-  <td class="multichoice">
-    <b>Selitys</b>
-  </td>
+    <td class="multichoice">
+      <b>Selitys</b>
+    </td>
 
-</tr>
+  </tr>
 
-<% subtask.multichoice.options.each do |option| %>
-    <tr>
-      <td class="multichoice 
-      <% if option.is_correct_answer %>
-        correct-answer
-      <% else %>
-        wrong-answer
-      <% end %>
+  <% subtask.multichoice.options.each do |option| %>
+      <tr>
+        <td class="multichoice
+              <% if option.is_correct_answer == "required" %>
+                correct-answer
+              <% elsif option.is_correct_answer == "allowed" %>
+
+              <% elsif option.is_correct_answer == "wrong" %>
+                wrong-answer
+              <% end %>
       ">
-        <%= option.content %>
-      </td>
-      <td class="multichoice 
-      <% if option.is_correct_answer %>
-        correct-answer
-      <% else %>
-        wrong-answer
-      <% end %>
+          <%= option.content %>
+        </td>
+        <td class="multichoice
+              <% if option.is_correct_answer == "required" %>
+                correct-answer
+              <% elsif option.is_correct_answer == "allowed" %>
+
+              <% elsif option.is_correct_answer == "wrong" %>
+                wrong-answer
+              <% end %>
       ">
-        <%= option.explanation %>
-      </td>
-    </tr>
-<% end %>
+          <%= option.explanation %>
+        </td>
+      </tr>
+  <% end %>
 </table>
