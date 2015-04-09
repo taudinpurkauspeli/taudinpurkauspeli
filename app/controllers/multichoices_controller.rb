@@ -20,6 +20,7 @@ class MultichoicesController < ApplicationController
   def edit
     @multichoice = Multichoice.find(params[:id])
     @new_option = Option.new
+    @is_correct_answers = Option.is_correct_answers
 
     set_view_layout
   end
