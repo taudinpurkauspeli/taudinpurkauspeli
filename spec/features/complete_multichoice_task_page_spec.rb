@@ -78,16 +78,25 @@ describe "Multichoice page for student", js:true do
         }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content 'Valinnoissa oli vielä virheitä!'
+        expect(page).to have_content option.explanation
+        expect(page).to have_content option2.explanation
+        expect(page).to have_content option3.explanation
+        expect(page).not_to have_content option4.explanation
       end
 
       it "when not all right options are selected" do
         check 'checked_options_1'
+        check 'checked_options_4'
 
         expect {
           click_and_wait('Tarkista')
         }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content 'Valinnoissa oli vielä virheitä!'
+        expect(page).to have_content option.explanation
+        expect(page).to have_content option4.explanation
+        expect(page).not_to have_content option2.explanation
+        expect(page).not_to have_content option3.explanation
       end
     end
 
@@ -105,10 +114,12 @@ describe "Multichoice page for student", js:true do
         expect(page).to have_content option.content
         expect(page).to have_content option2.content
         expect(page).to have_content option3.content
+        expect(page).to have_content option4.content
 
         expect(page).to have_content option.explanation
         expect(page).to have_content option2.explanation
         expect(page).to have_content option3.explanation
+        expect(page).to have_content option4.explanation
       end
     end
   end
