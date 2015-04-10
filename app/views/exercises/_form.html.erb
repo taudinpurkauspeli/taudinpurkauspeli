@@ -18,7 +18,7 @@
 
     <%= image_tag @exercise.image.picture.url(:original) unless @exercise.image.nil? %>
     <div class="field">
-      <%=f.select :image, options_from_collection_for_select(Image.all, :id, :name, selected: :id), { :prompt => 'Valitse kuva' } %>
+      <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: :image), { :prompt => 'Valitse kuva' } %>
     </div>
 
     <div class="field">

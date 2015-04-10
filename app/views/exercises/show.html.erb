@@ -2,7 +2,7 @@
 
 <h1> Case: <%= @exercise.name %> </h1>
 
-<%= image_tag @exercise.picture.url(:original) if @exercise.picture.file? %>
+<%= image_tag @exercise.image.picture.url(:original) unless @exercise.image.nil? %>
 
 <% if @exercise.hidden? %>
     <p>Tämä case on piilotettu opiskelijoilta. <%= link_to 'Muokkaa', edit_exercise_path(@exercise) %> casea tehdäksesi siitä näkyvä.</p>
