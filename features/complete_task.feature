@@ -18,6 +18,14 @@ Feature: Complete task feature
     And I check the right options
     Then the task can be completed by clicking the button "Tarkista"
 
+  Scenario: Student can complete a multichoice task with right and some allowed options selected
+    Given I have logged in as a student
+    And some multichoice tasks have been added to case
+    When I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
+    And I choose a multichoice task "Lääkitse hevonen"
+    And I check the right and some allowed options
+    Then the task can be completed by clicking the button "Tarkista"
+
   Scenario: Student cannot complete a multichoice task with wrong options selected
     Given I have logged in as a student
     And some multichoice tasks have been added to case
@@ -26,6 +34,7 @@ Feature: Complete task feature
     And I check wrong options
     Then the task cannot be completed by clicking the button "Tarkista"
     And I should see the message "Valinnoissa oli vielä virheitä!"
+    And I should see the explanations for wrong options
 
   Scenario: Student cannot complete a multichoice task with no options selected
     Given I have logged in as a student
@@ -44,6 +53,7 @@ Feature: Complete task feature
     And I don't check all right options
     Then the task cannot be completed by clicking the button "Tarkista"
     And I should see the message "Valinnoissa oli vielä virheitä!"
+    And I should see the explanations for checked options
 
   Scenario: Student can complete a radio button task from a task list
     Given I have logged in as a student

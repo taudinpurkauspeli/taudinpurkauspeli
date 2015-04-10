@@ -2,7 +2,7 @@ module CucumberHelpers
 
   def create_exercises
     Exercise.create name:"Lihanautakuolemat", anamnesis:"Lihanautoja on menehtynyt lukuisia"
-    Exercise.create name:"Heikko hevonen", anamnesis:"Hevosella on heikot polvet"  
+    Exercise.create name:"Heikko hevonen", anamnesis:"Hevosella on heikot polvet"
   end
 
   def create_hypothesis_groups
@@ -37,7 +37,8 @@ module CucumberHelpers
     FactoryGirl.create(:multichoice, subtask_id: 2, question:"Mitä lääkkeitä käytät?")
     FactoryGirl.create(:option, multichoice_id: 2, content: "Bakteerilääke")
     FactoryGirl.create(:option, multichoice_id: 2, content: "Astmalääke", is_correct_answer: "wrong", explanation: "Ei oikea vastaus")
-    FactoryGirl.create(:option, multichoice_id: 2, content: "Kurkkulääke", explanation: "Melkein oikea vastaus")
+    FactoryGirl.create(:option, multichoice_id: 2, content: "Superbakteerilääke", explanation: "Toinen oikea vastaus")
+    FactoryGirl.create(:option, multichoice_id: 2, content: "Kurkkulääke", is_correct_answer: "allowed", explanation: "Melkein oikea vastaus")
   end
 
   def create_radiobuttons
@@ -46,7 +47,7 @@ module CucumberHelpers
 
     FactoryGirl.create(:subtask, task_id: 4)
     FactoryGirl.create(:radiobutton, subtask_id: 2, question:"Mitä lääkettä käytät?")
-    FactoryGirl.create(:option, multichoice_id: 2, content: "Bakteerilääke", is_correct_answer: "wrong", explanation: "Ei oikein")
+    FactoryGirl.create(:option, multichoice_id: 2, content: "Bakteerilääke", is_correct_answer: "allowed", explanation: "Melkein oikein")
     FactoryGirl.create(:option, multichoice_id: 2, content: "Astmalääke", is_correct_answer: "wrong", explanation: "Ei oikea vastaus")
     FactoryGirl.create(:option, multichoice_id: 2, content: "Kurkkulääke", explanation: "Oikea vastaus")
   end
@@ -68,11 +69,11 @@ module CucumberHelpers
   end
 
   def complete_task(task, user)
-   CompletedTask.create user:user, task:task
+    CompletedTask.create user:user, task:task
   end
 
   def complete_subtask(subtask, user)
-   CompletedSubtask.create user:user, subtask:subtask
+    CompletedSubtask.create user:user, subtask:subtask
   end
 
   def go_to_case(exercise)

@@ -41,6 +41,12 @@ When(/^I check the right options$/) do
   check 'checked_options_3'
 end
 
+When(/^I check the right and some allowed options$/) do
+  check 'checked_options_1'
+  check 'checked_options_3'
+  check 'checked_options_4'
+end
+
 When(/^I choose the right option$/) do
   choose 'checked_options_3'
 end
@@ -63,6 +69,7 @@ end
 
 When(/^I don't check all right options$/) do
   check 'checked_options_3'
+  check 'checked_options_4'
 end
 
 
@@ -82,4 +89,15 @@ end
 
 Then(/^I should see the message "(.*?)"$/) do |arg1|
   expect(page).to have_content arg1
+end
+
+Then(/^I should see the explanations for wrong options$/) do
+  expect(page).to have_content "Juuri oikea vastaus"
+  expect(page).to have_content "Ei oikea vastaus"
+  expect(page).to have_content "Toinen oikea vastaus"
+end
+
+Then(/^I should see the explanations for checked options$/) do
+  expect(page).to have_content "Toinen oikea vastaus"
+  expect(page).to have_content "Melkein oikea vastaus"
 end
