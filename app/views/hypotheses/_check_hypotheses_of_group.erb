@@ -1,34 +1,34 @@
 
-  <% @exercise.get_unchecked_hypotheses_for(current_user)[group.id].to_a.each do |unchecked_hypothesis| %>
+<% @exercise.get_unchecked_hypotheses_for(current_user)[group.id].to_a.each do |unchecked_hypothesis| %>
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-md-8">
         <%= form_for(@new_checked_hypothesis) do |f| %>
-          <%= f.hidden_field :exercise_hypothesis_id, :value => unchecked_hypothesis.id %>
-          <%= f.hidden_field :user_id, :value => current_user.id %>
-          <%= f.submit unchecked_hypothesis.hypothesis.name, :class => 'btn btn-default btn-save multiline' %>
+            <%= f.hidden_field :exercise_hypothesis_id, :value => unchecked_hypothesis.id %>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+            <%= f.submit unchecked_hypothesis.hypothesis.name, :class => 'btn btn-default btn-save multiline' %>
         <% end %>
       </div>
       <% if @last_clicked_hypothesis_id == unchecked_hypothesis.id.to_s %>
-        <div class = "col-md-1">
-          <div class="alert-unchecked-hypothesis removable"><%= alert %></div>
-        </div>
+          <div class = "col-md-1">
+            <div class="alert-unchecked-hypothesis removable"><%= alert %></div>
+          </div>
       <% end %>
-    </div>  
-  <% end %>
+    </div>
+<% end %>
 
 <%# add checked hypothesis back to case (unchecked state) for normal user %>
 
-  <% @exercise.get_checked_hypotheses_for(current_user)[group.id].to_a.each do |checked_hypothesis| %>
+<% @exercise.get_checked_hypotheses_for(current_user)[group.id].to_a.each do |checked_hypothesis| %>
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-md-8">
         <%= button_to checked_hypothesis.hypothesis.name, checked_hypothesis, method: :delete, :class => 'btn btn-default btn-checked multiline', :id => "checked_hypothesis_"+checked_hypothesis.id.to_s %>
       </div>
       <% if @last_clicked_hypothesis_id == checked_hypothesis.exercise_hypothesis.id.to_s %>
-        <div class = "col-md-1">
-          <div class="info-checked-hypothesis removable"><%= checked_hypothesis.get_explanation %></div>
-        </div>
+          <div class = "col-md-1">
+            <div class="info-checked-hypothesis removable"><%= checked_hypothesis.get_explanation %></div>
+          </div>
       <% end %>
     </div>
-  <% end %>
+<% end %>
