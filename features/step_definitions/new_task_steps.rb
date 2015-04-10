@@ -91,7 +91,7 @@ Then(/^radiobutton should be in the database$/) do
 end
 
 Then(/^option should be in the database$/) do
-  expect(Option.count).to eq(4)
+  expect(Option.count).to eq(5)
   expect(Option.last.content).to eq('Soitan puhelimella')
   end
 
