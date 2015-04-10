@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 
-<%= image_tag @image.picture.url(:full) if @image.picture.file? %>
+<%= image_tag @image.picture.url(:original) if @image.picture.file? %>
 
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>
