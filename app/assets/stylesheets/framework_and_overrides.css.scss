@@ -315,6 +315,10 @@ li.active>a{
   border-bottom: 7px solid transparent;
 }
 
+.collapse-answer{
+  border: 1px solid black;
+}
+
 //***************
 //*   Inputs    *
 //***************
@@ -371,6 +375,7 @@ td.multichoice{
   width: 50%;
   padding: 5px;
 }
+
 td.wrong-answer{
   background-color: $PaleLightRed;
 }
@@ -395,6 +400,9 @@ td.correct-answer{
 }
 .width100{
   width: 100%;
+}
+.width95{
+  width: 95%;
 }
 .height50{
   height: 50%;
