@@ -16,10 +16,9 @@
       <%= f.text_area :name, placeholder: "Sisältö", :class => 'width100', :rows => '1' %>
     </div>
 
-    <%= image_tag @exercise.picture.url(:original) if @exercise.picture.file? %>
+    <%= image_tag @exercise.image.picture.url(:original) unless @exercise.image.nil? %>
     <div class="field">
-      <%= f.label :picture %>
-      <%= f.file_field :picture %>
+      <%=f.select :image, options_from_collection_for_select(Image.all, :id, :name, selected: :id), { :prompt => 'Valitse kuva' } %>
     </div>
 
     <div class="field">
