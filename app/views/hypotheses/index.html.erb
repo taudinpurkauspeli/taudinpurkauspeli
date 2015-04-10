@@ -5,7 +5,11 @@
 <%# headers %>
 <div class="row">
   <div class="col-md-5">
+    <% if current_user_is_admin %>
     <h2>Casen <%= @exercise.name %> työhypoteesit</h2>
+    <% else %>
+    <h2>Valitse poissuljettavat työhypoteesit<h2>
+    <% end %>
   </div>
   <div class="col-md-2">
     <%# spacer %>
