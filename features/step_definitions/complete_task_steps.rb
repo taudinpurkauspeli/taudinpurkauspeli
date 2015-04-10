@@ -52,6 +52,10 @@ When(/^I choose the right option$/) do
 end
 
 When(/^I choose a wrong option$/) do
+  choose 'checked_options_2'
+end
+
+When(/^I choose an allowed option$/) do
   choose 'checked_options_1'
 end
 
@@ -95,9 +99,24 @@ Then(/^I should see the explanations for wrong options$/) do
   expect(page).to have_content "Juuri oikea vastaus"
   expect(page).to have_content "Ei oikea vastaus"
   expect(page).to have_content "Toinen oikea vastaus"
+  expect(page).not_to have_content "Melkein oikea vastaus"
 end
 
 Then(/^I should see the explanations for checked options$/) do
   expect(page).to have_content "Toinen oikea vastaus"
   expect(page).to have_content "Melkein oikea vastaus"
+  expect(page).not_to have_content "Juuri oikea vastaus"
+  expect(page).not_to have_content "Ei oikea vastaus"
+end
+
+Then(/^I should see the explanation for wrong option$/) do
+  expect(page).to have_content "Ei oikea vastaus"
+  expect(page).not_to have_content "Melkein oikein"
+  expect(page).not_to have_content "Oikea vastaus"
+end
+
+Then(/^I should see the explanation for allowed option$/) do
+  expect(page).to have_content "Melkein oikein"
+  expect(page).not_to have_content "Ei oikea vastaus"
+  expect(page).not_to have_content "Oikea vastaus"
 end

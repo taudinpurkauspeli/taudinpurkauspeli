@@ -71,6 +71,17 @@ Feature: Complete task feature
     And I choose a wrong option
     Then the task cannot be completed by clicking the button "Tarkista"
     And I should see the message "Valinnoissa oli vielä virheitä!"
+    And I should see the explanation for wrong option
+
+  Scenario: Student cannot complete a radio button task with allowed option selected
+    Given I have logged in as a student
+    And some radiobutton tasks have been added to case
+    When I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
+    And I choose a radiobutton task "Lääkitse hevonen"
+    And I choose an allowed option
+    Then the task cannot be completed by clicking the button "Tarkista"
+    And I should see the message "Valinnoissa oli vielä virheitä!"
+    And I should see the explanation for allowed option
 
   Scenario: Student cannot complete a radio button task with no option selected
     Given I have logged in as a student
