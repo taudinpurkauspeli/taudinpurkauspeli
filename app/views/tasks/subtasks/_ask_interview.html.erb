@@ -16,14 +16,14 @@
 
                 <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
                     <%= hidden_field_tag 'question_id', question.id %>
-                    <%= submit_tag(question.title, :class => "btn btn-default width95 floatRight") unless current_user_is_admin %>
+                    <%= submit_tag(question.title, :class => "btn btn-default multiline width95 floatRight") unless current_user_is_admin %>
                 <% end %>
 
             <% else %>
-                <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
+                <input class='btn btn-default btn-hypothesis-group multiline width95 floatRight <%= "collapse-answer-right" if question.required == true %>' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
                 </td>
               <td class="multichoice">
-                <div class="collapse collapse-answer" id="collapseQuestionContent<%= question.id%>" >
+                <div class='collapse collapse-answer <%= "collapse-answer-right" if question.required == true %>' id="collapseQuestionContent<%= question.id%>" >
                   <p><%= question.content %></p>
                 </div>
             <%end %>
@@ -40,13 +40,13 @@
         <% if !current_user.has_asked_question?(question) %>
             <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
                 <%= hidden_field_tag 'question_id', question.id %>
-                <%= submit_tag(question.title, :class => "btn btn-default width100") unless current_user_is_admin %>
+                <%= submit_tag(question.title, :class => "btn btn-default multiline width100") unless current_user_is_admin %>
             <% end %>
         <% else %>
-            <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
+            <input class='btn btn-default btn-hypothesis-group multiline <%= "collapse-answer-right" if question.required == true %>' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
           </td>
           <td class="multichoice">
-            <div class="collapse collapse-answer" id="collapseQuestionContent<%= question.id%>" >
+            <div class='collapse collapse-answer <%= "collapse-answer-right" if question.required == true %>' id="collapseQuestionContent<%= question.id%>" >
               <p><%= question.content %></p>
             </div>
         <%end %>
