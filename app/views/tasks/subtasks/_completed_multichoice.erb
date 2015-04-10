@@ -15,7 +15,7 @@
         <%= option.content %>
       </div>
       <div class="col-md-8">
-        <%= image_tag option.picture.url(:original) if option.picture.file? %>
+                <%= image_tag option.image.picture.url(:original) unless option.image.nil? %>
         <%= option.explanation %>
       </div>
     </div>

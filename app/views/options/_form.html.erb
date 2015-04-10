@@ -12,9 +12,9 @@
     <% end %>
     <p>ALSLLASLS</p>
 
+    <%= image_tag @option.image.picture.url(:thumb) unless @option.image.nil? %>
     <div class="field">
-      <%= f.label :picture %>
-      <%= f.file_field :picture %>
+      <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: @option.image), { :prompt => 'Valitse kuva' } %>
     </div>
 
     <div class="field">

@@ -70,7 +70,7 @@ class OptionsController < ApplicationController
   end
   # Never trust parameters from the scary internet, only allow the white list through.
   def option_params
-    params.require(:option).permit(:content, :is_correct_answer, :explanation, :multichoice_id, :picture )
+    params.require(:option).permit(:content, :is_correct_answer, :explanation, :multichoice_id, :image_id )
   end
   # Unchecks other options when updated option is corrent answer
   def uncheck_other_options(option)
