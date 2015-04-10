@@ -16,8 +16,8 @@
       <%= f.text_area :content, placeholder: "Sisältö", :class => 'form-control', :rows => '10' %>
     </div>
     <div class="field">
-      <%= f.label :picture %>
-      <%= f.file_field :picture %>
+      <%= image_tag @task_text.image.picture.url(:thumb) unless @task_text.image.nil? %>
+      <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: @task_text.image), { :prompt => 'Valitse kuva' } %>
     </div>
     <br>
 
