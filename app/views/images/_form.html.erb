@@ -11,6 +11,12 @@
     </div>
   <% end %>
 
+  <%= image_tag @image.image.url(:thumb) if @image.image.file? %>
+    <div class="field">
+      <%= f.label :image %>
+      <%= f.file_field :image %>
+    </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
