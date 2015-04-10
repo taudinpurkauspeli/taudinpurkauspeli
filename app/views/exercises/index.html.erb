@@ -27,10 +27,12 @@
 <% end %>
 <div class="row">
   <div class="col-md-5">
-
     <%= button_to '+ Luo uusi case', new_exercise_path, :class => 'btn btn-default btn-exercise btn-save', :method => :get if current_user_is_admin%>
+        <br><%= button_to 'Kuvapankki', images_path, :class => 'btn btn-default btn-exercise btn-save', :method => :get if current_user_is_admin%> 
   </div>
-</div>
+
+
+      </div>
 <br />
 <br />
 
