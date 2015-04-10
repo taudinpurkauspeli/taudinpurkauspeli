@@ -87,7 +87,7 @@ Then(/^the page should show the information about completed radiobutton$/) do
 	expect(page).to have_content "Bakteerilääke"
 	expect(page).to have_content "Astmalääke"
 	expect(page).to have_content "Kurkkulääke"
-	expect(page).to have_content "Ei oikein"
+	expect(page).to have_content "Melkein oikein"
 	expect(page).to have_content "Ei oikea vastaus"
 	expect(page).to have_content "Oikea vastaus"
 end

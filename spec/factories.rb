@@ -109,4 +109,9 @@ FactoryGirl.define do
     subtask_id nil
     title "Omistajan haastattelu"
   end
+
+  factory :asked_question do
+    user_id nil
+    question_id nil
+  end
 end
