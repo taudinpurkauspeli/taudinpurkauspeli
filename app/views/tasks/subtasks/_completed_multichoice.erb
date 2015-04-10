@@ -10,13 +10,13 @@
 </div>
 
 <% subtask.multichoice.options.each do |option| %>
-    <div class="row">
-      <div class="col-md-4">
-        <%= option.content %>
-      </div>
-      <div class="col-md-8">
-                <%= image_tag option.image.picture.url(:original) unless option.image.nil? %>
-        <%= option.explanation %>
-      </div>
-    </div>
+<div class="row">
+  <div class="col-md-4">
+    <%= option.content %>
+  </div>
+  <div class="col-md-8">
+    <%= image_tag option.image.picture.url(:original) unless option.image.nil? %>
+    <%= option.explanation %>
+  </div>
+</div>
 <% end %>
