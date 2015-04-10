@@ -41,7 +41,7 @@
         <% else %>
             <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
             <div class="collapse" id="collapseQuestionContent<%= question.id%>" >
-              <%= "TODO insert image here" %>
+              <%= image_tag question.image.picture.url(:original) unless question.image.nil? %>
               <p><%= question.content %></p>
             </div>
         <%end %>

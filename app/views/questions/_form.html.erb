@@ -16,10 +16,8 @@
       <%= f.text_field :title %>
     </div>
     <br>
-    <div class="field">
-      <%= f.label :picture %>
-      <%= f.file_field :picture %>
-    </div>
+      <%= image_tag @question.image.picture.url(:thumb) unless @question.image.nil? %>
+      <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: @question.image), { :prompt => 'Valitse kuva' } %>
     <br>
 
     <div class="field">
