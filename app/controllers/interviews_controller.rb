@@ -56,7 +56,7 @@ class InterviewsController < ApplicationController
 		current_user.ask_question(Question.find(question_params[:question_id]))
 
 		respond_to do |format|
-			format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout) }
+			format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout, :last_clicked_question_id => question_params[:question_id]) }
 		end
 	end
 

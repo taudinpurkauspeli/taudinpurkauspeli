@@ -41,6 +41,7 @@ class TasksController < ApplicationController
     end
 
     @multichoice_checked_options = params[:multichoice_checked_options].to_a
+    @last_clicked_question_id = params[:last_clicked_question_id]
 
     @subtasks = @task.subtasks
     @new_completed_task = CompletedTask.new
