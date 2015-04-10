@@ -12,6 +12,12 @@
   <% end %>
 
   <%= image_tag @image.picture.url(:thumb) if @image.picture.file? %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
     <div class="field">
       <%= f.label :picture %>
       <%= f.file_field :picture %>
