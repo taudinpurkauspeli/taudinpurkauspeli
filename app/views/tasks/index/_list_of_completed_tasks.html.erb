@@ -2,12 +2,10 @@
 <h3>Suoritetut toimenpiteet</h3>
 <br />
 
-<% @tasks.each do |task| %>
-    <% if current_user.has_completed?(task) %>
-        <div class="row">
-          <div class="col-md-5">
-            <%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task', :form_class => "form-completed-task" %>
-          </div>
-        </div>
-    <% end %>
+<% @completed_tasks.each do |task| %>
+    <div class="row">
+      <div class="col-md-5">
+        <%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task', :form_class => "form-completed-task" %>
+      </div>
+    </div>
 <% end %>
