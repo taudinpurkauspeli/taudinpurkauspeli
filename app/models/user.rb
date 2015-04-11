@@ -97,5 +97,13 @@ class User < ActiveRecord::Base
     return !asked_questions.where(question:question).empty?
   end
 
+  def has_checked_hypothesis?(exercise_hypothesis)
+    return !checked_hypotheses.where(exercise_hypothesis:exercise_hypothesis).empty?
+  end
+
+  def get_checked_hypothesis(exercise_hypothesis)
+    return checked_hypotheses.where(exercise_hypothesis:exercise_hypothesis).first
+  end
+
 
 end
