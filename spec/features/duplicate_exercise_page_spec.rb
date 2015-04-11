@@ -23,7 +23,7 @@ describe "Duplicate exercise page" do
   let!(:multichoice_subtask){FactoryGirl.create(:subtask, task_id:multichoice_task.id)}
   let!(:multichoice){FactoryGirl.create(:multichoice, subtask_id:multichoice_subtask.id)}
   let!(:option){FactoryGirl.create(:option, multichoice_id:multichoice.id)}
-  let!(:option2){FactoryGirl.create(:option, multichoice_id:multichoice.id, content: "Ei tykkää", is_correct_answer: false, explanation: "Ei oikea vastaus")}
+  let!(:option2){FactoryGirl.create(:option, multichoice_id:multichoice.id, content: "Ei tykkää", is_correct_answer: "wrong", explanation: "Ei oikea vastaus")}
   let!(:option3){FactoryGirl.create(:option, multichoice_id:multichoice.id, content: "Ehkä tykkää", explanation: "Melkein oikea vastaus")}
 
   #Interview task
@@ -80,7 +80,7 @@ describe "Duplicate exercise page" do
         expect(Hypothesis.count).to eq(2)
       end
 
-      it "hypotheses" do
+      it "users" do
         expect(User.count).to eq(2)
       end
 

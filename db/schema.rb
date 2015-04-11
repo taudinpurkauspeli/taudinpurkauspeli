@@ -96,10 +96,16 @@ ActiveRecord::Schema.define(version: 20150410113855) do
     t.integer  "multichoice_id"
     t.string   "content"
     t.string   "explanation"
+<<<<<<< HEAD
     t.boolean  "is_correct_answer"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "image_id"
+=======
+    t.integer  "is_correct_answer", default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+>>>>>>> development
   end
 
   create_table "question_groups", force: :cascade do |t|

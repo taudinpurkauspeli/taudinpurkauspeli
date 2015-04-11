@@ -40,6 +40,8 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
 
+    @multichoice_checked_options = params[:multichoice_checked_options].to_a
+
     @subtasks = @task.subtasks
     @new_completed_task = CompletedTask.new
     @new_asked_question = AskedQuestion.new

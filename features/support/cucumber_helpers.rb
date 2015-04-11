@@ -36,7 +36,7 @@ module CucumberHelpers
     FactoryGirl.create(:subtask, task_id: 4)
     FactoryGirl.create(:multichoice, subtask_id: 2, question:"Mitä lääkkeitä käytät?")
     FactoryGirl.create(:option, multichoice_id: 2, content: "Bakteerilääke")
-    FactoryGirl.create(:option, multichoice_id: 2, content: "Astmalääke", is_correct_answer: false, explanation: "Ei oikea vastaus")
+    FactoryGirl.create(:option, multichoice_id: 2, content: "Astmalääke", is_correct_answer: "wrong", explanation: "Ei oikea vastaus")
     FactoryGirl.create(:option, multichoice_id: 2, content: "Kurkkulääke", explanation: "Melkein oikea vastaus")
   end
 
@@ -46,8 +46,8 @@ module CucumberHelpers
 
     FactoryGirl.create(:subtask, task_id: 4)
     FactoryGirl.create(:radiobutton, subtask_id: 2, question:"Mitä lääkettä käytät?")
-    FactoryGirl.create(:option, multichoice_id: 2, content: "Bakteerilääke", is_correct_answer: false, explanation: "Ei oikein")
-    FactoryGirl.create(:option, multichoice_id: 2, content: "Astmalääke", is_correct_answer: false, explanation: "Ei oikea vastaus")
+    FactoryGirl.create(:option, multichoice_id: 2, content: "Bakteerilääke", is_correct_answer: "wrong", explanation: "Ei oikein")
+    FactoryGirl.create(:option, multichoice_id: 2, content: "Astmalääke", is_correct_answer: "wrong", explanation: "Ei oikea vastaus")
     FactoryGirl.create(:option, multichoice_id: 2, content: "Kurkkulääke", explanation: "Oikea vastaus")
   end
 
