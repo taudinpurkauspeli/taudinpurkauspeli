@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409101737) do
+ActiveRecord::Schema.define(version: 20150410113855) do
 
   create_table "asked_questions", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -48,14 +48,11 @@ ActiveRecord::Schema.define(version: 20150409101737) do
 
   create_table "exercises", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text     "anamnesis"
     t.boolean  "hidden"
-    t.string   "picture_file_name"
-    t.string   "picture_content_type"
-    t.integer  "picture_file_size"
-    t.datetime "picture_updated_at"
+    t.integer  "image_id"
   end
 
   create_table "hypotheses", force: :cascade do |t|
@@ -68,6 +65,16 @@ ActiveRecord::Schema.define(version: 20150409101737) do
 
   create_table "hypothesis_groups", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+    t.string   "name"
   end
 
   create_table "interviews", force: :cascade do |t|
@@ -91,6 +98,7 @@ ActiveRecord::Schema.define(version: 20150409101737) do
     t.string   "explanation"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.integer  "image_id"
     t.integer  "is_correct_answer", default: 0
   end
 
@@ -109,6 +117,7 @@ ActiveRecord::Schema.define(version: 20150409101737) do
     t.datetime "updated_at",        null: false
     t.integer  "question_group_id"
     t.integer  "interview_id"
+    t.integer  "image_id"
   end
 
   create_table "subtasks", force: :cascade do |t|
@@ -123,6 +132,7 @@ ActiveRecord::Schema.define(version: 20150409101737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "subtask_id"
+    t.integer  "image_id"
   end
 
   create_table "tasks", force: :cascade do |t|

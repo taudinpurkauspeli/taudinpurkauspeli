@@ -20,10 +20,12 @@
                 <% end %>
 
             <% else %>
+            <%# TODO this should be refactored to make sense %>
                 <input class='btn btn-default btn-hypothesis-group multiline width95 floatRight <%= "collapse-answer-right" if question.required == true %>' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
                 </td>
               <td class="multichoice">
                 <div class='collapse <%= "in" if @last_clicked_question_id == question.id.to_s %> collapse-answer <%= "collapse-answer-right" if question.required == true %>' id="collapseQuestionContent<%= question.id%>" >
+                <%= image_tag question.picture.url(:original) if @question.picture.file? %>
                   <p><%= question.content %></p>
                 </div>
             <%end %>
@@ -43,10 +45,16 @@
                 <%= submit_tag(question.title, :class => "btn btn-default multiline width100") unless current_user_is_admin %>
             <% end %>
         <% else %>
+<<<<<<< HEAD
             <input class='btn btn-default btn-hypothesis-group multiline <%= "collapse-answer-right" if question.required == true %>' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
           </td>
           <td class="multichoice">
             <div class='collapse <%= "in" if @last_clicked_question_id == question.id.to_s %> collapse-answer <%= "collapse-answer-right" if question.required == true %>' id="collapseQuestionContent<%= question.id%>" >
+=======
+            <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
+            <div class="collapse" id="collapseQuestionContent<%= question.id%>" >
+              <%= image_tag question.image.picture.url(:original) unless question.image.nil? %>
+>>>>>>> image-bank-merge
               <p><%= question.content %></p>
             </div>
         <%end %>
