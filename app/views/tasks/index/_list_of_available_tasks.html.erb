@@ -2,21 +2,19 @@
 <h3>Valitse suoritettava toimenpide</h3>
 <br />
 
-<% @tasks.each do |task| %>
-    <% if !current_user.has_completed?(task) %>
-        <div class = "row">
+<% @available_tasks.each do |task| %>
+    <div class = "row">
+      <div class="col-md-5">
+        <% if current_user.can_start?(task) %>
+            <%= button_to task.name, task, method: :get, :class => "btn btn-default btn-available-task", :form_class => "form-to-task-student" %>
+        <% else %>
+            <%= button_to task.name, task, method: :get, :class => "btn btn-default btn-available-task", :form_class => "form-cannot-task-student" %>
+        <% end %>
+      </div>
+      <% if @last_clicked_task_id == task.id.to_s %>
           <div class="col-md-5">
-            <% if current_user.can_start?(task) %>
-                <%= button_to task.name, task, method: :get, :class => "btn btn-default btn-available-task", :form_class => "form-to-task-student" %>
-            <% else %>
-                <%= button_to task.name, task, method: :get, :class => "btn btn-default btn-available-task", :form_class => "form-cannot-task-student" %>
-            <% end %>
+            <div class="alert-unavailable-task removable"><%= alert %></div>
           </div>
-          <% if @last_clicked_task_id == task.id.to_s %>
-            <div class="col-md-5">
-              <div class="alert-unavailable-task removable"><%= alert %></div>
-            </div>
-          <% end %>
-        </div>
-    <% end %>
+      <% end %>
+    </div>
 <% end %>
