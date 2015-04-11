@@ -31,7 +31,7 @@ class OptionsController < ApplicationController
         format.html { redirect_to edit_multichoice_path(@option.multichoice.id, :layout => get_layout), notice: 'Vaihtoehto lisättiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @option }
       else
-        format.html { redirect_to edit_multichoice_path(Multichoice.find(option_params[:multichoice_id]), :layout => get_layout), alert: 'Vaihtoehdonn tiedot puuttelliset.' }
+        format.html { redirect_to edit_multichoice_path(Multichoice.find(option_params[:multichoice_id]), :layout => get_layout), alert: 'Vaihtoehdon tiedot puuttelliset.' }
         format.json { render json: @option.errors, status: :unprocessable_entity }
       end
     end
