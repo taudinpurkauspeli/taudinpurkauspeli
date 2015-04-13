@@ -108,6 +108,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
+    @task.reset_prerequisites
     session[:task_id] = nil
     @task.destroy
     respond_to do |format|
