@@ -72,7 +72,7 @@ describe "New Task page", js:true do
           fill_in('multichoice_question', with: "Mitä kysyt asiakkaalta:")
 
           expect{
-            click_and_wait('Tallenna kysymys')
+            click_and_wait('Tallenna')
           }.to change(Multichoice, :count).by(1)
 
           expect(page).to have_content 'Kysymys lisättiin onnistuneesti!'
@@ -102,7 +102,7 @@ describe "New Task page", js:true do
           fill_in('multichoice_question', with: "")
 
           expect{
-            click_and_wait('Tallenna kysymys')
+            click_and_wait('Tallenna')
           }.to change(Multichoice, :count).by(0)
 
           expect(page).to have_content 'Kysymyksen lisääminen epäonnistui!'
@@ -141,7 +141,7 @@ describe "New Task page", js:true do
         before :each do
           click_and_wait('+ Luo uusi monivalinta-alitoimenpide')
           fill_in('multichoice_question', with: "Mitä kysyt asiakkaalta:")
-          click_and_wait('Tallenna kysymys')
+          click_and_wait('Tallenna')
           expect(page).to have_content 'Muokkaa monivalintakysymystä'
         end
 
@@ -149,7 +149,7 @@ describe "New Task page", js:true do
 
           fill_in('multichoice_question', with: "Useita kysymyksiä asiakkaalle:")
 
-          click_and_wait('Tallenna kysymys')
+          click_and_wait('Päivitä')
 
           expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
           expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Useita kysymyksiä asiakkaalle:")
@@ -158,7 +158,7 @@ describe "New Task page", js:true do
         it "should not be able to update multichoice to have no question" do
           fill_in('multichoice_question', with: "")
 
-          click_and_wait('Tallenna kysymys')
+          click_and_wait('Päivitä')
 
           expect(page).to have_content 'Kysymyksen päivitys epäonnistui!'
           expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Mitä kysyt asiakkaalta:")
@@ -187,7 +187,7 @@ describe "New Task page", js:true do
           click_and_wait('+ Luo uusi monivalinta-alitoimenpide')
           fill_in('multichoice_question', with: "Onko tauti epidemia?")
           check 'multichoice_is_radio_button'
-          click_and_wait('Tallenna kysymys')
+          click_and_wait('Tallenna')
           expect(page).to have_content 'Muokkaa monivalintakysymystä'
         end
 
@@ -195,7 +195,7 @@ describe "New Task page", js:true do
 
           fill_in('multichoice_question', with: "Mahtaako olla epidemiaa liikkeellä?")
 
-          click_and_wait('Tallenna kysymys')
+          click_and_wait('Päivitä')
 
           expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
           expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Mahtaako olla epidemiaa liikkeellä?")
@@ -204,7 +204,7 @@ describe "New Task page", js:true do
         it "should not be able to update radiobutton to have no question" do
           fill_in('multichoice_question', with: "")
 
-          click_and_wait('Tallenna kysymys')
+          click_and_wait('Päivitä')
 
           expect(page).to have_content 'Kysymyksen päivitys epäonnistui!'
           expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Onko tauti epidemia?")

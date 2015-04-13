@@ -35,7 +35,7 @@ Feature: New task feature
     And I press the button "Tallenna"
     And I press the button "+ Luo uusi monivalinta-alitoimenpide"
     And I fill in multichoice question
-    And I press the button "Tallenna kysymys"
+    And I press the button "Tallenna"
     Then page should have a message: "Kysymys lisättiin onnistuneesti!"
     And multichoice should be in the database
 
@@ -60,7 +60,7 @@ Feature: New task feature
     And I press the button "Tallenna"
     And I press the button "+ Luo uusi monivalinta-alitoimenpide"
     And I fill fill in radiobutton question and select radiobutton option
-    And I press the button "Tallenna kysymys"
+    And I press the button "Tallenna"
     Then page should have a message: "Kysymys lisättiin onnistuneesti!"
     And radiobutton should be in the database
 

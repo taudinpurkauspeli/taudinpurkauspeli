@@ -4,7 +4,7 @@
 
 <div class = "panel panel-default panel-grey">
   <div class = "panel-heading panel-heading-grey">
-    Haastattelu
+    Haastattelun perustiedot
   </div>
   <div class = "panel-body">
     <%= render 'form' %>
@@ -28,7 +28,7 @@
                 <%= f.label :required%><br>
                 <%= f.check_box :required %>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <%= f.text_area :title, placeholder: "Kysymys", :class => 'form-control' %>
 
               </div>
@@ -36,8 +36,8 @@
                 <%= f.text_area :content, placeholder: "Vastausteksti", :class => 'form-control' %>
               </div>
               <div class="col-md-2">
-                                    <%= image_tag question.image.picture.url(:thumb) unless question.image.nil? %>
-                    <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: question.image), { :prompt => 'Valitse kuva' } %>
+                <%= image_tag question.image.picture.url(:thumb) unless question.image.nil? %>
+                <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: question.image), { :prompt => 'Valitse kuva' } %>
               </div>
               <div class="col-md-1">
                 <%= f.submit :class => 'btn btn-default btn-save' %>
@@ -61,7 +61,6 @@
 <% end %>
 
 
-
 <div class = "panel panel-default panel-green">
   <div class="row panel-body">
     <div class = "nakki">
@@ -79,7 +78,7 @@
           <div class="col-md-2">
             <%= image_tag @new_question.image.picture.url(:thumb) unless @new_question.image.nil? %>
             <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: @new_question.image), { :prompt => 'Valitse kuva' } %>
-              </div>
+          </div>
           <div class="col-md-1">
             <%= f.submit 'Tallenna', :class => 'btn btn-default btn-save' %>
           </div>
@@ -94,7 +93,6 @@
 <h1>Ryhmät</h1>
 <div class="row panel-body">
   <%= render 'questions/new_question_group', {interview: @interview} %>
-
 </div>
 
 <script>
