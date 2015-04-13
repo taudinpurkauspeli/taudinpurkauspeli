@@ -8,6 +8,7 @@ class Task < ActiveRecord::Base
   has_many :task_texts, through: :subtasks
   has_many :multichoices, through: :subtasks
   has_many :interviews, through: :subtasks
+  has_many :exercise_hypotheses
 
   amoeba do
     enable
@@ -68,5 +69,14 @@ class Task < ActiveRecord::Base
       return name
     end
     return return_string
+  end
+
+  def reset_prerequisites
+
+    anamnesis = exercise.tasks.where(name: "Anamneesi").first
+    exercise_hypotheses.each do |ex_hyp|
+      ex_hyp.update(task:anamnesis)
+    end
+
   end
 end

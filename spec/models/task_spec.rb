@@ -19,7 +19,7 @@ RSpec.describe Task, :type => :model do
       expect(Task.where(level:1...999).count).to eq(1)
     end
 
-    describe "in on exercise" do
+    describe "in exercise" do
 
       it "cannot be two tasks with same name" do
         expect{
@@ -35,6 +35,26 @@ RSpec.describe Task, :type => :model do
           Task.create name:"Soita asiakkaalle", exercise:exercise2
         }.to change(Task, :count).by(1)
       end
+    end
+
+    describe "as prerequisite task" do
+      let!(:hypothesis){FactoryGirl.create(:hypothesis)}
+      let!(:hypothesis2){FactoryGirl.create(:hypothesis, name: "Sikatauti")}
+      let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, task:task, exercise:exercise, hypothesis:hypothesis)}
+      let!(:exercise_hypothesis2){FactoryGirl.create(:exercise_hypothesis, task:task, exercise:exercise, hypothesis:hypothesis2)}
+
+      it "reset_prerequisites resets prerequisites to anamnesis" do
+        expect(exercise_hypothesis.task).to eq(task)
+        expect(exercise_hypothesis2.task).to eq(task)
+
+        task.reset_prerequisites
+
+        anamnesis = exercise.tasks.first
+
+        expect(ExerciseHypothesis.find(1).task).to eq(anamnesis)
+        expect(ExerciseHypothesis.find(2).task).to eq(anamnesis)
+      end
+
     end
 
   end
