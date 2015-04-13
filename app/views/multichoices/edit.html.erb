@@ -29,9 +29,6 @@
               <div class="col-md-4">
                 <%= f.text_area :explanation, placeholder: "Vastausteksti", :id => "explanation_" + option.id.to_s, :class => 'form-control' %>
               </div>
-              <div class="col-md-1">
-                <%= f.submit :class => 'btn btn-default btn-save', :id => "save_" + option.id.to_s %>
-              </div>
               <div class="col-md-2">
                 <%= image_tag option.image.picture.url(:thumb) unless option.image.nil? %>
                 <div class="field">
@@ -39,6 +36,9 @@
                 </div>
               </div>
 
+              <div class="col-md-1">
+                <%= f.submit :class => 'btn btn-default btn-save', :id => "save_" + option.id.to_s %>
+              </div>
               <%= f.hidden_field :option_id, :value => option.id %>
               <%= f.hidden_field :multichoice_id, :value => @multichoice.id%>
 
@@ -72,9 +72,9 @@
             <%= f.text_area :explanation, placeholder: "Vastausteksti", :class => 'form-control' %>
           </div>
           <div class="col-md-2">
-                <div class="field">
-                  <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: @new_option.image), { :prompt => 'Valitse kuva' } %>
-                </div>
+            <div class="field">
+              <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: @new_option.image), { :prompt => 'Valitse kuva' } %>
+            </div>
           </div>
           <div class="col-md-1">
             <%= f.submit 'Tallenna', :class => 'btn btn-default btn-save' %>
