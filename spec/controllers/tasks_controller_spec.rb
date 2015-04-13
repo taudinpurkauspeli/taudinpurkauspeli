@@ -101,7 +101,7 @@ RSpec.describe TasksController, :type => :controller do
 
       it "redirects to the task list" do
         post :create, {:task => invalid_attributes}, valid_session
-        expect(response).to redirect_to(tasks_path(:layout => true))
+        expect(response).to redirect_to(new_task_path(:layout => true))
       end
     end
   end
