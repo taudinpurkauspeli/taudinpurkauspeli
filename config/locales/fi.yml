@@ -77,6 +77,8 @@ fi:
         hidden: "Piilota case opiskelijoilta"
       hypothesis:
         name: "Nimi"
+      interview:
+        title: "Otsikko"
       multichoice:
         question: "Kysymys"
         is_radio_button: "Radio button -tyyppinen kysymys"

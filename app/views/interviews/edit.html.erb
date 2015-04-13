@@ -4,7 +4,7 @@
 
 <div class = "panel panel-default panel-grey">
   <div class = "panel-heading panel-heading-grey">
-    Haastattelu
+    Haastattelun perustiedot
   </div>
   <div class = "panel-body">
     <%= render 'form' %>
@@ -28,7 +28,7 @@
                 <%= f.label :required%><br>
                 <%= f.check_box :required %>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <%= f.text_area :title, placeholder: "Kysymys", :class => 'form-control' %>
 
               </div>
@@ -59,7 +59,6 @@
     </div>
 
 <% end %>
-
 
 
 <div class = "panel panel-default panel-green">
@@ -94,7 +93,6 @@
 <h1>Ryhmät</h1>
 <div class="row panel-body">
   <%= render 'questions/new_question_group', {interview: @interview} %>
-
 </div>
 
 <script>
