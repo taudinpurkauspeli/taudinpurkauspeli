@@ -85,7 +85,7 @@ class TasksController < ApplicationController
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide luotiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @task }
       else
-        format.html { redirect_to tasks_url(:layout => get_layout), alert: 'Toimenpiteen luonti epäonnistui.' }
+        format.html { redirect_to new_task_path(:layout => get_layout), alert: 'Toimenpiteen luonti epäonnistui.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
