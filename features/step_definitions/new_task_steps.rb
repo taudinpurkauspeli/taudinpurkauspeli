@@ -30,6 +30,10 @@ When(/^I fill in task text content$/) do
   fill_in('task_text_content', with: 'Soita asiakkaalle puhelimella')
 end
 
+When(/^I fill in interview title$/) do
+  fill_in('interview_title', with: 'Lisätietoa puhelimella')
+end
+
 When(/^I go to the multichoice edit page$/) do
   click_and_wait('Soita lääkärille')
   click_and_wait('Monivalintakysymys: Tykkääkö koira nappuloista?')
@@ -79,6 +83,10 @@ Then(/^page should show the new task text content$/) do
   expect(page).to have_button("Teksti: Soita asiakkaalle puhelimella")
 end
 
+Then(/^page should show the new interview title$/) do
+  expect(page).to have_selector("input[value='Lisätietoa puhelimella']")
+end
+
 Then(/^multichoice should be in the database$/) do
   expect(Multichoice.count).to eq(1)
   expect(Subtask.count).to eq(1)
@@ -87,6 +95,11 @@ end
 Then(/^radiobutton should be in the database$/) do
   expect(Multichoice.count).to eq(1)
   expect(Multichoice.first.is_radio_button).to eq(true)
+  expect(Subtask.count).to eq(1)
+end
+
+Then(/^interview should be in the database$/) do
+  expect(Interview.count).to eq(1)
   expect(Subtask.count).to eq(1)
 end
 

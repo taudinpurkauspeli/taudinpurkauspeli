@@ -74,3 +74,16 @@ Feature: New task feature
     And I press the button "Tallenna"
     Then page should have a message: "Vaihtoehto lisättiin onnistuneesti."
     And right radiobutton option should be in the database
+
+Scenario: Teacher can create a task with interview
+    Given I have logged in as a teacher
+    And Cases have been created
+    And I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
+    And I press the button "+ Luo uusi toimenpide"
+    When I fill in task name
+    And I press the button "Tallenna"
+    And I press the button "+ Luo uusi haastattelu"
+    And I fill in interview title
+    And I press the button "Tallenna"
+    Then page should show the new interview title
+    And interview should be in the database
