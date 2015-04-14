@@ -87,3 +87,14 @@ Scenario: Teacher can create a task with interview
     And I press the button "Tallenna"
     Then page should show the new interview title
     And interview should be in the database
+
+Scenario: Teacher can create a task with interview and questions
+    Given I have logged in as a teacher
+    And Cases have been created
+    And Task with interview has been created
+    And I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
+    When I go to the interview edit page
+    And I fill in question title and content
+    And I press the button "Tallenna"
+    # page should show the new question title
+    And question should be in the database

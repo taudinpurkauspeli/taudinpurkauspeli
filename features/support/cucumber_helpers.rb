@@ -52,6 +52,11 @@ module CucumberHelpers
     FactoryGirl.create(:option, multichoice_id: 2, content: "Kurkkulääke", explanation: "Oikea vastaus")
   end
 
+  def create_interviews
+    FactoryGirl.create(:subtask, task_id:3)
+    FactoryGirl.create(:interview, subtask_id:1, title:"Haastattelu")
+  end
+
   def create_all_hypotheses_for_case
     create_exercises
     create_hypothesis_groups
