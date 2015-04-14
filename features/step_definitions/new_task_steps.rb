@@ -123,7 +123,7 @@ end
 
 Then(/^question should be in the database$/) do
   expect(Question.count).to eq(1)
-  expect(Question.last.content).to eq('Onko hygieniasta huolehdittu')
+  expect(Question.last.title).to eq('Onko hygieniasta huolehdittu')
   end
 
 Then(/^option should be in the database$/) do
