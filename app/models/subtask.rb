@@ -6,6 +6,8 @@ class Subtask < ActiveRecord::Base
   has_one :task_text, dependent: :destroy
   has_one :multichoice, dependent: :destroy
   has_one :interview, dependent: :destroy
+  has_one :conclusion, dependent: :destroy
+
 
   amoeba do
     enable
