@@ -24,10 +24,12 @@
                 <%=f.select :question_group_id, options_from_collection_for_select(@question_groups, :id, :title, selected: question.question_group_id), { :prompt => 'Valitse ryhmä' } %>
               </div>
 
-              <div class="col-md-1">
-                <%= f.label :required%><br>
-                <%= f.check_box :required %>
+
+              <%= f.label :required%><br>
+              <div class="col-md-2">
+                <%=f.select :required, options_for_select(@requireds.collect { |answer| [t("activerecord.attributes.question.requireds.#{answer[0]}"), answer[0]] }, selected: question.required), {}, {:id => "required_" + question.id.to_s, class: "form-control"} %>
               </div>
+
               <div class="col-md-3">
                 <%= f.text_area :title, placeholder: "Kysymys", :class => 'form-control' %>
 
@@ -65,10 +67,12 @@
   <div class="row panel-body">
     <div class = "nakki">
       <%= form_for(@new_question) do |f| %>
-          <div class="col-md-1">
-            <%= f.label :required%><br>
-            <%= f.check_box :required, :value => true %>
+
+          <%= f.label :required%><br>
+          <div class="col-md-2">
+            <%=f.select :required, options_for_select(@requireds.collect { |answer| [t("activerecord.attributes.question.requireds.#{answer[0]}"), answer[0]] }, selected: @new_question.required), {}, {class: "form-control"} %>
           </div>
+
           <div class="col-md-4">
             <%= f.text_area :title, placeholder: "Kysymys", :class => 'form-control' %>
           </div>

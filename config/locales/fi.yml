@@ -92,6 +92,10 @@ fi:
           wrong: "Väärin"
       question:
         required: "Pakollinen kysymys"
+        requireds:
+          allowed: "Sallittu"
+          required: "Pakollinen"
+          wrong: "Väärin"
       task:
         name: "Nimi"
       task_text:

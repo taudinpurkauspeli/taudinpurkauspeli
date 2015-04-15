@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410113855) do
+ActiveRecord::Schema.define(version: 20150415122320) do
 
   create_table "asked_questions", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -116,12 +116,12 @@ ActiveRecord::Schema.define(version: 20150410113855) do
   create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
-    t.boolean  "required"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "question_group_id"
     t.integer  "interview_id"
     t.integer  "image_id"
+    t.integer  "required",          default: 0
   end
 
   create_table "subtasks", force: :cascade do |t|

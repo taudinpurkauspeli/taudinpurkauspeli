@@ -15,6 +15,7 @@ class InterviewsController < ApplicationController
 		@new_asked_question = AskedQuestion.new
 		@new_question_group = QuestionGroup.new
 		@question_groups = QuestionGroup.all
+    @requireds = Question.requireds
 
 		set_view_layout
 	end
