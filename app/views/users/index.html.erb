@@ -4,7 +4,7 @@
 
 
 <%= form_tag(users_path, method: :get) do %>
-<%= select_tag 'exercise', options_for_select(@exercises.collect{ |e| [e.name, e.id] }, @shown_exercises.first.id), :onchange => "this.form.submit();" %>
+<%= select_tag 'exercise', options_for_select([["Kaikki", 0]] + @exercises.collect{ |e| [e.name, e.id] }, @shown_exercises.first.id), :onchange => "this.form.submit();" %>
 <% end %>
 
 <% @shown_exercises.each do |exercise| %>

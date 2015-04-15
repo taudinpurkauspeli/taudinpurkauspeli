@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @exercises = Exercise.all
     @users = User.all
 
-    if params[:exercise].nil?
+    if params[:exercise].nil? || params[:exercise] == "0"
       @shown_exercises = @exercises
     else
       @shown_exercises  = Exercise.where("id = ?", params[:exercise])
