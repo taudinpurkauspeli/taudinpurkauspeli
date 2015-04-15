@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150415114959) do
   create_table "conclusions", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
+    t.integer  "subtask_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

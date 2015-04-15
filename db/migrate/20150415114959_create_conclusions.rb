@@ -3,6 +3,7 @@ class CreateConclusions < ActiveRecord::Migration
     create_table :conclusions do |t|
       t.string :title
       t.string :content
+      t.integer :subtask_id
 
       t.timestamps null: false
     end
