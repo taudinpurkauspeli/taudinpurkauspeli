@@ -6,15 +6,14 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
 
-    if params[:exercise].nil?
-      @exercises = Exercise.all
-    else
-      @exercises = Exercise.where("id = ?", params[:exercise])
-    end
-
-    @exercises_all = Exercise.all
-
+    @exercises = Exercise.all
     @users = User.all
+
+    if params[:exercise].nil?
+      @shown_exercises = @exercises
+    else
+      @shown_exercises  = Exercise.where("id = ?", params[:exercise])
+    end
     
   end
 
