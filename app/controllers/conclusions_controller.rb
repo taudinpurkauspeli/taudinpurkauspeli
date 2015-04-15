@@ -38,7 +38,7 @@ class ConclusionsController < ApplicationController
 			end
 		end
 	end
-	
+
 	def update
 		respond_to do |format|
 			if @conclusion.update(conclusion_params)
@@ -61,7 +61,7 @@ class ConclusionsController < ApplicationController
 	private
 
 	def conclusion_params
-		params.require(:conclusion).permit(:title, :content)
+		params.require(:conclusion).permit(:title, :content, :exercise_hypothesis_id)
 	end
 
 	def set_conclusion
