@@ -24,6 +24,9 @@ class Subtask < ActiveRecord::Base
     unless interview.nil?
       return 'interview'
     end
+    unless conclusion.nil?
+      return 'conclusion'
+    end
   end
 
   def set_level
@@ -57,6 +60,11 @@ class Subtask < ActiveRecord::Base
     unless interview.nil?
       return_string = ''
       content = interview.title
+    end
+
+    unless conclusion.nil?
+      return_string = ''
+      content = conclusion.title
     end
 
     if content.split.size > 3

@@ -1,0 +1,3 @@
+class ConclusionsController < ApplicationController
+
+end
