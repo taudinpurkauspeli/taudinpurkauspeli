@@ -8,12 +8,14 @@ class ConclusionsController < ApplicationController
 	end
 
 	def new
+		@exercise_hypotheses = ExerciseHypothesis.where(exercise: current_task.exercise)
 		@conclusion = Conclusion.new
 		set_view_layout
 	end
 
 	# GET /conclusions/1/edit
 	def edit
+		@exercise_hypotheses = ExerciseHypothesis.where(exercise: current_task.exercise)
 		set_view_layout
 	end
 
@@ -36,6 +38,7 @@ class ConclusionsController < ApplicationController
 			end
 		end
 	end
+	
 	def update
 		respond_to do |format|
 			if @conclusion.update(conclusion_params)
