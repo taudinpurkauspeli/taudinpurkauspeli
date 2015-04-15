@@ -24,7 +24,7 @@
                   </td>
                   <td class="multichoice">
                     <div class='collapse <%= "in" if @last_clicked_question_id == question.id.to_s %> collapse-answer <%= "collapse-answer-right" if question.required == true %>' id="collapseQuestionContent<%= question.id%>" >
-                      <%= image_tag question.image.picture.url(:original) if @question.image.nil? %>
+                      <%= image_tag question.image.picture.url(:original) unless @question.image.nil? %>
                       <p><%= question.content %></p>
                     </div>
               <%end %>
