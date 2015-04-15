@@ -1,5 +1,7 @@
 class ConclusionsController < ApplicationController
 	before_action :ensure_user_is_logged_in
+	before_action :ensure_user_is_admin, except: [:index, :show]
+	before_action :set_conclusion, only: [:edit, :update, :destroy]
 
 	def show
 		set_view_layout
@@ -34,6 +36,16 @@ class ConclusionsController < ApplicationController
 			end
 		end
 	end
+	def update
+		respond_to do |format|
+			if @conclusion.update(conclusion_params)
+				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Päätöstoimenpide päivitettiin onnistuneesti.' }
+			else
+				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), alert: 'Toimenpiteen päivitys epäonnistui.' }
+				format.json { render json: @conclusion.errors, status: :unprocessable_entity }
+			end
+		end
+	end
 
 	def destroy
 		@conclusion.destroy
@@ -44,8 +56,14 @@ class ConclusionsController < ApplicationController
 	end
 
 	private
+
 	def conclusion_params
 		params.require(:conclusion).permit(:title, :content)
 	end
+
+	def set_conclusion
+		@conclusion = Conclusion.find(params[:id])
+	end
+
 
 end
