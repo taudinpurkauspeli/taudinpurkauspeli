@@ -35,6 +35,8 @@ Rails.application.routes.draw do
 
   resources :question_groups
 
+  resources :conclusions
+
   #resources :asked_questions, only: [:create]
 
   get 'signin', to: 'sessions#new'
