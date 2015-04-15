@@ -41,8 +41,9 @@ ActiveRecord::Schema.define(version: 20150415114959) do
     t.string   "title"
     t.string   "content"
     t.integer  "subtask_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "exercise_hypothesis_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "exercise_hypotheses", force: :cascade do |t|
