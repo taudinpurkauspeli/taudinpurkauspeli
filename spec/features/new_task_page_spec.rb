@@ -72,7 +72,7 @@ describe "New Task page", js:true do
           fill_in('multichoice_question', with: "Mitä kysyt asiakkaalta:")
 
           expect{
-            click_and_wait('Tallenna kysymys')
+            click_and_wait('Tallenna')
           }.to change(Multichoice, :count).by(1)
 
           expect(page).to have_content 'Kysymys lisättiin onnistuneesti!'
@@ -102,7 +102,7 @@ describe "New Task page", js:true do
           fill_in('multichoice_question', with: "")
 
           expect{
-            click_and_wait('Tallenna kysymys')
+            click_and_wait('Tallenna')
           }.to change(Multichoice, :count).by(0)
 
           expect(page).to have_content 'Kysymyksen lisääminen epäonnistui!'
@@ -141,7 +141,7 @@ describe "New Task page", js:true do
         before :each do
           click_and_wait('+ Luo uusi monivalinta-alitoimenpide')
           fill_in('multichoice_question', with: "Mitä kysyt asiakkaalta:")
-          click_and_wait('Tallenna kysymys')
+          click_and_wait('Tallenna')
           expect(page).to have_content 'Muokkaa monivalintakysymystä'
         end
 
@@ -149,7 +149,7 @@ describe "New Task page", js:true do
 
           fill_in('multichoice_question', with: "Useita kysymyksiä asiakkaalle:")
 
-          click_and_wait('Tallenna kysymys')
+          click_and_wait('Päivitä')
 
           expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
           expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Useita kysymyksiä asiakkaalle:")
@@ -158,7 +158,7 @@ describe "New Task page", js:true do
         it "should not be able to update multichoice to have no question" do
           fill_in('multichoice_question', with: "")
 
-          click_and_wait('Tallenna kysymys')
+          click_and_wait('Päivitä')
 
           expect(page).to have_content 'Kysymyksen päivitys epäonnistui!'
           expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Mitä kysyt asiakkaalta:")
@@ -167,7 +167,7 @@ describe "New Task page", js:true do
         it "should be able to add option to a multichoice" do
           fill_in('option_content', with: "Kysy taudeista")
           fill_in('option_explanation', with: "Taudeista on hyvä kysyä!")
-          check 'option_is_correct_answer'
+          select('Pakollinen', from:'option[is_correct_answer]')
 
           expect{
             click_and_wait('Tallenna')
@@ -177,7 +177,7 @@ describe "New Task page", js:true do
 
           expect(Multichoice.first.options.first.content).to eq('Kysy taudeista')
           expect(Multichoice.first.options.first.explanation).to eq('Taudeista on hyvä kysyä!')
-          expect(Multichoice.first.options.first.is_correct_answer).to eq(true)
+          expect(Multichoice.first.options.first.is_correct_answer).to eq("required")
         end
 
       end
@@ -187,7 +187,7 @@ describe "New Task page", js:true do
           click_and_wait('+ Luo uusi monivalinta-alitoimenpide')
           fill_in('multichoice_question', with: "Onko tauti epidemia?")
           check 'multichoice_is_radio_button'
-          click_and_wait('Tallenna kysymys')
+          click_and_wait('Tallenna')
           expect(page).to have_content 'Muokkaa monivalintakysymystä'
         end
 
@@ -195,7 +195,7 @@ describe "New Task page", js:true do
 
           fill_in('multichoice_question', with: "Mahtaako olla epidemiaa liikkeellä?")
 
-          click_and_wait('Tallenna kysymys')
+          click_and_wait('Päivitä')
 
           expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
           expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Mahtaako olla epidemiaa liikkeellä?")
@@ -204,15 +204,15 @@ describe "New Task page", js:true do
         it "should not be able to update radiobutton to have no question" do
           fill_in('multichoice_question', with: "")
 
-          click_and_wait('Tallenna kysymys')
+          click_and_wait('Päivitä')
 
           expect(page).to have_content 'Kysymyksen päivitys epäonnistui!'
           expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Onko tauti epidemia?")
         end
 
         describe "with options" do
-          let!(:option1){FactoryGirl.create(:option, multichoice_id: 1, content: "Bakteerilääke", is_correct_answer: false, explanation: "Ei oikein")}
-          let!(:option2){FactoryGirl.create(:option, multichoice_id: 1, content: "Astmalääke", is_correct_answer: false, explanation: "Ei oikea vastaus")}
+          let!(:option1){FactoryGirl.create(:option, multichoice_id: 1, content: "Bakteerilääke", is_correct_answer: "wrong", explanation: "Ei oikein")}
+          let!(:option2){FactoryGirl.create(:option, multichoice_id: 1, content: "Astmalääke", is_correct_answer: "allowed", explanation: "Ei oikea vastaus")}
           let!(:option3){FactoryGirl.create(:option, multichoice_id: 1, content: "Kurkkulääke", explanation: "Oikea vastaus")}
 
           before :each do
@@ -222,12 +222,12 @@ describe "New Task page", js:true do
           end
 
           it "should be able to change the right option" do
-            check 'is_correct_answer_2'
+            select('Pakollinen', from:'is_correct_answer_2')
             click_and_wait('save_2')
 
-            expect(Option.find(1).is_correct_answer).to eq(false)
-            expect(Option.find(2).is_correct_answer).to eq(true)
-            expect(Option.find(3).is_correct_answer).to eq(false)
+            expect(Option.find(1).is_correct_answer).to eq("wrong")
+            expect(Option.find(2).is_correct_answer).to eq("required")
+            expect(Option.find(3).is_correct_answer).to eq("allowed")
           end
         end
       end

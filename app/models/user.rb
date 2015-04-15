@@ -11,9 +11,8 @@ class User < ActiveRecord::Base
   has_many :checked_hypotheses, dependent: :destroy
   has_many :exercise_hypotheses, through: :checked_hypotheses
 
-  has_many :completed_tasks, dependent: :destroy
+  has_many :completed_tasks, -> {order('created_at DESC')}, dependent: :destroy
   has_many :tasks, through: :completed_tasks
-
   has_many :completed_subtasks, dependent: :destroy
 
   has_many :subtasks, through: :completed_subtasks
@@ -96,6 +95,14 @@ class User < ActiveRecord::Base
 
   def has_asked_question?(question)
     return !asked_questions.where(question:question).empty?
+  end
+
+  def has_checked_hypothesis?(exercise_hypothesis)
+    return !checked_hypotheses.where(exercise_hypothesis:exercise_hypothesis).empty?
+  end
+
+  def get_checked_hypothesis(exercise_hypothesis)
+    return checked_hypotheses.where(exercise_hypothesis:exercise_hypothesis).first
   end
 
 

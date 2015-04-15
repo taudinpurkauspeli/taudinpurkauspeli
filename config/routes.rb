@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :images
   root 'exercises#index'
 
   resources :users
@@ -49,6 +50,8 @@ Rails.application.routes.draw do
   post 'interviews/:id/ask_question', to: 'interviews#ask_question'
   post 'interviews/:id/check_answers', to: 'interviews#check_answers'
   post 'task_texts/:id/check_answers', to: 'task_texts#check_answers'
+
+  post 'exercises/:id/dup', to: 'exercises#duplicate_exercise'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

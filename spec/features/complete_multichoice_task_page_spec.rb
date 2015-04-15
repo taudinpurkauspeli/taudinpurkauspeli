@@ -10,8 +10,9 @@ describe "Multichoice page for student", js:true do
   let!(:multichoice_subtask){FactoryGirl.create(:subtask, task_id:multichoice_task.id)}
   let!(:multichoice){FactoryGirl.create(:multichoice, subtask_id:multichoice_subtask.id)}
   let!(:option){FactoryGirl.create(:option, multichoice_id:multichoice.id)}
-  let!(:option2){FactoryGirl.create(:option, multichoice_id:multichoice.id, content: "Ei tykkää", is_correct_answer: false, explanation: "Ei oikea vastaus")}
-  let!(:option3){FactoryGirl.create(:option, multichoice_id:multichoice.id, content: "Ehkä tykkää", explanation: "Melkein oikea vastaus")}
+  let!(:option2){FactoryGirl.create(:option, multichoice_id:multichoice.id, content: "Ei tykkää", is_correct_answer: "wrong", explanation: "Ei oikea vastaus")}
+  let!(:option3){FactoryGirl.create(:option, multichoice_id:multichoice.id, content: "Paljon tykkää", explanation: "Toinen oikea vastaus")}
+  let!(:option4){FactoryGirl.create(:option, multichoice_id:multichoice.id, content: "Ehkä tykkää soittaa", is_correct_answer: "allowed", explanation: "Melkein oikea vastaus")}
 
   describe "student" do
 
@@ -37,6 +38,22 @@ describe "Multichoice page for student", js:true do
         expect(page).to have_content option.explanation
         expect(page).to have_content option2.explanation
         expect(page).to have_content option3.explanation
+        expect(page).to have_content option4.explanation
+      end
+
+      it "with right and allowed options selected" do
+        check 'checked_options_1'
+        check 'checked_options_3'
+        check 'checked_options_4'
+        expect {
+          click_and_wait('Tarkista')
+        }.to change(CompletedTask, :count).by(1)
+
+        expect(page).to have_content 'Valitsit oikein!'
+        expect(page).to have_content option.explanation
+        expect(page).to have_content option2.explanation
+        expect(page).to have_content option3.explanation
+        expect(page).to have_content option4.explanation
       end
 
     end
@@ -61,16 +78,25 @@ describe "Multichoice page for student", js:true do
         }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content 'Valinnoissa oli vielä virheitä!'
+        expect(page).to have_content option.explanation
+        expect(page).to have_content option2.explanation
+        expect(page).to have_content option3.explanation
+        expect(page).not_to have_content option4.explanation
       end
 
       it "when not all right options are selected" do
         check 'checked_options_1'
+        check 'checked_options_4'
 
         expect {
           click_and_wait('Tarkista')
         }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content 'Valinnoissa oli vielä virheitä!'
+        expect(page).to have_content option.explanation
+        expect(page).to have_content option4.explanation
+        expect(page).not_to have_content option2.explanation
+        expect(page).not_to have_content option3.explanation
       end
     end
 
@@ -88,10 +114,12 @@ describe "Multichoice page for student", js:true do
         expect(page).to have_content option.content
         expect(page).to have_content option2.content
         expect(page).to have_content option3.content
+        expect(page).to have_content option4.content
 
         expect(page).to have_content option.explanation
         expect(page).to have_content option2.explanation
         expect(page).to have_content option3.explanation
+        expect(page).to have_content option4.explanation
       end
     end
   end

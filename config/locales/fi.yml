@@ -77,6 +77,8 @@ fi:
         hidden: "Piilota case opiskelijoilta"
       hypothesis:
         name: "Nimi"
+      interview:
+        title: "Otsikko"
       multichoice:
         question: "Kysymys"
         is_radio_button: "Radio button -tyyppinen kysymys"
@@ -84,6 +86,10 @@ fi:
         content: "Vaihtoehto"
         explanation: "Vastausteksti"
         is_correct_answer: "Oikea vastaus"
+        is_correct_answers:
+          allowed: "Sallittu"
+          required: "Pakollinen"
+          wrong: "Väärin"
       question:
         required: "Pakollinen kysymys"
       task:

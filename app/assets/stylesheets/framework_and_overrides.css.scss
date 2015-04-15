@@ -10,6 +10,7 @@ $PaleLightGreen       : #b2dca5;
 $LightGreen           : #74ad61;
 $MediumGreen          : #446739;
 $LightRed             : #ae6161;
+$PaleLightRed         : #be8181;
 $DarkRed              : #692f2f;
 $DarkGreen            : #232e1e;
 
@@ -63,7 +64,10 @@ li.active>a{
   background-color: #EEE !important;
 }
 
-//login
+//************
+//*  Login   *
+//************
+
 .login-container{
   display: table;
   width: auto;  
@@ -242,6 +246,84 @@ li.active>a{
   //color: white;
 }
 
+//*******************************
+//*   Notices and info fields   *
+//*******************************
+.messages{
+  position: fixed;
+  top: 60px;
+  right: 10px;
+  width: 300px;
+  padding: 10px;
+}
+.notice{
+  width: 100%;
+  padding: 10px;
+  background-color: $PaleLightGreen;
+  border: 2px solid $LightGreen;
+  //border-radius: 5px;
+}
+.alert{
+  color: white;
+  width: 100%;
+  padding: 10px;
+  background-color: $PaleLightRed;
+  border: 2px solid $LightRed;
+  //border-radius: 5px;
+}
+
+.info-checked-hypothesis{
+  position: absolute;
+  min-width: 200px;
+  padding: 10px;
+  padding-right: 20px;
+  background-color: $PaleLightGreen;
+  //border: 1px solid $MediumGreen;
+  box-shadow: 0px 0px 10px $PaleLightGreen;
+}
+.info-checked-hypothesis:before {
+  content:"";
+  position: absolute;
+  right: 100%;
+  top: 7px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-right: 14px solid $PaleLightGreen;
+  border-bottom: 7px solid transparent;
+}
+
+.alert-unchecked-hypothesis, .alert-unavailable-task{
+  position: absolute;
+  min-width: 200px;
+  padding: 10px;
+  padding-right: 20px;
+  background-color: $PaleLightRed;
+  color: white;
+  //border: 1px solid red;
+  box-shadow: 0px 0px 10px $PaleLightRed;
+}
+.alert-unchecked-hypothesis:before, .alert-unavailable-task:before {
+  content:"";
+  position: absolute;
+  right: 100%;
+  top: 7px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-right: 14px solid $PaleLightRed;
+  border-bottom: 7px solid transparent;
+}
+
+.collapse-answer{
+  padding: 10px;
+  background-color: #EEE;
+  border-radius: 2px;
+}
+.collapse-answer-right{
+  background-color: $PaleLightGreen;
+}
+
 //***************
 //*   Inputs    *
 //***************
@@ -267,8 +349,10 @@ input[type="checkbox"]:checked {
 
 
 
+//*******************
+//*   Layout divs   *
+//*******************
 
-//Layout divs
 .div-task-order-container{
   float: left;
   height: 5em;
@@ -283,7 +367,27 @@ input[type="checkbox"]:checked {
   height: 100%;
   padding: 2px;
 }
+div.separator{
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid #CCC;
+  background-color: #DDD;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
+td.multichoice{
+  width: 50%;
+  padding: 5px;
+  vertical-align: top;
+}
+
+td.wrong-answer{
+  background-color: $PaleLightRed;
+}
+td.correct-answer{
+  background-color: $PaleLightGreen;
+}
 
 
 //New anamnesis
@@ -302,6 +406,9 @@ input[type="checkbox"]:checked {
 }
 .width100{
   width: 100%;
+}
+.width95{
+  width: 95%;
 }
 .height50{
   height: 50%;

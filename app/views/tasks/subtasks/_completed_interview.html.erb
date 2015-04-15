@@ -1,56 +1,59 @@
 
-<% subtask.interview.question_groups.distinct.each do |group|%>
-    <div class="row">
-      <div class="col-md-4">
-        <h4><%= group.title %></h4>
-      </div>
-    </div>
-    <div class="row">
+<table class = "width100">
+  <tr><td>&nbsp;</td><td>&nbsp;</td></tr> <%# fixing the fucking layout%>
+  <% subtask.interview.question_groups.distinct.each do |group|%>
+      <tr>
+        <td class="multichoice">
+          <h4><%= group.title %></h4>
+        </td>
+        <td></td>
+      </tr>
 
       <% group.questions.where(interview: subtask.interview).each do |question| %>
-          <div class="row">
-            <div class="col-md-4 margin2em">
-              <% if !current_user.has_asked_question?(question) && !current_user_is_admin %>
+          <tr>
+            <td class="multichoice"><div class="floatLeft" style = "width: 5%;"></div>
+              <% if !current_user.has_asked_question?(question) %>
+
                   <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
                       <%= hidden_field_tag 'question_id', question.id %>
-                      <%= submit_tag(question.title, :class => "btn btn-default btn-save disabled widthAuto") unless current_user_is_admin %>
+                      <%= submit_tag(question.title, :class => "btn btn-default multiline width95 floatRight") unless current_user_is_admin %>
                   <% end %>
+
               <% else %>
-                  <div class="row">
-                    <div class="col-md-9">
-                      <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
+                  <%# TODO this should be refactored to make sense %>
+                  <input class='btn btn-default btn-hypothesis-group multiline width95 floatRight <%= "collapse-answer-right" if question.required == true %>' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
+                  </td>
+                  <td class="multichoice">
+                    <div class='collapse <%= "in" if @last_clicked_question_id == question.id.to_s %> collapse-answer <%= "collapse-answer-right" if question.required == true %>' id="collapseQuestionContent<%= question.id%>" >
+                      <%= image_tag question.picture.url(:original) if @question.picture.file? %>
+                      <p><%= question.content %></p>
                     </div>
-                  </div>
-                  <div class="collapse" id="collapseQuestionContent<%= question.id%>" >
-                    <p><%= question.content %></p>
-                  </div>
               <%end %>
-            </div>
-          </div>
+              </td>
+              </tr>
       <% end %>
-    </div>
-<% end %>
 
-<% subtask.interview.questions.where(question_group:nil).each do |question| %>
-    <div class="row">
-      <br>
-      <div class="col-md-4 margin2em">
-        <% if !current_user.has_asked_question?(question) && !current_user_is_admin %>
-            <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
-                <%= hidden_field_tag 'question_id', question.id %>
-                <%= submit_tag(question.title, :class => "btn btn-default btn-save disabled widthAuto") unless current_user_is_admin %>
-            <% end %>
-        <% else %>
-            <div class="row">
-              <div class="col-md-9">
-                <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
-              </div>
-            </div>
-            <div class="collapse" id="collapseQuestionContent<%= question.id%>" >
-              <p><%= question.content %></p>
-            </div>
-        <%end %>
-      </div>
-    </div>
-<% end %>
+  <% end %>
 
+  <% subtask.interview.questions.where(question_group:nil).each do |question| %>
+      <tr>
+        <td class="multichoice">
+          <% if !current_user.has_asked_question?(question) %>
+              <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
+                  <%= hidden_field_tag 'question_id', question.id %>
+                  <%= submit_tag(question.title, :class => "btn btn-default multiline width100") unless current_user_is_admin %>
+              <% end %>
+          <% else %>
+              <input class='btn btn-default btn-hypothesis-group multiline <%= "collapse-answer-right" if question.required == true %>' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
+              </td>
+              <td class="multichoice">
+                <div class='collapse <%= "in" if @last_clicked_question_id == question.id.to_s %> collapse-answer <%= "collapse-answer-right" if question.required == true %>' id="collapseQuestionContent<%= question.id%>" >
+                  <%= image_tag question.image.picture.url(:original) unless question.image.nil? %>
+                  <p><%= question.content %></p>
+                </div>
+          <%end %>
+          </td>
+          </tr>
+  <% end %>
+</table>
+<br />

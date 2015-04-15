@@ -91,18 +91,27 @@ FactoryGirl.define do
     multichoice_id nil
     content "Tykkää"
     explanation "Juuri oikea vastaus"
-    is_correct_answer true
+    is_correct_answer "required"
   end
 
-    factory :question do
+  factory :question do
     question_group_id nil
     title "Oliko lehmällä veljiä?"
     content "Asiakas vastaa, että lehmällä ei ollut veljiä."
     required true
   end
 
-    factory :interview do
+  factory :question_group do
+    title "Lehmätaudit"
+  end
+
+  factory :interview do
     subtask_id nil
     title "Omistajan haastattelu"
+  end
+
+  factory :asked_question do
+    user_id nil
+    question_id nil
   end
 end

@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  validates :name, presence: true, length: {minimum: 2}
+  validates :name, presence: true, length: {minimum: 2}, uniqueness: {scope: :exercise_id}
   belongs_to :exercise
 
   has_many :completed_tasks, dependent: :destroy
@@ -8,6 +8,12 @@ class Task < ActiveRecord::Base
   has_many :task_texts, through: :subtasks
   has_many :multichoices, through: :subtasks
   has_many :interviews, through: :subtasks
+  has_many :exercise_hypotheses
+
+  amoeba do
+    enable
+    include_association :subtasks
+  end
 
   def self.get_highest_level(exercise)
     highest_level = exercise.tasks.maximum("level")
@@ -63,5 +69,14 @@ class Task < ActiveRecord::Base
       return name
     end
     return return_string
+  end
+
+  def reset_prerequisites
+
+    anamnesis = exercise.tasks.where(name: "Anamneesi").first
+    exercise_hypotheses.each do |ex_hyp|
+      ex_hyp.update(task:anamnesis)
+    end
+
   end
 end

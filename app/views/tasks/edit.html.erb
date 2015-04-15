@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-<p id="alert"><%= alert %></p>
+<%= render 'messages/messages' %>
 
 <div class = "row">
   <div class = "col-md-6">
@@ -40,11 +39,14 @@
 <br>
 
 <script>
-    setAjaxSubmits("#currentTaskTab #form-update-task", "#currentTaskTab", "post");
+    setAjaxSubmits("#currentTaskTab #form-update-task", "#currentTaskTab", "post", function(){
+        loadView("/tasks", "#taskTab");
+        loadView("/hypotheses", "#hypothesisTab");
+    });
     setAjaxSubmits("#currentTaskTab #form-delete-task", "#taskTab", "post", function(){
         showTab("#taskTab");
         closeTab("#currentTaskTab");
-
+        loadView("/hypotheses", "#hypothesisTab");
     });
     setAjaxSubmits("#currentTaskTab .form-subtask", "#currentTaskTab", "get");
     setAjaxSubmits("#currentTaskTab .form-show-task", "#currentTaskTab", "get");

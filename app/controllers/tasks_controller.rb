@@ -8,13 +8,15 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     @user = current_user
+    @last_clicked_task_id = params[:last_clicked_task_id]
 
     @exercise = current_exercise
     if @exercise
       if current_user_is_admin
         @tasks = @exercise.tasks.where("level > ?", 0).order("level")
       else
-        @tasks = @exercise.tasks.where("level > ?", 0).order("name")
+        @available_tasks = @exercise.tasks.where("level > ?", 0).order("name") - @user.tasks.where("level > ?", 0).where(exercise:@exercise)
+        @completed_tasks = @user.tasks.where("level > ?", 0).where(exercise:@exercise)
       end
     else
       redirect_to exercises_path, alert: 'Valitse ensin case, jota haluat tarkastella!'
@@ -32,12 +34,15 @@ class TasksController < ApplicationController
         session[:task_id] = params[:id]
       else
         respond_to do |format|
-          format.html { redirect_to tasks_url(:layout => get_layout), alert: 'Et voi vielä suorittaa tätä toimenpidettä.' and return }
+          format.html { redirect_to tasks_url(:layout => get_layout, :last_clicked_task_id => params[:id]), alert: 'Et voi vielä suorittaa tätä toimenpidettä.' and return }
         end
       end
     else
       @task = Task.find(params[:id])
     end
+
+    @multichoice_checked_options = params[:multichoice_checked_options].to_a
+    @last_clicked_question_id = params[:last_clicked_question_id]
 
     @subtasks = @task.subtasks
     @new_completed_task = CompletedTask.new
@@ -80,7 +85,7 @@ class TasksController < ApplicationController
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide luotiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @task }
       else
-        format.html { redirect_to tasks_url(:layout => get_layout), alert: 'Toimenpiteen luonti epäonnistui.' }
+        format.html { redirect_to new_task_path(:layout => get_layout), alert: 'Toimenpiteen luonti epäonnistui.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -103,6 +108,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
+    @task.reset_prerequisites
     session[:task_id] = nil
     @task.destroy
     respond_to do |format|

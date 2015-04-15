@@ -18,6 +18,7 @@ RSpec.describe Subtask, type: :model do
     end
   end
 
+=begin
   describe "with incorrect id" do
 
     it "is not saved" do
@@ -26,6 +27,7 @@ RSpec.describe Subtask, type: :model do
       expect(Subtask.count).to eq(0)
     end
   end
+=end
 
   describe "template" do
 

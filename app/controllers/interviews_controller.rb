@@ -56,7 +56,7 @@ class InterviewsController < ApplicationController
 		current_user.ask_question(Question.find(question_params[:question_id]))
 
 		respond_to do |format|
-			format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout) }
+			format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout, :last_clicked_question_id => question_params[:question_id]) }
 		end
 	end
 
@@ -66,7 +66,7 @@ class InterviewsController < ApplicationController
 				current_user.complete_subtask(@interview.subtask)
 				format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout) }
 			else
-				format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout), alert: 'Et ole vielä kysynyt kaikkia tarpeellisia kysymyksiä!' }
+				format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout), alert: 'Et ole vielä valinnut kaikki tarpeellisia vaihtoehtoja!' }
 			end
 		end
 	end

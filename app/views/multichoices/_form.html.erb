@@ -13,7 +13,7 @@
 
     <div class="field">
       <%= f.label :question%><br>
-      <%= f.text_field :question, :class => "form-control" %>
+      <%= f.text_field :question, placeholder: "Kysymys", :class => "form-control" %>
     </div>
     <br>
 
@@ -28,6 +28,6 @@
     <br>
 
     <div class="actions">
-      <%= f.submit "Tallenna kysymys", :class => 'btn btn-default btn-save widthAuto'%>
+      <%= f.submit :class => 'btn btn-default btn-save widthAuto'%>
     </div>
 <% end %>

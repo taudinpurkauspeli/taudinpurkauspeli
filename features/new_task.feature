@@ -35,7 +35,7 @@ Feature: New task feature
     And I press the button "Tallenna"
     And I press the button "+ Luo uusi monivalinta-alitoimenpide"
     And I fill in multichoice question
-    And I press the button "Tallenna kysymys"
+    And I press the button "Tallenna"
     Then page should have a message: "Kysymys lisättiin onnistuneesti!"
     And multichoice should be in the database
 
@@ -60,7 +60,7 @@ Feature: New task feature
     And I press the button "Tallenna"
     And I press the button "+ Luo uusi monivalinta-alitoimenpide"
     And I fill fill in radiobutton question and select radiobutton option
-    And I press the button "Tallenna kysymys"
+    And I press the button "Tallenna"
     Then page should have a message: "Kysymys lisättiin onnistuneesti!"
     And radiobutton should be in the database
 
@@ -74,3 +74,27 @@ Feature: New task feature
     And I press the button "Tallenna"
     Then page should have a message: "Vaihtoehto lisättiin onnistuneesti."
     And right radiobutton option should be in the database
+
+Scenario: Teacher can create a task with interview
+    Given I have logged in as a teacher
+    And Cases have been created
+    And I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
+    And I press the button "+ Luo uusi toimenpide"
+    When I fill in task name
+    And I press the button "Tallenna"
+    And I press the button "+ Luo uusi haastattelu"
+    And I fill in interview title
+    And I press the button "Tallenna"
+    Then page should show the new interview title
+    And interview should be in the database
+
+Scenario: Teacher can create a task with interview and questions
+    Given I have logged in as a teacher
+    And Cases have been created
+    And Task with interview has been created
+    And I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
+    When I go to the interview edit page
+    And I fill in question title and content
+    And I press the button "Tallenna"
+    # page should show the new question title
+    And question should be in the database

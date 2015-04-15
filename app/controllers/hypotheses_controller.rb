@@ -11,6 +11,8 @@ class HypothesesController < ApplicationController
       @hypothesis_groups = HypothesisGroup.all
       @tasks = @exercise.tasks
 
+      @last_clicked_hypothesis_id = params[:last_clicked_hypothesis_id]
+
       #new instances
       @new_exercise_hypothesis = ExerciseHypothesis.new
       @new_hypothesis_group = HypothesisGroup.new

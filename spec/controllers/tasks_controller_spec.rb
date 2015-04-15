@@ -86,7 +86,8 @@ RSpec.describe TasksController, :type => :controller do
     describe "with valid params" do
       it "assigns correct level" do
         for i in 1..5
-          post :create, {:task => valid_attributes}, valid_session
+          new_valid_attributes = {name: "Soita asiakkaalle" + i.to_s, exercise_id: exercise.id, level: 2}
+          post :create, {:task => new_valid_attributes}, valid_session
         end
         expect(Task.get_highest_level(exercise)).to eq(5)
       end
@@ -100,7 +101,7 @@ RSpec.describe TasksController, :type => :controller do
 
       it "redirects to the task list" do
         post :create, {:task => invalid_attributes}, valid_session
-        expect(response).to redirect_to(tasks_path(:layout => true))
+        expect(response).to redirect_to(new_task_path(:layout => true))
       end
     end
   end
@@ -138,16 +139,9 @@ RSpec.describe TasksController, :type => :controller do
 
 
       let!(:task2){FactoryGirl.create(:task, exercise:exercise, level: 1)}
-      let!(:task3){FactoryGirl.create(:task, exercise:exercise, level: 2)}
+      let!(:task3){FactoryGirl.create(:task, name: "Soita lääkärille", exercise:exercise, level: 2)}
 
       it "changes the level when no siblings & no children" do
-
-      # expect(:post => "tasks/2/up").to route_to(
-                                   #           :controller => "tasks",
-                                   #           :action => "level_up",
-                                   #           :id => "2"
-                                   #       )
-
 
         expect {
          post :level_up, {:id => task3.id}, valid_session

@@ -1,6 +1,4 @@
 class ExerciseHypothesis < ActiveRecord::Base
-  validates :exercise_id, presence: true
-  validates :hypothesis_id, presence: true
 
 	belongs_to :exercise
 	belongs_to :hypothesis
@@ -10,6 +8,11 @@ class ExerciseHypothesis < ActiveRecord::Base
   has_many :users, through: :checked_hypotheses
 
   has_one :hypothesis_group, through: :hypothesis
+
+  amoeba do
+    enable
+    exclude_association [:checked_hypotheses, :users, :hypothesis_group, :hypothesis, :exercise]
+  end
 
   def get_prerequisite
     return task
