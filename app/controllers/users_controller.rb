@@ -11,8 +11,10 @@ class UsersController < ApplicationController
 
     if params[:exercise].nil? || params[:exercise] == "0"
       @shown_exercises = @exercises
+      @selected_exercise_id = "0"
     else
       @shown_exercises  = Exercise.where("id = ?", params[:exercise])
+      @selected_exercise_id = params[:exercise]
     end
     
   end
