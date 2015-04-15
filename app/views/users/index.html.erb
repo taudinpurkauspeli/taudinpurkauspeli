@@ -1,6 +1,6 @@
 <%= render 'messages/messages' %>
 
-<h1>KOpiskelijoiden tiedot</h1>
+<h1>Opiskelijoiden tiedot</h1>
 
 <% @exercises.each do |exercise| %>
   <div class = "row">
@@ -9,46 +9,38 @@
     </div>
     <div class = "col-md-12">
 
-<div class="panel panel-default">
-  <div class="panel-body">
-    <table>
-        <thead>
-        <tr>
-          <th>Käyttäjä</th>
-          <th colspan="3"></th>
-        </tr>
-        </thead>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <table>
+              <thead>
+              <tr>
+                <th>Käyttäjä</th>
+                <th colspan="3"></th>
+              </tr>
+              </thead>
 
-        <%
-          tasks_of_ex = exercise.tasks
-          users_of_ex = Array.new()
+              <%
+                tasks_of_ex = exercise.tasks
+                users_of_ex = Array.new()
 
-          exercise.tasks.each do |task|
-            users_of_ex += task.users
-          end
+                exercise.tasks.each do |task|
+                  users_of_ex += task.users
+                end
 
-          users_of_ex = users_of_ex.uniq
-        %>
+                users_of_ex = users_of_ex.uniq
+              %>
 
-        <tbody>
-        <% users_of_ex.each do |user| %>
-            <tr>
-              <td><%= link_to user.username, user %></td>
-            </tr>
-        <% end %>
-        </tbody>
-      </table>
-  </div>
-</div>
-
-      
+              <tbody>
+              <% users_of_ex.each do |user| %>
+                  <tr>
+                    <td><%= link_to user.realname, user %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+        </div>
+      </div>
 
     </div>
   </div>
 <% end %>
-
-
-
-<br>
-
-<%= link_to 'New User', new_user_path %>
