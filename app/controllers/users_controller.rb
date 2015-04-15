@@ -5,8 +5,17 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+
+    if params[:exercise].nil?
+      @exercises = Exercise.all
+    else
+      @exercises = Exercise.where("id = ?", params[:exercise])
+    end
+
+    @exercises_all = Exercise.all
+
     @users = User.all
-    @exercises = Exercise.all
+    
   end
 
   # GET /users/1

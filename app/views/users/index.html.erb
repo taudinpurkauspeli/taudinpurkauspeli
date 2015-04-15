@@ -2,6 +2,11 @@
 
 <h1>Opiskelijoiden tiedot</h1>
 
+
+<%= form_tag(users_path, method: :get) do %>
+<%= select_tag 'exercise', options_for_select(@exercises_all.collect{ |e| [e.name, e.id] }), :onchange => "this.form.submit();" %>
+<% end %>
+
 <% @exercises.each do |exercise| %>
   <div class = "row">
     <div class = "col-md-12">
