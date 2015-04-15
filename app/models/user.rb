@@ -18,8 +18,8 @@ class User < ActiveRecord::Base
   has_many :subtasks, through: :completed_subtasks
 
   def has_asked_all_required_questions_of(interview)
-    asked = questions.where(interview:interview).where(required:true)
-    required = interview.questions.where(required:true)
+    asked = questions.where(interview:interview).required
+    required = interview.questions.required
     return (asked - required).empty? && (required - asked).empty?
   end
 
