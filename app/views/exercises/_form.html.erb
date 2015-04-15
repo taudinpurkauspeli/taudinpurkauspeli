@@ -23,7 +23,7 @@
 
     <div class="field">
       <%= f.label :anamnesis%><br>
-      <%= f.text_area :anamnesis, placeholder: "Anamneesi", :class => 'width100', :rows => '10' %>
+      <%= f.cktext_area :anamnesis, placeholder: "Anamneesi", :class => 'width100', :rows => '10' , :ckeditor => {:language => 'fi'}%>
     </div>
     <br>
 

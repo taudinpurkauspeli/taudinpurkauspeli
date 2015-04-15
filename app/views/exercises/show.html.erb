@@ -18,7 +18,7 @@
       <% if @exercise.anamnesis.nil? || @exercise.anamnesis == "" %>
           <%= link_to 'Casen anamneesia ei ole asetettu.', edit_exercise_path(@exercise) %>
       <% else %>
-          <%= @exercise.anamnesis %>
+          <%= @exercise.anamnesis.html_safe %>
       <% end %>
     </div>
   </div>

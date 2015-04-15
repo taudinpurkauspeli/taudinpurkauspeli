@@ -30,6 +30,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Twitter Boostrap
 gem 'bootstrap-sass'
 
+# Text editor
+gem 'ckeditor'
+
 # Password encryption
 #gem 'bcrypt-ruby', '~> 3.1.2'
 
