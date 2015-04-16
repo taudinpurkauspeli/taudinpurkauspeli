@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :completed_tasks, -> {order('created_at DESC')}, dependent: :destroy
   has_many :tasks, through: :completed_tasks
   has_many :completed_subtasks, dependent: :destroy
+  has_many :completed_exercises
+  has_many :exercises, through: :completed_exercises
 
   has_many :subtasks, through: :completed_subtasks
 
@@ -23,12 +25,15 @@ class User < ActiveRecord::Base
     return (asked - required).empty? && (required - asked).empty?
   end
 
-  def has_completed?(completable_task)
-    if completable_task.class == Subtask
-      return !completed_subtasks.where(subtask:completable_task).empty?
+  def has_completed?(completable_object)
+    if completable_object.class == Subtask
+      return !(completed_subtasks.where subtask:completable_object).empty?
     end
-    if completable_task.class == Task
-      return !completed_tasks.where(task:completable_task).empty?
+    if completable_object.class == Task
+      return !(completed_tasks.where task:completable_object ).empty?
+    end
+    if completable_object.class == Exercise
+      return !(exercises.find_by id:completable_object.id).nil?
     end
   end
 
@@ -43,13 +48,21 @@ class User < ActiveRecord::Base
   def complete_subtask(subtask)
     completed_subtasks.create(subtask:subtask)
     task_in_progress = subtask.task
-    if task_in_progress.subtasks.last == subtask
+    exercise = task_in_progress.exercise
+    if subtask == task_in_progress.subtasks.last
       complete_task(task_in_progress)
+      if exercise.tasks.where(level:1...999).count == tasks.count
+        complete_exercise(exercise)
+      end
     end
   end
 
   def complete_task(task)
     completed_tasks.create(task:task)
+  end
+
+  def complete_exercise(exercise)
+    completed_exercises.create(exercise:exercise)
   end
 
   def ask_question(question)

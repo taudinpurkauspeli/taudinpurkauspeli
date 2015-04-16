@@ -1,0 +1,29 @@
+    <div class="row">
+
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-9">
+          <h4><%= subtask.conclusion.title %></h4>
+          <p><%= subtask.conclusion.content %></p>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <% @exercise_hypotheses.each do |exhyp| %>
+        <div class="row">
+          <% if !current_user.has_checked_hypothesis?(exhyp) %>
+          <div class="col-md-9">
+            <%= form_tag("conclusions/" + subtask.conclusion.id.to_s + "/check_answers", method: "post") do %>
+            <%= hidden_field_tag :exhyp_id, exhyp.id %>
+            <%= submit_tag(exhyp.name, :class => "btn btn-default multiline width95 floatRight") unless current_user_is_admin %>
+            <% end %>
+          </div>
+
+        </div>
+        <% end %>
+        <%end%>
+      </div>
+
+    </div>
+
+
