@@ -64,12 +64,9 @@ class ConclusionsController < ApplicationController
 		respond_to do |format|
 			if @conclusion.user_answered_correctly?(current_user, check_conclusion_params[:exhyp_id])
 				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout), notice: 'Valitsit oikein!' }
-				puts "NAKKI"
 			else
-				puts "MUUSI"
 				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout), alert: 'Valitsit väärin!' }
 
-				# format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :multichoice_checked_options => checked_options_params[:checked_options]), alert: 'Valinnoissa oli vielä virheitä!' }
 			end
 		end
 	end

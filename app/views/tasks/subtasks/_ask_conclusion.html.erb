@@ -1,10 +1,13 @@
     <div class="row">
+
       <div class="row">
+        <div class="col-md-1"></div>
         <div class="col-md-9">
-          <p><%= subtask.conclusion.title %></p>
+          <h4><%= subtask.conclusion.title %></h4>
           <p><%= subtask.conclusion.content %></p>
         </div>
       </div>
+
       <div class="col-md-9">
         <% @exercise_hypotheses.each do |exhyp| %>
         <div class="row">
@@ -20,6 +23,7 @@
         <% end %>
         <%end%>
       </div>
+
     </div>
 
 
