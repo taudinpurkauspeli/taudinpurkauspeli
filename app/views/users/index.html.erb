@@ -4,6 +4,7 @@
 
 
 <%= form_tag(users_path, method: :get) do %>
+<%= label_tag 'exercise', 'Case: ' %>
 <%= select_tag 'exercise', options_for_select([["Kaikki", 0]] + @exercises.collect{ |e| [e.name, e.id] }, @selected_exercise_id), :onchange => "this.form.submit();", :class => 'form-control widthAuto' %>
 <% end %>
 
@@ -29,7 +30,10 @@
               <% exercise.get_users.each do |user| %>
                   <tr>
                     <td class = "user"><%= link_to user.realname, user %></td>
-                    <td class = "user"><%= user.get_percent_of_completed_tasks_of_exercise(exercise) %></td>
+                    <td class = "user">
+                      <div class ="progressbar" ><div class = "progressbar progress" style = "width: <%= 100 - user.get_percent_of_completed_tasks_of_exercise(exercise) %>%;"></div></div>
+                      <span class = "progress-percent"><%= user.get_percent_of_completed_tasks_of_exercise(exercise) %>%</span>
+                    </td>
 
                     <%# model.options.references( :model_options ).where( model_options: { active: true }) %>
                   </tr>
