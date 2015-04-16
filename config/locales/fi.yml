@@ -21,6 +21,9 @@
 # fi.activerecord.errors.models.task_text.attributes.content.blank
 # 
 fi:
+  ckeditor:
+    buttons:
+      upload: "Lataa"
   helpers:
     submit:
       create: "Tallenna"

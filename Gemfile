@@ -33,6 +33,8 @@ gem 'bootstrap-sass'
 # Text editor
 gem 'ckeditor'
 
+gem 'responders'
+
 # Password encryption
 #gem 'bcrypt-ruby', '~> 3.1.2'
 
