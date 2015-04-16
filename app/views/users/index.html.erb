@@ -54,3 +54,6 @@
     </div>
   </div>
 <% end %>
+
+
+<%= button_to 'Pääsivulle', exercises_path, :class => 'btn btn-default btn-exercise widthAuto', :method => :get if current_user_is_admin%>
