@@ -96,6 +96,7 @@ fi:
           allowed: "Sallittu"
           required: "Pakollinen"
           wrong: "Väärin"
+        question_group: Kysymyksen ryhmä
       task:
         name: "Nimi"
       task_text:
