@@ -26,7 +26,7 @@ class ConclusionsController < ApplicationController
 
 		# This can be done for each different type of subtask in their respective controllers
 		subtask = @task.subtasks.build
-		@conclusion = subtask.build_conclusion(title:conclusion_params[:title], content:conclusion_params[:content])
+		@conclusion = subtask.build_conclusion(title:conclusion_params[:title], content:conclusion_params[:content], exercise_hypothesis_id:conclusion_params[:exercise_hypothesis_id],)
 
 		respond_to do |format|
 			if @conclusion.save
