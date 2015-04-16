@@ -25,4 +25,9 @@ class ExerciseHypothesis < ActiveRecord::Base
     end
     return true
   end
+
+  def name
+    return hypothesis.name
+  end
+  
 end

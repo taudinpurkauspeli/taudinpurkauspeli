@@ -1,0 +1,9 @@
+<%= render 'messages/messages' %>
+
+<h1>Muokkaa päätöstoimenpidettä</h1>
+
+<%= render 'form' %>
+
+<script>
+    setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post");
+</script>

@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20150415114959) do
+=======
 ActiveRecord::Schema.define(version: 20150415122320) do
+>>>>>>> development
 
   create_table "asked_questions", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -35,6 +39,15 @@ ActiveRecord::Schema.define(version: 20150415122320) do
     t.integer  "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "conclusions", force: :cascade do |t|
+    t.string   "title"
+    t.string   "content"
+    t.integer  "subtask_id"
+    t.integer  "exercise_hypothesis_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "exercise_hypotheses", force: :cascade do |t|

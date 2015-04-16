@@ -20,6 +20,9 @@ class SubtasksController < ApplicationController
     unless (@subtask.interview.nil?)
       redirect_to edit_interview_path(@subtask.interview.id, :layout => get_layout)
     end
+    unless (@subtask.conclusion.nil?)
+      redirect_to edit_conclusion_path(@subtask.conclusion.id, :layout => get_layout)
+    end
   end
 
   # POST /subtasks

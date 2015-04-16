@@ -47,6 +47,8 @@ class TasksController < ApplicationController
     @subtasks = @task.subtasks
     @new_completed_task = CompletedTask.new
     @new_asked_question = AskedQuestion.new
+    @exercise_hypotheses = ExerciseHypothesis.where(exercise: current_task.exercise)
+
 
     set_view_layout
 
