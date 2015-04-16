@@ -329,7 +329,7 @@ div.progressbar{
   float: left;
   width: 100px;
   height: 15px;
-  background-color: green;
+  background-color: #CCA300;
   border: 1px solid black;
   border-radius: 5px;
 }
@@ -340,6 +340,9 @@ div.progress{
   border-bottom-left-radius: 0px;
   margin-top: -1px;
   margin-right: -1px;
+}
+div.completed{
+  background-color: green;
 }
 span.progress-percent{
   float: left;
