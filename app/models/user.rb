@@ -105,5 +105,8 @@ class User < ActiveRecord::Base
     return checked_hypotheses.where(exercise_hypothesis:exercise_hypothesis).first
   end
 
+  def get_number_of_completed_tasks_by_exercise(exercise)
+    return completed_tasks.select{ |ct| ct.has_exercise?(exercise)}.count
+  end
 
 end
