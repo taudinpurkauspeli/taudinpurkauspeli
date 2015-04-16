@@ -1,34 +1,33 @@
 <%= form_for(@conclusion) do |f| %>
-    <% if @conclusion.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= t('activerecord.errors.template.header')%></h2>
+<% if @conclusion.errors.any? %>
+<div id="error_explanation">
+  <h2><%= t('activerecord.errors.template.header')%></h2>
 
-          <ul>
-            <% @conclusion.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
+  <ul>
+    <% @conclusion.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
     <% end %>
-    <div class="field">
-      <%=f.select :exercise_hypothesis_id, options_from_collection_for_select(@exercise_hypotheses, :id, :name, selected: @conclusion.exercise_hypothesis_id), { :prompt => 'Valitse casen oikea työhypoteesi' } %>
+  </ul>
+</div>
+<% end %>
+<div class="field">
+  <%=f.select :exercise_hypothesis_id, options_from_collection_for_select(@exercise_hypotheses, :id, :name, selected: @conclusion.exercise_hypothesis_id), { :prompt => 'Valitse casen oikea työhypoteesi' } %>
 
-    </div>
+</div>
 
-    <div class="field">
-      <%= f.label :title%><br>
-      <%= f.text_field :title, placeholder: "Otsikkoteksti", :class => 'form-control'%>
-    </div>
-    <br>
+<div class="field">
+  <%= f.label :title%><br>
+  <%= f.text_field :title, placeholder: "Otsikkoteksti", :class => 'form-control'%>
+</div>
+<br>
 
-    <div class="field">
-      <%= f.label :content%><br>
-      <%= f.text_area :content, placeholder: "Sisältö", :class => 'form-control', :rows => '10' %>
-    </div>
-    <br>
+<div class="field">
+  <%= f.label :content%><br>
+  <%= f.text_area :content, placeholder: "Sisältö", :class => 'form-control', :rows => '10' %>
+</div>
+<br>
 
-
-    <div class="actions">
-      <%= f.submit "Tallenna", :class => "btn btn-default btn-save widthAuto" %>
-    </div>
+<div class="actions">
+  <%= f.submit "Tallenna", :class => "btn btn-default btn-save widthAuto" %>
+</div>
 <% end %>
