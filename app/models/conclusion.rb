@@ -5,7 +5,7 @@ class Conclusion < ActiveRecord::Base
 
 
 	def user_answered_correctly?(user, final_conclusion)
-		if true
+		if final_conclusion == exercise_hypothesis.id
 			user.complete_subtask(subtask)
 			return true
 		else
