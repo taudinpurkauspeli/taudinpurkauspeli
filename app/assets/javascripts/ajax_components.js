@@ -13,10 +13,13 @@ $(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
 */
 function setAjaxSubmits(formsSelector, containerElementSelector, type, submitCallback){
 	//alert("setajaxsubmits: " + formsSelector + "; " + containerElementSelector);
+	
 	var forms = $(formsSelector);
 	var containerElement = $(containerElementSelector);
 
 	forms.submit(function(){
+		//updates superhypermastereditors!!
+		CKupdate();
 		var clickedForm = $(this);
 		var postUrl = fullUrlWithoutLayout(clickedForm.attr("action"));
 		//alert(postUrl);
@@ -41,6 +44,12 @@ function setAjaxSubmits(formsSelector, containerElementSelector, type, submitCal
     return false;
 	});
 
+}
+
+function CKupdate(){
+    for ( instance in CKEDITOR.instances ){
+        CKEDITOR.instances[instance].updateElement();
+    }
 }
 
 /**

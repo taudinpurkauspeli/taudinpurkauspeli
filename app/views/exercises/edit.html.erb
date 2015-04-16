@@ -13,10 +13,4 @@
     //back to exercise form
     setAjaxSubmits("#anamnesisTab .form-back-to-exercise", "#anamnesisTab", "get");
 
-    $('form[data-remote]').bind('ajax:before', function(){
-        for (instance in CKEDITOR.instances){
-            CKEDITOR.instances[instance].updateElement();
-        }
-    });
-
 </script>
