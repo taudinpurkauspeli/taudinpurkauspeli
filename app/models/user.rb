@@ -27,13 +27,13 @@ class User < ActiveRecord::Base
 
   def has_completed?(completable_object)
     if completable_object.class == Subtask
-      return !completed_subtasks.where(subtask:completable_object).empty?
+      return !(completed_subtasks.where subtask:completable_object).empty?
     end
     if completable_object.class == Task
-      return !completed_tasks.where(task:completable_object).empty?
+      return !(completed_tasks.where task:completable_object ).empty?
     end
     if completable_object.class == Exercise
-      return !completed_exercises.where(exercise:completable_object).empty?
+      return !(exercises.find_by id:completable_object.id).nil?
     end
   end
 

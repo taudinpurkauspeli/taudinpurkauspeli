@@ -1,6 +1,6 @@
 <%= render 'messages/messages' %>
 
-<h1> Case: <%= @exercise.name %> </h1>
+<h1> Case: <%= @exercise.name %>, completed: <%= current_user.has_completed? @exercise %> </h1>
 
 <%= image_tag @exercise.image.picture.url(:original) unless @exercise.image.nil? %>
 
