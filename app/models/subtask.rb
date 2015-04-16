@@ -44,7 +44,7 @@ class Subtask < ActiveRecord::Base
   end
 
   def to_s
-    return_string = 'Alitoimenpide'
+    return_string = 'Alakohta'
     content = ''
 
     unless task_text.nil?

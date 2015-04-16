@@ -98,7 +98,7 @@ FactoryGirl.define do
     question_group_id nil
     title "Oliko lehmällä veljiä?"
     content "Asiakas vastaa, että lehmällä ei ollut veljiä."
-    required true
+    required "required"
   end
 
   factory :question_group do

@@ -22,7 +22,7 @@ deploy:
     - restart
     - "rake cleanup"
   app:
-    development: taudinpurkauspeli-development
+   # development: taudinpurkauspeli-development
     master: taudinpurkauspeli
 
 notifications:
