@@ -76,6 +76,7 @@ describe "has_completed" do
   before(:each) do
     user.complete_subtask(subtask)
     user.complete_task(task)
+    user.complete_exercise(exercise)
   end
 
   it "finds completed task" do
@@ -84,6 +85,10 @@ describe "has_completed" do
 
   it "finds completed subtask" do
     expect(user.has_completed?(subtask)).to eq(true)
+  end
+
+  it "finds completed exercise" do
+    expect(user.has_completed?(exercise)).to eq(true)
   end
 end
 
