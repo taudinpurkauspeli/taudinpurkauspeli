@@ -20,6 +20,7 @@
       <%= form_for(question) do |f| %>
 
       <div class="col-md-2">
+        <%= f.label :question_group_id %>
         <%=f.select :question_group_id, options_from_collection_for_select(@question_groups, :id, :title, selected: question.question_group_id), { :prompt => 'Valitse ryhmä' }, { class: "form-control"} %><br>
         <%= f.label :required%><br>
         <%=f.select :required, options_for_select(@requireds.collect { |answer| [t("activerecord.attributes.question.requireds.#{answer[0]}"), answer[0]] }, selected: question.required), {}, {:id => "required_" + question.id.to_s, class: "form-control"} %><br>
@@ -28,10 +29,12 @@
       </div>
 
       <div class="col-md-3">
+        <%= f.label :title%>
         <%= f.text_area :title, placeholder: "Kysymys", :class => 'form-control' %>
 
       </div>
       <div class="col-md-4">
+        <%= f.label :content%>
         <%= f.text_area :content, placeholder: "Vastausteksti", :class => 'form-control' %>
       </div>
       <div class="col-md-2">
