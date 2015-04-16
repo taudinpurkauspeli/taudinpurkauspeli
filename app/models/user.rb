@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :completed_tasks, -> {order('created_at DESC')}, dependent: :destroy
   has_many :tasks, through: :completed_tasks
   has_many :completed_subtasks, dependent: :destroy
+  has_many :completed_exercises
+  has_many :exercises, through: :completed_exercises
 
   has_many :subtasks, through: :completed_subtasks
 
