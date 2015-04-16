@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(version: 20150415122320) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "conclusions", force: :cascade do |t|
+    t.string   "title"
+    t.string   "content"
+    t.integer  "subtask_id"
+    t.integer  "exercise_hypothesis_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "exercise_hypotheses", force: :cascade do |t|
     t.integer  "exercise_id"
     t.integer  "hypothesis_id"
