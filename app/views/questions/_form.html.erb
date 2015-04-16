@@ -17,7 +17,7 @@
     </div>
     <br>
       <%= image_tag @question.image.picture.url(:thumb) unless @question.image.nil? %>
-      <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: @question.image), { :prompt => 'Valitse kuva' } %>
+      <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: @question.image_id), { :prompt => 'Valitse kuva' } %>
     <br>
 
     <div class="field">
