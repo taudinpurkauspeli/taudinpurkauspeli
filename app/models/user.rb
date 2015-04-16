@@ -109,4 +109,8 @@ class User < ActiveRecord::Base
     return completed_tasks.select{ |ct| ct.has_exercise?(exercise)}.count
   end
 
+  def get_percent_of_completed_tasks_of_exercise(exercise)
+    return (get_number_of_completed_tasks_by_exercise(exercise) * 100) / exercise.tasks.count
+  end
+
 end

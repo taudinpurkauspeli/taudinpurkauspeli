@@ -41,7 +41,7 @@
               <% users_of_ex.each do |user| %>
                   <tr>
                     <td class = "user"><%= link_to user.realname, user %></td>
-                    <td class = "user"><%= user.get_number_of_completed_tasks_by_exercise(exercise) %></td>
+                    <td class = "user"><%= user.get_percent_of_completed_tasks_of_exercise(exercise) %></td>
 
                     <%# model.options.references( :model_options ).where( model_options: { active: true }) %>
                   </tr>
