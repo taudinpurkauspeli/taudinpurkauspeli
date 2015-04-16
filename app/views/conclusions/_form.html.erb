@@ -26,17 +26,6 @@
     </div>
     <br>
 
-    <div class="row">
-      <div class="col-md-9">
-        <% @exercise_hypotheses.each do |hypothesis| %>
-           <div class="row">
-              <div class="col-md-9">
-              <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= hypothesis.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup1<%= hypothesis.id%>"/>
-             </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
 
     <div class="actions">
       <%= f.submit "Tallenna", :class => "btn btn-default btn-save widthAuto" %>

@@ -1,0 +1,21 @@
+<p><%= subtask.conclusion.title %></p>
+<p><%= subtask.conclusion.content %></p>
+    <div class="row">
+      <div class="col-md-9">
+        <% @exercise_hypotheses.each do |exhyp| %>
+           <div class="row">
+              <% if !current_user.has_checked_hypothesis?(exhyp) %>
+              <div class="col-md-9">
+              <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= exhyp.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup1<%= exhyp.id%>"/>
+             </div>
+             <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+<%= form_tag("/conclusions/" + subtask.conclusion.id.to_s + "/check_answers", method: "post") do %>
+<%= submit_tag("Jatka", :class => "btn btn-default btn-save widthAuto") unless current_user_is_admin %>
+<% end %>
+
+

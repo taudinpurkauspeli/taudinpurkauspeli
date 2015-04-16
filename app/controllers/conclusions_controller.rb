@@ -8,6 +8,7 @@ class ConclusionsController < ApplicationController
 	end
 
 	def new
+		@hypothesis_groups = HypothesisGroup.all
 		@exercise_hypotheses = ExerciseHypothesis.where(exercise: current_task.exercise)
 		@conclusion = Conclusion.new
 		set_view_layout
@@ -15,6 +16,7 @@ class ConclusionsController < ApplicationController
 
 	# GET /conclusions/1/edit
 	def edit
+		@hypothesis_groups = HypothesisGroup.all
 		@exercise_hypotheses = ExerciseHypothesis.where(exercise: current_task.exercise)
 		set_view_layout
 	end
