@@ -25,20 +25,8 @@
                 <th class = "user">Suoritettu</th>
               </tr>
               </thead>
-
-              <%
-                tasks_of_ex = exercise.tasks
-                users_of_ex = Array.new()
-
-                exercise.tasks.each do |task|
-                  users_of_ex += task.users
-                end
-
-                users_of_ex = users_of_ex.uniq
-              %>
-
               <tbody>
-              <% users_of_ex.each do |user| %>
+              <% exercise.get_users.each do |user| %>
                   <tr>
                     <td class = "user"><%= link_to user.realname, user %></td>
                     <td class = "user"><%= user.get_percent_of_completed_tasks_of_exercise(exercise) %></td>
