@@ -60,6 +60,16 @@ class ConclusionsController < ApplicationController
 		end
 	end
 
+	def check_answers
+		respond_to do |format|
+			if @conclusion.user_answered_correctly?(current_user, check_conclusion_params[:final_conclusion].to_a)
+				format.html { redirect_to task_path(@conclsuion.subtask.task, :layout => get_layout), notice: 'Valitsit oikein!' }
+			else
+				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :multichoice_checked_options => checked_options_params[:checked_options]), alert: 'Valinnoissa oli vielä virheitä!' }
+			end
+		end
+	end
+
 	private
 
 	def conclusion_params
@@ -68,6 +78,10 @@ class ConclusionsController < ApplicationController
 
 	def set_conclusion
 		@conclusion = Conclusion.find(params[:id])
+	end
+
+	def check_conclusion_params
+		params.permit(:final_conclusion)
 	end
 
 
