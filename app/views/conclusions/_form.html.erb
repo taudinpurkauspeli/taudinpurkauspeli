@@ -16,7 +16,7 @@
 
     <div class="field">
       <%= f.label :title%><br>
-      <%= f.text_area :title, placeholder: "Otsikkoteksti", :class => 'form-control', :rows => '10' %>
+      <%= f.text_field :title, placeholder: "Otsikkoteksti", :class => 'form-control'%>
     </div>
     <br>
 
@@ -25,6 +25,18 @@
       <%= f.text_area :content, placeholder: "Sisältö", :class => 'form-control', :rows => '10' %>
     </div>
     <br>
+
+    <div class="row">
+      <div class="col-md-9">
+        <% @exercise_hypotheses.each do |hypothesis| %>
+           <div class="row">
+              <div class="col-md-9">
+              <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= hypothesis.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup1<%= hypothesis.id%>"/>
+             </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
     <div class="actions">
       <%= f.submit "Tallenna", :class => "btn btn-default btn-save widthAuto" %>
