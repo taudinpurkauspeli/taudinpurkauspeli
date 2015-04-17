@@ -10,7 +10,9 @@ class Interview < ActiveRecord::Base
 		include_association :questions
 	end
 
-	def user_has_asked_all_required(user)
-		user.questions
-	end
+	def all_questions_asked_by?(user)
+    asked = user.questions.where(interview:self).required
+    required = questions.required
+    return (asked - required).empty? && (required - asked).empty?
+  end
 end

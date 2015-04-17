@@ -19,12 +19,6 @@ class User < ActiveRecord::Base
 
   has_many :subtasks, through: :completed_subtasks
 
-  def has_asked_all_required_questions_of(interview)
-    asked = questions.where(interview:interview).required
-    required = interview.questions.required
-    return (asked - required).empty? && (required - asked).empty?
-  end
-
   def has_completed?(completable_object)
     if completable_object.class == Subtask
       return !(completed_subtasks.where subtask:completable_object).empty?
