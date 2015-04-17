@@ -44,45 +44,6 @@ RSpec.describe ExerciseHypothesesController, :type => :controller do
       user_id: 1
   } }
 
-
-
-  describe "GET edit" do
-    it "assigns the requested exercise_hypothesis as @exercise_hypothesis" do
-      exercise_hypothesis = ExerciseHypothesis.create! valid_attributes
-      get :edit, {:id => exercise_hypothesis.to_param}, valid_session
-      expect(assigns(:exercise_hypothesis)).to eq(exercise_hypothesis)
-    end
-  end
-=begin
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new ExerciseHypothesis" do
-        expect {
-          post :create, {:exercise_hypothesis => valid_attributes}, valid_session
-        }.to change(ExerciseHypothesis, :count).by(1)
-      end
-
-      it "assigns a newly created exercise_hypothesis as @exercise_hypothesis" do
-        post :create, {:exercise_hypothesis => valid_attributes}, valid_session
-        expect(assigns(:exercise_hypothesis)).to be_a(ExerciseHypothesis)
-        expect(assigns(:exercise_hypothesis)).to be_persisted
-      end
-
-      it "redirects to the created exercise_hypothesis" do
-        post :create, {:exercise_hypothesis => valid_attributes}, valid_session
-        expect(response).to redirect_to(hypotheses_path(:layout => true))
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved exercise_hypothesis as @exercise_hypothesis" do
-        post :create, {:exercise_hypothesis => invalid_attributes}, valid_session
-        expect(assigns(:exercise_hypothesis)).to be_a_new(ExerciseHypothesis)
-      end
-    end
-  end
-=end
-
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
