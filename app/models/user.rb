@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates :realname, presence: true, length: { minimum: 4 }
   validates :email, presence: true
+  validates :student_number, presence: true, uniqueness: true , length: { is: 9 }
+  validates :starting_year, presence: true
 
   has_secure_password
 
@@ -106,5 +108,13 @@ class User < ActiveRecord::Base
 
   def get_checked_hypothesis(exercise_hypothesis)
     return checked_hypotheses.where(exercise_hypothesis:exercise_hypothesis).first
+  end
+
+  def get_number_of_completed_tasks_by_exercise(exercise)
+    return completed_tasks.select{ |ct| ct.has_exercise?(exercise)}.count
+  end
+
+  def get_percent_of_completed_tasks_of_exercise(exercise)
+    return (get_number_of_completed_tasks_by_exercise(exercise) * 100) / (exercise.tasks.count - 1) #anamnesis is an exercise
   end
 end

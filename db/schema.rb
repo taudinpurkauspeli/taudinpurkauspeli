@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20150416104311) do
 
   create_table "asked_questions", force: :cascade do |t|
@@ -171,6 +172,8 @@ ActiveRecord::Schema.define(version: 20150416104311) do
     t.string   "email"
     t.string   "realname"
     t.string   "password_digest"
+    t.string   "student_number"
+    t.integer  "starting_year"
   end
 
 end

@@ -8,52 +8,53 @@ RSpec.describe User, :type => :model do
   end
 
   it "cannot be saved with no username" do
-    user = User.create username:"", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com"
+    user = User.create username:"", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
 
     expect(user).not_to be_valid
     expect(User.count).to eq(0)
   end
 
   it "cannot be saved with no realname" do
-    user = User.create username:"Pekka", realname:"", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com"
+    user = User.create username:"Pekka", realname:"", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
 
     expect(user).not_to be_valid
     expect(User.count).to eq(0)
   end
 
   it "cannot be saved with no email" do
-    user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:""
+    user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"", student_number: "000000001", starting_year: 2000
 
     expect(user).not_to be_valid
     expect(User.count).to eq(0)
   end
 
   it "cannot be saved with no password" do
-    user = User.create username:"Pekka", realname:"Pera", password:"", password_confirmation: "Salasana1", email:"pekka@gmail.com"
+    user = User.create username:"Pekka", realname:"Pera", password:"", password_confirmation: "Salasana1", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
 
     expect(user).not_to be_valid
     expect(User.count).to eq(0)
   end
 
   it "cannot be saved with no valid password confirmation" do
-    user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "", email:"pekka@gmail.com"
+    user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
 
     expect(user).not_to be_valid
     expect(User.count).to eq(0)
   end
 
   it "can be saved with correct information" do
-  	user = User.new username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com"
+  	user = User.new username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
   	user.save
   	expect(User.count).to eq(1)
   end
 
   it "cannot be saved if username is not unique" do
-    User.create username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com"
+    User.create username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
 
    #FactoryGirl.create(:user)
 
-   user = User.create username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com"
+
+  	user = User.create username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
 
    expect(user).not_to be_valid
    expect(User.count).to eq(1)
@@ -66,6 +67,7 @@ RSpec.describe User, :type => :model do
   user.completed_tasks.create(task:task)
   expect(user.get_number_of_tasks_by_level(exercise, task.level)).to eq(1)
 end
+
 
 describe "has_completed" do
   let!(:exercise){FactoryGirl.create(:exercise)}

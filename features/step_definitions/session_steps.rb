@@ -16,10 +16,12 @@ When(/^I fill in the form with correct values$/) do
   fill_in('user_password_confirmation', with: 'Nauta on koullut')
   fill_in('user_realname', with: 'Teppo Testaaja')
   fill_in('user_email', with: 'nauta@on.koullut')
+  fill_in('user_student_number', with: '000000000')
+  select(2000, from:'user[starting_year]')
 end
 
 Given(/^I have a user account$/) do
-  User.create username:'Testikäyttäjä', password:'Nauta on koullut', password_confirmation:'Nauta on koullut', realname:'Teppo Testaaja', email:'nauta@on.koullut'
+  User.create username:'Testikäyttäjä', password:'Nauta on koullut', password_confirmation:'Nauta on koullut', realname:'Teppo Testaaja', email:'nauta@on.koullut', student_number: '000000000', starting_year: 2000
 end
 
 When(/^I enter my username and password$/) do

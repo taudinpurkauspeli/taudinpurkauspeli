@@ -95,13 +95,13 @@ li.active>a{
 //**************
 
 .panel-default{
-  border-radius: 10px;
+  border-radius: 5px;
   border-width: 0px
 
 }
 .panel-heading{
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
   border-width: 0px
 }
 .panel-heading-tasks{
@@ -324,6 +324,31 @@ li.active>a{
   background-color: $PaleLightGreen;
 }
 
+
+div.progressbar{
+  float: left;
+  width: 100px;
+  height: 15px;
+  background-color: #CCA300;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+div.progress{
+  float: right;
+  background-color: white;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  margin-top: -1px;
+  margin-right: -1px;
+}
+div.completed{
+  background-color: green;
+}
+span.progress-percent{
+  float: left;
+  margin-left: 20px;
+}
+
 //***************
 //*   Inputs    *
 //***************
@@ -387,6 +412,13 @@ td.wrong-answer{
 }
 td.correct-answer{
   background-color: $PaleLightGreen;
+}
+td.user{
+  border-top: 1px solid #AAA;
+  padding: 5px;
+}
+th.user{
+  padding: 5px;
 }
 
 
