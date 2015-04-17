@@ -17,7 +17,7 @@ When(/^I fill in the form with correct values$/) do
   fill_in('user_realname', with: 'Teppo Testaaja')
   fill_in('user_email', with: 'nauta@on.koullut')
   fill_in('user_student_number', with: '000000000')
-  fill_in('user_starting_year', with: 2000)
+  select(2000, from:'user[starting_year]')
 end
 
 Given(/^I have a user account$/) do
