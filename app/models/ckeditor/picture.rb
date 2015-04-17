@@ -1,6 +1,6 @@
 class Ckeditor::Picture < Ckeditor::Asset
   has_attached_file :data,
-                    :styles => { :content => '800>', :thumb => '100x100#' },
+                    :styles => { :content => '1070>', :thumb => '100x100#' },
                     :storage => :s3,
                     :s3_credentials => {
                             :bucket => ENV['S3_BUCKET_NAME'],
