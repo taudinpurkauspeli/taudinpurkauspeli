@@ -5,7 +5,18 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+
+    @exercises = Exercise.all
     @users = User.all
+
+    if params[:exercise].nil? || params[:exercise] == "0"
+      @shown_exercises = @exercises
+      @selected_exercise_id = "0"
+    else
+      @shown_exercises  = Exercise.where("id = ?", params[:exercise])
+      @selected_exercise_id = params[:exercise]
+    end
+    
   end
 
   # GET /users/1

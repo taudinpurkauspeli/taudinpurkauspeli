@@ -120,5 +120,12 @@ class User < ActiveRecord::Base
     return checked_hypotheses.where(exercise_hypothesis:exercise_hypothesis).first
   end
 
+  def get_number_of_completed_tasks_by_exercise(exercise)
+    return completed_tasks.select{ |ct| ct.has_exercise?(exercise)}.count
+  end
+
+  def get_percent_of_completed_tasks_of_exercise(exercise)
+    return (get_number_of_completed_tasks_by_exercise(exercise) * 100) / (exercise.tasks.count - 1) #anamnesis is an exercise
+  end
 
 end
