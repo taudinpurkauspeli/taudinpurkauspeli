@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20150416104311) do
 
   create_table "asked_questions", force: :cascade do |t|
@@ -65,14 +64,10 @@ ActiveRecord::Schema.define(version: 20150416104311) do
 
   create_table "exercises", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text     "anamnesis"
     t.boolean  "hidden"
-    t.string   "picture_file_name"
-    t.string   "picture_content_type"
-    t.integer  "picture_file_size"
-    t.datetime "picture_updated_at"
     t.integer  "image_id"
   end
 
@@ -119,8 +114,8 @@ ActiveRecord::Schema.define(version: 20150416104311) do
     t.string   "explanation"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.integer  "is_correct_answer", default: 0
     t.integer  "image_id"
+    t.integer  "is_correct_answer", default: 0
   end
 
   create_table "question_groups", force: :cascade do |t|
