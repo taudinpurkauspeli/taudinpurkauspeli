@@ -68,25 +68,6 @@
   <div class="row panel-body">
     <div class = "nakki">
       <%= form_for(@new_question) do |f| %>
-      <div class="col-md-1">
-        <%= f.label :required%><br>
-        <%= f.check_box :required, :value => true %>
-      </div>
-      <div class="col-md-4">
-        <%= f.text_area :title, placeholder: "Kysymys", :class => 'form-control' %>
-      </div>
-      <div class="col-md-4">
-        <%= f.text_area :content, placeholder: "Vastausteksti", :class => 'form-control' %>
-      </div>
-      <div class="col-md-2">
-        <%= image_tag @new_question.image.picture.url(:thumb) unless @new_question.image.nil? %>
-        <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: @new_question.image), { :prompt => 'Valitse kuva' } %>
-      </div>
-      <div class="col-md-1">
-        <%= f.submit 'Tallenna', :class => 'btn btn-default btn-save' %>
-      </div>
-
-<<<<<<< HEAD
       <%= f.label :required%><br>
       <div class="col-md-2">
         <%=f.select :required, options_for_select(@requireds.collect { |answer| [t("activerecord.attributes.question.requireds.#{answer[0]}"), answer[0]] }, selected: @new_question.required), {}, {class: "form-control"} %>
@@ -105,9 +86,6 @@
       <div class="col-md-1">
         <%= f.submit 'Tallenna', :class => 'btn btn-default btn-save' %>
       </div>
-
-=======
->>>>>>> development
       <%= f.hidden_field :interview_id, :value => @interview.id %>
       <% end %>
 
