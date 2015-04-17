@@ -13,7 +13,7 @@
         <div class="row">
           <% if !current_user.has_checked_hypothesis?(exhyp) %>
           <div class="col-md-9">
-            <%= form_tag("conclusions/" + subtask.conclusion.id.to_s + "/check_answers", method: "post") do %>
+            <%= form_tag("conclusions/" + subtask.conclusion.id.to_s + "/check_answers", method: "post", :id => 'check_exhyp_form') do %>
             <%= hidden_field_tag :exhyp_id, exhyp.id %>
             <%= submit_tag(exhyp.name, :class => "btn btn-default multiline width95 floatRight") unless current_user_is_admin %>
             <% end %>

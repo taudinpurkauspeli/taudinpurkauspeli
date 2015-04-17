@@ -63,7 +63,7 @@ class InterviewsController < ApplicationController
   # TODO fix user_has_completed redirect logic
 	def check_answers
 		respond_to do |format|
-			if current_user.has_asked_all_required_questions_of(@interview)
+			if @interview.all_questions_asked_by?(current_user)
 				current_user.complete_subtask(@interview.subtask)
         if(current_user.has_completed?(current_exercise))
           format.html { redirect_to exercise_path(current_exercise, :layout => get_layout) }
