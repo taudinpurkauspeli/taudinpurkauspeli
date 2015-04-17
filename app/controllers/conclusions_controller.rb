@@ -66,6 +66,8 @@ class ConclusionsController < ApplicationController
 				current_user.check_all_hypotheses(current_task.exercise)
 				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout), notice: 'Valitsit oikein!' }
 			else
+				exhyp = ExerciseHypothesis.find(check_conclusion_params[:exhyp_id])
+				current_user.check_hypothesis(exhyp)
 				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :wrong_conclusion => check_conclusion_params[:exhyp_id]), alert: 'Valitsit väärin!' }
 
 			end
