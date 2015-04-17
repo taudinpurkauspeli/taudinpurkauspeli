@@ -25,7 +25,12 @@
     setAjaxSubmits("#currentTaskTab form:not(.form-task-completed, .form-edit-task)", "#currentTaskTab", "post", function(){
         loadView("/tasks", "#taskTab");
     });
+    setAjaxSubmits("#currentTaskTab #check_exhyp_form", "#currentTaskTab", "post", function(){
+        loadView("/hypotheses", "#hypothesisTab");
+    });
+
     setAjaxSubmits("#currentTaskTab .form-edit-task", "#currentTaskTab", "get");
+
     setGoToTab("#form-open-hypotheses-tab", "#hypothesisTab");
     setGoToTab("#form-open-tasks-tab", "#taskTab");
 </script>

@@ -63,6 +63,7 @@ class ConclusionsController < ApplicationController
 	def check_answers
 		respond_to do |format|
 			if @conclusion.user_answered_correctly?(current_user, check_conclusion_params[:exhyp_id])
+				current_user.check_all_hypotheses(current_task.exercise)
 				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout), notice: 'Valitsit oikein!' }
 			else
 				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :wrong_conclusion => check_conclusion_params[:exhyp_id]), alert: 'Valitsit väärin!' }

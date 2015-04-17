@@ -102,6 +102,14 @@ class User < ActiveRecord::Base
     return number_of_tasks
   end
 
+  def check_all_hypotheses(exercise)
+    exercise.exercise_hypotheses.each do |exhyp|
+      unless has_checked_hypothesis?(exhyp)
+        checked_hypotheses.create(exercise_hypothesis:exhyp)
+      end
+    end
+  end
+
   def has_completed_task(id)
     return completed_tasks.where(id:id).nil?
   end
