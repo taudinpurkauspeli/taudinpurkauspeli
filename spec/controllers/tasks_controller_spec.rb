@@ -60,6 +60,7 @@ RSpec.describe TasksController, :type => :controller do
 
   describe "GET show" do
     it "assigns the requested task as @task" do
+
       task = Task.create! valid_attributes
       get :show, {:id => task.to_param}, valid_session
       expect(assigns(:task)).to eq(task)
