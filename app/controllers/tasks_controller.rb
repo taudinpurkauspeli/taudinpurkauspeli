@@ -29,6 +29,11 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
 
+    #such hack
+    unless session[:exhyp_id].nil?
+      @wrong_conclusion = ExerciseHypothesis.find(session[:exhyp_id])
+    end
+
     unless current_user_is_admin
       if user_can_start_task(current_user, current_exercise, @task)
         session[:task_id] = params[:id]
