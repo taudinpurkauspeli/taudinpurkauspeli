@@ -85,15 +85,7 @@ class User < ActiveRecord::Base
   end
 
   def get_number_of_tasks_by_level(exercise, level)
-    number_of_tasks = 0
-    completed_tasks.each do |c|
-      unless c.task.nil?
-        if(c.task.level == level && c.task.exercise_id == exercise.id)
-          number_of_tasks += 1
-        end
-      end
-    end
-    return number_of_tasks
+    tasks.where(level:level).where(exercise:exercise).count
   end
 
   def has_completed_task(id)
@@ -111,6 +103,4 @@ class User < ActiveRecord::Base
   def get_checked_hypothesis(exercise_hypothesis)
     return checked_hypotheses.where(exercise_hypothesis:exercise_hypothesis).first
   end
-
-
 end
