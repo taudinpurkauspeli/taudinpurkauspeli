@@ -55,7 +55,7 @@ class TasksController < ApplicationController
   end
 
   def user_can_start_task(user, exercise, task)
-    return true if user.has_completed_task(task.id)
+    return true if user.has_completed?(task)
     return true if task.level <= 1
     return user.get_number_of_tasks_by_level(exercise, task.level - 1) == exercise.get_number_of_tasks_by_level(task.level - 1)
   end

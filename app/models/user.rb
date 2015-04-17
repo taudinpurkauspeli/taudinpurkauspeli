@@ -88,12 +88,8 @@ class User < ActiveRecord::Base
     tasks.where(level:level).where(exercise:exercise).count
   end
 
-  def has_completed_task(id)
-    return completed_tasks.where(id:id).nil?
-  end
-
   def has_asked_question?(question)
-    return !asked_questions.where(question:question).empty?
+    return !asked_questions.find_by(question:question).empty?
   end
 
   def has_checked_hypothesis?(exercise_hypothesis)
