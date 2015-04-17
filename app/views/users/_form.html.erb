@@ -31,8 +31,16 @@
       <%= f.text_field :realname %>
     </div>
     <div class="field">
+      <%= f.label :student_number %><br>
+      <%= f.text_field :student_number %>
+    </div>
+    <div class="field">
       <%= f.label :email %><br>
       <%= f.text_field :email %>
+    </div>
+    <div class="field">
+      <%= f.label :starting_year %><br>
+      <%= f.select :starting_year, (2000..Time.now.year).to_a.reverse, :starting_year => "Select year" %>
     </div>
     <div class="actions">
       <%= f.submit %>

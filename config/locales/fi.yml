@@ -50,6 +50,11 @@ fi:
               blank: "on pakollinen"
             password_confirmation:
               confirmation: "ei vastannut salasanaa"
+            student_number:
+              blank: "on pakollinen"
+              wrong_length: "on väärän pituinen"
+            starting_year:
+              blank: "on pakollinen"
         hypothesis:
           attributes:
             name:
@@ -105,3 +110,5 @@ fi:
         password: "Salasana"
         password_confirmation: "Salasanan vahvistus"
         realname: "Nimi"
+        student_number: "Opiskelijanumero"
+        starting_year: "Aloitusvuosi"
