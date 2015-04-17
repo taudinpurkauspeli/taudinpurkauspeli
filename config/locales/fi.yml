@@ -96,11 +96,14 @@ fi:
           required: "Pakollinen"
           wrong: "Väärin"
       question:
+        content: "Vastaus"
+        title: "Kysymys"
         required: "Pakollinen kysymys"
         requireds:
           allowed: "Sallittu"
           required: "Pakollinen"
           wrong: "Väärin"
+        question_group_id: Kysymyksen ryhmä
       task:
         name: "Nimi"
       task_text:

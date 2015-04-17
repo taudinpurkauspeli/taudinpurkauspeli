@@ -55,11 +55,16 @@ class TaskTextsController < ApplicationController
     end
   end
 
+  # TODO fix user_has_completed redirect logic
   # /task_texts/:id/check_answers'
   def check_answers
     @task_text.user_answered_correctly?(current_user)
     respond_to do |format|
-      format.html { redirect_to task_path(@task_text.subtask.task, :layout => get_layout), notice: 'Tehtävä suoritettu!' }
+      if(current_user.has_completed?(current_exercise))
+        format.html { redirect_to exercise_path(current_exercise, :layout => get_layout) }
+      else
+        format.html { redirect_to task_path(@task_text.subtask.task, :layout => get_layout), notice: 'Tehtävä suoritettu!' }
+      end
     end
   end
 

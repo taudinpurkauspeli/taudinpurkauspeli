@@ -9,6 +9,7 @@ describe "Task text page for student", js:true do
   let!(:task_text_task){FactoryGirl.create(:task, name: "Tekstitehtävä", exercise_id:exercise.id)}
   let!(:task_text_subtask){FactoryGirl.create(:subtask, task_id:task_text_task.id)}
   let!(:task_text){FactoryGirl.create(:task_text, subtask_id:task_text_subtask.id)}
+  let!(:additional_dummy_task_to_prevent_ex_completion){FactoryGirl.create(:task, name:"Dummy task", exercise:exercise)}
 
   describe "student" do
 
