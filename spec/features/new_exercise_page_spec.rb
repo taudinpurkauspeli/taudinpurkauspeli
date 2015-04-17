@@ -8,7 +8,7 @@ describe "New Exercise page", js:true do
 
 		before :each do
 			sign_in(username:"Testipoika", password:"Salainen1")
-			visit new_exercise_path
+			click_button("+ Luo uusi case")
 		end
 
 		it "should be able to create a new exercise" do
