@@ -74,7 +74,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:username, :realname, :email, :admin, :password, :password_confirmation, :student_number, :starting_year)
   end
 
-  # def testimetodi
-  #   {username: user_params[:username], realname: user_params[:realname], email: user_params[:email], admin: user_params[:admin], password: user_params[:password], password_confirmation: user_params[:password_confirmation], student_number: user_params[:student_number].to_i, starting_year: user_params[:starting_year]}
-  # end
 end

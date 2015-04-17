@@ -52,6 +52,7 @@ fi:
               confirmation: "ei vastannut salasanaa"
             student_number:
               blank: "on pakollinen"
+              wrong_length: "on väärän pituinen"
             starting_year:
               blank: "on pakollinen"
         hypothesis:
