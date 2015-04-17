@@ -32,7 +32,6 @@ gem 'bootstrap-sass'
 
 # Text editor
 gem 'ckeditor'
-
 gem 'responders'
 
 # Password encryption
