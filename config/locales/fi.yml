@@ -24,6 +24,10 @@ fi:
   ckeditor:
     buttons:
       upload: "Lataa"
+      next: "Seuraava sivu"
+      delete: "Poista"
+    page_title: "Valitse haluamasi kuva"
+    confirm_delete: "Haluatko varmasti poistaa kuvan?"
   helpers:
     submit:
       create: "Tallenna"
