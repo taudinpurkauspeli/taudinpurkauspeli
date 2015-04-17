@@ -21,10 +21,10 @@ class User < ActiveRecord::Base
 
   def has_completed?(completable_object)
     if completable_object.class == Subtask
-      return !(completed_subtasks.where subtask:completable_object).empty?
+      return !(subtasks.find_by id:completable_object.id).nil?
     end
     if completable_object.class == Task
-      return !(completed_tasks.where task:completable_object ).empty?
+      return !(tasks.find_by id:completable_object.id).nil?
     end
     if completable_object.class == Exercise
       return !(exercises.find_by id:completable_object.id).nil?
@@ -41,18 +41,18 @@ class User < ActiveRecord::Base
 
   def complete_subtask(subtask)
     completed_subtasks.create(subtask:subtask)
-    task_in_progress = subtask.task
-    exercise = task_in_progress.exercise
-    if subtask == task_in_progress.subtasks.last
-      complete_task(task_in_progress)
-      if exercise.tasks.where(level:1...999).count == tasks.count
-        complete_exercise(exercise)
-      end
+    task = subtask.task
+    if subtask == task.subtasks.last
+      complete_task(task)
     end
   end
 
   def complete_task(task)
     completed_tasks.create(task:task)
+    exercise = task.exercise
+    if exercise.tasks.where(level:1...999).count == tasks.count
+      complete_exercise(exercise)
+    end
   end
 
   def complete_exercise(exercise)
