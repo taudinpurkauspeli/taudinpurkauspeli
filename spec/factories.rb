@@ -8,7 +8,7 @@ FactoryGirl.define do
     password_confirmation "Salainen1"
     admin true
     student_number "000000000"
-    starting_year "2000"
+    starting_year 2000
   end
 
   factory :student, class: User do
@@ -19,7 +19,7 @@ FactoryGirl.define do
     password_confirmation "Salainen1"
     admin false
     student_number "000000001"
-    starting_year "2000"
+    starting_year 2000
   end
 
   factory :exercise do
