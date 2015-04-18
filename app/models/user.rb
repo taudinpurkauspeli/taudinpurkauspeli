@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
   end
   
   def has_asked_question?(question)
-    return !asked_questions.find_by(question:question).empty?
+    return !asked_questions.find_by(question:question).nil?
   end
 
   def has_checked_hypothesis?(exercise_hypothesis)
