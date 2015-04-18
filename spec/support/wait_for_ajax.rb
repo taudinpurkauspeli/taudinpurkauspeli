@@ -33,4 +33,17 @@ module WaitForAjax
 
     raise "Element containing text '" + element_text + "' not found"
   end
+
+  def wait_for_ckeditor(selector)
+    Timeout.timeout(Capybara.default_wait_time) do
+      loop until page.evaluate_script("isCkeditorLoaded('#{selector}');")
+    end
+  end
+
+  def fill_in_ckeditor(selector, html)
+    wait_for_ckeditor(selector)
+
+    html[:with].gsub!(/\n+/, "") # otherwise: unterminated string literal (Selenium::WebDriver::Error::JavascriptError)
+    page.execute_script("CKEDITOR.instances['#{selector}'].setData('#{html[:with]}');")
+  end
 end
