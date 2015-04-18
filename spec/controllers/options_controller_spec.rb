@@ -16,22 +16,6 @@ RSpec.describe OptionsController, :type => :controller do
 			user_id: 1, task_id: 1
 	} }
 
-	describe "GET new" do
-		it "assigns a new option as @option" do
-			get :new, {}, valid_session
-			expect(assigns(:option)).to be_a_new(Option)
-		end
-	end
-
-	describe "GET edit" do
-		it "assigns the requested option as @option" do
-			option = Option.create! valid_attributes
-			get :edit, {:id => option.to_param}, valid_session
-			expect(assigns(:option)).to eq(option)
-		end
-	end
-
-
 	describe "POST create" do
 		describe "with valid params" do
 			it "creates a new Option" do

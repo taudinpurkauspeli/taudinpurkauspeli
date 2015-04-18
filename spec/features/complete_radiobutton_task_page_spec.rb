@@ -12,6 +12,7 @@ describe "Radiobutton page for student", js:true do
   let!(:option){FactoryGirl.create(:option, multichoice_id:radiobutton.id, content: "Asiakkaan isälle", is_correct_answer: "allowed", explanation: "Ei oikein!")}
   let!(:option2){FactoryGirl.create(:option, multichoice_id:radiobutton.id, content: "Asiakkaan äidille", is_correct_answer: "wrong", explanation: "Ei oikea vastaus")}
   let!(:option3){FactoryGirl.create(:option, multichoice_id:radiobutton.id, content: "Asiakkaalles", explanation: "Oikea vastaus")}
+  let!(:additional_dummy_task_to_prevent_ex_completion){FactoryGirl.create(:task, name:"Dummy task", exercise:exercise)}
 
   describe "student" do
 

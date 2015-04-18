@@ -8,6 +8,7 @@ class Task < ActiveRecord::Base
   has_many :task_texts, through: :subtasks
   has_many :multichoices, through: :subtasks
   has_many :interviews, through: :subtasks
+  has_many :conclusions, through: :subtasks
   has_many :exercise_hypotheses
 
   amoeba do

@@ -20,7 +20,7 @@ Feature: New task feature
     And I click on the button "+ Luo uusi toimenpide"
     When I fill in task name
     And I press the button "Tallenna"
-    And I press the button "+ Luo uusi tekstimuotoinen alitoimenpide"
+    And I press the button "+ Luo uusi tekstimuotoinen alakohta"
     And I fill in task text content
     And I press the button "Tallenna"
     Then page should show the new task text content
@@ -33,7 +33,7 @@ Feature: New task feature
     And I press the button "+ Luo uusi toimenpide"
     When I fill in task name
     And I press the button "Tallenna"
-    And I press the button "+ Luo uusi monivalinta-alitoimenpide"
+    And I press the button "+ Luo uusi monivalinta-alakohta"
     And I fill in multichoice question
     And I press the button "Tallenna"
     Then page should have a message: "Kysymys lisättiin onnistuneesti!"
@@ -58,7 +58,7 @@ Feature: New task feature
     And I press the button "+ Luo uusi toimenpide"
     When I fill in task name
     And I press the button "Tallenna"
-    And I press the button "+ Luo uusi monivalinta-alitoimenpide"
+    And I press the button "+ Luo uusi monivalinta-alakohta"
     And I fill fill in radiobutton question and select radiobutton option
     And I press the button "Tallenna"
     Then page should have a message: "Kysymys lisättiin onnistuneesti!"

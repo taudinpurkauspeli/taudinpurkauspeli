@@ -22,6 +22,11 @@ Given(/^I visit the "(.*?)" page of the case "(.*?)"$/) do |arg1, arg2|
   wait_for_ajax
 end
 
+Given(/^cases and tasks have been created$/) do
+  create_exercises
+  create_tasks
+end
+
 When(/^I click on the link "(.*?)"$/) do |arg1|
   click_link(arg1)
   wait_for_ajax
@@ -34,6 +39,10 @@ end
 
 Then(/^the page should show the content "(.*?)"$/) do |string|
   expect(page).to have_content string
+end
+
+Then(/^the page should not show the content "(.*?)"$/) do |string|
+  expect(page).not_to have_content string
 end
 
 Then(/the page should have button "(.*?)"$/) do |arg1|

@@ -51,6 +51,17 @@ class Exercise < ActiveRecord::Base
     return false
   end
 
+  def get_users
+
+    users_of_ex = Array.new()
+
+    tasks.each do |task|
+      users_of_ex += task.users
+    end
+
+    return  users_of_ex.uniq
+  end
+
   private
   def create_anamnesis
     tasks.create(name:"Anamneesi", level:0)

@@ -11,7 +11,7 @@
     <%= button_to 'Esikatsele', @task, :class => 'btn btn-default btn-exercise floatRight',:form_class => "form-show-task", :method => :get %>
   </div>
   <div class = "col-md-2">
-    <%= button_to 'Poista toimenpide', @task, :class => 'btn btn-default btn-exercise btn-del width100', :form => {id: "form-delete-task"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa toimenpiteen ja sen kaikki alitoimenpiteet?' } %>
+    <%= button_to 'Poista toimenpide', @task, :class => 'btn btn-default btn-exercise btn-del width100', :form => {id: "form-delete-task"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa toimenpiteen ja sen kaikki alakohdat?' } %>
   </div>
 </div>
 
@@ -26,15 +26,17 @@
   </div>
 </div>
 
-<h1>Alitoimenpiteet</h1>
+<h1>Alakohdat</h1>
 
 <% @task.subtasks.each do |subtask| %>
     <%= button_to subtask, edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise multiline', :form_class => "form-subtask", :method => :get %>
 <% end %>
 
-<%= button_to '+ Luo uusi tekstimuotoinen alitoimenpide', new_task_text_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
-<%= button_to '+ Luo uusi monivalinta-alitoimenpide', new_multichoice_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
+<%= button_to '+ Luo uusi tekstimuotoinen alakohta', new_task_text_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
+<%= button_to '+ Luo uusi monivalinta-alakohta', new_multichoice_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
 <%= button_to '+ Luo uusi haastattelu', new_interview_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
+<%= button_to '+ Luo päätöstoimenpide', new_conclusion_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
+
 
 <br>
 

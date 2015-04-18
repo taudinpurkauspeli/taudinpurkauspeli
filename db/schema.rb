@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415170436) do
+ActiveRecord::Schema.define(version: 20150416104311) do
 
   create_table "asked_questions", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 20150415170436) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type"
 
+  create_table "completed_exercises", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "exercise_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+  
   create_table "completed_subtasks", force: :cascade do |t|
     t.integer "subtask_id"
     t.integer "user_id"
@@ -51,6 +58,15 @@ ActiveRecord::Schema.define(version: 20150415170436) do
     t.integer  "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "conclusions", force: :cascade do |t|
+    t.string   "title"
+    t.string   "content"
+    t.integer  "subtask_id"
+    t.integer  "exercise_hypothesis_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "exercise_hypotheses", force: :cascade do |t|
@@ -114,8 +130,8 @@ ActiveRecord::Schema.define(version: 20150415170436) do
     t.string   "explanation"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.integer  "is_correct_answer", default: 0
     t.integer  "image_id"
+    t.integer  "is_correct_answer", default: 0
   end
 
   create_table "question_groups", force: :cascade do |t|
@@ -167,6 +183,8 @@ ActiveRecord::Schema.define(version: 20150415170436) do
     t.string   "email"
     t.string   "realname"
     t.string   "password_digest"
+    t.string   "student_number"
+    t.integer  "starting_year"
   end
 
 end
