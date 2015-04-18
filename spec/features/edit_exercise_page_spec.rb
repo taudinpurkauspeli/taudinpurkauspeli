@@ -18,20 +18,20 @@ describe "Edit Exercise page", js:true do
 		it "should be able to edit exercise" do
 
 			fill_in('exercise_name', with: "Broilerimysteeri")
-			fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
+			fill_in_ckeditor 'exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??'
 
 			click_and_wait('Tallenna')
 
 			expect(current_path).to eq(exercise_path(exercise))
 			expect(page).to have_content 'Broilerimysteeri'
 			expect(Exercise.first.name).to eq('Broilerimysteeri')
-			expect(Exercise.first.anamnesis).to eq('Mitä kanoille on tapahtunut??')
+			expect(Exercise.first.anamnesis).to eq("<p>Mit&auml; kanoille on tapahtunut??</p>\r\n")
 		end
 
 		it "should not be able to edit exercise wrong" do
 
 			fill_in('exercise_name', with: "")
-			fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
+			fill_in_ckeditor 'exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??'
 
 			click_and_wait('Tallenna')
 
