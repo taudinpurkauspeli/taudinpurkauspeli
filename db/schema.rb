@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20150416104311) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
-  
+
   create_table "completed_subtasks", force: :cascade do |t|
     t.integer "subtask_id"
     t.integer "user_id"
@@ -130,8 +130,8 @@ ActiveRecord::Schema.define(version: 20150416104311) do
     t.string   "explanation"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.integer  "image_id"
     t.integer  "is_correct_answer", default: 0
+    t.integer  "image_id"
   end
 
   create_table "question_groups", force: :cascade do |t|
