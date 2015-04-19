@@ -4,8 +4,10 @@
 
   <h1>Opiskelijoiden tiedot</h1>
 
-
   <%= form_tag(users_path, method: :get) do %>
+  <%= label_tag 'starting_year', 'Aloitusvuosi: ' %>
+  <%= select_tag 'starting_year', options_for_select([["Kaikki", 0]] + @users.select(:starting_year).order(:starting_year).map(&:starting_year).uniq.collect{ |u| [u, u] }, @selected_starting_year), :onchange => "this.form.submit();", :class => 'form-control widthAuto' %>
+
   <%= label_tag 'exercise', 'Case: ' %>
   <%= select_tag 'exercise', options_for_select([["Kaikki", 0]] + @exercises.collect{ |e| [e.name, e.id] }, @selected_exercise_id), :onchange => "this.form.submit();", :class => 'form-control widthAuto' %>
   <% end %>
@@ -33,7 +35,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% exercise.get_users.each do |user| %>
+                <% exercise.get_users(@selected_starting_year).each do |user| %>
                     <tr>
                       <td class = "user"><%= link_to user.realname, user %></td>
                       <td class = "user">

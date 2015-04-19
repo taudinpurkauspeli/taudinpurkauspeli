@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def index
 
     @exercises = Exercise.all
-    @users = User.all
+    @users = User.where("admin = ?", false)
 
     if params[:exercise].nil? || params[:exercise] == "0"
       @shown_exercises = @exercises
@@ -15,6 +15,14 @@ class UsersController < ApplicationController
     else
       @shown_exercises  = Exercise.where("id = ?", params[:exercise])
       @selected_exercise_id = params[:exercise]
+    end
+
+    if params[:starting_year].nil? || params[:starting_year] == "0"
+      @shown_users = @users
+      @selected_starting_year = "0"
+    else
+      @shown_users  = Exercise.where("id = ? and admin = ?", params[:starting_year], false)
+      @selected_starting_year = params[:starting_year]
     end
     
   end
