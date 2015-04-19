@@ -7,14 +7,32 @@ class UsersController < ApplicationController
   def index
 
     @exercises = Exercise.all
-    @users = User.all
+    @users = User.where("admin = ?", false)
 
+    #list type
+    if params[:list_type].nil? || params[:list_type] == "0"
+      @list_type = 0
+    else
+      @list_type = 1
+    end
+
+
+    #exercise
     if params[:exercise].nil? || params[:exercise] == "0"
       @shown_exercises = @exercises
       @selected_exercise_id = "0"
     else
       @shown_exercises  = Exercise.where("id = ?", params[:exercise])
       @selected_exercise_id = params[:exercise]
+    end
+
+    #starting year
+    if params[:starting_year].nil? || params[:starting_year] == "0"
+      @shown_users = @users
+      @selected_starting_year = "0"
+    else
+      @shown_users  = User.where("starting_year = ? and admin = ?", params[:starting_year].to_i, false)
+      @selected_starting_year = params[:starting_year]
     end
     
   end
