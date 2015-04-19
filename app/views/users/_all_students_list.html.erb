@@ -1,0 +1,42 @@
+
+<%= form_tag(users_path, method: :get) do %>
+
+  <%= hidden_field_tag 'list_type', @list_type %>
+
+  <%= label_tag 'starting_year', 'Aloitusvuosi: ' %>
+  <%= select_tag 'starting_year', options_for_select([["Kaikki", 0]] + @users.select(:starting_year).order(:starting_year).map(&:starting_year).uniq.collect{ |u| [u, u] }, @selected_starting_year), :onchange => "this.form.submit();", :class => 'form-control widthAuto' %>
+<% end %>
+
+<br />
+
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class = "width100">
+      <colgroup>
+        <col style="width:25%" />
+        <col style="width:25%" />
+        <col style="width:25%" />
+        <col style="width:25%" />
+      </colgroup> 
+        <thead>
+        <tr>
+          <th class = "user">Nimi</th>
+          <th class = "user">Opiskelijanumero</th>
+          <th class = "user">Sähköposti</th>
+          <th class = "user">Aloitusvuosi</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @shown_users.each do |user| %>
+            <tr>
+              <td class = "user"><%= link_to user.realname, user %></td>
+              <td class = "user"><%= link_to user.student_number, user %></td>
+              <td class = "user"><%= user.email %></td>
+              <td class = "user"><%= user.starting_year %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>
