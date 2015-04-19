@@ -43,7 +43,7 @@ RSpec.describe UsersController, :type => :controller do
   } }
 
   describe "GET index" do
-    it "assigns all normal users as @users" do
+    it "selects no admin users to @users" do
       user = User.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:users)).to eq([])
