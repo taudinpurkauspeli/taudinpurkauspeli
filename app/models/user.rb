@@ -90,6 +90,10 @@ class User < ActiveRecord::Base
     tasks.where(level:level).where(exercise:exercise).count
   end
 
+  def check_hypothesis(exhyp)
+    checked_hypotheses.create(exercise_hypothesis:exhyp)
+  end
+
   def check_all_hypotheses(exercise)
     exercise.exercise_hypotheses.each do |exhyp|
       unless has_checked_hypothesis?(exhyp)
