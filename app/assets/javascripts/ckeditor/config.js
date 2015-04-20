@@ -107,14 +107,23 @@ CKEDITOR.editorConfig = function( config )
         { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] }
     ];
 
-    config.toolbar_mini = [
+    config.toolbar_full = [
         { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', '-', '-', '-', 'Blockquote', '-', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
         { name: 'styles', items: [ 'Font', 'FontSize' ] },
         { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
         { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', '-' ] },
         { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar' ] }
     ];
-    config.toolbar = "mini";
+
+    config.toolbar_minimalist = [
+        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' ] },
+        //{ name: 'styles', items: [ 'Font', 'FontSize' ] },
+        //{ name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', '-', '-', '-', '-', '-' ] },
+        { name: 'insert', items: [ 'Image', 'Table', '-', '-' ] }
+    ];
+    config.toolbar = "full";
     config.tabSpaces = 4;
     config.height = 400;
+  //  config.uiColor = '#AADC6E';
 };

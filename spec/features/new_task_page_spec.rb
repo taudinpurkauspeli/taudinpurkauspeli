@@ -52,7 +52,7 @@ describe "New Task page", js:true do
         it "task text subtask" do
           click_and_wait('+ Luo uusi tekstimuotoinen alakohta')
 
-          fill_in('task_text_content', with: "Asiakas kertoo, että koira on kipeä.")
+          fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira on kipeä.'
 
           expect{
             click_and_wait('Tallenna')
@@ -62,7 +62,7 @@ describe "New Task page", js:true do
           expect(page).to have_button 'Teksti: Asiakas kertoo, että ...'
           expect(Subtask.count).to eq(1)
 
-          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("Asiakas kertoo, että koira on kipeä.")
+          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, ett&auml; koira on kipe&auml;.</p>\r\n")
         end
 
 
@@ -86,7 +86,8 @@ describe "New Task page", js:true do
         it "task text subtask without content" do
 
           click_and_wait('+ Luo uusi tekstimuotoinen alakohta')
-          fill_in('task_text_content', with: "")
+
+          fill_in_ckeditor 'task_text_content', with: ""
 
           expect{
             click_and_wait('Tallenna')
@@ -114,7 +115,8 @@ describe "New Task page", js:true do
         before :each do
           click_and_wait('+ Luo uusi tekstimuotoinen alakohta')
 
-          fill_in('task_text_content', with: "Asiakas kertoo, että koira on kipeä.")
+          fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira on kipeä.'
+
           click_and_wait('Tallenna')
 
           click_and_wait('Teksti: Asiakas kertoo, että ...')
@@ -122,15 +124,17 @@ describe "New Task page", js:true do
 
         it "should be able to update the content of a task text" do
 
-          fill_in('task_text_content', with: "Asiakas kertoo, että koira ei ole kipeä!")
+          fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira ei ole kipeä!'
+
           click_and_wait('Tallenna')
 
           expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
-          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("Asiakas kertoo, että koira ei ole kipeä!")
+          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, ett&auml; koira ei ole kipe&auml;!</p>\r\n")
         end
 
         it "should not be able to update task text to have no content" do
-          fill_in('task_text_content', with: "")
+          fill_in_ckeditor 'task_text_content', with: ""
+
           click_and_wait('Tallenna')
 
           expect(page).to have_content 'Kysymyksen päivitys epäonnistui!'
@@ -166,7 +170,7 @@ describe "New Task page", js:true do
 
         it "should be able to add option to a multichoice" do
           fill_in('option_content', with: "Kysy taudeista")
-          fill_in('option_explanation', with: "Taudeista on hyvä kysyä!")
+          fill_in_ckeditor 'option_explanation', with: 'Taudeista on hyvä kysyä!'
           select('Pakollinen', from:'option[is_correct_answer]')
 
           expect{
@@ -176,7 +180,7 @@ describe "New Task page", js:true do
           expect(page).to have_content 'Vaihtoehto lisättiin onnistuneesti'
 
           expect(Multichoice.first.options.first.content).to eq('Kysy taudeista')
-          expect(Multichoice.first.options.first.explanation).to eq('Taudeista on hyvä kysyä!')
+          expect(Multichoice.first.options.first.explanation).to eq("<p>Taudeista on hyv&auml; kysy&auml;!</p>\r\n")
           expect(Multichoice.first.options.first.is_correct_answer).to eq("required")
         end
 

@@ -1,7 +1,7 @@
 <div class = "panel panel-default panel-green">
   <div class="row panel-body">
     <div class = "nakki">
-      <%= form_for(@new_question) do |f| %>
+      <%= form_for(@new_question, :html => {:id => "form-new-question", :class=> "rich-text-form"}) do |f| %>
       <%= f.label :required%><br>
       <div class="row">
         <div class="col-md-4">
@@ -15,7 +15,7 @@
         <%= f.text_area :title, placeholder: "Kysymys", :class => 'form-control' %>
       </div>
       <div class="col-md-4">
-        <%= f.text_area :content, placeholder: "Vastausteksti", :class => 'form-control' %>
+        <%= f.cktext_area :content, placeholder: "Vastausteksti", :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200}%>
       </div>
       <div class="col-md-2">
         <%= image_tag @new_question.image.picture.url(:thumb) unless @new_question.image.nil? %>

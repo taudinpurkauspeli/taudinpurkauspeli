@@ -37,7 +37,7 @@
               <% elsif option.is_correct_answer == "wrong" %>
                 wrong-answer
               <% end %>
-              "><%= option.explanation %>
+              "><%= option.explanation.html_safe %>
             <% else %>
             ">
             <% end %>

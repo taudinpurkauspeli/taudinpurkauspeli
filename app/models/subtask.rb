@@ -44,12 +44,13 @@ class Subtask < ActiveRecord::Base
   end
 
   def to_s
+    full_sanitizer = Rails::Html::FullSanitizer.new
     return_string = 'Alakohta'
     content = ''
 
     unless task_text.nil?
-      return_string = 'Teksti: '
-      content = task_text.content
+      return_string = "Teksti: "
+      content = full_sanitizer.sanitize(task_text.content.strip)
     end
 
     unless multichoice.nil?

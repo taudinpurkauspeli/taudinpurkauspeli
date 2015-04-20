@@ -273,6 +273,7 @@ DEPENDENCIES
   phantomjs
   poltergeist
   rails (~> 4.2.0)
+  rails-html-sanitizer
   rails_12factor
   rails_layout
   rb-readline

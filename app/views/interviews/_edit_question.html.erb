@@ -1,7 +1,8 @@
 <div class = "panel panel-default panel-grey">
   <div class="row panel-body">
     <div class = "row panel-body">
-      <%= form_for(question) do |f| %>
+
+      <%= form_for(question, :html => {:id => "form-edit-question-" + question.id.to_s , :class=> "rich-text-form"}) do |f| %>
       <div class="row">
         <div class="col-md-4">
           <%= f.label :question_group_id %>
@@ -9,8 +10,6 @@
         </div>
       </div>
       <div class="col-md-2">
-
-
         <%= f.label :required%><br>
         <%=f.select :required, options_for_select(@requireds.collect { |answer| [t("activerecord.attributes.question.requireds.#{answer[0]}"), answer[0]] }, selected: question.required), {}, {:id => "required_" + question.id.to_s, class: "form-control"} %><br>
       </div>
@@ -20,7 +19,7 @@
       </div>
       <div class="col-md-4">
         <%= f.label :content%>
-        <%= f.text_area :content, placeholder: "Vastausteksti", :class => 'form-control' %>
+        <%= f.cktext_area :content, placeholder: "Vastausteksti", :class => 'form-control', :id => "content_" + question.id.to_s, :ckeditor => {:toolbar => 'minimalist', :height => 200} %>
       </div>
       <div class="col-md-2">
         <%= image_tag question.image.picture.url(:thumb) unless question.image.nil? %>
