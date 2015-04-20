@@ -129,7 +129,7 @@ describe "New Task page", js:true do
           click_and_wait('Tallenna')
 
           expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
-          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, ett&auml; koira ei ole kipe&auml;!<p>\r\n")
+          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, ett&auml; koira ei ole kipe&auml;!</p>\r\n")
         end
 
         it "should not be able to update task text to have no content" do
