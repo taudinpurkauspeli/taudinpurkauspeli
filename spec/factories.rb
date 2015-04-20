@@ -109,6 +109,12 @@ FactoryGirl.define do
     title "Lehmätaudit"
   end
 
+  factory :conclusion do
+    subtask_id nil
+    title "Viimekysymys"
+    content "Valitse tästä oikea diagnoosi"
+  end
+
   factory :interview do
     subtask_id nil
     title "Omistajan haastattelu"
