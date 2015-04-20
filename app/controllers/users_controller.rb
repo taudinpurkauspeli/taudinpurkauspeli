@@ -40,6 +40,10 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    unless @user == current_user || current_user_is_admin
+      redirect_to exercises_path, alert: 'Käyttäjää ei löytynyt!'
+    end
+    @exercises = Exercise.all
   end
 
   # GET /users/new
