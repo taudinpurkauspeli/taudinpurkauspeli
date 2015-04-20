@@ -17,10 +17,6 @@
   <%= render 'edit_question', { question:question } %>
 <% end %>
 <%= render 'new_question' %>
-<h1>Ryhmät</h1>
-<div class="row panel-body">
-  <%= render 'questions/new_question_group', {interview: @interview} %>
-</div>
 
 <script>
 setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post");
