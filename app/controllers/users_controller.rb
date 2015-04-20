@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     unless @user == current_user || current_user_is_admin
       redirect_to exercises_path, alert: 'Käyttäjää ei löytynyt!'
     end
-
+    @exercises = Exercise.all
   end
 
   # GET /users/new

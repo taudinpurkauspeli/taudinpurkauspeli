@@ -3,55 +3,41 @@
 <% if !current_user_is_admin %>
     <h1><%= @user.realname %> </h1>
 
-    <strong>Käyttäjänimi:</strong><%= @user.username %><br/>
-    <strong>Opiskelijanumero:</strong><%= @user.student_number %><br/>
-    <strong>Sähköposti:</strong><%= @user.email %><br/>
-    <strong>Aloitusvuosi:</strong><%= @user.starting_year %><br/><br/><br/>
+    <strong>Käyttäjänimi: </strong><%= @user.username %><br/>
+    <strong>Opiskelijanumero: </strong><%= @user.student_number %><br/>
+    <strong>Sähköposti: </strong><%= @user.email %><br/>
+    <strong>Aloitusvuosi: </strong><%= @user.starting_year %><br/><br/><br/>
 
     <%= link_to 'Muokkaa', edit_user_path(@user) %> <br/><br/><br/>
 
-    <h4>Suoritetut caset:</h4>
+    <h3>Caset:</h3>
 
-    <% if !@exercises.nil? %>
+    <% @exercises.each do |exercise| %>
 
-        <% @exercises.each do |exercise| %>
-            <div class = "row">
-              <div class = "col-md-12">
-                <strong><%= exercise.name %></strong>
+        <table class = "width100">
+          <thead>
+          <tr>
+            <th class = "user"><%= exercise.name %></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class = "user">
+              <% if exercise.tasks.count - 1 == 0 %>
+                  <% progress = 0 %>
+              <% else  %>
+                  <% progress = current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>
+              <% end %>
+              <div class ="progressbar <%= 'completed' if progress == 100 %>" >
+                <% if progress < 100 %>
+                    <div class = "progressbar progress" style = "width: <%= 100 - progress %>%;"></div>
+                <% end %>
               </div>
-              <div class = "col-md-12">
-
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                    <table class = "width100">
-                      <colgroup>
-                        <col style="width:50%" />
-                        <col style="width:50%" />
-                      </colgroup>
-                      <thead>
-                      <tr>
-                        <th class = "user">Suoritettu</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td class = "user">
-                          <div class ="progressbar <%= 'completed' if user.get_percent_of_completed_tasks_of_exercise(exercise) == 100 %>" >
-                            <% if user.get_percent_of_completed_tasks_of_exercise(exercise) < 100 %>
-                                <div class = "progressbar progress" style = "width: <%= 100 - user.get_percent_of_completed_tasks_of_exercise(exercise) %>%;"></div>
-                            <% end %>
-                          </div>
-                          <span class = "progress-percent"><%= user.get_percent_of_completed_tasks_of_exercise(exercise) %>%</span>
-                        </td>
-                      </tr>
-        <% end %>
-        </tbody>
+              <span class = "progress-percent"><%= progress %>%</span>
+            </td>
+          </tr>
+          </tbody>
         </table>
-        </div>
-        </div>
-
-        </div>
-        </div>
     <% end %>
 <% end %>
 
