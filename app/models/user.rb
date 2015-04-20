@@ -123,5 +123,6 @@ class User < ActiveRecord::Base
       return 0
     else
       return (get_number_of_completed_tasks_by_exercise(exercise) * 100) / (exercise.tasks.where(level: 1...99).count)
+    end
   end
 end
