@@ -39,7 +39,7 @@ end
 
 When(/^I fill in question title and content$/) do
   fill_in('question_title', with: 'Onko hygieniasta huolehdittu')
-  fill_in('question_content', with: 'Käsiä on pesty aina kun on muistettu')
+  fill_in_ckeditor 'question_content', with: 'Käsiä on pesty aina kun on muistettu'
 end
 
 When(/^I go to the multichoice edit page$/) do
@@ -71,12 +71,12 @@ When(/^I fill in option content$/) do
 end
 
 When(/^I fill in option explanation$/) do
-  fill_in('option_explanation', with: 'Puhelimella soittaminen on nyt hyvin järkevää.')
+  fill_in_ckeditor 'option_explanation', with: 'Puhelimella soittaminen on nyt hyvin järkevää.'
 end
 
 When(/^I fill in option content, explanation and select right answer box$/) do
   fill_in('option_content', with: 'On')
-  fill_in('option_explanation', with: 'Epidemia on yleinen.')
+  fill_in_ckeditor 'option_explanation', with: 'Epidemia on yleinen.'
   select('Pakollinen', from:'option[is_correct_answer]')
 end
 
