@@ -124,20 +124,21 @@ describe "Hypothesis list page", js:true do
 
       it "edit the explanation of a hypothesis added to an exercise" do
         backdoor = 0
-        while(ExerciseHypothesis.first.explanation != 'Virus ei olekaan bakteeritauti')
+        while(ExerciseHypothesis.first.explanation != "<p>Virus ei olekaan bakteeritauti</p>\r\n")
           if backdoor > 50 then
             raise "Loop error!"
           end
 
           click_and_wait('Virustauti')
 
-          fill_in('exercise_hypothesis_explanation', with: 'Virus ei olekaan bakteeritauti')
+          fill_in_ckeditor 'exercise_hypothesis_explanation_1', with: 'Virus ei olekaan bakteeritauti'
+
           first(:button, 'Päivitä').click
           wait_for_ajax
           backdoor += 1
         end
 
-        expect(ExerciseHypothesis.first.explanation).to eq('Virus ei olekaan bakteeritauti')
+        expect(ExerciseHypothesis.first.explanation).to eq("<p>Virus ei olekaan bakteeritauti</p>\r\n")
       end
 
       it "add prerequisite task to a hypothesis added to an exercise" do
