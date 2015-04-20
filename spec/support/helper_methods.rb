@@ -21,7 +21,7 @@ module HelperMethods
     return user
   end
 
-  def current_user_is_admin
+  def current_user.try(:admin)
     return true
   end
 
