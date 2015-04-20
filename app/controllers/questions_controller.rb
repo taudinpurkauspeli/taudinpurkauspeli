@@ -21,10 +21,13 @@ class QuestionsController < ApplicationController
 
   def create
     @task = Task.find(session[:task_id])
+
     @question = Question.new(question_params)
 
     respond_to do |format|
       if @question.save
+        question_group = QuestionGroup.find_or_create_by(title:question_params[:question_group_title])
+        @question.update(question_group:question_group)
         format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), notice: 'Kysymysvaihtoehto lisättiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @question }
       else
@@ -38,6 +41,8 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
+        question_group = QuestionGroup.find_or_create_by(title:question_params[:question_group_title])
+        @question.update(question_group:question_group)
         format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti.' }
       else
         format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), notice: 'Kysymyksen päivitys epäonnistui.' }
