@@ -30,7 +30,7 @@ When(/^I fill in task name$/) do
 end
 
 When(/^I fill in task text content$/) do
-  fill_in('task_text_content', with: 'Soita asiakkaalle puhelimella')
+  fill_in_ckeditor 'task_text_content', with: 'Soita asiakkaalle puhelimella'
 end
 
 When(/^I fill in interview title$/) do
