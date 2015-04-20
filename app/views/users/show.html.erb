@@ -30,7 +30,7 @@
           <% if exercise.tasks.count - 1 == 0 %>
               <% progress = 0 %>
           <% else  %>
-              <% progress = current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>
+              <% progress = @user.get_percent_of_completed_tasks_of_exercise(exercise) %>
           <% end %>
           <div class ="progressbar <%= 'completed' if progress == 100 %>" >
             <% if progress < 100 %>
