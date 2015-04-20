@@ -8,9 +8,6 @@ class CompletedTask < ActiveRecord::Base
   has_one :exercise, through: :task
 
   def has_exercise?(exercisee)
-  	if exercise.id == exercisee.id
-  		return true
-  	end
-  	return false
+  	return exercise.id == exercisee.id
   end
 end
