@@ -1,7 +1,7 @@
 <div class = "panel panel-default panel-grey">
   <div class="row panel-body">
     <div class = "nakki">
-      <%= form_for(option) do |f| %>
+      <%= form_for(option, :html => {:id => "form-edit-option-" + option.id.to_s , :class=> "rich-text-form"}) do |f| %>
 	      <%= f.label :is_correct_answer%><br>
 	      <div class="col-md-2">
 	        <%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [t("activerecord.attributes.option.is_correct_answers.#{answer[0]}"), answer[0]] }, selected: option.is_correct_answer), {}, {:id => "is_correct_answer_" + option.id.to_s, class: "form-control"}%>
