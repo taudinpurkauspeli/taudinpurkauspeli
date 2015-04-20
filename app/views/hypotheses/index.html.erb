@@ -27,7 +27,7 @@
     <%# hypothesis_groups %>
     <% @hypothesis_groups.each do |group| %>
       <% unless @exercise.get_hypotheses[group.id].nil? %>
-        <%= render 'hypotheses/show/hypothesis_group_header' %>
+        <%= render 'hypotheses/show/hypothesis_group_header', { group:group } %>
         <div class="collapse in" id="collapseHypothesisGroup1<%= group.id%>" >
           <%# hypotheses that belong to current exercise and group%>
           <%= if current_user_is_admin
@@ -43,8 +43,8 @@
   <div class="col-md-5">
     <% if current_user_is_admin %>
       <% @hypothesis_groups.each do |group| %>
-        <%= render 'hypotheses/edit/hypothesis_group_edit', {group: group}  %>
-        <%= render 'hypotheses/edit/hypotheses_of_group', {group: group}  %>
+        <%= render 'hypotheses/edit/hypothesis_group_edit', { group: group }  %>
+        <%= render 'hypotheses/edit/hypotheses_of_group', { group: group }  %>
       <% end %>
       <%= render 'hypotheses/edit/new_hypothesis_group'  %>
     <% end %>
