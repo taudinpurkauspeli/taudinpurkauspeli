@@ -42,6 +42,8 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.update(question_params)
         question_group = QuestionGroup.find_or_create_by(title:question_params[:question_group_title])
+        question_group.questions.push(@question) unless question_group.questions.include?(@question)
+        QuestionGroup.delete_unused_groups
         @question.update(question_group:question_group)
         format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti.' }
       else
