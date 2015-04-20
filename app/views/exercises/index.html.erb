@@ -2,30 +2,28 @@
 
 <h1>Taudinpurkauspeli</h1>
 <%@exercises.each do |exercise| %>
-
-    <div class="row">
-      <div class="col-md-10">
-        <% if !exercise.hidden? || current_user.try(:admin) %>
-            <%if current_user.nil? %>
-            <div class="col-md-5">
-               <%= button_to exercise.name, '', :class => 'btn disabled btn-exercise', :method => :get %>
-             </div>
-               <% else %>
-               <div class="col-md-5">
-               <%= button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get %>
-               </div>
-               <div class="col-md-5">   <br>
-                    <div class ="progressbar <%= 'completed' if current_user.get_percent_of_completed_tasks_of_exercise(exercise) == 100 %>" >
-                      <% if current_user.get_percent_of_completed_tasks_of_exercise(exercise) < 100 %>
-                        <div class = "progressbar progress" style = "width: <%= 100 - current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>%;"></div>
-                      <% end %>
-                    </div>
-                    <span class = "progress-percent"><%= current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>%</span>
-                  </div>
-
-               <% end%>
-        <% end %>
-      </div>
+  <div class="row">
+    <div class="col-md-10">
+      <% if !exercise.hidden? || current_user.try(:admin) %>
+        <%if current_user.nil? %>
+        <div class="col-md-5">
+           <%= button_to exercise.name, '', :class => 'btn disabled btn-exercise', :method => :get %>
+         </div>
+        <% else %>
+         <div class="col-md-5">
+         <%= button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get %>
+         </div>
+         <div class="col-md-5">   <br>
+              <div class ="progressbar <%= 'completed' if current_user.get_percent_of_completed_tasks_of_exercise(exercise) == 100 %>" >
+                <% if current_user.get_percent_of_completed_tasks_of_exercise(exercise) < 100 %>
+                  <div class = "progressbar progress" style = "width: <%= 100 - current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>%;"></div>
+                <% end %>
+              </div>
+              <span class = "progress-percent"><%= current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>%</span>
+          </div>
+          <% end%>
+      <% end %>
+    </div>
       <% if current_user.try(:admin) %>
 
           <div class="col-md-1">
@@ -37,7 +35,7 @@
           </div>
 
       <%end%>
-    </div>
+  </div>
 <% end %>
 <div class="row">
   <div class="col-md-5">
