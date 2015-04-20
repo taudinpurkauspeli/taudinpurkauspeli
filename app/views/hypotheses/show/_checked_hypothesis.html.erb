@@ -4,6 +4,6 @@
 </div>
 <% if @last_clicked_hypothesis_id == checked_hypothesis.exercise_hypothesis.id.to_s %>
   <div class = "col-md-1">
-    <div class="info-checked-hypothesis removable"><%= checked_hypothesis.get_explanation %></div>
+    <div class="info-checked-hypothesis removable"><%= checked_hypothesis.get_explanation.html_safe %></div>
   </div>
 <% end %>
