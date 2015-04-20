@@ -36,7 +36,7 @@
               <%# hypotheses that belong to current exercise and group%>
               <%= if current_user_is_admin
                   then render 'edit_hypotheses_of_group', { group: group }
-                  else render 'check_hypotheses_of_group', { group: group }
+                  else render 'hypotheses/student/check_hypotheses_of_group', { group: group }
                   end %>
             </div>
         <% end %>
