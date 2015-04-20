@@ -170,7 +170,7 @@ describe "New Task page", js:true do
 
         it "should be able to add option to a multichoice" do
           fill_in('option_content', with: "Kysy taudeista")
-          fill_in('option_explanation', with: "Taudeista on hyvä kysyä!")
+          fill_in_ckeditor 'option_explanation', with: 'Taudeista on hyvä kysyä!'
           select('Pakollinen', from:'option[is_correct_answer]')
 
           expect{
@@ -180,7 +180,7 @@ describe "New Task page", js:true do
           expect(page).to have_content 'Vaihtoehto lisättiin onnistuneesti'
 
           expect(Multichoice.first.options.first.content).to eq('Kysy taudeista')
-          expect(Multichoice.first.options.first.explanation).to eq('Taudeista on hyvä kysyä!')
+          expect(Multichoice.first.options.first.explanation).to eq("<p>Taudeista on hyv&auml; kysy&auml;!</p>\r\n")
           expect(Multichoice.first.options.first.is_correct_answer).to eq("required")
         end
 

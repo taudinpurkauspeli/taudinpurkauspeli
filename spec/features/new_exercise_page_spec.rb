@@ -13,7 +13,6 @@ describe "New Exercise page", js:true do
 
 		it "should be able to create a new exercise" do
 			fill_in('exercise_name', with: "Broilerimysteeri")
-			#fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
 
 			fill_in_ckeditor 'exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??'
 

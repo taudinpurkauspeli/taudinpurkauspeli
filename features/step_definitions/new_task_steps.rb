@@ -134,5 +134,5 @@ Then(/^option should be in the database$/) do
 Then(/^right radiobutton option should be in the database$/) do
   expect(Option.count).to eq(4)
   expect(Option.last.content).to eq('On')
-  expect(Option.last.explanation).to eq('Epidemia on yleinen.')
+  expect(Option.last.explanation).to eq("<p>Epidemia on yleinen.</p>\r\n")
 end
