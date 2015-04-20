@@ -7,14 +7,8 @@ RSpec.describe HypothesisGroupsController, :type => :controller do
   # This should return the minimal set of attributes required to create a valid
   # HypothesisGroup. As you add validations to HypothesisGroup, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    {name: "Bakteeritauti"}
-  }
-
-
-  let(:invalid_attributes) {
-    {name: ""}
-  }
+  let(:valid_attributes) { {name: "Bakteeritauti"} }
+  let(:invalid_attributes) { {name: ""} }
 
 
   # This should return the minimal set of values that should be in the session
@@ -28,30 +22,28 @@ RSpec.describe HypothesisGroupsController, :type => :controller do
         expect {
           post :create, {:hypothesis_group => valid_attributes}, valid_session
           }.to change(HypothesisGroup, :count).by(1)
-        end
-
-        it "assigns a newly created hypothesis group as @hypothesis_group" do
-          post :create, {:hypothesis_group => valid_attributes}, valid_session
-          expect(assigns(:hypothesis_group)).to be_a(HypothesisGroup)
-          expect(assigns(:hypothesis_group)).to be_persisted
-        end
-
-        it "redirects to the created hypothesis group" do
-          post :create, {:hypothesis_group => valid_attributes}, valid_session
-          expect(response).to redirect_to(hypotheses_path(:layout => true))
-        end
       end
 
+      it "assigns a newly created hypothesis group as @hypothesis_group" do
+        post :create, {:hypothesis_group => valid_attributes}, valid_session
+        expect(assigns(:hypothesis_group)).to be_a(HypothesisGroup)
+        expect(assigns(:hypothesis_group)).to be_persisted
+      end
 
-
-      describe "with invalid params" do
-        it "assigns a newly created but unsaved hypothesis group as @hypothesis_group" do
-          post :create, {:hypothesis_group => invalid_attributes}, valid_session
-          expect(assigns(:hypothesis_group)).to be_a_new(HypothesisGroup)
-        end
+      it "redirects to the created hypothesis group" do
+        post :create, {:hypothesis_group => valid_attributes}, valid_session
+        expect(response).to redirect_to(hypotheses_path(:layout => true))
       end
     end
-    
+
+    describe "with invalid params" do
+      it "assigns a newly created but unsaved hypothesis group as @hypothesis_group" do
+        post :create, {:hypothesis_group => invalid_attributes}, valid_session
+        expect(assigns(:hypothesis_group)).to be_a_new(HypothesisGroup)
+      end
+    end
+  end
+
     describe "DELETE destroy" do
       it "destroys the requested hypothesis group" do
         hypothesis_group = HypothesisGroup.create! valid_attributes
