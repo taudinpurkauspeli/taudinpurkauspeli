@@ -1,19 +1,19 @@
 <%= render 'messages/messages' %>
 
-<% if current_user_is_admin %>
+<% if current_user.try(:admin) %>
 
-  <h1>Opiskelijoiden tiedot</h1>
+    <h1>Opiskelijoiden tiedot</h1>
 
-  <%= form_tag(users_path, method: :get) do %>
-  <%= label_tag 'list_type', 'Näytä: ' %>
-  <%= select_tag 'list_type', options_for_select([["Opiskelijoiden eteneminen", 0], ["Opiskelijalista", 1]], @list_type), :onchange => "this.form.submit();", :class => 'form-control widthAuto' %>
-  <% end %>
+    <%= form_tag(users_path, method: :get) do %>
+        <%= label_tag 'list_type', 'Näytä: ' %>
+        <%= select_tag 'list_type', options_for_select([["Opiskelijoiden eteneminen", 0], ["Opiskelijalista", 1]], @list_type), :onchange => "this.form.submit();", :class => 'form-control widthAuto' %>
+    <% end %>
 
-  <% if @list_type == 0 %>
-    <%= render 'student_progress_list' %>
-  <% else %>
-    <%= render 'all_students_list' %>
-  <% end %>
+    <% if @list_type == 0 %>
+        <%= render 'student_progress_list' %>
+    <% else %>
+        <%= render 'all_students_list' %>
+    <% end %>
 
 <% end %>
 

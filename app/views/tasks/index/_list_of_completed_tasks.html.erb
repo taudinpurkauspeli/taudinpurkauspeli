@@ -1,11 +1,9 @@
-
 <h3>Suoritetut toimenpiteet</h3>
 <br />
-
-<% @completed_tasks.each do |task| %>
+<% @completed_tasks.each_with_index do |task, index| %>
     <div class="row">
       <div class="col-md-5">
-        <%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task', :form_class => "form-completed-task" %>
+        <%= button_to (index + 1).to_s + ". " + task.name, task, method: :get, :class => 'btn btn-default btn-completed-task', :form_class => "form-completed-task" %>
       </div>
     </div>
 <% end %>

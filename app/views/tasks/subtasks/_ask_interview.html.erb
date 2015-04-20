@@ -15,7 +15,7 @@
 
                   <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
                       <%= hidden_field_tag 'question_id', question.id %>
-                      <%= submit_tag(question.title, :class => "btn btn-default multiline width95 floatRight") unless current_user_is_admin %>
+                      <%= submit_tag(question.title, :class => "btn btn-default multiline width95 floatRight") unless current_user.try(:admin) %>
                   <% end %>
 
               <% else %>
@@ -40,7 +40,7 @@
           <% if !current_user.has_asked_question?(question) %>
               <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
                   <%= hidden_field_tag 'question_id', question.id %>
-                  <%= submit_tag(question.title, :class => "btn btn-default multiline width100") unless current_user_is_admin %>
+                  <%= submit_tag(question.title, :class => "btn btn-default multiline width100") unless current_user.try(:admin) %>
               <% end %>
           <% else %>
               <input class='btn btn-default btn-hypothesis-group multiline <%= "collapse-answer-right" if question.required == "required" %>' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
@@ -59,7 +59,7 @@
 <br />
 
 <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/check_answers", method: "post") do %>
-    <%= submit_tag("Jatka", :class => "btn btn-default btn-save widthAuto") unless current_user_is_admin %>
+    <%= submit_tag("Jatka", :class => "btn btn-default btn-save widthAuto") unless current_user.try(:admin) %>
 <% end %>
 
 

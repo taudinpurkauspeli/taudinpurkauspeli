@@ -60,6 +60,7 @@ fi:
             student_number:
               blank: "on pakollinen"
               wrong_length: "on väärän pituinen"
+              taken: "on jo käytössä"
             starting_year:
               blank: "on pakollinen"
         hypothesis:

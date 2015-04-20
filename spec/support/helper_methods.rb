@@ -21,10 +21,6 @@ module HelperMethods
     return user
   end
 
-  def current_user_is_admin
-    return true
-  end
-
   def populate_task(task)
     subs = Array.new(10)
     for i in 0...10

@@ -1,11 +1,11 @@
-<% if current_user_is_admin %>
+<% if current_user.try(:admin) %>
   <%= render 'messages/messages' %>
 <% end %>
 
 <%# headers %>
 <div class="row">
   <div class="col-md-5">
-    <% if current_user_is_admin %>
+    <% if current_user.try(:admin) %>
       <h2>Casen <%= @exercise.name %> työhypoteesit</h2>
     <% else %>
       <h2>Valitse poissuljettavat työhypoteesit</h2>
@@ -15,7 +15,7 @@
     <%# spacer %>
   </div>
   <div class="col-md-5">
-    <% if current_user_is_admin %>
+    <% if current_user.try(:admin) %>
       <h2>Työhypoteesipankki</h2>
     <% end %>
   </div>
@@ -30,7 +30,7 @@
         <%= render 'hypotheses/show/hypothesis_group_header', { group:group } %>
         <div class="collapse in" id="collapseHypothesisGroup1<%= group.id%>" >
           <%# hypotheses that belong to current exercise and group%>
-          <%= if current_user_is_admin
+          <%= if current_user.try(:admin)
               then render 'hypotheses/edit/edit_hypotheses_of_group', { group: group }
               else render 'hypotheses/show/check_hypotheses_of_group', { group: group }
               end %>
@@ -41,7 +41,7 @@
   <div class="col-md-2">
   </div>
   <div class="col-md-5">
-    <% if current_user_is_admin %>
+    <% if current_user.try(:admin) %>
       <% @hypothesis_groups.each do |group| %>
         <%= render 'hypotheses/edit/hypothesis_group_edit', { group: group }  %>
         <%= render 'hypotheses/edit/hypotheses_of_group', { group: group }  %>

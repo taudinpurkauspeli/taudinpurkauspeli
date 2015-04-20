@@ -12,7 +12,7 @@ class TasksController < ApplicationController
 
     @exercise = current_exercise
     if @exercise
-      if current_user_is_admin
+      if current_user.try(:admin)
         @tasks = @exercise.tasks.where("level > ?", 0).order("level")
       else
         @available_tasks = @exercise.tasks.where("level > ?", 0).order("name") - @user.tasks.where("level > ?", 0).where(exercise:@exercise)
@@ -29,7 +29,12 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
 
-    unless current_user_is_admin
+    #such hack
+    unless session[:exhyp_id].nil?
+      @wrong_conclusion = ExerciseHypothesis.find(session[:exhyp_id])
+    end
+
+    unless current_user.try(:admin)
       if current_user.can_start?(@task)
         session[:task_id] = params[:id]
       else

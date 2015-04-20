@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :checked_hypotheses, dependent: :destroy
   has_many :exercise_hypotheses, through: :checked_hypotheses
 
-  has_many :completed_tasks, -> {order('created_at DESC')}, dependent: :destroy
+  has_many :completed_tasks, -> {order('created_at ASC')}, dependent: :destroy
   has_many :tasks, through: :completed_tasks
   has_many :completed_subtasks, dependent: :destroy
   has_many :completed_exercises
@@ -88,6 +88,10 @@ class User < ActiveRecord::Base
 
   def get_number_of_tasks_by_level(exercise, level)
     tasks.where(level:level).where(exercise:exercise).count
+  end
+
+  def check_hypothesis(exhyp)
+    checked_hypotheses.create(exercise_hypothesis:exhyp)
   end
 
   def check_all_hypotheses(exercise)
