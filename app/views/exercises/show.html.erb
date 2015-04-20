@@ -4,16 +4,7 @@
 
 <%# Case completed %>
 <% if current_user.has_completed? @exercise %>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-        Case suoritettu!
-    </div>
-    <div id="collapse0" class="panel-collapse collapse in">
-      <div class="panel-body">
-        <p>Selvitit casen ja olet tehnyt kaikki tarvittavat toimenpiteet. Onneksi olkoon, <%= current_user.username %>!</p>
-      </div>
-    </div>
-</div>
+  <%= render 'user_has_completed_exercise' %>
 <% end %>
 
 <%= image_tag @exercise.image.picture.url(:original) unless @exercise.image.nil? %>
