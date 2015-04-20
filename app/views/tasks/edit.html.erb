@@ -29,7 +29,7 @@
 <h1>Alakohdat</h1>
 
 <% @task.subtasks.each do |subtask| %>
-    <%= button_to subtask, edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise multiline', :form_class => "form-subtask", :method => :get %>
+    <%= button_to sanitize(subtask.to_s), edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise multiline', :form_class => "form-subtask", :method => :get %>
 <% end %>
 
 <%= button_to '+ Luo uusi tekstimuotoinen alakohta', new_task_text_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>

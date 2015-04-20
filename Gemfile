@@ -34,6 +34,7 @@ gem 'bootstrap-sass'
 gem 'ckeditor'
 gem 'responders'
 gem "non-stupid-digest-assets"
+gem 'rails-html-sanitizer'
 
 # Password encryption
 #gem 'bcrypt-ruby', '~> 3.1.2'
