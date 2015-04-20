@@ -1,7 +1,7 @@
 <div class = "panel panel-default panel-green">
   <div class="row panel-body">
     <div class = "nakki">
-      <%= form_for(@new_option) do |f| %>
+      <%= form_for(@new_option, :html => {:id => "form-new-option", :class=> "rich-text-form"}) do |f| %>
           <%= f.label :is_correct_answer%><br>
           <div class="col-md-2">
             <%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [t("activerecord.attributes.option.is_correct_answers.#{answer[0]}"), answer[0]] }, selected: @new_option.is_correct_answer), {}, {class: "form-control"} %>
@@ -10,7 +10,7 @@
             <%= f.text_area :content, placeholder: "Vaihtoehto", :class => 'form-control' %>
           </div>
           <div class="col-md-4">
-            <%= f.text_area :explanation, placeholder: "Vastausteksti", :class => 'form-control' %>
+            <%= f.cktext_area :explanation, placeholder: "Vastausteksti", :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %>
           </div>
           <div class="col-md-2">
             <div class="field">

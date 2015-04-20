@@ -11,7 +11,7 @@
 
 	      </div>
 	      <div class="col-md-4">
-	        <%= f.text_area :explanation, placeholder: "Vastausteksti", :id => "explanation_" + option.id.to_s, :class => 'form-control' %>
+	        <%= f.cktext_area :explanation, placeholder: "Vastausteksti", :id => "explanation_" + option.id.to_s, :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %>
 	      </div>
 	      <div class="col-md-2">
 	        <%= image_tag option.image.picture.url(:thumb) unless option.image.nil? %>
