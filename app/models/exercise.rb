@@ -17,7 +17,9 @@ class Exercise < ActiveRecord::Base
 
   def has_conclusion?
     tasks.each do |task|
-      unless task.conslusions.nil? return false
+      unless task.conclusions.nil?
+        return false
+      end
     end
     return true
   end
