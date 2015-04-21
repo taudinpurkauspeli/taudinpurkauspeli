@@ -52,6 +52,13 @@ function setAjaxSubmits(formsSelector, containerElementSelector, type, submitCal
 
 }
 
+/**
+ * Updates CKeditor instance in view.
+ *
+ *
+ *
+ */
+
 function CKupdate(){
     for ( instance in CKEDITOR.instances ){
         CKEDITOR.instances[instance].updateElement();
