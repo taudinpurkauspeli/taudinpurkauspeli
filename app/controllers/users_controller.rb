@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    unless @user == current_user || current_user_is_admin
+    unless @user == current_user || current_user.try(:admin)
       redirect_to exercises_path, alert: 'Käyttäjää ei löytynyt!'
     end
     @exercises = Exercise.all
@@ -99,7 +99,7 @@ class UsersController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
