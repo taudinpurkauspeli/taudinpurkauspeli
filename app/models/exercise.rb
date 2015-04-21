@@ -15,6 +15,13 @@ class Exercise < ActiveRecord::Base
     include_association :tasks
   end
 
+  def has_conclusion?
+    tasks.each do |task|
+      unless task.conslusions.nil? return false
+    end
+    return true
+  end
+
   def get_hypotheses
     return exercise_hypotheses.group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
   end
