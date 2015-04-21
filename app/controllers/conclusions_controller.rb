@@ -44,8 +44,9 @@ class ConclusionsController < ApplicationController
 	end
 
 	def update
+		@task = @conclusion.subtask.task
 		respond_to do |format|
-			if @conclusion.update(conclusion_params)
+			if @conclusion.update(conclusion_params) & @task.update(name:conclusion_params[:title])
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Päätöstoimenpide päivitettiin onnistuneesti.' }
 			else
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), alert: 'Toimenpiteen päivitys epäonnistui.' }
