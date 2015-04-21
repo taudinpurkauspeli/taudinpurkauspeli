@@ -47,35 +47,31 @@ end
 
 
 When(/^I click on a button "(.*?)"$/) do |arg1|
-  first(:button, arg1).click
-  wait_for_ajax
+  click_and_wait("new_hypothesis_for_group_1")
 end
 
 When(/^I click on button "(.*?)"$/) do |arg1|
-  click_and_wait(arg1)
+  click_and_wait("new_hypothesis_group")
 end
 
 When(/^I fill in the hypothesis name field with a correct value$/) do
-  fill_in('hypothesis_name', with: 'Suu- ja sorkkatauti', :match => :prefer_exact)
+  fill_in('new_hypothesis_name', with: 'Suu- ja sorkkatauti')
 end
 
 When(/^I fill in the hypothesis name field with an incorrect value$/) do
-  fill_in('hypothesis_name', with: '', :match => :prefer_exact)
+  fill_in('new_hypothesis_name', with: '')
 end
 
 When(/^I save the new hypothesis with button "(.*?)"$/) do |arg1|
-  all(:button, 'Tallenna')[0].click
-  wait_for_ajax
+  click_and_wait("save_new_hypothesis_for_group_1")
 end
 
 When(/^I save changes with button "(.*?)"$/) do |arg1|
-  all(:button, 'Päivitä')[0].click
-  wait_for_ajax
+  click_and_wait("update_exercise_hypothesis_2")
 end
 
 When(/^I click on the delete button "(.*?)"$/) do |arg1|
-  all(:button, 'Poista casesta')[0].click
-  wait_for_ajax
+  click_and_wait("remove_from_case_2")
 end
 
 When(/^I click on the hypothesis button "(.*?)"$/) do |arg1|
@@ -87,7 +83,7 @@ When(/^I click on one of the hypotheses of the case$/) do
 end
 
 When(/^I fill in the hypothesis group name field with a correct name$/) do
-  fill_in('hypothesis_group_name', with: 'Koirasairaudet', :match => :prefer_exact)
+  fill_in('hypothesis_group_name', with: 'Koirasairaudet')
 end
 
 When(/^I fill in the explanation field$/) do
@@ -114,62 +110,62 @@ Then(/^the new hypothesis group should be created$/) do
 end
 
 Then(/^the explanation should be added to the hypothesis$/) do
-  backdoor = 0
-  while(ExerciseHypothesis.find(2).explanation != "<p>Hevosen hauraat luut</p>\r\n")
+ # backdoor = 0
+  #while(ExerciseHypothesis.find(2).explanation != "<p>Hevosen hauraat luut</p>\r\n")
 
-    if backdoor > 50 then
-      raise "Loop error!"
-    end
+  #  if backdoor > 50 then
+  #    raise "Loop error!"
+  #  end
 
-    click_and_wait('Hevosheikkous')
+  #  click_and_wait('Hevosheikkous')
 
-    fill_in_ckeditor 'exercise_hypothesis_explanation_2', with: "Hevosen hauraat luut"
+  #  fill_in_ckeditor 'exercise_hypothesis_explanation_2', with: "Hevosen hauraat luut"
 
-    first(:button, 'Päivitä').click
-    wait_for_ajax
+   # first(:button, 'Päivitä').click
+   # wait_for_ajax
 
-    backdoor += 1
-  end
+   # backdoor += 1
+ # end
 
   expect(ExerciseHypothesis.last.explanation).to eq("<p>Hevosen hauraat luut</p>\r\n")
 end
 
 Then(/^the hypothesis should be removed from the case$/) do
-  backdoor = 0
-  while(ExerciseHypothesis.count != 1)
+  #backdoor = 0
+  #while(ExerciseHypothesis.count != 1)
 
-    if backdoor > 50 then
-      raise "Loop error!"
-    end
+   # if backdoor > 50 then
+   #   raise "Loop error!"
+   # end
 
-    click_and_wait('Hevosheikkous')
-    first(:button, 'Poista casesta').click
-    wait_for_ajax
+   # click_and_wait('Hevosheikkous')
+    #first(:button, 'Poista casesta').click
+   # wait_for_ajax
 
-    backdoor += 1
-  end
+   # backdoor += 1
+  #end
   exercise_hypotheses = Exercise.first.exercise_hypotheses
   expect(exercise_hypotheses.count).to eq(1)
   expect(exercise_hypotheses.first.hypothesis.name).not_to eq("Hevosheikkous")
 end
 
 Then(/^the prerequisite task of the hypothesis should be updated$/) do
-  backdoor = 0
-  while(ExerciseHypothesis.last.task.name == "Lääkitse hevonen")
+ # backdoor = 0
+ # while(ExerciseHypothesis.last.task.name == "Lääkitse hevonen")
 
-    if backdoor > 50 then
-      raise "Loop error!"
-    end
+  #  if backdoor > 50 then
+  #    raise "Loop error!"
+  #  end
 
-    click_and_wait('Hevosheikkous')
+    #click_and_wait('Hevosheikkous')
 
-    select('Soita lääkärille', from:'exercise_hypothesis[task_id]')
+   # select('Soita lääkärille', from:'exercise_hypothesis[task_id]')
 
-    first(:button, 'Päivitä').click
-    wait_for_ajax
+   # first(:button, 'Päivitä').click
+   # wait_for_ajax
 
-    backdoor += 1
-  end
+   # backdoor += 1
+ # end
   exercise_hypothesis = Exercise.first.exercise_hypotheses.last
   expect(exercise_hypothesis.task.name).to eq("Soita lääkärille")
 end

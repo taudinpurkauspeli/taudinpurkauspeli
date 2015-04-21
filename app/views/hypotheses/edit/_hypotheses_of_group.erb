@@ -26,7 +26,7 @@
         <%= form_for(@new_hypothesis) do |f| %>
             <div class="row">
               <div class="col-md-12">
-                <%= f.text_field :name, placeholder: "Nimi", :class => 'width100' %>
+                <%= f.text_field :name, placeholder: "Nimi", :class => 'width100', :id => "new_hypothesis_name" %>
                 <%= f.hidden_field :hypothesis_group_id, :value => group.id %>
               </div>
             </div>
