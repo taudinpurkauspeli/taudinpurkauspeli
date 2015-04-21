@@ -3,14 +3,14 @@
 
 <h1><%= @user.realname %> </h1>
 
-<% if !current_user_is_admin %>
+<% if !current_user.try(:admin) %>
     <strong>Käyttäjänimi: </strong><%= @user.username %><br/>
 <% end %>
 <strong>Opiskelijanumero: </strong><%= @user.student_number %><br/>
 <strong>Sähköposti: </strong><%= @user.email %><br/>
 <strong>Aloitusvuosi: </strong><%= @user.starting_year %><br/><br/><br/>
 
-<% if !current_user_is_admin %>
+<% if !current_user.try(:admin) %>
     <%= link_to 'Muokkaa', edit_user_path(@user) %> <br/><br/><br/>
 <% end %>
 
