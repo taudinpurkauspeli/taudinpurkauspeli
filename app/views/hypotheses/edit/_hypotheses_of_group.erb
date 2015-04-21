@@ -21,7 +21,7 @@
     <div class="col-md-8">
       <%# new hypothesis%>
       <%#= button_to '+ Uusi työhypoteesi', new_hypothesis_path, method: :get, :class => 'btn btn-default btn-save btn-hypothesis' %>
-      <input class="btn btn-default btn-hypothesis btn-save" type="button" value="+ Uusi työhypoteesi" data-toggle="collapse" data-target="#collapseNewHypothesis<%= group.id%>" />
+      <input class="btn btn-default btn-hypothesis btn-save" type="button" value="+ Uusi työhypoteesi" data-toggle="collapse" id="new_hypothesis_for_group_<%= group.id%>" data-target="#collapseNewHypothesis<%= group.id%>" />
       <div class="collapse" id="collapseNewHypothesis<%= group.id%>">
         <%= form_for(@new_hypothesis) do |f| %>
             <div class="row">
@@ -32,7 +32,7 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                <%= f.submit 'Tallenna', :class => 'btn btn-default btn-save', :id => 'new_hypothesis_for_group_' + group.id.to_s %>
+                <%= f.submit 'Tallenna', :class => 'btn btn-default btn-save', :id => 'save_new_hypothesis_for_group_' + group.id.to_s %>
               </div>
             </div>
         <% end %>

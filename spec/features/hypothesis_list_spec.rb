@@ -75,7 +75,7 @@ describe "Hypothesis list page", js:true do
 
         fill_in('hypothesis_name', with: 'Sorkkaihottuma')
         expect {
-          click_and_wait("new_hypothesis_for_group_1")
+          click_and_wait("save_new_hypothesis_for_group_1")
         }.to change(Hypothesis, :count).by(1)
 
         expect(Hypothesis.first.name).to eq('Sorkkaihottuma')
@@ -162,7 +162,7 @@ describe "Hypothesis list page", js:true do
 
       fill_in('hypothesis_name', with: '')
       expect {
-        click_and_wait("new_hypothesis_for_group_1")
+        click_and_wait("save_new_hypothesis_for_group_1")
       }.to change(Hypothesis, :count).by(0)
 
       expect(page).to have_content 'Hypoteesin luominen epäonnistui'
