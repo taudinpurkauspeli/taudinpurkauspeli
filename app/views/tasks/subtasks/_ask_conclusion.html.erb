@@ -11,7 +11,7 @@
     <div class="col-md-4">
       <% if !@wrong_conclusion.nil? %>
       <p><%= @wrong_conclusion.hypothesis.name %></p>
-      <p><%= @wrong_conclusion.explanation %></p>
+      <p><%= @wrong_conclusion.explanation.html_safe %></p>
       <% end %>
     </div>
   </div>
