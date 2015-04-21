@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :checked_hypotheses, dependent: :destroy
   has_many :exercise_hypotheses, through: :checked_hypotheses
 
-  has_many :completed_tasks, -> {order('created_at ASC')}, dependent: :destroy
+  has_many :completed_tasks, dependent: :destroy
   has_many :tasks, through: :completed_tasks
   has_many :completed_subtasks, dependent: :destroy
   has_many :completed_exercises
