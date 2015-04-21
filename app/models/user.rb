@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
   def complete_task(task)
     completed_tasks.create(task:task)
     exercise = task.exercise
-    if exercise.tasks.where(level:1...999).count == tasks.count
+    if exercise.tasks.where(level:1...999).count == tasks.where(exercise:exercise).count
       complete_exercise(exercise)
     end
   end
