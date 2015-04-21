@@ -51,6 +51,23 @@ class Exercise < ActiveRecord::Base
     return false
   end
 
+  def get_users(year)
+
+    users_of_ex = Array.new()
+
+    if year.nil? || year == 0 || year == "0"
+      tasks.each do |task|
+        users_of_ex += task.users
+      end
+    else
+      tasks.each do |task|
+        users_of_ex += task.users.where("starting_year = ?", year)
+      end
+    end
+
+    return  users_of_ex.uniq
+  end
+
   private
   def create_anamnesis
     tasks.create(name:"Anamneesi", level:0)

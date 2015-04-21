@@ -13,6 +13,7 @@ describe "Multichoice page for student", js:true do
   let!(:option2){FactoryGirl.create(:option, multichoice_id:multichoice.id, content: "Ei tykkää", is_correct_answer: "wrong", explanation: "Ei oikea vastaus")}
   let!(:option3){FactoryGirl.create(:option, multichoice_id:multichoice.id, content: "Paljon tykkää", explanation: "Toinen oikea vastaus")}
   let!(:option4){FactoryGirl.create(:option, multichoice_id:multichoice.id, content: "Ehkä tykkää soittaa", is_correct_answer: "allowed", explanation: "Melkein oikea vastaus")}
+  let!(:additional_dummy_task_to_prevent_ex_completion){FactoryGirl.create(:task, name:"Dummy task", exercise:exercise)}
 
   describe "student" do
 

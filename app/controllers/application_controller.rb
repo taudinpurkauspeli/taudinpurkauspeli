@@ -1,4 +1,8 @@
+require "application_responder"
+
 class ApplicationController < ActionController::Base
+  self.responder = ApplicationResponder
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -7,7 +11,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_task
   helper_method :current_exercise
-  helper_method :current_user_is_admin
 
   def current_exercise
     return nil if session[:exercise_id].nil?
@@ -23,21 +26,13 @@ class ApplicationController < ActionController::Base
     return nil if session[:task_id].nil?
     Task.find(session[:task_id])
   end
-
-  def current_user_is_admin
-    u = current_user
-    unless u.nil?
-      return u.admin
-    end
-    return false
-  end
-
+  
   def ensure_user_is_logged_in
     redirect_to signin_path, alert: "Toiminto vaatii sisäänkirjautumisen" if current_user.nil?
   end
 
   def ensure_user_is_admin
-    redirect_to signin_path, alert: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia" unless current_user_is_admin
+    redirect_to signin_path, alert: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia" unless current_user.try(:admin)
   end
 
   def get_layout

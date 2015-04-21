@@ -25,7 +25,7 @@ RSpec.describe UsersController, :type => :controller do
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {username: "Pekka", email: "kukkuu@kukkuu.com", admin: true, realname: "Topohanta", password: "Salasana1", password_confirmation: "Salasana1"}
+    {username: "Pekka", email: "kukkuu@kukkuu.com", admin: true, realname: "Topohanta", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000000", starting_year: 2000}
 
   }
 
@@ -35,6 +35,7 @@ RSpec.describe UsersController, :type => :controller do
   }
 
   # This should return the minimal set of values that should be in the session
+
   # in order to pass any filters (e.g. authentication) defined in
   # UsersController. Be sure to keep this updated too.
   let(:valid_session) { {
@@ -42,8 +43,14 @@ RSpec.describe UsersController, :type => :controller do
   } }
 
   describe "GET index" do
-    it "assigns all users as @users" do
+    it "selects no admin users to @users" do
       user = User.create! valid_attributes
+      get :index, {}, valid_session
+      expect(assigns(:users)).to eq([])
+    end
+
+    it "assigns all normal users as @users" do
+      user = User.create!  username: "Pekka", email: "kukkuu@kukkuu.com", admin: false, realname: "Topohanta", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000000", starting_year: 2000
       get :index, {}, valid_session
       expect(assigns(:users)).to eq([user])
     end
@@ -108,7 +115,7 @@ RSpec.describe UsersController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        {username: "Topohanta", email: "kukkuu@kukkuu.com", admin: true, realname: "Pekka", password: "Salasana1", password_confirmation: "Salasana1"}
+        {username: "Topohanta", email: "kukkuu@kukkuu.com", admin: true, realname: "Pekka", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000000", starting_year: 2000}
 
       }
 

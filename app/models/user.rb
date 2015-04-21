@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates :realname, presence: true, length: { minimum: 4 }
   validates :email, presence: true
+  validates :student_number, presence: true, uniqueness: true , length: { is: 9 }
+  validates :starting_year, presence: true
 
   has_secure_password
 
@@ -11,24 +13,23 @@ class User < ActiveRecord::Base
   has_many :checked_hypotheses, dependent: :destroy
   has_many :exercise_hypotheses, through: :checked_hypotheses
 
-  has_many :completed_tasks, -> {order('created_at DESC')}, dependent: :destroy
+  has_many :completed_tasks, dependent: :destroy
   has_many :tasks, through: :completed_tasks
   has_many :completed_subtasks, dependent: :destroy
+  has_many :completed_exercises
+  has_many :exercises, through: :completed_exercises
 
   has_many :subtasks, through: :completed_subtasks
 
-  def has_asked_all_required_questions_of(interview)
-    asked = questions.where(interview:interview).where(required:true)
-    required = interview.questions.where(required:true)
-    return (asked - required).empty? && (required - asked).empty?
-  end
-
-  def has_completed?(completable_task)
-    if completable_task.class == Subtask
-      return !completed_subtasks.where(subtask:completable_task).empty?
+  def has_completed?(completable_object)
+    if completable_object.class == Subtask
+      return !(subtasks.find_by id:completable_object.id).nil?
     end
-    if completable_task.class == Task
-      return !completed_tasks.where(task:completable_task).empty?
+    if completable_object.class == Task
+      return !(tasks.find_by id:completable_object.id).nil?
+    end
+    if completable_object.class == Exercise
+      return !(exercises.find_by id:completable_object.id).nil?
     end
   end
 
@@ -42,14 +43,22 @@ class User < ActiveRecord::Base
 
   def complete_subtask(subtask)
     completed_subtasks.create(subtask:subtask)
-    task_in_progress = subtask.task
-    if task_in_progress.subtasks.last == subtask
-      complete_task(task_in_progress)
+    task = subtask.task
+    if subtask == task.subtasks.last
+      complete_task(task)
     end
   end
 
   def complete_task(task)
     completed_tasks.create(task:task)
+    exercise = task.exercise
+    if exercise.tasks.where(level:1...999).count == tasks.where(exercise:exercise).count
+      complete_exercise(exercise)
+    end
+  end
+
+  def complete_exercise(exercise)
+    completed_exercises.create(exercise:exercise)
   end
 
   def ask_question(question)
@@ -78,23 +87,23 @@ class User < ActiveRecord::Base
   end
 
   def get_number_of_tasks_by_level(exercise, level)
-    number_of_tasks = 0
-    completed_tasks.each do |c|
-      unless c.task.nil?
-        if(c.task.level == level && c.task.exercise_id == exercise.id)
-          number_of_tasks += 1
-        end
+    tasks.where(level:level).where(exercise:exercise).count
+  end
+
+  def check_hypothesis(exhyp)
+    checked_hypotheses.create(exercise_hypothesis:exhyp)
+  end
+
+  def check_all_hypotheses(exercise)
+    exercise.exercise_hypotheses.each do |exhyp|
+      unless has_checked_hypothesis?(exhyp)
+        checked_hypotheses.create(exercise_hypothesis:exhyp)
       end
     end
-    return number_of_tasks
   end
-
-  def has_completed_task(id)
-    return completed_tasks.where(id:id).nil?
-  end
-
+  
   def has_asked_question?(question)
-    return !asked_questions.where(question:question).empty?
+    return !asked_questions.find_by(question:question).nil?
   end
 
   def has_checked_hypothesis?(exercise_hypothesis)
@@ -105,5 +114,15 @@ class User < ActiveRecord::Base
     return checked_hypotheses.where(exercise_hypothesis:exercise_hypothesis).first
   end
 
+  def get_number_of_completed_tasks_by_exercise(exercise)
+    return completed_tasks.select{ |ct| ct.has_exercise?(exercise)}.count
+  end
 
+  def get_percent_of_completed_tasks_of_exercise(exercise)
+    if exercise.tasks.where(level: 1...99).count == 0
+      return 0
+    else
+      return (get_number_of_completed_tasks_by_exercise(exercise) * 100) / (exercise.tasks.where(level: 1...99).count)
+    end
+  end
 end

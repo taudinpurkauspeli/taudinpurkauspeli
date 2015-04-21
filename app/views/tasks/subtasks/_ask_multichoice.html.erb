@@ -37,7 +37,7 @@
               <% elsif option.is_correct_answer == "wrong" %>
                 wrong-answer
               <% end %>
-              "><%= option.explanation %>
+              "><%= option.explanation.html_safe %>
             <% else %>
             ">
             <% end %>
@@ -46,5 +46,5 @@
       <% end %>
     </table>
     <br />
-    <%= submit_tag("Tarkista", :class => "btn btn-default btn-save widthAuto") unless current_user_is_admin %>
+    <%= submit_tag("Tarkista", :class => "btn btn-default btn-save widthAuto") unless current_user.try(:admin) %>
 <% end %>

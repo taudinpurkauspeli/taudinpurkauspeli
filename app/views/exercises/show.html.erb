@@ -2,6 +2,11 @@
 
 <h1> Case: <%= @exercise.name %> </h1>
 
+<%# Case completed %>
+<% if current_user.has_completed? @exercise %>
+  <%= render 'user_has_completed_exercise' %>
+<% end %>
+
 <%= image_tag @exercise.image.picture.url(:original) unless @exercise.image.nil? %>
 
 <% if @exercise.hidden? %>
@@ -18,14 +23,14 @@
       <% if @exercise.anamnesis.nil? || @exercise.anamnesis == "" %>
           <%= link_to 'Casen anamneesia ei ole asetettu.', edit_exercise_path(@exercise) %>
       <% else %>
-          <%= @exercise.anamnesis %>
+          <%= @exercise.anamnesis.html_safe %>
       <% end %>
     </div>
   </div>
 </div>
 
 
-<%= button_to 'Muokkaa', edit_exercise_path(@exercise), :class => "btn btn-default btn-save widthAuto" if current_user_is_admin %> <!-- |
+<%= button_to 'Muokkaa', edit_exercise_path(@exercise), :method => :get, :class => "btn btn-default btn-save widthAuto" if current_user.try(:admin) %> <!-- |
 <%= link_to 'Takaisin', exercises_path %> -->
 
 <script>

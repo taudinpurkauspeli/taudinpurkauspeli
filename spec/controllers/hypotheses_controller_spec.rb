@@ -44,29 +44,6 @@ RSpec.describe HypothesesController, :type => :controller do
       user_id: 1
   } }
 
-  describe "GET show" do
-    it "assigns the requested hypothesis as @hypothesis" do
-      hypothesis = Hypothesis.create! valid_attributes
-      get :show, {:id => hypothesis.to_param}, valid_session
-      expect(assigns(:hypothesis)).to eq(hypothesis)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new hypothesis as @hypothesis" do
-      get :new, {}, valid_session
-      expect(assigns(:hypothesis)).to be_a_new(Hypothesis)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested hypothesis as @hypothesis" do
-      hypothesis = Hypothesis.create! valid_attributes
-      get :edit, {:id => hypothesis.to_param}, valid_session
-      expect(assigns(:hypothesis)).to eq(hypothesis)
-    end
-  end
-
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Hypothesis" do
@@ -86,20 +63,6 @@ RSpec.describe HypothesesController, :type => :controller do
         expect(response).to redirect_to(hypotheses_path(:layout => true))
       end
     end
-
-=begin
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved hypothesis as @hypothesis" do
-        post :create, {:hypothesis => invalid_attributes}, valid_session
-        expect(assigns(:hypothesis)).to be_a_new(Hypothesis)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, {:hypothesis => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
-    end
-=end
   end
 
 
@@ -161,5 +124,4 @@ RSpec.describe HypothesesController, :type => :controller do
       expect(response).to redirect_to(hypotheses_path(:layout => true))
     end
   end
-
 end

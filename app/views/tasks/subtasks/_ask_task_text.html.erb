@@ -1,5 +1,5 @@
 <%= image_tag subtask.task_text.image.picture.url(:original) unless subtask.task_text.image.nil? %>
-<p><%= subtask.task_text.content %></p>
+<p><%= subtask.task_text.content.html_safe %></p>
 
 <%= form_tag("/task_texts/" + subtask.task_text.id.to_s + "/check_answers", method: "post") do %>
     <%= submit_tag("Jatka", :class => "btn btn-default btn-save widthAuto") %>

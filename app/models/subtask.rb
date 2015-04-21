@@ -6,6 +6,8 @@ class Subtask < ActiveRecord::Base
   has_one :task_text, dependent: :destroy
   has_one :multichoice, dependent: :destroy
   has_one :interview, dependent: :destroy
+  has_one :conclusion, dependent: :destroy
+
 
   amoeba do
     enable
@@ -21,6 +23,9 @@ class Subtask < ActiveRecord::Base
     end
     unless interview.nil?
       return 'interview'
+    end
+    unless conclusion.nil?
+      return 'conclusion'
     end
   end
 
@@ -39,12 +44,13 @@ class Subtask < ActiveRecord::Base
   end
 
   def to_s
-    return_string = 'Alitoimenpide'
+    full_sanitizer = Rails::Html::FullSanitizer.new
+    return_string = 'Alakohta'
     content = ''
 
     unless task_text.nil?
-      return_string = 'Teksti: '
-      content = task_text.content
+      return_string = "Teksti: "
+      content = full_sanitizer.sanitize(task_text.content.strip)
     end
 
     unless multichoice.nil?
@@ -55,6 +61,11 @@ class Subtask < ActiveRecord::Base
     unless interview.nil?
       return_string = ''
       content = interview.title
+    end
+
+    unless conclusion.nil?
+      return_string = ''
+      content = conclusion.title
     end
 
     if content.split.size > 3

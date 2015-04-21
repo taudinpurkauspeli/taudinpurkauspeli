@@ -1,0 +1,20 @@
+<% @exercise.get_hypotheses[group.id].to_a.each do |exercise_hypothesis| %>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8">
+        <%# edit case hypothesis field for admin user%>
+        <input class="btn btn-default btn-hypothesis multiline" type="button" value="<%= exercise_hypothesis.hypothesis.name %>" data-toggle="collapse" data-target="#collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>" />
+        <div class="collapse" id="collapseExerciseHypothesis<%= exercise_hypothesis.hypothesis_id %>">
+          <%= form_for(exercise_hypothesis, :html => {:id => "form-edit-exercise-hypothesis-" + exercise_hypothesis.id.to_s, :class=> "rich-text-form"}) do |f| %>
+              <%= f.hidden_field :exercise_id, :value => exercise_hypothesis.exercise_id %>
+              <%= f.hidden_field :hypothesis_id, :value => exercise_hypothesis.hypothesis_id %>
+              <%= f.label :task_id %>
+              <%= f.select :task_id, options_from_collection_for_select(@exercise.tasks, :id, :short_name, selected: exercise_hypothesis.task_id) %>
+              <%= f.cktext_area :explanation, placeholder: "Selite", :class => 'width100', :id => "exercise_hypothesis_explanation_" + exercise_hypothesis.id.to_s, :rows => '10', :ckeditor => {:toolbar => 'minimalist'} %>
+              <%= f.submit :class => 'btn btn-default btn-save width50' %>
+          <% end %>
+          <%= button_to 'Poista casesta', exercise_hypothesis, method: :delete, :class => 'btn btn-default btn-del width50' %>
+        </div>
+      </div>
+    </div>
+<% end %>

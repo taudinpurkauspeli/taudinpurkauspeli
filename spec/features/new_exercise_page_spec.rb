@@ -8,12 +8,13 @@ describe "New Exercise page", js:true do
 
 		before :each do
 			sign_in(username:"Testipoika", password:"Salainen1")
-			visit new_exercise_path
+			click_and_wait('+ Luo uusi case')
 		end
 
 		it "should be able to create a new exercise" do
 			fill_in('exercise_name', with: "Broilerimysteeri")
-			fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
+
+			fill_in_ckeditor 'exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??'
 
 			expect{
 				click_and_wait('Tallenna')
@@ -21,12 +22,12 @@ describe "New Exercise page", js:true do
 
 			expect(page).to have_content 'Broilerimysteeri'
 			expect(Exercise.first.name).to eq('Broilerimysteeri')
-			expect(Exercise.first.anamnesis).to eq('Mitä kanoille on tapahtunut??')
+			expect(Exercise.first.anamnesis).to eq("<p>Mit&auml; kanoille on tapahtunut??</p>\r\n")
 		end
 
 		it "should not be able to create a new exercise without a name" do
 			fill_in('exercise_name', with: "")
-			fill_in('exercise_anamnesis', with: "Mitä kanoille on tapahtunut??")
+			fill_in_ckeditor 'exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??'
 
 			expect{
 				click_and_wait('Tallenna')

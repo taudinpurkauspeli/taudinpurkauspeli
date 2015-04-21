@@ -1,9 +1,48 @@
 <%= render 'messages/messages' %>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<h1><%= @user.realname %> </h1>
+
+<% if !current_user.try(:admin) %>
+    <strong>Käyttäjänimi: </strong><%= @user.username %><br/>
+<% end %>
+<strong>Opiskelijanumero: </strong><%= @user.student_number %><br/>
+<strong>Sähköposti: </strong><%= @user.email %><br/>
+<strong>Aloitusvuosi: </strong><%= @user.starting_year %><br/><br/><br/>
+
+<% if !current_user.try(:admin) %>
+    <%= link_to 'Muokkaa', edit_user_path(@user) %> <br/><br/><br/>
+<% end %>
+
+<h3>Caset:</h3>
+
+<% @exercises.each do |exercise| %>
+
+    <table class = "width100">
+      <thead>
+      <tr>
+        <th class = "user"><%= exercise.name %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class = "user">
+          <% if exercise.tasks.count - 1 == 0 %>
+              <% progress = 0 %>
+          <% else  %>
+              <% progress = @user.get_percent_of_completed_tasks_of_exercise(exercise) %>
+          <% end %>
+          <div class ="progressbar <%= 'completed' if progress == 100 %>" >
+            <% if progress < 100 %>
+                <div class = "progressbar progress" style = "width: <%= 100 - progress %>%;"></div>
+            <% end %>
+          </div>
+          <span class = "progress-percent"><%= progress %>%</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+<% end %>
+
+
+

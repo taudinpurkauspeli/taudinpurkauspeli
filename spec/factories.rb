@@ -7,6 +7,8 @@ FactoryGirl.define do
     password "Salainen1"
     password_confirmation "Salainen1"
     admin true
+    student_number "000000000"
+    starting_year 2000
   end
 
   factory :student, class: User do
@@ -16,6 +18,8 @@ FactoryGirl.define do
     password "Salainen1"
     password_confirmation "Salainen1"
     admin false
+    student_number "000000001"
+    starting_year 2000
   end
 
   factory :exercise do
@@ -98,11 +102,17 @@ FactoryGirl.define do
     question_group_id nil
     title "Oliko lehmällä veljiä?"
     content "Asiakas vastaa, että lehmällä ei ollut veljiä."
-    required true
+    required "required"
   end
 
   factory :question_group do
     title "Lehmätaudit"
+  end
+
+  factory :conclusion do
+    subtask_id nil
+    title "Viimekysymys"
+    content "Valitse tästä oikea diagnoosi"
   end
 
   factory :interview do

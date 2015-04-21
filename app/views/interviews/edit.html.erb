@@ -14,87 +14,10 @@
 <h1>Kysymykset</h1>
 
 <% @interview.questions.each do |question| %>
-    <div class = "panel panel-default panel-grey">
-      <div class="row panel-body">
-        <div class = "row panel-body">
-          <%= form_for(question) do |f| %>
-
-              <div class="row panel-body">
-                <div class="col-md-1"></div>
-                <%=f.select :question_group_id, options_from_collection_for_select(@question_groups, :id, :title, selected: question.question_group_id), { :prompt => 'Valitse ryhmä' } %>
-              </div>
-
-              <div class="col-md-1">
-                <%= f.label :required%><br>
-                <%= f.check_box :required %>
-              </div>
-              <div class="col-md-3">
-                <%= f.text_area :title, placeholder: "Kysymys", :class => 'form-control' %>
-
-              </div>
-              <div class="col-md-4">
-                <%= f.text_area :content, placeholder: "Vastausteksti", :class => 'form-control' %>
-              </div>
-              <div class="col-md-2">
-                <%= image_tag question.image.picture.url(:thumb) unless question.image.nil? %>
-                <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: question.image), { :prompt => 'Valitse kuva' } %>
-              </div>
-              <div class="col-md-1">
-                <%= f.submit :class => 'btn btn-default btn-save' %>
-
-              </div>
-
-              <%= f.hidden_field :question_id, :value => question.id %>
-              <%= f.hidden_field :interview_id, :value => @interview.id%>
-
-          <% end %>
-
-          <%# Bootsrapin layoutti tekee temppuja, kun rivin leveys yli 12: viimeiset kaksi oudosti päällekkäin %>
-          <div class="col-md-1">
-            <%= button_to 'Poista', question, method: :delete, :class => 'btn btn-default btn-del' %>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
+  <%= render 'edit_question', { question:question } %>
 <% end %>
-
-
-<div class = "panel panel-default panel-green">
-  <div class="row panel-body">
-    <div class = "nakki">
-      <%= form_for(@new_question) do |f| %>
-          <div class="col-md-1">
-            <%= f.label :required%><br>
-            <%= f.check_box :required, :value => true %>
-          </div>
-          <div class="col-md-4">
-            <%= f.text_area :title, placeholder: "Kysymys", :class => 'form-control' %>
-          </div>
-          <div class="col-md-4">
-            <%= f.text_area :content, placeholder: "Vastausteksti", :class => 'form-control' %>
-          </div>
-          <div class="col-md-2">
-            <%= image_tag @new_question.image.picture.url(:thumb) unless @new_question.image.nil? %>
-            <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: @new_question.image), { :prompt => 'Valitse kuva' } %>
-          </div>
-          <div class="col-md-1">
-            <%= f.submit 'Tallenna', :class => 'btn btn-default btn-save' %>
-          </div>
-
-          <%= f.hidden_field :interview_id, :value => @interview.id %>
-      <% end %>
-
-    </div>
-  </div>
-</div>
-
-<h1>Ryhmät</h1>
-<div class="row panel-body">
-  <%= render 'questions/new_question_group', {interview: @interview} %>
-</div>
+<%= render 'new_question' %>
 
 <script>
-    setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post");
+setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post");
 </script>

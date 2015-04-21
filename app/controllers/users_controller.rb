@@ -5,12 +5,45 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+
+    @exercises = Exercise.all
+    @users = User.where("admin = ?", false)
+
+    #list type
+    if params[:list_type].nil? || params[:list_type] == "0"
+      @list_type = 0
+    else
+      @list_type = 1
+    end
+
+
+    #exercise
+    if params[:exercise].nil? || params[:exercise] == "0"
+      @shown_exercises = @exercises
+      @selected_exercise_id = "0"
+    else
+      @shown_exercises  = Exercise.where("id = ?", params[:exercise])
+      @selected_exercise_id = params[:exercise]
+    end
+
+    #starting year
+    if params[:starting_year].nil? || params[:starting_year] == "0"
+      @shown_users = @users
+      @selected_starting_year = "0"
+    else
+      @shown_users  = User.where("starting_year = ? and admin = ?", params[:starting_year].to_i, false)
+      @selected_starting_year = params[:starting_year]
+    end
+    
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    unless @user == current_user || current_user.try(:admin)
+      redirect_to exercises_path, alert: 'Käyttäjää ei löytynyt!'
+    end
+    @exercises = Exercise.all
   end
 
   # GET /users/new
@@ -66,11 +99,12 @@ class UsersController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:username, :realname, :email, :admin, :password, :password_confirmation)
+    params.require(:user).permit(:username, :realname, :email, :admin, :password, :password_confirmation, :student_number, :starting_year)
   end
+
 end

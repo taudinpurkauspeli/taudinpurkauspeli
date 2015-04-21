@@ -21,6 +21,13 @@
 # fi.activerecord.errors.models.task_text.attributes.content.blank
 # 
 fi:
+  ckeditor:
+    buttons:
+      upload: "Lataa"
+      next: "Seuraava sivu"
+      delete: "Poista"
+    page_title: "Valitse haluamasi kuva"
+    confirm_delete: "Haluatko varmasti poistaa kuvan?"
   helpers:
     submit:
       create: "Tallenna"
@@ -50,6 +57,12 @@ fi:
               blank: "on pakollinen"
             password_confirmation:
               confirmation: "ei vastannut salasanaa"
+            student_number:
+              blank: "on pakollinen"
+              wrong_length: "on väärän pituinen"
+              taken: "on jo käytössä"
+            starting_year:
+              blank: "on pakollinen"
         hypothesis:
           attributes:
             name:
@@ -91,7 +104,14 @@ fi:
           required: "Pakollinen"
           wrong: "Väärin"
       question:
+        content: "Vastaus"
+        title: "Kysymys"
         required: "Pakollinen kysymys"
+        requireds:
+          allowed: "Sallittu"
+          required: "Pakollinen"
+          wrong: "Väärin"
+        question_group_id: Kysymyksen ryhmä
       task:
         name: "Nimi"
       task_text:
@@ -101,3 +121,5 @@ fi:
         password: "Salasana"
         password_confirmation: "Salasanan vahvistus"
         realname: "Nimi"
+        student_number: "Opiskelijanumero"
+        starting_year: "Aloitusvuosi"

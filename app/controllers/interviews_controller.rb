@@ -15,13 +15,14 @@ class InterviewsController < ApplicationController
 		@new_asked_question = AskedQuestion.new
 		@new_question_group = QuestionGroup.new
 		@question_groups = QuestionGroup.all
+    @requireds = Question.requireds
 
-		set_view_layout
-	end
+    set_view_layout
+  end
 
 
-	def create
-		@task = Task.find(session[:task_id])
+  def create
+    @task = Task.find(session[:task_id])
 
 		# This can be done for each different type of subtask in their respective controllers
 		subtask = @task.subtasks.build
@@ -54,33 +55,37 @@ class InterviewsController < ApplicationController
 
 	def ask_question
 		current_user.ask_question(Question.find(question_params[:question_id]))
-
 		respond_to do |format|
 			format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout, :last_clicked_question_id => question_params[:question_id]) }
 		end
 	end
 
+  # TODO fix user_has_completed redirect logic
 	def check_answers
 		respond_to do |format|
-			if current_user.has_asked_all_required_questions_of(@interview)
+			if @interview.all_questions_asked_by?(current_user)
 				current_user.complete_subtask(@interview.subtask)
-				format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout) }
-			else
-				format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout), alert: 'Et ole vielä valinnut kaikki tarpeellisia vaihtoehtoja!' }
-			end
-		end
-	end
+        if(current_user.has_completed?(current_exercise))
+          format.html { redirect_to exercise_path(current_exercise, :layout => get_layout) }
+        else
+          format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout) }
+        end
+      else
+        format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout), alert: 'Et ole vielä valinnut kaikki tarpeellisia vaihtoehtoja!' }
+      end
+    end
+  end
 
-	private
-	def set_interview
-		@interview = Interview.find(params[:id])
-	end
+  private
+  def set_interview
+    @interview = Interview.find(params[:id])
+  end
 
-	def question_params
-		params.permit(:question_id)
-	end
+  def question_params
+    params.permit(:question_id)
+  end
 
-	def interview_params
-		params.require(:interview).permit(:title)
-	end
+  def interview_params
+    params.require(:interview).permit(:title)
+  end
 end

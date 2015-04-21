@@ -91,7 +91,7 @@ When(/^I fill in the hypothesis group name field with a correct name$/) do
 end
 
 When(/^I fill in the explanation field$/) do
-  fill_in('exercise_hypothesis_explanation', with: 'Hevosen hauraat luut')
+  fill_in_ckeditor 'exercise_hypothesis_explanation_2', with: 'Hevosen hauraat luut'
 end
 
 When(/^I change the prerequisite task$/) do
@@ -115,7 +115,7 @@ end
 
 Then(/^the explanation should be added to the hypothesis$/) do
   backdoor = 0
-  while(ExerciseHypothesis.find(2).explanation != 'Hevosen hauraat luut')
+  while(ExerciseHypothesis.find(2).explanation != "<p>Hevosen hauraat luut</p>\r\n")
 
     if backdoor > 50 then
       raise "Loop error!"
@@ -123,14 +123,15 @@ Then(/^the explanation should be added to the hypothesis$/) do
 
     click_and_wait('Hevosheikkous')
 
-    fill_in('exercise_hypothesis_explanation', with: 'Hevosen hauraat luut')
+    fill_in_ckeditor 'exercise_hypothesis_explanation_2', with: "Hevosen hauraat luut"
+
     first(:button, 'Päivitä').click
     wait_for_ajax
 
     backdoor += 1
   end
 
-  expect(ExerciseHypothesis.last.explanation).to eq('Hevosen hauraat luut')
+  expect(ExerciseHypothesis.last.explanation).to eq("<p>Hevosen hauraat luut</p>\r\n")
 end
 
 Then(/^the hypothesis should be removed from the case$/) do

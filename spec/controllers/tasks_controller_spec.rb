@@ -26,7 +26,7 @@ RSpec.describe TasksController, :type => :controller do
   # Task. As you add validations to Task, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {name: "Soita asiakkaalle", exercise_id: exercise.id, level: 2}
+    {name: "Soita asiakkaalle", exercise: exercise, level:1}
   }
 
 
@@ -60,6 +60,7 @@ RSpec.describe TasksController, :type => :controller do
 
   describe "GET show" do
     it "assigns the requested task as @task" do
+
       task = Task.create! valid_attributes
       get :show, {:id => task.to_param}, valid_session
       expect(assigns(:task)).to eq(task)
