@@ -22,14 +22,16 @@ class ConclusionsController < ApplicationController
 	end
 
 	def create
-		@task = Task.find(session[:task_id])
+
+		@task = Task.new(name:conclusion_params[:title], exercise: current_exercise)
+		@task.level = Task.get_highest_level(@task.exercise) + 1
 
 		# This can be done for each different type of subtask in their respective controllers
 		subtask = @task.subtasks.build
 		@conclusion = subtask.build_conclusion(title:conclusion_params[:title], content:conclusion_params[:content], exercise_hypothesis_id:conclusion_params[:exercise_hypothesis_id],)
 
 		respond_to do |format|
-			if @conclusion.save
+			if @conclusion.save & @task.save
 				subtask.save
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Päätöstoimenpide lisättiin onnistuneesti.' }
 				#format.json { render :show, status: :created, location: @multichoice }
