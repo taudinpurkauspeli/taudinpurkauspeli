@@ -2,7 +2,6 @@
 
 <div class = "row">
 	<div class = "col-md-8">
-		<h1>Muokkaa monivalintakysymystä</h1>
 	</div>
 	<div class = "col-md-4">
 		<%= render 'general_partials/back_to_task_button' %>
@@ -11,18 +10,19 @@
 
 <div class = "panel panel-default panel-grey">
   <div class = "panel-heading panel-heading-grey">
-    Monivalintakysymyksen perustiedot
+    Monivalintakysymyksen muokkaus
   </div>
   <div class = "panel-body">
     <%= render 'form' %>
   </div>
+
+
 </div>
+  <% @multichoice.options.each do |option| %>
+    <%= render 'edit_option', { option:option } %>
+  <% end %>
+<h4>Lisää vaihtoehtoja</h4>
 
-<h1>Vastausvaihtoehdot</h1>
-
-<% @multichoice.options.each do |option| %>
-  <%= render 'edit_option', { option:option } %>
-<% end %>
 <%= render 'new_option' %>
 <script>
     setAjaxSubmits("#currentTaskTab form:not(.form-edit-task)", "#currentTaskTab", "post");
