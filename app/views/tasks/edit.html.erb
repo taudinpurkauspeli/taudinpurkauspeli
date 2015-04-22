@@ -1,38 +1,42 @@
 <%= render 'messages/messages' %>
 
-<div class = "row">
-  <div class = "col-md-6">
-    <h1>Toimenpiteen muokkaus</h1>
-  </div>
-  <div class = "col-md-3">
-    <%= button_to 'Esikatsele', @task, :class => 'btn btn-default btn-exercise floatRight',:form_class => "form-show-task", :method => :get %>
-  </div>
-  <div class = "col-md-3">
-    <%= button_to 'Poista toimenpide', @task, :class => 'btn btn-default btn-exercise btn-del width100', :form => {id: "form-delete-task"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa toimenpiteen ja sen kaikki alakohdat?' } %>
-  </div>
-</div>
-
-<br>
-<br>
+   <br>
 <div class="panel panel-default panel-grey">
   <div class = "panel-heading panel-heading-grey">
-    Toimenpiteen perustiedot
+    <div class = "row">
+      <div class = "col-md-8">
+        <h4>Toimenpide</h4>
+      </div>
+      <div class = "col-md-2">
+        <%= button_to 'Esikatsele', @task, :class => 'btn btn-default width100',:form_class => "form-show-task", :method => :get %>
+      </div>
+      <div class = "col-md-2">
+        <%= button_to 'Poista toimenpide', @task, :class => 'btn btn-default btn-del width100', :form => {id: "form-delete-task"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa toimenpiteen ja sen kaikki alakohdat?' } %>
+      </div>
+
+    </div>
   </div>
   <div class="panel-body">
-    <%= render 'form' %>
+    <%= render 'task_name_form' %>
+    <br>
+    <% @task.subtasks.each do |subtask| %>
+    <%= button_to sanitize(subtask.to_s), edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise btn-subtask multiline width100', :form_class => "form-subtask", :method => :get %>
+  <% end %>
   </div>
 </div>
 
-<h1>Alakohdat</h1>
+<div class="panel panel-default panel-grey">
+  <div class = "panel-heading panel-heading-grey">
+    <h4>Lisää alakohta</h4>
+  </div>
+  <div class="panel-body">
+    <%= button_to '+ Teksti', new_task_text_path,  :class => 'btn btn-default btn-exercise btn-subtask', :form_class => "form-subtask", :method => :get  %>
+    <%= button_to '+ Monivalinta tai radio button', new_multichoice_path,  :class => 'btn btn-default btn-exercise btn-subtask', :form_class => "form-subtask", :method => :get  %>
+    <%= button_to '+ Pohdinta', new_interview_path,  :class => 'btn btn-default btn-exercise btn-subtask', :form_class => "form-subtask", :method => :get  %>
+    <%= button_to '+ Päätöstoimenpide', new_conclusion_path,  :class => 'btn btn-default btn-exercise btn-subtask', :form_class => "form-subtask", :method => :get  %>
+  </div>
+</div>
 
-<% @task.subtasks.each do |subtask| %>
-    <%= button_to sanitize(subtask.to_s), edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise multiline', :form_class => "form-subtask", :method => :get %>
-<% end %>
-
-<%= button_to '+ Luo uusi tekstimuotoinen alakohta', new_task_text_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
-<%= button_to '+ Luo uusi monivalinta-alakohta', new_multichoice_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
-<%= button_to '+ Luo uusi haastattelu', new_interview_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
-<%= button_to '+ Luo päätöstoimenpide', new_conclusion_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
 
 
 <br>

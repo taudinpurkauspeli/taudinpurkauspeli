@@ -31,11 +31,11 @@ class InterviewsController < ApplicationController
 		respond_to do |format|
 			if @interview.save
 				subtask.save
-				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Haastattelu lisättiin onnistuneesti.' }
+				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Pohdinta lisättiin onnistuneesti.' }
 				#format.json { render :show, status: :created, location: @multichoice }
 			else
 				## TODO redirect task show
-				format.html { redirect_to new_interview_path(:layout => get_layout), alert: 'Haastattelun lisääminen epäonnistui.' }
+				format.html { redirect_to new_interview_path(:layout => get_layout), alert: 'Pohdinnan lisääminen epäonnistui.' }
 				format.json { render json: @interview.errors, status: :unprocessable_entity }
 			end
 		end
@@ -44,10 +44,10 @@ class InterviewsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @interview.update(interview_params)
-				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Haastattelu päivitettiin onnistuneesti.' }
+				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Pohdinta päivitettiin onnistuneesti.' }
 			else
 				@new_question = Question.new
-				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), alert: 'Haastattelun päivitys epäonnistui.' }
+				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), alert: 'Pohdinnan päivitys epäonnistui.' }
 				format.json { render json: @interview.errors, status: :unprocessable_entity }
 			end
 		end
