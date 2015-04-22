@@ -13,7 +13,6 @@ describe "Hypothesis list page", js:true do
 
     before :each do
       sign_in(username:"Opiskelija", password:"Salainen1")
-      visit root_path
     end
 
     it "should not be able to view hypotheses of an unchosen exercise" do
@@ -73,7 +72,7 @@ describe "Hypothesis list page", js:true do
       it "create a new hypothesis" do
         click_and_wait('+ Uusi työhypoteesi')
 
-        fill_in('new_hypothesis_name', with: 'Sorkkaihottuma')
+        fill_in('new_hypothesis_name_1', with: 'Sorkkaihottuma')
         expect {
           click_and_wait("save_new_hypothesis_for_group_1")
         }.to change(Hypothesis, :count).by(1)
@@ -165,7 +164,7 @@ describe "Hypothesis list page", js:true do
       it " create a new hypothesis without a name" do
         click_and_wait('+ Uusi työhypoteesi')
 
-        fill_in('new_hypothesis_name', with: '')
+        fill_in('new_hypothesis_name_1', with: '')
         expect {
           click_and_wait("save_new_hypothesis_for_group_1")
         }.to change(Hypothesis, :count).by(0)
