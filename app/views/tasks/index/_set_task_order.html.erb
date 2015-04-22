@@ -3,7 +3,11 @@
   <% @tasks.each do |task| %>
       <div class = "div-task-order-container <% if task.level > previous_level then %> clearLeft <% end %>">
         <div class = "div-task-order-taskbutton">
+          <%if task.conclusions.nil? %>
+            <%= button_to task.name, edit_conclusion_path(task), method: :get, :class => 'btn btn-default btn-task-order multiline', :form_class => "form-button-to-task height100" %>
+          <%else%>
           <%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-task-order multiline', :form_class => "form-button-to-task height100" %>
+          <%end%>
         </div>
         <div class = "div-task-order-updown">
 

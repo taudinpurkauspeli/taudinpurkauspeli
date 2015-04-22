@@ -5,5 +5,7 @@
 <%= render 'form' %>
 
 <script>
-    setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post");
+        setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post", function(){
+        loadView("/tasks", "#taskTab"););
+    });
 </script>
