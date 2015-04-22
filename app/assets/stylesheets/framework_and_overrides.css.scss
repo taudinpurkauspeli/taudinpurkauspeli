@@ -255,6 +255,7 @@ li.active>a{
   right: 10px;
   width: 300px;
   padding: 10px;
+  z-index: 10;
 }
 .notice{
   width: 100%;
@@ -324,6 +325,9 @@ li.active>a{
   background-color: $PaleLightGreen;
 }
 
+//*********************
+//*   Progress bars   *
+//*********************
 
 div.progressbar{
   float: left;
