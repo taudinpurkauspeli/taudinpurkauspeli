@@ -1,5 +1,5 @@
 class ExercisesController < ApplicationController
-  before_action :set_exercise, only: [:show, :edit, :update, :destroy, :duplicate_exercise]
+  before_action :set_exercise, only: [:show, :edit, :update, :destroy, :duplicate_exercise, :toggle_hidden]
   before_action :ensure_user_is_logged_in, except: [:index]
   before_action :ensure_user_is_admin, except: [:index, :show]
   # GET /exercises
@@ -78,7 +78,16 @@ class ExercisesController < ApplicationController
         format.html { redirect_to exercises_path(:layout => get_layout), notice: 'Casen kopioiminen epäonnistui!' }
       end
     end
+  end
 
+  def toggle_hidden
+    respond_to do |format|
+      if @exercise.update(hidden:!@exercise.hidden?)
+        format.html { redirect_to exercises_path(:layout => get_layout), notice: 'Casen näkyvyys muutettu.' }
+      else
+        format.html { redirect_to exercises_path(:layout => get_layout), notice: 'Casen näkyvyyttä ei voi muuttaa.' }
+      end
+    end
   end
 
   private
