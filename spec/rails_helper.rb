@@ -23,7 +23,7 @@ end
 ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 
 Capybara.javascript_driver = :poltergeist
-Capybara.default_wait_time = 5
+Capybara.default_wait_time = 30
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
