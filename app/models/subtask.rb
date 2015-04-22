@@ -54,17 +54,21 @@ class Subtask < ActiveRecord::Base
     end
 
     unless multichoice.nil?
-      return_string = 'Monivalintakysymys: '
+      if multichoice.is_radio_button?
+        return_string = 'Radio button: '
+      else 
+        return_string = 'Monivalinta: '
+      end
       content = multichoice.question
     end
 
     unless interview.nil?
-      return_string = ''
+      return_string = 'Pohdinta: '
       content = interview.title
     end
 
     unless conclusion.nil?
-      return_string = ''
+      return_string = 'Päätöstoimenpide: '
       content = conclusion.title
     end
 

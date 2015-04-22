@@ -33,5 +33,12 @@ class Multichoice < ActiveRecord::Base
 		return !(wrong_answers.count == result.count)
 	end
 
+  def to_s
+    if self.is_radio_button?
+      return 'Radio button'
+    else 
+      return 'Monivalinta'
+    end
+  end
 
 end
