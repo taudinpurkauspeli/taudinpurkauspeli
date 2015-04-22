@@ -45,26 +45,26 @@ class Subtask < ActiveRecord::Base
 
   def to_s
     full_sanitizer = Rails::Html::FullSanitizer.new
-    return_string = 'Alakohta'
+    return_string = ''
     content = ''
 
     unless task_text.nil?
-      return_string = "Teksti: "
+      return_string = task_text.to_s + ': '
       content = full_sanitizer.sanitize(task_text.content.strip)
     end
 
     unless multichoice.nil?
-      return_string = multichoice.to_s
+      return_string = multichoice.to_s + ': '
       content = multichoice.question
     end
 
     unless interview.nil?
-      return_string = 'Pohdinta: '
+      return_string = interview.to_s + ': '
       content = interview.title
     end
 
     unless conclusion.nil?
-      return_string = 'Päätöstoimenpide: '
+      return_string = conclusion.to_s + ': '
       content = conclusion.title
     end
 
