@@ -112,7 +112,8 @@ describe "Hypothesis list page", js:true do
           end
 
           click_and_wait('Virustauti')
-          click_and_wait('remove_from_case_1')
+          wait_for_ckeditor("exercise_hypothesis_explanation_1")
+           click_and_wait('remove_from_case_1')
           backdoor += 1
         end
         expect(ExerciseHypothesis.count).to eq(0)
@@ -126,7 +127,10 @@ describe "Hypothesis list page", js:true do
           end
 
           click_and_wait('Virustauti')
+          save_and_open_page
+          wait_for_ckeditor("exercise_hypothesis_explanation_1")
 
+          #save_and_open_page
           fill_in_ckeditor 'exercise_hypothesis_explanation_1', with: 'Virus ei olekaan bakteeritauti'
 
           click_and_wait("update_exercise_hypothesis_1")

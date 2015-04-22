@@ -22,10 +22,6 @@ end
 # Capybara because it starts the web server in a thread.
 ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, :debug => true)
-end
-
 Capybara.javascript_driver = :poltergeist
 Capybara.default_wait_time = 5
 

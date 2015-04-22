@@ -50,7 +50,7 @@ class Subtask < ActiveRecord::Base
 
     unless task_text.nil?
       return_string = "Teksti: "
-      content = full_sanitizer.sanitize(task_text.content.strip)
+      content = ActionController::Base.helpers.sanitize(full_sanitizer.sanitize(task_text.content.strip))
     end
 
     unless multichoice.nil?
