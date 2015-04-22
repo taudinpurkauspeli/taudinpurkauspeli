@@ -222,7 +222,7 @@ describe "New Task page", js:true do
           before :each do
             click_and_wait("Toimenpiteet")
             click_and_wait("Soita asiakkaalle")
-            click_and_wait("Monivalinta: Onko tauti epidemia?")
+            click_and_wait("Radio button: Onko tauti epidemia?")
           end
 
           it "should be able to change the right option" do
