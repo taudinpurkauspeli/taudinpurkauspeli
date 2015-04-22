@@ -37,6 +37,13 @@
           <div class="col-md-1">
             <%= button_to 'Kopioi', 'exercises/' + exercise.id.to_s + '/dup', :class => 'btn btn-default btn-exercise widthAuto', :method => :post, data: { confirm: 'Haluatko varmasti kopioida koko casen?' }, id: 'exercises/' + exercise.id.to_s + '/dup' %>
           </div>
+          <div class="col-md-1">
+            <% if exercise.hidden? %>
+              <%= button_to 'Tee näkyväksi', 'exercises/' + exercise.id.to_s + '/hide', :class => 'btn btn-default btn-exercise widthAuto', :method => :post, data: { confirm: 'Haluatko varmasti tehdä casen näkyväksi opiskelijoille?' }, id: 'exercises/' + exercise.id.to_s + '/hide' %>
+            <% else %>
+              <%= button_to 'Piilota opiskelijoilta', 'exercises/' + exercise.id.to_s + '/hide', :class => 'btn btn-default btn-exercise widthAuto', :method => :post, id: 'exercises/' + exercise.id.to_s + '/hide' %>
+            <% end %>
+          </div>
 
       <%end%>
   </div>
