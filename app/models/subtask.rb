@@ -54,11 +54,7 @@ class Subtask < ActiveRecord::Base
     end
 
     unless multichoice.nil?
-      if multichoice.is_radio_button?
-        return_string = 'Radio button: '
-      else 
-        return_string = 'Monivalinta: '
-      end
+      return_string = multichoice.to_s
       content = multichoice.question
     end
 
