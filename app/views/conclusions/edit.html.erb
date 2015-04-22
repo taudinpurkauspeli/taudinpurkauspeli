@@ -1,18 +1,17 @@
 <%= render 'messages/messages' %>
-
-<div class = "row">
-	<div class = "col-md-8">
+<div class="row">
+	<br>
+	<div class="col-md-8">
 		<h1>Muokkaa päätöstoimenpidettä</h1>
 	</div>
 	<div class = "col-md-4">
-		<%= render 'general_partials/back_to_task_button' %>
+		<%= button_to 'Poista', @conclusion, :class => 'btn btn-default btn-del widthAuto floatRight', :form => {id: "form-delete-conclusion"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa päätöstoimenpiteen?' } %>
 	</div>
 </div>
 
 <%= render 'form' %>
-
 <script>
-    setAjaxSubmits("#currentTaskTab form:not(.form-edit-task)", "#currentTaskTab", "post");
-
-    setAjaxSubmits("#currentTaskTab .form-edit-task", "#currentTaskTab", "get");
+    setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post", function(){
+        loadView("/tasks", "#taskTab");
+    });
 </script>
