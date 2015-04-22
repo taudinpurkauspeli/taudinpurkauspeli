@@ -7,16 +7,13 @@
       <div class="panel panel-default panel-grey">
         <div class = "panel-heading panel-heading-grey">
           <div class = "row">
-            <div class = "col-md-8">
-              <h4>Toimenpide</h4>
+            <div class = "col-md-6">
+              <h4>Toimenpiteen <%= @task.name %> muokkaus</h4>
             </div>
-            <div class = "col-md-2">
-              <%= button_to 'Esikatsele', @task, :class => 'btn btn-default width100',:form_class => "form-show-task", :method => :get %>
+            <div class= "col-md-6">
+              <%= button_to 'Esikatsele', @task, :class => 'btn btn-default widthAuto floatRight',:form_class => "form-show-task", :method => :get %>
+              <%= button_to 'Poista toimenpide', @task, :class => 'btn btn-default btn-del widthAuto floatRight', :form => {id: "form-delete-task"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa toimenpiteen ja sen kaikki alakohdat?' } %>
             </div>
-            <div class = "col-md-2">
-              <%= button_to 'Poista toimenpide', @task, :class => 'btn btn-default btn-del width100', :form => {id: "form-delete-task"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa toimenpiteen ja sen kaikki alakohdat?' } %>
-            </div>
-
           </div>
         </div>
         <div class="panel-body">
