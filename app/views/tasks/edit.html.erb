@@ -19,23 +19,28 @@
 <br>
 <div class="panel panel-default panel-grey">
   <div class = "panel-heading panel-heading-grey">
-    Toimenpiteen perustiedot
+    Toimenpide
   </div>
   <div class="panel-body">
-    <%= render 'form' %>
+    <%= render 'task_name_form' %>
+    <% @task.subtasks.each do |subtask| %>
+    <%= button_to sanitize(subtask.to_s), edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise multiline width100', :form_class => "form-subtask", :method => :get %>
+  <% end %>
   </div>
 </div>
 
-<h1>Alakohdat</h1>
+<div class="panel panel-default panel-grey">
+  <div class = "panel-heading panel-heading-grey">
+    Lisää alakohta
+  </div>
+  <div class="panel-body">
+    <%= button_to '+ Luo uusi tekstimuotoinen alakohta', new_task_text_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
+    <%= button_to '+ Luo uusi monivalinta-alakohta', new_multichoice_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
+    <%= button_to '+ Luo uusi haastattelu', new_interview_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
+    <%= button_to '+ Luo päätöstoimenpide', new_conclusion_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
+  </div>
+</div>
 
-<% @task.subtasks.each do |subtask| %>
-    <%= button_to sanitize(subtask.to_s), edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise multiline', :form_class => "form-subtask", :method => :get %>
-<% end %>
-
-<%= button_to '+ Luo uusi tekstimuotoinen alakohta', new_task_text_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
-<%= button_to '+ Luo uusi monivalinta-alakohta', new_multichoice_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
-<%= button_to '+ Luo uusi haastattelu', new_interview_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
-<%= button_to '+ Luo päätöstoimenpide', new_conclusion_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
 
 
 <br>
