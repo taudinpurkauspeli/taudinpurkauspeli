@@ -17,11 +17,10 @@ class Exercise < ActiveRecord::Base
 
   def has_conclusion?
     tasks.each do |task|
-      unless task.conclusions.nil?
+      if task.conclusions.empty?
         return false
       end
     end
-    return true
   end
 
   def get_hypotheses
