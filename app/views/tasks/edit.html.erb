@@ -11,8 +11,8 @@
               <h4>Toimenpiteen <%= @task.name %> muokkaus</h4>
             </div>
             <div class= "col-md-6">
-              <%= button_to 'Esikatsele', @task, :class => 'btn btn-default widthAuto floatRight',:form_class => "form-show-task", :method => :get %>
-              <%= button_to 'Poista toimenpide', @task, :class => 'btn btn-default btn-del widthAuto floatRight', :form => {id: "form-delete-task"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa toimenpiteen ja sen kaikki alakohdat?' } %>
+              <%= button_to 'Poista toimenpide', @task, :class => 'btn btn-default btn-del widthAuto floatRight margin-em', :form => {id: "form-delete-task"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa toimenpiteen ja sen kaikki alakohdat?' } %>
+              <%= button_to 'Esikatsele', @task, :class => 'btn btn-default widthAuto floatRight margin-em',:form_class => "form-show-task", :method => :get %> 
             </div>
           </div>
         </div>
