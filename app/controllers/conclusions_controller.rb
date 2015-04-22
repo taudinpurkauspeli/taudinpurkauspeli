@@ -56,9 +56,11 @@ class ConclusionsController < ApplicationController
 	end
 
 	def destroy
+		@task = @conclusion.subtask.task
+		@task.destroy
 		@conclusion.destroy
 		respond_to do |format|
-			format.html { redirect_to tasks_path(:layout => get_layout), notice: 'Taskin poisto onnistui!' }
+			format.html { redirect_to tasks_path(:layout => get_layout), notice: 'Päätöstoimenpide poistettu!' }
 			format.json { head :no_content }
 		end
 	end
