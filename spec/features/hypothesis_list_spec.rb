@@ -103,59 +103,72 @@ describe "Hypothesis list page", js:true do
         expect(ExerciseHypothesis.last.hypothesis.name).to eq('Sorkkatauti')
       end
 
-=begin
-      it "remove hypotheses from an exercise" do
-        backdoor = 0
-        while(ExerciseHypothesis.count != 0)
-          if backdoor > 50 then
-            raise "Loop error!"
-          end
 
-          click_and_wait('Virustauti')
-          wait_for_ckeditor("exercise_hypothesis_explanation_1")
-          click_and_wait('remove_from_case_1')
-          backdoor += 1
-        end
+      it "remove hypotheses from an exercise" do
+        # backdoor = 0
+        # while(ExerciseHypothesis.count != 0)
+        #   if backdoor > 50 then
+        #     raise "Loop error!"
+        #   end
+
+        #click_and_wait('Virustauti')
+        find_button("Virustauti").trigger('click')
+        wait_for_ajax
+        wait_for_ckeditor("exercise_hypothesis_explanation_1")
+        #click_and_wait('remove_from_case_1')
+        find_button("remove_from_case_1").trigger('click')
+        wait_for_ajax
+        #  backdoor += 1
+        #end
         expect(ExerciseHypothesis.count).to eq(0)
       end
 
       it "edit the explanation of a hypothesis added to an exercise" do
-        backdoor = 0
-        while(ExerciseHypothesis.first.explanation != "<p>Virus ei olekaan bakteeritauti</p>\r\n")
-          if backdoor > 50 then
-            raise "Loop error!"
-          end
+        # backdoor = 0
+        # while(ExerciseHypothesis.first.explanation != "<p>Virus ei olekaan bakteeritauti</p>\r\n")
+        #   if backdoor > 50 then
+        #     raise "Loop error!"
+        #   end
 
-          click_and_wait('Virustauti')
+         # click_and_wait('Virustauti')
+        find_button("Virustauti").trigger('click')
+        wait_for_ajax
           wait_for_ckeditor("exercise_hypothesis_explanation_1")
 
           fill_in_ckeditor 'exercise_hypothesis_explanation_1', with: 'Virus ei olekaan bakteeritauti'
 
-          click_and_wait("update_exercise_hypothesis_1")
-          backdoor += 1
-        end
+        #  click_and_wait("update_exercise_hypothesis_1")
+        find_button("update_exercise_hypothesis_1").trigger('click')
+        wait_for_ajax
+        #  backdoor += 1
+        #end
 
         expect(ExerciseHypothesis.first.explanation).to eq("<p>Virus ei olekaan bakteeritauti</p>\r\n")
       end
 
       it "add prerequisite task to a hypothesis added to an exercise" do
-        backdoor = 0
-        while(ExerciseHypothesis.first.task.name == task.name)
-          if backdoor > 50 then
-            raise "Loop error!"
-          end
+        # backdoor = 0
+        # while(ExerciseHypothesis.first.task.name == task.name)
+        #   if backdoor > 50 then
+        #     raise "Loop error!"
+        #   end
 
-          click_and_wait('Virustauti')
+         # click_and_wait('Virustauti')
+
+          find_button("Virustauti").trigger('click')
+          wait_for_ajax
           wait_for_ckeditor("exercise_hypothesis_explanation_1")
 
           select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]')
 
-          click_and_wait("update_exercise_hypothesis_1")
-          backdoor += 1
-        end
+         # click_and_wait("update_exercise_hypothesis_1")
+          find_button("update_exercise_hypothesis_1").trigger('click')
+          wait_for_ajax
+         # backdoor += 1
+        #end
         expect(ExerciseHypothesis.first.task.name).to eq('Asiakkaan soitto')
       end
-=end
+
     end
 
 
