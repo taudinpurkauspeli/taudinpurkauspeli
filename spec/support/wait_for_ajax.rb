@@ -35,7 +35,7 @@ module WaitForAjax
   end
 
   def wait_for_ckeditor(selector)
-    Timeout.timeout(Capybara.default_wait_time) do
+    Timeout.timeout(30) do
       loop until page.evaluate_script("isCkeditorLoaded('#{selector}');")
     end
   end
