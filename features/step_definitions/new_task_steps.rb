@@ -92,8 +92,8 @@ Then(/^task text should be in the database$/) do
   expect(Subtask.count).to eq(1)
 end
 
-Then(/^page should show the new task text content$/) do
-  expect(page).to have_button("Teksti: Soita asiakkaalle puhelimella")
+Then(/^page should show a succesfull notice$/) do
+  expect(page).to have_content("Kysymys lisättiin onnistuneesti!")
 end
 
 Then(/^page should show the new interview title$/) do
