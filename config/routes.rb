@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   post 'conclusions/:id/check_answers', to: 'conclusions#check_answers'
 
   post 'exercises/:id/dup', to: 'exercises#duplicate_exercise'
+  post 'exercises/:id/hide', to: 'exercises#toggle_hidden'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
