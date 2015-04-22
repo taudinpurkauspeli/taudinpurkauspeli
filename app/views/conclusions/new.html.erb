@@ -1,11 +1,15 @@
 <%= render 'messages/messages' %>
 
-<h1>Päätöstoimenpide</h1>
+<div class = "row">
+	<div class = "col-md-8">
+		<h1>Päätöstoimenpide</h1>
+	</div>
+</div>
 
 <%= render 'form' %>
 
 <script>
-        setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post", function(){
+    setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post", function(){
         loadView("/tasks", "#taskTab");
     });
 </script>

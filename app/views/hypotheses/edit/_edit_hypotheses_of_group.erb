@@ -11,9 +11,9 @@
               <%= f.label :task_id %>
               <%= f.select :task_id, options_from_collection_for_select(@exercise.tasks, :id, :short_name, selected: exercise_hypothesis.task_id) %>
               <%= f.cktext_area :explanation, placeholder: "Selite", :class => 'width100', :id => "exercise_hypothesis_explanation_" + exercise_hypothesis.id.to_s, :rows => '10', :ckeditor => {:toolbar => 'minimalist'} %>
-              <%= f.submit :class => 'btn btn-default btn-save width50' %>
+              <%= f.submit :class => 'btn btn-default btn-save width50', :id => "update_exercise_hypothesis_" + exercise_hypothesis.id.to_s %>
           <% end %>
-          <%= button_to 'Poista casesta', exercise_hypothesis, method: :delete, :class => 'btn btn-default btn-del width50' %>
+          <%= button_to 'Poista casesta', exercise_hypothesis, method: :delete, :class => 'btn btn-default btn-del width50', :id => "remove_from_case_" + exercise_hypothesis.id.to_s %>
         </div>
       </div>
     </div>

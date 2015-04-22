@@ -13,4 +13,8 @@ class TaskText < ActiveRecord::Base
     user.complete_subtask(subtask)
     return true
   end
+
+  def to_s
+    'Teksti'
+  end
 end

@@ -1,6 +1,5 @@
 <%= render 'messages/messages' %>
 
-
    <br>
 <div class="panel panel-default panel-grey">
   <div class = "panel-heading panel-heading-grey">
@@ -20,9 +19,10 @@
   <div class="panel-body">
     <%= render 'task_name_form' %>
     <br>
+    <%= 'Toimenpiteelle ei ole vielä lisätty alakohtia.' if @task.subtasks.empty? %>
     <% @task.subtasks.each do |subtask| %>
-    <%= button_to sanitize(subtask.to_s), edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise btn-subtask multiline width100', :form_class => "form-subtask", :method => :get %>
-  <% end %>
+      <%= button_to sanitize(subtask.to_s), edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise btn-subtask multiline width100', :form_class => "form-subtask", :method => :get %>
+    <% end %>
   </div>
 </div>
 
@@ -37,8 +37,6 @@
     <%= button_to '+ Päätöstoimenpide', new_conclusion_path,  :class => 'btn btn-default btn-exercise btn-subtask', :form_class => "form-subtask", :method => :get  %>
   </div>
 </div>
-
-
 
 <br>
 

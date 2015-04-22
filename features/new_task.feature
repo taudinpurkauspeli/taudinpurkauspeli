@@ -23,7 +23,7 @@ Feature: New task feature
     And I press the button "+ Teksti"
     And I fill in task text content
     And I press the button "Tallenna"
-    Then page should show the new task text content
+    Then page should show a succesfull notice
     And task text should be in the database
 
   Scenario: Teacher can create a task with multichoice

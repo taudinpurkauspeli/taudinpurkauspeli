@@ -34,16 +34,17 @@ class UsersController < ApplicationController
       @shown_users  = User.where("starting_year = ? and admin = ?", params[:starting_year].to_i, false)
       @selected_starting_year = params[:starting_year]
     end
-    
+
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    unless @user == current_user || current_user.try(:admin)
+    if !@user.nil? && (@user == current_user || current_user.try(:admin))
+      @exercises = Exercise.all
+    else
       redirect_to exercises_path, alert: 'Käyttäjää ei löytynyt!'
     end
-    @exercises = Exercise.all
   end
 
   # GET /users/new
@@ -75,13 +76,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'Käyttäjän tiedot päivitetty.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    unless @user.nil?
+      respond_to do |format|
+        if @user.update(user_params)
+          format.html { redirect_to @user, notice: 'Käyttäjän tiedot päivitetty.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -89,17 +92,19 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'Käyttäjä poistettu.' }
-      format.json { head :no_content }
+    unless @user.nil?
+      @user.destroy
+      respond_to do |format|
+        format.html { redirect_to users_url, notice: 'Käyttäjä poistettu.' }
+        format.json { head :no_content }
+      end
     end
   end
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
-    @user = User.find_by(params[:id])
+    @user = User.find_by(id:params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

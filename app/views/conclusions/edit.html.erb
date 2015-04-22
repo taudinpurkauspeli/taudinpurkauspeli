@@ -8,6 +8,7 @@
 		<%= button_to 'Poista', @conclusion, :class => 'btn btn-default btn-del widthAuto floatRight', :form => {id: "form-delete-conclusion"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa päätöstoimenpiteen?' } %>
 	</div>
 </div>
+
 <%= render 'form' %>
 <script>
     setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post", function(){

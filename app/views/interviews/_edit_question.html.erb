@@ -10,7 +10,6 @@
         </div>
       </div>
       <div class="col-md-2">
-        <%= f.label :required%><br>
         <%=f.select :required, options_for_select(@requireds.collect { |answer| [t("activerecord.attributes.question.requireds.#{answer[0]}"), answer[0]] }, selected: question.required), {}, {:id => "required_" + question.id.to_s, class: "form-control"} %><br>
       </div>
       <div class="col-md-3">
