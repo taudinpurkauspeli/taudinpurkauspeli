@@ -59,7 +59,6 @@ describe "New Task page", js:true do
           }.to change(TaskText, :count).by(1)
 
           expect(page).to have_content 'Kysymys lisättiin onnistuneesti!'
-          expect(page).to have_button 'Teksti: Asiakas kertoo, että ...'
           expect(Subtask.count).to eq(1)
 
           expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, ett&auml; koira on kipe&auml;.</p>\r\n")
@@ -118,8 +117,6 @@ describe "New Task page", js:true do
           fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira on kipeä.'
 
           click_and_wait('Tallenna')
-
-          click_and_wait('Teksti: Asiakas kertoo, että ...')
         end
 
         it "should be able to update the content of a task text" do
