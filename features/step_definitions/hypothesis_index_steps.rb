@@ -47,35 +47,31 @@ end
 
 
 When(/^I click on a button "(.*?)"$/) do |arg1|
-  first(:button, arg1).click
-  wait_for_ajax
+  click_and_wait("new_hypothesis_for_group_1")
 end
 
 When(/^I click on button "(.*?)"$/) do |arg1|
-  click_and_wait(arg1)
+  click_and_wait("new_hypothesis_group")
 end
 
 When(/^I fill in the hypothesis name field with a correct value$/) do
-  fill_in('hypothesis_name', with: 'Suu- ja sorkkatauti', :match => :prefer_exact)
+  fill_in('new_hypothesis_name_1', with: 'Suu- ja sorkkatauti')
 end
 
 When(/^I fill in the hypothesis name field with an incorrect value$/) do
-  fill_in('hypothesis_name', with: '', :match => :prefer_exact)
+  fill_in('new_hypothesis_name_1', with: '')
 end
 
 When(/^I save the new hypothesis with button "(.*?)"$/) do |arg1|
-  all(:button, 'Tallenna')[0].click
-  wait_for_ajax
+  click_and_wait("save_new_hypothesis_for_group_1")
 end
 
 When(/^I save changes with button "(.*?)"$/) do |arg1|
-  all(:button, 'Päivitä')[0].click
-  wait_for_ajax
+  click_and_wait("update_exercise_hypothesis_2")
 end
 
 When(/^I click on the delete button "(.*?)"$/) do |arg1|
-  all(:button, 'Poista casesta')[0].click
-  wait_for_ajax
+  click_and_wait("remove_from_case_2")
 end
 
 When(/^I click on the hypothesis button "(.*?)"$/) do |arg1|
@@ -87,7 +83,7 @@ When(/^I click on one of the hypotheses of the case$/) do
 end
 
 When(/^I fill in the hypothesis group name field with a correct name$/) do
-  fill_in('hypothesis_group_name', with: 'Koirasairaudet', :match => :prefer_exact)
+  fill_in('hypothesis_group_name', with: 'Koirasairaudet')
 end
 
 When(/^I fill in the explanation field$/) do
@@ -176,7 +172,7 @@ end
 
 Then(/^the new hypothesis should be created$/) do
   expect(page).to have_button 'Suu- ja sorkkatauti'
-  hypothesis_group = HypothesisGroup.first
+  hypothesis_group = HypothesisGroup.last
   expect(hypothesis_group.hypotheses.first.name).to eq('Suu- ja sorkkatauti')
   expect(Hypothesis.count).to eq(1)
 end

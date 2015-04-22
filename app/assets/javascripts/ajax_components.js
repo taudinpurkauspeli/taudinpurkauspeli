@@ -52,8 +52,6 @@ function setAjaxSubmits(formsSelector, containerElementSelector, type, submitCal
 
 }
 
-
-
 /**
  *
  *

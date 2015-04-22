@@ -20,6 +20,13 @@ function isCkeditorLoaded(instance_selector) {
     return status === 'ready';
 };
 
+/**
+ * Updates CKeditor instance in view.
+ *
+ *
+ *
+ */
+
 function CKupdate(){
     for ( instance in CKEDITOR.instances ){
         CKEDITOR.instances[instance].updateElement();

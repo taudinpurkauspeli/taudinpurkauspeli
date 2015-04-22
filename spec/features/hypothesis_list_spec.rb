@@ -13,7 +13,6 @@ describe "Hypothesis list page", js:true do
 
     before :each do
       sign_in(username:"Opiskelija", password:"Salainen1")
-      visit root_path
     end
 
     it "should not be able to view hypotheses of an unchosen exercise" do
@@ -73,10 +72,9 @@ describe "Hypothesis list page", js:true do
       it "create a new hypothesis" do
         click_and_wait('+ Uusi työhypoteesi')
 
-        fill_in('hypothesis_name', with: 'Sorkkaihottuma')
+        fill_in('new_hypothesis_name_1', with: 'Sorkkaihottuma')
         expect {
-          first(:button, 'Tallenna').click
-          wait_for_ajax
+          click_and_wait("save_new_hypothesis_for_group_1")
         }.to change(Hypothesis, :count).by(1)
 
         expect(Hypothesis.first.name).to eq('Sorkkaihottuma')
@@ -90,8 +88,7 @@ describe "Hypothesis list page", js:true do
         fill_in('hypothesis_group_name', with: 'Sorkkaeläinten ihotaudit')
 
         expect {
-          first(:button, 'Tallenna').click
-          wait_for_ajax
+          click_and_wait("new_hypothesis_group")
         }.to change(HypothesisGroup, :count).by(1)
 
         expect(page).to have_button 'Sorkkaeläinten ihotaudit'
@@ -100,15 +97,13 @@ describe "Hypothesis list page", js:true do
 
       it "add hypotheses to an exercise" do
         expect {
-          first(:button,'Sorkkatauti').click
-          wait_for_ajax
+          click_and_wait('Sorkkatauti')
         }.to change(ExerciseHypothesis, :count).by(1)
 
         expect(ExerciseHypothesis.last.hypothesis.name).to eq('Sorkkatauti')
       end
 
 =begin
-
       it "remove hypotheses from an exercise" do
         backdoor = 0
         while(ExerciseHypothesis.count != 0)
@@ -117,15 +112,13 @@ describe "Hypothesis list page", js:true do
           end
 
           click_and_wait('Virustauti')
-          first(:button, 'Poista casesta').click
-          wait_for_ajax
+          wait_for_ckeditor("exercise_hypothesis_explanation_1")
+          click_and_wait('remove_from_case_1')
           backdoor += 1
         end
         expect(ExerciseHypothesis.count).to eq(0)
       end
-=end
 
-=begin
       it "edit the explanation of a hypothesis added to an exercise" do
         backdoor = 0
         while(ExerciseHypothesis.first.explanation != "<p>Virus ei olekaan bakteeritauti</p>\r\n")
@@ -134,19 +127,17 @@ describe "Hypothesis list page", js:true do
           end
 
           click_and_wait('Virustauti')
+          wait_for_ckeditor("exercise_hypothesis_explanation_1")
 
           fill_in_ckeditor 'exercise_hypothesis_explanation_1', with: 'Virus ei olekaan bakteeritauti'
 
-          first(:button, 'Päivitä').click
-          wait_for_ajax
+          click_and_wait("update_exercise_hypothesis_1")
           backdoor += 1
         end
 
         expect(ExerciseHypothesis.first.explanation).to eq("<p>Virus ei olekaan bakteeritauti</p>\r\n")
       end
-=end
 
-=begin
       it "add prerequisite task to a hypothesis added to an exercise" do
         backdoor = 0
         while(ExerciseHypothesis.first.task.name == task.name)
@@ -155,11 +146,11 @@ describe "Hypothesis list page", js:true do
           end
 
           click_and_wait('Virustauti')
+          wait_for_ckeditor("exercise_hypothesis_explanation_1")
 
           select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]')
 
-          first(:button, 'Päivitä').click
-          wait_for_ajax
+          click_and_wait("update_exercise_hypothesis_1")
           backdoor += 1
         end
         expect(ExerciseHypothesis.first.task.name).to eq('Asiakkaan soitto')
@@ -173,10 +164,9 @@ describe "Hypothesis list page", js:true do
       it " create a new hypothesis without a name" do
         click_and_wait('+ Uusi työhypoteesi')
 
-        fill_in('hypothesis_name', with: '')
+        fill_in('new_hypothesis_name_1', with: '')
         expect {
-          first(:button, 'Tallenna').click
-          wait_for_ajax
+          click_and_wait("save_new_hypothesis_for_group_1")
         }.to change(Hypothesis, :count).by(0)
 
         expect(page).to have_content 'Hypoteesin luominen epäonnistui'
@@ -187,8 +177,7 @@ describe "Hypothesis list page", js:true do
 
         fill_in('hypothesis_group_name', with: '')
         expect {
-          first(:button, 'Tallenna').click
-          wait_for_ajax
+          click_and_wait("new_hypothesis_group")
         }.to change(HypothesisGroup, :count).by(0)
 
         expect(page).to have_content 'Työhypoteesiryhmän luominen epäonnistui'
