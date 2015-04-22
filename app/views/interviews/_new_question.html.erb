@@ -2,7 +2,6 @@
   <div class="row panel-body">
     <div class = "nakki">
       <%= form_for(@new_question, :html => {:id => "form-new-question", :class=> "rich-text-form"}) do |f| %>
-      <%= f.label :required%><br>
       <div class="row">
         <div class="col-md-4">
           <%= f.text_field :question_group_title, placeholder: "Ryhmä", :class => 'width100' %>
