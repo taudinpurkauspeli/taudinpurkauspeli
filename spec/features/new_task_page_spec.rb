@@ -50,7 +50,7 @@ describe "New Task page", js:true do
       describe "should be able to add a" do
 
         it "task text subtask" do
-          click_and_wait('+ Luo uusi tekstimuotoinen alakohta')
+          click_and_wait('+ Teksti')
 
           fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira on kipeä.'
 
@@ -59,7 +59,6 @@ describe "New Task page", js:true do
           }.to change(TaskText, :count).by(1)
 
           expect(page).to have_content 'Kysymys lisättiin onnistuneesti!'
-          expect(page).to have_button 'Teksti: Asiakas kertoo, että ...'
           expect(Subtask.count).to eq(1)
 
           expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, ett&auml; koira on kipe&auml;.</p>\r\n")
@@ -68,7 +67,7 @@ describe "New Task page", js:true do
 
         it "multichoice subtask" do
 
-          click_and_wait('+ Luo uusi monivalinta-alakohta')
+          click_and_wait('+ Monivalinta tai radio button')
           fill_in('multichoice_question', with: "Mitä kysyt asiakkaalta:")
 
           expect{
@@ -85,7 +84,7 @@ describe "New Task page", js:true do
       describe "should not be able to add a" do
         it "task text subtask without content" do
 
-          click_and_wait('+ Luo uusi tekstimuotoinen alakohta')
+          click_and_wait('+ Teksti')
 
           fill_in_ckeditor 'task_text_content', with: ""
 
@@ -99,7 +98,7 @@ describe "New Task page", js:true do
 
         it "multichoice subtask without question" do
 
-          click_and_wait('+ Luo uusi monivalinta-alakohta')
+          click_and_wait('+ Monivalinta tai radio button')
           fill_in('multichoice_question', with: "")
 
           expect{
@@ -113,13 +112,11 @@ describe "New Task page", js:true do
 
       describe "with task text subtask" do
         before :each do
-          click_and_wait('+ Luo uusi tekstimuotoinen alakohta')
+          click_and_wait('+ Teksti')
 
           fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira on kipeä.'
 
           click_and_wait('Tallenna')
-
-          click_and_wait('Teksti: Asiakas kertoo, että ...')
         end
 
         it "should be able to update the content of a task text" do
@@ -143,7 +140,7 @@ describe "New Task page", js:true do
 
       describe "with multichoice subtask" do
         before :each do
-          click_and_wait('+ Luo uusi monivalinta-alakohta')
+          click_and_wait('+ Monivalinta tai radio button')
           fill_in('multichoice_question', with: "Mitä kysyt asiakkaalta:")
           click_and_wait('Tallenna')
           expect(page).to have_content 'Muokkaa monivalintakysymystä'
@@ -188,7 +185,7 @@ describe "New Task page", js:true do
 
       describe "with radiobutton subtask" do
         before :each do
-          click_and_wait('+ Luo uusi monivalinta-alakohta')
+          click_and_wait('+ Monivalinta tai radio button')
           fill_in('multichoice_question', with: "Onko tauti epidemia?")
           check 'multichoice_is_radio_button'
           click_and_wait('Tallenna')
@@ -222,7 +219,7 @@ describe "New Task page", js:true do
           before :each do
             click_and_wait("Toimenpiteet")
             click_and_wait("Soita asiakkaalle")
-            click_and_wait("Monivalintakysymys: Onko tauti epidemia?")
+            click_and_wait("Radio button: Onko tauti epidemia?")
           end
 
           it "should be able to change the right option" do

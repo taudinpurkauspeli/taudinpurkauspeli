@@ -53,19 +53,6 @@ function setAjaxSubmits(formsSelector, containerElementSelector, type, submitCal
 }
 
 /**
- * Updates CKeditor instance in view.
- *
- *
- *
- */
-
-function CKupdate(){
-    for ( instance in CKEDITOR.instances ){
-        CKEDITOR.instances[instance].updateElement();
-    }
-}
-
-/**
  *
  *
  *
@@ -118,6 +105,11 @@ function openNewTab(url, containerElementSelector, taskName, callback){
 function loadView(url, elementSelector, callback){
     //alert("loadView: " + url + "; " + elementSelector);
     var element = $(elementSelector);
+
+    element.empty();
+    element.append("<div id = 'ajax-curtain' style = 'width: 100%; text-align: center; line-height: 500px; height: 500px;'><img style = 'display: inline;' src = 'http://s3-eu-central-1.amazonaws.com/taudinpurkauspeli/data/2/content.gif'></img></div>");
+
+
     element.load(fullUrlWithoutLayout(url), function(responseTxt, statusTxt, xhr){
         if(statusTxt == "error"){
             element.html("<h1>Virhe sivua ladattaessa.</h1><div>"+responseTxt+"</div><p>"+statusTxt+"</p><p>"+xhr+"</p>");
@@ -128,6 +120,9 @@ function loadView(url, elementSelector, callback){
 
         }
     });
+
+
+    
 
 }
 
@@ -191,19 +186,3 @@ function showTab(tabElementSelector){
  });
  }
  */
-
-/**
- * Function for testing ckeditor text editors.
- *
- * Allows tests to wait until ckeditor has been loaded.
- *
- */
-
-function isCkeditorLoaded(instance_selector) {
-    // instance_selector is e.g. 'template_html'
-    var status;
-    if (window.CKEDITOR && CKEDITOR.instances && CKEDITOR.instances[instance_selector]) {
-        status = CKEDITOR.instances[instance_selector].status;
-    }
-    return status === 'ready';
-};

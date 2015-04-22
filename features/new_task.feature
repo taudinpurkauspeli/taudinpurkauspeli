@@ -20,10 +20,10 @@ Feature: New task feature
     And I click on the button "+ Luo uusi toimenpide"
     When I fill in task name
     And I press the button "Tallenna"
-    And I press the button "+ Luo uusi tekstimuotoinen alakohta"
+    And I press the button "+ Teksti"
     And I fill in task text content
     And I press the button "Tallenna"
-    Then page should show the new task text content
+    Then page should show a succesfull notice
     And task text should be in the database
 
   Scenario: Teacher can create a task with multichoice
@@ -33,7 +33,7 @@ Feature: New task feature
     And I press the button "+ Luo uusi toimenpide"
     When I fill in task name
     And I press the button "Tallenna"
-    And I press the button "+ Luo uusi monivalinta-alakohta"
+    And I press the button "+ Monivalinta tai radio button"
     And I fill in multichoice question
     And I press the button "Tallenna"
     Then page should have a message: "Kysymys lisättiin onnistuneesti!"
@@ -58,7 +58,7 @@ Feature: New task feature
     And I press the button "+ Luo uusi toimenpide"
     When I fill in task name
     And I press the button "Tallenna"
-    And I press the button "+ Luo uusi monivalinta-alakohta"
+    And I press the button "+ Monivalinta tai radio button"
     And I fill fill in radiobutton question and select radiobutton option
     And I press the button "Tallenna"
     Then page should have a message: "Kysymys lisättiin onnistuneesti!"
@@ -82,7 +82,7 @@ Scenario: Teacher can create a task with interview
     And I press the button "+ Luo uusi toimenpide"
     When I fill in task name
     And I press the button "Tallenna"
-    And I press the button "+ Luo uusi haastattelu"
+    And I press the button "+ Pohdinta"
     And I fill in interview title
     And I press the button "Tallenna"
     Then page should show the new interview title

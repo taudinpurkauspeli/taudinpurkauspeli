@@ -212,6 +212,10 @@ li.active>a{
   color: #fff;
 }
 
+.btn-subtask{
+  background-color: #cacaca;
+}
+
 .btn-new-task{
   height: 5em;
   width: 20em;
@@ -255,6 +259,7 @@ li.active>a{
   right: 10px;
   width: 300px;
   padding: 10px;
+  z-index: 10;
 }
 .notice{
   width: 100%;
@@ -324,6 +329,9 @@ li.active>a{
   background-color: $PaleLightGreen;
 }
 
+//*********************
+//*   Progress bars   *
+//*********************
 
 div.progressbar{
   float: left;
