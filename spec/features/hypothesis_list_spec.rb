@@ -104,6 +104,7 @@ describe "Hypothesis list page", js:true do
         expect(ExerciseHypothesis.last.hypothesis.name).to eq('Sorkkatauti')
       end
 
+=begin
       it "remove hypotheses from an exercise" do
         backdoor = 0
         while(ExerciseHypothesis.count != 0)
@@ -155,6 +156,7 @@ describe "Hypothesis list page", js:true do
         end
         expect(ExerciseHypothesis.first.task.name).to eq('Asiakkaan soitto')
       end
+=end
     end
 
 
