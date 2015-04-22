@@ -15,4 +15,8 @@ class Interview < ActiveRecord::Base
     required = questions.required
     return (asked - required).empty? && (required - asked).empty?
   end
+
+  def to_s
+    'Pohdinta'
+  end
 end

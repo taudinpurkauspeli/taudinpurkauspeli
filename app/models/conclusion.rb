@@ -10,4 +10,8 @@ class Conclusion < ActiveRecord::Base
 			return false
 		end
 	end
+
+  def to_s
+    'Päätöstoimenpide'
+  end
 end
