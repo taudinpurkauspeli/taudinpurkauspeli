@@ -42,7 +42,7 @@
     </div>
     <div class="field">
       <%= f.label :starting_year %><br>
-      <%= f.select :starting_year, (2000..Time.now.year).to_a.reverse, :starting_year => "Select year" %>
+      <%= f.select :starting_year, (2000..Time.now.year).to_a.reverse, {:starting_year => "Select year"}, {:class => 'form-control widthAuto'} %>
     </div>
     <div class="actions">
       <%= f.submit :class => 'btn btn-default btn-save widthAuto' %>
