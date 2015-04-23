@@ -85,13 +85,17 @@ function openNewTab(url, containerElementSelector, taskName, callback){
     var targetTabLink = $('#navigationTabs a[href="'+containerElementSelector+'"]')
 
     if(!targetTabLink.length){
-        $("#navigationTabs").append("<li role='presentation'><a href='"+containerElementSelector+"' aria-controls='currentTask' role='tab' data-toggle='tab'>"+taskName+"</a></li>");
+        $("#navigationTabs").append("<li class = 'tabLink' role='presentation'><a href='"+containerElementSelector+"' aria-controls='currentTask' role='tab' data-toggle='tab'>"+taskName+"</a></li>");
         targetTabLink = $('#navigationTabs a[href="'+containerElementSelector+'"]');
     }else{
         targetTabLink.html(taskName);
     }
 
-    loadView(url, containerElementSelector, callback)
+    if(callback != undefined){
+        callback = function(){};
+    }
+
+    loadView(url, containerElementSelector, callback, true)
     targetTabLink.tab('show');
 }
 
@@ -102,27 +106,27 @@ function openNewTab(url, containerElementSelector, taskName, callback){
  *
  *
  */
-function loadView(url, elementSelector, callback){
+function loadView(url, elementSelector, callback, ajaxloader){
     //alert("loadView: " + url + "; " + elementSelector);
     var element = $(elementSelector);
 
-    element.empty();
-    element.append("<div id = 'ajax-curtain' style = 'width: 100%; text-align: center; line-height: 500px; height: 500px;'><img style = 'display: inline;' src = 'http://s3-eu-central-1.amazonaws.com/taudinpurkauspeli/data/2/content.gif'></img></div>");
-
+    if(ajaxloader != undefined){
+        if(ajaxloader == true){
+            element.empty();
+            element.append("<div id = 'ajax-curtain' style = 'width: 100%; text-align: center; line-height: 500px; height: 500px;'><img style = 'display: inline;' src = 'http://s3-eu-central-1.amazonaws.com/taudinpurkauspeli/data/2/content.gif'></img></div>");
+        }
+    }
 
     element.load(fullUrlWithoutLayout(url), function(responseTxt, statusTxt, xhr){
         if(statusTxt == "error"){
             element.html("<h1>Virhe sivua ladattaessa.</h1><div>"+responseTxt+"</div><p>"+statusTxt+"</p><p>"+xhr+"</p>");
         }else if(statusTxt == "success"){
             if(callback != undefined){
-                callback();
+                    callback();
             }
 
         }
-    });
-
-
-    
+    }); 
 
 }
 
