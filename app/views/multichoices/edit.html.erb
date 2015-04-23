@@ -10,7 +10,7 @@
 
 <div class = "panel panel-default panel-grey widthAuto">
   <div class = "panel-heading panel-heading-grey">
-    Monivalintakysymyksen muokkaus
+    <h4>Monivalintakysymyksen muokkaus</h4>
   </div>
   <div class = "panel-body">
     <%= render 'form' %>
@@ -21,8 +21,6 @@
   <% @multichoice.options.each do |option| %>
     <%= render 'edit_option', { option:option } %>
   <% end %>
-<h4>Lisää vaihtoehtoja</h4>
-
 <%= render 'new_option' %>
 <script>
     setAjaxSubmits("#currentTaskTab form:not(.form-edit-task)", "#currentTaskTab", "post");
