@@ -1,7 +1,7 @@
 <div class = "panel panel-default panel-green width70">
   <%= form_for(@new_option, :html => {:id => "form-new-option", :class=> "rich-text-form"}) do |f| %>
   <div class = "panel-heading panel-heading-grey">
-   
+
     <div class="row">
       <div class="col-md-6">
         <h4> Lisää vastausvaihtoehto</h4>
@@ -16,18 +16,18 @@
     <div class = "container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [t("activerecord.attributes.option.is_correct_answers.#{answer[0]}"), answer[0]] }, selected: @new_option.is_correct_answer), {}, {class: "form-control"} %>
-          
-          
-          <%= f.text_area :content, placeholder: "Vaihtoehto", :class => 'form-control' %>
-          
+          <%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [t("activerecord.attributes.option.is_correct_answers.#{answer[0]}"), answer[0]] }, selected: @new_option.is_correct_answer), {}, {class: "form-control"} %><br>
+
+
+          <%= f.text_area :content, placeholder: "Vaihtoehto", :class => 'form-control' %><br>
+
           <%= f.cktext_area :explanation, placeholder: "Vastausteksti", :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %>
-          
+
         </div>
         <%= f.hidden_field :multichoice_id, :value => @multichoice.id %>
       </div>
     </div>
   </div>
-  
+
   <% end %>
 </div>
