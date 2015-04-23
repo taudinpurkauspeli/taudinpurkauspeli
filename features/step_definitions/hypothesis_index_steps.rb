@@ -116,62 +116,16 @@ Then(/^the new hypothesis group should be created$/) do
 end
 
 Then(/^the explanation should be added to the hypothesis$/) do
-  #backdoor = 0
-  #while(ExerciseHypothesis.find(2).explanation != "<p>Hevosen hauraat luut</p>\r\n")
-
-    #if backdoor > 50 then
-    #  raise "Loop error!"
-    #end
-
-   # click_and_wait('Hevosheikkous')
-
-   # fill_in_ckeditor 'exercise_hypothesis_explanation_2', with: "Hevosen hauraat luut"
-
-   # first(:button, 'Päivitä').click
-   # wait_for_ajax
-
-  #  backdoor += 1
-  #end
-
   expect(ExerciseHypothesis.last.explanation).to eq("<p>Hevosen hauraat luut</p>\r\n")
 end
 
 Then(/^the hypothesis should be removed from the case$/) do
-  # backdoor = 0
-  # while(ExerciseHypothesis.count != 1)
-
-  #  if backdoor > 50 then
-  #    raise "Loop error!"
-  #  end
-
-  #  click_and_wait('Hevosheikkous')
-  #  first(:button, 'Poista casesta').click
-  #  wait_for_ajax
-
-  #  backdoor += 1
-  #end
   exercise_hypotheses = Exercise.first.exercise_hypotheses
   expect(exercise_hypotheses.count).to eq(1)
   expect(exercise_hypotheses.first.hypothesis.name).not_to eq("Hevosheikkous")
 end
 
 Then(/^the prerequisite task of the hypothesis should be updated$/) do
-  #backdoor = 0
- # while(ExerciseHypothesis.last.task.name == "Lääkitse hevonen")
-
-   # if backdoor > 50 then
-   #   raise "Loop error!"
-   # end
-
-  #  click_and_wait('Hevosheikkous')
-
-   # select('Soita lääkärille', from:'exercise_hypothesis[task_id]')
-
-   # first(:button, 'Päivitä').click
-   # wait_for_ajax
-
-   # backdoor += 1
-  #end
   exercise_hypothesis = Exercise.first.exercise_hypotheses.last
   expect(exercise_hypothesis.task.name).to eq("Soita lääkärille")
 end
