@@ -143,7 +143,7 @@ describe "New Task page", js:true do
           click_and_wait('+ Monivalinta tai radio button')
           fill_in('multichoice_question', with: "Mitä kysyt asiakkaalta:")
           click_and_wait('Tallenna')
-          expect(page).to have_content 'Muokkaa monivalintakysymystä'
+          expect(page).to have_content 'Monivalintakysymyksen muokkaus'
         end
 
         it "should be able to update the question of a multichoice" do
@@ -189,7 +189,7 @@ describe "New Task page", js:true do
           fill_in('multichoice_question', with: "Onko tauti epidemia?")
           check 'multichoice_is_radio_button'
           click_and_wait('Tallenna')
-          expect(page).to have_content 'Muokkaa monivalintakysymystä'
+          expect(page).to have_content 'Monivalintakysymyksen muokkaus'
         end
 
         it "should be able to update the question of a radiobutton" do
