@@ -67,11 +67,14 @@ When(/^I save the new hypothesis with button "(.*?)"$/) do |arg1|
 end
 
 When(/^I save changes with button "(.*?)"$/) do |arg1|
-  click_and_wait("update_exercise_hypothesis_2")
+  find_button("update_exercise_hypothesis_2").trigger('click')
+  wait_for_ajax
 end
 
 When(/^I click on the delete button "(.*?)"$/) do |arg1|
-  click_and_wait("remove_from_case_2")
+  wait_for_ckeditor("exercise_hypothesis_explanation_2")
+  find_button("remove_from_case_2").trigger('click')
+  wait_for_ajax
 end
 
 When(/^I click on the hypothesis button "(.*?)"$/) do |arg1|
@@ -79,7 +82,8 @@ When(/^I click on the hypothesis button "(.*?)"$/) do |arg1|
 end
 
 When(/^I click on one of the hypotheses of the case$/) do
-  click_and_wait('Hevosheikkous')
+  find_button("Hevosheikkous").trigger('click')
+  wait_for_ajax
 end
 
 When(/^I fill in the hypothesis group name field with a correct name$/) do
@@ -87,10 +91,12 @@ When(/^I fill in the hypothesis group name field with a correct name$/) do
 end
 
 When(/^I fill in the explanation field$/) do
+  wait_for_ckeditor("exercise_hypothesis_explanation_2")
   fill_in_ckeditor 'exercise_hypothesis_explanation_2', with: 'Hevosen hauraat luut'
 end
 
 When(/^I change the prerequisite task$/) do
+  wait_for_ckeditor("exercise_hypothesis_explanation_2")
   select('Soita lääkärille', from:'exercise_hypothesis[task_id]')
 end
 
@@ -110,62 +116,62 @@ Then(/^the new hypothesis group should be created$/) do
 end
 
 Then(/^the explanation should be added to the hypothesis$/) do
-  backdoor = 0
-  while(ExerciseHypothesis.find(2).explanation != "<p>Hevosen hauraat luut</p>\r\n")
+  #backdoor = 0
+  #while(ExerciseHypothesis.find(2).explanation != "<p>Hevosen hauraat luut</p>\r\n")
 
-    if backdoor > 50 then
-      raise "Loop error!"
-    end
+    #if backdoor > 50 then
+    #  raise "Loop error!"
+    #end
 
-    click_and_wait('Hevosheikkous')
+   # click_and_wait('Hevosheikkous')
 
-    fill_in_ckeditor 'exercise_hypothesis_explanation_2', with: "Hevosen hauraat luut"
+   # fill_in_ckeditor 'exercise_hypothesis_explanation_2', with: "Hevosen hauraat luut"
 
-    first(:button, 'Päivitä').click
-    wait_for_ajax
+   # first(:button, 'Päivitä').click
+   # wait_for_ajax
 
-    backdoor += 1
-  end
+  #  backdoor += 1
+  #end
 
   expect(ExerciseHypothesis.last.explanation).to eq("<p>Hevosen hauraat luut</p>\r\n")
 end
 
 Then(/^the hypothesis should be removed from the case$/) do
-  backdoor = 0
-  while(ExerciseHypothesis.count != 1)
+  # backdoor = 0
+  # while(ExerciseHypothesis.count != 1)
 
-    if backdoor > 50 then
-      raise "Loop error!"
-    end
+  #  if backdoor > 50 then
+  #    raise "Loop error!"
+  #  end
 
-    click_and_wait('Hevosheikkous')
-    first(:button, 'Poista casesta').click
-    wait_for_ajax
+  #  click_and_wait('Hevosheikkous')
+  #  first(:button, 'Poista casesta').click
+  #  wait_for_ajax
 
-    backdoor += 1
-  end
+  #  backdoor += 1
+  #end
   exercise_hypotheses = Exercise.first.exercise_hypotheses
   expect(exercise_hypotheses.count).to eq(1)
   expect(exercise_hypotheses.first.hypothesis.name).not_to eq("Hevosheikkous")
 end
 
 Then(/^the prerequisite task of the hypothesis should be updated$/) do
-  backdoor = 0
-  while(ExerciseHypothesis.last.task.name == "Lääkitse hevonen")
+  #backdoor = 0
+ # while(ExerciseHypothesis.last.task.name == "Lääkitse hevonen")
 
-    if backdoor > 50 then
-      raise "Loop error!"
-    end
+   # if backdoor > 50 then
+   #   raise "Loop error!"
+   # end
 
-    click_and_wait('Hevosheikkous')
+  #  click_and_wait('Hevosheikkous')
 
-    select('Soita lääkärille', from:'exercise_hypothesis[task_id]')
+   # select('Soita lääkärille', from:'exercise_hypothesis[task_id]')
 
-    first(:button, 'Päivitä').click
-    wait_for_ajax
+   # first(:button, 'Päivitä').click
+   # wait_for_ajax
 
-    backdoor += 1
-  end
+   # backdoor += 1
+  #end
   exercise_hypothesis = Exercise.first.exercise_hypotheses.last
   expect(exercise_hypothesis.task.name).to eq("Soita lääkärille")
 end
