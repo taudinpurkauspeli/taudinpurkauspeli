@@ -1,34 +1,33 @@
-<div class = "panel panel-default panel-grey">
-  <div class="row panel-body">
-    <div class = "nakki">
-      <%= form_for(option, :html => {:id => "form-edit-option-" + option.id.to_s , :class=> "rich-text-form"}) do |f| %>
-	      <div class="col-md-2">
-	        <%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [t("activerecord.attributes.option.is_correct_answers.#{answer[0]}"), answer[0]] }, selected: option.is_correct_answer), {}, {:id => "is_correct_answer_" + option.id.to_s, class: "form-control"}%>
-	      </div>
-	      <div class="col-md-4">
-	        <%= f.text_area :content, placeholder: "Vaihtoehto", :id => "content_" + option.id.to_s, :class => 'form-control' %>
+<%= form_for(option, :html => {:id => "form-edit-option-" + option.id.to_s , :class=> "rich-text-form"}) do |f| %>
+<div class = "panel panel-default panel-grey width70">
+	<div class = "panel-heading panel-heading-grey">
+		<div class="row">
+			<div class="col-md-6">
+				<h5> Vastausvaihtoehto: <%= option.content %></h5>
+			</div>
+			<div class="col-md-6">
+				<%= f.submit :class => 'btn btn-default btn-save floatRight widthAuto margin-em', :id => "save_" + option.id.to_s %>
+				<%#= button_to 'Poista', option, method: :delete, :class => 'btn btn-default btn-del floatRight widthAuto margin-em', :id => "delete_" + option.id.to_s,  data: { confirm: 'Haluatko varmasti poistaa vaihtoehdon?' } %>
+			</div>
+		</div>
+	</div>
+	<div class="row panel-body">
+		<div class="container-fluid">
+			<div class="row">
+				<%= f.hidden_field :option_id, :value => option.id %>
+				<%= f.hidden_field :multichoice_id, :value => @multichoice.id%>
 
-	      </div>
-	      <div class="col-md-4">
-	        <%= f.cktext_area :explanation, placeholder: "Vastausteksti", :id => "explanation_" + option.id.to_s, :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %>
-	      </div>
-	      <div class="col-md-2">
-	        <%= image_tag option.image.picture.url(:thumb) unless option.image.nil? %>
-	        <div class="field">
-	          <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: option.image_id), { :prompt => 'Valitse kuva' } %>
-	        </div>
-	      </div>
+				<div class="col-md-12">
 
-	      <div class="col-md-1">
-	        <%= f.submit :class => 'btn btn-default btn-save', :id => "save_" + option.id.to_s %>
-	      </div>
-	      <%= f.hidden_field :option_id, :value => option.id %>
-	      <%= f.hidden_field :multichoice_id, :value => @multichoice.id%>
-      <% end %>
-      <%# Bootsrapin layoutti tekee temppuja, kun rivin leveys yli 12: viimeiset kaksi oudosti päällekkäin %>
-      <div class="col-md-1">
-        <%= button_to 'Poista', option, method: :delete, :class => 'btn btn-default btn-del', :id => "delete_" + option.id.to_s %>
-      </div>
-    </div>
-  </div>
+					<%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [t("activerecord.attributes.option.is_correct_answers.#{answer[0]}"), answer[0]] }, selected: option.is_correct_answer), {}, {:id => "is_correct_answer_" + option.id.to_s, class: "form-control"}%><br>
+					<%= f.label "Vaihtoehdon teksti"%><br>
+					<%= f.text_area :content, placeholder: "Vaihtoehto", :id => "content_" + option.id.to_s, :class => 'form-control' %><br>
+
+					<%= f.label "Seliteteksti"%><br>
+					<%= f.cktext_area :explanation, placeholder: "Vastausteksti", :id => "explanation_" + option.id.to_s, :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %><br>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+<% end %>
