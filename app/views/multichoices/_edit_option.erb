@@ -1,34 +1,33 @@
 <%= form_for(option, :html => {:id => "form-edit-option-" + option.id.to_s , :class=> "rich-text-form"}) do |f| %>
-<div class = "panel panel-default panel-grey width70 padding15">
+<div class = "panel panel-default panel-grey width70">
 	<div class = "panel-heading panel-heading-grey">
-		<div class="row padding5">
+		<div class="row">
 			<div class="col-md-6">
 				<h4> Vastausvaihtoehto</h4>
 			</div>
-			<div class="col-md-3">
-				<%= f.submit :class => 'btn btn-default btn-save floatRight', :id => "save_" + option.id.to_s %>
-			</div>
-			<div class="col-md-2">
-				<%= button_to 'Poista', option, method: :delete, :class => 'btn btn-default btn-del floatRight', :id => "delete_" + option.id.to_s %>
+			<div class="col-md-6">
+				<%= f.submit :class => 'btn btn-default btn-save floatRight widthAuto margin-em', :id => "save_" + option.id.to_s %>
+				<%= button_to 'Poista', option, method: :delete, :class => 'btn btn-default btn-del floatRight widthAuto margin-em', :id => "delete_" + option.id.to_s %>
 			</div>
 		</div>
 	</div>
 	<div class="row panel-body">
-		<div class="row padding5">
-			<%= f.hidden_field :option_id, :value => option.id %>
-			<%= f.hidden_field :multichoice_id, :value => @multichoice.id%>
+		<div class="container-fluid">
+			<div class="row">
+				<%= f.hidden_field :option_id, :value => option.id %>
+				<%= f.hidden_field :multichoice_id, :value => @multichoice.id%>
 
-			<div class="col-md-12 padding15">
-				
-				<%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [t("activerecord.attributes.option.is_correct_answers.#{answer[0]}"), answer[0]] }, selected: option.is_correct_answer), {}, {:id => "is_correct_answer_" + option.id.to_s, class: "form-control widthAuto"}%><br>
-				<%= f.label "Vaihtoehdon teksti"%><br>
-				<%= f.text_area :content, placeholder: "Vaihtoehto", :id => "content_" + option.id.to_s, :class => 'form-control width100' %><br>
+				<div class="col-md-12">
 
-				<%= f.label "Seliteteksti"%><br>
-				<%= f.cktext_area :explanation, placeholder: "Vastausteksti", :id => "explanation_" + option.id.to_s, :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %><br>
+					<%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [t("activerecord.attributes.option.is_correct_answers.#{answer[0]}"), answer[0]] }, selected: option.is_correct_answer), {}, {:id => "is_correct_answer_" + option.id.to_s, class: "form-control widthAuto"}%><br>
+					<%= f.label "Vaihtoehdon teksti"%><br>
+					<%= f.text_area :content, placeholder: "Vaihtoehto", :id => "content_" + option.id.to_s, :class => 'form-control width100' %><br>
+
+					<%= f.label "Seliteteksti"%><br>
+					<%= f.cktext_area :explanation, placeholder: "Vastausteksti", :id => "explanation_" + option.id.to_s, :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %><br>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <% end %>
-<%# Bootsrapin layoutti tekee temppuja, kun rivin leveys yli 12: viimeiset kaksi oudosti päällekkäin %>

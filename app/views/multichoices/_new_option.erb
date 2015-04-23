@@ -1,26 +1,36 @@
-<div class = "panel panel-default panel-green">
-  <div class="row panel-body">
-    <div class = "nakki">
-      <%= form_for(@new_option, :html => {:id => "form-new-option", :class=> "rich-text-form"}) do |f| %>
-          <div class="col-md-2">
-            <%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [t("activerecord.attributes.option.is_correct_answers.#{answer[0]}"), answer[0]] }, selected: @new_option.is_correct_answer), {}, {class: "form-control"} %>
-          </div>
-          <div class="col-md-4">
-            <%= f.text_area :content, placeholder: "Vaihtoehto", :class => 'form-control' %>
-          </div>
-          <div class="col-md-4">
-            <%= f.cktext_area :explanation, placeholder: "Vastausteksti", :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %>
-          </div>
-          <div class="col-md-2">
-            <div class="field">
-              <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: @new_option.image_id), { :prompt => 'Valitse kuva' } %>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <%= f.submit 'Tallenna', :class => 'btn btn-default btn-save' %>
-          </div>
-          <%= f.hidden_field :multichoice_id, :value => @multichoice.id %>
-      <% end %>
+<div class = "panel panel-default panel-green width70">
+  <%= form_for(@new_option, :html => {:id => "form-new-option", :class=> "rich-text-form"}) do |f| %>
+  <div class = "panel-heading panel-heading-green">
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
+        <%= f.submit 'Tallenna', :class => 'btn btn-default btn-save floatRight widthAuto margin-em' %>
+      </div>
     </div>
+
+    <div class="row panel-body">
+      <div class = "nakki">
+
+        <div class="col-md-2">
+          <%=f.select :is_correct_answer, options_for_select(@is_correct_answers.collect { |answer| [t("activerecord.attributes.option.is_correct_answers.#{answer[0]}"), answer[0]] }, selected: @new_option.is_correct_answer), {}, {class: "form-control"} %>
+        </div>
+        <div class="col-md-4">
+          <%= f.text_area :content, placeholder: "Vaihtoehto", :class => 'form-control' %>
+        </div>
+        <div class="col-md-4">
+          <%= f.cktext_area :explanation, placeholder: "Vastausteksti", :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %>
+        </div>
+        <div class="col-md-2">
+          <div class="field">
+            <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: @new_option.image_id), { :prompt => 'Valitse kuva' } %>
+          </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+        <%= f.hidden_field :multichoice_id, :value => @multichoice.id %>
+
+      </div>
+    </div>
+    <% end %>
   </div>
-</div>
