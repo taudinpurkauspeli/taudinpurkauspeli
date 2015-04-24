@@ -79,6 +79,21 @@ describe "New Task page", js:true do
           expect(Multichoice.first.question).to eq("Mitä kysyt asiakkaalta:")
           expect(Multichoice.first.subtask.task.name).to eq("Soita asiakkaalle")
         end
+
+        it "interview subtask" do
+
+          click_and_wait('+ Pohdinta')
+          fill_in('interview_title', with: "Asiakkaan haastattelu")
+
+          expect{
+            click_and_wait('Tallenna')
+          }.to change(Interview, :count).by(1)
+
+          expect(page).to have_content 'Pohdinta lisättiin onnistuneesti!'
+          expect(Subtask.count).to eq(1)
+          expect(Interview.first.title).to eq("Asiakkaan haastattelu")
+          expect(Interview.first.subtask.task.name).to eq("Soita asiakkaalle")
+        end
       end
 
       describe "should not be able to add a" do
@@ -106,6 +121,19 @@ describe "New Task page", js:true do
           }.to change(Multichoice, :count).by(0)
 
           expect(page).to have_content 'Kysymyksen lisääminen epäonnistui!'
+          expect(Subtask.count).to eq(0)
+        end
+
+        it "interview subtask without title" do
+
+          click_and_wait('+ Pohdinta')
+          fill_in('interview_title', with: "")
+
+          expect{
+            click_and_wait('Tallenna')
+          }.to change(Interview, :count).by(0)
+
+          expect(page).to have_content 'Pohdinnan lisääminen epäonnistui!'
           expect(Subtask.count).to eq(0)
         end
       end
@@ -168,7 +196,7 @@ describe "New Task page", js:true do
         it "should be able to add option to a multichoice" do
           fill_in('option_content', with: "Kysy taudeista")
           fill_in_ckeditor 'option_explanation', with: 'Taudeista on hyvä kysyä!'
-          select('Pakollinen', from:'option[is_correct_answer]')
+          select('Pakollinen vaihtoehto', from:'option[is_correct_answer]')
 
           expect{
             click_and_wait('Tallenna')
@@ -222,16 +250,130 @@ describe "New Task page", js:true do
             click_and_wait("Radio button: Onko tauti epidemia?")
           end
 
-          it "should be able to change the right option" do
-            page.find("#collapse-option-link2").trigger('click')
-            wait_for_ajax
-            select('Pakollinen', from:'is_correct_answer_2')
-            click_and_wait('save_2')
+          describe "should be able to change" do
 
-            expect(Option.find(1).is_correct_answer).to eq("wrong")
-            expect(Option.find(2).is_correct_answer).to eq("required")
-            expect(Option.find(3).is_correct_answer).to eq("allowed")
+            it "the right option" do
+              page.find("#collapse-option-link2").trigger('click')
+              wait_for_ajax
+              select('Pakollinen vaihtoehto', from:'option_is_correct_answer_2')
+              find_button('option_save_2').trigger('click')
+              wait_for_ajax
+
+              expect(Option.find(1).is_correct_answer).to eq("wrong")
+              expect(Option.find(2).is_correct_answer).to eq("required")
+              expect(Option.find(3).is_correct_answer).to eq("allowed")
+            end
+
+            it "the content of an option" do
+              page.find("#collapse-option-link2").trigger('click')
+              wait_for_ajax
+              fill_in('option_content_2', with: "Kysy taudeista lisätietoja")
+              find_button('option_save_2').trigger('click')
+              wait_for_ajax
+
+              expect(Option.find(2).content).to eq("Kysy taudeista lisätietoja")
+            end
+
+            it "the explanation of an option" do
+              page.find("#collapse-option-link2").trigger('click')
+              wait_for_ajax
+              fill_in_ckeditor 'option_explanation_2', with: 'Taudista pitää kerätä lisätietoja!'
+              find_button('option_save_2').trigger('click')
+              wait_for_ajax
+
+              expect(Option.find(2).explanation).to eq("<p>Taudista pit&auml;&auml; ker&auml;t&auml; lis&auml;tietoja!</p>\r\n")
+            end
           end
+
+        end
+      end
+
+      describe "with interview subtask" do
+        before :each do
+          click_and_wait('+ Pohdinta')
+          fill_in('interview_title', with: "Kysymyksiä asiakkaalle")
+          click_and_wait('Tallenna')
+          expect(page).to have_content 'Pohdintatehtävän muokkaus'
+        end
+
+        it "should be able to update the title of an interview" do
+
+          fill_in('interview_title', with: "Paljon kysymyksiä asiakkaalle")
+
+          click_and_wait('Päivitä')
+
+          expect(page).to have_content 'Pohdinta päivitettiin onnistuneesti!'
+          expect(Task.where(level:1...999).first.interviews.first.title).to eq("Paljon kysymyksiä asiakkaalle")
+        end
+
+        it "should not be able to update interview to have no title" do
+          fill_in('interview_title', with: "")
+
+          click_and_wait('Päivitä')
+
+          expect(page).to have_content 'Pohdinnan päivitys epäonnistui!'
+          expect(Task.where(level:1...999).first.interviews.first.title).to eq("Kysymyksiä asiakkaalle")
+        end
+
+        it "should be able to add question without a question group to an interview" do
+          fill_in('question_title', with: "Onko eläin ollut kipeä?")
+          fill_in_ckeditor 'question_content', with: 'On ollut kipeä.'
+          select('Pakollinen kysymys', from:'question[required]')
+
+          expect{
+            click_and_wait('Tallenna')
+          }.to change(Question, :count).by(1)
+
+          expect(page).to have_content 'Kysymysvaihtoehto lisättiin onnistuneesti'
+
+          expect(Interview.first.questions.first.title).to eq('Onko eläin ollut kipeä?')
+          expect(Interview.first.questions.first.content).to eq("<p>On ollut kipe&auml;.</p>\r\n")
+          expect(Interview.first.questions.first.required).to eq("required")
+        end
+
+        describe "with questions" do
+          let!(:question1){FactoryGirl.create(:question, interview_id: 1, title: "Sääolosuhteet", required: "wrong", content: "Sää oli normaali")}
+          let!(:question2){FactoryGirl.create(:question, interview_id: 1, title: "Laidunolosuhteet", required: "allowed", content: "Laidun on puhdas")}
+          let!(:question3){FactoryGirl.create(:question, interview_id: 1, title: "Karsinaolosuhteet", content: "Siivoton karsina")}
+
+          before :each do
+            click_and_wait("Toimenpiteet")
+            click_and_wait("Soita asiakkaalle")
+            click_and_wait("Pohdinta: Kysymyksiä asiakkaalle")
+          end
+
+          describe "should be able to change" do
+            it "the required status of a question" do
+              page.find("#collapse-question-link2").trigger('click')
+              wait_for_ajax
+              select('Pakollinen kysymys', from:'question_required_2')
+              find_button('question_save_2').trigger('click')
+              wait_for_ajax
+
+              expect(Question.find(2).required).to eq("required")
+            end
+
+            it "the content of a question" do
+              page.find("#collapse-question-link2").trigger('click')
+              wait_for_ajax
+              fill_in_ckeditor 'question_content_2', with: 'On ollut todella kipeä!'
+              find_button('question_save_2').trigger('click')
+              wait_for_ajax
+
+              expect(Question.find(2).content).to eq("<p>On ollut todella kipe&auml;!</p>\r\n")
+            end
+
+            it "the title of a question" do
+              page.find("#collapse-question-link2").trigger('click')
+              wait_for_ajax
+              fill_in('question_title_2', with: "Miten eläin on voinut")
+              find_button('question_save_2').trigger('click')
+              wait_for_ajax
+
+              expect(Question.find(2).title).to eq("Miten eläin on voinut")
+            end
+          end
+
         end
       end
     end
