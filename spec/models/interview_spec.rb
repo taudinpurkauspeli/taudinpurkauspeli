@@ -17,6 +17,10 @@ RSpec.describe Interview, type: :model do
       expect(interview).to be_valid
       expect(Interview.count).to eq(1)
     end
+
+    it "to_s is overridden" do
+      expect(interview.to_s).to eq("Pohdinta")
+    end
   end
 
 end
