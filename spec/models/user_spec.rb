@@ -21,8 +21,43 @@ RSpec.describe User, :type => :model do
     expect(User.count).to eq(0)
   end
 
+  it "cannot be saved with too short realname" do
+    user = User.create username:"Pekka", realname:"Tes", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
+
+    expect(user).not_to be_valid
+    expect(User.count).to eq(0)
+  end
+
   it "cannot be saved with no email" do
     user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"", student_number: "000000001", starting_year: 2000
+
+    expect(user).not_to be_valid
+    expect(User.count).to eq(0)
+  end
+
+  it "cannot be saved with no student number" do
+    user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@p.com", student_number: "", starting_year: 2000
+
+    expect(user).not_to be_valid
+    expect(User.count).to eq(0)
+  end
+
+  it "cannot be saved with too short student number" do
+    user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@p.com", student_number: "12345678", starting_year: 2000
+
+    expect(user).not_to be_valid
+    expect(User.count).to eq(0)
+  end
+
+  it "cannot be saved when student number contains other characters than numbers" do
+    user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@p.com", student_number: "12345678A", starting_year: 2000
+
+    expect(user).not_to be_valid
+    expect(User.count).to eq(0)
+  end
+
+  it "cannot be saved with no starting year" do
+    user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@p.com", student_number: "123456789", starting_year: nil
 
     expect(user).not_to be_valid
     expect(User.count).to eq(0)
@@ -43,112 +78,118 @@ RSpec.describe User, :type => :model do
   end
 
   it "can be saved with correct information" do
-  	user = User.new username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
-  	user.save
-  	expect(User.count).to eq(1)
+    user = User.new username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
+    user.save
+    expect(User.count).to eq(1)
   end
 
   it "cannot be saved if username is not unique" do
     User.create username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
 
-   #FactoryGirl.create(:user)
+    user = User.create username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000001", starting_year: 2000
 
-
-  	user = User.create username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
-
-   expect(user).not_to be_valid
-   expect(User.count).to eq(1)
- end
-
- it "returns correct number of completed tasks" do
-  exercise = FactoryGirl.create(:exercise)
-  user = FactoryGirl.create(:user, admin: false)
-  task = FactoryGirl.create(:task, exercise:exercise)
-  user.completed_tasks.create(task:task)
-  expect(user.get_number_of_tasks_by_level(exercise, task.level)).to eq(1)
-end
-
-
-describe "has_completed" do
-  let!(:exercise){FactoryGirl.create(:exercise)}
-  let!(:user){FactoryGirl.create(:user)}
-  let!(:task){FactoryGirl.create(:task, exercise:exercise)}
-  let!(:subtask){FactoryGirl.create(:subtask, task:task)}
-
-  before(:each) do
-    user.complete_subtask(subtask)
-    user.complete_task(task)
-    user.complete_exercise(exercise)
+    expect(user).not_to be_valid
+    expect(User.count).to eq(1)
   end
 
-  it "finds completed task" do
-    expect(user.has_completed?(task)).to eq(true)
+  it "cannot be saved if student number is not unique" do
+    User.create username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
+
+    user = User.create username:"Testikaveri", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
+
+    expect(user).not_to be_valid
+    expect(User.count).to eq(1)
   end
 
-  it "finds completed subtask" do
-    expect(user.has_completed?(subtask)).to eq(true)
+  it "returns correct number of completed tasks" do
+    exercise = FactoryGirl.create(:exercise)
+    user = FactoryGirl.create(:user, admin: false)
+    task = FactoryGirl.create(:task, exercise:exercise)
+    user.completed_tasks.create(task:task)
+    expect(user.get_number_of_tasks_by_level(exercise, task.level)).to eq(1)
   end
 
-  it "finds completed exercise" do
-    expect(user.has_completed?(exercise)).to eq(true)
-  end
-end
 
-describe "can_start?" do
-  let!(:exercise){FactoryGirl.create(:exercise)}
-  let!(:user){FactoryGirl.create(:user)}
-  let!(:task1){FactoryGirl.create(:task, exercise:exercise, level:1)}
-  let!(:task2){FactoryGirl.create(:task, name:"Alt", exercise:exercise, level:2)}
-  let!(:task3){FactoryGirl.create(:task, name:"Alter", exercise:exercise, level:3)}
+  describe "has_completed" do
+    let!(:exercise){FactoryGirl.create(:exercise)}
+    let!(:user){FactoryGirl.create(:user)}
+    let!(:task){FactoryGirl.create(:task, exercise:exercise)}
+    let!(:subtask){FactoryGirl.create(:subtask, task:task)}
 
-  it "lets user start first task" do
-    expect(user.can_start?(task1)).to eq(true)
-  end
-
-  it "prevents user from starting wrong task" do
-    expect(user.can_start?(task2)).to eq(false)
-  end
-
-  it "lets user start any correct task" do
-    user.complete_task(task1)
-    expect(user.can_start?(task2)).to eq(true)
-  end
-end
-
-describe "can add completed" do
-  let!(:exercise){FactoryGirl.create(:exercise)}
-  let!(:user){FactoryGirl.create(:user)}
-  let!(:task){FactoryGirl.create(:task, exercise:exercise)}
-  let!(:subtask){FactoryGirl.create(:subtask, task:task)}
-
-  it "subtasks" do
-    expect {
+    before(:each) do
       user.complete_subtask(subtask)
-      }.to change{user.subtasks.count}.by(1)
-  end
-
-  it "tasks" do
-    expect {
       user.complete_task(task)
+      user.complete_exercise(exercise)
+    end
+
+    it "finds completed task" do
+      expect(user.has_completed?(task)).to eq(true)
+    end
+
+    it "finds completed subtask" do
+      expect(user.has_completed?(subtask)).to eq(true)
+    end
+
+    it "finds completed exercise" do
+      expect(user.has_completed?(exercise)).to eq(true)
+    end
+  end
+
+  describe "can_start?" do
+    let!(:exercise){FactoryGirl.create(:exercise)}
+    let!(:user){FactoryGirl.create(:user)}
+    let!(:task1){FactoryGirl.create(:task, exercise:exercise, level:1)}
+    let!(:task2){FactoryGirl.create(:task, name:"Alt", exercise:exercise, level:2)}
+    let!(:task3){FactoryGirl.create(:task, name:"Alter", exercise:exercise, level:3)}
+
+    it "lets user start first task" do
+      expect(user.can_start?(task1)).to eq(true)
+    end
+
+    it "prevents user from starting wrong task" do
+      expect(user.can_start?(task2)).to eq(false)
+    end
+
+    it "lets user start any correct task" do
+      user.complete_task(task1)
+      expect(user.can_start?(task2)).to eq(true)
+    end
+  end
+
+  describe "can add completed" do
+    let!(:exercise){FactoryGirl.create(:exercise)}
+    let!(:user){FactoryGirl.create(:user)}
+    let!(:task){FactoryGirl.create(:task, exercise:exercise)}
+    let!(:subtask){FactoryGirl.create(:subtask, task:task)}
+
+    it "subtasks" do
+      expect {
+        user.complete_subtask(subtask)
+      }.to change{user.subtasks.count}.by(1)
+    end
+
+    it "tasks" do
+      expect {
+        user.complete_task(task)
       }.to change{user.tasks.count}.by(1)
-  end
-
-  describe "exercises" do
-    let!(:task){FactoryGirl.create(:task, exercise:exercise, name:'Koira')}
-    let!(:subtask_last){FactoryGirl.create(:subtask, task:task)}
-
-    it "by direct method call" do
-      expect {
-        user.complete_exercise(exercise)
-        }.to change{user.exercises.count}.by(1)
     end
 
-    it "by completing subtasks" do
-      user.complete_subtask(subtask)
-      expect {
-        user.complete_subtask(subtask_last)
+    describe "exercises" do
+      let!(:task){FactoryGirl.create(:task, exercise:exercise, name:'Koira')}
+      let!(:subtask_last){FactoryGirl.create(:subtask, task:task)}
+
+      it "by direct method call" do
+        expect {
+          user.complete_exercise(exercise)
         }.to change{user.exercises.count}.by(1)
+      end
+
+      it "by completing subtasks" do
+        user.complete_subtask(subtask)
+        expect {
+          user.complete_subtask(subtask_last)
+        }.to change{user.exercises.count}.by(1)
+      end
     end
   end
-end
 end

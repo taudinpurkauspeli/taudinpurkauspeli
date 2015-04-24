@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :student_number, presence: true, uniqueness: true , length: { is: 9 }
   validates :starting_year, presence: true
+  validates_format_of :student_number, with: /\A\d+\z/i
 
   has_secure_password
 
