@@ -43,15 +43,6 @@ describe Exercise do
       expect(Exercise.count).to eq(1)
     end
 
-=begin
-    it "is not saved if the name is already in use" do
-      exercise2 = Exercise.create name:"Lihanautakuolemat", anamnesis:"Voi voi koiraa"
-
-      expect(exercise2).not_to be_valid
-      expect(Exercise.count).to eq(1) 
-    end
-=end
-
     it "can be duplicated" do
       expect{
         exercise.create_duplicate(exercise)
@@ -75,4 +66,19 @@ describe Exercise do
     end
   end
 
+  describe "has_conclusion?" do
+    let!(:has_conclusion){FactoryGirl.create(:exercise)}
+    let!(:has_no_conclusion){FactoryGirl.create(:exercise)}
+    let!(:task){FactoryGirl.create(:task, exercise:has_conclusion)}
+    let!(:subt){FactoryGirl.create(:subtask, task:task)}
+    let!(:conclusion){FactoryGirl.create(:conclusion, subtask:subt)}
+
+    it "returns true if exercise has conclusion" do
+      expect(has_conclusion.has_conclusion?).to eq(true)
+    end
+
+    it "returns false if exercise doesn't have conclusion" do
+      expect(has_no_conclusion.has_conclusion?).to eq(false)
+    end
+  end
 end

@@ -18,37 +18,70 @@ RSpec.describe Subtask, type: :model do
     end
   end
 
-=begin
-  describe "with incorrect id" do
-
-    it "is not saved" do
-      subtask = Subtask.create task_id: nil
-      expect(subtask).not_to be_valid
-      expect(Subtask.count).to eq(0)
-    end
-  end
-=end
-
-  describe "template" do
-
-    describe "returns correct template for" do
+  describe "string methods" do
+    describe "return correctly for" do
       let!(:task){FactoryGirl.create(:task, exercise_id:1, level:1)}
       let!(:subtask){FactoryGirl.create(:subtask, task:task)}
 
-      it "multichoice" do
-        subtask.create_multichoice
-        expect(subtask.template). to eq("multichoice")
+      describe "multichoice" do
+        let(:s){
+          subtask.create_multichoice(question:"This is a test")
+          subtask
+        }
+
+        it "template" do
+          expect(s.template).to eq("multichoice")
+        end
+
+        it "to_s" do
+          expect(s.to_s).to eq("Monivalinta: This is a ...")
+        end
       end
 
-      it "task_text" do
-        subtask.create_task_text
-        expect(subtask.template). to eq("task_text")
+      describe "task_text" do
+        let(:s){
+          subtask.create_task_text(content:"This is a test")
+          subtask
+        }
+
+        it "template" do
+          expect(s.template).to eq("task_text")
+        end
+
+        it "to_s" do
+          expect(s.to_s).to eq("Teksti: This is a ...")
+        end
       end
 
- #     it "interview" do
- #       subtask.create_interview
- #       expect(subtask.template). to eq("interview")
- #     end
+      describe "interview" do
+        let(:s){
+          subtask.create_interview(title:"This is a test")
+          subtask
+        }
+
+        it "template" do
+          expect(s.template).to eq("interview")
+        end
+
+        it "to_s" do
+          expect(s.to_s).to eq("Pohdinta: This is a ...")
+        end
+      end
+ 
+      describe "conclusion" do
+        let(:s){
+          subtask.create_conclusion(title:"This is a test")
+          subtask
+        }
+
+        it "template" do
+          expect(s.template).to eq("conclusion")
+        end
+
+        it "to_s" do
+          expect(s.to_s).to eq("Päätöstoimenpide: This is a ...")
+        end
+      end
     end
   end
 
