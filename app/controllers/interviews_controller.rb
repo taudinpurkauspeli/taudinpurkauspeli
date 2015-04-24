@@ -71,7 +71,7 @@ class InterviewsController < ApplicationController
           format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout) }
         end
       else
-        format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout), alert: 'Et ole vielä valinnut kaikki tarpeellisia vaihtoehtoja!' }
+        format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout), alert: 'Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!' }
       end
     end
   end
