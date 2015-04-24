@@ -1,19 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe Conclusion, type: :model do
+  let!(:exercise_hypothesis){FactoryGirl.create(exercise_id:1, hypothesis_id:1, task_id:1)}
+  let!(:task){FactoryGirl.create(:task, exercise_id:1, level:1)}
+  let!(:subtask){FactoryGirl.create(:subtask, task:task)}
+  let!(:conclusion){FactoryGirl.create(:conclusion, subtask:subtask, exercise_hypothesis:exercise_hypothesis)}
+
   it "has overridden to_s" do
-    conclusion = Conclusion.new
     expect(conclusion.to_s).to eq("Päätöstoimenpide")
   end
 
   describe "user_answered_correctly?" do
       
-    let!(:conclusion){FactoryGirl.create(:conclusion)}
-      
     describe "when user answers wrong" do
 
       let!(:user){FactoryGirl.create(:user)}
-
 
       it "returns false" do
         expect(0).to eq (0)
