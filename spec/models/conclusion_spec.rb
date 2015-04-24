@@ -8,7 +8,12 @@ RSpec.describe Conclusion, type: :model do
 
   describe "user_answered_correctly?" do
       
+    let!(:conclusion){FactoryGirl.create(:conclusion)}
+      
     describe "when user answers wrong" do
+
+      let!(:user){FactoryGirl.create(:user)}
+
 
       it "returns false" do
         expect(0).to eq (0)

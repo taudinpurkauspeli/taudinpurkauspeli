@@ -85,6 +85,13 @@ FactoryGirl.define do
     question "Tykkääkö koira nappuloista?"
   end
 
+  factory :conclusion do
+    subtask_id nil
+    exercise_hypothesis_id nil
+    title "Päätös"
+    content "Sisältö"
+  end
+
   factory :radiobutton, class: Multichoice do
     subtask_id nil
     question "Kenelle pitää soittaa?"
