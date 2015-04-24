@@ -1,3 +1,8 @@
+/**
+*   Listerners for rompvable blocks
+*
+*
+*/
 function setRemovables(){
 	$(".removable").click(function(){
 		$(this).fadeOut(50);
@@ -32,3 +37,12 @@ function CKupdate(){
         CKEDITOR.instances[instance].updateElement();
     }
 }
+
+/**
+*   Popovers for help buttons
+*
+*
+*/
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
