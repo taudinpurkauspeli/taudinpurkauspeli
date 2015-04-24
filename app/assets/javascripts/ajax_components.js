@@ -137,7 +137,7 @@ function loadView(url, elementSelector, callback, ajaxloader){
  *
  */
 function fullUrlWithoutLayout(path){
-    if(path.indexOf("http:") > -1 && path.indexOf("?layout=false") > -1){
+    if((path.indexOf("http:") > -1 || path.indexOf("https:") > -1) && path.indexOf("?layout=false") > -1){
         return path;
     }
     if(path.charAt(0) == "/"){
