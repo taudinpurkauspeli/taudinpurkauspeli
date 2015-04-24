@@ -223,6 +223,8 @@ describe "New Task page", js:true do
           end
 
           it "should be able to change the right option" do
+            page.find("#collapse-option-link2").trigger('click')
+            wait_for_ajax
             select('Pakollinen', from:'is_correct_answer_2')
             click_and_wait('save_2')
 
