@@ -88,8 +88,8 @@ FactoryGirl.define do
   factory :conclusion do
     subtask_id nil
     exercise_hypothesis_id nil
-    title "Päätös"
-    content "Sisältö"
+    title "Viimekysymys"
+    content "Valitse tästä oikea diagnoosi"
   end
 
   factory :radiobutton, class: Multichoice do
@@ -114,12 +114,6 @@ FactoryGirl.define do
 
   factory :question_group do
     title "Lehmätaudit"
-  end
-
-  factory :conclusion do
-    subtask_id nil
-    title "Viimekysymys"
-    content "Valitse tästä oikea diagnoosi"
   end
 
   factory :interview do
