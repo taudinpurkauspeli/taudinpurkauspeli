@@ -1,6 +1,15 @@
 <%= render 'messages/messages' %>
+<br />
+<div class = "row">
+  <div class = "col-md-8">
+    <h1>Case: <%= @exercise.name %></h1>
+  </div>
+  <div class = "col-md-4">
+    <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Voit siirtyä suorittamaan toimenpiteitä tai tarkastelemaan työhypoteeseja yläreunan valikosta.">Ohje</a>
+  </div>
+</div>
 
-<h1> Case: <%= @exercise.name %> </h1>
+<!--<h1> Case: <%= @exercise.name %> </h1>-->
 
 <%# Case completed %>
 <% if current_user.has_completed? @exercise %>
@@ -36,4 +45,5 @@
 <script>
     //edit exercise form
     setAjaxSubmits("#anamnesisTab form", "#anamnesisTab", "get");
+    $('[data-toggle="popover"]').popover();
 </script>
