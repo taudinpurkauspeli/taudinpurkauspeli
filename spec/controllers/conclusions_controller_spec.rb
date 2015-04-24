@@ -14,6 +14,10 @@ RSpec.describe ConclusionsController, :type => :controller do
 		{subtask_id: subtask.id, title: "Viimeinen kysymys"}
 	}
 
+	let(:invalid_attributes) {
+		{subtask_id: subtask.id, title: ""}
+	}
+
 	let(:valid_session) { {
 			user_id: user.id, task_id: task.id, exercise_id: exercise.id}
 	}
@@ -47,10 +51,24 @@ RSpec.describe ConclusionsController, :type => :controller do
 				expect(assigns(:conclusion)).to eq(conclusion)
 			end
 		end
+
+		describe "with invalid params" do
+	      it "assigns the conclusion as @conclusion" do
+	        conclusion = Conclusion.create! valid_attributes
+	        put :update, {:id => conclusion.to_param, :conclusion => invalid_attributes}, valid_session
+	        expect(assigns(:conclusion)).to eq(conclusion)
+	      end
+
+	      it "redirects to the 'edit' template" do
+	        conclusion = Conclusion.create! valid_attributes
+	        put :update, {:id => conclusion.to_param, :conclusion => invalid_attributes}, valid_session
+	        expect(response).to redirect_to(edit_conclusion_path(conclusion, :layout => true))
+	      end
+	    end
 	end
 
 	    describe "check_answers" do
-    	let(:conclusion){FactoryGirl.create(:conclusion, subtask:subtask)}
+    #	let(:conclusion){FactoryGirl.create(:conclusion, subtask:subtask)}
 
    #  	it "completes subtask" do
 			# expect {
@@ -68,5 +86,21 @@ RSpec.describe ConclusionsController, :type => :controller do
    #  	end
 
     end
+
+    	describe "DELETE create" do
+		    it "destroys the requested conclusion" do
+		      conclusion = Conclusion.create! valid_attributes
+		      expect {
+		        delete :destroy, {:id => conclusion.to_param}, valid_session
+		      }.to change(Conclusion, :count).by(-1)
+		    end
+
+		    it "redirects to the task list" do
+		      conclusion = Conclusion.create! valid_attributes
+		      delete :destroy, {:id => conclusion.to_param}, valid_session
+		      expect(response).to redirect_to(tasks_url(:layout => true))
+		    end
+
+	end
 
 end
