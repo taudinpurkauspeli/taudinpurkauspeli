@@ -256,7 +256,7 @@ describe "New Task page", js:true do
           describe "should be able to change" do
 
             it "the right option" do
-              page.find("#collapse-option-link2").trigger('click')
+              find_link("collapse-option-link2").trigger('click')
               wait_for_ajax
               select('Pakollinen vaihtoehto', from:'option_is_correct_answer_2')
               find_button('option_save_2').trigger('click')
@@ -268,7 +268,7 @@ describe "New Task page", js:true do
             end
 
             it "the content of an option" do
-              page.find("#collapse-option-link2").trigger('click')
+              find_link("collapse-option-link2").trigger('click')
               wait_for_ajax
               fill_in('option_content_2', with: "Kysy taudeista lisätietoja")
               find_button('option_save_2').trigger('click')
@@ -278,7 +278,7 @@ describe "New Task page", js:true do
             end
 
             it "the explanation of an option" do
-              page.find("#collapse-option-link2").trigger('click')
+              find_link("collapse-option-link2").trigger('click')
               wait_for_ajax
               fill_in_ckeditor 'option_explanation_2', with: 'Taudista pitää kerätä lisätietoja!'
               find_button('option_save_2').trigger('click')
@@ -369,7 +369,7 @@ describe "New Task page", js:true do
 
           describe "should be able to" do
             it "change the required status of a question" do
-              page.find("#collapse-question-link2").trigger('click')
+              find_link("collapse-question-link2").trigger('click')
               wait_for_ajax
               select('Pakollinen kysymys', from:'question_required_2')
               find_button('question_save_2').trigger('click')
@@ -379,7 +379,7 @@ describe "New Task page", js:true do
             end
 
             it "change the content of a question" do
-              page.find("#collapse-question-link2").trigger('click')
+              find_link("collapse-question-link2").trigger('click')
               wait_for_ajax
               fill_in_ckeditor 'question_content_2', with: 'On ollut todella kipeä!'
               find_button('question_save_2').trigger('click')
@@ -389,7 +389,7 @@ describe "New Task page", js:true do
             end
 
             it "change the title of a question" do
-              page.find("#collapse-question-link2").trigger('click')
+              find_link("collapse-question-link2").trigger('click')
               wait_for_ajax
               fill_in('question_title_2', with: "Miten eläin on voinut")
               find_button('question_save_2').trigger('click')
@@ -399,7 +399,7 @@ describe "New Task page", js:true do
             end
 
             it "add question group to a question" do
-              page.find("#collapse-question-link2").trigger('click')
+              find_link("collapse-question-link2").trigger('click')
               wait_for_ajax
               fill_in('question_question_group_attributes_title_2', with: "Eläinkysymys")
               find_button('question_save_2').trigger('click')
@@ -412,7 +412,7 @@ describe "New Task page", js:true do
             end
 
             it "add same question group to many questions" do
-              page.find("#collapse-question-link2").trigger('click')
+              find_link("collapse-question-link2").trigger('click')
               wait_for_ajax
               fill_in('question_question_group_attributes_title_2', with: "Lehmätaudit")
               find_button('question_save_2').trigger('click')
@@ -425,7 +425,7 @@ describe "New Task page", js:true do
             end
 
             it "remove question group from a question" do
-              page.find("#collapse-question-link4").trigger('click')
+              find_link("collapse-question-link4").trigger('click')
               wait_for_ajax
               fill_in('question_question_group_attributes_title_4', with: "")
               find_button('question_save_4').trigger('click')
