@@ -11,7 +11,7 @@ describe "New Task page", js:true do
       visit root_path
       wait_for_ajax
       visit root_path
-      wait_and_trigger_click(exercise.name)
+      click_and_wait(exercise.name)
       wait_and_trigger_click('Toimenpiteet')
       click_and_wait('+ Luo uusi toimenpide')
     end
