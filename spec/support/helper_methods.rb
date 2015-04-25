@@ -5,7 +5,6 @@ module HelperMethods
     fill_in('username', with:credentials[:username])
     fill_in('password', with:credentials[:password])
     click_button('Kirjaudu sisään')
-    wait_for_ajax
   end
 
   def number_of_ex_tasks
