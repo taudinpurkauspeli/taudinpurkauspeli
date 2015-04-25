@@ -354,9 +354,11 @@ describe "New Task page", js:true do
         end
 
         describe "with questions" do
+          let!(:question_group){FactoryGirl.create(:question_group)}
           let!(:question1){FactoryGirl.create(:question, interview_id: 1, title: "Sääolosuhteet", required: "wrong", content: "Sää oli normaali")}
           let!(:question2){FactoryGirl.create(:question, interview_id: 1, title: "Laidunolosuhteet", required: "allowed", content: "Laidun on puhdas")}
           let!(:question3){FactoryGirl.create(:question, interview_id: 1, title: "Karsinaolosuhteet", content: "Siivoton karsina")}
+          let!(:question4){FactoryGirl.create(:question, interview_id: 1, title: "Karsinaolosuhteet", content: "Siivoton karsina", question_group_id: 1)}
 
           before :each do
             click_and_wait("Toimenpiteet")
@@ -364,8 +366,8 @@ describe "New Task page", js:true do
             click_and_wait("Pohdinta: Kysymyksiä asiakkaalle")
           end
 
-          describe "should be able to change" do
-            it "the required status of a question" do
+          describe "should be able to" do
+            it "change the required status of a question" do
               page.find("#collapse-question-link2").trigger('click')
               wait_for_ajax
               select('Pakollinen kysymys', from:'question_required_2')
@@ -375,7 +377,7 @@ describe "New Task page", js:true do
               expect(Question.find(2).required).to eq("required")
             end
 
-            it "the content of a question" do
+            it "change the content of a question" do
               page.find("#collapse-question-link2").trigger('click')
               wait_for_ajax
               fill_in_ckeditor 'question_content_2', with: 'On ollut todella kipeä!'
@@ -385,7 +387,7 @@ describe "New Task page", js:true do
               expect(Question.find(2).content).to eq("<p>On ollut todella kipe&auml;!</p>\r\n")
             end
 
-            it "the title of a question" do
+            it "change the title of a question" do
               page.find("#collapse-question-link2").trigger('click')
               wait_for_ajax
               fill_in('question_title_2', with: "Miten eläin on voinut")
@@ -393,6 +395,44 @@ describe "New Task page", js:true do
               wait_for_ajax
 
               expect(Question.find(2).title).to eq("Miten eläin on voinut")
+            end
+
+            it "add question group to a question" do
+              page.find("#collapse-question-link2").trigger('click')
+              wait_for_ajax
+              fill_in('question_question_group_attributes_title_2', with: "Eläinkysymys")
+              find_button('question_save_2').trigger('click')
+              wait_for_ajax
+
+              expect(QuestionGroup.count).to eq(2)
+              expect(QuestionGroup.last.questions.count).to eq(1)
+              expect(QuestionGroup.last.questions.first.title).to eq("Laidunolosuhteet")
+              expect(Question.find(2).question_group.title).to eq("Eläinkysymys")
+            end
+
+            it "add same question group to many questions" do
+              page.find("#collapse-question-link2").trigger('click')
+              wait_for_ajax
+              fill_in('question_question_group_attributes_title_2', with: "Lehmätaudit")
+              find_button('question_save_2').trigger('click')
+              wait_for_ajax
+
+              expect(QuestionGroup.count).to eq(1)
+              expect(QuestionGroup.last.questions.count).to eq(2)
+              expect(QuestionGroup.last.questions.last.title).to eq("Laidunolosuhteet")
+              expect(Question.find(2).question_group.title).to eq("Lehmätaudit")
+            end
+
+            it "remove question group from a question" do
+              page.find("#collapse-question-link4").trigger('click')
+              wait_for_ajax
+              fill_in('question_question_group_attributes_title_4', with: "")
+              find_button('question_save_4').trigger('click')
+              wait_for_ajax
+
+              expect(QuestionGroup.count).to eq(0)
+              expect(QuestionGroup.find_by(title: "Lehmätaudit")).to eq(nil)
+              expect(Question.find(4).question_group).to eq(nil)
             end
           end
 
