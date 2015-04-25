@@ -8,9 +8,8 @@ describe "New Task page", js:true do
 
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
-      find_button(exercise.name).trigger('click')
-      wait_for_ajax
-      click_and_wait('Toimenpiteet')
+      wait_and_trigger_click(exercise.name)
+      wait_and_trigger_click('Toimenpiteet')
       click_and_wait('+ Luo uusi toimenpide')
     end
 
@@ -40,7 +39,6 @@ describe "New Task page", js:true do
         fill_in('task_name', with: "Soita asiakkaalle")
         click_and_wait('Tallenna')
       end
-
 
       it "should not be able to edit task without a name" do
         fill_in('task_name', with: "")
@@ -248,19 +246,19 @@ describe "New Task page", js:true do
           let!(:option3){FactoryGirl.create(:option, multichoice_id: 1, content: "Kurkkulääke", explanation: "Oikea vastaus")}
 
           before :each do
-            click_and_wait("Toimenpiteet")
-            click_and_wait("Soita asiakkaalle")
-            click_and_wait("Radio button: Onko tauti epidemia?")
+            wait_and_trigger_click("Toimenpiteet")
+            wait_and_trigger_click("Soita asiakkaalle")
+            wait_and_trigger_click("Radio button: Onko tauti epidemia?")
           end
 
           describe "should be able to change" do
 
             it "the right option" do
-              find_link("collapse-option-link2").trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click("collapse-option-link2")
+
               select('Pakollinen vaihtoehto', from:'option_is_correct_answer_2')
-              find_button('option_save_2').trigger('click')
-              wait_for_ajax
+              page.save_screenshot('~/Ohtupro/taudinpurkauspeli/kuva.png')
+              wait_and_trigger_click('option_save_2')
 
               expect(Option.find(1).is_correct_answer).to eq("wrong")
               expect(Option.find(2).is_correct_answer).to eq("required")
@@ -268,21 +266,18 @@ describe "New Task page", js:true do
             end
 
             it "the content of an option" do
-              find_link("collapse-option-link2").trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click("collapse-option-link2")
+
               fill_in('option_content_2', with: "Kysy taudeista lisätietoja")
-              find_button('option_save_2').trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click('option_save_2')
 
               expect(Option.find(2).content).to eq("Kysy taudeista lisätietoja")
             end
 
             it "the explanation of an option" do
-              find_link("collapse-option-link2").trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click("collapse-option-link2")
               fill_in_ckeditor 'option_explanation_2', with: 'Taudista pitää kerätä lisätietoja!'
-              find_button('option_save_2').trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click('option_save_2')
 
               expect(Option.find(2).explanation).to eq("<p>Taudista pit&auml;&auml; ker&auml;t&auml; lis&auml;tietoja!</p>\r\n")
             end
@@ -362,48 +357,40 @@ describe "New Task page", js:true do
           let!(:question4){FactoryGirl.create(:question, interview_id: 1, title: "Ulko-olosuhteet", content: "Likainen laidun", question_group_id: 1)}
 
           before :each do
-            click_and_wait("Toimenpiteet")
-            click_and_wait("Soita asiakkaalle")
-            click_and_wait("Pohdinta: Kysymyksiä asiakkaalle")
+            wait_and_trigger_click("Toimenpiteet")
+            wait_and_trigger_click("Soita asiakkaalle")
+            wait_and_trigger_click("Pohdinta: Kysymyksiä asiakkaalle")
           end
 
           describe "should be able to" do
             it "change the required status of a question" do
-              find_link("collapse-question-link2").trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click("collapse-question-link2")
               select('Pakollinen kysymys', from:'question_required_2')
-              find_button('question_save_2').trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click('question_save_2')
 
               expect(Question.find(2).required).to eq("required")
             end
 
             it "change the content of a question" do
-              find_link("collapse-question-link2").trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click("collapse-question-link2")
               fill_in_ckeditor 'question_content_2', with: 'On ollut todella kipeä!'
-              find_button('question_save_2').trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click('question_save_2')
 
               expect(Question.find(2).content).to eq("<p>On ollut todella kipe&auml;!</p>\r\n")
             end
 
             it "change the title of a question" do
-              find_link("collapse-question-link2").trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click("collapse-question-link2")
               fill_in('question_title_2', with: "Miten eläin on voinut")
-              find_button('question_save_2').trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click('question_save_2')
 
               expect(Question.find(2).title).to eq("Miten eläin on voinut")
             end
 
             it "add question group to a question" do
-              find_link("collapse-question-link2").trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click("collapse-question-link2")
               fill_in('question_question_group_attributes_title_2', with: "Eläinkysymys")
-              find_button('question_save_2').trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click('question_save_2')
 
               expect(QuestionGroup.count).to eq(2)
               expect(QuestionGroup.last.questions.count).to eq(1)
@@ -412,11 +399,9 @@ describe "New Task page", js:true do
             end
 
             it "add same question group to many questions" do
-              find_link("collapse-question-link2").trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click("collapse-question-link2")
               fill_in('question_question_group_attributes_title_2', with: "Lehmätaudit")
-              find_button('question_save_2').trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click('question_save_2')
 
               expect(QuestionGroup.count).to eq(1)
               expect(QuestionGroup.last.questions.count).to eq(2)
@@ -425,11 +410,9 @@ describe "New Task page", js:true do
             end
 
             it "remove question group from a question" do
-              find_link("collapse-question-link4").trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click("collapse-question-link4")
               fill_in('question_question_group_attributes_title_4', with: "")
-              find_button('question_save_4').trigger('click')
-              wait_for_ajax
+              wait_and_trigger_click('question_save_4')
 
               expect(QuestionGroup.count).to eq(0)
               expect(QuestionGroup.find_by(title: "Lehmätaudit")).to eq(nil)
@@ -438,6 +421,7 @@ describe "New Task page", js:true do
           end
 
         end
+
       end
     end
   end
