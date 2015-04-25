@@ -1,6 +1,14 @@
 <%= render 'messages/messages' %>
+<br />
+<div class = "row">
+  <div class = "col-md-8">
+    <h1>Taudinpurkauspeli</h1>
+  </div>
+  <div class = "col-md-4">
+    <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Valitse haluamasi taudinpurkauspeli hiirellä klikkaamalla. Viereisessä palkissa näkyy edistymisesi kyseisessä taudinpurkauspelissä. Oikean yläreunan linkistä pääset muokkaamaan omia tietojasi.">Ohje</a>
+  </div>
+</div>
 
-<h1>Taudinpurkauspeli</h1>
 <%@exercises.each do |exercise| %>
   <div class="row">
  
