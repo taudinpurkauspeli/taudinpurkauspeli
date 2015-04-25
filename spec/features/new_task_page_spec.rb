@@ -10,7 +10,9 @@ describe "New Task page", js:true do
       sign_in(username:"Testipoika", password:"Salainen1")
       visit root_path
       wait_for_ajax
+      expect(page).to have_button('Lihanautakuolemat')
       click_and_wait(exercise.name)
+      expect(page).to have_content('Lihanautakuolemat')
       wait_and_trigger_click('Toimenpiteet')
       click_and_wait('+ Luo uusi toimenpide')
     end
@@ -259,7 +261,6 @@ describe "New Task page", js:true do
               wait_and_trigger_click("collapse-option-link2")
 
               select('Pakollinen vaihtoehto', from:'option_is_correct_answer_2')
-              page.save_screenshot('~/Ohtupro/taudinpurkauspeli/kuva.png')
               wait_and_trigger_click('option_save_2')
 
               expect(Option.find(1).is_correct_answer).to eq("wrong")
