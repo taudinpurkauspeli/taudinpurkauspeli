@@ -10,7 +10,6 @@ describe "New Task page", js:true do
       sign_in(username:"Testipoika", password:"Salainen1")
       visit root_path
       wait_for_ajax
-      visit root_path
       click_and_wait(exercise.name)
       wait_and_trigger_click('Toimenpiteet')
       click_and_wait('+ Luo uusi toimenpide')
