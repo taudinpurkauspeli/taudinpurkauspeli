@@ -96,5 +96,5 @@ Scenario: Teacher can create a task with interview and questions
     When I go to the interview edit page
     And I fill in question title and content
     And I press the button "Tallenna"
-    # page should show the new question title
+    And page should show the new question title
     And question should be in the database

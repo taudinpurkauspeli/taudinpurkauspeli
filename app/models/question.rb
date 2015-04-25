@@ -23,21 +23,27 @@ class Question < ActiveRecord::Base
 
 		if question_group_attributes['title'].blank?
 
-			old_question_group = self.question_group
+			return handle_empty_group
 
-			self.question_group = nil
+		elsif _question_group = QuestionGroup.find_by(title:question_group_attributes['title'])
 
-			if !old_question_group.nil? && old_question_group.questions.count == 1
-				old_question_group.destroy
-			end
-			return true
-		end
-
-		if _question_group = QuestionGroup.find_by(title:question_group_attributes['title'])
 			self.question_group = _question_group
 			return true
+
 		end
 		return false
+	end
+
+	def handle_empty_group
+
+		old_question_group = self.question_group
+		self.question_group = nil
+
+		if !old_question_group.nil? && old_question_group.questions.count == 1
+			old_question_group.destroy
+		end
+		return true
+
 	end
 
 end

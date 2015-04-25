@@ -101,8 +101,7 @@ Then(/^page should show the new interview title$/) do
 end
 
 Then(/^page should show the new question title$/) do
-  save_and_open_page
-  expect(page).to have_selector("input[value='Lisätietoa puhelimella']")
+  expect(page).to have_content("Vastausvaihtoehto: Onko hygieniasta huolehdittu")
 end
 
 Then(/^multichoice should be in the database$/) do
@@ -122,7 +121,7 @@ Then(/^interview should be in the database$/) do
 end
 
 Then(/^question should be in the database$/) do
-  expect(Question.count).to eq(1)
+  expect(Question.count).to eq(5)
   expect(Question.last.title).to eq('Onko hygieniasta huolehdittu')
   end
 

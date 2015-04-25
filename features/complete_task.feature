@@ -91,4 +91,36 @@ Feature: Complete task feature
     And I don't choose any option
     Then the task cannot be completed by clicking the button "Tarkista"
     And I should see the message "Valinnoissa oli vielä virheitä!"
- 
+
+  Scenario: Student can complete an interview task from a task list
+    Given I have logged in as a student
+    And some interview tasks have been added to case
+    When I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
+    And I choose an interview task "Lääkitse hevonen"
+    And I ask the required questions
+    Then the task can be completed by clicking the button "Jatka"
+
+  Scenario: Student can complete an interview task with allowed questions asked
+    Given I have logged in as a student
+    And some interview tasks have been added to case
+    When I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
+    And I choose an interview task "Lääkitse hevonen"
+    And I ask the required and some allowed questions
+    Then the task can be completed by clicking the button "Jatka"
+
+  Scenario: Student can complete an interview task with wrong questions asked
+    Given I have logged in as a student
+    And some interview tasks have been added to case
+    When I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
+    And I choose an interview task "Lääkitse hevonen"
+    And I ask the required and some wrong questions
+    Then the task can be completed by clicking the button "Jatka"
+
+  Scenario: Student cannot complete an interview task no questions asked
+    Given I have logged in as a student
+    And some interview tasks have been added to case
+    When I visit the "Toimenpiteet" page of the case "Lihanautakuolemat"
+    And I choose an interview task "Lääkitse hevonen"
+    And I don't ask any questions
+    Then the task cannot be completed by clicking the button "Jatka"
+    And I should see the message "Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!"

@@ -22,6 +22,12 @@ Given(/^some radiobutton tasks have been added to case$/) do
   create_exercises
   create_tasks
   create_radiobuttons
+  end
+
+Given(/^some interview tasks have been added to case$/) do
+  create_exercises
+  create_tasks
+  create_interviews
 end
 
 When(/^I choose a text task "(.*?)"$/) do |arg1|
@@ -33,6 +39,10 @@ When(/^I choose a multichoice task "(.*?)"$/) do |arg1|
 end
 
 When(/^I choose a radiobutton task "(.*?)"$/) do |arg1|
+  click_and_wait(arg1)
+end
+
+When(/^I choose an interview task "(.*?)"$/) do |arg1|
   click_and_wait(arg1)
 end
 
@@ -74,6 +84,26 @@ end
 When(/^I don't check all right options$/) do
   check 'checked_options_3'
   check 'checked_options_4'
+end
+
+When(/^I ask the required questions$/) do
+  click_and_wait('ask_question_1')
+  click_and_wait('ask_question_3')
+end
+
+When(/^I ask the required and some allowed questions$/) do
+  click_and_wait('ask_question_1')
+  click_and_wait('ask_question_3')
+  click_and_wait('ask_question_4')
+end
+
+When(/^I ask the required and some wrong questions$/) do
+  click_and_wait('ask_question_1')
+  click_and_wait('ask_question_3')
+  click_and_wait('ask_question_2')
+end
+
+When(/^I don't ask any questions$/) do
 end
 
 

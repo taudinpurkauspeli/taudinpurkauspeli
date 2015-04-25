@@ -55,6 +55,13 @@ module CucumberHelpers
   def create_interviews
     FactoryGirl.create(:subtask, task_id:3)
     FactoryGirl.create(:interview, subtask_id:1, title:"Haastattelu")
+
+    FactoryGirl.create(:subtask, task_id: 4)
+    FactoryGirl.create(:interview, subtask_id: 2, title:"Mitä kysyt asiakkaalta?")
+    FactoryGirl.create(:question, interview_id: 2, title: "Sääolosuhteet", content: "Paljon ukkosta")
+    FactoryGirl.create(:question, interview_id: 2, title: "Sisäolosuhteet", required: "wrong", content: "Kaikki hyvin")
+    FactoryGirl.create(:question, interview_id: 2, title: "Ulko-olosuhteet", content: "Epämääräistä")
+    FactoryGirl.create(:question, interview_id: 2, title: "Karsinaolosuhteet", required: "allowed", content: "Lattia puhdas")
   end
 
   def create_all_hypotheses_for_case

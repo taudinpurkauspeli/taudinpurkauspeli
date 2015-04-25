@@ -8,8 +8,8 @@ describe "New Task page", js:true do
 
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
-      visit root_path
-      click_and_wait(exercise.name)
+      find_button(exercise.name).trigger('click')
+      wait_for_ajax
       click_and_wait('Toimenpiteet')
       click_and_wait('+ Luo uusi toimenpide')
     end
@@ -322,6 +322,7 @@ describe "New Task page", js:true do
 
             expect(page).to have_content 'Kysymysvaihtoehto lisättiin onnistuneesti'
 
+            expect(QuestionGroup.count).to eq(0)
             expect(Interview.first.questions.first.title).to eq('Onko eläin ollut kipeä?')
             expect(Interview.first.questions.first.content).to eq("<p>On ollut kipe&auml;.</p>\r\n")
             expect(Interview.first.questions.first.required).to eq("required")
@@ -358,7 +359,7 @@ describe "New Task page", js:true do
           let!(:question1){FactoryGirl.create(:question, interview_id: 1, title: "Sääolosuhteet", required: "wrong", content: "Sää oli normaali")}
           let!(:question2){FactoryGirl.create(:question, interview_id: 1, title: "Laidunolosuhteet", required: "allowed", content: "Laidun on puhdas")}
           let!(:question3){FactoryGirl.create(:question, interview_id: 1, title: "Karsinaolosuhteet", content: "Siivoton karsina")}
-          let!(:question4){FactoryGirl.create(:question, interview_id: 1, title: "Karsinaolosuhteet", content: "Siivoton karsina", question_group_id: 1)}
+          let!(:question4){FactoryGirl.create(:question, interview_id: 1, title: "Ulko-olosuhteet", content: "Likainen laidun", question_group_id: 1)}
 
           before :each do
             click_and_wait("Toimenpiteet")
@@ -419,7 +420,7 @@ describe "New Task page", js:true do
 
               expect(QuestionGroup.count).to eq(1)
               expect(QuestionGroup.last.questions.count).to eq(2)
-              expect(QuestionGroup.last.questions.last.title).to eq("Laidunolosuhteet")
+              expect(QuestionGroup.last.questions.first.title).to eq("Laidunolosuhteet")
               expect(Question.find(2).question_group.title).to eq("Lehmätaudit")
             end
 
