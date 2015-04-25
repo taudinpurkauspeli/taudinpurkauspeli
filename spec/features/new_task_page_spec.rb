@@ -8,6 +8,7 @@ describe "New Task page", js:true do
 
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
+      visit root_path
       click_and_wait(exercise.name)
       click_and_wait('Toimenpiteet')
       click_and_wait('+ Luo uusi toimenpide')
@@ -32,12 +33,14 @@ describe "New Task page", js:true do
       expect(number_of_ex_tasks).to eq(0)
     end
 
+
     describe "when a task exists" do
 
       before :each do
         fill_in('task_name', with: "Soita asiakkaalle")
         click_and_wait('Tallenna')
       end
+
 
       it "should not be able to edit task without a name" do
         fill_in('task_name', with: "")
@@ -296,14 +299,49 @@ describe "New Task page", js:true do
           expect(page).to have_content 'Pohdintatehtävän muokkaus'
         end
 
-        it "should be able to update the title of an interview" do
+        describe "should be able to" do
 
-          fill_in('interview_title', with: "Paljon kysymyksiä asiakkaalle")
+          it "update the title of an interview" do
 
-          click_and_wait('Päivitä')
+            fill_in('interview_title', with: "Paljon kysymyksiä asiakkaalle")
 
-          expect(page).to have_content 'Pohdinta päivitettiin onnistuneesti!'
-          expect(Task.where(level:1...999).first.interviews.first.title).to eq("Paljon kysymyksiä asiakkaalle")
+            click_and_wait('Päivitä')
+
+            expect(page).to have_content 'Pohdinta päivitettiin onnistuneesti!'
+            expect(Task.where(level:1...999).first.interviews.first.title).to eq("Paljon kysymyksiä asiakkaalle")
+          end
+
+          it "add question without a question group to an interview" do
+            fill_in('question_title', with: "Onko eläin ollut kipeä?")
+            fill_in_ckeditor 'question_content', with: 'On ollut kipeä.'
+            select('Pakollinen kysymys', from:'question[required]')
+
+            expect{
+              click_and_wait('Tallenna')
+            }.to change(Question, :count).by(1)
+
+            expect(page).to have_content 'Kysymysvaihtoehto lisättiin onnistuneesti'
+
+            expect(Interview.first.questions.first.title).to eq('Onko eläin ollut kipeä?')
+            expect(Interview.first.questions.first.content).to eq("<p>On ollut kipe&auml;.</p>\r\n")
+            expect(Interview.first.questions.first.required).to eq("required")
+          end
+
+          it "add question with a question group to an interview" do
+            fill_in('question_title', with: "Onko eläin ollut kipeä?")
+            fill_in_ckeditor 'question_content', with: 'On ollut kipeä.'
+            select('Pakollinen kysymys', from:'question[required]')
+            fill_in('question_question_group_attributes_title', with: "Eläinkysymys")
+
+            expect{
+              click_and_wait('Tallenna')
+            }.to change(Question, :count).by(1)
+
+            expect(QuestionGroup.count).to eq(1)
+            expect(page).to have_content 'Kysymysvaihtoehto lisättiin onnistuneesti'
+
+            expect(Interview.first.questions.first.question_group.title).to eq("Eläinkysymys")
+          end
         end
 
         it "should not be able to update interview to have no title" do
@@ -313,22 +351,6 @@ describe "New Task page", js:true do
 
           expect(page).to have_content 'Pohdinnan päivitys epäonnistui!'
           expect(Task.where(level:1...999).first.interviews.first.title).to eq("Kysymyksiä asiakkaalle")
-        end
-
-        it "should be able to add question without a question group to an interview" do
-          fill_in('question_title', with: "Onko eläin ollut kipeä?")
-          fill_in_ckeditor 'question_content', with: 'On ollut kipeä.'
-          select('Pakollinen kysymys', from:'question[required]')
-
-          expect{
-            click_and_wait('Tallenna')
-          }.to change(Question, :count).by(1)
-
-          expect(page).to have_content 'Kysymysvaihtoehto lisättiin onnistuneesti'
-
-          expect(Interview.first.questions.first.title).to eq('Onko eläin ollut kipeä?')
-          expect(Interview.first.questions.first.content).to eq("<p>On ollut kipe&auml;.</p>\r\n")
-          expect(Interview.first.questions.first.required).to eq("required")
         end
 
         describe "with questions" do
