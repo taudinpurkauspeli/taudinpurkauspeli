@@ -22,6 +22,7 @@
           <%= 'Toimenpiteelle ei ole vielä lisätty alakohtia.' if @task.subtasks.empty? %>
           <% @task.subtasks.each do |subtask| %>
             <%= button_to sanitize(subtask.to_s), edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise btn-subtask multiline width100', :form_class => "form-subtask", :method => :get %>
+            <%= button_to "Poista", subtask, :class => 'btn btn-default btn-exercise btn-del multiline width100', :form_class => "form-subtask-del", :method => :delete, data: { confirm: 'Haluatko varmasti poistaa alakohdan?' } %>
           <% end %>
         </div>
       </div>
@@ -56,4 +57,5 @@
     });
     setAjaxSubmits("#currentTaskTab .form-subtask", "#currentTaskTab", "get");
     setAjaxSubmits("#currentTaskTab .form-show-task", "#currentTaskTab", "get");
+    setAjaxSubmits("#currentTaskTab .form-subtask-del", "#currentTaskTab", "post");
 </script>
