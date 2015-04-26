@@ -338,6 +338,9 @@ li.active>a{
 .collapse-answer-right{
   background-color: $PaleLightGreen;
 }
+.collapse-answer-wrong{
+  background-color: $PaleLightRed;
+}
 
 //*********************
 //*   Progress bars   *
