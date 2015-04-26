@@ -20,10 +20,18 @@
           <%= render 'task_name_form' %>
           <br>
           <%= 'Toimenpiteelle ei ole vielä lisätty alakohtia.' if @task.subtasks.empty? %>
-          <% @task.subtasks.each do |subtask| %>
-            <%= button_to sanitize(subtask.to_s), edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise btn-subtask multiline width100', :form_class => "form-subtask", :method => :get %>
-            <%= button_to "Poista", subtask, :class => 'btn btn-default btn-exercise btn-del multiline width100', :form_class => "form-subtask-del", :method => :delete, data: { confirm: 'Haluatko varmasti poistaa alakohdan?' } %>
-          <% end %>
+          <table class="width100">
+            <% @task.subtasks.each do |subtask| %>
+              <tr>
+                <td class="width100">
+                  <%= button_to sanitize(subtask.to_s), edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise btn-subtask multiline width100', :form_class => "form-subtask", :method => :get %>
+                </td>
+                <td style="padding-left: 10px;">
+                  <%= button_to "Poista", subtask, :class => 'btn btn-default btn-exercise btn-del multiline widthAuto', :form_class => "form-subtask-del", :method => :delete, data: { confirm: 'Haluatko varmasti poistaa alakohdan?' } %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
         </div>
       </div>
     </div>
