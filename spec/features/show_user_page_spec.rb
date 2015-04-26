@@ -35,11 +35,46 @@ describe "User show page", js:true do
         expect(page).to have_content student.starting_year
       end
 
-      describe "edit" do
+      describe "change" do
         before :each do
           click_button 'Muokkaa tietoja'
         end
 
+        it "password" do
+          fill_in 'user_password', with: 'Salaisuus'
+          fill_in 'user_password_confirmation', with: 'Salaisuus'
+          click_button 'Päivitä salasana'
+          expect(page).to have_content 'Käyttäjän tiedot päivitetty'
+
+          updated_student = User.where(username:"Opiskelija").first
+          expect(updated_student.realname).to eq(student.realname)
+          expect(updated_student.username).to eq(student.username)
+          expect(updated_student.email).to eq(student.email)
+          expect(updated_student.student_number).to eq(student.student_number)
+          expect(updated_student.starting_year).to eq(student.starting_year)
+
+          click_button 'Kirjaudu ulos'
+          sign_in(username:"Opiskelija", password:"Salaisuus")
+          expect(page).to have_content 'Tervetuloa takaisin!'
+        end
+
+        it "other information without changing password" do
+          fill_in 'user_realname', with: 'Uusi hassu nimi'
+          fill_in 'user_email', with: 'uusi@nimi.com'
+          click_button 'Päivitä'
+          expect(page).to have_content 'Käyttäjän tiedot päivitetty'
+
+          updated_student = User.where(username:"Opiskelija").first
+          expect(updated_student.realname).to eq('Uusi hassu nimi')
+          expect(updated_student.username).to eq(student.username)
+          expect(updated_student.email).to eq('uusi@nimi.com')
+          expect(updated_student.student_number).to eq(student.student_number)
+          expect(updated_student.starting_year).to eq(student.starting_year)
+
+          click_button 'Kirjaudu ulos'
+          sign_in(username:"Opiskelija", password:"Salainen1")
+          expect(page).to have_content 'Tervetuloa takaisin!'
+        end
 
       end
 
@@ -68,6 +103,13 @@ describe "User show page", js:true do
         visit user_path(student2)
         expect(current_path).to eq(exercises_path)
         expect(page).to have_content('Pääsy toisen käyttäjän tietoihin estetty!')
+      end
+
+      it "other information without changing password" do
+        click_button 'Muokkaa tietoja'
+        fill_in 'user_realname', with: ''
+        click_button 'Päivitä'
+        expect(page).to have_content 'Seuraavat virheet estivät tallennuksen:'
       end
     end
   end

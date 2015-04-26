@@ -114,15 +114,6 @@ describe "Users page", js:true do
             expect(page).to have_content student3.realname
             expect(page).not_to have_content student2.realname
           end
-
-          it "view users of specific starting year and exercise" do
-            select 2000, from: 'starting_year'
-            select 'Lihanautakuolemat', from: 'exercise'
-            expect(page).to have_content student.realname
-            expect(page).not_to have_content student3.realname
-            expect(page).not_to have_content student2.realname
-          end
-
         end
       end
     end
