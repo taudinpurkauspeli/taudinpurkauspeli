@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
       @exercises = Exercise.all
-      @users = User.where("admin = ?", false)
+      @users = User.where(admin:false)
 
       #list type
       if params[:list_type].nil? || params[:list_type] == "0"
@@ -21,13 +21,12 @@ class UsersController < ApplicationController
         @list_type = 1
       end
 
-
       #exercise
       if params[:exercise].nil? || params[:exercise] == "0"
         @shown_exercises = @exercises
         @selected_exercise_id = "0"
       else
-        @shown_exercises  = Exercise.where("id = ?", params[:exercise])
+        @shown_exercises  = Exercise.where(id:params[:exercise])
         @selected_exercise_id = params[:exercise]
       end
 
@@ -36,7 +35,7 @@ class UsersController < ApplicationController
         @shown_users = @users
         @selected_starting_year = "0"
       else
-        @shown_users  = User.where("starting_year = ? and admin = ?", params[:starting_year].to_i, false)
+        @shown_users  = User.where(starting_year:params[:starting_year].to_i).where(admin:false)
         @selected_starting_year = params[:starting_year]
       end
   end
@@ -44,7 +43,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-      @exercises = Exercise.all
+      @exercises = @user.started_exercises.where(hidden: false).distinct
   end
 
   # GET /users/new
