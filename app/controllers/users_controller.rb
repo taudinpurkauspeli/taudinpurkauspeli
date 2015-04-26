@@ -93,9 +93,15 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     unless @user.nil?
+
       @user.destroy
+      session[:user_id] = nil
+      session[:exercise_id] = nil
+      session[:task_id] = nil
+      session[:exhyp_id] = nil
+
       respond_to do |format|
-        format.html { redirect_to users_url, notice: 'Käyttäjä poistettu.' }
+        format.html { redirect_to :root, notice: 'Käyttäjä poistettu.' }
         format.json { head :no_content }
       end
     end
