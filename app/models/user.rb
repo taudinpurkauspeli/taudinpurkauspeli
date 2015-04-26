@@ -25,11 +25,9 @@ class User < ActiveRecord::Base
   def has_completed?(completable_object)
     if completable_object.class == Subtask
       return !(subtasks.find_by id:completable_object.id).nil?
-    end
-    if completable_object.class == Task
+    elsif completable_object.class == Task
       return !(tasks.find_by id:completable_object.id).nil?
-    end
-    if completable_object.class == Exercise
+    elsif completable_object.class == Exercise
       return !(exercises.find_by id:completable_object.id).nil?
     end
   end
@@ -102,7 +100,7 @@ class User < ActiveRecord::Base
       end
     end
   end
-  
+
   def has_asked_question?(question)
     return !asked_questions.find_by(question:question).nil?
   end
