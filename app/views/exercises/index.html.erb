@@ -4,9 +4,21 @@
   <div class = "col-md-8">
     <h1>Taudinpurkauspeli</h1>
   </div>
-  <div class = "col-md-4">
-    <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Valitse haluamasi taudinpurkauspeli hiirellä klikkaamalla. Viereisessä palkissa näkyy edistymisesi kyseisessä taudinpurkauspelissä. Oikean yläreunan linkistä pääset muokkaamaan omia tietojasi.">Ohje</a>
-  </div>
+  <%if current_user.nil? %>
+      <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Kirjaudu sisään tai luo uusi käyttäjätunnus pelataksesi peliä.">Ohje</a>
+      </div>
+  <% else %>
+      <% if current_user.try(:admin) %>
+          <div class = "col-md-4">
+            <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Voit hiirellä klikkaamalla siirtyä muokkaamaan vanhaa casea tai luoda uuden casen. Opiskelijoiden seurantaan pääsee sivun alareunan napista hiirellä klikkaamalla. Kopio nappi kopio koko vanhan casen uuden pohjaksi.">Ohje</a>
+          </div>
+      <% else %>
+          <div class = "col-md-4">
+            <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Valitse haluamasi taudinpurkauspeli hiirellä klikkaamalla. Viereisessä palkissa näkyy edistymisesi kyseisessä taudinpurkauspelissä. Oikean yläreunan linkistä pääset muokkaamaan omia tietojasi.">Ohje</a>
+          </div>
+      <% end %>
+  <% end %>
 </div>
 
 <%@exercises.each do |exercise| %>
@@ -72,4 +84,7 @@
 <br />
 <br />
 
+<script>
+    $('[data-toggle="popover"]').popover();
+</script>
 
