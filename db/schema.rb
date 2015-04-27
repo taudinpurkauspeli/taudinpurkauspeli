@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427100748) do
+ActiveRecord::Schema.define(version: 20150416104311) do
 
   create_table "asked_questions", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "checked_hypotheses", force: :cascade do |t|
@@ -72,26 +72,26 @@ ActiveRecord::Schema.define(version: 20150427100748) do
   create_table "exercise_hypotheses", force: :cascade do |t|
     t.integer  "exercise_id"
     t.integer  "hypothesis_id"
+    t.integer  "task_id"
     t.string   "explanation"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.integer  "task_id"
   end
 
   create_table "exercises", force: :cascade do |t|
     t.string   "name"
+    t.boolean  "hidden"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text     "anamnesis"
-    t.boolean  "hidden"
   end
 
   create_table "hypotheses", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
     t.integer  "count"
     t.integer  "hypothesis_group_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "hypothesis_groups", force: :cascade do |t|
@@ -100,17 +100,17 @@ ActiveRecord::Schema.define(version: 20150427100748) do
 
   create_table "interviews", force: :cascade do |t|
     t.string   "title"
+    t.integer  "subtask_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "subtask_id"
   end
 
   create_table "multichoices", force: :cascade do |t|
     t.string   "question"
     t.integer  "subtask_id"
+    t.boolean  "is_radio_button"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.boolean  "is_radio_button"
   end
 
   create_table "options", force: :cascade do |t|
@@ -124,18 +124,18 @@ ActiveRecord::Schema.define(version: 20150427100748) do
 
   create_table "question_groups", force: :cascade do |t|
     t.string   "title"
+    t.integer  "interview_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.integer  "interview_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
     t.integer  "question_group_id"
     t.integer  "interview_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "required",          default: 0
   end
 
@@ -148,29 +148,29 @@ ActiveRecord::Schema.define(version: 20150427100748) do
 
   create_table "task_texts", force: :cascade do |t|
     t.string   "content"
+    t.integer  "subtask_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "subtask_id"
   end
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
     t.integer  "exercise_id"
     t.integer  "level"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.boolean  "admin",           default: false
     t.string   "email"
     t.string   "realname"
     t.string   "password_digest"
     t.string   "student_number"
     t.integer  "starting_year"
+    t.boolean  "admin",           default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
 end
