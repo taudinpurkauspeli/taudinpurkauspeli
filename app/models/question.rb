@@ -4,7 +4,6 @@ class Question < ActiveRecord::Base
 
 	belongs_to :interview
 	belongs_to :question_group
-    belongs_to :image
 
     attr_accessor :question_group_title
 
