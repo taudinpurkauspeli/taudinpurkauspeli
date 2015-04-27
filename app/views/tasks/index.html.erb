@@ -1,6 +1,16 @@
 <%= render 'messages/messages' %>
+<br />
+<div class = "row">
+  <div class = "col-md-8">
+    <h1>Toimenpiteet</h1>
+  </div>
+  <% if current_user.try(:admin) %>
+      <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteiden luominen ja järjestely" data-content="Tällä sivulla voit luoda uusia toimenpiteitä ja päätöstoimenpiteen. Kussakin casessa voi olla vain yksi päätöstoimenpide. Toimenpiteiden suoritusjärjestystä voi muokata toimenpiteen vieressä olevilla nuolilla. Samassa numeroidussa ryhmässä olevat toimenpiteet voi suorittaa valinnaisessa järjestyksessä. Ryhmät taas suoritetaan numerojärjestyksessä ykkösestä alkaen.">Ohje</a>
+      </div>
+  <% end %>
+</div>
 
-<h1>Toimenpiteet</h1>
 
 <% if current_user.try(:admin) %>
     <%= render 'tasks/index/set_task_order' %>

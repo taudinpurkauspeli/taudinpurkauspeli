@@ -11,8 +11,11 @@
       <div class="col-md-2">
         <%# spacer %>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-3">
         <h2>Työhypoteesipankki</h2>
+      </div>
+      <div class = "col-md-2">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Työhypoteesit" data-content="Voit valita Työhypoteesipankista caseen sopivat työhypoteesit klikkaamalla hiirellä. Työhypoteesiryhmät siirtyvät työhypoteesien mukana automaattisesti. Voit myös luoda tai poistaa työhypoteesiryhmiä ja työhypoteeseja Työhypoteesipankin puolella.">Ohje</a>
       </div>
     </div>
 <% else %>
@@ -26,25 +29,6 @@
       </div>
     </div>
 <% end %>
-
-
-<!--<div class="row">
-  <div class="col-md-5">
-    <%# if current_user.try(:admin) %>
-      <h2>Casen <%#= @exercise.name %> työhypoteesit</h2>
-    <%# else %>
-      <h2>Valitse poissuljettavat työhypoteesit</h2>
-    <%# end %>
-  </div>
-  <div class="col-md-2">
-    <%# spacer %>
-  </div>
-  <div class="col-md-5">
-    <%# if current_user.try(:admin) %>
-      <h2>Työhypoteesipankki</h2>
-    <%# end %>
-  </div>
-</div>-->
 
 <%# lists of hypotheses %>
 <div class="row">

@@ -1,8 +1,14 @@
 module CucumberHelpers
 
   def create_exercises
-    Exercise.create name:"Lihanautakuolemat", anamnesis:"Lihanautoja on menehtynyt lukuisia"
-    Exercise.create name:"Heikko hevonen", anamnesis:"Hevosella on heikot polvet"
+    FactoryGirl.create(:exercise, name:"Lihanautakuolemat", anamnesis:"Lihanautoja on menehtynyt lukuisia")
+    FactoryGirl.create(:exercise, name:"Heikko hevonen", anamnesis:"Hevosella on heikot polvet")
+  end
+
+  def create_students
+    FactoryGirl.create(:student)
+    FactoryGirl.create(:student, username: "Heppo", realname: "Kepponen", student_number: "123456789")
+    FactoryGirl.create(:student, username: "Teppo", realname: "Hepponen", student_number: "987654321")
   end
 
   def create_hypothesis_groups

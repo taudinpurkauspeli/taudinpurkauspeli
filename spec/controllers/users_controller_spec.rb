@@ -20,12 +20,14 @@ require 'rails_helper'
 
 RSpec.describe UsersController, :type => :controller do
 
-
+  let!(:admin_user){FactoryGirl.create(:user)}
+  let!(:normal_user){FactoryGirl.create(:student)}
+  let!(:normal_user2){FactoryGirl.create(:student, username: "Teppo", realname: "Töppö", student_number:"000000002")}
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {username: "Pekka", email: "kukkuu@kukkuu.com", admin: true, realname: "Topohanta", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000000", starting_year: 2000}
+    {username: "Pekka", email: "kukkuu@kukkuu.com", admin: true, realname: "Topohanta", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000003", starting_year: 2000}
 
   }
 
@@ -38,75 +40,119 @@ RSpec.describe UsersController, :type => :controller do
 
   # in order to pass any filters (e.g. authentication) defined in
   # UsersController. Be sure to keep this updated too.
-  let(:valid_session) { {
+  let(:valid_admin_session) { {
       user_id: 1
   } }
 
+  let(:valid_normal_session) { {
+      user_id: 2
+  } }
+
   describe "GET index" do
-    it "selects no admin users to @users" do
-      user = User.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:users)).to eq([])
+    describe "for admin" do
+      it "assigns all normal users as @users" do
+        get :index, {}, valid_admin_session
+        expect(assigns(:users)).to eq([normal_user, normal_user2])
+      end
     end
 
-    it "assigns all normal users as @users" do
-      user = User.create!  username: "Pekka", email: "kukkuu@kukkuu.com", admin: false, realname: "Topohanta", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000000", starting_year: 2000
-      get :index, {}, valid_session
-      expect(assigns(:users)).to eq([user])
+    describe "for normal user" do
+      it "redirects to exercises page" do
+        get :index, {}, valid_normal_session
+        expect(response).to redirect_to(exercises_path)
+      end
     end
   end
 
   describe "GET show" do
-    it "assigns the requested user as @user" do
-      user = User.create! valid_attributes
-      get :show, {:id => user.to_param}, valid_session
-      expect(assigns(:user)).to eq(user)
+
+    describe "for admin" do
+      it "assigns the requested user as @user for own show page" do
+        get :show, {:id => admin_user.to_param}, valid_admin_session
+        expect(assigns(:user)).to eq(admin_user)
+      end
+
+      it "assigns the requested user as @user for student show page" do
+        get :show, {:id => normal_user.to_param}, valid_admin_session
+        expect(assigns(:user)).to eq(normal_user)
+      end
+    end
+
+    describe "for normal user" do
+      it "assigns the requested user as @user in own page" do
+        get :show, {:id => normal_user.to_param}, valid_normal_session
+        expect(assigns(:user)).to eq(normal_user)
+      end
+
+      it "redirects to exercises page in other user's page" do
+        get :show, {:id => normal_user2.to_param}, valid_normal_session
+        expect(response).to redirect_to(exercises_path)
+      end
     end
   end
 
   describe "GET new" do
     it "assigns a new user as @user" do
-      get :new, {}, valid_session
+      get :new, {}, valid_normal_session
       expect(assigns(:user)).to be_a_new(User)
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested user as @user" do
-      user = User.create! valid_attributes
-      get :edit, {:id => user.to_param}, valid_session
-      expect(assigns(:user)).to eq(user)
+
+    describe "for admin" do
+      it "assigns the requested user as @user for own edit page" do
+        get :edit, {:id => admin_user.to_param}, valid_admin_session
+        expect(assigns(:user)).to eq(admin_user)
+      end
+      it "assigns the requested user as @user for student edit page" do
+        get :edit, {:id => normal_user.to_param}, valid_admin_session
+        expect(assigns(:user)).to eq(normal_user)
+      end
     end
+
+    describe "for normal user" do
+      it "assigns the requested user as @user in own page" do
+        get :edit, {:id => normal_user.to_param}, valid_normal_session
+        expect(assigns(:user)).to eq(normal_user)
+      end
+
+      it "redirects to exercises page in other user's page" do
+        get :edit, {:id => normal_user2.to_param}, valid_normal_session
+        expect(response).to redirect_to(exercises_path)
+      end
+    end
+
   end
 
   describe "POST create" do
     describe "with valid params" do
       it "creates a new User" do
         expect {
-          post :create, {:user => valid_attributes}, valid_session
+          post :create, {:user => valid_attributes}, valid_normal_session
         }.to change(User, :count).by(1)
       end
 
       it "assigns a newly created user as @user" do
-        post :create, {:user => valid_attributes}, valid_session
+        post :create, {:user => valid_attributes}, valid_normal_session
         expect(assigns(:user)).to be_a(User)
         expect(assigns(:user)).to be_persisted
       end
 
-      it "redirects to the created user" do
-        post :create, {:user => valid_attributes}, valid_session
+      it "redirects to the root page" do
+        post :create, {:user => valid_attributes}, valid_normal_session
         expect(response).to redirect_to(:root)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved user as @user" do
-        post :create, {:user => invalid_attributes}, valid_session
+        post :create, {:user => invalid_attributes}, valid_normal_session
         expect(assigns(:user)).to be_a_new(User)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:user => invalid_attributes}, valid_session
+        post :create, {:user => invalid_attributes}, valid_normal_session
         expect(response).to render_template("new")
       end
     end
@@ -114,59 +160,173 @@ RSpec.describe UsersController, :type => :controller do
 
   describe "PUT update" do
     describe "with valid params" do
-      let(:new_attributes) {
-        {username: "Topohanta", email: "kukkuu@kukkuu.com", admin: true, realname: "Pekka", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000000", starting_year: 2000}
-
+      let(:new_admin_attributes) {
+        {username: "Topohanta", email: "kukkuu@kukkuu.com", admin: true, realname: "Pekka", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000011", starting_year: 2000}
       }
 
-      it "updates the requested user" do
-        user = User.create! valid_attributes
-        put :update, {:id => user.to_param, :user => new_attributes}, valid_session
-        user.reload
-        expect(user.username).to eq("Topohanta")
-        expect(user.realname).to eq("Pekka")
+      let(:new_normal_attributes) {
+        {username: "Topohanta", email: "kukkuu@kukkuu.com", admin: false, realname: "Pekka", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000010", starting_year: 2000}
+      }
+
+      describe "for admin" do
+
+        it "updates own information" do
+          put :update, {:id => admin_user.to_param, :user => new_admin_attributes}, valid_admin_session
+          admin_user.reload
+          expect(admin_user.username).to eq("Topohanta")
+          expect(admin_user.realname).to eq("Pekka")
+        end
+
+        it "updates student information" do
+          put :update, {:id => normal_user.to_param, :user => new_normal_attributes}, valid_admin_session
+          normal_user.reload
+          expect(normal_user.username).to eq("Topohanta")
+          expect(normal_user.realname).to eq("Pekka")
+        end
+
+        it "assigns the requested normal user as @user" do
+          put :update, {:id => normal_user.to_param, :user => new_normal_attributes}, valid_admin_session
+          expect(assigns(:user)).to eq(normal_user)
+        end
+
+        it "assigns the requested admin user as @user" do
+          put :update, {:id => admin_user.to_param, :user => new_admin_attributes}, valid_admin_session
+          expect(assigns(:user)).to eq(admin_user)
+        end
+
+        it "redirects to the user" do
+          put :update, {:id => admin_user.to_param, :user => new_admin_attributes}, valid_admin_session
+          expect(response).to redirect_to(admin_user)
+        end
       end
 
-      it "assigns the requested user as @user" do
-        user = User.create! valid_attributes
-        put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
-        expect(assigns(:user)).to eq(user)
-      end
+      describe "for normal user" do
 
-      it "redirects to the user" do
-        user = User.create! valid_attributes
-        put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
-        expect(response).to redirect_to(user)
+        it "updates own information" do
+          put :update, {:id => normal_user.to_param, :user => new_normal_attributes}, valid_normal_session
+          normal_user.reload
+          expect(normal_user.username).to eq("Topohanta")
+          expect(normal_user.realname).to eq("Pekka")
+        end
+
+        it "does not update other student's information" do
+          put :update, {:id => normal_user2.to_param, :user => new_normal_attributes}, valid_normal_session
+          expect(response).to redirect_to(exercises_path)
+        end
+
+        it "assigns the requested normal user as @user" do
+          put :update, {:id => normal_user.to_param, :user => new_normal_attributes}, valid_normal_session
+          expect(assigns(:user)).to eq(normal_user)
+        end
+
+        it "redirects to the user" do
+          put :update, {:id => normal_user.to_param, :user => new_normal_attributes}, valid_normal_session
+          expect(response).to redirect_to(normal_user)
+        end
       end
     end
 
     describe "with invalid params" do
-      it "assigns the user as @user" do
-        user = User.create! valid_attributes
-        put :update, {:id => user.to_param, :user => invalid_attributes}, valid_session
-        expect(assigns(:user)).to eq(user)
+
+
+      describe "for admin" do
+
+        it "does not update own information" do
+          put :update, {:id => admin_user.to_param, :user => invalid_attributes}, valid_admin_session
+          admin_user.reload
+          expect(admin_user.username).to eq("Testipoika")
+          expect(admin_user.realname).to eq("Teppo Testailija")
+        end
+
+        it "does not update student information" do
+          put :update, {:id => normal_user.to_param, :user => invalid_attributes}, valid_admin_session
+          normal_user.reload
+          expect(normal_user.username).to eq("Opiskelija")
+          expect(normal_user.realname).to eq("Olli Testailija")
+        end
+
+        it "assigns the requested normal user as @user" do
+          put :update, {:id => normal_user.to_param, :user => invalid_attributes}, valid_admin_session
+          expect(assigns(:user)).to eq(normal_user)
+        end
+
+        it "assigns the requested admin user as @user" do
+          put :update, {:id => admin_user.to_param, :user => invalid_attributes}, valid_admin_session
+          expect(assigns(:user)).to eq(admin_user)
+        end
+
+        it "re-renders the 'edit' template" do
+          put :update, {:id => admin_user.to_param, :user => invalid_attributes}, valid_admin_session
+          expect(response).to render_template("edit")
+        end
       end
 
-      it "re-renders the 'edit' template" do
-        user = User.create! valid_attributes
-        put :update, {:id => user.to_param, :user => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+      describe "for normal user" do
+
+        it "does not update own information" do
+          put :update, {:id => normal_user.to_param, :user => invalid_attributes}, valid_normal_session
+          normal_user.reload
+          expect(normal_user.username).to eq("Opiskelija")
+          expect(normal_user.realname).to eq("Olli Testailija")
+        end
+
+        it "does not update other student's information" do
+          put :update, {:id => normal_user2.to_param, :user => invalid_attributes}, valid_normal_session
+          expect(response).to redirect_to(exercises_path)
+        end
+
+        it "assigns the requested normal user as @user" do
+          put :update, {:id => normal_user.to_param, :user => invalid_attributes}, valid_normal_session
+          expect(assigns(:user)).to eq(normal_user)
+        end
+
+        it "redirects to the user" do
+          put :update, {:id => normal_user.to_param, :user => invalid_attributes}, valid_normal_session
+          expect(response).to render_template("edit")
+        end
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested user" do
-      user = User.create! valid_attributes
-      expect {
-        delete :destroy, {:id => user.to_param}, valid_session
-      }.to change(User, :count).by(-1)
+
+    describe "for admin" do
+      it "destroys the requested normal user" do
+        expect {
+          delete :destroy, {:id => normal_user.to_param}, valid_admin_session
+        }.to change(User, :count).by(-1)
+      end
+
+      it "destroys own account" do
+        expect {
+          delete :destroy, {:id => admin_user.to_param}, valid_admin_session
+        }.to change(User, :count).by(-1)
+      end
+
+      it "redirects to the starting page" do
+        delete :destroy, {:id => admin_user.to_param}, valid_admin_session
+        expect(response).to redirect_to(:root)
+      end
+
     end
 
-    it "redirects to the users list" do
-      user = User.create! valid_attributes
-      delete :destroy, {:id => user.to_param}, valid_session
-      expect(response).to redirect_to(users_url)
+    describe "for normal user" do
+      it "does not destoy other user's account" do
+        expect {
+          delete :destroy, {:id => normal_user2.to_param}, valid_normal_session
+        }.to change(User, :count).by(0)
+      end
+
+      it "destroys own account" do
+        expect {
+          delete :destroy, {:id => normal_user.to_param}, valid_normal_session
+        }.to change(User, :count).by(-1)
+      end
+
+      it "redirects to the starting page" do
+        delete :destroy, {:id => normal_user.to_param}, valid_normal_session
+        expect(response).to redirect_to(:root)
+      end
     end
   end
 

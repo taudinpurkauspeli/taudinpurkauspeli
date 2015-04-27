@@ -1,50 +1,49 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in, except: [:new, :create]
+  before_action :ensure_user_is_admin, only: [:index]
+  before_action except: [:new, :create, :index] do
+    if @user.nil? || (!current_user.try(:admin) && @user != current_user)
+      redirect_to exercises_path, alert: 'Pääsy toisen käyttäjän tietoihin estetty!'
+    end
+  end
 
   # GET /users
   # GET /users.json
   def index
+      @exercises = Exercise.all
+      @users = User.where(admin:false)
 
-    @exercises = Exercise.all
-    @users = User.where("admin = ?", false)
+      #list type
+      if params[:list_type].nil? || params[:list_type] == "0"
+        @list_type = 0
+      else
+        @list_type = 1
+      end
 
-    #list type
-    if params[:list_type].nil? || params[:list_type] == "0"
-      @list_type = 0
-    else
-      @list_type = 1
-    end
+      #exercise
+      if params[:exercise].nil? || params[:exercise] == "0"
+        @shown_exercises = @exercises
+        @selected_exercise_id = "0"
+      else
+        @shown_exercises  = Exercise.where(id:params[:exercise])
+        @selected_exercise_id = params[:exercise]
+      end
 
-
-    #exercise
-    if params[:exercise].nil? || params[:exercise] == "0"
-      @shown_exercises = @exercises
-      @selected_exercise_id = "0"
-    else
-      @shown_exercises  = Exercise.where("id = ?", params[:exercise])
-      @selected_exercise_id = params[:exercise]
-    end
-
-    #starting year
-    if params[:starting_year].nil? || params[:starting_year] == "0"
-      @shown_users = @users
-      @selected_starting_year = "0"
-    else
-      @shown_users  = User.where("starting_year = ? and admin = ?", params[:starting_year].to_i, false)
-      @selected_starting_year = params[:starting_year]
-    end
-
+      #starting year
+      if params[:starting_year].nil? || params[:starting_year] == "0"
+        @shown_users = @users
+        @selected_starting_year = "0"
+      else
+        @shown_users  = User.where(starting_year:params[:starting_year].to_i).where(admin:false)
+        @selected_starting_year = params[:starting_year]
+      end
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    if !@user.nil? && (@user == current_user || current_user.try(:admin))
-      @exercises = Exercise.all
-    else
-      redirect_to exercises_path, alert: 'Käyttäjää ei löytynyt!'
-    end
+      @exercises = @user.started_exercises.where(hidden: false).distinct
   end
 
   # GET /users/new
@@ -93,9 +92,15 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     unless @user.nil?
+
       @user.destroy
+      session[:user_id] = nil
+      session[:exercise_id] = nil
+      session[:task_id] = nil
+      session[:exhyp_id] = nil
+
       respond_to do |format|
-        format.html { redirect_to users_url, notice: 'Käyttäjä poistettu.' }
+        format.html { redirect_to :root, notice: 'Käyttäjä poistettu.' }
         format.json { head :no_content }
       end
     end

@@ -76,6 +76,6 @@ class TaskTextsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_text_params
-    params.require(:task_text).permit(:content, :image_id)
+    params.require(:task_text).permit(:content)
   end
 end
