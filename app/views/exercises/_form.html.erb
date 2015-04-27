@@ -16,11 +16,6 @@
       <%= f.text_area :name, placeholder: "Sisältö", :class => 'width100', :rows => '1' %>
     </div>
 
-    <%= image_tag @exercise.image.picture.url(:thumb) unless @exercise.image.nil? %>
-    <div class="field">
-      <%=f.select :image_id, options_from_collection_for_select(Image.all, :id, :name, selected: @exercise.image_id), { :prompt => 'Valitse kuva' } %>
-    </div>
-
     <div class="field">
       <%= f.label :anamnesis%><br>
       <%= f.cktext_area :anamnesis, placeholder: "Anamneesi", :class => 'width100', :rows => '10'%>

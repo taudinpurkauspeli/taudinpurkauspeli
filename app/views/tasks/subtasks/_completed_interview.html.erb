@@ -41,7 +41,6 @@
 
                       <% end %>
                       ' id="collapseQuestionContent<%= question.id%>" >
-                      <%= image_tag question.image.picture.url(:original) unless question.image.nil? %>
                       <p><%= question.content.html_safe %></p>
                     </div>
               <%end %>
@@ -80,7 +79,6 @@
 
                       <% end %>
                   ' id="collapseQuestionContent<%= question.id%>" >
-                  <%= image_tag question.image.picture.url(:original) unless question.image.nil? %>
                   <p><%= question.content.html_safe %></p>
                 </div>
           <%end %>
