@@ -26,3 +26,12 @@ Feature: User list feature
     And I click on the button "Opiskelijoiden seuranta"
     And "Kaikki" option is selected from case list
     Then the page should show the content "50%"
+
+  Scenario: Teacher can all students
+    Given I have logged in as a teacher
+    And some tasks have been added to case
+    And students have created accounts
+    And students have completed tasks
+    And I click on the button "Opiskelijoiden seuranta"
+    When I select "Opiskelijalista" to be shown
+    Then the page should show all students

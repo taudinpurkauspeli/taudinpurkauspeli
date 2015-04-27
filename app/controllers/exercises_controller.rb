@@ -5,7 +5,7 @@ class ExercisesController < ApplicationController
   # GET /exercises
   # GET /exercises.json
   def index
-    @exercises = Exercise.all
+    @exercises = Exercise.all.order(:name)
     @excercise_page_rendered = true
     session[:exercise_id] = nil
     session[:task_id] = nil

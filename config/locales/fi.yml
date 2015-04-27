@@ -61,6 +61,7 @@ fi:
               blank: "on pakollinen"
               wrong_length: "on väärän pituinen"
               taken: "on jo käytössä"
+              invalid: "saa sisältää vain numeroita"
             starting_year:
               blank: "on pakollinen"
         hypothesis:

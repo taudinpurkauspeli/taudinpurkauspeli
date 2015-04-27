@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :student_number, presence: true, uniqueness: true , length: { is: 9 }
   validates :starting_year, presence: true
+  validates_format_of :student_number, with: /\A\d+\z/i
 
   has_secure_password
 
@@ -15,7 +16,10 @@ class User < ActiveRecord::Base
 
   has_many :completed_tasks, dependent: :destroy
   has_many :tasks, through: :completed_tasks
+  has_many :started_exercises, -> { order('name')}, through: :tasks, source: :exercise
+
   has_many :completed_subtasks, dependent: :destroy
+
   has_many :completed_exercises
   has_many :exercises, through: :completed_exercises
 
@@ -24,11 +28,9 @@ class User < ActiveRecord::Base
   def has_completed?(completable_object)
     if completable_object.class == Subtask
       return !(subtasks.find_by id:completable_object.id).nil?
-    end
-    if completable_object.class == Task
+    elsif completable_object.class == Task
       return !(tasks.find_by id:completable_object.id).nil?
-    end
-    if completable_object.class == Exercise
+    elsif completable_object.class == Exercise
       return !(exercises.find_by id:completable_object.id).nil?
     end
   end
@@ -101,7 +103,7 @@ class User < ActiveRecord::Base
       end
     end
   end
-  
+
   def has_asked_question?(question)
     return !asked_questions.find_by(question:question).nil?
   end
@@ -115,7 +117,7 @@ class User < ActiveRecord::Base
   end
 
   def get_number_of_completed_tasks_by_exercise(exercise)
-    return completed_tasks.select{ |ct| ct.has_exercise?(exercise)}.count
+    return tasks.where(exercise:exercise).count
   end
 
   def get_percent_of_completed_tasks_of_exercise(exercise)
