@@ -21,18 +21,13 @@ class QuestionsController < ApplicationController
 
   def create
     @task = Task.find(session[:task_id])
-
     @question = Question.new(question_params)
 
     respond_to do |format|
       if @question.save
-        question_group = QuestionGroup.find_or_create_by(title:question_params[:question_group_title])
-        @question.update(question_group:question_group)
         format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), notice: 'Kysymysvaihtoehto lisättiin onnistuneesti.' }
-        format.json { render :show, status: :created, location: @question }
       else
         format.html { redirect_to edit_interview_path(Interview.find(question_params[:interview_id]), :layout => get_layout), alert: 'Kysymyksen tiedot puuttelliset.' }
-        format.json { render json: @option.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,13 +36,9 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        question_group = QuestionGroup.find_or_create_by(title:question_params[:question_group_title])
-        question_group.questions.push(@question) unless question_group.questions.include?(@question)
-        QuestionGroup.delete_unused_groups
-        @question.update(question_group:question_group)
         format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti.' }
       else
-        format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), notice: 'Kysymyksen päivitys epäonnistui.' }
+        format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), alert: 'Kysymyksen päivitys epäonnistui.' }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
@@ -69,7 +60,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :content, :required, :interview_id, :question_group_title )
+    params.require(:question).permit(:title, :content, :required, :interview_id, question_group_attributes: [:title])
   end
 
 end

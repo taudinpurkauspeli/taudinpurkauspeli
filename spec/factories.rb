@@ -108,6 +108,7 @@ FactoryGirl.define do
 
   factory :question do
     question_group_id nil
+    interview_id nil
     title "Oliko lehmällä veljiä?"
     content "Asiakas vastaa, että lehmällä ei ollut veljiä."
     required "required"

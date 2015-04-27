@@ -105,38 +105,31 @@ describe "Hypothesis list page", js:true do
 
 
       it "remove hypotheses from an exercise" do
-        find_button("Virustauti").trigger('click')
-        wait_for_ajax
+        wait_and_trigger_click("Virustauti")
         wait_for_ckeditor("exercise_hypothesis_explanation_1")
-
-        find_button("remove_from_case_1").trigger('click')
-        wait_for_ajax
+        wait_and_trigger_click("remove_from_case_1")
 
         expect(ExerciseHypothesis.count).to eq(0)
       end
 
       it "edit the explanation of a hypothesis added to an exercise" do
-        find_button("Virustauti").trigger('click')
-        wait_for_ajax
+        wait_and_trigger_click("Virustauti")
         wait_for_ckeditor("exercise_hypothesis_explanation_1")
 
         fill_in_ckeditor 'exercise_hypothesis_explanation_1', with: 'Virus ei olekaan bakteeritauti'
 
-        find_button("update_exercise_hypothesis_1").trigger('click')
-        wait_for_ajax
+        wait_and_trigger_click("update_exercise_hypothesis_1")
         expect(ExerciseHypothesis.first.explanation).to eq("<p>Virus ei olekaan bakteeritauti</p>\r\n")
       end
 
       it "add prerequisite task to a hypothesis added to an exercise" do
 
-        find_button("Virustauti").trigger('click')
-        wait_for_ajax
+        wait_and_trigger_click("Virustauti")
         wait_for_ckeditor("exercise_hypothesis_explanation_1")
 
         select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]')
 
-        find_button("update_exercise_hypothesis_1").trigger('click')
-        wait_for_ajax
+        wait_and_trigger_click("update_exercise_hypothesis_1")
 
         expect(ExerciseHypothesis.first.task.name).to eq('Asiakkaan soitto')
       end

@@ -16,12 +16,12 @@
 
                   <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
                       <%= hidden_field_tag 'question_id', question.id %>
-                      <%= submit_tag(question.title, :class => "btn btn-default multiline width95 floatRight") unless current_user.try(:admin) %>
+                      <%= submit_tag(question.title, :class => "btn btn-default multiline width95 floatRight", :id => "ask_question_" + question.id.to_s) unless current_user.try(:admin) %>
                   <% end %>
 
               <% else %>
                   <%# TODO this should be refactored to make sense %>
-                  <input class='btn btn-default btn-hypothesis-group multiline width95 floatRight 
+                  <input class='btn btn-default btn-hypothesis-group multiline width95 floatRight
                     <% if question.required == "required" %>
                         <%= "collapse-answer-right" %>
                       <% elsif question.required == "wrong" %>
@@ -29,7 +29,7 @@
                       <% else %>
 
                       <% end %>
-                    ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
+                    ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>" id="asked_question_<%= question.id.to_s %>"/>
                   </td>
                   <td class="multichoice">
                     <div class='collapse in collapse-answer 
@@ -56,10 +56,10 @@
           <% if !current_user.has_asked_question?(question) %>
               <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
                   <%= hidden_field_tag 'question_id', question.id %>
-                  <%= submit_tag(question.title, :class => "btn btn-default multiline width100") unless current_user.try(:admin) %>
+                  <%= submit_tag(question.title, :class => "btn btn-default multiline width100", :id => "ask_question_" + question.id.to_s) unless current_user.try(:admin) %>
               <% end %>
           <% else %>
-              <input class='btn btn-default btn-hypothesis-group multiline 
+              <input class='btn btn-default btn-hypothesis-group multiline
               <% if question.required == "required" %>
                         <%= "collapse-answer-right" %>
                       <% elsif question.required == "wrong" %>
@@ -67,7 +67,7 @@
                       <% else %>
 
                       <% end %>
-              ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>"/>
+              ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>" id="asked_question_<%= question.id.to_s %>"/>
               </td>
               <td class="multichoice">
                 <div class='collapse in collapse-answer 

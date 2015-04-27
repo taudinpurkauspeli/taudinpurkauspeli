@@ -1,36 +1,45 @@
 <%= form_for(question, :html => {:id => "form-edit-question-" + question.id.to_s , :class=> "rich-text-form"}) do |f| %>
-  <div class = "panel panel-default panel-grey width70">
-    <div class = "panel-heading panel-heading-grey">
-      <div class="row">
-        <div class="col-md-6">
-          <a data-toggle="collapse" id="collapse-question-link<%= question.id.to_s %>" href="#collapse-question<%= question.id.to_s %>"><h5> Vastausvaihtoehto: <%= question.title %></h5></a>
-        </div>
-        <div class="col-md-6">
-          <%= f.submit :class => 'btn btn-default btn-save floatRight widthAuto margin-em', :id => "save_" + question.id.to_s %>
-          <%#= button_to 'Poista', question, method: :delete, :class => 'btn btn-default btn-del floatRight widthAuto margin-em', :id => "delete_" + question.id.to_s,  data: { confirm: 'Haluatko varmasti poistaa vaihtoehdon?' } %>
+    <div class = "panel panel-default panel-grey width70">
+      <div class = "panel-heading panel-heading-grey">
+        <div class="row">
+          <div class="col-md-6">
+            <a data-toggle="collapse" id="collapse-question-link<%= question.id.to_s %>" href="#collapse-question<%= question.id.to_s %>"><h5> Vastausvaihtoehto: <%= question.title %></h5></a>
+          </div>
+          <div class="col-md-6">
+            <%= f.submit :class => 'btn btn-default btn-save floatRight widthAuto margin-em', :id => "question_save_" + question.id.to_s %>
+            <%#= button_to 'Poista', question, method: :delete, :class => 'btn btn-default btn-del floatRight widthAuto margin-em', :id => "delete_" + question.id.to_s,  data: { confirm: 'Haluatko varmasti poistaa vaihtoehdon?' } %>
+          </div>
         </div>
       </div>
-    </div>
-    <div id="collapse-question<%= question.id.to_s %>" class="panel-collapse collapse">
-      <div class="row panel-body">
-        <div class="container-fluid">
-          <div class="row">
-            <%= f.hidden_field :question_id, :value => question.id %>
-            <%= f.hidden_field :interview_id, :value => @interview.id%>
+      <div id="collapse-question<%= question.id.to_s %>" class="panel-collapse collapse">
+        <div class="row panel-body">
+          <div class="container-fluid">
+            <div class="row">
+              <%= f.hidden_field :question_id, :value => question.id %>
+              <%= f.hidden_field :interview_id, :value => @interview.id%>
 
-            <div class="col-md-12">
+              <div class="col-md-12">
 
-              <%=f.select :required, options_for_select(@requireds.collect { |answer| [t("activerecord.attributes.question.requireds.#{answer[0]}"), answer[0]] }, selected: question.required), {}, {:id => "required_" + question.id.to_s, class: "form-control"}%><br>
-              <%= f.label "Vaihtoehdon teksti"%><br>
-              <%= f.text_area :title, placeholder: "Vaihtoehto", :id => "content_" + question.id.to_s, :class => 'form-control' %><br>
+                <%=f.select :required, options_for_select(@requireds.collect { |answer| [t("activerecord.attributes.question.requireds.#{answer[0]}"), answer[0]] }, selected: question.required), {}, {:id => "question_required_" + question.id.to_s, class: "form-control"}%><br>
+                <%= f.label "Vaihtoehdon teksti"%><br>
+                <%= f.text_area :title, placeholder: "Vaihtoehto", :id => "question_title_" + question.id.to_s, :class => 'form-control' %><br>
 
-              <%= f.label "Seliteteksti"%><br>
-              <%= f.cktext_area :content, placeholder: "Vastausteksti", :id => "explanation_" + question.id.to_s, :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %><br>
-              <%= f.text_area :question_group, placeholder: "Kysymysryhmä", :class => 'form-control' %><br>
+                <%= f.label "Seliteteksti"%><br>
+                <%= f.cktext_area :content, placeholder: "Vastausteksti", :id => "question_content_" + question.id.to_s, :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %><br>
+
+                <% if question.question_group.nil? %>
+                    <%= f.fields_for :question_group, question.init_new_question_group do |q_g| %>
+                        <%= q_g.text_area :title, placeholder: "Kysymysryhmä", :id => "question_question_group_attributes_title_" + question.id.to_s, :class => 'form-control' %><br>
+                    <% end %>
+                <% else %>
+                    <%= f.fields_for :question_group, question.question_group do |q_g| %>
+                        <%= q_g.text_area :title, placeholder: "Kysymysryhmä", :id => "question_question_group_attributes_title_" + question.id.to_s, :class => 'form-control' %><br>
+                    <% end %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 <% end %>

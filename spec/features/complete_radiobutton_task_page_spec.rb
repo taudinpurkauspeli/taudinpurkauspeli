@@ -19,8 +19,6 @@ describe "Radiobutton page for student", js:true do
     before :each do
       sign_in(username:"Opiskelija", password:"Salainen1")
 
-      visit root_path
-
       click_and_wait('Lihanautakuolemat')
       click_and_wait('Toimenpiteet')
       click_and_wait(radiobutton_task.name)

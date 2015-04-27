@@ -12,6 +12,7 @@ class InterviewsController < ApplicationController
 	# GET /interviews/1/edit
 	def edit
 		@new_question = Question.new
+		@new_question.build_question_group
 		@new_asked_question = AskedQuestion.new
 		@new_question_group = QuestionGroup.new
 		@question_groups = QuestionGroup.all
@@ -31,11 +32,11 @@ class InterviewsController < ApplicationController
 		respond_to do |format|
 			if @interview.save
 				subtask.save
-				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Pohdinta lisättiin onnistuneesti.' }
+				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Pohdinta lisättiin onnistuneesti!' }
 				#format.json { render :show, status: :created, location: @multichoice }
 			else
 				## TODO redirect task show
-				format.html { redirect_to new_interview_path(:layout => get_layout), alert: 'Pohdinnan lisääminen epäonnistui.' }
+				format.html { redirect_to new_interview_path(:layout => get_layout), alert: 'Pohdinnan lisääminen epäonnistui!' }
 				format.json { render json: @interview.errors, status: :unprocessable_entity }
 			end
 		end
@@ -44,10 +45,10 @@ class InterviewsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @interview.update(interview_params)
-				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Pohdinta päivitettiin onnistuneesti.' }
+				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Pohdinta päivitettiin onnistuneesti!' }
 			else
 				@new_question = Question.new
-				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), alert: 'Pohdinnan päivitys epäonnistui.' }
+				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), alert: 'Pohdinnan päivitys epäonnistui!' }
 				format.json { render json: @interview.errors, status: :unprocessable_entity }
 			end
 		end
@@ -71,7 +72,7 @@ class InterviewsController < ApplicationController
           format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout) }
         end
       else
-        format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout), alert: 'Et ole vielä valinnut kaikki tarpeellisia vaihtoehtoja!' }
+        format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout), alert: 'Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!' }
       end
     end
   end

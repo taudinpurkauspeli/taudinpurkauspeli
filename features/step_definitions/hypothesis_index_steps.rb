@@ -67,14 +67,12 @@ When(/^I save the new hypothesis with button "(.*?)"$/) do |arg1|
 end
 
 When(/^I save changes with button "(.*?)"$/) do |arg1|
-  find_button("update_exercise_hypothesis_2").trigger('click')
-  wait_for_ajax
+  wait_and_trigger_click("update_exercise_hypothesis_2")
 end
 
 When(/^I click on the delete button "(.*?)"$/) do |arg1|
   wait_for_ckeditor("exercise_hypothesis_explanation_2")
-  find_button("remove_from_case_2").trigger('click')
-  wait_for_ajax
+  wait_and_trigger_click("remove_from_case_2")
 end
 
 When(/^I click on the hypothesis button "(.*?)"$/) do |arg1|
@@ -82,8 +80,7 @@ When(/^I click on the hypothesis button "(.*?)"$/) do |arg1|
 end
 
 When(/^I click on one of the hypotheses of the case$/) do
-  find_button("Hevosheikkous").trigger('click')
-  wait_for_ajax
+  wait_and_trigger_click("Hevosheikkous")
 end
 
 When(/^I fill in the hypothesis group name field with a correct name$/) do
