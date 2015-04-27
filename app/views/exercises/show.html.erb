@@ -20,8 +20,6 @@
   <%= render 'user_has_completed_exercise' %>
 <% end %>
 
-<%= image_tag @exercise.image.picture.url(:original) unless @exercise.image.nil? %>
-
 <% if @exercise.hidden? %>
     <p>Tämä case on piilotettu opiskelijoilta. <%= link_to 'Muokkaa', edit_exercise_path(@exercise) %> casea tehdäksesi siitä näkyvä.</p>
 <% end %>

@@ -4,7 +4,7 @@ class CreateOptions < ActiveRecord::Migration
       t.integer :multichoice_id
       t.string :content
       t.string :explanation
-      t.boolean :value
+      t.boolean :is_correct_answer
 
       t.timestamps null: false
     end

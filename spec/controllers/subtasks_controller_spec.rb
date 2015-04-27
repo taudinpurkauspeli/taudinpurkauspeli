@@ -27,28 +27,6 @@ RSpec.describe SubtasksController, :type => :controller do
 				}.to change(Subtask, :count).by(1)
 			end
 		end
-
-
-=begin
-		describe "with invalid params" do
-			it "assigns a newly created but unsaved subtask as @subtask" do
-				post :create, {:subtask => invalid_attributes}, valid_session
-				expect(assigns(:subtask)).to be_a_new(Subtask)
-			end
-
-			it "new subtask is not saved" do
-				expect {
-					post :create, {:subtask => invalid_attributes}, valid_session
-				}.not_to change(Subtask, :count)
-			end
-
-			it "redirects to tasks index page" do
-				post :create, {:subtask => invalid_attributes}, valid_session
-				expect(response).to redirect_to(tasks_path(:layout => true))
-			end
-		end
-=end
-
 	end
 
 	describe "DELETE destroy" do

@@ -28,11 +28,11 @@ class ApplicationController < ActionController::Base
   end
   
   def ensure_user_is_logged_in
-    redirect_to signin_path, alert: "Toiminto vaatii sisäänkirjautumisen" if current_user.nil?
+    redirect_to exercises_path, alert: "Toiminto vaatii sisäänkirjautumisen" if current_user.nil?
   end
 
   def ensure_user_is_admin
-    redirect_to signin_path, alert: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia" unless current_user.try(:admin)
+    redirect_to exercises_path, alert: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia" unless current_user.try(:admin)
   end
 
   def get_layout
