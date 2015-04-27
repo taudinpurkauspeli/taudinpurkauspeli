@@ -48,7 +48,7 @@ describe "New Exercise page", js:true do
 
 		it "he should not be able to visit new exercise page" do
 			visit new_exercise_path
-			expect(current_path).to eq(signin_path)
+			expect(current_path).to eq(exercises_path)
 			expect(page).to have_content('Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia')
 		end
 

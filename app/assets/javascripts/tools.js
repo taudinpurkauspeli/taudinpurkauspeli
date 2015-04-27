@@ -1,5 +1,5 @@
 /**
-*   Listerners for rompvable blocks
+*   Listerners for removable blocks
 *
 *
 */
@@ -7,6 +7,15 @@ function setRemovables(){
 	$(".removable").click(function(){
 		$(this).fadeOut(50);
 	});	
+}
+
+/**
+*   Shows the explanation of given exhyp element
+*
+*
+*/
+function showExHypExplanation(elemid){
+    $(elemid).fadeIn(50);
 }
 
 /**

@@ -246,7 +246,7 @@ describe "New Task page", js:true do
 
     it "should not be able to visit new task page" do
       visit new_task_path
-      expect(current_path).to eq(signin_path)
+      expect(current_path).to eq(exercises_path)
     end
   end
 
