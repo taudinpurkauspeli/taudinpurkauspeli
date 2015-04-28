@@ -105,7 +105,7 @@ describe "User show page", js:true do
         expect(page).to have_content('Pääsy toisen käyttäjän tietoihin estetty!')
       end
 
-      it "other information without changing password" do
+      it "update information wrong" do
         click_button 'Muokkaa tietoja'
         fill_in 'user_realname', with: ''
         click_button 'Päivitä'

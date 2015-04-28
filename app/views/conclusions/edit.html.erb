@@ -1,17 +1,23 @@
 <%= render 'messages/messages' %>
 <div class="row">
-	<br>
-	<div class="col-md-8">
-		<h1>Muokkaa päätöstoimenpidettä</h1>
-	</div>
-	<div class = "col-md-4">
-		<%= button_to 'Poista', @conclusion, :class => 'btn btn-default btn-del widthAuto floatRight', :form => {id: "form-delete-conclusion"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa päätöstoimenpiteen?' } %>
-	</div>
+  <br>
+  <div class="col-md-8">
+    <h1>Muokkaa päätöstoimenpidettä</h1>
+  </div>
+  <div class = "col-md-4">
+    <%= button_to 'Poista', @conclusion, :class => 'btn btn-default btn-del widthAuto floatRight', :form => {id: "form-delete-conclusion"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa päätöstoimenpiteen?' } %>
+  </div>
 </div>
 
 <%= render 'form' %>
 <script>
-    setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post", function(){
+    setAjaxSubmits("#currentTaskTab form:not(#form-delete-conclusion)", "#currentTaskTab", "post", function(){
         loadView("/tasks", "#taskTab");
+        loadView("/hypotheses", "#hypothesisTab");
+    });
+    setAjaxSubmits("#currentTaskTab #form-delete-conclusion", "#taskTab", "post", function(){
+        showTab("#taskTab");
+        closeTab("#currentTaskTab");
+        loadView("/hypotheses", "#hypothesisTab");
     });
 </script>
