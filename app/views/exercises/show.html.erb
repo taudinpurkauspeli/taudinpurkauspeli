@@ -1,13 +1,24 @@
 <%= render 'messages/messages' %>
-
-<h1> Case: <%= @exercise.name %> </h1>
+<br />
+<div class = "row">
+  <div class = "col-md-8">
+    <h1>Case: <%= @exercise.name %></h1>
+  </div>
+  <% if current_user.try(:admin) %>
+      <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Muokkaa-napista pääset muokkaamaan casen nimeä ja anamneesia, sekä casen näkyvyyttä opiskelijalle.">Ohje</a>
+      </div>
+  <% else %>
+      <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Voit siirtyä suorittamaan toimenpiteitä tai tarkastelemaan työhypoteeseja yläreunan valikosta.">Ohje</a>
+      </div>
+  <% end %>
+</div>
 
 <%# Case completed %>
 <% if current_user.has_completed? @exercise %>
   <%= render 'user_has_completed_exercise' %>
 <% end %>
-
-<%= image_tag @exercise.image.picture.url(:original) unless @exercise.image.nil? %>
 
 <% if @exercise.hidden? %>
     <p>Tämä case on piilotettu opiskelijoilta. <%= link_to 'Muokkaa', edit_exercise_path(@exercise) %> casea tehdäksesi siitä näkyvä.</p>
@@ -36,4 +47,5 @@
 <script>
     //edit exercise form
     setAjaxSubmits("#anamnesisTab form", "#anamnesisTab", "get");
+    $('[data-toggle="popover"]').popover();
 </script>

@@ -3,6 +3,6 @@
     <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= group.name %>" data-toggle="collapse" data-target="#collapseHypothesisGroup<%= group.id%>" />
   </div>
   <div class="col-md-3">
-    <%= button_to 'Poista', group, method: :delete, :class => 'btn btn-default btn-del', data: { confirm: 'Oletko varma?' } %>
+    <%= button_to 'Poista', group, method: :delete, :id => "delete_hypothesis_group_" + group.id.to_s, :class => 'btn btn-default btn-del', data: { confirm: 'Oletko varma?' } %>
   </div>
 </div>

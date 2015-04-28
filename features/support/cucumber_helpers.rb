@@ -1,8 +1,14 @@
 module CucumberHelpers
 
   def create_exercises
-    Exercise.create name:"Lihanautakuolemat", anamnesis:"Lihanautoja on menehtynyt lukuisia"
-    Exercise.create name:"Heikko hevonen", anamnesis:"Hevosella on heikot polvet"
+    FactoryGirl.create(:exercise, name:"Lihanautakuolemat", anamnesis:"Lihanautoja on menehtynyt lukuisia")
+    FactoryGirl.create(:exercise, name:"Heikko hevonen", anamnesis:"Hevosella on heikot polvet")
+  end
+
+  def create_students
+    FactoryGirl.create(:student)
+    FactoryGirl.create(:student, username: "Heppo", realname: "Kepponen", student_number: "123456789")
+    FactoryGirl.create(:student, username: "Teppo", realname: "Hepponen", student_number: "987654321")
   end
 
   def create_hypothesis_groups
@@ -55,6 +61,13 @@ module CucumberHelpers
   def create_interviews
     FactoryGirl.create(:subtask, task_id:3)
     FactoryGirl.create(:interview, subtask_id:1, title:"Haastattelu")
+
+    FactoryGirl.create(:subtask, task_id: 4)
+    FactoryGirl.create(:interview, subtask_id: 2, title:"Mitä kysyt asiakkaalta?")
+    FactoryGirl.create(:question, interview_id: 2, title: "Sääolosuhteet", content: "Paljon ukkosta")
+    FactoryGirl.create(:question, interview_id: 2, title: "Sisäolosuhteet", required: "wrong", content: "Kaikki hyvin")
+    FactoryGirl.create(:question, interview_id: 2, title: "Ulko-olosuhteet", content: "Epämääräistä")
+    FactoryGirl.create(:question, interview_id: 2, title: "Karsinaolosuhteet", required: "allowed", content: "Lattia puhdas")
   end
 
   def create_all_hypotheses_for_case

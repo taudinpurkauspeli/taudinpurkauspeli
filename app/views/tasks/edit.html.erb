@@ -1,42 +1,55 @@
 <%= render 'messages/messages' %>
 
-<div class = "row">
-  <div class = "col-md-6">
-    <h1>Toimenpiteen muokkaus</h1>
-  </div>
-  <div class = "col-md-2">
-    <%= button_to 'Takaisin', tasks_path, :class => 'btn btn-default btn-exercise floatRight', :method => :get %>
-  </div>
-  <div class = "col-md-2">
-    <%= button_to 'Esikatsele', @task, :class => 'btn btn-default btn-exercise floatRight',:form_class => "form-show-task", :method => :get %>
-  </div>
-  <div class = "col-md-2">
-    <%= button_to 'Poista toimenpide', @task, :class => 'btn btn-default btn-exercise btn-del width100', :form => {id: "form-delete-task"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa toimenpiteen ja sen kaikki alakohdat?' } %>
+   <br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="panel panel-default panel-grey">
+        <div class = "panel-heading panel-heading-grey">
+          <div class = "row">
+            <div class = "col-md-6">
+              <h4>Toimenpiteen <%= @task.name %> muokkaus</h4>
+            </div>
+            <div class= "col-md-6">
+              <%= button_to 'Poista toimenpide', @task, :class => 'btn btn-default btn-del widthAuto floatRight margin-em', :form => {id: "form-delete-task"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa toimenpiteen ja sen kaikki alakohdat?' } %>
+              <%= button_to 'Esikatsele', @task, :class => 'btn btn-default widthAuto floatRight margin-em',:form_class => "form-show-task", :method => :get %> 
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <%= render 'task_name_form' %>
+          <br>
+          <%= 'Toimenpiteelle ei ole vielä lisätty alakohtia.' if @task.subtasks.empty? %>
+          <table class="width100">
+            <% @task.subtasks.each do |subtask| %>
+              <tr>
+                <td class="width100">
+                  <%= button_to sanitize(subtask.to_s), edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise btn-subtask multiline width100', :form_class => "form-subtask", :method => :get %>
+                </td>
+                <td style="padding-left: 10px;">
+                  <%= button_to "Poista", subtask, :class => 'btn btn-default btn-exercise btn-del multiline widthAuto', :form_class => "form-subtask-del", :method => :delete, data: { confirm: 'Haluatko varmasti poistaa alakohdan?' } %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="panel panel-default panel-grey">
+        <div class = "panel-heading panel-heading-grey">
+          Lisää alakohta
+        </div>
+        <div class="panel-body">
+          <%= button_to '+ Teksti', new_task_text_path,  :class => 'btn btn-default btn-exercise btn-subtask', :form_class => "form-subtask", :method => :get  %>
+          <%= button_to '+ Monivalinta tai radio button', new_multichoice_path,  :class => 'btn btn-default btn-exercise btn-subtask', :form_class => "form-subtask", :method => :get  %>
+          <%= button_to '+ Pohdinta', new_interview_path,  :class => 'btn btn-default btn-exercise btn-subtask', :form_class => "form-subtask", :method => :get  %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-<br>
-<br>
-<div class="panel panel-default panel-grey">
-  <div class = "panel-heading panel-heading-grey">
-    Toimenpiteen perustiedot
-  </div>
-  <div class="panel-body">
-    <%= render 'form' %>
-  </div>
-</div>
-
-<h1>Alakohdat</h1>
-
-<% @task.subtasks.each do |subtask| %>
-    <%= button_to sanitize(subtask.to_s), edit_subtask_path(subtask), :class => 'btn btn-default btn-exercise multiline', :form_class => "form-subtask", :method => :get %>
-<% end %>
-
-<%= button_to '+ Luo uusi tekstimuotoinen alakohta', new_task_text_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
-<%= button_to '+ Luo uusi monivalinta-alakohta', new_multichoice_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
-<%= button_to '+ Luo uusi haastattelu', new_interview_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
-<%= button_to '+ Luo päätöstoimenpide', new_conclusion_path,  :class => 'btn btn-default btn-exercise btn-save', :form_class => "form-subtask", :method => :get  %>
-
 
 <br>
 
@@ -52,4 +65,5 @@
     });
     setAjaxSubmits("#currentTaskTab .form-subtask", "#currentTaskTab", "get");
     setAjaxSubmits("#currentTaskTab .form-show-task", "#currentTaskTab", "get");
+    setAjaxSubmits("#currentTaskTab .form-subtask-del", "#currentTaskTab", "post");
 </script>

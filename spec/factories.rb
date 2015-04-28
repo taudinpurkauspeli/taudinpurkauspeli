@@ -25,6 +25,7 @@ FactoryGirl.define do
   factory :exercise do
     name "Lihanautakuolemat"
     anamnesis "Kuolleita lehmiä: 15"
+    hidden false
   end
 
   factory :task do
@@ -85,6 +86,13 @@ FactoryGirl.define do
     question "Tykkääkö koira nappuloista?"
   end
 
+  factory :conclusion do
+    subtask_id nil
+    exercise_hypothesis_id nil
+    title "Viimekysymys"
+    content "Valitse tästä oikea diagnoosi"
+  end
+
   factory :radiobutton, class: Multichoice do
     subtask_id nil
     question "Kenelle pitää soittaa?"
@@ -100,6 +108,7 @@ FactoryGirl.define do
 
   factory :question do
     question_group_id nil
+    interview_id nil
     title "Oliko lehmällä veljiä?"
     content "Asiakas vastaa, että lehmällä ei ollut veljiä."
     required "required"
@@ -107,12 +116,6 @@ FactoryGirl.define do
 
   factory :question_group do
     title "Lehmätaudit"
-  end
-
-  factory :conclusion do
-    subtask_id nil
-    title "Viimekysymys"
-    content "Valitse tästä oikea diagnoosi"
   end
 
   factory :interview do

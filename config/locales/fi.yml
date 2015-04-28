@@ -61,6 +61,7 @@ fi:
               blank: "on pakollinen"
               wrong_length: "on väärän pituinen"
               taken: "on jo käytössä"
+              invalid: "saa sisältää vain numeroita"
             starting_year:
               blank: "on pakollinen"
         hypothesis:
@@ -100,18 +101,18 @@ fi:
         explanation: "Vastausteksti"
         is_correct_answer: "Oikea vastaus"
         is_correct_answers:
-          allowed: "Sallittu"
-          required: "Pakollinen"
-          wrong: "Väärin"
+          allowed: "Sallittu vaihtoehto"
+          required: "Pakollinen vaihtoehto"
+          wrong: "Väärä vaihtoehto"
       question:
         content: "Vastaus"
         title: "Kysymys"
         required: "Pakollinen kysymys"
         requireds:
-          allowed: "Sallittu"
-          required: "Pakollinen"
-          wrong: "Väärin"
-        question_group_id: Kysymyksen ryhmä
+          allowed: "Sallittu kysymys"
+          required: "Pakollinen kysymys"
+          wrong: "Väärä kysymys"
+        question_group_id: "Kysymyksen ryhmä"
       task:
         name: "Nimi"
       task_text:

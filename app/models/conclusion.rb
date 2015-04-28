@@ -1,4 +1,6 @@
 class Conclusion < ActiveRecord::Base
+	 validates :title, presence: true, length: {minimum: 2}
+
 	belongs_to :subtask
 	belongs_to :exercise_hypothesis
 
@@ -10,4 +12,8 @@ class Conclusion < ActiveRecord::Base
 			return false
 		end
 	end
+
+  def to_s
+    'Päätöstoimenpide'
+  end
 end

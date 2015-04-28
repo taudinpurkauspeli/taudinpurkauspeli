@@ -1,33 +1,53 @@
 <%= render 'messages/messages' %>
-
-<h1>Taudinpurkauspeli</h1>
-<%@exercises.each do |exercise| %>
-  <div class="row">
- 
-      <% if !exercise.hidden? || current_user.try(:admin) %>
-        <%if current_user.nil? %>
-        <div class="col-md-5">
-           <%= button_to exercise.name, '', :class => 'btn disabled btn-exercise', :method => :get %>
-         </div>
-        <% else %>
-         <div class="col-md-5">
-         <%= button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get %>
-         </div>
-
-         <% unless current_user.try(:admin) %>
-         <div class="col-md-5">   <br>
-              <div class ="progressbar <%= 'completed' if current_user.get_percent_of_completed_tasks_of_exercise(exercise) == 100 %>" >
-                <% if current_user.get_percent_of_completed_tasks_of_exercise(exercise) < 100 %>
-                  <div class = "progressbar progress" style = "width: <%= 100 - current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>%;"></div>
-                <% end %>
-              </div>
-              <span class = "progress-percent"><%= current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>%</span>
+<br />
+<div class = "row">
+  <div class = "col-md-8">
+    <h1>Taudinpurkauspeli</h1>
+  </div>
+  <%if current_user.nil? %>
+      <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Kirjaudu sisään tai luo uusi käyttäjätunnus pelataksesi peliä.">Ohje</a>
+      </div>
+  <% else %>
+      <% if current_user.try(:admin) %>
+          <div class = "col-md-4">
+            <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Voit hiirellä klikkaamalla siirtyä muokkaamaan vanhaa casea tai luoda uuden casen. Opiskelijoiden seurantaan pääsee sivun alareunan napista hiirellä klikkaamalla. Kopio nappi kopio koko vanhan casen uuden pohjaksi.">Ohje</a>
           </div>
-          <% end %>
+      <% else %>
+          <div class = "col-md-4">
+            <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Valitse haluamasi taudinpurkauspeli hiirellä klikkaamalla. Viereisessä palkissa näkyy edistymisesi kyseisessä taudinpurkauspelissä. Oikean yläreunan linkistä pääset muokkaamaan omia tietojasi.">Ohje</a>
+          </div>
+      <% end %>
+  <% end %>
+</div>
+
+<%@exercises.each do |exercise| %>
+    <div class="row">
+
+      <% if !exercise.hidden? || current_user.try(:admin) %>
+          <%if current_user.nil? %>
+              <div class="col-md-5">
+                <%= button_to exercise.name, '', :class => 'btn disabled btn-exercise', :method => :get %>
+              </div>
+          <% else %>
+              <div class="col-md-5">
+                <%= button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get %>
+              </div>
+
+              <% unless current_user.try(:admin) %>
+                  <div class="col-md-5">   <br>
+                    <div class ="progressbar <%= 'completed' if current_user.get_percent_of_completed_tasks_of_exercise(exercise) == 100 %>" >
+                      <% if current_user.get_percent_of_completed_tasks_of_exercise(exercise) < 100 %>
+                          <div class = "progressbar progress" style = "width: <%= 100 - current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>%;"></div>
+                      <% end %>
+                    </div>
+                    <span class = "progress-percent"><%= current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>%</span>
+                  </div>
+              <% end %>
 
           <% end%>
       <% end %>
-    
+
       <% if current_user.try(:admin) %>
 
           <div class="col-md-1">
@@ -37,9 +57,16 @@
           <div class="col-md-1">
             <%= button_to 'Kopioi', 'exercises/' + exercise.id.to_s + '/dup', :class => 'btn btn-default btn-exercise widthAuto', :method => :post, data: { confirm: 'Haluatko varmasti kopioida koko casen?' }, id: 'exercises/' + exercise.id.to_s + '/dup' %>
           </div>
+          <div class="col-md-1">
+            <% if exercise.hidden? %>
+                <%= button_to 'Tee näkyväksi', 'exercises/' + exercise.id.to_s + '/hide', :class => 'btn btn-default btn-exercise widthAuto', :method => :post, data: { confirm: 'Haluatko varmasti tehdä casen näkyväksi opiskelijoille?' }, id: 'exercises/' + exercise.id.to_s + '/hide' %>
+            <% else %>
+                <%= button_to 'Piilota opiskelijoilta', 'exercises/' + exercise.id.to_s + '/hide', :class => 'btn btn-default btn-exercise widthAuto', :method => :post, id: 'exercises/' + exercise.id.to_s + '/hide' %>
+            <% end %>
+          </div>
 
       <%end%>
-  </div>
+    </div>
 <% end %>
 <div class="row">
   <div class="col-md-5">
@@ -51,16 +78,13 @@
 <br />
 <div class="row">
   <div class="col-md-5">
-    <%= button_to 'Kuvapankki', images_path, :class => 'btn btn-default btn-exercise', :method => :get if current_user.try(:admin)%>
-  </div>
-</div>
-<br />
-<div class="row">
-  <div class="col-md-5"> 
     <%= button_to 'Opiskelijoiden seuranta', users_path, :class => 'btn btn-default btn-exercise', :method => :get if current_user.try(:admin)%>
   </div>
 </div>
 <br />
 <br />
 
+<script>
+    $('[data-toggle="popover"]').popover();
+</script>
 

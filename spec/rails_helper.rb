@@ -25,6 +25,8 @@ ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 Capybara.javascript_driver = :poltergeist
 Capybara.default_wait_time = 5
 
+Capybara.ignore_hidden_elements = true
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

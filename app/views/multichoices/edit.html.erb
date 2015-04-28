@@ -1,22 +1,29 @@
 <%= render 'messages/messages' %>
 
-<h1>Muokkaa monivalintakysymystä</h1>
+<div class = "row">
+	<div class = "col-md-8">
+	</div>
+	<div class = "col-md-4">
+		<%= render 'general_partials/back_to_task_button' %>
+	</div>
+</div>
 
-<div class = "panel panel-default panel-grey">
+<div class = "panel panel-default panel-grey widthAuto">
   <div class = "panel-heading panel-heading-grey">
-    Monivalintakysymyksen perustiedot
+    <h4>Monivalintakysymyksen muokkaus</h4>
   </div>
   <div class = "panel-body">
     <%= render 'form' %>
   </div>
+
+
 </div>
-
-<h1>Vastausvaihtoehdot</h1>
-
-<% @multichoice.options.each do |option| %>
-  <%= render 'edit_option', { option:option } %>
-<% end %>
+  <% @multichoice.options.each do |option| %>
+    <%= render 'edit_option', { option:option } %>
+  <% end %>
 <%= render 'new_option' %>
 <script>
-    setAjaxSubmits("#currentTaskTab form", "#currentTaskTab", "post");
+    setAjaxSubmits("#currentTaskTab form:not(.form-edit-task)", "#currentTaskTab", "post");
+
+    setAjaxSubmits("#currentTaskTab .form-edit-task", "#currentTaskTab", "get");
 </script>

@@ -18,8 +18,7 @@ end
 
 Given(/^I visit the "(.*?)" page of the case "(.*?)"$/) do |arg1, arg2|
   go_to_case(arg2)
-  click_link(arg1)
-  wait_for_ajax
+  click_and_wait(arg1)
 end
 
 Given(/^cases and tasks have been created$/) do
@@ -28,13 +27,11 @@ Given(/^cases and tasks have been created$/) do
 end
 
 When(/^I click on the link "(.*?)"$/) do |arg1|
-  click_link(arg1)
-  wait_for_ajax
+  click_and_wait(arg1)
 end
 
 When(/^I click on the button "(.*?)"$/) do |arg1|
-  click_button(arg1)
-  wait_for_ajax
+  click_and_wait(arg1)
 end
 
 Then(/^the page should show the content "(.*?)"$/) do |string|

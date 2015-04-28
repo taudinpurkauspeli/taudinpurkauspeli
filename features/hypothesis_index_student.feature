@@ -46,5 +46,5 @@ Feature: Hypothesis list feature
     And there is an exercise that has multiple hypotheses
     And those hypotheses are all checked
     And I go to the hypothesis list of that exercise
-    Then the hypothesis list should be in alphabetical order
+    Then the checked hypothesis list should be in alphabetical order
 

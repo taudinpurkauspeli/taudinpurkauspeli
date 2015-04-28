@@ -9,7 +9,7 @@ class ConclusionsController < ApplicationController
 
 	def new
 		@hypothesis_groups = HypothesisGroup.all
-		@exercise_hypotheses = ExerciseHypothesis.where(exercise: current_task.exercise)
+		@exercise_hypotheses = ExerciseHypothesis.where(exercise: current_exercise)
 		@conclusion = Conclusion.new
 		set_view_layout
 	end
@@ -17,19 +17,21 @@ class ConclusionsController < ApplicationController
 	# GET /conclusions/1/edit
 	def edit
 		@hypothesis_groups = HypothesisGroup.all
-		@exercise_hypotheses = ExerciseHypothesis.where(exercise: current_task.exercise)
+		@exercise_hypotheses = ExerciseHypothesis.where(exercise: @conclusion.subtask.task.exercise)
 		set_view_layout
 	end
 
 	def create
-		@task = Task.find(session[:task_id])
+
+		@task = Task.new(name:conclusion_params[:title], exercise: current_exercise)
+		@task.level = Task.get_highest_level(@task.exercise) + 1
 
 		# This can be done for each different type of subtask in their respective controllers
 		subtask = @task.subtasks.build
 		@conclusion = subtask.build_conclusion(title:conclusion_params[:title], content:conclusion_params[:content], exercise_hypothesis_id:conclusion_params[:exercise_hypothesis_id],)
 
 		respond_to do |format|
-			if @conclusion.save
+			if @conclusion.save & @task.save
 				subtask.save
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Päätöstoimenpide lisättiin onnistuneesti.' }
 				#format.json { render :show, status: :created, location: @multichoice }
@@ -42,8 +44,9 @@ class ConclusionsController < ApplicationController
 	end
 
 	def update
+		@task = @conclusion.subtask.task
 		respond_to do |format|
-			if @conclusion.update(conclusion_params)
+			if @conclusion.update(conclusion_params) & @task.update(name:conclusion_params[:title])
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Päätöstoimenpide päivitettiin onnistuneesti.' }
 			else
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), alert: 'Toimenpiteen päivitys epäonnistui.' }
@@ -53,9 +56,11 @@ class ConclusionsController < ApplicationController
 	end
 
 	def destroy
+		@task = @conclusion.subtask.task
+		@task.destroy
 		@conclusion.destroy
 		respond_to do |format|
-			format.html { redirect_to tasks_path(:layout => get_layout), notice: 'Taskin poisto onnistui!' }
+			format.html { redirect_to tasks_path(:layout => get_layout), notice: 'Päätöstoimenpide poistettu!' }
 			format.json { head :no_content }
 		end
 	end

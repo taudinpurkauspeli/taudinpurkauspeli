@@ -1,9 +1,18 @@
 <%= render 'messages/messages' %>
 
-<h1>Muokkaa tekstiä</h1>
+<div class = "row">
+	<div class = "col-md-8">
+		<h1>Muokkaa tekstiä</h1>
+	</div>
+	<div class = "col-md-4">
+		<%= render 'general_partials/back_to_task_button' %>
+	</div>
+</div>
 
 <%= render 'form' %>
 
 <script>
-    setAjaxSubmits("#currentTaskTab #form-save-task-text", "#currentTaskTab", "post");
+  setAjaxSubmits("#currentTaskTab #form-save-task-text", "#currentTaskTab", "post");
+
+  setAjaxSubmits("#currentTaskTab .form-edit-task", "#currentTaskTab", "get");
 </script>
