@@ -1,17 +1,17 @@
 # Taudinpurkauspeli
 
-## Toimivat versiot
+Taudinpurkauspeli on eläinlääketieteen opiskelijoille tarkoitettu web-sovellus, jolla luodaan pelinomainen oppimisympäristö opiskelijoiden käyttöön. Pelissä ratkotaan erilaisia tautitapauksia ja pyritään määrittämään niiden diagnoosi pelaamisen aikana kerättävien lisätietojen avulla.
 
-Master:
-http://taudinpurkauspeli.herokuapp.com/
+Pelin avulla opiskelijat voivat ratkaista aitoja ammatillisia ongelmia, joita he eivät Suomen hyvän eläintautitilanteen vuoksi pääse käytännössä harjoittelemaan, mutta joiden vastustamiseksi heillä täytyy olla valmiuksia.
 
-Development:
-http://taudinpurkauspeli-development.herokuapp.com/
+## Sovelluksen asentaminen Herokuun
 
-## Dokumentteja
+Sovellus asentuu sulavasti [Herokuun](http://www.heroku.com) luomalla uusi Heroku-app Git-repositorion juuressa.
 
-Backlogit: https://docs.google.com/spreadsheets/d/1uzcWafa0DXnwDLg7TLTAhEu_sILRR4lXjvoTdJw3hfs/edit?usp=sharing
+Sovellus käyttää kuvien säilömiseen [AWS S3](http://aws.amazon.com) -palvelua, jota varten käyttäjällä tulee olla valmiina AWS-tili ja S3 bucket s3-eu-central-1 -palvelimella. Mikäli kuvien hostaamiseen käytetään jotakin muuta palvelinta, tämän voi muuttaa paperclip.rb-tiedostossa.
 
-Daily scrum: https://docs.google.com/document/d/1hBdMOXDwbCJnHNBZdbMCOd-fDwonCP4n5szyiBXLDzw/edit?usp=sharing
+Paperclip tarvitsee käyttäjän AWS-tiedot, jotka haetaan sovelluksen käyttöön Herokun config-muuttujista. Ne asetetaan seuraavasti:
 
-[![Build Status](https://api.travis-ci.org/taudinpurkauspeli/taudinpurkauspeli.svg?branch=master)](https://travis-ci.org/taudinpurkauspeli/taudinpurkauspeli)
+```
+heroku config:set S3_BUCKET_NAME=foo AWS_ACCESS_KEY_ID=bar AWS_SECRET_ACCESS_KEY=baz AWS_REGION=qux
+```
