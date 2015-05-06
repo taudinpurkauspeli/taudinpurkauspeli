@@ -1,10 +1,12 @@
 # Taudinpurkauspeli
 
+Taudinpurkauspeli on eläinlääketieteen opiskelijoille tarkoitettu selaimessa pelattava peli, jossa opetellaan eläintautien diagnosointia interaktiivisessa ympäristössä. Pelissä ratkotaan erilaisia tautitapauksia ja pyritään määrittämään niiden diagnoosi pelaamisen aikana kerättävien lisätietojen avulla. Tarkoituksena pelissä on opettaa opiskelijoille menetelmiä, joiden avulla eläintauteja voidaan diagnosoida. 
+
 ## Sovelluksen asentaminen Herokuun
 
-Sovellus asentuu sulavasti Herokuun luomalla uusi Heroku-app Git-repositorion juuressa.
+Sovellus asentuu sulavasti [Herokuun](http://www.heroku.com) luomalla uusi Heroku-app Git-repositorion juuressa.
 
-Sovellus käyttää kuvien säilömiseen AWS S3 -palvelua, jota varten käyttäjällä tulee olla valmiina AWS-tili ja S3 bucket s3-eu-central-1 -palvelimella. Mikäli kuvien hostaamiseen käytetään jotakin muuta palvelinta, tämän voi muuttaa paperclip.rb-tiedostossa.
+Sovellus käyttää kuvien säilömiseen [AWS S3](http://aws.amazon.com) -palvelua, jota varten käyttäjällä tulee olla valmiina AWS-tili ja S3 bucket s3-eu-central-1 -palvelimella. Mikäli kuvien hostaamiseen käytetään jotakin muuta palvelinta, tämän voi muuttaa paperclip.rb-tiedostossa.
 
 Paperclip tarvitsee käyttäjän AWS-tiedot, jotka haetaan sovelluksen käyttöön Herokun config-muuttujista. Ne asetetaan seuraavasti:
 
