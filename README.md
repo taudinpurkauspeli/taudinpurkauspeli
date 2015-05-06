@@ -1,17 +1,13 @@
 # Taudinpurkauspeli
 
-## Toimivat versiot
+## Sovelluksen asentaminen Herokuun
 
-Master:
-http://taudinpurkauspeli.herokuapp.com/
+Sovellus asentuu sulavasti Herokuun luomalla uusi Heroku-app Git-repositorion juuressa.
 
-Development:
-http://taudinpurkauspeli-development.herokuapp.com/
+Sovellus käyttää kuvien säilömiseen AWS S3 -palvelua, jota varten käyttäjällä tulee olla valmiina AWS-tili ja S3 bucket s3-eu-central-1 -palvelimella. Mikäli kuvien hostaamiseen käytetään jotakin muuta palvelinta, tämän voi muuttaa paperclip.rb-tiedostossa.
 
-## Dokumentteja
+Paperclip tarvitsee käyttäjän AWS-tiedot, jotka haetaan sovelluksen käyttöön Herokun config-muuttujista. Ne asetetaan seuraavasti:
 
-Backlogit: https://docs.google.com/spreadsheets/d/1uzcWafa0DXnwDLg7TLTAhEu_sILRR4lXjvoTdJw3hfs/edit?usp=sharing
-
-Daily scrum: https://docs.google.com/document/d/1hBdMOXDwbCJnHNBZdbMCOd-fDwonCP4n5szyiBXLDzw/edit?usp=sharing
-
-[![Build Status](https://api.travis-ci.org/taudinpurkauspeli/taudinpurkauspeli.svg?branch=master)](https://travis-ci.org/taudinpurkauspeli/taudinpurkauspeli)
+```
+heroku config:set S3_BUCKET_NAME=foo AWS_ACCESS_KEY_ID=bar AWS_SECRET_ACCESS_KEY=baz AWS_REGION=qux
+```
