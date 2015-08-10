@@ -21,8 +21,19 @@ test: &test
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+  database: taudinpurkauspeli_production
+  username: taudinpurkauspeli
+  password: <%= ENV['TAUDINPURKAUSPELI_DATABASE_PASSWORD'] %>
+
+
+#production:
+#  <<: *default
+#  database: db/production.sqlite3
 
 cucumber:
   <<: *test
