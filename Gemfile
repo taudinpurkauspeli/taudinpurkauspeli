@@ -31,7 +31,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
 
 # Text editor
-gem 'ckeditor'
+gem 'ckeditor', '4.1.1'
 gem 'responders'
 gem "non-stupid-digest-assets"
 gem 'rails-html-sanitizer'
