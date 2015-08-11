@@ -29,6 +29,7 @@ production:
   database: taudinpurkauspeli_production
   username: taudinpurkauspeli
   password: <%= ENV['TAUDINPURKAUSPELI_DATABASE_PASSWORD'] %>
+  template: template0
 
 
 #production:
