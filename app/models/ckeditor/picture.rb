@@ -1,5 +1,10 @@
 class Ckeditor::Picture < Ckeditor::Asset
   has_attached_file :data,
+                    :url  => "/ckeditor_assets/pictures/:id/:style_:basename.:extension",
+                    :path => ":rails_root/public/ckeditor_assets/pictures/:id/:style_:basename.:extension",
+                    :styles => { :content => '800>', :thumb => '118x100#' }
+
+=begin
                     :styles => { :content => '1070>', :thumb => '100x100#' },
                     :storage => :s3,
                     :s3_credentials => {
@@ -9,6 +14,7 @@ class Ckeditor::Picture < Ckeditor::Asset
                     },
                     :path => ":attachment/:id/:style.:extension",
                     :url => "http://s3-eu-central-1.amazonaws.com/taudinpurkauspeli/"
+=end
 
   validates_attachment_presence :data
   validates_attachment_size :data, :less_than => 2.megabytes
