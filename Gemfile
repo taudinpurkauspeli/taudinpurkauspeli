@@ -82,7 +82,19 @@ group :development do
   # For showing speed/database queries
  # gem 'rack-mini-profiler'
 
+  #Automating deployments with Capistrano
+
+  gem 'capistrano'
+  gem 'capistrano-bundler', '>= 1.1.0'
+  gem 'capistrano-passenger', '>= 0.1.1'
+
+  # Remove the following if your app does not use Rails
+  gem 'capistrano-rails'
+
+  # Remove the following if your server does not use RVM
+  gem 'capistrano-rvm'
 end
+
 
 group :development, :test do
 
