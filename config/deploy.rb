@@ -43,7 +43,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 
 set :rails_env, 'production'
 
-set :bundle_env_variables, { rails_env: production }
+set :bundle_env_variables, { rails_env: "production" }
 
 set :rvm_ruby_version, '2.2.0'
 
