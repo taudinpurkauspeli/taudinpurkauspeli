@@ -11,6 +11,9 @@ set :repo_url, 'git@github.com:taudinpurkauspeli/taudinpurkauspeli.git'
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/data/var/www/taudinpurkauspeli/code'
 
+set :stages, ["staging", "production"]
+set :default_stage, "production"
+
 # Default value for :scm is :git
 # set :scm, :git
 
