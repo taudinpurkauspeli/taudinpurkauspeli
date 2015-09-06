@@ -15,9 +15,9 @@ describe "Conclusion page for student", js:true do
   let!(:hypothesis2){FactoryGirl.create(:hypothesis, name: "Kurkkukipu", hypothesis_group:hypothesis_group2)}
   let!(:hypothesis3){FactoryGirl.create(:hypothesis, hypothesis_group:hypothesis_group2)}
 
-  let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, exercise:exercise, hypothesis:hypothesis, task:task)}
-  let!(:exercise_hypothesis2){FactoryGirl.create(:exercise_hypothesis, exercise:exercise, hypothesis:hypothesis2, task:task)}
-  let!(:exercise_hypothesis3){FactoryGirl.create(:exercise_hypothesis, exercise:exercise, hypothesis:hypothesis3, task:task)}
+  let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, exercise:exercise, hypothesis:hypothesis, task:task, explanation:"Bakteeritauti on tosiaan kyseessä!")}
+  let!(:exercise_hypothesis2){FactoryGirl.create(:exercise_hypothesis, exercise:exercise, hypothesis:hypothesis2, task:task, explanation:"Kurkkukipu ei aiheuta tällaisia oireita!")}
+  let!(:exercise_hypothesis3){FactoryGirl.create(:exercise_hypothesis, exercise:exercise, hypothesis:hypothesis3, task:task, explanation:"")}
 
   let!(:conclusion_task){FactoryGirl.create(:task, name: "Diagnoosi", exercise_id:exercise.id)}
   let!(:conclusion_subtask){FactoryGirl.create(:subtask, task_id:conclusion_task.id)}
@@ -51,7 +51,7 @@ describe "Conclusion page for student", js:true do
       it "one wrong answer" do
         expect {
           click_and_wait("Kurkkukipu")
-        }.to change(CompletedTask, :count).by(0)
+        }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content "Hyvä, väärä työhypoteesi poissuljettu!"
 
@@ -64,17 +64,12 @@ describe "Conclusion page for student", js:true do
       end
 
       it "all wrong answers" do
-        expect {
-          click_and_wait("Kurkkukipu")
-        }.to change(CheckedHypothesis, :count).by(1)
+        click_and_wait("Kurkkukipu")
+        click_and_wait("Virustauti")
 
         expect {
-          click_and_wait("Virustauti")
-        }.to change(CheckedHypothesis, :count).by(1)
-        
-        expect {
           click_and_wait("Bakteeritauti")
-        }.to change(CheckedHypothesis, :count).by(1)
+        }.to change(CompletedTask, :count).by(1)
 
         expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Bakteeritauti. Mitä sinun tulee vielä tehdä?"
         # expect(page).to have_content 'Toimenpide suoritettu!'
@@ -82,27 +77,60 @@ describe "Conclusion page for student", js:true do
 
     end
 
-    # describe "should not be able to complete conclusion task" do
-    #   it "without any questions asked" do
-    #     expect {
-    #       click_and_wait('Jatka')
-    #     }.not_to change(CompletedTask, :count)
-    #
-    #     expect(page).to have_content 'Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!'
-    #   end
-    #
-    #   it "when not all right questions are asked" do
-    #     click_and_wait('ask_question_1')
-    #     click_and_wait('ask_question_4')
-    #
-    #     expect {
-    #       click_and_wait('Jatka')
-    #     }.not_to change(CompletedTask, :count)
-    #
-    #     expect(page).to have_content 'Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!'
-    #   end
-    # end
-    #
+    describe "should see the explanations for" do
+      it "wrong exercise hypotheses" do
+        click_and_wait("Kurkkukipu")
+
+        expect(page).to have_content "Kurkkukipu ei aiheuta tällaisia oireita!"
+        expect(page).to have_content "Kurkkukipu"
+
+        click_and_wait("Virustauti")
+
+        expect(page).to have_content "Virustauti"
+      end
+
+      it "the right exercise hypothesis" do
+
+        click_and_wait("Bakteeritauti")
+
+        expect(page).to have_content "Bakteeritauti on tosiaan kyseessä!"
+      end
+    end
+
+    describe "when clicking" do
+      describe "the right exercise hypothesis " do
+        it "all remaining wrong exercise hypotheses should be checked" do
+          expect {
+            click_and_wait("Bakteeritauti")
+          }.to change(CheckedHypothesis, :count).by(3)
+        end
+
+        it "after wrong exercise hypotheses all should be checked one by one" do
+          expect {
+            click_and_wait("Kurkkukipu")
+          }.to change(CheckedHypothesis, :count).by(1)
+
+          expect {
+            click_and_wait("Virustauti")
+          }.to change(CheckedHypothesis, :count).by(1)
+
+          expect {
+            click_and_wait("Bakteeritauti")
+          }.to change(CheckedHypothesis, :count).by(1)
+        end
+      end
+
+      it "wrong exercise hypotheses they should be checked" do
+        expect {
+          click_and_wait("Kurkkukipu")
+        }.to change(CheckedHypothesis, :count).by(1)
+
+        expect {
+          click_and_wait("Virustauti")
+        }.to change(CheckedHypothesis, :count).by(1)
+      end
+    end
+
 
     describe "after completing conclusion task" do
 

@@ -2,5 +2,7 @@
 	<div class="col-md-9">
 		<h4><%= subtask.conclusion.title %></h4>
 		<p>Onnittelut! Sait selville, että kyseessä oli <%= subtask.conclusion.exercise_hypothesis.hypothesis.name %>. Mitä sinun tulee vielä tehdä? </p>
+
+        <p>Selitys oikealle diagnoosille: <%= subtask.conclusion.exercise_hypothesis.explanation.html_safe if !subtask.conclusion.exercise_hypothesis.explanation.nil? %></p>
 	</div>
 </div>
