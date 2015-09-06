@@ -25,7 +25,6 @@ describe "Conclusion page for student", js:true do
 
   let!(:additional_dummy_task_to_prevent_ex_completion){FactoryGirl.create(:task, name:"Dummy task", exercise:exercise)}
 
-=begin
   describe "student" do
 
     before :each do
@@ -36,109 +35,89 @@ describe "Conclusion page for student", js:true do
       click_and_wait(conclusion_task.name)
     end
 
-    describe "should be able to complete conclusion task" do
-      it "with required questions asked" do
-        click_and_wait('ask_question_1')
-        expect(page).to have_content question.content
-        click_and_wait('ask_question_3')
-        expect(page).to have_content question3.content
+    describe "should be able to complete conclusion task after clicking" do
+      it "directly the right answer" do
+
         expect {
-          click_and_wait('Jatka')
+          click_and_wait("Bakteeritauti")
         }.to change(CompletedTask, :count).by(1)
 
-        expect(page).to have_content 'Toimenpide suoritettu!'
+        expect(page).to have_content "Hyvä, selvitit oikean diagnoosin!"
+        expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Bakteeritauti. Mitä sinun tulee vielä tehdä?"
+        #expect(page).to have_content 'Toimenpide suoritettu!'
       end
 
-      it "with right and allowed questions asked" do
-        click_and_wait('ask_question_1')
-        click_and_wait('ask_question_3')
-        click_and_wait('ask_question_4')
-        expect(page).to have_content question4.content
+
+      it "one wrong answer" do
         expect {
-          click_and_wait('Jatka')
+          click_and_wait("Kurkkukipu")
+        }.to change(CompletedTask, :count).by(0)
+
+        expect(page).to have_content "Hyvä, väärä työhypoteesi poissuljettu!"
+
+        expect {
+          click_and_wait("Bakteeritauti")
         }.to change(CompletedTask, :count).by(1)
 
-        expect(page).to have_content 'Toimenpide suoritettu!'
+        expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Bakteeritauti. Mitä sinun tulee vielä tehdä?"
+        # expect(page).to have_content 'Toimenpide suoritettu!'
       end
 
-      it "with right and wrong questions asked" do
-        click_and_wait('ask_question_1')
-        click_and_wait('ask_question_3')
-        click_and_wait('ask_question_2')
-        expect(page).to have_content question2.content
+      it "all wrong answers" do
         expect {
-          click_and_wait('Jatka')
-        }.to change(CompletedTask, :count).by(1)
+          click_and_wait("Kurkkukipu")
+        }.to change(CheckedHypothesis, :count).by(1)
 
-        expect(page).to have_content 'Toimenpide suoritettu!'
+        expect {
+          click_and_wait("Virustauti")
+        }.to change(CheckedHypothesis, :count).by(1)
+        
+        expect {
+          click_and_wait("Bakteeritauti")
+        }.to change(CheckedHypothesis, :count).by(1)
+
+        expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Bakteeritauti. Mitä sinun tulee vielä tehdä?"
+        # expect(page).to have_content 'Toimenpide suoritettu!'
       end
 
     end
 
-    describe "should not be able to complete conclusion task" do
-      it "without any questions asked" do
-        expect {
-          click_and_wait('Jatka')
-        }.not_to change(CompletedTask, :count)
-
-        expect(page).to have_content 'Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!'
-      end
-
-      it "when not all right questions are asked" do
-        click_and_wait('ask_question_1')
-        click_and_wait('ask_question_4')
-
-        expect {
-          click_and_wait('Jatka')
-        }.not_to change(CompletedTask, :count)
-
-        expect(page).to have_content 'Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!'
-      end
-    end
+    # describe "should not be able to complete conclusion task" do
+    #   it "without any questions asked" do
+    #     expect {
+    #       click_and_wait('Jatka')
+    #     }.not_to change(CompletedTask, :count)
+    #
+    #     expect(page).to have_content 'Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!'
+    #   end
+    #
+    #   it "when not all right questions are asked" do
+    #     click_and_wait('ask_question_1')
+    #     click_and_wait('ask_question_4')
+    #
+    #     expect {
+    #       click_and_wait('Jatka')
+    #     }.not_to change(CompletedTask, :count)
+    #
+    #     expect(page).to have_content 'Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!'
+    #   end
+    # end
+    #
 
     describe "after completing conclusion task" do
 
       before :each do
-        click_and_wait('ask_question_1')
-        click_and_wait('ask_question_3')
-        click_and_wait('Jatka')
+        click_and_wait("Bakteeritauti")
         click_and_wait('Toimenpiteet')
         click_and_wait(conclusion_task.name)
       end
 
-      it "should be able to view questions and contents of the conclusion" do
-        expect(AskedQuestion.count).to eq(2)
-
-        expect(page).to have_button question.title
-        click_and_wait('asked_question_1')
-        expect(page).to have_content question.content
-
-        expect(page).to have_button question2.title
-        click_and_wait('ask_question_2')
-        expect(page).to have_content question2.content
-
-        expect(page).to have_button question3.title
-        click_and_wait('asked_question_3')
-        expect(page).to have_content question3.content
-
-        expect(page).to have_button question4.title
-        click_and_wait('ask_question_4')
-        expect(page).to have_content question4.content
+      it "should be able to view the contents of the conclusion" do
+        expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Bakteeritauti. Mitä sinun tulee vielä tehdä?"
       end
 
-      it "should be able to ask more questions" do
-        expect(AskedQuestion.count).to eq(2)
-
-        click_and_wait('ask_question_2')
-        expect(page).to have_content question2.content
-
-        click_and_wait('ask_question_4')
-        expect(page).to have_content question4.content
-
-        expect(AskedQuestion.count).to eq(4)
-      end
     end
   end
-=end
+
 end
 
