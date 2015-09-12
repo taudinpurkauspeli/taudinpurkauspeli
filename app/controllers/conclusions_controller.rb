@@ -33,11 +33,11 @@ class ConclusionsController < ApplicationController
 		respond_to do |format|
 			if @conclusion.save & @task.save
 				subtask.save
-				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Päätöstoimenpide lisättiin onnistuneesti.' }
+				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide lisättiin onnistuneesti!' }
 				#format.json { render :show, status: :created, location: @multichoice }
 			else
 				## TODO redirect task show
-				format.html { redirect_to new_conclusion_path(:layout => get_layout), alert: 'Päätöstoimenpiteen lisääminen epäonnistui.' }
+				format.html { redirect_to new_conclusion_path(:layout => get_layout), alert: 'Diagnoositoimenpiteen lisääminen epäonnistui!' }
 				format.json { render json: @conclusion.errors, status: :unprocessable_entity }
 			end
 		end
@@ -47,9 +47,9 @@ class ConclusionsController < ApplicationController
 		@task = @conclusion.subtask.task
 		respond_to do |format|
 			if @conclusion.update(conclusion_params) & @task.update(name:conclusion_params[:title])
-				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Päätöstoimenpide päivitettiin onnistuneesti.' }
+				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide päivitettiin onnistuneesti!' }
 			else
-				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), alert: 'Toimenpiteen päivitys epäonnistui.' }
+				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), alert: 'Toimenpiteen päivitys epäonnistui!' }
 				format.json { render json: @conclusion.errors, status: :unprocessable_entity }
 			end
 		end
@@ -59,7 +59,7 @@ class ConclusionsController < ApplicationController
 		@task = @conclusion.subtask.task
 		@task.destroy
 		respond_to do |format|
-			format.html { redirect_to tasks_path(:layout => get_layout), notice: 'Päätöstoimenpide poistettu!' }
+			format.html { redirect_to tasks_path(:layout => get_layout), notice: 'Diagnoositoimenpide poistettu!' }
 			format.json { head :no_content }
 		end
 	end
