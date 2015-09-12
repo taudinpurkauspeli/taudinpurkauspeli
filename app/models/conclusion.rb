@@ -14,6 +14,6 @@ class Conclusion < ActiveRecord::Base
 	end
 
   def to_s
-    'Päätöstoimenpide'
+    'Diagnoositoimenpide'
   end
 end

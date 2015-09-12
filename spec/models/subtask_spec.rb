@@ -79,7 +79,7 @@ RSpec.describe Subtask, type: :model do
         end
 
         it "to_s" do
-          expect(s.to_s).to eq("Päätöstoimenpide: This is a ...")
+          expect(s.to_s).to eq("Diagnoositoimenpide: This is a ...")
         end
       end
     end
