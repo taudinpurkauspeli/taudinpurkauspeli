@@ -49,7 +49,7 @@ class ConclusionsController < ApplicationController
 			if @conclusion.update(conclusion_params) & @task.update(name:conclusion_params[:title])
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide päivitettiin onnistuneesti!' }
 			else
-				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), alert: 'Toimenpiteen päivitys epäonnistui!' }
+				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), alert: 'Diagnoosioimenpiteen päivitys epäonnistui!' }
 				format.json { render json: @conclusion.errors, status: :unprocessable_entity }
 			end
 		end
