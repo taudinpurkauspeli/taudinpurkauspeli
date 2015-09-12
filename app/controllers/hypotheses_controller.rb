@@ -16,7 +16,7 @@ class HypothesesController < ApplicationController
       #new instances
       @new_exercise_hypothesis = ExerciseHypothesis.new
       @new_hypothesis_group = HypothesisGroup.new
-      @new_hypothesis =Hypothesis.new
+      @new_hypothesis = Hypothesis.new
       @new_checked_hypothesis = CheckedHypothesis.new
     else
       redirect_to exercises_path, alert: 'Valitse ensin case, jota haluat tarkastella!'
