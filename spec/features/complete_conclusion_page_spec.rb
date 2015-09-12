@@ -38,6 +38,8 @@ describe "Conclusion page for student", js:true do
     describe "should be able to see" do
 
       it "the title and the content of the conclusion" do
+
+
         expect(page).to have_content "Diagnoosi"
         expect(page).to have_content "Valitse tästä oikea diagnoosi"
       end
@@ -52,6 +54,13 @@ describe "Conclusion page for student", js:true do
 
         it "checking one wrong hypothesis" do
           click_and_wait("Kurkkukipu")
+          expect(page).to have_button "Bakteeritauti"
+          expect(page).to have_button "Kurkkukipu"
+          expect(page).to have_button "Virustauti"
+        end
+
+        it "checking the right hypothesis" do
+          click_and_wait("Bakteeritauti")
           expect(page).to have_button "Bakteeritauti"
           expect(page).to have_button "Kurkkukipu"
           expect(page).to have_button "Virustauti"
@@ -157,7 +166,6 @@ describe "Conclusion page for student", js:true do
       end
     end
 
-
     describe "after completing conclusion task" do
 
       before :each do
@@ -168,6 +176,10 @@ describe "Conclusion page for student", js:true do
 
       it "should be able to view the contents of the conclusion" do
         expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Bakteeritauti. Mitä sinun tulee vielä tehdä?"
+      end
+
+      it "should be able to view the explanation for right conclusion" do
+        expect(page).to have_button "Bakteeritauti"
       end
 
     end
