@@ -9,15 +9,15 @@
   </div>
   <div class="row">
     <div class="col-md-4">
-      <% if !@wrong_conclusion.nil? %>
-          <p><%= @wrong_conclusion.hypothesis.name %></p>
-          <p><%= @wrong_conclusion.explanation.html_safe if !@wrong_conclusion.explanation.nil? %>
-      <% end %>
+      <%# if !@wrong_conclusion.nil? %>
+      <p><%#= @wrong_conclusion.hypothesis.name %></p>
+      <p><%#= @wrong_conclusion.explanation.html_safe if !@wrong_conclusion.explanation.nil? %>
+        <%# end %>
     </div>
   </div>
 
   <div class="col-md-9">
-    <% @exercise_hypotheses.each do |exhyp| %>
+    <% @conclusion_exercise_hypotheses.each do |exhyp| %>
         <div class="row">
           <div class="col-md-9">
             <% if !current_user.has_checked_hypothesis?(exhyp) %>
@@ -25,6 +25,19 @@
                     <%= hidden_field_tag :exhyp_id, exhyp.id %>
                     <%= submit_tag(exhyp.name, :class => "btn btn-default multiline width95 floatRight") unless current_user.try(:admin) %>
                 <% end %>
+            <% else %>
+                <input id="checked_hypothesis_<%= exhyp.id.to_s %>" class="btn btn-default btn-checked multiline" type="button" value="<%= exhyp.hypothesis.name %>" onclick='showExHypExplanation("#exhyp_explanation_<%= exhyp.id.to_s %>");'></input>
+
+                <% if @wrong_conclusion.id.to_s == exhyp.id.to_s %>
+                    <div class = "col-md-1">
+                      <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>"><%= exhyp.get_explanation.html_safe %></div>
+                    </div>
+                <% else %>
+                    <div class = "col-md-1">
+                      <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>" style="display:none;"><%= exhyp.get_explanation.html_safe %></div>
+                    </div>
+                <% end %>
+
             <% end %>
           </div>
         </div>

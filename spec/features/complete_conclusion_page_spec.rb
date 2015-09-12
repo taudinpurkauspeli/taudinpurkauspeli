@@ -35,6 +35,32 @@ describe "Conclusion page for student", js:true do
       click_and_wait(conclusion_task.name)
     end
 
+    describe "should be able to see" do
+
+      it "the title and the content of the conclusion" do
+        expect(page).to have_content "Diagnoosi"
+        expect(page).to have_content "Valitse tästä oikea diagnoosi"
+      end
+
+      it "all remaining hypotheses" do
+        expect(page).to have_button "Bakteeritauti"
+        expect(page).to have_button "Kurkkukipu"
+        expect(page).to have_button "Virustauti"
+      end
+
+      describe "all hypotheses after" do
+
+        it "checking one wrong hypothesis" do
+          click_and_wait("Kurkkukipu")
+          expect(page).to have_button "Bakteeritauti"
+          expect(page).to have_button "Kurkkukipu"
+          expect(page).to have_button "Virustauti"
+        end
+
+      end
+
+    end
+
     describe "should be able to complete conclusion task after clicking" do
       it "directly the right answer" do
 

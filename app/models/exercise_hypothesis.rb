@@ -29,5 +29,13 @@ class ExerciseHypothesis < ActiveRecord::Base
   def name
     return hypothesis.name
   end
+
+  def get_explanation
+    notice = "Työhypoteesi \"" + hypothesis.name + "\" poissuljettu."
+    unless explanation.nil?
+      notice += " Perustelu: " + explanation
+    end
+    return notice
+  end
   
 end

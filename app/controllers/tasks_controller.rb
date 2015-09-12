@@ -49,10 +49,18 @@ class TasksController < ApplicationController
     @last_clicked_question_id = params[:last_clicked_question_id]
 
     @subtasks = @task.subtasks
+
     @new_completed_task = CompletedTask.new
     @new_asked_question = AskedQuestion.new
     @exercise_hypotheses = ExerciseHypothesis.where(exercise: @task.exercise)
 
+    unless @subtasks.first.conclusion.nil?
+      if session[:exhyp_id].nil?
+        session[:exhyp_id] = (@exercise_hypotheses - current_user.exercise_hypotheses).map(&:id)
+      end
+    end
+
+    @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_id])
 
     set_view_layout
 
