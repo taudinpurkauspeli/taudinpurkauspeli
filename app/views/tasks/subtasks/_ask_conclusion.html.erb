@@ -26,7 +26,7 @@
               </div>
 
               <div class = "col-md-8">
-                <% if @wrong_conclusion && (@wrong_conclusion.id.to_s == exhyp.id.to_s) %>
+                <% if @last_clicked_conclusion && (@last_clicked_conclusion.id.to_s == exhyp.id.to_s) %>
                     <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>"><%= exhyp.get_explanation.html_safe %></div>
                 <% else %>
                     <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>" style="display:none;"><%= exhyp.get_explanation.html_safe %></div>

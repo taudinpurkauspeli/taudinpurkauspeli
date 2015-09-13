@@ -29,8 +29,8 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
 
-    unless params[:wrong_conclusion].nil?
-      @wrong_conclusion = ExerciseHypothesis.find(params[:wrong_conclusion])
+    unless params[:last_clicked_conclusion].nil?
+      @last_clicked_conclusion = ExerciseHypothesis.find(params[:last_clicked_conclusion])
     end
 
     unless current_user.try(:admin)
@@ -55,12 +55,12 @@ class TasksController < ApplicationController
     @exercise_hypotheses = ExerciseHypothesis.where(exercise: @task.exercise)
 
     unless @subtasks.first.conclusion.nil?
-      if session[:exhyp_id].nil?
-        session[:exhyp_id] = (@exercise_hypotheses - current_user.exercise_hypotheses).map(&:id)
+      if session[:exhyp_ids].nil?
+        session[:exhyp_ids] = (@exercise_hypotheses - current_user.exercise_hypotheses).map(&:id)
       end
     end
 
-    @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_id])
+    @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
 
     set_view_layout
 
