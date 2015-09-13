@@ -54,12 +54,14 @@ class TasksController < ApplicationController
     @new_asked_question = AskedQuestion.new
     @exercise_hypotheses = ExerciseHypothesis.where(exercise: @task.exercise)
 
-    unless @subtasks.first.conclusion.nil?
+    # Unchecked exercise hypothesis id:s to session
+    unless @task.conclusions.empty?
       if session[:exhyp_ids].nil?
         session[:exhyp_ids] = (@exercise_hypotheses - current_user.exercise_hypotheses).map(&:id)
       end
     end
 
+    # Unchecked exercise hypotheses for conclusion view
     @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
 
     set_view_layout

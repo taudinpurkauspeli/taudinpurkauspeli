@@ -37,7 +37,6 @@ class ConclusionsController < ApplicationController
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide lisättiin onnistuneesti!' }
 				#format.json { render :show, status: :created, location: @multichoice }
 			else
-				## TODO redirect task show
 				format.html { redirect_to new_conclusion_path(:layout => get_layout), alert: 'Diagnoositoimenpiteen lisääminen epäonnistui!' }
 				format.json { render json: @conclusion.errors, status: :unprocessable_entity }
 			end

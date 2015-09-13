@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "New Task page", js:true do
+describe "New Conclusion page", js:true do
   let!(:exercise){FactoryGirl.create(:exercise)}
 
   let!(:hypothesis){FactoryGirl.create(:hypothesis)}
