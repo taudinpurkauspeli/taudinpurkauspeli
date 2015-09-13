@@ -24,7 +24,6 @@
     <% end %>
 <% end %>
 
-<%# if current_user.has_completed?(@task) && @task.conclusions.empty? %>
 <% if current_user.has_completed?(@task) %>
     <%= render 'task_completed' %>
 <% end %>
