@@ -1,10 +1,14 @@
 <% subtask_exhyp = subtask.conclusion.exercise_hypothesis %>
 
+<% if current_user.try(:admin) %>
+    <%= render 'tasks/subtasks/ask_conclusion', { subtask:subtask } %>
+<% end %>
+
 <p>Onnittelut! Sait selville, että kyseessä oli <%= subtask_exhyp.hypothesis.name %>. Mitä sinun tulee vielä tehdä? </p>
 
 <br/>
 
-<% if !@conclusion_exercise_hypotheses.empty?%>
+<% if !@conclusion_exercise_hypotheses.empty? && !current_user.try(:admin)%>
 
     <h4>Poissuljetut työhypoteesit:</h4>
 

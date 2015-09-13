@@ -1,11 +1,19 @@
 <%= render 'messages/messages' %>
 
 <% if current_user.try(:admin) %>
-    <div class = "row">
-      <div class = "col-md-2">
-        <%= button_to 'Palaa muokkaamaan', edit_task_path(@task), :class => 'btn btn-default btn-exercise floatRight',:form_class => "form-edit-task", :method => :get %>
-      </div>
-    </div>
+    <% if @task.conclusions.empty? %>
+        <div class = "row">
+          <div class = "col-md-2">
+            <%= button_to 'Palaa muokkaamaan', edit_task_path(@task), :class => 'btn btn-default btn-exercise floatRight',:form_class => "form-edit-task", :method => :get %>
+          </div>
+        </div>
+    <% else %>
+        <div class = "row">
+          <div class = "col-md-2">
+            <%= button_to 'Palaa muokkaamaan', edit_conclusion_path(@task.conclusions.first), :class => 'btn btn-default btn-exercise floatRight',:form_class => "form-edit-task", :method => :get %>
+          </div>
+        </div>
+    <% end %>
 <% end %>
 
 <h1>Toimenpide: <%= @task.name %></h1>
@@ -16,7 +24,8 @@
     <% end %>
 <% end %>
 
-<% if current_user.has_completed?(@task) && @task.conclusions.empty? %>
+<%# if current_user.has_completed?(@task) && @task.conclusions.empty? %>
+<% if current_user.has_completed?(@task) %>
     <%= render 'task_completed' %>
 <% end %>
 

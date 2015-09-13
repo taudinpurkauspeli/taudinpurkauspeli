@@ -18,6 +18,7 @@ class ConclusionsController < ApplicationController
 	def edit
 		@hypothesis_groups = HypothesisGroup.all
 		@exercise_hypotheses = ExerciseHypothesis.where(exercise: @conclusion.subtask.task.exercise)
+		@task = @conclusion.subtask.task
 		set_view_layout
 	end
 
@@ -72,7 +73,7 @@ class ConclusionsController < ApplicationController
 			else
 				exhyp = ExerciseHypothesis.find(check_conclusion_params[:exhyp_id])
 				current_user.check_hypothesis(exhyp)
-				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :wrong_conclusion => check_conclusion_params[:exhyp_id]), alert: 'Hyvä, väärä työhypoteesi poissuljettu!' }
+				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :wrong_conclusion => check_conclusion_params[:exhyp_id]), notice: 'Hyvä, väärä työhypoteesi poissuljettu!' }
 			end
 		end
 	end

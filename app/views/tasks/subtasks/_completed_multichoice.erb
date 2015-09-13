@@ -12,7 +12,6 @@
 
   <% subtask.multichoice.options.each do |option| %>
       <tr>
-        <%# TODO this is ugly and the logic should be handled in Option.rb, not here %>
         <td class="multichoice
               <% if option.is_correct_answer == "required" %>
                 correct-answer

@@ -9,7 +9,6 @@ describe "New Task page", js:true do
   let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, exercise: exercise, hypothesis: hypothesis)}
   let!(:exercise_hypothesis2){FactoryGirl.create(:exercise_hypothesis, exercise: exercise, hypothesis: hypothesis2)}
 
-
   describe "teacher" do
     let!(:user){FactoryGirl.create(:user)}
 
@@ -83,7 +82,6 @@ describe "New Task page", js:true do
         expect(Task.where(level:1...999).first.name).to eq("Diagnoositoimenpide")
       end
 
-
     end
 
     describe "should not be able to add new conclusion" do
@@ -135,6 +133,16 @@ describe "New Task page", js:true do
 
         it "preview the conclusion" do
 
+          click_and_wait('Esikatsele')
+
+          expect(page).to have_content "Diagnoositoimenpide"
+          expect(page).to have_content "Tehtäväsi:"
+          expect(page).to have_content "Valitse oikea diagnoosi!"
+          expect(page).to have_content "Jäljellä olevat työhypoteesit:"
+          expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Virustauti. Mitä sinun tulee vielä tehdä?"
+          expect(page).to have_content "Oikea diagnoosi:"
+          expect(page).to have_button "Virustauti"
+
         end
 
         describe "update" do
@@ -167,7 +175,6 @@ describe "New Task page", js:true do
           end
 
         end
-
       end
 
       it "should not be able to update conclusion to have no title" do
@@ -178,14 +185,7 @@ describe "New Task page", js:true do
         expect(Conclusion.first.title).to eq("Diagnoositoimenpide")
       end
 
-
-
     end
-
-
-    # TODO: Specs for previewing conclusion
-
   end
-
 end
 

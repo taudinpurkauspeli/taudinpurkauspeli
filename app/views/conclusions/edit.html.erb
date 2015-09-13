@@ -1,22 +1,39 @@
 <%= render 'messages/messages' %>
-<div class="row">
 
-  <br>
-  <div class="col-md-8">
-    <h1>Muokkaa diagnoositoimenpidettä</h1>
-  </div>
+<br/>
 
-  <div class = "col-md-4">
-    <%= button_to 'Poista', @conclusion, :class => 'btn btn-default btn-del widthAuto floatRight', :form => {id: "form-delete-conclusion"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa diagnoositoimenpiteen?' } %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default panel-grey">
+        <div class = "panel-heading panel-heading-grey">
+          <div class="row">
+
+            <div class="col-md-6">
+              <h3>Muokkaa diagnoositoimenpidettä</h3>
+            </div>
+
+            <div class = "col-md-6">
+              <%= button_to 'Poista', @conclusion, :class => 'btn btn-default btn-del widthAuto floatRight margin-em', :form => {id: "form-delete-conclusion"}, :method => :delete, data: { confirm: 'Haluatko varmasti poistaa diagnoositoimenpiteen?' } %>
+              <%= button_to 'Esikatsele', @task, :class => 'btn btn-default widthAuto floatRight margin-em',:form_class => "form-show-task", :method => :get %>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="panel-body">
+          <%= render 'form' %>
+
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 
-<br/>
-
-<%= render 'form' %>
 <script>
-    setAjaxSubmits("#currentTaskTab form:not(#form-delete-conclusion)", "#currentTaskTab", "post", function(){
+    setAjaxSubmits("#currentTaskTab form:not(#form-delete-conclusion, .form-show-task)", "#currentTaskTab", "post", function(){
         loadView("/tasks", "#taskTab");
         loadView("/hypotheses", "#hypothesisTab");
     });
@@ -25,4 +42,6 @@
         closeTab("#currentTaskTab");
         loadView("/hypotheses", "#hypothesisTab");
     });
+
+    setAjaxSubmits("#currentTaskTab .form-show-task", "#currentTaskTab", "get");
 </script>

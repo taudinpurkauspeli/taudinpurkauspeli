@@ -6,35 +6,36 @@
 <h4>Jäljellä olevat työhypoteesit:</h4>
 <br/>
 
-<% @conclusion_exercise_hypotheses.each do |exhyp| %>
+<% unless current_user.try(:admin) %>
+    <% @conclusion_exercise_hypotheses.each do |exhyp| %>
 
-    <div class = "row">
+        <div class = "row">
 
-      <% if !current_user.has_checked_hypothesis?(exhyp) %>
-          <div class = "col-md-4">
-            <%= form_tag("conclusions/" + subtask.conclusion.id.to_s + "/check_answers", method: "post", :id => 'check_exhyp_form') do %>
-                <%= hidden_field_tag :exhyp_id, exhyp.id %>
-                <%= submit_tag(exhyp.name, :class => "btn btn-default multiline") unless current_user.try(:admin) %>
-            <% end %>
-          </div>
+          <% if !current_user.has_checked_hypothesis?(exhyp) %>
+              <div class = "col-md-4">
+                <%= form_tag("conclusions/" + subtask.conclusion.id.to_s + "/check_answers", method: "post", :id => 'check_exhyp_form') do %>
+                    <%= hidden_field_tag :exhyp_id, exhyp.id %>
+                    <%= submit_tag(exhyp.name, :class => "btn btn-default multiline") unless current_user.try(:admin) %>
+                <% end %>
+              </div>
 
-      <% else %>
+          <% else %>
 
-          <div class = "col-md-4">
-            <input id="checked_hypothesis_<%= exhyp.id.to_s %>" class="btn btn-default btn-checked multiline" type="button" value="<%= exhyp.hypothesis.name %>" onclick='showExHypExplanation("#exhyp_explanation_<%= exhyp.id.to_s %>");'></input>
-          </div>
+              <div class = "col-md-4">
+                <input id="checked_hypothesis_<%= exhyp.id.to_s %>" class="btn btn-default btn-checked multiline" type="button" value="<%= exhyp.hypothesis.name %>" onclick='showExHypExplanation("#exhyp_explanation_<%= exhyp.id.to_s %>");'></input>
+              </div>
 
-          <div class = "col-md-8">
-            <% if @wrong_conclusion && (@wrong_conclusion.id.to_s == exhyp.id.to_s) %>
-                <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>"><%= exhyp.get_explanation.html_safe %></div>
-            <% else %>
-                <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>" style="display:none;"><%= exhyp.get_explanation.html_safe %></div>
-            <% end %>
-          </div>
+              <div class = "col-md-8">
+                <% if @wrong_conclusion && (@wrong_conclusion.id.to_s == exhyp.id.to_s) %>
+                    <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>"><%= exhyp.get_explanation.html_safe %></div>
+                <% else %>
+                    <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>" style="display:none;"><%= exhyp.get_explanation.html_safe %></div>
+                <% end %>
+              </div>
 
-      <% end %>
-    </div>
-
+          <% end %>
+        </div>
+    <%end%>
 <%end%>
 
 
