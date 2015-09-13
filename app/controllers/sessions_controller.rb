@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     session[:exercise_id] = nil
     session[:task_id] = nil
-    session[:exhyp_id] = nil
+    session[:exhyp_ids] = nil
     redirect_to :root
   end
 

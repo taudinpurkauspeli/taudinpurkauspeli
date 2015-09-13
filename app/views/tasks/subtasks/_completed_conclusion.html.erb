@@ -1,6 +1,55 @@
-<div class="row">
-	<div class="col-md-9">
-		<h4><%= subtask.conclusion.title %></h4>
-		<p>Onnittelut! Sait selville, että kyseessä oli <%= subtask.conclusion.exercise_hypothesis.hypothesis.name %>. Mitä sinun tulee vielä tehdä? </p>
-	</div>
-</div>
+<% subtask_exhyp = subtask.conclusion.exercise_hypothesis %>
+
+<% if current_user.try(:admin) %>
+    <%= render 'tasks/subtasks/ask_conclusion', { subtask:subtask } %>
+<% end %>
+
+<p>Onnittelut! Sait selville, että kyseessä oli <%= subtask_exhyp.hypothesis.name %>. Mitä sinun tulee vielä tehdä? </p>
+
+<br/>
+
+<% if !@conclusion_exercise_hypotheses.empty? && !current_user.try(:admin)%>
+
+    <h4>Poissuljetut työhypoteesit:</h4>
+
+    <% @conclusion_exercise_hypotheses.each do |exhyp| %>
+
+        <div class = "row">
+          <% if exhyp.id ==  subtask_exhyp.id %>
+              <div class = "col-md-4">
+                <input id="checked_hypothesis_<%= exhyp.id.to_s %>" class="btn btn-default btn-save multiline" type="button" value="<%= exhyp.hypothesis.name %>" onclick='showExHypExplanation("#exhyp_explanation_<%= exhyp.id.to_s %>");'></input>
+              </div>
+
+          <% else %>
+              <div class = "col-md-4">
+                <input id="checked_hypothesis_<%= exhyp.id.to_s %>" class="btn btn-default btn-checked multiline" type="button" value="<%= exhyp.hypothesis.name %>" onclick='showExHypExplanation("#exhyp_explanation_<%= exhyp.id.to_s %>");'></input>
+              </div>
+
+          <% end %>
+          <div class = "col-md-8">
+            <% if @last_clicked_conclusion && (@last_clicked_conclusion.id.to_s == exhyp.id.to_s) %>
+                <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>"><%= exhyp.get_explanation.html_safe %></div>
+            <% else %>
+                <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>" style="display:none;"><%= exhyp.get_explanation.html_safe %></div>
+            <% end %>
+          </div>
+
+        </div>
+
+    <%end%>
+
+<% else %>
+    <h4>Oikea diagnoosi:</h4>
+
+    <div class = "row">
+
+      <div class = "col-md-4">
+        <input id="checked_hypothesis_<%= subtask_exhyp.id.to_s %>" class="btn btn-default btn-save multiline" type="button" value="<%= subtask_exhyp.hypothesis.name %>" onclick='showExHypExplanation("#exhyp_explanation_<%= subtask_exhyp.id.to_s %>");'></input>
+      </div>
+      <div class = "col-md-8">
+        <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= subtask_exhyp.id.to_s %>" style="display:none;"><%= subtask_exhyp.get_explanation.html_safe %></div>
+      </div>
+
+    </div>
+
+<%end%>

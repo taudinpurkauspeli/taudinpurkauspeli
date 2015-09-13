@@ -29,9 +29,8 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
 
-    #such hack
-    unless session[:exhyp_id].nil?
-      @wrong_conclusion = ExerciseHypothesis.find(session[:exhyp_id])
+    unless params[:last_clicked_conclusion].nil?
+      @last_clicked_conclusion = ExerciseHypothesis.find(params[:last_clicked_conclusion])
     end
 
     unless current_user.try(:admin)
@@ -50,10 +49,20 @@ class TasksController < ApplicationController
     @last_clicked_question_id = params[:last_clicked_question_id]
 
     @subtasks = @task.subtasks
+
     @new_completed_task = CompletedTask.new
     @new_asked_question = AskedQuestion.new
     @exercise_hypotheses = ExerciseHypothesis.where(exercise: @task.exercise)
 
+    # Unchecked exercise hypothesis id:s to session
+    unless @task.conclusions.empty?
+      if session[:exhyp_ids].nil?
+        session[:exhyp_ids] = (@exercise_hypotheses - current_user.exercise_hypotheses).map(&:id)
+      end
+    end
+
+    # Unchecked exercise hypotheses for conclusion view
+    @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
 
     set_view_layout
 

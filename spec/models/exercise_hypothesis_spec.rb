@@ -22,6 +22,18 @@ RSpec.describe ExerciseHypothesis, :type => :model do
     end
   end
 
+  describe "with explanation and hypothesis" do
+    let!(:exercise){FactoryGirl.create(:exercise)}
+    let!(:hypothesis){FactoryGirl.create(:hypothesis)}
+
+    let!(:exercise_hypothesis){FactoryGirl.create(:exercise_hypothesis, exercise:exercise, hypothesis:hypothesis)}
+
+    it "returns right explanation" do
+      expect(exercise_hypothesis.get_explanation).to eq('Työhypoteesi "Virustauti" poissuljettu. Perustelu: Anamneesin mukaan tauti on virustauti')
+    end
+
+  end
+
   describe "has prerequisite set"  do
     let!(:exercise){FactoryGirl.create(:exercise)}
     let!(:hypothesis){FactoryGirl.create(:hypothesis)}

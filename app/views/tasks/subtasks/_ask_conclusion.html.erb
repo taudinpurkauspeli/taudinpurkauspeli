@@ -1,35 +1,42 @@
-<div class="row">
-  <div class="row">
-    <div class="col-md-6">
-      <h4><%= subtask.conclusion.title %></h4>
-      <p><%= subtask.conclusion.content.html_safe %></p>
-      
-    </div>
-    <br>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <% if !@wrong_conclusion.nil? %>
-      <p><%= @wrong_conclusion.hypothesis.name %></p>
-      <p><%= @wrong_conclusion.explanation.html_safe %></p>
-      <% end %>
-    </div>
-  </div>
+<h4>Tehtäväsi:</h4>
+<p><%= subtask.conclusion.content.html_safe %></p>
 
-  <div class="col-md-9">
-    <% @exercise_hypotheses.each do |exhyp| %>
-    <div class="row">
-      <div class="col-md-9">
-        <% if !current_user.has_checked_hypothesis?(exhyp) %>
-        <%= form_tag("conclusions/" + subtask.conclusion.id.to_s + "/check_answers", method: "post", :id => 'check_exhyp_form') do %>
-        <%= hidden_field_tag :exhyp_id, exhyp.id %>
-        <%= submit_tag(exhyp.name, :class => "btn btn-default multiline width95 floatRight") unless current_user.try(:admin) %>
-        <% end %>
-        <% end %>
-      </div>
-    </div>
+<br>
+
+<h4>Jäljellä olevat työhypoteesit:</h4>
+<br/>
+
+<% unless current_user.try(:admin) %>
+    <% @conclusion_exercise_hypotheses.each do |exhyp| %>
+
+        <div class = "row">
+
+          <% if !current_user.has_checked_hypothesis?(exhyp) %>
+              <div class = "col-md-4">
+                <%= form_tag("conclusions/" + subtask.conclusion.id.to_s + "/check_answers", method: "post", :id => 'check_exhyp_form') do %>
+                    <%= hidden_field_tag :exhyp_id, exhyp.id %>
+                    <%= submit_tag(exhyp.name, :class => "btn btn-default multiline") unless current_user.try(:admin) %>
+                <% end %>
+              </div>
+
+          <% else %>
+
+              <div class = "col-md-4">
+                <input id="checked_hypothesis_<%= exhyp.id.to_s %>" class="btn btn-default btn-checked multiline" type="button" value="<%= exhyp.hypothesis.name %>" onclick='showExHypExplanation("#exhyp_explanation_<%= exhyp.id.to_s %>");'></input>
+              </div>
+
+              <div class = "col-md-8">
+                <% if @last_clicked_conclusion && (@last_clicked_conclusion.id.to_s == exhyp.id.to_s) %>
+                    <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>"><%= exhyp.get_explanation.html_safe %></div>
+                <% else %>
+                    <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>" style="display:none;"><%= exhyp.get_explanation.html_safe %></div>
+                <% end %>
+              </div>
+
+          <% end %>
+        </div>
     <%end%>
-  </div>
-</div>
+<%end%>
+
 
 
