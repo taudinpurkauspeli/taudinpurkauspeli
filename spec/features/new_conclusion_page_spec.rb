@@ -139,7 +139,6 @@ describe "New Conclusion page", js:true do
           expect(page).to have_content "Tehtäväsi:"
           expect(page).to have_content "Valitse oikea diagnoosi!"
           expect(page).to have_content "Diffilistassa jäljellä:"
-          expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Virustauti. Mitä sinun tulee vielä tehdä?"
           expect(page).to have_content "Oikea diagnoosi:"
           expect(page).to have_button "Virustauti"
 
