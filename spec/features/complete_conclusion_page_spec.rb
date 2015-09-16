@@ -39,9 +39,8 @@ describe "Conclusion page for student", js:true do
 
       it "the title and the content of the conclusion" do
 
-
         expect(page).to have_content "Diagnoosi"
-        expect(page).to have_content "Valitse tästä oikea diagnoosi"
+        expect(page).to have_content "Diffilistassa jäljellä:"
       end
 
       it "all remaining hypotheses" do
@@ -79,7 +78,12 @@ describe "Conclusion page for student", js:true do
 
         expect(page).to have_content "Hyvä, selvitit oikean diagnoosin!"
         expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Bakteeritauti. Mitä sinun tulee vielä tehdä?"
-        #expect(page).to have_content 'Toimenpide suoritettu!'
+        expect(page).to have_content 'Toimenpide suoritettu!'
+        expect(page).to have_content 'Nyt voit mennä suorittamaan lisää toimenpiteitä.'
+        expect(page).not_to have_content 'poissulkemaan diffejä tai'
+
+        expect(page).to have_button 'Toimenpidelista'
+        expect(page).not_to have_button 'Diffilista'
       end
 
 
@@ -95,7 +99,7 @@ describe "Conclusion page for student", js:true do
         }.to change(CompletedTask, :count).by(1)
 
         expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Bakteeritauti. Mitä sinun tulee vielä tehdä?"
-        # expect(page).to have_content 'Toimenpide suoritettu!'
+        expect(page).to have_content 'Toimenpide suoritettu!'
       end
 
       it "all wrong answers" do
@@ -107,7 +111,7 @@ describe "Conclusion page for student", js:true do
         }.to change(CompletedTask, :count).by(1)
 
         expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Bakteeritauti. Mitä sinun tulee vielä tehdä?"
-        # expect(page).to have_content 'Toimenpide suoritettu!'
+        expect(page).to have_content 'Toimenpide suoritettu!'
       end
 
     end

@@ -23,6 +23,15 @@ class Exercise < ActiveRecord::Base
     return false
   end
 
+  def correct_diagnosis
+    tasks.each do |task|
+      if !task.conclusions.empty?
+        return task.conclusions.first.exercise_hypothesis
+      end
+    end
+    return nil
+  end
+
   def get_hypotheses
     return exercise_hypotheses.group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
   end
