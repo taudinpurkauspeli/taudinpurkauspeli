@@ -4,10 +4,10 @@
 </div>
 <% if @last_clicked_hypothesis_id == checked_hypothesis.exercise_hypothesis.id.to_s %>
   <div class = "col-md-1">
-    <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= checked_hypothesis.id.to_s %>"><%= checked_hypothesis.get_explanation.html_safe %></div>
+    <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= checked_hypothesis.id.to_s %>"><%= (@correct_diagnosis && @correct_diagnosis.hypothesis.id == checked_hypothesis.hypothesis.id) ? checked_hypothesis.get_right_explanation.html_safe : checked_hypothesis.get_explanation.html_safe %></div>
   </div>
 <% else %>
 	<div class = "col-md-1">
-    <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= checked_hypothesis.id.to_s %>" style="display:none;"><%= checked_hypothesis.get_explanation.html_safe %></div>
+    <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= checked_hypothesis.id.to_s %>" style="display:none;"><%= (@correct_diagnosis && @correct_diagnosis.hypothesis.id == checked_hypothesis.hypothesis.id) ? checked_hypothesis.get_right_explanation.html_safe : checked_hypothesis.get_explanation.html_safe  %></div>
   </div>
 <% end %>

@@ -80,6 +80,7 @@ describe "Conclusion page for student", js:true do
         expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Bakteeritauti. Mitä sinun tulee vielä tehdä?"
         expect(page).to have_content 'Toimenpide suoritettu!'
         expect(page).to have_content 'Nyt voit mennä suorittamaan lisää toimenpiteitä.'
+        expect(page).to have_content 'Poissuljetut diffit:'
         expect(page).not_to have_content 'poissulkemaan diffejä tai'
 
         expect(page).to have_button 'Toimenpidelista'
@@ -179,7 +180,8 @@ describe "Conclusion page for student", js:true do
       end
 
       it "should be able to view the contents of the conclusion" do
-        expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Bakteeritauti. Mitä sinun tulee vielä tehdä?"
+
+        expect(page).to have_content "Poissuljetut diffit:"
       end
 
       it "should be able to view the explanation for right conclusion" do
