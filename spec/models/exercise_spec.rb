@@ -99,4 +99,22 @@ describe Exercise do
       expect(has_no_conclusion.correct_diagnosis).to eq(nil)
     end
   end
+
+  describe "get_conclusion" do
+    let!(:has_conclusion){FactoryGirl.create(:exercise)}
+    let!(:has_no_conclusion){FactoryGirl.create(:exercise)}
+    let!(:task){FactoryGirl.create(:task, exercise:has_conclusion)}
+    let!(:subtask){FactoryGirl.create(:subtask, task:task)}
+    let!(:conclusion){FactoryGirl.create(:conclusion, subtask:subtask)}
+
+    it "returns right conclusion if exercise has conclusion" do
+      exercise_conclusion = has_conclusion.get_conclusion
+      expect(exercise_conclusion.title).to eq("Viimekysymys")
+      expect(exercise_conclusion.content).to eq("Valitse tästä oikea diagnoosi")
+    end
+
+    it "returns nil if exercise doesn't have conclusion" do
+      expect(has_no_conclusion.get_conclusion).to eq(nil)
+    end
+  end
 end

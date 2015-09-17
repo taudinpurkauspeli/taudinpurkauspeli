@@ -15,19 +15,24 @@ class Exercise < ActiveRecord::Base
   end
 
   def has_conclusion?
-    tasks.each do |task|
-      if !task.conclusions.empty?
-        return true
-      end
-    end
-    return false
+    conclusion = Conclusion.includes(:task).where(tasks:{exercise_id: id})
+    return !conclusion.empty?
   end
 
   def correct_diagnosis
-    tasks.each do |task|
-      if !task.conclusions.empty?
-        return task.conclusions.first.exercise_hypothesis
-      end
+    conclusion = Conclusion.includes(:task).where(tasks:{exercise_id: id})
+
+    unless conclusion.empty?
+      return conclusion.first.exercise_hypothesis
+    end
+    return nil
+  end
+
+  def get_conclusion
+    conclusion = Conclusion.includes(:task).where(tasks:{exercise_id: id})
+
+    unless conclusion.empty?
+      return conclusion.first
     end
     return nil
   end
