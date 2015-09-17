@@ -4,8 +4,6 @@
     <%= render 'tasks/subtasks/ask_conclusion', { subtask:subtask } %>
 <% end %>
 
-<!--<p>Onnittelut! Sait selville, että kyseessä oli <%#= subtask_exhyp.hypothesis.name %>. Mitä sinun tulee vielä tehdä? </p>-->
-
 <% if !@conclusion_exercise_hypotheses.empty? && !current_user.try(:admin)%>
 
     <h4>Poissuljetut diffit:</h4>
@@ -13,24 +11,25 @@
     <% @conclusion_exercise_hypotheses.each do |exhyp| %>
 
         <div class = "row">
-          <% if exhyp.id ==  subtask_exhyp.id %>
-              <div class = "col-md-4">
-                <input id="checked_hypothesis_<%= exhyp.id.to_s %>" class="btn btn-default btn-save multiline" type="button" value="<%= exhyp.hypothesis.name %>" onclick='showExHypExplanation("#exhyp_explanation_<%= exhyp.id.to_s %>");'></input>
-              </div>
+          <div class = "col-md-4">
+            <input id="checked_hypothesis_<%= exhyp.id.to_s %>"
+                   class="btn btn-default
+                       <%= exhyp.id ==  subtask_exhyp.id ? "btn-save" : "btn-checked"%>
+                       multiline"
+                   type="button"
+                   value="<%= exhyp.hypothesis.name %>"
+                   onclick='showExHypExplanation("#exhyp_explanation_<%= exhyp.id.to_s %>");'></input>
+          </div>
 
-          <% else %>
-              <div class = "col-md-4">
-                <input id="checked_hypothesis_<%= exhyp.id.to_s %>" class="btn btn-default btn-checked multiline" type="button" value="<%= exhyp.hypothesis.name %>" onclick='showExHypExplanation("#exhyp_explanation_<%= exhyp.id.to_s %>");'></input>
-              </div>
-
-          <% end %>
           <div class = "col-md-8">
-            <% if @last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id) %>
 
-                <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>"><%= (exhyp.id == subtask_exhyp.id) ? exhyp.get_right_explanation.html_safe : exhyp.get_explanation.html_safe %></div>
-            <% else %>
-                <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= exhyp.id.to_s %>" style="display:none;"><%= (exhyp.id == subtask_exhyp.id) ? exhyp.get_right_explanation.html_safe : exhyp.get_explanation.html_safe %></div>
-            <% end %>
+            <div class="info-checked-hypothesis removable"
+                 id="exhyp_explanation_<%= exhyp.id.to_s %>"
+                 style=<%= (@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id)) ? "" : "display:none;"%>
+            >
+              <%= (exhyp.id == subtask_exhyp.id) ? exhyp.get_right_explanation.html_safe : exhyp.get_explanation.html_safe %>
+            </div>
+
           </div>
 
         </div>
@@ -46,7 +45,7 @@
         <input id="checked_hypothesis_<%= subtask_exhyp.id.to_s %>" class="btn btn-default btn-save multiline" type="button" value="<%= subtask_exhyp.hypothesis.name %>" onclick='showExHypExplanation("#exhyp_explanation_<%= subtask_exhyp.id.to_s %>");'></input>
       </div>
       <div class = "col-md-8">
-        <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= subtask_exhyp.id.to_s %>" style="display:none;">Onnittelut! Sait selville, että kyseessä oli <%= subtask_exhyp.hypothesis.name %>. Mitä sinun tulee vielä tehdä?</div>
+        <div class="info-checked-hypothesis removable" id="exhyp_explanation_<%= subtask_exhyp.id.to_s %>" style="display:none;"><%= subtask_exhyp.get_right_explanation.html_safe %></div>
       </div>
 
     </div>
