@@ -93,7 +93,7 @@ describe "Conclusion page for student", js:true do
           click_and_wait("Kurkkukipu")
         }.not_to change(CompletedTask, :count)
 
-        expect(page).to have_content "Hyvä, väärä työhypoteesi poissuljettu!"
+        expect(page).to have_content "Väärä diffi poissuljettu!"
 
         expect {
           click_and_wait("Bakteeritauti")

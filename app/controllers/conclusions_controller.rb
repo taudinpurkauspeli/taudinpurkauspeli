@@ -72,7 +72,7 @@ class ConclusionsController < ApplicationController
 			else
 				exhyp = ExerciseHypothesis.find(check_conclusion_params[:exhyp_id])
 				current_user.check_hypothesis(exhyp)
-				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :last_clicked_conclusion => check_conclusion_params[:exhyp_id]), notice: 'Hyvä, väärä työhypoteesi poissuljettu!' }
+				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :last_clicked_conclusion => check_conclusion_params[:exhyp_id]), notice: 'Väärä diffi poissuljettu!' }
 			end
 		end
 	end
