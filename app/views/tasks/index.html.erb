@@ -29,7 +29,9 @@
 <script>
     //STUDENT
     //open task button for student
-    setNewTabSubmits("#taskTab .form-to-task-student", "#currentTaskTab");
+    setNewTabSubmits("#taskTab .form-to-task-student", "#currentTaskTab", function(){
+        loadView("/hypotheses", "#hypothesisTab");
+    });
     //submits for task that cannot be done
     setAjaxSubmits("#taskTab .form-cannot-task-student", "#taskTab", "get");
     //open completed task

@@ -91,7 +91,7 @@ function openNewTab(url, containerElementSelector, taskName, callback){
         targetTabLink.html(taskName);
     }
 
-    if(callback != undefined){
+    if(callback == undefined){
         callback = function(){};
     }
 
