@@ -33,8 +33,7 @@
 
                 <div class="info-checked-hypothesis removable"
                      id="exhyp_explanation_<%= exhyp.id.to_s %>"
-                     style=<%= (@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id)) ? "" : "display:none;"%>
-                >
+                     style=<%= (@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id)) ? "" : "display:none;"%>>
                   <%= exhyp.get_explanation.html_safe %>
                 </div>
               </div>
