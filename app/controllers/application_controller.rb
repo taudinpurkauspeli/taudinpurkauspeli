@@ -3,6 +3,8 @@ require "application_responder"
 class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
 
+  around_action :say_hi
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -48,4 +50,28 @@ class ApplicationController < ActionController::Base
       render :layout => false
     end
   end
+
+  private
+
+  def say_hi
+    if !current_user.try(:admin)
+      logged_item = {}
+      logged_item[:user_id] = current_user.id
+      logged_item[:controller] = params[:controller]
+      logged_item[:action] = params[:action]
+      logged_item[:params] = params
+      logged_item[:exercise_id] = session[:exercise_id]
+      logged_item[:task_id] = session[:task_id]
+      logged_item[:exhyp_ids] = session[:exhyp_ids]
+      logged_item[:datetime] = DateTime.current
+      logged_item[:path] = request.path
+      logged_item[:ip] = request.ip
+      logged_item[:method] = request.method
+    end
+    yield
+    logged_item[:response] = response.location
+
+    byebug
+  end
+  
 end
