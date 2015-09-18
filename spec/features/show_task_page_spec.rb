@@ -49,7 +49,7 @@ describe "Task show page", js:true do
       describe "question and answer options for a" do
 
         it "multichoice task" do
-          click_button(multichoice_task.name)
+          click_and_wait(multichoice_task.name)
 
           expect(page).to have_content multichoice.question
           expect(page).to have_content option.content
@@ -58,7 +58,7 @@ describe "Task show page", js:true do
         end
 
         it "radiobutton task" do
-          click_button(radiobutton_task.name)
+          click_and_wait(radiobutton_task.name)
 
           expect(page).to have_content radiobutton.question
           expect(page).to have_content option4.content
