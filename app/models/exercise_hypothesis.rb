@@ -31,7 +31,14 @@ class ExerciseHypothesis < ActiveRecord::Base
   end
 
   def get_explanation
-    notice = "Työhypoteesi \"" + hypothesis.name + "\" poissuljettu."
+    notice = "\"" + hypothesis.name + "\" poissuljettu."
+    unless explanation.nil?
+      notice += " Perustelu: " + explanation
+    end
+    return notice
+  end
+  def get_right_explanation
+    notice = "Onnittelut! Sait selville, että kyseessä oli " + hypothesis.name  + ". Mitä sinun tulee vielä tehdä?"
     unless explanation.nil?
       notice += " Perustelu: " + explanation
     end

@@ -37,7 +37,7 @@ describe "Users page", js:true do
 
     describe "should be able to" do
       it "visit users page and see all exercises" do
-        click_button('Opiskelijoiden seuranta')
+        click_and_wait('Opiskelijoiden seuranta')
         expect(current_path).to eq(users_path)
         expect(page).to have_content 'Opiskelijoiden tiedot'
         expect(page).to have_content 'Lihanautakuolemat'
@@ -49,7 +49,7 @@ describe "Users page", js:true do
       end
 
       it "visit list of all students" do
-        click_button('Opiskelijoiden seuranta')
+        click_and_wait('Opiskelijoiden seuranta')
         select 'Opiskelijalista', from: 'list_type'
         expect(page).to have_content student.realname
         expect(page).to have_content student2.realname
@@ -84,7 +84,7 @@ describe "Users page", js:true do
         let!(:completed_task5){FactoryGirl.create(:completed_task, task:task, user:student3)}
 
         it "visit users page and see all users that have started exercises" do
-          click_button('Opiskelijoiden seuranta')
+          click_and_wait('Opiskelijoiden seuranta')
           expect(page).to have_content student.realname
           expect(page).to have_content student2.realname
           expect(page).to have_content student3.realname
@@ -97,7 +97,7 @@ describe "Users page", js:true do
         describe "in users page" do
 
           before :each do
-            click_button('Opiskelijoiden seuranta')
+            click_and_wait('Opiskelijoiden seuranta')
           end
 
           it "view users of one exercise" do

@@ -13,6 +13,8 @@ class HypothesesController < ApplicationController
 
       @last_clicked_hypothesis_id = params[:last_clicked_hypothesis_id]
 
+      @correct_diagnosis = @exercise.correct_diagnosis
+
       #new instances
       @new_exercise_hypothesis = ExerciseHypothesis.new
       @new_hypothesis_group = HypothesisGroup.new

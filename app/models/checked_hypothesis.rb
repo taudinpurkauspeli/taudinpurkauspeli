@@ -13,4 +13,8 @@ class CheckedHypothesis < ActiveRecord::Base
   def get_explanation
     return exercise_hypothesis.get_explanation
   end
+
+  def get_right_explanation
+    return exercise_hypothesis.get_right_explanation
+  end
 end

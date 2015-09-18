@@ -37,13 +37,13 @@ describe "User show page", js:true do
 
       describe "change" do
         before :each do
-          click_button 'Muokkaa tietoja'
+          click_and_wait 'Muokkaa tietoja'
         end
 
         it "password" do
           fill_in 'user_password', with: 'Salaisuus'
           fill_in 'user_password_confirmation', with: 'Salaisuus'
-          click_button 'Päivitä salasana'
+          click_and_wait 'Päivitä salasana'
           expect(page).to have_content 'Käyttäjän tiedot päivitetty'
 
           updated_student = User.where(username:"Opiskelija").first
@@ -53,7 +53,7 @@ describe "User show page", js:true do
           expect(updated_student.student_number).to eq(student.student_number)
           expect(updated_student.starting_year).to eq(student.starting_year)
 
-          click_button 'Kirjaudu ulos'
+          click_and_wait 'Kirjaudu ulos'
           sign_in(username:"Opiskelija", password:"Salaisuus")
           expect(page).to have_content 'Tervetuloa takaisin!'
         end
@@ -61,7 +61,7 @@ describe "User show page", js:true do
         it "other information without changing password" do
           fill_in 'user_realname', with: 'Uusi hassu nimi'
           fill_in 'user_email', with: 'uusi@nimi.com'
-          click_button 'Päivitä'
+          click_and_wait 'Päivitä'
           expect(page).to have_content 'Käyttäjän tiedot päivitetty'
 
           updated_student = User.where(username:"Opiskelija").first
@@ -71,7 +71,7 @@ describe "User show page", js:true do
           expect(updated_student.student_number).to eq(student.student_number)
           expect(updated_student.starting_year).to eq(student.starting_year)
 
-          click_button 'Kirjaudu ulos'
+          click_and_wait 'Kirjaudu ulos'
           sign_in(username:"Opiskelija", password:"Salainen1")
           expect(page).to have_content 'Tervetuloa takaisin!'
         end
@@ -106,9 +106,9 @@ describe "User show page", js:true do
       end
 
       it "update information wrong" do
-        click_button 'Muokkaa tietoja'
+        click_and_wait 'Muokkaa tietoja'
         fill_in 'user_realname', with: ''
-        click_button 'Päivitä'
+        click_and_wait 'Päivitä'
         expect(page).to have_content 'Seuraavat virheet estivät tallennuksen:'
       end
     end
