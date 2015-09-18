@@ -3,9 +3,9 @@
     <h3 class="panel-title">Toimenpide suoritettu!</h3>
   </div>
   <div class="panel-body">
-    <p>Nyt voit mennä <%= " poissulkemaan diffejä tai " if (current_exercise && current_exercise.has_conclusion? && (task.level < current_exercise.get_conclusion.task.level)) %> suorittamaan lisää toimenpiteitä.</p>
+    <p>Nyt voit mennä <%= " poissulkemaan diffejä tai " if (!current_exercise.has_conclusion? || (current_exercise.has_conclusion? && (task.level < current_exercise.get_conclusion.task.level))) %> suorittamaan lisää toimenpiteitä.</p>
     <div class="row">
-      <% if (current_exercise && current_exercise.has_conclusion? && (task.level < current_exercise.get_conclusion.task.level)) %>
+      <% if (!current_exercise.has_conclusion? || (current_exercise.has_conclusion? && (task.level < current_exercise.get_conclusion.task.level))) %>
           <div class="col-md-3">
             <%= button_to 'Diffilista', hypotheses_path, :class => 'btn btn-default widthAuto', :form_class => "form-task-completed", :form => {id: "form-open-hypotheses-tab"}, :method => :get %>
           </div>
