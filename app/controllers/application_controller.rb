@@ -3,7 +3,7 @@ require "application_responder"
 class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
 
-  around_action :say_hi
+  around_action :log_request, if: :current_user_is_student
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -27,6 +27,14 @@ class ApplicationController < ActionController::Base
   def current_task
     return nil if session[:task_id].nil?
     Task.find(session[:task_id])
+  end
+
+  def current_user_is_student
+    user = current_user
+    if user.nil? || user.admin
+      return false
+    end
+    return true
   end
   
   def ensure_user_is_logged_in
@@ -53,25 +61,25 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def say_hi
-    if !current_user.try(:admin)
-      logged_item = {}
-      logged_item[:user_id] = current_user.id
-      logged_item[:controller] = params[:controller]
-      logged_item[:action] = params[:action]
-      logged_item[:params] = params
-      logged_item[:exercise_id] = session[:exercise_id]
-      logged_item[:task_id] = session[:task_id]
-      logged_item[:exhyp_ids] = session[:exhyp_ids]
-      logged_item[:datetime] = DateTime.current
-      logged_item[:path] = request.path
-      logged_item[:ip] = request.ip
-      logged_item[:method] = request.method
-    end
-    yield
-    logged_item[:response] = response.location
+  def log_request
+    # if !current_user.try(:admin)
+    #   logged_item = {}
+    #   logged_item[:user_id] = current_user.id
+    #   logged_item[:controller] = params[:controller]
+    #   logged_item[:action] = params[:action]
+    #   logged_item[:params] = params
+    #   logged_item[:exercise_id] = session[:exercise_id]
+    #   logged_item[:task_id] = session[:task_id]
+    #   logged_item[:exhyp_ids] = session[:exhyp_ids]
+    #   logged_item[:datetime] = DateTime.current
+    #   logged_item[:path] = request.path
+    #   logged_item[:ip] = request.ip
+    #   logged_item[:method] = request.method
+    # end
+     yield
+    # logged_item[:response] = response.location
 
-    byebug
+    #byebug
   end
-  
+
 end
