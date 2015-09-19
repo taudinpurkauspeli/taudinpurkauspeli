@@ -1,22 +1,20 @@
 <%= render 'messages/messages' %>
 
-<h1>Listing Log Entries</h1>
+<br/>
 
-<table>
+<h1>Loki</h1>
+
+<br/>
+
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>User</th>
-      <th>Controller</th>
-      <th>Action</th>
-      <th>Params</th>
-      <th>Exercise</th>
-      <th>Task</th>
-      <th>Exhyp ids</th>
-      <th>Datetime</th>
-      <th>Request path</th>
-      <th>Ip</th>
-      <th>Method</th>
-      <th>Response path</th>
+      <th>Käyttäjä</th>
+      <th>Toiminto</th>
+      <th>Aika</th>
+      <th>Pyynnön polku</th>
+      <th>Metodi</th>
+      <th>Vastauksen polku</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -25,23 +23,16 @@
     <% @log_entries.each do |log_entry| %>
       <tr>
         <td><%= log_entry.user_id %></td>
-        <td><%= log_entry.controller %></td>
         <td><%= log_entry.action %></td>
-        <td><%= log_entry.params %></td>
-        <td><%= log_entry.exercise_id %></td>
-        <td><%= log_entry.task_id %></td>
-        <td><%= log_entry.exhyp_ids %></td>
         <td><%= log_entry.datetime %></td>
         <td><%= log_entry.request_path %></td>
-        <td><%= log_entry.ip %></td>
         <td><%= log_entry.method %></td>
         <td><%= log_entry.response_path %></td>
-        <td><%= link_to 'Show', log_entry %></td>
-        <td><%= link_to 'Destroy', log_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Näytä', log_entry, class: "btn btn-save" %></td>
+        <td><%= link_to 'Poista', log_entry, method: :delete, data: { confirm: 'Oletko varma, että haluat poistaa rivin?' }, class: "btn btn-del" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
 
