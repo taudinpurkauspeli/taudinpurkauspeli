@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
 
   has_many :subtasks, through: :completed_subtasks
 
+  has_many :log_entries
+
   def has_completed?(completable_object)
     if completable_object.class == Subtask
       return !(subtasks.find_by id:completable_object.id).nil?

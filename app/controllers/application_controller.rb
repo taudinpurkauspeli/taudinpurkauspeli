@@ -28,14 +28,6 @@ class ApplicationController < ActionController::Base
     return nil if session[:task_id].nil?
     Task.find(session[:task_id])
   end
-
-  def current_user_is_student
-    user = current_user
-    if user.nil? || user.admin
-      return false
-    end
-    return true
-  end
   
   def ensure_user_is_logged_in
     redirect_to exercises_path, alert: "Toiminto vaatii sisäänkirjautumisen" if current_user.nil?
@@ -80,6 +72,14 @@ class ApplicationController < ActionController::Base
     # logged_item[:response] = response.location
 
     #byebug
+  end
+
+  def current_user_is_student
+    user = current_user
+    if user.nil? || user.admin
+      return false
+    end
+    return true
   end
 
 end
