@@ -86,7 +86,7 @@ class ApplicationController < ActionController::Base
   def current_user_is_student_in_production
     # if Rails.env.production?
     user = current_user
-    if user.nil? || user.admin
+    if Rails.env.test? || user.nil? || user.admin
       return false
     end
     return true
