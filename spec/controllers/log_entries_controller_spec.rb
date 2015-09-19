@@ -26,7 +26,7 @@ RSpec.describe LogEntriesController, type: :controller do
   # LogEntry. As you add validations to LogEntry, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {user_id: 2, controller: "exercises", action: "show", exercise_id: 2, method: "GET"}
+    {user_id: 2, controller: "exercises", params: "test", exhyp_ids: "text", action: "show", exercise_id: 2, method: "GET"}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -61,7 +61,7 @@ RSpec.describe LogEntriesController, type: :controller do
     it "redirects to the log_entries list" do
       log_entry = LogEntry.create! valid_attributes
       delete :destroy, {:id => log_entry.to_param}, valid_session
-      expect(response).to redirect_to(log_entries_url)
+      expect(response).to redirect_to(log_entries_url(:layout => true))
     end
   end
 
