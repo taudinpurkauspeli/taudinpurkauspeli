@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416104311) do
+ActiveRecord::Schema.define(version: 20150919190349) do
 
   create_table "asked_questions", force: :cascade do |t|
     t.integer  "user_id"
@@ -103,6 +103,23 @@ ActiveRecord::Schema.define(version: 20150416104311) do
     t.integer  "subtask_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "log_entries", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "controller"
+    t.string   "action"
+    t.text     "params"
+    t.integer  "exercise_id"
+    t.integer  "task_id"
+    t.text     "exhyp_ids"
+    t.datetime "datetime"
+    t.string   "request_path"
+    t.string   "ip"
+    t.string   "method"
+    t.string   "response_path"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "multichoices", force: :cascade do |t|

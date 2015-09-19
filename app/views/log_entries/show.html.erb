@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @log_entry.user_id %>
+</p>
+
+<p>
+  <strong>Controller:</strong>
+  <%= @log_entry.controller %>
+</p>
+
+<p>
+  <strong>Action:</strong>
+  <%= @log_entry.action %>
+</p>
+
+<p>
+  <strong>Params:</strong>
+  <%= @log_entry.params %>
+</p>
+
+<p>
+  <strong>Exercise:</strong>
+  <%= @log_entry.exercise_id %>
+</p>
+
+<p>
+  <strong>Task:</strong>
+  <%= @log_entry.task_id %>
+</p>
+
+<p>
+  <strong>Exhyp ids:</strong>
+  <%= @log_entry.exhyp_ids %>
+</p>
+
+<p>
+  <strong>Datetime:</strong>
+  <%= @log_entry.datetime %>
+</p>
+
+<p>
+  <strong>Request path:</strong>
+  <%= @log_entry.request_path %>
+</p>
+
+<p>
+  <strong>Ip:</strong>
+  <%= @log_entry.ip %>
+</p>
+
+<p>
+  <strong>Method:</strong>
+  <%= @log_entry.method %>
+</p>
+
+<p>
+  <strong>Response path:</strong>
+  <%= @log_entry.response_path %>
+</p>
+
+<%= link_to 'Edit', edit_log_entry_path(@log_entry) %> |
+<%= link_to 'Back', log_entries_path %>
