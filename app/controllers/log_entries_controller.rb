@@ -1,39 +1,23 @@
 class LogEntriesController < ApplicationController
-  before_action :set_log_entry, only: [:show, :edit, :update, :destroy]
+  before_action :set_log_entry, only: [:show, :destroy]
 
-  respond_to :html
-
+  # GET /log_entries
   def index
     @log_entries = LogEntry.all
-    respond_with(@log_entries)
+    set_view_layout
   end
 
+  # GET /log_entries/1
   def show
-    respond_with(@log_entry)
+    set_view_layout
   end
 
-  def new
-    @log_entry = LogEntry.new
-    respond_with(@log_entry)
-  end
-
-  def edit
-  end
-
-  def create
-    @log_entry = LogEntry.new(log_entry_params)
-    @log_entry.save
-    respond_with(@log_entry)
-  end
-
-  def update
-    @log_entry.update(log_entry_params)
-    respond_with(@log_entry)
-  end
-
+  # DELETE /log_entries/1
   def destroy
     @log_entry.destroy
-    respond_with(@log_entry)
+    respond_to do |format|
+      format.html { redirect_to log_entries_path(:layout => get_layout), notice: 'Lokin rivi poistettu.' }
+    end
   end
 
   private
