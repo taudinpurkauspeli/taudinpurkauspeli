@@ -140,6 +140,8 @@ FactoryGirl.define do
     ip "127.0.0.1"
 
     response_path "/exercises/new/post"
+    flash_notice "Oikein!"
+    flash_alert "Väärin!"
   end
 
 end

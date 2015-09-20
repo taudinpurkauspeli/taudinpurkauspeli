@@ -78,6 +78,8 @@ class ApplicationController < ActionController::Base
     yield
 
     new_log_entry.response_path = response.location
+    new_log_entry.flash_notice = flash[:notice]
+    new_log_entry.flash_alert = flash[:alert]
 
     new_log_entry.save
 

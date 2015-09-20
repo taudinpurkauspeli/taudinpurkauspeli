@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919190349) do
+ActiveRecord::Schema.define(version: 20150920180235) do
 
   create_table "asked_questions", force: :cascade do |t|
     t.integer  "user_id"
@@ -120,6 +120,8 @@ ActiveRecord::Schema.define(version: 20150919190349) do
     t.string   "response_path"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "flash_notice"
+    t.string   "flash_alert"
   end
 
   create_table "multichoices", force: :cascade do |t|

@@ -24,6 +24,8 @@ RSpec.describe LogEntry, type: :model do
     new_log_entry.method = "GET"
 
     new_log_entry.response_path = "/exercises/new/post"
+    new_log_entry.flash_notice = "Oikein meni!"
+    new_log_entry.flash_alert = "Valinnoissa oli vielä virheitä!"
 
     expect(new_log_entry.user_id).to eq(1)
     expect(new_log_entry.controller).to eq("exercises")
@@ -37,6 +39,8 @@ RSpec.describe LogEntry, type: :model do
     expect(new_log_entry.ip).to eq("127.0.0.1")
     expect(new_log_entry.method).to eq("GET")
     expect(new_log_entry.response_path).to eq("/exercises/new/post")
+    expect(new_log_entry.flash_notice).to eq("Oikein meni!")
+    expect(new_log_entry.flash_alert).to eq("Valinnoissa oli vielä virheitä!")
 
   end
 
