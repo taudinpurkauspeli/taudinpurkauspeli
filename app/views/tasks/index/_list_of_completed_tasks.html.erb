@@ -11,7 +11,7 @@
 <% @completed_tasks.each_with_index do |task, index| %>
     <div class="row">
       <div class="col-md-5">
-        <%= button_to (index + 1).to_s + ". " + task.name, task, method: :get, :class => 'btn btn-default btn-completed-task', :form_class => "form-completed-task" %>
+        <%= button_to (index + 1).to_s + ". " + task.name, task, method: :get, :class => 'btn btn-default btn-completed-task multiline', :form_class => "form-completed-task" %>
       </div>
     </div>
 <% end %>
