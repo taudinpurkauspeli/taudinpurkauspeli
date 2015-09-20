@@ -15,3 +15,5 @@ Paperclip tarvitsee käyttäjän AWS-tiedot, jotka haetaan sovelluksen käyttö�
 ```
 heroku config:set S3_BUCKET_NAME=foo AWS_ACCESS_KEY_ID=bar AWS_SECRET_ACCESS_KEY=baz AWS_REGION=qux
 ```
+
+Jotta kuvien siirto toimisi AWS S3 -palveluun, täytyy tiedostosta app/models/ckeditor/picture.rb poistaa kommentit kommentoiduilta riveiltä: :styles, :storage, :s3_credentials, :path ja :url. Lisäksi täytyy lisätä kommentit aiemmin kommentoimattomille riveille: :url, :path ja :styles.
