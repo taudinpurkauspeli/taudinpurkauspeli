@@ -21,7 +21,7 @@ class ExercisesController < ApplicationController
     @user = current_user
     @completed_tasks = @user.tasks.where("level > ?", 0).where(exercise:@exercise)
 
-
+    # Unchecked exercise hypotheses for conclusion view
     @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
 
     set_view_layout

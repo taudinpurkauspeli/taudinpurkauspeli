@@ -51,22 +51,26 @@
 
 <% unless @completed_tasks.empty? %>
 
-
     <% @completed_tasks.each_with_index do |task, index| %>
 
-        <div class="panel panel-default" >
-          <div class="panel-heading">
-            <a data-toggle="collapse" id="collapse-completed-task-link<%= task.id.to_s %>" href="#collapse-completed-task<%= task.id.to_s %>" >
+
+        <div class = "row">
+          <div class = "col-md-12">
+
+            <button class="btn btn-default btn-completed-task" data-toggle="collapse" id="collapse-completed-task-link<%= task.id.to_s %>" href="#collapse-completed-task<%= task.id.to_s %>" >
               <%= (index + 1).to_s + ". " + task.name %>
-            </a>
-          </div>
-          <div id="collapse-completed-task<%= task.id.to_s %>" class="panel-collapse collapse">
-            <div class="panel-body">
-              <% task.subtasks.each do |subtask| %>
-                  <% if current_user.can_complete_subtask?(task, subtask) || current_user.try(:admin) %>
-                      <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask } %>
+            </button>
+
+            <div class="panel panel-default panel-grey">
+              <div id="collapse-completed-task<%= task.id.to_s %>" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <% task.subtasks.each do |subtask| %>
+                      <% if current_user.can_complete_subtask?(task, subtask) || current_user.try(:admin) %>
+                          <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask } %>
+                      <% end %>
                   <% end %>
-              <% end %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
