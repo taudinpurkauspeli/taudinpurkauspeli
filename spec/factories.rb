@@ -127,4 +127,21 @@ FactoryGirl.define do
     user_id nil
     question_id nil
   end
+
+  factory :log_entry do
+    user_id 1
+    controller "exercises"
+    action "new"
+
+    exercise_id  2
+    task_id 3
+
+    request_path "/exercises/new"
+    ip "127.0.0.1"
+
+    response_path "/exercises/new/post"
+    flash_notice "Oikein!"
+    flash_alert "Väärin!"
+  end
+
 end

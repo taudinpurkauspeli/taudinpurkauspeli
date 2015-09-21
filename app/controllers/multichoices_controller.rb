@@ -3,9 +3,6 @@ class MultichoicesController < ApplicationController
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show, :check_answers]
 
-  #  def index
-  #   @multichoices = Multichoice.all
-  # end
   def show
     set_view_layout
   end
