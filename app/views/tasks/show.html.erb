@@ -33,6 +33,7 @@
     setAjaxSubmits("#currentTaskTab form:not(.form-task-completed, .form-edit-task)", "#currentTaskTab", "post", function(){
         loadView("/tasks", "#taskTab");
         loadView("/hypotheses", "#hypothesisTab");
+        loadView("/<%= exercise_path(current_exercise) %>", "#anamnesisTab");
     });
 
     setAjaxSubmits("#currentTaskTab .form-edit-task", "#currentTaskTab", "get");

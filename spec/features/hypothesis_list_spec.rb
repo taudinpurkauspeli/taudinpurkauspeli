@@ -25,7 +25,7 @@ describe "Hypothesis list page", js:true do
 
       before :each do
         click_and_wait('Lihanautakuolemat')
-        click_and_wait('Työhypoteesit')
+        click_and_wait('Diffit')
       end
 
       it "then he should be able to view the hypotheses of an exercise" do
@@ -64,7 +64,7 @@ describe "Hypothesis list page", js:true do
       sign_in(username:"Testipoika", password:"Salainen1")
       visit root_path
       click_and_wait('Lihanautakuolemat')
-      click_and_wait('Työhypoteesit')
+      click_and_wait('Diffit')
     end
 
     describe "should be able to" do

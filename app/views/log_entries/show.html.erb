@@ -62,6 +62,15 @@
   <strong>Vastauksen polku:</strong>
   <%= @log_entry.response_path %>
 </p>
+<p>
+  <strong>Vastauksen alert:</strong>
+  <%= @log_entry.flash_alert %>
+</p>
+
+<p>
+  <strong>Vastauksen notice:</strong>
+  <%= @log_entry.flash_notice %>
+</p>
 
 <br/>
 <%= link_to 'Takaisin', log_entries_path, class: "btn btn-save" %>

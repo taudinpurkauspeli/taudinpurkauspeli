@@ -15,21 +15,37 @@
   <% end %>
 </div>
 
+<div class = "separator"></div>
+
+<br/>
+
 <%# Case completed %>
 <% if current_user.has_completed? @exercise %>
-  <%= render 'user_has_completed_exercise' %>
+    <%= render 'user_has_completed_exercise' %>
+    <br />
+    <div class = "separator"></div>
+    <br />
 <% end %>
+
 
 <% if @exercise.hidden? %>
     <p>Tämä case on piilotettu opiskelijoilta. <%= link_to 'Muokkaa', edit_exercise_path(@exercise) %> casea tehdäksesi siitä näkyvä.</p>
+    <br />
+    <div class = "separator"></div>
+    <br />
 <% end %>
+
+
+
+<h3>Anamneesi</h3>
+
+<br/>
+<br/>
+
 <div class="panel panel-default">
   <div class="panel-heading">
-    <a data-toggle="collapse" href="#collapse0">
-      Anamneesi
-    </a>
   </div>
-  <div id="collapse0" class="panel-collapse collapse in">
+  <div id="anamnesis">
     <div class="panel-body">
       <% if @exercise.anamnesis.nil? || @exercise.anamnesis == "" %>
           <%= link_to 'Casen anamneesia ei ole asetettu.', edit_exercise_path(@exercise) %>
@@ -40,9 +56,49 @@
   </div>
 </div>
 
+<br />
+<div class = "separator"></div>
+<br />
 
-<%= button_to 'Muokkaa', edit_exercise_path(@exercise), :method => :get, :class => "btn btn-default btn-save widthAuto" if current_user.try(:admin) %> <!-- |
-<%= link_to 'Takaisin', exercises_path %> -->
+<h3>Tehdyt toimenpiteet</h3>
+
+<br/>
+<br/>
+
+<% unless @completed_tasks.empty? %>
+
+    <% @completed_tasks.each_with_index do |task, index| %>
+
+
+        <div class = "row">
+          <div class = "col-md-12">
+
+            <button class="btn btn-default btn-completed-task" data-toggle="collapse" id="collapse-completed-task-link<%= task.id.to_s %>" href="#collapse-completed-task<%= task.id.to_s %>" >
+              <%= (index + 1).to_s + ". " + task.name %>
+            </button>
+
+            <div class="panel panel-default panel-grey">
+              <div id="collapse-completed-task<%= task.id.to_s %>" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <% task.subtasks.each do |subtask| %>
+                      <% if current_user.can_complete_subtask?(task, subtask) || current_user.try(:admin) %>
+                          <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask } %>
+                      <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <% end %>
+<% end %>
+
+
+<br />
+
+
+<%= button_to 'Muokkaa', edit_exercise_path(@exercise), :method => :get, :class => "btn btn-default btn-save widthAuto" if current_user.try(:admin) %>
 
 <script>
     //edit exercise form
