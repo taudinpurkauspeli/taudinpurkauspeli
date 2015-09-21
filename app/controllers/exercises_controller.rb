@@ -18,6 +18,12 @@ class ExercisesController < ApplicationController
   def show
     session[:exercise_id] = params[:id]
 
+    @user = current_user
+    @completed_tasks = @user.tasks.where("level > ?", 0).where(exercise:@exercise)
+
+
+    @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
+
     set_view_layout
   end
 
