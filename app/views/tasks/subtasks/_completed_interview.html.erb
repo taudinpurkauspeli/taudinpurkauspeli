@@ -29,7 +29,7 @@
                       <% else %>
 
                       <% end %>
-                    ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%><%= exercise_show_or_tab_view %>" id="asked_question_<%= question.id.to_s %>"/>
+                    ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%><%= exercise_show_or_task_show %>" id="asked_question_<%= question.id.to_s %>"/>
                   </td>
                   <td class="interview">
                     <div class='collapse in collapse-answer 
@@ -40,7 +40,7 @@
                       <% else %>
 
                       <% end %>
-                      ' id="collapseQuestionContent<%= question.id%><%= exercise_show_or_tab_view %>" >
+                      ' id="collapseQuestionContent<%= question.id%><%= exercise_show_or_task_show %>" >
                       <p><%= question.content.html_safe %></p>
                     </div>
               <%end %>
@@ -67,7 +67,7 @@
                       <% else %>
 
                       <% end %>
-              ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>" id="asked_question_<%= question.id.to_s %><%= exercise_show_or_tab_view %>"/>
+              ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%><%= exercise_show_or_task_show %>" id="asked_question_<%= question.id.to_s %>"/>
               </td>
               <td class="interview">
                 <div class='collapse in collapse-answer 
@@ -78,7 +78,7 @@
                       <% else %>
 
                       <% end %>
-                  ' id="collapseQuestionContent<%= question.id%><%= exercise_show_or_tab_view %>" >
+                  ' id="collapseQuestionContent<%= question.id%><%= exercise_show_or_task_show %>" >
                   <p><%= question.content.html_safe %></p>
                 </div>
           <%end %>
