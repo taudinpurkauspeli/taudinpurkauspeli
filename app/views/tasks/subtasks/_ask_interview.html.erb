@@ -7,14 +7,14 @@
   <tbody>
   <% subtask.interview.question_groups.distinct.each do |group|%>
       <tr>
-        <td class="multichoice">
+        <td class="interview">
           <h4><%= group.title %></h4>
         </td>
       </tr>
 
       <% group.questions.where(interview: subtask.interview).each do |question| %>
           <tr>
-            <td class="multichoice"><div class="floatLeft" style = "width: 5%;"></div>
+            <td class="interview"><div class="floatLeft" style = "width: 5%;"></div>
               <% if !current_user.has_asked_question?(question) %>
 
                   <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
@@ -36,7 +36,7 @@
                       <% end %>
                     ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>" id="asked_question_<%= question.id.to_s %>"/>
                   </td>
-                  <td class="multichoice">
+                  <td class="interview">
                     <div class='collapse <%= "in" if @last_clicked_question_id == question.id.to_s %> collapse-answer 
                       <%#= "collapse-answer-right" if question.required == "required"%>
                       <% if question.required == "required" %>
@@ -58,7 +58,7 @@
 
   <% subtask.interview.questions.where(question_group:nil).each do |question| %>
       <tr>
-        <td class="multichoice">
+        <td class="interview">
           <% if !current_user.has_asked_question?(question) %>
               <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
                   <%= hidden_field_tag 'question_id', question.id %>
@@ -76,7 +76,7 @@
                       <% end %>
               ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>" id="asked_question_<%= question.id.to_s %>"/>
               </td>
-              <td class="multichoice">
+              <td class="interview">
                 <div class='collapse <%= "in" if @last_clicked_question_id == question.id.to_s %> collapse-answer 
                   <%#= "collapse-answer-right" if question.required == "required" %>
                   <% if question.required == "required" %>
