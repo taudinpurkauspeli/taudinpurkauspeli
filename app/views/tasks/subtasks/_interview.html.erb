@@ -12,7 +12,7 @@
   </div>
   <div class="panel-body">
     <% if current_user.has_completed?(subtask) || current_user.try(:admin) %>
-        <%= render 'tasks/subtasks/completed_interview', { subtask:subtask} %>
+        <%= render 'tasks/subtasks/completed_interview', { subtask:subtask, exercise_show_or_tab_view: parent_view} %>
     <% else %>
         <%= render 'tasks/subtasks/ask_interview', { subtask:subtask } %>
     <% end %>
