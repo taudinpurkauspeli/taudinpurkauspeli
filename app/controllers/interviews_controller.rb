@@ -67,7 +67,7 @@ class InterviewsController < ApplicationController
 			if @interview.all_questions_asked_by?(current_user)
 				current_user.complete_subtask(@interview.subtask)
         if(current_user.has_completed?(current_exercise))
-          format.html { redirect_to exercise_path(current_exercise, :layout => get_layout) }
+          format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout, notice: "Onneksi olkoon suoritit casen!") }
         else
           format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout) }
         end
