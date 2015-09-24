@@ -1,5 +1,5 @@
 <%= render 'messages/messages' %>
-
+<br/>
 <% if current_user.try(:admin) %>
     <% if @task.conclusions.empty? %>
         <div class = "row">
@@ -17,6 +17,7 @@
 <% end %>
 
 <h1>Toimenpide: <%= @task.name %></h1>
+<br/>
 
 <% @subtasks.each do |subtask| %>
     <% if current_user.can_complete_subtask?(@task, subtask) || current_user.try(:admin) %>
@@ -24,7 +25,9 @@
     <% end %>
 <% end %>
 
-<% if current_user.has_completed?(@task) %>
+<% if current_user.has_completed? current_exercise %>
+    <%= render 'exercises/user_has_completed_exercise' %>
+<% elsif current_user.has_completed?(@task) %>
     <%= render 'task_completed', {task:@task} %>
 <% end %>
 

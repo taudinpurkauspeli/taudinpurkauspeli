@@ -68,7 +68,6 @@ class ConclusionsController < ApplicationController
 		respond_to do |format|
 			if @conclusion.user_answered_correctly?(current_user, check_conclusion_params[:exhyp_id])
 				current_user.check_all_hypotheses(current_task.exercise)
-
 				if(current_user.has_completed?(current_exercise))
 					format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :last_clicked_conclusion => check_conclusion_params[:exhyp_id]), notice: 'Onneksi olkoon suoritit casen!' }
 				else
