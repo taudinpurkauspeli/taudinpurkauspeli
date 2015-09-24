@@ -1,5 +1,6 @@
 <% checked_hypothesis = current_user.get_checked_hypothesis(exercise_hypothesis) %>
-<div class="col-md-8">
+
+<div class="col-md-4">
   <input id="checked_hypothesis_<%= checked_hypothesis.id.to_s %>"
          class="btn btn-default <%= (@correct_diagnosis && @correct_diagnosis.hypothesis.id == checked_hypothesis.hypothesis.id) ? "btn-save" : "btn-checked" %> multiline"
          type="button"
@@ -8,10 +9,11 @@
 </div>
 
 
-<div class = "col-md-1">
+<div class = "col-md-6">
   <div class="info-checked-hypothesis removable"
        id="exhyp_explanation_<%= checked_hypothesis.id.to_s %>"
        style=<%= @last_clicked_hypothesis_id == checked_hypothesis.exercise_hypothesis.id.to_s ? "" : "display:none;"%>>
     <%= (@correct_diagnosis && @correct_diagnosis.hypothesis.id == checked_hypothesis.hypothesis.id) ? checked_hypothesis.get_right_explanation.html_safe : checked_hypothesis.get_explanation.html_safe %>
   </div>
 </div>
+
