@@ -29,7 +29,7 @@
 
 
 <% if @exercise.hidden? %>
-    <p>Tämä case on piilotettu opiskelijoilta. <%= link_to 'Muokkaa', edit_exercise_path(@exercise) %> casea tehdäksesi siitä näkyvä.</p>
+    <p>Tämä case on piilotettu opiskelijoilta. Muokkaa casea tehdäksesi siitä näkyvä.</p>
     <br />
     <div class = "separator"></div>
     <br />
@@ -48,7 +48,7 @@
   <div id="anamnesis">
     <div class="panel-body">
       <% if @exercise.anamnesis.nil? || @exercise.anamnesis == "" %>
-          <%= link_to 'Casen anamneesia ei ole asetettu.', edit_exercise_path(@exercise) %>
+          Casen anamneesia ei ole asetettu. Muokkaa casea lisätäksesi siihen anamneesin.
       <% else %>
           <%= @exercise.anamnesis.html_safe %>
       <% end %>
@@ -98,10 +98,11 @@
 <br />
 
 
-<%= button_to 'Muokkaa', edit_exercise_path(@exercise), :method => :get, :class => "btn btn-default btn-save widthAuto" if current_user.try(:admin) %>
+<%= button_to 'Muokkaa', edit_exercise_path(@exercise), :method => "get", :class => "btn btn-default btn-save widthAuto", :form_class => 'edit-exercise-page-form' if current_user.try(:admin) %>
 
 <script>
+    setAjaxSubmits("#anamnesisTab form:not(.edit-exercise-page-form)", "#anamnesisTab", "post");
     //edit exercise form
-    setAjaxSubmits("#anamnesisTab form", "#anamnesisTab", "get");
+    setAjaxSubmits("#anamnesisTab .edit-exercise-page-form", "#anamnesisTab", "get");
     $('[data-toggle="popover"]').popover();
 </script>
