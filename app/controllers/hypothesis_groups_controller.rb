@@ -11,7 +11,7 @@ class HypothesisGroupsController < ApplicationController
       if @hypothesis_group.save
         format.html { redirect_to hypotheses_url(:layout => get_layout)}
       else
-        format.html { redirect_to hypotheses_url(:layout => get_layout), notice: "Työhypoteesiryhmän luominen epäonnistui."}
+        format.html { redirect_to hypotheses_url(:layout => get_layout), alert: "Työhypoteesiryhmän luominen epäonnistui."}
       end
     end
   end
