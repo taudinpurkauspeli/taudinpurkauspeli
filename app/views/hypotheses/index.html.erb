@@ -23,12 +23,13 @@
     <div class = "row">
       <div class = "col-md-8">
         <h1>Valitse poissuljettavat diffit</h1>
-        <br/>
       </div>
       <div class = "col-md-4">
         <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Hypoteesien poissulkeminen" data-content="Voit sulkea pois mielestäsi väärän hypoteesin klikkaamalla sitä. Poissuljettu työhypoteesi muuttuu punaiseksi. Et kuitenkaan pysty poissulkemaan työhypoteeseja, joiden poissulkemiseksi ei ole vielä tarpeeksi tietoa. Tällöin voit tehdä lisää toimenpiteitä ja tulla myöhemmin poissulkemaan lisää työhypoteeseja.">Ohje</a>
       </div>
     </div>
+    <div class = "separator"></div>
+    <br/>
 <% end %>
 
 <%# lists of hypotheses %>
@@ -38,8 +39,8 @@
       <div class="col-md-5">
         <% @hypothesis_groups.each do |group| %>
             <% unless @exercise.get_hypotheses[group.id].nil? %>
-                <%= render 'hypotheses/show/hypothesis_group_header', { group:group } %>
                 <%# hypotheses that belong to current exercise and group%>
+                <%= render 'hypotheses/show/hypothesis_group_header', { group:group } %>
                 <%= render 'hypotheses/edit/edit_hypotheses_of_group', { group: group } %>
             <% end %>
         <% end %>
@@ -47,7 +48,6 @@
 
       <div class="col-md-2">
       </div>
-
 
       <div class="col-md-5">
         <% @hypothesis_groups.each do |group| %>
@@ -58,8 +58,8 @@
       </div>
 
   <% else %>
+
       <div class="col-md-12">
-        <%# hypothesis_groups %>
         <% @hypothesis_groups.each do |group| %>
             <% unless @exercise.get_hypotheses[group.id].nil? %>
                 <div class="row">
@@ -74,7 +74,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <%# hypotheses that belong to current exercise and group%>
+                  <%# checkable hypotheses for student %>
                   <%= render 'hypotheses/show/check_hypotheses_of_group', { group: group } %>
                 </div>
             <% end %>
@@ -82,11 +82,6 @@
       </div>
 
   <% end %>
-
-
-
-
-
 
 </div>
 
@@ -97,7 +92,6 @@
                 loadView("/tasks/" + <%= current_task.id.to_s %> , "#currentTaskTab");
                 <% end %>
             }
-
     );
     $('[data-toggle="popover"]').popover();
 </script>
