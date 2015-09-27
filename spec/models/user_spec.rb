@@ -23,43 +23,50 @@ RSpec.describe User, :type => :model do
       expect(User.count).to eq(0)
     end
 
-    it "with too short realname" do
-      user = User.create username:"Pekka", realname:"Tes", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
+    it "with too short first_name" do
+      user = User.create username:"Pekka", first_name:"Te", last_name: "Test", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
+
+      expect(user).not_to be_valid
+      expect(User.count).to eq(0)
+    end
+
+    it "with too short last_name" do
+      user = User.create username:"Pekka", first_name:"Test", last_name: "Te", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
 
       expect(user).not_to be_valid
       expect(User.count).to eq(0)
     end
 
     it "with no email" do
-      user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"", student_number: "000000001", starting_year: 2000
+      user = User.create username:"Pekka", first_name:"Pera", last_name: "Peranen", password:"Salasana1", password_confirmation: "Salasana1", email:"", student_number: "000000001", starting_year: 2000
 
       expect(user).not_to be_valid
       expect(User.count).to eq(0)
     end
 
     it "with no student number" do
-      user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@p.com", student_number: "", starting_year: 2000
+      user = User.create username:"Pekka", first_name:"Pera", last_name: "Peranen", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@p.com", student_number: "", starting_year: 2000
 
       expect(user).not_to be_valid
       expect(User.count).to eq(0)
     end
 
     it "with too short student number" do
-      user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@p.com", student_number: "12345678", starting_year: 2000
+      user = User.create username:"Pekka", first_name:"Pera", last_name: "Peranen", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@p.com", student_number: "12345678", starting_year: 2000
 
       expect(user).not_to be_valid
       expect(User.count).to eq(0)
     end
 
     it "with no starting year" do
-      user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@p.com", student_number: "123456789", starting_year: nil
+      user = User.create username:"Pekka", first_name:"Pera", last_name: "Peranen", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@p.com", student_number: "123456789", starting_year: nil
 
       expect(user).not_to be_valid
       expect(User.count).to eq(0)
     end
 
     it "with no password" do
-      user = User.create username:"Pekka", realname:"Pera", password:"", password_confirmation: "Salasana1", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
+      user = User.create username:"Pekka", first_name:"Pera", last_name: "Peranen", password:"", password_confirmation: "Salasana1", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
 
       expect(user).not_to be_valid
       expect(User.count).to eq(0)
@@ -67,32 +74,32 @@ RSpec.describe User, :type => :model do
 
 
     it "with valid password confirmation" do
-      user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
+      user = User.create username:"Pekka", first_name:"Pera", last_name: "Peranen", password:"Salasana1", password_confirmation: "", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
 
       expect(user).not_to be_valid
       expect(User.count).to eq(0)
     end
 
     it "when student number contains other characters than numbers" do
-      user = User.create username:"Pekka", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@p.com", student_number: "12345678A", starting_year: 2000
+      user = User.create username:"Pekka", first_name:"Pera", last_name: "Peranen", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@p.com", student_number: "12345678A", starting_year: 2000
 
       expect(user).not_to be_valid
       expect(User.count).to eq(0)
     end
 
     it "if username is not unique" do
-      User.create username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
+      User.create username:"Testipoika", first_name:"Teppo", last_name: "Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
 
-      user = User.create username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000001", starting_year: 2000
+      user = User.create username:"Testipoika", first_name:"Teppo", last_name: "Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000001", starting_year: 2000
 
       expect(user).not_to be_valid
       expect(User.count).to eq(1)
     end
 
     it "if student number is not unique" do
-      User.create username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
+      User.create username:"Testipoika", first_name:"Teppo", last_name: "Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
 
-      user = User.create username:"Testikaveri", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
+      user = User.create username:"Testikaveri", first_name:"Teppo", last_name: "Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
 
       expect(user).not_to be_valid
       expect(User.count).to eq(1)
@@ -101,7 +108,7 @@ RSpec.describe User, :type => :model do
   end
 
   it "can be saved with correct information" do
-    user = User.new username:"Testipoika", realname:"Teppo Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
+    user = User.new username:"Testipoika", first_name:"Teppo", last_name: "Testailija", password:"Salainen", password_confirmation:"Salainen", email:"teppo.testailija@gmail.com", student_number: "000000000", starting_year: 2000
     user.save
     expect(User.count).to eq(1)
   end
