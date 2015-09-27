@@ -22,7 +22,7 @@ When(/^I fill in the form with correct values$/) do
 end
 
 Given(/^I have a user account$/) do
-  User.create username:'Testikäyttäjä', password:'Nauta on koullut', password_confirmation:'Nauta on koullut', realname:'Teppo Testaaja', email:'nauta@on.koullut', student_number: '000000000', starting_year: 2000
+  User.create username:'Testikäyttäjä', password:'Nauta on koullut', password_confirmation:'Nauta on koullut', first_name:'Teppo', last_name: 'Testaaja', email:'nauta@on.koullut', student_number: '000000000', starting_year: 2000
 end
 
 When(/^I enter my username and password$/) do
