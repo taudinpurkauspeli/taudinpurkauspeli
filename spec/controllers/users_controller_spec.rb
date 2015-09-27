@@ -32,7 +32,7 @@ RSpec.describe UsersController, :type => :controller do
   }
 
   let(:invalid_attributes) {
-    {username: "", realname: "", password: "Salasana1", password_confirmation: "Salasana1", email: ""}
+    {username: "", first_name: "", last_name: "", password: "Salasana1", password_confirmation: "Salasana1", email: ""}
 
   }
 
@@ -235,14 +235,16 @@ RSpec.describe UsersController, :type => :controller do
           put :update, {:id => admin_user.to_param, :user => invalid_attributes}, valid_admin_session
           admin_user.reload
           expect(admin_user.username).to eq("Testipoika")
-          expect(admin_user.first_name).to eq("Teppo Testailija")
+          expect(admin_user.first_name).to eq("Teppo")
+          expect(admin_user.first_name).to eq("Testailija")
         end
 
         it "does not update student information" do
           put :update, {:id => normal_user.to_param, :user => invalid_attributes}, valid_admin_session
           normal_user.reload
           expect(normal_user.username).to eq("Opiskelija")
-          expect(normal_user.first_name).to eq("Olli Testailija")
+          expect(normal_user.first_name).to eq("Olli")
+          expect(normal_user.last_name).to eq("Testailija")
         end
 
         it "assigns the requested normal user as @user" do
@@ -267,7 +269,8 @@ RSpec.describe UsersController, :type => :controller do
           put :update, {:id => normal_user.to_param, :user => invalid_attributes}, valid_normal_session
           normal_user.reload
           expect(normal_user.username).to eq("Opiskelija")
-          expect(normal_user.first_name).to eq("Olli Testailija")
+          expect(normal_user.first_name).to eq("Olli")
+          expect(normal_user.last_name).to eq("Testailija")
         end
 
         it "does not update other student's information" do

@@ -16,7 +16,8 @@ Given(/^I go to see my own page$/) do
 end
 
 Then(/^the page should show my information$/) do
-  expect(page).to have_content(User.find(1).realname)
+  expect(page).to have_content(User.find(1).first_name)
+  expect(page).to have_content(User.find(1).last_name)
   expect(page).to have_content(User.find(1).username)
   expect(page).to have_content(User.find(1).email)
   expect(page).to have_content(User.find(1).student_number)
