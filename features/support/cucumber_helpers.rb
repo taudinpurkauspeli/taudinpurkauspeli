@@ -7,8 +7,8 @@ module CucumberHelpers
 
   def create_students
     FactoryGirl.create(:student)
-    FactoryGirl.create(:student, username: "Heppo", realname: "Kepponen", student_number: "123456789")
-    FactoryGirl.create(:student, username: "Teppo", realname: "Hepponen", student_number: "987654321")
+    FactoryGirl.create(:student, username: "Heppo", first_name: "Heppo", last_name: "Kepponen", student_number: "123456789")
+    FactoryGirl.create(:student, username: "Teppo", first_name: "Teppo", last_name: "Hepponen", student_number: "987654321")
   end
 
   def create_hypothesis_groups
