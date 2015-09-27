@@ -14,9 +14,9 @@ describe "Users page", js:true do
 
   let!(:teacher){FactoryGirl.create(:user)}
   let!(:student){FactoryGirl.create(:student)}
-  let!(:student2){FactoryGirl.create(:student, username: "Seppo", realname: "Seppä", student_number:"000000002")}
-  let!(:student3){FactoryGirl.create(:student, username: "Heppo", realname: "Heppä", student_number:"000000003", starting_year:2001)}
-  let!(:student4){FactoryGirl.create(:student, username: "Leppo", realname: "Leppä", student_number:"000000004", starting_year:2002)}
+  let!(:student2){FactoryGirl.create(:student, username: "Seppo", first_name: "Seppä", last_name: "Seppö", student_number:"000000002")}
+  let!(:student3){FactoryGirl.create(:student, username: "Heppo", first_name: "Heppä", last_name: "Heppö", student_number:"000000003", starting_year:2001)}
+  let!(:student4){FactoryGirl.create(:student, username: "Leppo", first_name: "Leppä", last_name: "Leppö", student_number:"000000004", starting_year:2002)}
 
   describe "when user is not logged in" do
     before :each do
@@ -42,19 +42,19 @@ describe "Users page", js:true do
         expect(page).to have_content 'Opiskelijoiden tiedot'
         expect(page).to have_content 'Lihanautakuolemat'
         expect(page).to have_content 'Kanakuolema'
-        expect(page).not_to have_content student.realname
-        expect(page).not_to have_content student2.realname
-        expect(page).not_to have_content student3.realname
-        expect(page).not_to have_content student4.realname
+        expect(page).not_to have_content student.first_name
+        expect(page).not_to have_content student2.first_name
+        expect(page).not_to have_content student3.first_name
+        expect(page).not_to have_content student4.first_name
       end
 
       it "visit list of all students" do
         click_and_wait('Opiskelijoiden seuranta')
         select 'Opiskelijalista', from: 'list_type'
-        expect(page).to have_content student.realname
-        expect(page).to have_content student2.realname
-        expect(page).to have_content student3.realname
-        expect(page).to have_content student4.realname
+        expect(page).to have_content student.first_name
+        expect(page).to have_content student2.first_name
+        expect(page).to have_content student3.first_name
+        expect(page).to have_content student4.first_name
 
         expect(page).to have_content student.student_number
         expect(page).to have_content student2.student_number
@@ -67,7 +67,7 @@ describe "Users page", js:true do
 
         expect(current_path).to eq(user_path(student))
         expect(page).to have_content 'Caset:'
-        expect(page).to have_content student.realname
+        expect(page).to have_content student.first_name
         expect(page).to have_content student.student_number
         expect(page).to have_content student.email
         expect(page).to have_content student.starting_year
@@ -85,9 +85,9 @@ describe "Users page", js:true do
 
         it "visit users page and see all users that have started exercises" do
           click_and_wait('Opiskelijoiden seuranta')
-          expect(page).to have_content student.realname
-          expect(page).to have_content student2.realname
-          expect(page).to have_content student3.realname
+          expect(page).to have_content student.first_name
+          expect(page).to have_content student2.first_name
+          expect(page).to have_content student3.first_name
 
           expect(page).to have_content '50'
           expect(page).to have_content '100'
@@ -102,17 +102,17 @@ describe "Users page", js:true do
 
           it "view users of one exercise" do
             select 'Lihanautakuolemat', from: 'exercise'
-            expect(page).to have_content student.realname
-            expect(page).to have_content student3.realname
-            expect(page).not_to have_content student2.realname
+            expect(page).to have_content student.first_name
+            expect(page).to have_content student3.first_name
+            expect(page).not_to have_content student2.first_name
             expect(page).not_to have_content "Kanakuolema"
           end
 
           it "view users of specific starting year" do
             select 2001, from: 'starting_year'
-            expect(page).not_to have_content student.realname
-            expect(page).to have_content student3.realname
-            expect(page).not_to have_content student2.realname
+            expect(page).not_to have_content student.first_name
+            expect(page).to have_content student3.first_name
+            expect(page).not_to have_content student2.first_name
           end
         end
       end

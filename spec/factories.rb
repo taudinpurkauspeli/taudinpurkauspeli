@@ -13,7 +13,8 @@ FactoryGirl.define do
 
   factory :student, class: User do
     username "Opiskelija"
-    realname "Olli Testailija"
+    first_name "Olli"
+    last_name "Testailija"
     email "teppo.testailija@gmail.com"
     password "Salainen1"
     password_confirmation "Salainen1"
