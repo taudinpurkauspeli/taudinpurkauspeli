@@ -9,6 +9,7 @@ class ExercisesController < ApplicationController
     @excercise_page_rendered = true
     session[:exercise_id] = nil
     session[:task_id] = nil
+    session[:exhyp_ids] = nil
 
     set_view_layout
   end

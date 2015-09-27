@@ -3,7 +3,7 @@
   <tr><td>&nbsp;</td><td>&nbsp;</td></tr> <%# fixing the fucking layout%>
   <% subtask.interview.question_groups.distinct.each do |group|%>
       <tr>
-        <td class="multichoice">
+        <td class="interview">
           <h4><%= group.title %></h4>
         </td>
         <td></td>
@@ -11,12 +11,13 @@
 
       <% group.questions.where(interview: subtask.interview).each do |question| %>
           <tr>
-            <td class="multichoice"><div class="floatLeft" style = "width: 5%;"></div>
+            <td class="interview"><div class="floatLeft" style = "width: 5%;"></div>
               <% if !current_user.has_asked_question?(question) %>
 
                   <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
                       <%= hidden_field_tag 'question_id', question.id %>
-                      <%= submit_tag(question.title, :class => "btn btn-default multiline width95 floatRight", :id => "ask_question_" + question.id.to_s) unless current_user.try(:admin) %>
+                      <%= hidden_field_tag 'exercise_show_or_task_show', exercise_show_or_task_show %>
+                      <%= submit_tag(question.title, :class => "btn btn-default multiline width95 floatRight", :id => "ask_question_" + question.id.to_s, :method => "post") unless current_user.try(:admin) %>
                   <% end %>
 
               <% else %>
@@ -29,9 +30,9 @@
                       <% else %>
 
                       <% end %>
-                    ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>" id="asked_question_<%= question.id.to_s %>"/>
+                    ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%><%= exercise_show_or_task_show %>" id="asked_question_<%= question.id.to_s %>"/>
                   </td>
-                  <td class="multichoice">
+                  <td class="interview">
                     <div class='collapse in collapse-answer 
                       <% if question.required == "required" %>
                         <%= "collapse-answer-right" %>
@@ -40,7 +41,7 @@
                       <% else %>
 
                       <% end %>
-                      ' id="collapseQuestionContent<%= question.id%>" >
+                      ' id="collapseQuestionContent<%= question.id%><%= exercise_show_or_task_show %>" >
                       <p><%= question.content.html_safe %></p>
                     </div>
               <%end %>
@@ -52,11 +53,12 @@
 
   <% subtask.interview.questions.where(question_group:nil).each do |question| %>
       <tr>
-        <td class="multichoice">
+        <td class="interview">
           <% if !current_user.has_asked_question?(question) %>
               <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
                   <%= hidden_field_tag 'question_id', question.id %>
-                  <%= submit_tag(question.title, :class => "btn btn-default multiline width100", :id => "ask_question_" + question.id.to_s) unless current_user.try(:admin) %>
+                  <%= hidden_field_tag 'exercise_show_or_task_show', exercise_show_or_task_show %>
+                  <%= submit_tag(question.title, :class => "btn btn-default multiline width100", :id => "ask_question_" + question.id.to_s, :method => "post") unless current_user.try(:admin) %>
               <% end %>
           <% else %>
               <input class='btn btn-default btn-hypothesis-group multiline
@@ -67,9 +69,9 @@
                       <% else %>
 
                       <% end %>
-              ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%>" id="asked_question_<%= question.id.to_s %>"/>
+              ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%><%= exercise_show_or_task_show %>" id="asked_question_<%= question.id.to_s %>"/>
               </td>
-              <td class="multichoice">
+              <td class="interview">
                 <div class='collapse in collapse-answer 
                   <% if question.required == "required" %>
                         <%= "collapse-answer-right" %>
@@ -78,7 +80,7 @@
                       <% else %>
 
                       <% end %>
-                  ' id="collapseQuestionContent<%= question.id%>" >
+                  ' id="collapseQuestionContent<%= question.id%><%= exercise_show_or_task_show %>" >
                   <p><%= question.content.html_safe %></p>
                 </div>
           <%end %>
