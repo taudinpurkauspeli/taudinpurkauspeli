@@ -15,7 +15,7 @@ class ExerciseHypothesesController < ApplicationController
         format.html { redirect_to hypotheses_url(:layout => get_layout)}
         format.json { render :show, status: :created, location: @exercise_hypothesis }
       else
-        format.html { redirect_to hypotheses_url(:layout => get_layout), alert: 'Työhypoteesin liittäminen caseen epäonnistui.' }
+        format.html { redirect_to hypotheses_url(:layout => get_layout), alert: 'Diffin liittäminen caseen epäonnistui.' }
       end
     end
   end
@@ -27,10 +27,10 @@ class ExerciseHypothesesController < ApplicationController
     respond_to do |format|
       if @exercise_hypothesis.update(exercise_hypothesis_params)
         puts "ja onnistuin tallennuksessa ex_hyp-kontrollerissa"
-        format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Työhypoteesin tiedot on päivitetty.' }
+        format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Diffin tiedot on päivitetty.' }
         format.json { render :show, status: :ok, location: @exercise_hypothesis }
       else
-        format.html { redirect_to hypotheses_url(:layout => get_layout), alert: 'Työhypoteesin päivittäminen epäonnistui.' }
+        format.html { redirect_to hypotheses_url(:layout => get_layout), alert: 'Diffin päivittäminen epäonnistui.' }
       end
     end
   end
@@ -42,7 +42,7 @@ class ExerciseHypothesesController < ApplicationController
     @exercise_hypothesis.destroy
     respond_to do |format|
       puts "ja onnistuin ex_hypin poistamisessa"
-      format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Työhypoteesi poistettu casesta.'}
+      format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Diffi poistettu casesta.'}
       format.json { head :no_content }
     end
   end

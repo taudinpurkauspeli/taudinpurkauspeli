@@ -10,7 +10,7 @@ RSpec.describe Conclusion, type: :model do
   let!(:user){FactoryGirl.create(:user)}
 
   it "has to_s overridden" do
-    expect(conclusion.to_s).to eq("Päätöstoimenpide")
+    expect(conclusion.to_s).to eq("Diagnoositoimenpide")
   end
 
   describe "user_answered_correctly?" do

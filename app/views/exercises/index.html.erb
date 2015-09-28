@@ -1,13 +1,14 @@
 <%= render 'messages/messages' %>
 <br />
+<img src="http://tautiset-pelit.it.helsinki.fi/images/titlebanner.png" height="200" width="1500">
 <div class = "row">
   <div class = "col-md-8">
-    <img src="http://tautiset-pelit.it.helsinki.fi/images/titlebanner.png" height="200" width="1500">
     <br/>
     <br/>
-    <h1>Taudinpurkauspeli</h1>
+    <h1>Taudinpurkauspelit</h1>
     <br/>
   </div>
+  <br/>
   <%if current_user.nil? %>
       <div class = "col-md-4">
         <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Kirjaudu sisään tai luo uusi käyttäjätunnus pelataksesi peliä.">Ohje</a>
@@ -85,6 +86,16 @@
     <%= button_to 'Opiskelijoiden seuranta', users_path, :class => 'btn btn-default btn-exercise', :method => :get if current_user.try(:admin)%>
   </div>
 </div>
+<% if current_user.try(:admin)%>
+    <br />
+    <div class = "separator"></div>
+    <br />
+    <div class="row">
+      <div class="col-md-5">
+        <%= button_to 'Loki', log_entries_path, :class => 'btn btn-default btn-exercise', :method => :get if current_user.try(:admin)%>
+      </div>
+    </div>
+<% end %>
 <br />
 <br />
 

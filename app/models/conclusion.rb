@@ -3,6 +3,7 @@ class Conclusion < ActiveRecord::Base
 
 	belongs_to :subtask
 	belongs_to :exercise_hypothesis
+	has_one :task, through: :subtask
 
 	def user_answered_correctly?(user, final_conclusion)
 		if final_conclusion.to_i == exercise_hypothesis.id
@@ -14,6 +15,6 @@ class Conclusion < ActiveRecord::Base
 	end
 
   def to_s
-    'Päätöstoimenpide'
+    'Diagnoositoimenpide'
   end
 end

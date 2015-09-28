@@ -61,7 +61,7 @@ class TaskTextsController < ApplicationController
     @task_text.user_answered_correctly?(current_user)
     respond_to do |format|
       if(current_user.has_completed?(current_exercise))
-        format.html { redirect_to exercise_path(current_exercise, :layout => get_layout) }
+        format.html { redirect_to task_path(@task_text.subtask.task, :layout => get_layout, notice: "Onneksi olkoon suoritit casen!") }
       else
         format.html { redirect_to task_path(@task_text.subtask.task, :layout => get_layout), notice: 'Tehtävä suoritettu!' }
       end

@@ -1,0 +1,76 @@
+<%= render 'messages/messages' %>
+
+<h2>Lokirivin tiedot</h2>
+<br/>
+
+<p>
+  <strong>Käyttäjä:</strong>
+  <%= @log_entry.user_id %>
+</p>
+
+<p>
+  <strong>Kontrolleri:</strong>
+  <%= @log_entry.controller %>
+</p>
+
+<p>
+  <strong>Toiminto:</strong>
+  <%= @log_entry.action %>
+</p>
+
+<p>
+  <strong>Parametrit:</strong>
+  <%= @parameters %>
+</p>
+
+<p>
+  <strong>Case:</strong>
+  <%= @log_entry.exercise_id %>
+</p>
+
+<p>
+  <strong>Toimenpide:</strong>
+  <%= @log_entry.task_id %>
+</p>
+
+<p>
+  <strong>Diffit:</strong>
+  <%= @exercise_hypothesis_ids %>
+</p>
+
+<p>
+  <strong>Aika:</strong>
+  <%= @log_entry.datetime %>
+</p>
+
+<p>
+  <strong>Pyynnön polku:</strong>
+  <%= @log_entry.request_path %>
+</p>
+
+<p>
+  <strong>IP:</strong>
+  <%= @log_entry.ip %>
+</p>
+
+<p>
+  <strong>Metodi:</strong>
+  <%= @log_entry.method %>
+</p>
+
+<p>
+  <strong>Vastauksen polku:</strong>
+  <%= @log_entry.response_path %>
+</p>
+<p>
+  <strong>Vastauksen alert:</strong>
+  <%= @log_entry.flash_alert %>
+</p>
+
+<p>
+  <strong>Vastauksen notice:</strong>
+  <%= @log_entry.flash_notice %>
+</p>
+
+<br/>
+<%= link_to 'Takaisin', log_entries_path, class: "btn btn-save" %>

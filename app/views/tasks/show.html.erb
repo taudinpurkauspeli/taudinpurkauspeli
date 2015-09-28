@@ -1,23 +1,34 @@
 <%= render 'messages/messages' %>
-
+<br/>
 <% if current_user.try(:admin) %>
-    <div class = "row">
-      <div class = "col-md-2">
-        <%= button_to 'Palaa muokkaamaan', edit_task_path(@task), :class => 'btn btn-default btn-exercise floatRight',:form_class => "form-edit-task", :method => :get %>
-      </div>
-    </div>
-<% end %>
-
-<h1>Toimenpide: <%= @task.name %></h1>
-
-<% @subtasks.each do |subtask| %>
-    <% if current_user.can_complete_subtask?(@task, subtask) || current_user.try(:admin) %>
-        <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask } %>
+    <% if @task.conclusions.empty? %>
+        <div class = "row">
+          <div class = "col-md-2">
+            <%= button_to 'Palaa muokkaamaan', edit_task_path(@task), :class => 'btn btn-default btn-exercise floatRight',:form_class => "form-edit-task", :method => :get %>
+          </div>
+        </div>
+    <% else %>
+        <div class = "row">
+          <div class = "col-md-2">
+            <%= button_to 'Palaa muokkaamaan', edit_conclusion_path(@task.conclusions.first), :class => 'btn btn-default btn-exercise floatRight',:form_class => "form-edit-task", :method => :get %>
+          </div>
+        </div>
     <% end %>
 <% end %>
 
-<% if current_user.has_completed?(@task) && @task.conclusions.empty? %>
-    <%= render 'task_completed' %>
+<h1>Toimenpide: <%= @task.name %></h1>
+<br/>
+
+<% @subtasks.each do |subtask| %>
+    <% if current_user.can_complete_subtask?(@task, subtask) || current_user.try(:admin) %>
+        <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask, parent_view: "task_show" } %>
+    <% end %>
+<% end %>
+
+<% if current_user.has_completed? current_exercise %>
+    <%= render 'exercises/user_has_completed_exercise' %>
+<% elsif current_user.has_completed?(@task) %>
+    <%= render 'task_completed', {task:@task} %>
 <% end %>
 
 <script>
@@ -25,9 +36,12 @@
     setAjaxSubmits("#currentTaskTab form:not(.form-task-completed, .form-edit-task)", "#currentTaskTab", "post", function(){
         loadView("/tasks", "#taskTab");
         loadView("/hypotheses", "#hypothesisTab");
+        loadView("<%= exercise_path(current_exercise) %>", "#anamnesisTab");
     });
 
     setAjaxSubmits("#currentTaskTab .form-edit-task", "#currentTaskTab", "get");
+
+    setRemovables();
 
     setGoToTab("#form-open-hypotheses-tab", "#hypothesisTab");
     setGoToTab("#form-open-tasks-tab", "#taskTab");

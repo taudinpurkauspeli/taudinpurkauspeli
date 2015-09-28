@@ -60,8 +60,9 @@ RSpec.describe TasksController, :type => :controller do
 
   describe "GET show" do
     it "assigns the requested task as @task" do
-
       task = Task.create! valid_attributes
+      FactoryGirl.create(:subtask, task_id: 2)
+      FactoryGirl.create(:task_text, subtask_id: 1)
       get :show, {:id => task.to_param}, valid_session
       expect(assigns(:task)).to eq(task)
     end
@@ -145,7 +146,7 @@ RSpec.describe TasksController, :type => :controller do
       it "changes the level when no siblings & no children" do
 
         expect {
-         post :level_up, {:id => task3.id}, valid_session
+          post :level_up, {:id => task3.id}, valid_session
         }.to change{Task.last.level}.by(-1)
 
       end

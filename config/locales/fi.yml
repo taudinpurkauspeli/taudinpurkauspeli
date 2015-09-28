@@ -77,11 +77,13 @@ fi:
         record_invalid: "Vääränlainen"
     models:
       exercise: "Case"
-      hypothesis: "Työhypoteesi"
+      hypothesis: "Diffi"
       task: "Toimenpide"
       user: "Käyttäjä"
       multichoice: "Monivalintakysymys"
       option: "Vaihtoehto"
+      conclusion: "Diagnoosi"
+      log_entry: "Loki"
     attributes:
       exercise_hypothesis:
         task_id: "Esivaatimustoimenpide"
@@ -89,10 +91,27 @@ fi:
         name: "Nimi"
         anamnesis: "Anamneesi"
         hidden: "Piilota case opiskelijoilta"
+      conclusion:
+        title: "Otsikko"
+        content: "Ohje opiskelijoille"
+        exercise_hypothesis_id: "Casen oikea diffi"
       hypothesis:
         name: "Nimi"
       interview:
         title: "Otsikko"
+      log_entry:
+        user_id: "Käyttäjä"
+        controller: "Kontrolleri"
+        action: "Toiminto"
+        params: "Parametrit"
+        exercise_id: "Case"
+        task_id: "Toimenpide"
+        exhyp_ids: "Diffit"
+        datetime: "Aika"
+        request_path: "Pyynnön polku"
+        ip: "IP"
+        method: "Metodi"
+        response_path: "Vastauksen polku"
       multichoice:
         question: "Kysymys"
         is_radio_button: "Radio button -tyyppinen kysymys"

@@ -16,7 +16,7 @@ RSpec.describe InterviewsController, :type => :controller do
 	}
 
 	let(:valid_session) { {
-			user_id: user.id, task_id: task.id}
+			user_id: user.id, task_id: task.id, exercise_id: 1}
 	}
 
 	describe "GET new" do

@@ -1,7 +1,7 @@
 <%# add navigation links to this file %>
-<li role="presentation" class="tabLink active"><a href="#anamnesisTab" aria-controls="home" role="tab" data-toggle="tab">Anamneesi</a></li>
+<li role="presentation" class="tabLink active"><a href="#anamnesisTab" aria-controls="home" role="tab" data-toggle="tab">Sairaskertomus</a></li>
 <li class = "tabLink" role="presentation"><a href="#taskTab" aria-controls="tasks" role="tab" data-toggle="tab">Toimenpiteet</a></li>
-<li class = "tabLink" role="presentation"><a href="#hypothesisTab" aria-controls="hypotheses" role="tab" data-toggle="tab">Työhypoteesit</a></li>
+<li class = "tabLink" role="presentation"><a href="#hypothesisTab" aria-controls="hypotheses" role="tab" data-toggle="tab">Diffit</a></li>
 <% unless current_task.nil? || current_user.has_completed?(current_task) %>
 	<li class = "tabLink" role="presentation"><a href="#currentTaskTab" aria-controls="currentTask" role="tab" data-toggle="tab"><%= current_task.name %></a></li>
 <% end %>

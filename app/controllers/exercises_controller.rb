@@ -9,6 +9,7 @@ class ExercisesController < ApplicationController
     @excercise_page_rendered = true
     session[:exercise_id] = nil
     session[:task_id] = nil
+    session[:exhyp_ids] = nil
 
     set_view_layout
   end
@@ -17,6 +18,12 @@ class ExercisesController < ApplicationController
   # GET /exercises/1.json
   def show
     session[:exercise_id] = params[:id]
+
+    @user = current_user
+    @completed_tasks = @user.tasks.where("level > ?", 0).where(exercise:@exercise)
+
+    # Unchecked exercise hypotheses for conclusion view
+    @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
 
     set_view_layout
   end

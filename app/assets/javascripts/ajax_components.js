@@ -91,7 +91,7 @@ function openNewTab(url, containerElementSelector, taskName, callback){
         targetTabLink.html(taskName);
     }
 
-    if(callback != undefined){
+    if(callback == undefined){
         callback = function(){};
     }
 
@@ -113,7 +113,7 @@ function loadView(url, elementSelector, callback, ajaxloader){
     if(ajaxloader != undefined){
         if(ajaxloader == true){
             element.empty();
-            element.append("<div id = 'ajax-curtain' style = 'width: 100%; text-align: center; line-height: 500px; height: 500px;'><img style = 'display: inline;' src = 'http://s3-eu-central-1.amazonaws.com/taudinpurkauspeli/data/2/content.gif'></img></div>");
+            element.append("<div id = 'ajax-curtain' style = 'width: 100%; text-align: center; line-height: 500px; height: 500px;'><img style = 'display: inline;' src = 'http://tautiset-pelit.it.helsinki.fi/images/contentLoading.gif'></img></div>");
         }
     }
 

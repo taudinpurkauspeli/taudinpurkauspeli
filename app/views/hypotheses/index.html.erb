@@ -1,18 +1,18 @@
 <% if current_user.try(:admin) %>
-  <%= render 'messages/messages' %>
+    <%= render 'messages/messages' %>
 <% end %>
 
 <%# headers %>
 <% if current_user.try(:admin) %>
     <div class="row">
       <div class="col-md-5">
-        <h2>Casen <%= @exercise.name %> työhypoteesit</h2>
+        <h2>Casen <%= @exercise.name %> diffit</h2>
       </div>
       <div class="col-md-2">
         <%# spacer %>
       </div>
       <div class="col-md-3">
-        <h2>Työhypoteesipankki</h2>
+        <h2>Diffipankki</h2>
       </div>
       <div class = "col-md-2">
         <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Työhypoteesit" data-content="Voit valita Työhypoteesipankista caseen sopivat työhypoteesit klikkaamalla hiirellä. Työhypoteesiryhmät siirtyvät työhypoteesien mukana automaattisesti. Voit myös luoda tai poistaa työhypoteesiryhmiä ja työhypoteeseja Työhypoteesipankin puolella.">Ohje</a>
@@ -22,46 +22,76 @@
     <br />
     <div class = "row">
       <div class = "col-md-8">
-        <h2>Valitse poissuljettavat työhypoteesit</h2>
+        <h1>Valitse poissuljettavat diffit</h1>
       </div>
       <div class = "col-md-4">
         <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Hypoteesien poissulkeminen" data-content="Voit sulkea pois mielestäsi väärän hypoteesin klikkaamalla sitä. Poissuljettu työhypoteesi muuttuu punaiseksi. Et kuitenkaan pysty poissulkemaan työhypoteeseja, joiden poissulkemiseksi ei ole vielä tarpeeksi tietoa. Tällöin voit tehdä lisää toimenpiteitä ja tulla myöhemmin poissulkemaan lisää työhypoteeseja.">Ohje</a>
       </div>
     </div>
+    <div class = "separator"></div>
+    <br/>
 <% end %>
 
 <%# lists of hypotheses %>
 <div class="row">
-  <div class="col-md-5">
-    <%# hypothesis_groups %>
-    <% @hypothesis_groups.each do |group| %>
-      <% unless @exercise.get_hypotheses[group.id].nil? %>
-        <%= render 'hypotheses/show/hypothesis_group_header', { group:group } %>
-        <div class="collapse in" id="collapseHypothesisGroup1<%= group.id%>" >
-          <%# hypotheses that belong to current exercise and group%>
-          <%= if current_user.try(:admin)
-              then render 'hypotheses/edit/edit_hypotheses_of_group', { group: group }
-              else render 'hypotheses/show/check_hypotheses_of_group', { group: group }
-              end %>
-        </div>
+
+  <% if current_user.try(:admin) %>
+      <div class="col-md-5">
+        <% @hypothesis_groups.each do |group| %>
+            <% unless @exercise.get_hypotheses[group.id].nil? %>
+                <%# hypotheses that belong to current exercise and group%>
+                <%= render 'hypotheses/show/hypothesis_group_header', { group:group } %>
+                <%= render 'hypotheses/edit/edit_hypotheses_of_group', { group: group } %>
+            <% end %>
         <% end %>
-    <% end %>
-  </div>
-  <div class="col-md-2">
-  </div>
-  <div class="col-md-5">
-    <% if current_user.try(:admin) %>
-      <% @hypothesis_groups.each do |group| %>
-        <%= render 'hypotheses/edit/hypothesis_group_edit', { group: group }  %>
-        <%= render 'hypotheses/edit/hypotheses_of_group', { group: group }  %>
-      <% end %>
-      <%= render 'hypotheses/edit/new_hypothesis_group'  %>
-    <% end %>
-  </div>
+      </div>
+
+      <div class="col-md-2">
+      </div>
+
+      <div class="col-md-5">
+        <% @hypothesis_groups.each do |group| %>
+            <%= render 'hypotheses/edit/hypothesis_group_edit', { group: group }  %>
+            <%= render 'hypotheses/edit/hypotheses_of_group', { group: group }  %>
+        <% end %>
+        <%= render 'hypotheses/edit/new_hypothesis_group'  %>
+      </div>
+
+  <% else %>
+
+      <div class="col-md-12">
+        <% @hypothesis_groups.each do |group| %>
+            <% unless @exercise.get_hypotheses[group.id].nil? %>
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="row">
+                      <div class="col-md-1">
+                      </div>
+                      <div class="col-md-11">
+                        <input class="btn btn-default btn-hypothesis-group multiline" type="button" value="<%= group.name %>" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <%# checkable hypotheses for student %>
+                  <%= render 'hypotheses/show/check_hypotheses_of_group', { group: group } %>
+                </div>
+            <% end %>
+        <% end %>
+      </div>
+
+  <% end %>
+
 </div>
 
 <script>
-    setAjaxSubmits("#hypothesisTab form", "#hypothesisTab", "post");
     setRemovables();
+    setAjaxSubmits("#hypothesisTab form", "#hypothesisTab", "post", function(){
+                <% if !current_task.nil? && !current_task.conclusions.empty? %>
+                loadView("/tasks/" + <%= current_task.id.to_s %> , "#currentTaskTab");
+                <% end %>
+            }
+    );
     $('[data-toggle="popover"]').popover();
 </script>
