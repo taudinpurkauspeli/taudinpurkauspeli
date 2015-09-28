@@ -10,14 +10,14 @@ RSpec.describe User, :type => :model do
   describe "cannot be saved" do
 
     it "with no username" do
-      user = User.create username:"", realname:"Pera", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
+      user = User.create username:"", first_name:"Pera", last_name: "Peranen", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
 
       expect(user).not_to be_valid
       expect(User.count).to eq(0)
     end
 
-    it "with no realname" do
-      user = User.create username:"Pekka", realname:"", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
+    it "with no names" do
+      user = User.create username:"Pekka", first_name:"", last_name: "", password:"Salasana1", password_confirmation: "Salasana1", email:"pekka@gmail.com", student_number: "000000001", starting_year: 2000
 
       expect(user).not_to be_valid
       expect(User.count).to eq(0)

@@ -236,7 +236,7 @@ RSpec.describe UsersController, :type => :controller do
           admin_user.reload
           expect(admin_user.username).to eq("Testipoika")
           expect(admin_user.first_name).to eq("Teppo")
-          expect(admin_user.first_name).to eq("Testailija")
+          expect(admin_user.last_name).to eq("Testailija")
         end
 
         it "does not update student information" do

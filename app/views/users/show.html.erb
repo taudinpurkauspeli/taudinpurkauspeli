@@ -1,7 +1,7 @@
 <%= render 'messages/messages' %>
 
 
-<h1><%= @user.realname %> </h1>
+<h1><%= @user.first_name %><%= @user.last_name %> </h1>
 
 <% if !current_user.try(:admin) %>
     <strong>Käyttäjänimi: </strong><%= @user.username %><br/>
