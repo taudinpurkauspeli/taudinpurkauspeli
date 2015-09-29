@@ -38,7 +38,7 @@ class TasksController < ApplicationController
         session[:task_id] = params[:id]
       else
         respond_to do |format|
-          format.html { redirect_to tasks_url(:layout => get_layout, :last_clicked_task_id => params[:id]), alert: 'Et voi vielä suorittaa tätä toimenpidettä.' and return }
+          format.html { redirect_to tasks_url(:layout => get_layout, :last_clicked_task_id => params[:id]), alert: 'Et voi vielä suorittaa tätä toimenpidettä, vaan sinun tulee suorittaa ainakin yksi muu toimenpide ennen tätä.' and return }
         end
       end
     else

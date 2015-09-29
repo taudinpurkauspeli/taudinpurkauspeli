@@ -105,7 +105,7 @@ describe "Task list page", js:true do
       describe "but has not completed required prerequisite tasks" do
         it "he should not be able to complete task" do
           click_and_wait('Hoida')
-          expect(page).to have_content('Et voi vielä suorittaa tätä toimenpidettä.')
+          expect(page).to have_content('Et voi vielä suorittaa tätä toimenpidettä, vaan sinun tulee suorittaa ainakin yksi muu toimenpide ennen tätä.')
         end
       end
     end

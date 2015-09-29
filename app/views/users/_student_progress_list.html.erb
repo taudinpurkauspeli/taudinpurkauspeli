@@ -36,6 +36,7 @@
               <% exercise.get_users(@selected_starting_year).each do |user| %>
                   <tr>
                     <td class = "user"><%= link_to user.last_name, user %></td>
+                    <td class = "user"><%= link_to user.first_name, user %></td>
                     <td class = "user">
                       <div class ="progressbar <%= 'completed' if user.get_percent_of_completed_tasks_of_exercise(exercise) == 100 %>" >
                         <% if user.get_percent_of_completed_tasks_of_exercise(exercise) < 100 %>
