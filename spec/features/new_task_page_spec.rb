@@ -66,7 +66,7 @@ describe "New Task page", js:true do
           expect(page).to have_content 'Kysymys lisättiin onnistuneesti!'
           expect(Subtask.count).to eq(1)
 
-          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, etta koira on kipea.</p>")
+          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, etta koira on kipea.</p>\r\n")
         end
 
 
@@ -159,7 +159,7 @@ describe "New Task page", js:true do
           click_and_wait('Tallenna')
 
           expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
-          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, etta koira ei ole kipea!</p>")
+          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, etta koira ei ole kipea!</p>\r\n")
         end
 
         it "should not be able to update task text to have no content" do
@@ -210,7 +210,7 @@ describe "New Task page", js:true do
           expect(page).to have_content 'Vaihtoehto lisättiin onnistuneesti'
 
           expect(Multichoice.first.options.first.content).to eq('Kysy taudeista')
-          expect(Multichoice.first.options.first.explanation).to eq("<p>Taudeista on hyvä kysya!</p>")
+          expect(Multichoice.first.options.first.explanation).to eq("<p>Taudeista on hyvä kysya!</p>\r\n")
           expect(Multichoice.first.options.first.is_correct_answer).to eq("required")
         end
 
@@ -282,7 +282,7 @@ describe "New Task page", js:true do
               fill_in_ckeditor 'option_explanation_2', with: 'Taudista pitaa kerata lisatietoja!'
               wait_and_trigger_click('option_save_2')
 
-              expect(Option.find(2).explanation).to eq("<p>Taudista pitaa kerata lisatietoja!</p>")
+              expect(Option.find(2).explanation).to eq("<p>Taudista pitaa kerata lisatietoja!</p>\r\n")
             end
           end
 
@@ -322,7 +322,7 @@ describe "New Task page", js:true do
 
             expect(QuestionGroup.count).to eq(0)
             expect(Interview.first.questions.first.title).to eq('Onko eläin ollut kipea?')
-            expect(Interview.first.questions.first.content).to eq("<p>On ollut kipea.</p>")
+            expect(Interview.first.questions.first.content).to eq("<p>On ollut kipea.</p>\r\n")
             expect(Interview.first.questions.first.required).to eq("required")
           end
 
@@ -379,7 +379,7 @@ describe "New Task page", js:true do
               fill_in_ckeditor 'question_content_2', with: 'On ollut todella kipea!'
               wait_and_trigger_click('question_save_2')
 
-              expect(Question.find(2).content).to eq("<p>On ollut todella kipea!</p>")
+              expect(Question.find(2).content).to eq("<p>On ollut todella kipea!</p>\r\n")
             end
 
             it "change the title of a question" do
