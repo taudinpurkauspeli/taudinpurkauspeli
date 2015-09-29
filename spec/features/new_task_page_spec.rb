@@ -210,7 +210,7 @@ describe "New Task page", js:true do
           expect(page).to have_content 'Vaihtoehto lisättiin onnistuneesti'
 
           expect(Multichoice.first.options.first.content).to eq('Kysy taudeista')
-          expect(Multichoice.first.options.first.explanation).to eq("<p>Taudeista on hyvä kysya!</p>\r\n")
+          expect(Multichoice.first.options.first.explanation).to eq("<p>Taudeista on hyva kysya!</p>\r\n")
           expect(Multichoice.first.options.first.is_correct_answer).to eq("required")
         end
 
