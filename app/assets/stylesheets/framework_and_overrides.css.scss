@@ -439,6 +439,12 @@ td.multichoice{
   vertical-align: top;
 }
 
+td.interview{
+  width: 50%;
+  padding: 5px;
+  vertical-align: top;
+}
+
 td.wrong-answer{
   background-color: $PaleLightRed;
 }

@@ -2,37 +2,52 @@
 
 <br/>
 
-<h1>Loki</h1>
+<div class="container">
 
-<br/>
+  <h1>Loki</h1>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Käyttäjä</th>
-      <th>Toiminto</th>
-      <th>Aika</th>
-      <th>Pyynnön polku</th>
-      <th>Metodi</th>
-      <th>Vastauksen polku</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+  <br/>
 
-  <tbody>
-    <% @log_entries.each do |log_entry| %>
-      <tr>
-        <td><%= log_entry.user_id %></td>
-        <td><%= log_entry.action %></td>
-        <td><%= log_entry.datetime %></td>
-        <td><%= log_entry.request_path %></td>
-        <td><%= log_entry.method %></td>
-        <td><%= log_entry.response_path %></td>
-        <td><%= link_to 'Näytä', log_entry, class: "btn btn-save" %></td>
-        <td><%= link_to 'Poista', log_entry, method: :delete, data: { confirm: 'Oletko varma, että haluat poistaa rivin?' }, class: "btn btn-del" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="col-md-12">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>Käyttäjä</th>
+                <th>Toiminto</th>
+                <th>Aika</th>
+                <th>Pyynnön polku</th>
+                <th>Metodi</th>
+                <th>Vastauksen polku</th>
+                <th colspan="2"></th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <% @log_entries.each do |log_entry| %>
+                  <tr>
+                    <td><%= log_entry.user_id %></td>
+                    <td><%= log_entry.action %></td>
+                    <td><%= log_entry.datetime %></td>
+                    <td><%= log_entry.request_path %></td>
+                    <td><%= log_entry.method %></td>
+                    <td><%= log_entry.response_path %></td>
+                    <td><%= link_to 'Näytä', log_entry, class: "btn btn-save" %></td>
+                    <td><%= link_to 'Poista', log_entry, method: :delete, data: { confirm: 'Oletko varma, että haluat poistaa rivin?' }, class: "btn btn-del" %></td>
+                  </tr>
+              <% end %>
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 

@@ -17,10 +17,10 @@ class CheckedHypothesesController < ApplicationController
           end
         end
       else
-        redirect_to hypotheses_url(:layout => get_layout, :last_clicked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id]), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
+        redirect_to hypotheses_url(:layout => get_layout, :last_clicked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id]), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea diffin."
       end
     else
-      redirect_to hypotheses_url(:layout => get_layout, :last_clicked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id]), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin."
+      redirect_to hypotheses_url(:layout => get_layout, :last_clicked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id]), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea diffin."
     end
   end
 
@@ -29,7 +29,7 @@ class CheckedHypothesesController < ApplicationController
   def destroy
     @checked_hypothesis.destroy
     respond_to do |format|
-      format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Työhypoteesi palautettu mahdollisten työhypoteesien listaan.'}
+      format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Diffi palautettu mahdollisten diffien listaan.'}
       format.json { head :no_content }
     end
   end

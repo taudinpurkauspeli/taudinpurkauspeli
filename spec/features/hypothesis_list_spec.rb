@@ -39,7 +39,7 @@ describe "Hypothesis list page", js:true do
           expect {
             click_and_wait('Virustauti')
           }.to change(CheckedHypothesis, :count).by (0)
-          expect(page).to have_content 'Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea työhypoteesin.'
+          expect(page).to have_content 'Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea diffin.'
         end
       end
 
