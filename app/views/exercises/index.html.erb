@@ -7,15 +7,8 @@
     <br/>
     <h1>Taudinpurkauspelit</h1>
     <br/>
-    Pelin tarkoitus on opetella taudinpurkaukseen tarvittavaa ajattelumallia.
-    Yritä miettiä mikä olisi paras järjestys suorittaa pelin toimenpiteet oikeaan diagnoosiin päästäksesi.
-    Pelin toimenpiteet eivät ole oikeassa suoritusjärjestyksessä. Luultavasti on helpointa sulkea vääriä
-    diffejä pois heti kun voit niin varmuudella tehdä.
-    <br/>
-    Ohjeita löytyy sivun oikeasta laidasta Ohje-napista.
-    Sivun yläreunassa on välilehtiä, joiden avulla kannattaa liikkua. Takaisin-nuoli ei valitettavasti
-    toimi normaalisti, vaan ohjaa Sairaskertomus-välilehdelle.
   </div>
+  <br/>
   <br/>
   <%if current_user.nil? %>
       <div class = "col-md-4">
@@ -33,6 +26,27 @@
       <% end %>
   <% end %>
 </div>
+
+<%unless current_user.nil? %>
+    <div class="row">
+
+      <div class="col-md-8">
+        <p>
+          Pelin tarkoitus on opetella taudinpurkaukseen tarvittavaa ajattelumallia.
+          Yritä miettiä, mikä olisi paras järjestys suorittaa pelin toimenpiteet oikeaan diagnoosiin päästäksesi.
+          Pelin toimenpiteet eivät ole toimenpidelistassa oikeassa suoritusjärjestyksessä. Vääriä
+          diffejä on helpointa sulkea pois heti, kun voit varmuudella tehdä niin.
+        </p>
+        <p>
+          Ohjeita löytyy sivun oikeasta laidasta Ohje-napista.
+          Sivun yläreunassa on välilehtiä, joiden avulla voi liikkua. Selaimen takaisin-nuoli ei valitettavasti
+          toimi normaalisti, vaan ohjaa Sairaskertomus-välilehdelle.
+        </p>
+
+        <br/>
+      </div>
+    </div>
+<%end%>
 
 <%@exercises.each do |exercise| %>
     <div class="row">
