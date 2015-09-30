@@ -14,7 +14,7 @@ describe "User show page", js:true do
   let!(:task6){FactoryGirl.create(:task, name: "Soita läänineläinlääkärille", exercise:exercise2)}
 
   let!(:student){FactoryGirl.create(:student)}
-  let!(:student2){FactoryGirl.create(:student, username: "Seppo", realname: "Seppä", student_number:"000000002")}
+  let!(:student2){FactoryGirl.create(:student, username: "Seppo", first_name: "Seppä", last_name: "Seppö", student_number:"000000002")}
 
   describe "student" do
 
@@ -29,7 +29,8 @@ describe "User show page", js:true do
         expect(current_path).to eq(user_path(student))
         expect(page).to have_content 'Caset:'
         expect(page).to have_content 'Ei aloitettuja caseja!'
-        expect(page).to have_content student.realname
+        expect(page).to have_content student.first_name
+        expect(page).to have_content student.last_name
         expect(page).to have_content student.student_number
         expect(page).to have_content student.email
         expect(page).to have_content student.starting_year
@@ -47,7 +48,8 @@ describe "User show page", js:true do
           expect(page).to have_content 'Käyttäjän tiedot päivitetty'
 
           updated_student = User.where(username:"Opiskelija").first
-          expect(updated_student.realname).to eq(student.realname)
+          expect(updated_student.first_name).to eq(student.first_name)
+          expect(updated_student.last_name).to eq(student.last_name)
           expect(updated_student.username).to eq(student.username)
           expect(updated_student.email).to eq(student.email)
           expect(updated_student.student_number).to eq(student.student_number)
@@ -59,13 +61,15 @@ describe "User show page", js:true do
         end
 
         it "other information without changing password" do
-          fill_in 'user_realname', with: 'Uusi hassu nimi'
+          fill_in 'user_first_name', with: 'Uusi hassu etunimi'
+          fill_in 'user_last_name', with: 'Uusi hassu sukunimi'
           fill_in 'user_email', with: 'uusi@nimi.com'
           click_and_wait 'Päivitä'
           expect(page).to have_content 'Käyttäjän tiedot päivitetty'
 
           updated_student = User.where(username:"Opiskelija").first
-          expect(updated_student.realname).to eq('Uusi hassu nimi')
+          expect(updated_student.first_name).to eq('Uusi hassu etunimi')
+          expect(updated_student.last_name).to eq('Uusi hassu sukunimi')
           expect(updated_student.username).to eq(student.username)
           expect(updated_student.email).to eq('uusi@nimi.com')
           expect(updated_student.student_number).to eq(student.student_number)
@@ -107,7 +111,7 @@ describe "User show page", js:true do
 
       it "update information wrong" do
         click_and_wait 'Muokkaa tietoja'
-        fill_in 'user_realname', with: ''
+        fill_in 'user_first_name', with: ''
         click_and_wait 'Päivitä'
         expect(page).to have_content 'Seuraavat virheet estivät tallennuksen:'
       end

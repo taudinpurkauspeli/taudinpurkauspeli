@@ -140,6 +140,7 @@ fi:
         username: "Käyttäjätunnus"
         password: "Salasana"
         password_confirmation: "Salasanan vahvistus"
-        realname: "Nimi"
+        first_name: "Etunimi"
+        last_name: "Sukunimi"
         student_number: "Opiskelijanumero"
         starting_year: "Aloitusvuosi"

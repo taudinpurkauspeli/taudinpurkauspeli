@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920180235) do
+ActiveRecord::Schema.define(version: 20150927140349) do
 
   create_table "asked_questions", force: :cascade do |t|
     t.integer  "user_id"
@@ -183,13 +183,14 @@ ActiveRecord::Schema.define(version: 20150920180235) do
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "email"
-    t.string   "realname"
     t.string   "password_digest"
     t.string   "student_number"
     t.integer  "starting_year"
     t.boolean  "admin",           default: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
 end

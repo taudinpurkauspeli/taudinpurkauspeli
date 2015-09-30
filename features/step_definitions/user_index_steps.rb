@@ -34,8 +34,11 @@ When(/^I select "(.*?)" to be shown$/) do |arg1|
 end
 
 Then(/^the page should show all students$/) do
-	expect(page).to have_content(User.find(2).realname)
-	expect(page).to have_content(User.find(3).realname)
-	expect(page).to have_content(User.find(4).realname)
+	expect(page).to have_content(User.find(2).first_name)
+	expect(page).to have_content(User.find(3).first_name)
+	expect(page).to have_content(User.find(4).first_name)
+	expect(page).to have_content(User.find(2).last_name)
+	expect(page).to have_content(User.find(3).last_name)
+	expect(page).to have_content(User.find(4).last_name)
 end
 

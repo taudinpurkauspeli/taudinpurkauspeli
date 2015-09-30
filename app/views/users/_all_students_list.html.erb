@@ -21,7 +21,8 @@
       </colgroup> 
         <thead>
         <tr>
-          <th class = "user">Nimi</th>
+          <th class = "user">Etunimi</th>
+          <th class = "user">Sukunimi</th>
           <th class = "user">Opiskelijanumero</th>
           <th class = "user">Sähköposti</th>
           <th class = "user">Aloitusvuosi</th>
@@ -30,7 +31,8 @@
         <tbody>
         <% @shown_users.each do |user| %>
             <tr>
-              <td class = "user"><%= link_to user.realname, user %></td>
+              <td class = "user"><%= link_to user.first_name, user %></td>
+              <td class = "user"><%= link_to user.last_name, user %></td>
               <td class = "user"><%= link_to user.student_number, user %></td>
               <td class = "user"><%= user.email %></td>
               <td class = "user"><%= user.starting_year %></td>
