@@ -101,7 +101,11 @@
 <%= button_to 'Muokkaa', edit_exercise_path(@exercise), :method => "get", :class => "btn btn-default btn-save widthAuto", :form_class => 'edit-exercise-page-form' if current_user.try(:admin) %>
 
 <script>
-    setAjaxSubmits("#anamnesisTab form:not(.edit-exercise-page-form)", "#anamnesisTab", "post");
+    setAjaxSubmits("#anamnesisTab form:not(.edit-exercise-page-form)", "#anamnesisTab", "post", function(){
+        <% if !current_task.nil? && current_user.has_completed?(current_task)%>
+        loadView("/tasks/" + <%= current_task.id.to_s %> , "#currentTaskTab");
+        <% end %>
+    });
     //edit exercise form
     setAjaxSubmits("#anamnesisTab .edit-exercise-page-form", "#anamnesisTab", "get");
     $('[data-toggle="popover"]').popover();
