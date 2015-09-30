@@ -144,3 +144,4 @@ fi:
         last_name: "Sukunimi"
         student_number: "Opiskelijanumero"
         starting_year: "Aloitusvuosi"
+        email: "Sähköposti"

@@ -1,6 +1,24 @@
 <%= render 'messages/messages' %>
+<br/>
 
 <h1>Uuden käyttäjätunnuksen luominen</h1>
 
-<%= render 'form' %>
+<div class = "separator"></div>
+<div class="row ">
+  <div class="col-md-12 text-right">
+    <%= link_to 'Rekisteriseloste', "http://tautiset-pelit.it.helsinki.fi/images/MikroEpinSuoritusrekisterinSeloste.pdf"%>
+  </div>
 
+</div>
+
+
+<br/>
+<%= render 'form' %>
+<br/>
+
+<div class = "separator"></div>
+<div class="row">
+  <div class="col-md-2">
+    <%= button_to 'Takaisin', exercises_path, :class => 'btn btn-default btn-exercise widthAuto', :method => :get%>
+  </div>
+</div>

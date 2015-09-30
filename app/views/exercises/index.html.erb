@@ -6,7 +6,6 @@
     <br/>
     <br/>
     <h1>Taudinpurkauspelit</h1>
-    <br/>
   </div>
   <br/>
   <br/>
@@ -26,6 +25,9 @@
       <% end %>
   <% end %>
 </div>
+<div class = "separator"></div>
+
+<br/>
 
 <%unless current_user.nil? %>
     <div class="row">
@@ -39,7 +41,7 @@
         </p>
         <p>
           Ohjeita löytyy sivun oikeasta laidasta Ohje-napista.
-          Sivun yläreunassa on välilehtiä, joiden avulla voi liikkua. Selaimen takaisin-nuoli ei valitettavasti
+          Sivun yläreunassa on välilehtiä, joiden avulla voi liikkua. Selaimen Takaisin-nuoli ei valitettavasti
           toimi normaalisti, vaan ohjaa Sairaskertomus-välilehdelle.
         </p>
 
@@ -102,6 +104,13 @@
 </div>
 <br />
 <div class = "separator"></div>
+
+<div class="row">
+  <div class="col-md-5">
+    <%= link_to 'Rekisteriseloste', "http://tautiset-pelit.it.helsinki.fi/images/MikroEpinSuoritusrekisterinSeloste.pdf"%>
+  </div>
+</div>
+
 <br />
 <div class="row">
   <div class="col-md-5">
