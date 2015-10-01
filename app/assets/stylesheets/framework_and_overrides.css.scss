@@ -239,6 +239,18 @@ li.active>a{
   width: 20em;
   background-color: #cacaca;
 }
+
+.btn-completed-task-order{
+  height: 45px;
+  width: 30em;
+  background-color: $PaleLightGreen;
+}
+
+.btn-completed-task-order:hover{
+  background-color: $LightGreen;
+  color: #fff;
+}
+
 .btn-task-down{
   height: 98%;
   margin-top: 2%;

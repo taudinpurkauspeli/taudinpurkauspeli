@@ -15,7 +15,7 @@ class TasksController < ApplicationController
       if current_user.try(:admin)
         @tasks = @exercise.tasks.where("level > ?", 0).order("level")
       else
-        @completed_tasks = @user.tasks.where("level > ?", 0).where(exercise:@exercise)
+        @completed_tasks = @user.tasks.where("level > ?", 0).where(exercise:@exercise).order("level")
         @available_tasks = @exercise.tasks.where("level > ?", 0).order("name") - @completed_tasks
       end
     else

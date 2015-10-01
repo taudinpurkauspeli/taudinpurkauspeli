@@ -1,17 +1,49 @@
-<br />
+<br/>
+
 <div class = "row">
   <div class = "col-md-8">
     <h3>Tehdyt toimenpiteet</h3>
   </div>
   <div class = "col-md-4">
-    <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="left" title="Suoritetun toimenpiteen tarkastelu" data-content="Voit tarkastella jo suorittamiasi toimenpiteitä klikkaamalla kyseistä tehtävää.">Ohje</a>
+    <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="left" title="Suoritetun toimenpiteen tarkastelu" data-content="Voit tarkastella jo suorittamiasi toimenpiteitä klikkaamalla kyseistä tehtävää. Toimenpiteet on sijoitettu tasoittain, mistä näkee toimenpiteiden mahdollisen suoritusjärjestyksen ja samalla sen, missä järjestyksessä olet suorittanut toimenpiteet. Samalla tasolla olevat toimenpiteet voi suorittaa missä tahansa järjestyksessä.">Ohje</a>
   </div>
 </div>
-<br />
-<% @completed_tasks.each_with_index do |task, index| %>
-    <div class="row">
-      <div class="col-md-5">
-        <%= button_to (index + 1).to_s + ". " + task.name, task, method: :get, :class => 'btn btn-default btn-completed-task multiline', :form_class => "form-completed-task" %>
+
+<br/>
+
+
+<div class = "row">
+  <div class = "col-md-6">
+    <div class = "div-tasks-container-admin">
+      <% previous_level = 0 %>
+      <% @completed_tasks.each do |task| %>
+
+          <% if task.level > previous_level %>
+              <% if previous_level > 0 %>
+                  </div>
+                  </td></tr></table>
+                  </div>
+              <% end %>
+              <div class="panel panel-default panel-grey">
+
+                <table><tr><td class = "task-level-header"><%= task.level %></td><td>
+
+
+                  <div class="panel-body">
+          <% end %>
+
+          <%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task-order multiline', :form_class => "form-completed-task" %>
+
+          <% previous_level = task.level %>
+      <% end %>
+
+      <% if previous_level > 0 %>
+          </div>
+          </td></tr></table>
+          </div>
+      <% end %>
+
       </div>
-    </div>
-<% end %>
+</div>
+</div>
+
