@@ -120,8 +120,16 @@ li.active>a{
   //background-color: #acc7a0;
   background-color: #c2ecb5;
 }
+
+.panel-light-green{
+  //background-color: #acc7a0;
+  background-color: $PaleLightGreen;
+}
 .panel-heading-grey{
   background-color: #cacaca !important;
+}
+.panel-heading-green{
+  background-color: $LightGreen !important;
 }
 .padding15{
   padding: 15px
