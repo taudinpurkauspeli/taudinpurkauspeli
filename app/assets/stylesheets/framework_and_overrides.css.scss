@@ -13,6 +13,7 @@ $LightRed             : #ae6161;
 $PaleLightRed         : #be8181;
 $DarkRed              : #692f2f;
 $DarkGreen            : #232e1e;
+$PaleLightYellow      : #EAEB7C;
 
 //These are not in palette.png and should be refactored later
 $DisabledButtonText   : #666;
@@ -356,6 +357,9 @@ li.active>a{
 .collapse-answer-wrong{
   background-color: $PaleLightRed;
 }
+.collapse-answer-allowed{
+  background-color: $PaleLightYellow;
+}
 
 //*********************
 //*   Progress bars   *
@@ -462,6 +466,9 @@ td.wrong-answer{
 }
 td.correct-answer{
   background-color: $PaleLightGreen;
+}
+td.allowed-answer{
+  background-color: $PaleLightYellow;
 }
 td.user{
   border-top: 1px solid #AAA;
