@@ -318,7 +318,7 @@ describe "New Task page", js:true do
               click_and_wait('Tallenna')
             }.to change(Question, :count).by(1)
 
-            expect(page).to have_content 'Kysymysvaihtoehto lisättiin onnistuneesti'
+            expect(page).to have_content 'Kysymys lisättiin onnistuneesti'
 
             expect(QuestionGroup.count).to eq(0)
             expect(Interview.first.questions.first.title).to eq('Onko eläin ollut kipea?')
@@ -337,7 +337,7 @@ describe "New Task page", js:true do
             }.to change(Question, :count).by(1)
 
             expect(QuestionGroup.count).to eq(1)
-            expect(page).to have_content 'Kysymysvaihtoehto lisättiin onnistuneesti'
+            expect(page).to have_content 'Kysymys lisättiin onnistuneesti'
 
             expect(Interview.first.questions.first.question_group.title).to eq("Eläinkysymys")
           end
