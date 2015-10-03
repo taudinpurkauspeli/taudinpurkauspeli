@@ -2,7 +2,7 @@ class ExercisesController < ApplicationController
   before_action :ensure_user_is_logged_in, except: [:index]
   before_action :ensure_user_is_admin, except: [:index, :show]
   before_action :set_exercise, only: [:show, :edit, :update, :destroy, :duplicate_exercise, :toggle_hidden]
-  before_action :set_current_user, only: [:show]
+  before_action :set_current_user, only: [:show, :index]
 
   # GET /exercises
   # GET /exercises.json
@@ -21,8 +21,7 @@ class ExercisesController < ApplicationController
   def show
     session[:exercise_id] = params[:id]
 
-    @user = current_user
-    @completed_tasks = @user.tasks.where("level > ?", 0).where(exercise:@exercise)
+    @completed_tasks = @current_user.tasks.where("level > ?", 0).where(exercise:@exercise)
 
     # Unchecked exercise hypotheses for conclusion view
     @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])

@@ -4,7 +4,7 @@
   <div class = "col-md-8">
     <h1>Case: <%= @exercise.name %></h1>
   </div>
-  <% if current_user.try(:admin) %>
+  <% if @current_user.try(:admin) %>
       <div class = "col-md-4">
         <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Muokkaa-napista pääset muokkaamaan casen nimeä ja anamneesia, sekä casen näkyvyyttä opiskelijalle.">Ohje</a>
       </div>
@@ -20,7 +20,7 @@
 <br/>
 
 <%# Case completed %>
-<% if current_user.has_completed? @exercise %>
+<% if @current_user.has_completed? @exercise %>
     <%= render 'user_has_completed_exercise' %>
     <br />
     <div class = "separator"></div>
@@ -81,7 +81,7 @@
               <div id="collapse-completed-task<%= task.id.to_s %>" class="panel-collapse collapse">
                 <div class="panel-body">
                   <% task.subtasks.each do |subtask| %>
-                      <% if current_user.can_complete_subtask?(task, subtask) || current_user.try(:admin) %>
+                      <% if @current_user.can_complete_subtask?(task, subtask) || @current_user.try(:admin) %>
                           <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask, parent_view: 'exercise_show' } %>
                       <% end %>
                   <% end %>
@@ -98,11 +98,11 @@
 <br />
 
 
-<%= button_to 'Muokkaa', edit_exercise_path(@exercise), :method => "get", :class => "btn btn-default btn-save widthAuto", :form_class => 'edit-exercise-page-form' if current_user.try(:admin) %>
+<%= button_to 'Muokkaa', edit_exercise_path(@exercise), :method => "get", :class => "btn btn-default btn-save widthAuto", :form_class => 'edit-exercise-page-form' if @current_user.try(:admin) %>
 
 <script>
     setAjaxSubmits("#anamnesisTab form:not(.edit-exercise-page-form)", "#anamnesisTab", "post", function(){
-        <% if !current_task.nil? && current_user.has_completed?(current_task)%>
+        <% if !current_task.nil? && @current_user.has_completed?(current_task)%>
         loadView("/tasks/" + <%= current_task.id.to_s %> , "#currentTaskTab");
         <% end %>
     });
