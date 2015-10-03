@@ -1,9 +1,9 @@
-<% if current_user.try(:admin) %>
+<% if @current_user.try(:admin) %>
     <%= render 'messages/messages' %>
 <% end %>
 
 <%# headers %>
-<% if current_user.try(:admin) %>
+<% if @current_user.try(:admin) %>
     <div class="row">
       <div class="col-md-5">
         <h2>Casen <%= @exercise.name %> diffit</h2>
@@ -35,7 +35,7 @@
 <%# lists of hypotheses %>
 <div class="row">
 
-  <% if current_user.try(:admin) %>
+  <% if @current_user.try(:admin) %>
       <div class="col-md-5">
         <% @hypothesis_groups.each do |group| %>
             <% unless @exercise.get_hypotheses[group.id].nil? %>

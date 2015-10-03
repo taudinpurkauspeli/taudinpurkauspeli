@@ -1,4 +1,4 @@
-<% checked_hypothesis = current_user.get_checked_hypothesis(exercise_hypothesis) %>
+<% checked_hypothesis = @current_user.get_checked_hypothesis(exercise_hypothesis) %>
 
 <div class="col-md-4">
   <input id="checked_hypothesis_<%= checked_hypothesis.id.to_s %>"

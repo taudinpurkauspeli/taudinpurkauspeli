@@ -2,6 +2,7 @@ class HypothesesController < ApplicationController
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
   before_action :set_hypothesis, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_user, only: [:index]
 
   # GET /hypotheses
   # GET /hypotheses.json

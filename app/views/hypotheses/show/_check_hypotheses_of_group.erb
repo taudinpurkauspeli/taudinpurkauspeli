@@ -1,13 +1,13 @@
 <% @exercise.get_hypotheses[group.id].to_a.each do |exercise_hypothesis| %>
     <div class="row">
       <div class="col-md-1"></div>
-      <% if current_user.has_checked_hypothesis?(exercise_hypothesis) %>
+      <% if @current_user.has_checked_hypothesis?(exercise_hypothesis) %>
           <%= render 'hypotheses/show/checked_hypothesis', { exercise_hypothesis: exercise_hypothesis} %>
       <% else %>
           <div class="col-md-4">
             <%= form_for(@new_checked_hypothesis) do |f| %>
                 <%= f.hidden_field :exercise_hypothesis_id, :value => exercise_hypothesis.id %>
-                <%= f.hidden_field :user_id, :value => current_user.id %>
+                <%= f.hidden_field :user_id, :value => @current_user.id %>
                 <%= f.submit exercise_hypothesis.hypothesis.name, :class => 'btn btn-default multiline' %>
             <% end %>
           </div>
