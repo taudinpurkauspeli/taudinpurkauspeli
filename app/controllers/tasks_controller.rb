@@ -1,18 +1,19 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
+  before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down]
+  before_action :set_current_user, only: [:index, :show]
 
   # GET /tasks
   # GET /tasks.json
   def index
     @tasks = Task.all
-    @user = current_user
+    @user = @current_user
     @last_clicked_task_id = params[:last_clicked_task_id]
 
     @exercise = current_exercise
     if @exercise
-      if current_user.try(:admin)
+      if @current_user.try(:admin)
         @tasks = @exercise.tasks.where("level > ?", 0).order("level")
       else
         @completed_tasks = @user.tasks.where("level > ?", 0).where(exercise:@exercise).order("level")
@@ -33,8 +34,8 @@ class TasksController < ApplicationController
       @last_clicked_conclusion = ExerciseHypothesis.find(params[:last_clicked_conclusion])
     end
 
-    unless current_user.try(:admin)
-      if current_user.can_start?(@task)
+    unless @current_user.try(:admin)
+      if @current_user.can_start?(@task)
         session[:task_id] = params[:id]
       else
         respond_to do |format|
@@ -57,7 +58,7 @@ class TasksController < ApplicationController
     # Unchecked exercise hypothesis id:s to session
     unless @task.conclusions.empty?
       if session[:exhyp_ids].nil?
-        session[:exhyp_ids] = (@exercise_hypotheses - current_user.exercise_hypotheses).map(&:id)
+        session[:exhyp_ids] = (@exercise_hypotheses - @current_user.exercise_hypotheses).map(&:id)
       end
     end
 

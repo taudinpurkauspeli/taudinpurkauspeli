@@ -1,7 +1,7 @@
 class SubtasksController < ApplicationController
-  before_action :set_subtask, only: [:show, :edit, :destroy]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
+  before_action :set_subtask, only: [:show, :edit, :destroy]
 
   # GET /tasks
   # GET /tasks.json

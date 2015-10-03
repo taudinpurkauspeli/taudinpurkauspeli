@@ -1,7 +1,8 @@
 class TaskTextsController < ApplicationController
-  before_action :set_task_text, only: [:show, :edit, :update, :destroy, :check_answers]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:check_answers]
+  before_action :set_task_text, only: [:show, :edit, :update, :destroy, :check_answers]
+  before_action :set_current_user, only: [:check_answers]
 
   # GET /tasks
   # GET /tasks.json
@@ -58,9 +59,9 @@ class TaskTextsController < ApplicationController
   # TODO fix user_has_completed redirect logic
   # /task_texts/:id/check_answers'
   def check_answers
-    @task_text.user_answered_correctly?(current_user)
+    @task_text.user_answered_correctly?(@current_user)
     respond_to do |format|
-      if(current_user.has_completed?(current_exercise))
+      if(@current_user.has_completed?(current_exercise))
         format.html { redirect_to task_path(@task_text.subtask.task, :layout => get_layout, notice: "Onneksi olkoon suoritit casen!") }
       else
         format.html { redirect_to task_path(@task_text.subtask.task, :layout => get_layout), notice: 'Tehtävä suoritettu!' }

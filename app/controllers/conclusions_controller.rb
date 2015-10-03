@@ -2,6 +2,7 @@ class ConclusionsController < ApplicationController
 	before_action :ensure_user_is_logged_in
 	before_action :ensure_user_is_admin, except: [:index, :show, :check_answers]
 	before_action :set_conclusion, only: [:edit, :update, :check_answers, :destroy]
+	before_action :set_current_user, only: [:check_answers]
 
 	def show
 		set_view_layout
@@ -66,9 +67,9 @@ class ConclusionsController < ApplicationController
 
 	def check_answers
 		respond_to do |format|
-			if @conclusion.user_answered_correctly?(current_user, check_conclusion_params[:exhyp_id])
-				current_user.check_all_hypotheses(current_task.exercise)
-				if(current_user.has_completed?(current_exercise))
+			if @conclusion.user_answered_correctly?(@current_user, check_conclusion_params[:exhyp_id])
+				@current_user.check_all_hypotheses(current_task.exercise)
+				if(@current_user.has_completed?(current_exercise))
 					format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :last_clicked_conclusion => check_conclusion_params[:exhyp_id]), notice: 'Onneksi olkoon suoritit casen!' }
 				else
 					format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :last_clicked_conclusion => check_conclusion_params[:exhyp_id]), notice: 'Hyvä, selvitit oikean diagnoosin!' }
@@ -76,7 +77,7 @@ class ConclusionsController < ApplicationController
 
 			else
 				exhyp = ExerciseHypothesis.find(check_conclusion_params[:exhyp_id])
-				current_user.check_hypothesis(exhyp)
+				@current_user.check_hypothesis(exhyp)
 				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :last_clicked_conclusion => check_conclusion_params[:exhyp_id]), notice: 'Väärä diffi poissuljettu!' }
 			end
 		end

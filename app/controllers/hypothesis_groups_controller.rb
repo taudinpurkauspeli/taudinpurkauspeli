@@ -1,7 +1,7 @@
 class HypothesisGroupsController < ApplicationController
-  before_action :set_hypothesis_group, only: [:destroy]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
+  before_action :set_hypothesis_group, only: [:destroy]
 
   # POST /hypothesis_group
   # POST /hypothesis_group.json

@@ -1,7 +1,7 @@
 class OptionsController < ApplicationController
-  before_action :set_option, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
+  before_action :set_option, only: [:show, :edit, :update, :destroy]
 
   def show
     set_view_layout

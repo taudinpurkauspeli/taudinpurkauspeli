@@ -1,7 +1,7 @@
 class ExerciseHypothesesController < ApplicationController
-  before_action :set_exercise_hypothesis, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
+  before_action :set_exercise_hypothesis, only: [:show, :edit, :update, :destroy]
 
   # POST /exercise_hypotheses
   # POST /exercise_hypotheses.json

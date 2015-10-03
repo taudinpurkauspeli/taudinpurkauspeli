@@ -1,7 +1,8 @@
 class MultichoicesController < ApplicationController
-  before_action :set_multichoice, only: [:edit, :update, :destroy, :check_answers]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show, :check_answers]
+  before_action :set_multichoice, only: [:edit, :update, :destroy, :check_answers]
+  before_action :set_current_user, only: [:check_answers]
 
   def show
     set_view_layout
@@ -59,8 +60,8 @@ class MultichoicesController < ApplicationController
   # /multichoices/:id/check_answers'
   def check_answers
     respond_to do |format|
-      if @multichoice.user_answered_correctly?(current_user, checked_options_params[:checked_options].to_a)
-        if(current_user.has_completed?(current_exercise))
+      if @multichoice.user_answered_correctly?(@current_user, checked_options_params[:checked_options].to_a)
+        if(@current_user.has_completed?(current_exercise))
           format.html { redirect_to task_path(@multichoice.subtask.task, :layout => get_layout, notice: "Onneksi olkoon suoritit casen!") }
         else
           format.html { redirect_to task_path(@multichoice.subtask.task, :layout => get_layout), notice: 'Valitsit oikein!' }

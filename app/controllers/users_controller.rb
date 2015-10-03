@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in, except: [:new, :create]
   before_action :ensure_user_is_admin, only: [:index]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action except: [:new, :create, :index] do
-    if @user.nil? || (!current_user.try(:admin) && @user != current_user)
+    current_user_now = current_user
+    if @user.nil? || (!current_user_now.try(:admin) && @user != current_user_now)
       redirect_to exercises_path, alert: 'Pääsy toisen käyttäjän tietoihin estetty!'
     end
   end
