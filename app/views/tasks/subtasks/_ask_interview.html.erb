@@ -15,12 +15,12 @@
       <% group.questions.where(interview: subtask.interview).each do |question| %>
           <tr>
             <td class="interview"><div class="floatLeft" style = "width: 5%;"></div>
-              <% if !current_user.has_asked_question?(question) %>
+              <% if !@current_user.has_asked_question?(question) %>
 
                   <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
                       <%= hidden_field_tag 'question_id', question.id %>
                       <%= hidden_field_tag 'exercise_show_or_task_show', exercise_show_or_task_show %>
-                      <%= submit_tag(question.title, :class => "btn btn-default multiline width95 floatRight", :id => "ask_question_" + question.id.to_s) unless current_user.try(:admin) %>
+                      <%= submit_tag(question.title, :class => "btn btn-default multiline width95 floatRight", :id => "ask_question_" + question.id.to_s) unless @current_user.try(:admin) %>
                   <% end %>
 
               <% else %>
@@ -60,11 +60,11 @@
   <% subtask.interview.questions.where(question_group:nil).each do |question| %>
       <tr>
         <td class="interview">
-          <% if !current_user.has_asked_question?(question) %>
+          <% if !@current_user.has_asked_question?(question) %>
               <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/ask_question", method: "post") do %>
                   <%= hidden_field_tag 'question_id', question.id %>
                   <%= hidden_field_tag 'exercise_show_or_task_show', exercise_show_or_task_show %>
-                  <%= submit_tag(question.title, :class => "btn btn-default multiline width100", :id => "ask_question_" + question.id.to_s) unless current_user.try(:admin) %>
+                  <%= submit_tag(question.title, :class => "btn btn-default multiline width100", :id => "ask_question_" + question.id.to_s) unless @current_user.try(:admin) %>
               <% end %>
           <% else %>
               <input class='btn btn-default btn-hypothesis-group multiline
@@ -101,7 +101,7 @@
 <br />
 
 <%= form_tag("/interviews/" + subtask.interview.id.to_s + "/check_answers", method: "post") do %>
-    <%= submit_tag("Jatka", :class => "btn btn-default btn-save widthAuto") unless current_user.try(:admin) %>
+    <%= submit_tag("Jatka", :class => "btn btn-default btn-save widthAuto") unless @current_user.try(:admin) %>
 <% end %>
 
 

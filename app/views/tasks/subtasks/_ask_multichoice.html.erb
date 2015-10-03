@@ -49,5 +49,5 @@
       <% end %>
     </table>
     <br />
-    <%= submit_tag("Tarkista", :class => "btn btn-default btn-save widthAuto") unless current_user.try(:admin) %>
+    <%= submit_tag("Tarkista", :class => "btn btn-default btn-save widthAuto") unless @current_user.try(:admin) %>
 <% end %>

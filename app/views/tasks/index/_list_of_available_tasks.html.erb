@@ -13,7 +13,7 @@
 <% @available_tasks.each do |task| %>
     <div class = "row">
       <div class="col-md-5">
-        <% if current_user.can_start?(task) %>
+        <% if @current_user.can_start?(task) %>
             <%= button_to task.name, task, method: :get, :class => "btn btn-default btn-available-task multiline", :form_class => "form-to-task-student" %>
         <% else %>
             <%= button_to task.name, task, method: :get, :class => "btn btn-default btn-available-task multiline", :form_class => "form-cannot-task-student" %>

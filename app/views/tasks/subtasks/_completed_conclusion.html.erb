@@ -1,10 +1,10 @@
 <% subtask_exhyp = subtask.conclusion.exercise_hypothesis %>
 
-<% if current_user.try(:admin) %>
+<% if @current_user.try(:admin) %>
     <%= render 'tasks/subtasks/ask_conclusion', { subtask:subtask } %>
 <% end %>
 
-<% if !@conclusion_exercise_hypotheses.empty? && !current_user.try(:admin)%>
+<% if !@conclusion_exercise_hypotheses.empty? && !@current_user.try(:admin)%>
 
     <h4>Poissuljetut diffit:</h4>
 
