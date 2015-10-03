@@ -68,7 +68,7 @@
                   <div class="col-md-5">   <br>
                     <div class ="progressbar <%= 'completed' if percent_of_completed_tasks_of_exercise == 100 %>" >
                       <% if percent_of_completed_tasks_of_exercise < 100 %>
-                          <div class = "progressbar progress" style = "width: <%= 100 - @current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>%;"></div>
+                          <div class = "progressbar progress" style = "width: <%= 100 - percent_of_completed_tasks_of_exercise %>%;"></div>
                       <% end %>
                     </div>
                     <span class = "progress-percent"><%= percent_of_completed_tasks_of_exercise %>%</span>

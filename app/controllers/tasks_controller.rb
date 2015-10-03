@@ -7,8 +7,6 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
-    @user = @current_user
     @last_clicked_task_id = params[:last_clicked_task_id]
 
     @exercise = current_exercise
@@ -16,7 +14,7 @@ class TasksController < ApplicationController
       if @current_user.try(:admin)
         @tasks = @exercise.tasks.where("level > ?", 0).order("level")
       else
-        @completed_tasks = @user.tasks.where("level > ?", 0).where(exercise:@exercise).order("level")
+        @completed_tasks = @current_user.tasks.where("level > ?", 0).where(exercise:@exercise).order("level")
         @available_tasks = @exercise.tasks.where("level > ?", 0).order("name") - @completed_tasks
       end
     else

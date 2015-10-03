@@ -14,17 +14,17 @@
 
 <% if @current_user.try(:admin) %>
     <%= render 'tasks/index/set_task_order' %>
+
+    <%= button_to '+ Luo uusi toimenpide', new_task_path, :class => 'btn btn-default btn-save btn-new-task', :form_class => "form-new-task", :method => :get %>
+    <%= button_to '+ Luo diagnoositoimenpide', new_conclusion_path, :class => 'btn btn-default btn-save btn-new-task', :form_class => "form-new-task", :method => :get unless current_exercise.has_conclusion? %>
+
 <% else %>
     <div class = "separator"></div>
     <%= render 'tasks/index/list_of_available_tasks' %>
     <div class = "separator"></div>
     <%= render 'tasks/index/list_of_completed_tasks' %>
 <% end %>
-<%= button_to '+ Luo uusi toimenpide', new_task_path, :class => 'btn btn-default btn-save btn-new-task', :form_class => "form-new-task", :method => :get if @current_user.try(:admin) %>
 
-<% unless current_exercise.has_conclusion? %>
-    <%= button_to '+ Luo diagnoositoimenpide', new_conclusion_path, :class => 'btn btn-default btn-save btn-new-task', :form_class => "form-new-task", :method => :get if @current_user.try(:admin) %>
-<% end %>
 
 <script>
     //STUDENT
