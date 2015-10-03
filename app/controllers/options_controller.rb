@@ -1,21 +1,7 @@
 class OptionsController < ApplicationController
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
-  before_action :set_option, only: [:show, :edit, :update, :destroy]
-
-  def show
-    set_view_layout
-  end
-
-  def new
-    @option = Option.new
-
-    set_view_layout
-  end
-
-  def edit
-    set_view_layout
-  end
+  before_action :set_option, only: [:update, :destroy]
 
   def create
     @task = Task.find(session[:task_id])
@@ -29,7 +15,6 @@ class OptionsController < ApplicationController
         end
         #subtask.save
         format.html { redirect_to edit_multichoice_path(@option.multichoice.id, :layout => get_layout), notice: 'Vaihtoehto lisättiin onnistuneesti.' }
-        format.json { render :show, status: :created, location: @option }
       else
         format.html { redirect_to edit_multichoice_path(Multichoice.find(option_params[:multichoice_id]), :layout => get_layout), alert: 'Vaihtoehdon tiedot puuttelliset.' }
         format.json { render json: @option.errors, status: :unprocessable_entity }

@@ -1,12 +1,8 @@
 class MultichoicesController < ApplicationController
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin, except: [:index, :show, :check_answers]
-  before_action :set_multichoice, only: [:edit, :update, :destroy, :check_answers]
+  before_action :ensure_user_is_admin, except: [:check_answers]
+  before_action :set_multichoice, only: [:edit, :update, :check_answers]
   before_action :set_current_user, only: [:check_answers]
-
-  def show
-    set_view_layout
-  end
 
   def new
     @multichoice = Multichoice.new
@@ -34,7 +30,6 @@ class MultichoicesController < ApplicationController
       if @multichoice.save
         subtask.save
         format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), notice: 'Kysymys lisättiin onnistuneesti!' }
-        #format.json { render :show, status: :created, location: @multichoice }
       else
         format.html { redirect_to new_multichoice_path(:layout => get_layout), alert: 'Kysymyksen lisääminen epäonnistui!' }
         format.json { render json: @multichoice.errors, status: :unprocessable_entity }

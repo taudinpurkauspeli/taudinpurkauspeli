@@ -11,7 +11,6 @@ class LogEntriesController < ApplicationController
 
   # GET /log_entries/1
   def show
-
     @parameters = YAML::load(@log_entry.params)
     @exercise_hypothesis_ids = YAML::load(@log_entry.exhyp_ids)
 

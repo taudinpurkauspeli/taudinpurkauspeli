@@ -1,7 +1,7 @@
 class InterviewsController < ApplicationController
 	before_action :ensure_user_is_logged_in
-	before_action :ensure_user_is_admin, except: [:index, :show, :ask_question, :check_answers]
-	before_action :set_interview, only: [:edit, :update, :destroy, :ask_question, :check_answers]
+	before_action :ensure_user_is_admin, except: [:ask_question, :check_answers]
+	before_action :set_interview, only: [:edit, :update, :ask_question, :check_answers]
 	before_action :set_current_user, only: [:ask_question, :check_answers]
 
 	def new
@@ -34,9 +34,7 @@ class InterviewsController < ApplicationController
 			if @interview.save
 				subtask.save
 				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Pohdinta lisättiin onnistuneesti!' }
-				#format.json { render :show, status: :created, location: @multichoice }
 			else
-				## TODO redirect task show
 				format.html { redirect_to new_interview_path(:layout => get_layout), alert: 'Pohdinnan lisääminen epäonnistui!' }
 				format.json { render json: @interview.errors, status: :unprocessable_entity }
 			end

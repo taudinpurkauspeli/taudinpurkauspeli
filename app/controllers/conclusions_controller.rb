@@ -1,12 +1,8 @@
 class ConclusionsController < ApplicationController
 	before_action :ensure_user_is_logged_in
-	before_action :ensure_user_is_admin, except: [:index, :show, :check_answers]
+	before_action :ensure_user_is_admin, except: [:check_answers]
 	before_action :set_conclusion, only: [:edit, :update, :check_answers, :destroy]
 	before_action :set_current_user, only: [:check_answers]
-
-	def show
-		set_view_layout
-	end
 
 	def new
 		@hypothesis_groups = HypothesisGroup.all
@@ -36,7 +32,6 @@ class ConclusionsController < ApplicationController
 			if @conclusion.save & @task.save
 				subtask.save
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide lisättiin onnistuneesti!' }
-				#format.json { render :show, status: :created, location: @multichoice }
 			else
 				format.html { redirect_to new_conclusion_path(:layout => get_layout), alert: 'Diagnoositoimenpiteen lisääminen epäonnistui!' }
 				format.json { render json: @conclusion.errors, status: :unprocessable_entity }
