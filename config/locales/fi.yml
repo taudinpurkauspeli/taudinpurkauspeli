@@ -143,5 +143,5 @@ fi:
         first_name: "Etunimi"
         last_name: "Sukunimi"
         student_number: "Opiskelijanumero"
-        starting_year: "Aloitusvuosi"
+        starting_year: "Epidemiologian kurssin aloitusvuosi"
         email: "Sähköposti"

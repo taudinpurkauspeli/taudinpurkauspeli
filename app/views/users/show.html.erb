@@ -8,7 +8,7 @@
 <% end %>
 <strong>Opiskelijanumero: </strong><%= @user.student_number %><br/>
 <strong>Sähköposti: </strong><%= @user.email %><br/>
-<strong>Aloitusvuosi: </strong><%= @user.starting_year %><br/><br/><br/>
+<strong>Epidemiologian kurssin aloitusvuosi: </strong><%= @user.starting_year %><br/><br/><br/>
 
 <% if !current_user.try(:admin) %>
     <%= button_to 'Muokkaa tietoja', edit_user_path(@user), :method => 'get', :class => 'btn btn-default widthAuto' %> <br/><br/><br/>
