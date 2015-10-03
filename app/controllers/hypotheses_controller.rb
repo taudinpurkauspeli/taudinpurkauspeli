@@ -10,17 +10,22 @@ class HypothesesController < ApplicationController
     @exercise = current_exercise
     if @exercise
       @hypothesis_groups = HypothesisGroup.all
-      @tasks = @exercise.tasks
 
       @last_clicked_hypothesis_id = params[:last_clicked_hypothesis_id]
 
-      @correct_diagnosis = @exercise.correct_diagnosis
+      if @current_user.try(:admin)
+        @tasks = @exercise.tasks
 
-      #new instances
-      @new_exercise_hypothesis = ExerciseHypothesis.new
-      @new_hypothesis_group = HypothesisGroup.new
-      @new_hypothesis = Hypothesis.new
-      @new_checked_hypothesis = CheckedHypothesis.new
+        #new instances
+        @new_exercise_hypothesis = ExerciseHypothesis.new
+        @new_hypothesis_group = HypothesisGroup.new
+        @new_hypothesis = Hypothesis.new
+      else
+        @correct_diagnosis = @exercise.correct_diagnosis
+
+        @new_checked_hypothesis = CheckedHypothesis.new
+      end
+
     else
       redirect_to exercises_path, alert: 'Valitse ensin case, jota haluat tarkastella!'
     end
