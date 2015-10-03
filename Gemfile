@@ -80,7 +80,7 @@ group :development do
   gem 'seed_dump'
 
   # For showing speed/database queries
- # gem 'rack-mini-profiler'
+  gem 'rack-mini-profiler'
 
   #Automating deployments with Capistrano
 
