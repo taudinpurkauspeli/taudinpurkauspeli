@@ -3,14 +3,14 @@
 
 <h1><%= @user.first_name %><%= @user.last_name %> </h1>
 
-<% if !current_user.try(:admin) %>
+<% if !@current_user.try(:admin) %>
     <strong>Käyttäjänimi: </strong><%= @user.username %><br/>
 <% end %>
 <strong>Opiskelijanumero: </strong><%= @user.student_number %><br/>
 <strong>Sähköposti: </strong><%= @user.email %><br/>
 <strong>Epidemiologian kurssin aloitusvuosi: </strong><%= @user.starting_year %><br/><br/><br/>
 
-<% if !current_user.try(:admin) %>
+<% if !@current_user.try(:admin) %>
     <%= button_to 'Muokkaa tietoja', edit_user_path(@user), :method => 'get', :class => 'btn btn-default widthAuto' %> <br/><br/><br/>
 <% end %>
 

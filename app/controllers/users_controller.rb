@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :ensure_user_is_logged_in, except: [:new, :create]
   before_action :ensure_user_is_admin, only: [:index]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_user, only: [:index, :show]
   before_action except: [:new, :create, :index] do
     current_user_now = current_user
     if @user.nil? || (!current_user_now.try(:admin) && @user != current_user_now)
