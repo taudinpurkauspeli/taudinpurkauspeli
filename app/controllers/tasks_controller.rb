@@ -40,8 +40,6 @@ class TasksController < ApplicationController
           format.html { redirect_to tasks_url(:layout => get_layout, :last_clicked_task_id => params[:id]), alert: 'Et voi vielä suorittaa tätä toimenpidettä, vaan sinun tulee suorittaa ainakin yksi muu toimenpide ennen tätä.' and return }
         end
       end
-    else
-      @task = Task.find(params[:id])
     end
 
     @multichoice_checked_options = params[:multichoice_checked_options].to_a
@@ -92,10 +90,8 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.save
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide luotiin onnistuneesti.' }
-        format.json { render :show, status: :created, location: @task }
       else
         format.html { redirect_to new_task_path(:layout => get_layout), alert: 'Toimenpiteen luonti epäonnistui.' }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -106,10 +102,8 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide päivitettiin onnistuneesti.' }
-        format.json { render :show, status: :ok, location: @task }
       else
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), alert: 'Toimenpiteen päivitys epäonnistui.' }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -122,7 +116,6 @@ class TasksController < ApplicationController
     @task.destroy
     respond_to do |format|
       format.html { redirect_to tasks_url(:layout => get_layout), notice: 'Toimenpide poistettu.' }
-      format.json { head :no_content }
     end
   end
 

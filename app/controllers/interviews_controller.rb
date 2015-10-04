@@ -36,7 +36,6 @@ class InterviewsController < ApplicationController
 				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Pohdinta lisättiin onnistuneesti!' }
 			else
 				format.html { redirect_to new_interview_path(:layout => get_layout), alert: 'Pohdinnan lisääminen epäonnistui!' }
-				format.json { render json: @interview.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -48,7 +47,6 @@ class InterviewsController < ApplicationController
 			else
 				@new_question = Question.new
 				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), alert: 'Pohdinnan päivitys epäonnistui!' }
-				format.json { render json: @interview.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -56,7 +54,6 @@ class InterviewsController < ApplicationController
 	def ask_question
 		question = Question.find(question_params[:question_id])
 		@current_user.ask_question(question)
-		#byebug
 		respond_to do |format|
 			if question_params[:exercise_show_or_task_show] == ("task_show" + question.interview.id.to_s)
 				format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout, :last_clicked_question_id => question_params[:question_id]) }
@@ -71,7 +68,7 @@ class InterviewsController < ApplicationController
 		respond_to do |format|
 			if @interview.all_questions_asked_by?(@current_user)
 				@current_user.complete_subtask(@interview.subtask)
-				if(@current_user.has_completed?(current_exercise))
+				if @current_user.has_completed?(current_exercise)
 					format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout, notice: "Onneksi olkoon suoritit casen!") }
 				else
 					format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout) }

@@ -32,7 +32,6 @@ class MultichoicesController < ApplicationController
         format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), notice: 'Kysymys lisättiin onnistuneesti!' }
       else
         format.html { redirect_to new_multichoice_path(:layout => get_layout), alert: 'Kysymyksen lisääminen epäonnistui!' }
-        format.json { render json: @multichoice.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,7 +45,6 @@ class MultichoicesController < ApplicationController
       else
         @new_option = Option.new
         format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), alert: 'Kysymyksen päivitys epäonnistui!' }
-        format.json { render json: @multichoice.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +54,7 @@ class MultichoicesController < ApplicationController
   def check_answers
     respond_to do |format|
       if @multichoice.user_answered_correctly?(@current_user, checked_options_params[:checked_options].to_a)
-        if(@current_user.has_completed?(current_exercise))
+        if @current_user.has_completed?(current_exercise)
           format.html { redirect_to task_path(@multichoice.subtask.task, :layout => get_layout, notice: "Onneksi olkoon suoritit casen!") }
         else
           format.html { redirect_to task_path(@multichoice.subtask.task, :layout => get_layout), notice: 'Valitsit oikein!' }

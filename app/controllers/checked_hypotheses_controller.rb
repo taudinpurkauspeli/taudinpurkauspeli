@@ -31,7 +31,6 @@ class CheckedHypothesesController < ApplicationController
     @checked_hypothesis.destroy
     respond_to do |format|
       format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Diffi palautettu mahdollisten diffien listaan.'}
-      format.json { head :no_content }
     end
   end
 

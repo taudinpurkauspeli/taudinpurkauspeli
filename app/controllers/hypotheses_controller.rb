@@ -47,7 +47,6 @@ class HypothesesController < ApplicationController
         format.html { redirect_to hypotheses_path(:layout => get_layout), notice: 'Hypoteesin luominen onnistui!' }
       else
         format.html { redirect_to hypotheses_path(:layout => get_layout), alert: 'Hypoteesin luominen epäonnistui!' }
-        format.json { render json: @hypothesis.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -58,7 +57,6 @@ class HypothesesController < ApplicationController
     @hypothesis.destroy
     respond_to do |format|
       format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Hypoteesin poisto onnistui!' }
-      format.json { head :no_content }
     end
   end
 

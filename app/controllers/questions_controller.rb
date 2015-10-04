@@ -22,7 +22,6 @@ class QuestionsController < ApplicationController
         format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti.' }
       else
         format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), alert: 'Kysymyksen päivitys epäonnistui.' }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -32,7 +31,6 @@ class QuestionsController < ApplicationController
     @question.destroy
     respond_to do |format|
       format.html { redirect_to edit_interview_path(parent_id, :layout => get_layout), notice: 'Kysymyksen poisto onnistui!' }
-      format.json { head :no_content }
     end
   end
 

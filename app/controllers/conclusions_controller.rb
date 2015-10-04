@@ -34,7 +34,6 @@ class ConclusionsController < ApplicationController
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide lisättiin onnistuneesti!' }
 			else
 				format.html { redirect_to new_conclusion_path(:layout => get_layout), alert: 'Diagnoositoimenpiteen lisääminen epäonnistui!' }
-				format.json { render json: @conclusion.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -46,7 +45,6 @@ class ConclusionsController < ApplicationController
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide päivitettiin onnistuneesti!' }
 			else
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), alert: 'Diagnoosioimenpiteen päivitys epäonnistui!' }
-				format.json { render json: @conclusion.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -56,7 +54,6 @@ class ConclusionsController < ApplicationController
 		@task.destroy
 		respond_to do |format|
 			format.html { redirect_to tasks_path(:layout => get_layout), notice: 'Diagnoositoimenpide poistettu!' }
-			format.json { head :no_content }
 		end
 	end
 
@@ -64,11 +61,10 @@ class ConclusionsController < ApplicationController
 		respond_to do |format|
 			if @conclusion.user_answered_correctly?(@current_user, check_conclusion_params[:exhyp_id])
 				@current_user.check_all_hypotheses(current_task.exercise)
-				if(@current_user.has_completed?(current_exercise))
-					format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :last_clicked_conclusion => check_conclusion_params[:exhyp_id]), notice: 'Onneksi olkoon suoritit casen!' }
-				else
-					format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :last_clicked_conclusion => check_conclusion_params[:exhyp_id]), notice: 'Hyvä, selvitit oikean diagnoosin!' }
-				end
+
+				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout,
+																						:last_clicked_conclusion => check_conclusion_params[:exhyp_id]),
+																	notice: (@current_user.has_completed?(current_exercise) ? 'Onneksi olkoon suoritit casen!' : 'Hyvä, selvitit oikean diagnoosin!') }
 
 			else
 				exhyp = ExerciseHypothesis.find(check_conclusion_params[:exhyp_id])

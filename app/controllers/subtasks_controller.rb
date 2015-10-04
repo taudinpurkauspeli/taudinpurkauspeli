@@ -4,7 +4,7 @@ class SubtasksController < ApplicationController
   before_action :set_subtask, only: [:edit, :destroy]
 
 
-  # GET /tasks/1/edit
+  # GET /subtasks/1/edit
   def edit
     @subtask = Subtask.find(params[:id])
     if !@subtask.task_text.nil?
@@ -25,7 +25,6 @@ class SubtasksController < ApplicationController
     @subtask.destroy
     respond_to do |format|
       format.html { redirect_to edit_task_path(task_id, :layout => get_layout), notice: 'Alakohta poistettu.' }
-      format.json { head :no_content }
     end
   end
 

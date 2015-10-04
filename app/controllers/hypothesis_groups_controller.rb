@@ -22,7 +22,6 @@ class HypothesisGroupsController < ApplicationController
     @hypothesis_group.destroy
     respond_to do |format|
       format.html { redirect_to hypotheses_url(:layout => get_layout)}
-      format.json { head :no_content }
     end
   end
 

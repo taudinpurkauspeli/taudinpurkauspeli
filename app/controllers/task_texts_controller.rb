@@ -32,7 +32,6 @@ class TaskTextsController < ApplicationController
         format.html { redirect_to edit_task_text_path(@task_text.id, :layout => get_layout), notice: 'Kysymys lisättiin onnistuneesti!' }
       else
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), alert: 'Kysymyksen lisääminen epäonnistui!' }
-        format.json { render json: @task_text.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -45,7 +44,6 @@ class TaskTextsController < ApplicationController
         format.html { redirect_to edit_task_text_path(@task_text.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti!' }
       else
         format.html { redirect_to edit_task_text_path(@task_text.id, :layout => get_layout), alert: 'Kysymyksen päivitys epäonnistui!' }
-        format.json { render json: @task_text.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,7 +53,7 @@ class TaskTextsController < ApplicationController
   def check_answers
     @task_text.user_answered_correctly?(@current_user)
     respond_to do |format|
-      if(@current_user.has_completed?(current_exercise))
+      if @current_user.has_completed?(current_exercise)
         format.html { redirect_to task_path(@task_text.subtask.task, :layout => get_layout, notice: "Onneksi olkoon suoritit casen!") }
       else
         format.html { redirect_to task_path(@task_text.subtask.task, :layout => get_layout), notice: 'Tehtävä suoritettu!' }

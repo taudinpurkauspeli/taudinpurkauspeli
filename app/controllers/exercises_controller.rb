@@ -46,10 +46,8 @@ class ExercisesController < ApplicationController
     respond_to do |format|
       if @exercise.save
         format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen luominen onnistui!' }
-        format.json { render :show, status: :created, location: @exercise }
       else
         format.html { redirect_to new_exercise_path(:layout => get_layout), alert: 'Casen luominen epäonnistui!' }
-        format.json { render json: @exercise.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,10 +58,8 @@ class ExercisesController < ApplicationController
     respond_to do |format|
       if @exercise.update(exercise_params)
         format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen päivitys onnistui!' }
-        format.json { render :show, status: :ok, location: @exercise }
       else
         format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), alert: 'Casen päivitys epäonnistui!' }
-        format.json { render json: @exercise.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -74,7 +70,6 @@ class ExercisesController < ApplicationController
     @exercise.destroy
     respond_to do |format|
       format.html { redirect_to exercises_url, notice: 'Casen poistaminen onnistui!' }
-      format.json { head :no_content }
     end
   end
 
