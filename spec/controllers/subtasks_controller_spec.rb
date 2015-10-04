@@ -19,16 +19,6 @@ RSpec.describe SubtasksController, :type => :controller do
 			user_id: 1}
 	}
 
-	describe "POST create" do
-		describe "with valid params" do
-			it "creates a new Subtask" do
-				expect {
-					post :create, {:subtask => valid_attributes}, valid_session
-				}.to change(Subtask, :count).by(1)
-			end
-		end
-	end
-
 	describe "DELETE destroy" do
 		it "destroys the requested subtask" do
 			subtask = Subtask.create! valid_attributes

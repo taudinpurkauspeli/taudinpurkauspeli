@@ -139,9 +139,9 @@ RSpec.describe UsersController, :type => :controller do
         expect(assigns(:user)).to be_persisted
       end
 
-      it "redirects to the root page" do
+      it "redirects to the exercises page" do
         post :create, {:user => valid_attributes}, valid_normal_session
-        expect(response).to redirect_to(:root)
+        expect(response).to redirect_to(exercises_path)
       end
     end
 
@@ -308,7 +308,7 @@ RSpec.describe UsersController, :type => :controller do
 
       it "redirects to the starting page" do
         delete :destroy, {:id => admin_user.to_param}, valid_admin_session
-        expect(response).to redirect_to(:root)
+        expect(response).to redirect_to(exercises_path)
       end
 
     end
@@ -328,7 +328,7 @@ RSpec.describe UsersController, :type => :controller do
 
       it "redirects to the starting page" do
         delete :destroy, {:id => normal_user.to_param}, valid_normal_session
-        expect(response).to redirect_to(:root)
+        expect(response).to redirect_to(exercises_path)
       end
     end
   end

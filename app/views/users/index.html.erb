@@ -1,6 +1,6 @@
 <%= render 'messages/messages' %>
 
-<% if current_user.try(:admin) %>
+<% if @current_user.try(:admin) %>
 
     <h1>Opiskelijoiden tiedot</h1>
 

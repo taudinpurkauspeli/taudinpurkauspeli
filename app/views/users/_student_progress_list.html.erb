@@ -3,7 +3,7 @@
 
   <%= hidden_field_tag 'list_type', @list_type %>
 
-  <%= label_tag 'starting_year', 'Aloitusvuosi: ' %>
+  <%= label_tag 'starting_year', 'Epidemiologian kurssin aloitusvuosi: ' %>
   <%= select_tag 'starting_year', options_for_select([["Kaikki", 0]] + @users.select(:starting_year).order(:starting_year).map(&:starting_year).uniq.collect{ |u| [u, u] }, @selected_starting_year), :onchange => "this.form.submit();", :class => 'form-control widthAuto' %>
 
   <%= label_tag 'exercise', 'Case: ' %>

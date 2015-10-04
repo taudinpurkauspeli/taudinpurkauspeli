@@ -57,7 +57,7 @@ describe "New Task page", js:true do
         it "task text subtask" do
           click_and_wait('+ Teksti')
 
-          fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, etta koira on kipea.'
+          fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira on kipeä.'
 
           expect{
             click_and_wait('Tallenna')
@@ -66,7 +66,7 @@ describe "New Task page", js:true do
           expect(page).to have_content 'Kysymys lisättiin onnistuneesti!'
           expect(Subtask.count).to eq(1)
 
-          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, etta koira on kipea.</p>\r\n")
+          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, ett&auml; koira on kipe&auml;.</p>\r\n")
         end
 
 
@@ -154,12 +154,12 @@ describe "New Task page", js:true do
 
         it "should be able to update the content of a task text" do
 
-          fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, etta koira ei ole kipea!'
+          fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira ei ole kipeä!'
 
           click_and_wait('Tallenna')
 
           expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
-          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, etta koira ei ole kipea!</p>\r\n")
+          expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, ett&auml; koira ei ole kipe&auml;!</p>\r\n")
         end
 
         it "should not be able to update task text to have no content" do
@@ -200,7 +200,7 @@ describe "New Task page", js:true do
 
         it "should be able to add option to a multichoice" do
           fill_in('option_content', with: "Kysy taudeista")
-          fill_in_ckeditor 'option_explanation', with: 'Taudeista on hyva kysya!'
+          fill_in_ckeditor 'option_explanation', with: 'Taudeista on hyvä kysyä!'
           select('Pakollinen vaihtoehto', from:'option[is_correct_answer]')
 
           expect{
@@ -210,7 +210,7 @@ describe "New Task page", js:true do
           expect(page).to have_content 'Vaihtoehto lisättiin onnistuneesti'
 
           expect(Multichoice.first.options.first.content).to eq('Kysy taudeista')
-          expect(Multichoice.first.options.first.explanation).to eq("<p>Taudeista on hyva kysya!</p>\r\n")
+          expect(Multichoice.first.options.first.explanation).to eq("<p>Taudeista on hyv&auml; kysy&auml;!</p>\r\n")
           expect(Multichoice.first.options.first.is_correct_answer).to eq("required")
         end
 
@@ -279,10 +279,10 @@ describe "New Task page", js:true do
 
             it "the explanation of an option" do
               wait_and_trigger_click("collapse-option-link2")
-              fill_in_ckeditor 'option_explanation_2', with: 'Taudista pitaa kerata lisatietoja!'
+              fill_in_ckeditor 'option_explanation_2', with: 'Taudista pitää kerätä lisätietoja!'
               wait_and_trigger_click('option_save_2')
 
-              expect(Option.find(2).explanation).to eq("<p>Taudista pitaa kerata lisatietoja!</p>\r\n")
+              expect(Option.find(2).explanation).to eq("<p>Taudista pit&auml;&auml; ker&auml;t&auml; lis&auml;tietoja!</p>\r\n")
             end
           end
 
@@ -311,18 +311,18 @@ describe "New Task page", js:true do
 
           it "add question without a question group to an interview" do
             fill_in('question_title', with: "Onko eläin ollut kipea?")
-            fill_in_ckeditor 'question_content', with: 'On ollut kipea.'
+            fill_in_ckeditor 'question_content', with: 'On ollut kipeä.'
             select('Pakollinen kysymys', from:'question[required]')
 
             expect{
               click_and_wait('Tallenna')
             }.to change(Question, :count).by(1)
 
-            expect(page).to have_content 'Kysymysvaihtoehto lisättiin onnistuneesti'
+            expect(page).to have_content 'Kysymys lisättiin onnistuneesti'
 
             expect(QuestionGroup.count).to eq(0)
             expect(Interview.first.questions.first.title).to eq('Onko eläin ollut kipea?')
-            expect(Interview.first.questions.first.content).to eq("<p>On ollut kipea.</p>\r\n")
+            expect(Interview.first.questions.first.content).to eq("<p>On ollut kipe&auml;.</p>\r\n")
             expect(Interview.first.questions.first.required).to eq("required")
           end
 
@@ -337,7 +337,7 @@ describe "New Task page", js:true do
             }.to change(Question, :count).by(1)
 
             expect(QuestionGroup.count).to eq(1)
-            expect(page).to have_content 'Kysymysvaihtoehto lisättiin onnistuneesti'
+            expect(page).to have_content 'Kysymys lisättiin onnistuneesti'
 
             expect(Interview.first.questions.first.question_group.title).to eq("Eläinkysymys")
           end
@@ -376,10 +376,10 @@ describe "New Task page", js:true do
 
             it "change the content of a question" do
               wait_and_trigger_click("collapse-question-link2")
-              fill_in_ckeditor 'question_content_2', with: 'On ollut todella kipea!'
+              fill_in_ckeditor 'question_content_2', with: 'On ollut todella kipeä!'
               wait_and_trigger_click('question_save_2')
 
-              expect(Question.find(2).content).to eq("<p>On ollut todella kipea!</p>\r\n")
+              expect(Question.find(2).content).to eq("<p>On ollut todella kipe&auml;!</p>\r\n")
             end
 
             it "change the title of a question" do

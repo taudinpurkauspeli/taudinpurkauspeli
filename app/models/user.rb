@@ -124,10 +124,12 @@ class User < ActiveRecord::Base
   end
 
   def get_percent_of_completed_tasks_of_exercise(exercise)
-    if exercise.tasks.where(level: 1...99).count == 0
+    exercise_tasks_count = exercise.tasks.where(level: 1...99).count
+
+    if exercise_tasks_count == 0
       return 0
     else
-      return (get_number_of_completed_tasks_by_exercise(exercise) * 100) / (exercise.tasks.where(level: 1...99).count)
+      return (get_number_of_completed_tasks_by_exercise(exercise) * 100) / (exercise_tasks_count)
     end
   end
 end

@@ -51,6 +51,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_current_user
+    @current_user = current_user
+  end
+
   private
 
   def log_request

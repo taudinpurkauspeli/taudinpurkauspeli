@@ -4,7 +4,7 @@
     <h3>Valitse suoritettava toimenpide</h3>
   </div>
   <div class = "col-md-4">
-    <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteen suorittaminen" data-content="Toimenpiteet voi suorittaa vain tietyssä järjestyksessä. Voit valita haluamasi toimenpiteen klikkaamalla sitä ja jos toimenpiteen voi suorittaa siirryt kyseisen toimenpiteen sivulle, muuten saat virheilmoituksen. Tällöin voit valita jonkun toisen toimenpiteen.">Ohje</a>
+    <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteen suorittaminen" data-content="Toimenpiteet voi suorittaa vain tietyssä järjestyksessä. Voit valita haluamasi toimenpiteen klikkaamalla sitä. Jos toimenpiteen voi suorittaa, siirryt kyseisen toimenpiteen sivulle, muuten saat virheilmoituksen. Tällöin voit valita jonkun toisen toimenpiteen.">Ohje</a>
   </div>
 </div>
 
@@ -13,11 +13,9 @@
 <% @available_tasks.each do |task| %>
     <div class = "row">
       <div class="col-md-5">
-        <% if current_user.can_start?(task) %>
-            <%= button_to task.name, task, method: :get, :class => "btn btn-default btn-available-task multiline", :form_class => "form-to-task-student" %>
-        <% else %>
-            <%= button_to task.name, task, method: :get, :class => "btn btn-default btn-available-task multiline", :form_class => "form-cannot-task-student" %>
-        <% end %>
+        <%= button_to task.name, task, method: :get,
+                      :class => "btn btn-default btn-available-task multiline",
+                      :form_class => (@current_user.can_start?(task) ? "form-to-task-student" : "form-cannot-task-student" )%>
       </div>
       <% if @last_clicked_task_id == task.id.to_s %>
           <div class="col-md-5">

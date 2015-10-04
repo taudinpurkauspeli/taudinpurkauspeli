@@ -1,7 +1,9 @@
 class ExercisesController < ApplicationController
-  before_action :set_exercise, only: [:show, :edit, :update, :destroy, :duplicate_exercise, :toggle_hidden]
   before_action :ensure_user_is_logged_in, except: [:index]
   before_action :ensure_user_is_admin, except: [:index, :show]
+  before_action :set_exercise, only: [:show, :edit, :update, :destroy, :duplicate_exercise, :toggle_hidden]
+  before_action :set_current_user, only: [:show, :index]
+
   # GET /exercises
   # GET /exercises.json
   def index
@@ -19,8 +21,7 @@ class ExercisesController < ApplicationController
   def show
     session[:exercise_id] = params[:id]
 
-    @user = current_user
-    @completed_tasks = @user.tasks.where("level > ?", 0).where(exercise:@exercise)
+    @completed_tasks = @current_user.tasks.where("level > ?", 0).where(exercise:@exercise)
 
     # Unchecked exercise hypotheses for conclusion view
     @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
@@ -45,10 +46,8 @@ class ExercisesController < ApplicationController
     respond_to do |format|
       if @exercise.save
         format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen luominen onnistui!' }
-        format.json { render :show, status: :created, location: @exercise }
       else
         format.html { redirect_to new_exercise_path(:layout => get_layout), alert: 'Casen luominen epäonnistui!' }
-        format.json { render json: @exercise.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -59,10 +58,8 @@ class ExercisesController < ApplicationController
     respond_to do |format|
       if @exercise.update(exercise_params)
         format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen päivitys onnistui!' }
-        format.json { render :show, status: :ok, location: @exercise }
       else
         format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), alert: 'Casen päivitys epäonnistui!' }
-        format.json { render json: @exercise.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -73,7 +70,6 @@ class ExercisesController < ApplicationController
     @exercise.destroy
     respond_to do |format|
       format.html { redirect_to exercises_url, notice: 'Casen poistaminen onnistui!' }
-      format.json { head :no_content }
     end
   end
 

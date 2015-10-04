@@ -20,7 +20,7 @@ class ExerciseHypothesis < ActiveRecord::Base
 
   def user_meets_requirements (user)
     return true if task.level < 1
-    if(user.completed_tasks.where(task_id: task_id).empty?)
+    if user.completed_tasks.where(task_id: task_id).empty?
       return false
     end
     return true

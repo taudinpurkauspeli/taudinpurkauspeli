@@ -1,6 +1,7 @@
 class CheckedHypothesesController < ApplicationController
-  before_action :set_checked_hypothesis, only: [:destroy]
   before_action :ensure_user_is_logged_in
+  before_action :set_checked_hypothesis, only: [:destroy]
+  before_action :set_current_user, only: [:create]
 
   # POST /checked_hypotheses
   # POST /checked_hypotheses.json
@@ -8,7 +9,7 @@ class CheckedHypothesesController < ApplicationController
     @checked_hypothesis = CheckedHypothesis.new(checked_hypothesis_params)
     exHyp = ExerciseHypothesis.find_by(id: checked_hypothesis_params[:exercise_hypothesis_id])
     unless(exHyp.nil?)
-      if(exHyp.user_meets_requirements(current_user))
+      if(exHyp.user_meets_requirements(@current_user))
         respond_to do |format|
           if @checked_hypothesis.save
             format.html { redirect_to hypotheses_url(:layout => get_layout, :last_clicked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id])}
@@ -30,7 +31,6 @@ class CheckedHypothesesController < ApplicationController
     @checked_hypothesis.destroy
     respond_to do |format|
       format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Diffi palautettu mahdollisten diffien listaan.'}
-      format.json { head :no_content }
     end
   end
 

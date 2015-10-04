@@ -4,7 +4,7 @@
   <div class = "col-md-8">
     <h1>Toimenpiteet</h1>
   </div>
-  <% if current_user.try(:admin) %>
+  <% if @current_user.try(:admin) %>
       <div class = "col-md-4">
         <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteiden luominen ja järjestely" data-content="Tällä sivulla voit luoda uusia toimenpiteitä ja päätöstoimenpiteen. Kussakin casessa voi olla vain yksi päätöstoimenpide. Toimenpiteiden suoritusjärjestystä voi muokata toimenpiteen vieressä olevilla nuolilla. Samassa numeroidussa ryhmässä olevat toimenpiteet voi suorittaa valinnaisessa järjestyksessä. Ryhmät taas suoritetaan numerojärjestyksessä ykkösestä alkaen.">Ohje</a>
       </div>
@@ -12,19 +12,19 @@
 </div>
 
 
-<% if current_user.try(:admin) %>
+<% if @current_user.try(:admin) %>
     <%= render 'tasks/index/set_task_order' %>
+
+    <%= button_to '+ Luo uusi toimenpide', new_task_path, :class => 'btn btn-default btn-save btn-new-task', :form_class => "form-new-task", :method => :get %>
+    <%= button_to '+ Luo diagnoositoimenpide', new_conclusion_path, :class => 'btn btn-default btn-save btn-new-task', :form_class => "form-new-task", :method => :get unless current_exercise.has_conclusion? %>
+
 <% else %>
     <div class = "separator"></div>
     <%= render 'tasks/index/list_of_available_tasks' %>
     <div class = "separator"></div>
     <%= render 'tasks/index/list_of_completed_tasks' %>
 <% end %>
-<%= button_to '+ Luo uusi toimenpide', new_task_path, :class => 'btn btn-default btn-save btn-new-task', :form_class => "form-new-task", :method => :get if current_user.try(:admin) %>
 
-<% unless current_exercise.has_conclusion? %>
-    <%= button_to '+ Luo diagnoositoimenpide', new_conclusion_path, :class => 'btn btn-default btn-save btn-new-task', :form_class => "form-new-task", :method => :get if current_user.try(:admin) %>
-<% end %>
 
 <script>
     //STUDENT

@@ -65,51 +65,6 @@ RSpec.describe HypothesesController, :type => :controller do
     end
   end
 
-
-  describe "PUT update" do
-    describe "with valid params" do
-      let(:new_attributes) {
-        {name: "Virustauti2"}
-      }
-
-      it "updates the requested hypothesis" do
-        hypothesis = Hypothesis.create! valid_attributes
-        put :update, {:id => hypothesis.to_param, :hypothesis => new_attributes}, valid_session
-        hypothesis.reload
-        expect(hypothesis.name).to eq("Virustauti2")
-      end
-
-      it "assigns the requested hypothesis as @hypothesis" do
-        hypothesis = Hypothesis.create! valid_attributes
-        put :update, {:id => hypothesis.to_param, :hypothesis => valid_attributes}, valid_session
-        expect(assigns(:hypothesis)).to eq(hypothesis)
-      end
-
-      it "redirects to the hypothesis" do
-        hypothesis = Hypothesis.create! valid_attributes
-        put :update, {:id => hypothesis.to_param, :hypothesis => valid_attributes}, valid_session
-        expect(response).to redirect_to(hypothesis)
-      end
-    end
-
-
-    describe "with invalid params" do
-      it "assigns the hypothesis as @hypothesis" do
-        hypothesis = Hypothesis.create! valid_attributes
-        put :update, {:id => hypothesis.to_param, :hypothesis => invalid_attributes}, valid_session
-        expect(assigns(:hypothesis)).to eq(hypothesis)
-      end
-
-      it "redirects to the hypothesis" do
-        hypothesis = Hypothesis.create! valid_attributes
-        put :update, {:id => hypothesis.to_param, :hypothesis => invalid_attributes}, valid_session
-        expect(response).to redirect_to(hypothesis)
-      end
-    end
-
-  end
-
-
   describe "DELETE destroy" do
     it "destroys the requested hypothesis" do
       hypothesis = Hypothesis.create! valid_attributes

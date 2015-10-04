@@ -1,11 +1,8 @@
 class ConclusionsController < ApplicationController
 	before_action :ensure_user_is_logged_in
-	before_action :ensure_user_is_admin, except: [:index, :show, :check_answers]
+	before_action :ensure_user_is_admin, except: [:check_answers]
 	before_action :set_conclusion, only: [:edit, :update, :check_answers, :destroy]
-
-	def show
-		set_view_layout
-	end
+	before_action :set_current_user, only: [:check_answers]
 
 	def new
 		@hypothesis_groups = HypothesisGroup.all
@@ -35,10 +32,8 @@ class ConclusionsController < ApplicationController
 			if @conclusion.save & @task.save
 				subtask.save
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide lisättiin onnistuneesti!' }
-				#format.json { render :show, status: :created, location: @multichoice }
 			else
 				format.html { redirect_to new_conclusion_path(:layout => get_layout), alert: 'Diagnoositoimenpiteen lisääminen epäonnistui!' }
-				format.json { render json: @conclusion.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -50,7 +45,6 @@ class ConclusionsController < ApplicationController
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide päivitettiin onnistuneesti!' }
 			else
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), alert: 'Diagnoosioimenpiteen päivitys epäonnistui!' }
-				format.json { render json: @conclusion.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -60,23 +54,21 @@ class ConclusionsController < ApplicationController
 		@task.destroy
 		respond_to do |format|
 			format.html { redirect_to tasks_path(:layout => get_layout), notice: 'Diagnoositoimenpide poistettu!' }
-			format.json { head :no_content }
 		end
 	end
 
 	def check_answers
 		respond_to do |format|
-			if @conclusion.user_answered_correctly?(current_user, check_conclusion_params[:exhyp_id])
-				current_user.check_all_hypotheses(current_task.exercise)
-				if(current_user.has_completed?(current_exercise))
-					format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :last_clicked_conclusion => check_conclusion_params[:exhyp_id]), notice: 'Onneksi olkoon suoritit casen!' }
-				else
-					format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :last_clicked_conclusion => check_conclusion_params[:exhyp_id]), notice: 'Hyvä, selvitit oikean diagnoosin!' }
-				end
+			if @conclusion.user_answered_correctly?(@current_user, check_conclusion_params[:exhyp_id])
+				@current_user.check_all_hypotheses(current_task.exercise)
+
+				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout,
+																						:last_clicked_conclusion => check_conclusion_params[:exhyp_id]),
+																	notice: (@current_user.has_completed?(current_exercise) ? 'Onneksi olkoon suoritit casen!' : 'Hyvä, selvitit oikean diagnoosin!') }
 
 			else
 				exhyp = ExerciseHypothesis.find(check_conclusion_params[:exhyp_id])
-				current_user.check_hypothesis(exhyp)
+				@current_user.check_hypothesis(exhyp)
 				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :last_clicked_conclusion => check_conclusion_params[:exhyp_id]), notice: 'Väärä diffi poissuljettu!' }
 			end
 		end

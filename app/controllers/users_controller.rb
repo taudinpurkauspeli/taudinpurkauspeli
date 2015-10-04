@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user_is_logged_in, except: [:new, :create]
   before_action :ensure_user_is_admin, only: [:index]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_user, only: [:index, :show]
+
   before_action except: [:new, :create, :index] do
-    if @user.nil? || (!current_user.try(:admin) && @user != current_user)
+    current_user_now = current_user
+    if @user.nil? || (!current_user_now.try(:admin) && @user != current_user_now)
       redirect_to exercises_path, alert: 'Pääsy toisen käyttäjän tietoihin estetty!'
     end
   end
@@ -63,11 +66,9 @@ class UsersController < ApplicationController
       if @user.save
         @user.authenticate(user_params[:password])
         session[:user_id] = @user.id
-        format.html { redirect_to :root, notice: 'Käyttäjätunnuksen luominen onnistui!' }
-        format.json { render :show, status: :created, location: @user }
+        format.html { redirect_to exercises_path, notice: 'Käyttäjätunnuksen luominen onnistui!' }
       else
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -79,10 +80,8 @@ class UsersController < ApplicationController
       respond_to do |format|
         if @user.update(user_params)
           format.html { redirect_to @user, notice: 'Käyttäjän tiedot päivitetty.' }
-          format.json { render :show, status: :ok, location: @user }
         else
           format.html { render :edit }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -97,11 +96,10 @@ class UsersController < ApplicationController
       session[:user_id] = nil
       session[:exercise_id] = nil
       session[:task_id] = nil
-      session[:exhyp_id] = nil
+      session[:exhyp_ids] = nil
 
       respond_to do |format|
-        format.html { redirect_to :root, notice: 'Käyttäjä poistettu.' }
-        format.json { head :no_content }
+        format.html { redirect_to exercises_path, notice: 'Käyttäjä poistettu.' }
       end
     end
   end
