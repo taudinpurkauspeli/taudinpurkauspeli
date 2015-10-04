@@ -69,7 +69,6 @@
 
     <% @completed_tasks.each_with_index do |task, index| %>
 
-
         <div class = "row">
           <div class = "col-md-12">
 
@@ -81,9 +80,7 @@
               <div id="collapse-completed-task<%= task.id.to_s %>" class="panel-collapse collapse">
                 <div class="panel-body">
                   <% task.subtasks.each do |subtask| %>
-                      <% if @current_user.can_complete_subtask?(task, subtask) || @current_user.try(:admin) %>
-                          <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask, parent_view: 'exercise_show' } %>
-                      <% end %>
+                      <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask, parent_view: 'exercise_show' } %>
                   <% end %>
                 </div>
               </div>
