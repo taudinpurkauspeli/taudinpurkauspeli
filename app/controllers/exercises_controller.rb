@@ -20,8 +20,8 @@ class ExercisesController < ApplicationController
   # GET /exercises/1.json
   def show
     session[:exercise_id] = params[:id]
-    
-    @completed_tasks = @current_user.tasks.includes(:completed_tasks).where("level > ?", 0).where(exercise:e).order("completed_tasks.created_at")
+
+    @completed_tasks = @current_user.tasks.includes(:completed_tasks).where("level > ?", 0).where(exercise:@exercise).order("completed_tasks.created_at")
 
     # Unchecked exercise hypotheses for conclusion view
     @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
