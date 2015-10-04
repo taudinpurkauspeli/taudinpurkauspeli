@@ -1,10 +1,10 @@
 <% subtask_exhyp = subtask.conclusion.exercise_hypothesis %>
 
-<% if current_user.try(:admin) %>
+<% if @current_user.try(:admin) %>
     <%= render 'tasks/subtasks/ask_conclusion', { subtask:subtask } %>
 <% end %>
 
-<% if !@conclusion_exercise_hypotheses.empty? && !current_user.try(:admin)%>
+<% if !@conclusion_exercise_hypotheses.empty? && !@current_user.try(:admin)%>
 
     <h4>Poissuljetut diffit:</h4>
 
@@ -18,13 +18,13 @@
                        multiline"
                    type="button"
                    value="<%= exhyp.hypothesis.name %>"
-                   onclick='showExHypExplanation("#exhyp_explanation_<%= exhyp.id.to_s %>");'></input>
+                   onclick='showExHypExplanation("#exhyp_explanation_<%= exhyp.id.to_s %><%= exercise_show_or_task_show %>");'></input>
           </div>
 
           <div class = "col-md-8">
 
             <div class="info-checked-hypothesis removable"
-                 id="exhyp_explanation_<%= exhyp.id.to_s %>"
+                 id="exhyp_explanation_<%= exhyp.id.to_s %><%= exercise_show_or_task_show %>"
                  style=<%= (@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id)) ? "" : "display:none;"%>>
               <%= (exhyp.id == subtask_exhyp.id) ? exhyp.get_right_explanation.html_safe : exhyp.get_explanation.html_safe %>
             </div>
@@ -45,11 +45,11 @@
                class="btn btn-default btn-save multiline"
                type="button"
                value="<%= subtask_exhyp.hypothesis.name %>"
-               onclick='showExHypExplanation("#exhyp_explanation_<%= subtask_exhyp.id.to_s %>");'></input>
+               onclick='showExHypExplanation("#exhyp_explanation_<%= subtask_exhyp.id.to_s %><%= exercise_show_or_task_show %>");'></input>
       </div>
       <div class = "col-md-8">
         <div class="info-checked-hypothesis removable"
-             id="exhyp_explanation_<%= subtask_exhyp.id.to_s %>"
+             id="exhyp_explanation_<%= subtask_exhyp.id.to_s %><%= exercise_show_or_task_show %>"
              style="display:none;">
           <%= subtask_exhyp.get_right_explanation.html_safe %>
         </div>

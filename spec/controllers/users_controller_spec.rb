@@ -22,17 +22,17 @@ RSpec.describe UsersController, :type => :controller do
 
   let!(:admin_user){FactoryGirl.create(:user)}
   let!(:normal_user){FactoryGirl.create(:student)}
-  let!(:normal_user2){FactoryGirl.create(:student, username: "Teppo", realname: "Töppö", student_number:"000000002")}
+  let!(:normal_user2){FactoryGirl.create(:student, username: "Teppo", first_name: "Töppö", last_name: "Tippo", student_number:"000000002")}
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {username: "Pekka", email: "kukkuu@kukkuu.com", admin: true, realname: "Topohanta", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000003", starting_year: 2000}
+    {username: "Pekka", email: "kukkuu@kukkuu.com", admin: true, first_name: "Pekka", last_name: "Topohanta", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000003", starting_year: 2000}
 
   }
 
   let(:invalid_attributes) {
-    {username: "", realname: "", password: "Salasana1", password_confirmation: "Salasana1", email: ""}
+    {username: "", first_name: "", last_name: "", password: "Salasana1", password_confirmation: "Salasana1", email: ""}
 
   }
 
@@ -139,9 +139,9 @@ RSpec.describe UsersController, :type => :controller do
         expect(assigns(:user)).to be_persisted
       end
 
-      it "redirects to the root page" do
+      it "redirects to the exercises page" do
         post :create, {:user => valid_attributes}, valid_normal_session
-        expect(response).to redirect_to(:root)
+        expect(response).to redirect_to(exercises_path)
       end
     end
 
@@ -161,11 +161,11 @@ RSpec.describe UsersController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_admin_attributes) {
-        {username: "Topohanta", email: "kukkuu@kukkuu.com", admin: true, realname: "Pekka", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000011", starting_year: 2000}
+        {username: "Topohanta", email: "kukkuu@kukkuu.com", admin: true, first_name: "Pekka", last_name: "Topohanta", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000011", starting_year: 2000}
       }
 
       let(:new_normal_attributes) {
-        {username: "Topohanta", email: "kukkuu@kukkuu.com", admin: false, realname: "Pekka", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000010", starting_year: 2000}
+        {username: "Topohanta", email: "kukkuu@kukkuu.com", admin: false, first_name: "Pekka", last_name: "Topohanta", password: "Salasana1", password_confirmation: "Salasana1", student_number: "000000010", starting_year: 2000}
       }
 
       describe "for admin" do
@@ -174,14 +174,14 @@ RSpec.describe UsersController, :type => :controller do
           put :update, {:id => admin_user.to_param, :user => new_admin_attributes}, valid_admin_session
           admin_user.reload
           expect(admin_user.username).to eq("Topohanta")
-          expect(admin_user.realname).to eq("Pekka")
+          expect(admin_user.first_name).to eq("Pekka")
         end
 
         it "updates student information" do
           put :update, {:id => normal_user.to_param, :user => new_normal_attributes}, valid_admin_session
           normal_user.reload
           expect(normal_user.username).to eq("Topohanta")
-          expect(normal_user.realname).to eq("Pekka")
+          expect(normal_user.first_name).to eq("Pekka")
         end
 
         it "assigns the requested normal user as @user" do
@@ -206,7 +206,7 @@ RSpec.describe UsersController, :type => :controller do
           put :update, {:id => normal_user.to_param, :user => new_normal_attributes}, valid_normal_session
           normal_user.reload
           expect(normal_user.username).to eq("Topohanta")
-          expect(normal_user.realname).to eq("Pekka")
+          expect(normal_user.first_name).to eq("Pekka")
         end
 
         it "does not update other student's information" do
@@ -235,14 +235,16 @@ RSpec.describe UsersController, :type => :controller do
           put :update, {:id => admin_user.to_param, :user => invalid_attributes}, valid_admin_session
           admin_user.reload
           expect(admin_user.username).to eq("Testipoika")
-          expect(admin_user.realname).to eq("Teppo Testailija")
+          expect(admin_user.first_name).to eq("Teppo")
+          expect(admin_user.last_name).to eq("Testailija")
         end
 
         it "does not update student information" do
           put :update, {:id => normal_user.to_param, :user => invalid_attributes}, valid_admin_session
           normal_user.reload
           expect(normal_user.username).to eq("Opiskelija")
-          expect(normal_user.realname).to eq("Olli Testailija")
+          expect(normal_user.first_name).to eq("Olli")
+          expect(normal_user.last_name).to eq("Testailija")
         end
 
         it "assigns the requested normal user as @user" do
@@ -267,7 +269,8 @@ RSpec.describe UsersController, :type => :controller do
           put :update, {:id => normal_user.to_param, :user => invalid_attributes}, valid_normal_session
           normal_user.reload
           expect(normal_user.username).to eq("Opiskelija")
-          expect(normal_user.realname).to eq("Olli Testailija")
+          expect(normal_user.first_name).to eq("Olli")
+          expect(normal_user.last_name).to eq("Testailija")
         end
 
         it "does not update other student's information" do
@@ -305,7 +308,7 @@ RSpec.describe UsersController, :type => :controller do
 
       it "redirects to the starting page" do
         delete :destroy, {:id => admin_user.to_param}, valid_admin_session
-        expect(response).to redirect_to(:root)
+        expect(response).to redirect_to(exercises_path)
       end
 
     end
@@ -325,7 +328,7 @@ RSpec.describe UsersController, :type => :controller do
 
       it "redirects to the starting page" do
         delete :destroy, {:id => normal_user.to_param}, valid_normal_session
-        expect(response).to redirect_to(:root)
+        expect(response).to redirect_to(exercises_path)
       end
     end
   end

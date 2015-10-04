@@ -48,7 +48,10 @@ fi:
             username:
               taken: "on jo käytössä"
               blank: "on pakollinen"
-            realname:
+            first_name:
+              blank: "on pakollinen"
+              too_short: "on liian lyhyt"
+            last_name:
               blank: "on pakollinen"
               too_short: "on liian lyhyt"
             email:
@@ -140,6 +143,8 @@ fi:
         username: "Käyttäjätunnus"
         password: "Salasana"
         password_confirmation: "Salasanan vahvistus"
-        realname: "Nimi"
+        first_name: "Etunimi"
+        last_name: "Sukunimi"
         student_number: "Opiskelijanumero"
-        starting_year: "Aloitusvuosi"
+        starting_year: "Epidemiologian kurssin aloitusvuosi"
+        email: "Sähköposti"

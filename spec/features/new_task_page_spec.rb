@@ -310,7 +310,7 @@ describe "New Task page", js:true do
           end
 
           it "add question without a question group to an interview" do
-            fill_in('question_title', with: "Onko eläin ollut kipeä?")
+            fill_in('question_title', with: "Onko eläin ollut kipea?")
             fill_in_ckeditor 'question_content', with: 'On ollut kipeä.'
             select('Pakollinen kysymys', from:'question[required]')
 
@@ -318,10 +318,10 @@ describe "New Task page", js:true do
               click_and_wait('Tallenna')
             }.to change(Question, :count).by(1)
 
-            expect(page).to have_content 'Kysymysvaihtoehto lisättiin onnistuneesti'
+            expect(page).to have_content 'Kysymys lisättiin onnistuneesti'
 
             expect(QuestionGroup.count).to eq(0)
-            expect(Interview.first.questions.first.title).to eq('Onko eläin ollut kipeä?')
+            expect(Interview.first.questions.first.title).to eq('Onko eläin ollut kipea?')
             expect(Interview.first.questions.first.content).to eq("<p>On ollut kipe&auml;.</p>\r\n")
             expect(Interview.first.questions.first.required).to eq("required")
           end
@@ -337,7 +337,7 @@ describe "New Task page", js:true do
             }.to change(Question, :count).by(1)
 
             expect(QuestionGroup.count).to eq(1)
-            expect(page).to have_content 'Kysymysvaihtoehto lisättiin onnistuneesti'
+            expect(page).to have_content 'Kysymys lisättiin onnistuneesti'
 
             expect(Interview.first.questions.first.question_group.title).to eq("Eläinkysymys")
           end

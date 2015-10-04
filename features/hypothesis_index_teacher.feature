@@ -66,7 +66,7 @@ Feature: Hypothesis list feature
     Given I have logged in as a teacher
     And cases, hypothesis groups and hypotheses have been created
     And I visit the "Diffit" page of the case "Lihanautakuolemat"
-    When I click on the button "+ Uusi työhypoteesiryhmä"
+    When I click on the button "+ Uusi diffiryhmä"
     And I fill in the hypothesis group name field with a correct name
     And I click on button "Tallenna"
     Then the new hypothesis group should be created

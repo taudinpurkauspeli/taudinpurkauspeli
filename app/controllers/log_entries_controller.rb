@@ -1,7 +1,7 @@
 class LogEntriesController < ApplicationController
-  before_action :set_log_entry, only: [:show, :destroy]
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
+  before_action :set_log_entry, only: [:show, :destroy]
 
   # GET /log_entries
   def index
@@ -11,7 +11,6 @@ class LogEntriesController < ApplicationController
 
   # GET /log_entries/1
   def show
-
     @parameters = YAML::load(@log_entry.params)
     @exercise_hypothesis_ids = YAML::load(@log_entry.exhyp_ids)
 

@@ -6,15 +6,15 @@
     <br/>
     <br/>
     <h1>Taudinpurkauspelit</h1>
-    <br/>
   </div>
   <br/>
-  <%if current_user.nil? %>
+  <br/>
+  <%if @current_user.nil? %>
       <div class = "col-md-4">
         <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Kirjaudu sisään tai luo uusi käyttäjätunnus pelataksesi peliä.">Ohje</a>
       </div>
   <% else %>
-      <% if current_user.try(:admin) %>
+      <% if @current_user.try(:admin) %>
           <div class = "col-md-4">
             <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Voit hiirellä klikkaamalla siirtyä muokkaamaan vanhaa casea tai luoda uuden casen. Opiskelijoiden seurantaan pääsee sivun alareunan napista hiirellä klikkaamalla. Kopio nappi kopio koko vanhan casen uuden pohjaksi.">Ohje</a>
           </div>
@@ -25,12 +25,36 @@
       <% end %>
   <% end %>
 </div>
+<div class = "separator"></div>
+
+<br/>
+
+<%unless @current_user.nil? %>
+    <div class="row">
+
+      <div class="col-md-8">
+        <p>
+          Pelin tarkoitus on opetella taudinpurkaukseen tarvittavaa ajattelumallia.
+          Yritä miettiä, mikä olisi paras järjestys suorittaa pelin toimenpiteet oikeaan diagnoosiin päästäksesi.
+          Pelin toimenpiteet eivät ole toimenpidelistassa oikeassa suoritusjärjestyksessä. Vääriä
+          diffejä on helpointa sulkea pois heti, kun voit varmuudella tehdä niin.
+        </p>
+        <p>
+          Ohjeita löytyy sivun oikeasta laidasta Ohje-napista.
+          Sivun yläreunassa on välilehtiä, joiden avulla voi liikkua. Selaimen Takaisin-nuoli ei valitettavasti
+          toimi normaalisti, vaan ohjaa Sairaskertomus-välilehdelle.
+        </p>
+
+        <br/>
+      </div>
+    </div>
+<%end%>
 
 <%@exercises.each do |exercise| %>
     <div class="row">
 
-      <% if !exercise.hidden? || current_user.try(:admin) %>
-          <%if current_user.nil? %>
+      <% if !exercise.hidden? || @current_user.try(:admin) %>
+          <%if @current_user.nil? %>
               <div class="col-md-5">
                 <%= button_to exercise.name, '', :class => 'btn disabled btn-exercise', :method => :get %>
               </div>
@@ -39,21 +63,22 @@
                 <%= button_to exercise.name, exercise, :class => 'btn btn-default btn-exercise', :method => :get %>
               </div>
 
-              <% unless current_user.try(:admin) %>
+              <% unless @current_user.try(:admin) %>
+                  <% percent_of_completed_tasks_of_exercise = @current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>
                   <div class="col-md-5">   <br>
-                    <div class ="progressbar <%= 'completed' if current_user.get_percent_of_completed_tasks_of_exercise(exercise) == 100 %>" >
-                      <% if current_user.get_percent_of_completed_tasks_of_exercise(exercise) < 100 %>
-                          <div class = "progressbar progress" style = "width: <%= 100 - current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>%;"></div>
+                    <div class ="progressbar <%= 'completed' if percent_of_completed_tasks_of_exercise == 100 %>" >
+                      <% if percent_of_completed_tasks_of_exercise < 100 %>
+                          <div class = "progressbar progress" style = "width: <%= 100 - percent_of_completed_tasks_of_exercise %>%;"></div>
                       <% end %>
                     </div>
-                    <span class = "progress-percent"><%= current_user.get_percent_of_completed_tasks_of_exercise(exercise) %>%</span>
+                    <span class = "progress-percent"><%= percent_of_completed_tasks_of_exercise %>%</span>
                   </div>
               <% end %>
 
           <% end%>
       <% end %>
 
-      <% if current_user.try(:admin) %>
+      <% if @current_user.try(:admin) %>
 
           <div class="col-md-1">
             <%= button_to 'Poista', exercise, :class => 'btn btn-default btn-exercise btn-del', :method => :delete, data: { confirm: 'Haluatko varmasti poistaa casen?' }, id: 'delete_exercise_' + exercise.id.to_s %>
@@ -75,24 +100,31 @@
 <% end %>
 <div class="row">
   <div class="col-md-5">
-    <%= button_to '+ Luo uusi case', new_exercise_path, :class => 'btn btn-default btn-exercise btn-save', :method => :get if current_user.try(:admin)%>
+    <%= button_to '+ Luo uusi case', new_exercise_path, :class => 'btn btn-default btn-exercise btn-save', :method => :get if @current_user.try(:admin)%>
   </div>
 </div>
 <br />
 <div class = "separator"></div>
+
+<div class="row">
+  <div class="col-md-5">
+    <%= link_to 'Rekisteriseloste', "http://tautiset-pelit.it.helsinki.fi/images/MikroEpinSuoritusrekisterinSeloste.pdf" unless @current_user.try(:admin)%>
+  </div>
+</div>
+
 <br />
 <div class="row">
   <div class="col-md-5">
-    <%= button_to 'Opiskelijoiden seuranta', users_path, :class => 'btn btn-default btn-exercise', :method => :get if current_user.try(:admin)%>
+    <%= button_to 'Opiskelijoiden seuranta', users_path, :class => 'btn btn-default btn-exercise', :method => :get if @current_user.try(:admin)%>
   </div>
 </div>
-<% if current_user.try(:admin)%>
+<% if @current_user.try(:admin)%>
     <br />
     <div class = "separator"></div>
     <br />
     <div class="row">
       <div class="col-md-5">
-        <%= button_to 'Loki', log_entries_path, :class => 'btn btn-default btn-exercise', :method => :get if current_user.try(:admin)%>
+        <%= button_to 'Loki', log_entries_path, :class => 'btn btn-default btn-exercise', :method => :get if @current_user.try(:admin)%>
       </div>
     </div>
 <% end %>

@@ -14,7 +14,7 @@
 
     <div class="field">
       <%= f.label :exercise_hypothesis_id%><br>
-      <%=f.select :exercise_hypothesis_id, options_from_collection_for_select(@exercise_hypotheses, :id, :name, selected: @conclusion.exercise_hypothesis_id), { :prompt => 'Valitse casen oikea työhypoteesi' } %>
+      <%=f.select :exercise_hypothesis_id, options_from_collection_for_select(@exercise_hypotheses, :id, :name, selected: @conclusion.exercise_hypothesis_id), { :prompt => 'Valitse casen oikea diagnoosi' } %>
 
     </div>
 

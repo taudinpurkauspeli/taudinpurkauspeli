@@ -2,7 +2,8 @@ FactoryGirl.define do
 
   factory :user do
     username "Testipoika"
-    realname "Teppo Testailija"
+    first_name "Teppo"
+    last_name "Testailija"
     email "teppo.testailija@gmail.com"
     password "Salainen1"
     password_confirmation "Salainen1"
@@ -13,7 +14,8 @@ FactoryGirl.define do
 
   factory :student, class: User do
     username "Opiskelija"
-    realname "Olli Testailija"
+    first_name "Olli"
+    last_name "Testailija"
     email "teppo.testailija@gmail.com"
     password "Salainen1"
     password_confirmation "Salainen1"

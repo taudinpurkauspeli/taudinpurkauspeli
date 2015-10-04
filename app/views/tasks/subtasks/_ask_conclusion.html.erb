@@ -6,16 +6,16 @@
 <h4>Diffilistassa jäljellä:</h4>
 <br/>
 
-<% unless current_user.try(:admin) %>
+<% unless @current_user.try(:admin) %>
     <% @conclusion_exercise_hypotheses.each do |exhyp| %>
 
         <div class = "row">
 
-          <% if !current_user.has_checked_hypothesis?(exhyp) %>
+          <% if !@current_user.has_checked_hypothesis?(exhyp) %>
               <div class = "col-md-4">
                 <%= form_tag("conclusions/" + subtask.conclusion.id.to_s + "/check_answers", method: "post", :id => 'check_exhyp_form') do %>
                     <%= hidden_field_tag :exhyp_id, exhyp.id %>
-                    <%= submit_tag(exhyp.name, :class => "btn btn-default multiline") unless current_user.try(:admin) %>
+                    <%= submit_tag(exhyp.name, :class => "btn btn-default multiline") unless @current_user.try(:admin) %>
                 <% end %>
               </div>
 

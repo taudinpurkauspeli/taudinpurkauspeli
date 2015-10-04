@@ -3,7 +3,7 @@
     <h3 class="panel-title">Kysymys: <%= subtask.multichoice.question %></h3>
   </div>
   <div class="panel-body">
-    <% if current_user.has_completed?(subtask) || current_user.try(:admin) %>
+    <% if @current_user.has_completed?(subtask) || @current_user.try(:admin) %>
         <%= render 'tasks/subtasks/completed_multichoice', { subtask:subtask} %>
     <% else %>
         <%= render 'tasks/subtasks/ask_multichoice', { subtask:subtask } %>

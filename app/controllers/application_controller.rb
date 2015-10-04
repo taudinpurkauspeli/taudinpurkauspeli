@@ -51,6 +51,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_current_user
+    @current_user = current_user
+  end
+
   private
 
   def log_request
@@ -88,7 +92,7 @@ class ApplicationController < ActionController::Base
   def current_user_is_student_in_production
     if Rails.env.production?
       user = current_user
-      if Rails.env.test? || user.nil? || user.admin
+      if  user.nil? || user.admin || Rails.env.test?
         return false
       end
       return true

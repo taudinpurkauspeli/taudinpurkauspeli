@@ -1,0 +1,10 @@
+<% @exercise.get_hypotheses[group.id].to_a.each do |exercise_hypothesis| %>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <% if @current_user.has_checked_hypothesis?(exercise_hypothesis) %>
+          <%= render 'hypotheses/show/checked_hypothesis', { exercise_hypothesis: exercise_hypothesis} %>
+      <% else %>
+          <%= render 'hypotheses/show/unchecked_hypothesis', { exercise_hypothesis: exercise_hypothesis} %>
+      <% end %>
+    </div>
+<% end %>
