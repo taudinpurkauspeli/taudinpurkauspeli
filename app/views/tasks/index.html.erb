@@ -23,7 +23,7 @@
 <%= button_to '+ Luo uusi toimenpide', new_task_path, :class => 'btn btn-default btn-save btn-new-task', :form_class => "form-new-task", :method => :get if current_user.try(:admin) %>
 
 <% unless current_exercise.has_conclusion? %>
-<%= button_to '+ Luo diagnoositoimenpide', new_conclusion_path, :class => 'btn btn-default btn-save btn-new-task', :form_class => "form-new-task", :method => :get if current_user.try(:admin) %>
+    <%= button_to '+ Luo diagnoositoimenpide', new_conclusion_path, :class => 'btn btn-default btn-save btn-new-task', :form_class => "form-new-task", :method => :get if current_user.try(:admin) %>
 <% end %>
 
 <script>
@@ -31,11 +31,14 @@
     //open task button for student
     setNewTabSubmits("#taskTab .form-to-task-student", "#currentTaskTab", function(){
         loadView("/hypotheses", "#hypothesisTab");
+        loadView("<%= exercise_path(current_exercise) %>", "#anamnesisTab");
     });
     //submits for task that cannot be done
     setAjaxSubmits("#taskTab .form-cannot-task-student", "#taskTab", "get");
     //open completed task
-    setNewTabSubmits("#taskTab .form-completed-task", "#currentTaskTab");
+    setNewTabSubmits("#taskTab .form-completed-task", "#currentTaskTab",function(){
+        loadView("<%= exercise_path(current_exercise) %>", "#anamnesisTab");
+    });
 
     //TEACHER
     //open task button for teacher

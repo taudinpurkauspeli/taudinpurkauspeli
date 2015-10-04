@@ -70,7 +70,7 @@ describe "Hypothesis list page", js:true do
     describe "should be able to" do
 
       it "create a new hypothesis" do
-        click_and_wait('+ Uusi työhypoteesi')
+        click_and_wait('+ Uusi diffi')
 
         fill_in('new_hypothesis_name_1', with: 'Sorkkaihottuma')
         expect {
@@ -83,7 +83,7 @@ describe "Hypothesis list page", js:true do
       end
 
       it "create a new hypothesis group" do
-        click_and_wait('+ Uusi työhypoteesiryhmä')
+        click_and_wait('+ Uusi diffiryhmä')
 
         fill_in('hypothesis_group_name', with: 'Sorkkaeläinten ihotaudit')
 
@@ -140,7 +140,7 @@ describe "Hypothesis list page", js:true do
     describe "should not be able to" do
 
       it " create a new hypothesis without a name" do
-        click_and_wait('+ Uusi työhypoteesi')
+        click_and_wait('+ Uusi diffi')
 
         fill_in('new_hypothesis_name_1', with: '')
         expect {
@@ -151,14 +151,14 @@ describe "Hypothesis list page", js:true do
       end
 
       it "create a new hypothesis group without a name" do
-        click_and_wait('+ Uusi työhypoteesiryhmä')
+        click_and_wait('+ Uusi diffiryhmä')
 
         fill_in('hypothesis_group_name', with: '')
         expect {
           click_and_wait("new_hypothesis_group")
         }.to change(HypothesisGroup, :count).by(0)
 
-        expect(page).to have_content 'Työhypoteesiryhmän luominen epäonnistui'
+        expect(page).to have_content 'Diffiryhmän luominen epäonnistui'
       end
     end
 

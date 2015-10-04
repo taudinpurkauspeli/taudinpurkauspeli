@@ -28,7 +28,7 @@
                       <% elsif question.required == "wrong" %>
                         <%= "collapse-answer-wrong" %>
                       <% else %>
-
+                        <%= "collapse-answer-allowed" %>
                       <% end %>
                     ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%><%= exercise_show_or_task_show %>" id="asked_question_<%= question.id.to_s %>"/>
                   </td>
@@ -39,7 +39,7 @@
                       <% elsif question.required == "wrong" %>
                         <%= "collapse-answer-wrong" %>
                       <% else %>
-
+                        <%= "collapse-answer-allowed" %>
                       <% end %>
                       ' id="collapseQuestionContent<%= question.id%><%= exercise_show_or_task_show %>" >
                       <p><%= question.content.html_safe %></p>
@@ -67,7 +67,7 @@
                       <% elsif question.required == "wrong" %>
                         <%= "collapse-answer-wrong" %>
                       <% else %>
-
+                        <%= "collapse-answer-allowed" %>
                       <% end %>
               ' type="button" value="<%= question.title %>" data-toggle="collapse" data-target="#collapseQuestionContent<%= question.id%><%= exercise_show_or_task_show %>" id="asked_question_<%= question.id.to_s %>"/>
               </td>
@@ -78,7 +78,7 @@
                       <% elsif question.required == "wrong" %>
                         <%= "collapse-answer-wrong" %>
                       <% else %>
-
+                        <%= "collapse-answer-allowed" %>
                       <% end %>
                   ' id="collapseQuestionContent<%= question.id%><%= exercise_show_or_task_show %>" >
                   <p><%= question.content.html_safe %></p>
