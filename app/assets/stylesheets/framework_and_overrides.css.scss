@@ -26,10 +26,12 @@ img {
   }
 
 body{
+  background-color: black;
   background-image: url('http://tautiset-pelit.it.helsinki.fi/images/5_3.JPG') !important;
   background-size: 100%;
   background-attachment: fixed;
-  background-position: 0px 0px
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
 }
 
 h1{
