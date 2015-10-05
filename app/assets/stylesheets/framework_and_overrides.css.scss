@@ -25,6 +25,13 @@ img {
   margin: 0 auto;
   }
 
+body{
+  background-image: url('http://tautiset-pelit.it.helsinki.fi/images/5_3.JPG') !important;
+  background-size: 100%;
+  background-attachment: fixed;
+  background-position: 0px -50px
+}
+
 h1{
   margin-top: 2px;
 }
@@ -55,7 +62,7 @@ label {
   width: 100%;
   min-height: 51px;
   background-color: $MediumGreen;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 0px solid #DDD;
 }
 
 li.tabLink>a{
