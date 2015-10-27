@@ -49,6 +49,9 @@ gem 'aws-sdk', '< 2.0'
 # Cloning gem
 gem 'amoeba'
 
+# Bower for Angular dependency management
+gem 'bower-rails'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'
