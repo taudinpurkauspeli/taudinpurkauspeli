@@ -1,0 +1,2 @@
+taudinpurkauspeli = angular.module('taudinpurkauspeli',[
+])
