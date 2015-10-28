@@ -1,0 +1,13 @@
+<h1>Tekstitoimenpiteet</h1>
+
+<section class="row" ng-if="task_texts">
+    <ul class="list-unstyled">
+        <li ng-repeat="task_text in task_texts">
+            <section class="well col-md-6 col-md-offset-3">
+                <h1 class="h3 col-md-6 text-right" style="margin-top: 0"><a href="#">{{task_text.content}}</a></h1>
+                <div class="col-md-6">
+                </div>
+            </section>
+        </li>
+    </ul>
+</section>
