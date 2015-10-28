@@ -12,8 +12,28 @@ taudinpurkauspeli.config([ '$routeProvider',
     )
 ]);
 
+task_texts = [
+  {
+    id: 1
+    content: 'Sisältöä id 1'
+  },
+  {
+    id: 2
+    content: 'Juttuja id 2',
+  },
+  {
+    id: 3
+    content: 'Muuta id 3',
+  },
+  {
+    id: 4
+    content: 'Testiä id 4',
+  },
+]
+
 controllers = angular.module('controllers',[]);
 
 controllers.controller("TaskTextsController", [ '$scope',
   ($scope)->
-])
+    $scope.task_texts = task_texts;
+]);
