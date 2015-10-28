@@ -39,6 +39,10 @@ GEM
     addressable (2.3.8)
     amoeba (3.0.0)
       activerecord (>= 3.2.6)
+    angular-rails-templates (0.1.4)
+      railties (>= 3.1)
+      sprockets
+      tilt
     arel (6.0.3)
     autoprefixer-rails (6.0.3)
       execjs
@@ -276,6 +280,7 @@ PLATFORMS
 
 DEPENDENCIES
   amoeba
+  angular-rails-templates
   aws-sdk (< 2.0)
   bcrypt (~> 3.1.7)
   bootstrap-sass
