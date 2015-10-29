@@ -52,12 +52,17 @@ gem 'amoeba'
 # Bower for Angular dependency management
 gem 'bower-rails'
 
+# Template cache for angular
+gem 'angular-rails-templates', '~> 0.2'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+#gem 'sprockets', '~> 2.x'
+gem 'sprockets', '2.12.3'
 
 group :test do
   
