@@ -24,8 +24,8 @@ describe "Hypothesis list page", js:true do
     describe "has chosen an exercise" do
 
       before :each do
-        click_and_wait('Lihanautakuolemat')
-        click_and_wait('Diffit')
+        wait_and_trigger_click('Lihanautakuolemat')
+        wait_and_trigger_click('Diffit')
       end
 
       it "then he should be able to view the hypotheses of an exercise" do
@@ -37,7 +37,7 @@ describe "Hypothesis list page", js:true do
 
         it "then he should not be able check hypotheses of an exercise" do
           expect {
-            click_and_wait('Virustauti')
+            wait_and_trigger_click('Virustauti')
           }.to change(CheckedHypothesis, :count).by (0)
           expect(page).to have_content 'Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea diffin.'
         end
@@ -47,7 +47,7 @@ describe "Hypothesis list page", js:true do
         it "then he should be able to check hypotheses of an exercise" do
           user.completed_tasks.create task_id:task.id
           expect {
-            click_and_wait('Virustauti')
+            wait_and_trigger_click('Virustauti')
           }.to change(CheckedHypothesis, :count).by (1)
         end
       end
@@ -63,18 +63,18 @@ describe "Hypothesis list page", js:true do
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
       visit root_path
-      click_and_wait('Lihanautakuolemat')
-      click_and_wait('Diffit')
+      wait_and_trigger_click('Lihanautakuolemat')
+      wait_and_trigger_click('Diffit')
     end
 
     describe "should be able to" do
 
       it "create a new hypothesis" do
-        click_and_wait('+ Uusi diffi')
+        wait_and_trigger_click('+ Uusi diffi')
 
         fill_in('new_hypothesis_name_1', with: 'Sorkkaihottuma')
         expect {
-          click_and_wait("save_new_hypothesis_for_group_1")
+          wait_and_trigger_click("save_new_hypothesis_for_group_1")
         }.to change(Hypothesis, :count).by(1)
 
         expect(Hypothesis.first.name).to eq('Sorkkaihottuma')
@@ -83,12 +83,12 @@ describe "Hypothesis list page", js:true do
       end
 
       it "create a new hypothesis group" do
-        click_and_wait('+ Uusi diffiryhmä')
+        wait_and_trigger_click('+ Uusi diffiryhmä')
 
         fill_in('hypothesis_group_name', with: 'Sorkkaeläinten ihotaudit')
 
         expect {
-          click_and_wait("new_hypothesis_group")
+          wait_and_trigger_click("new_hypothesis_group")
         }.to change(HypothesisGroup, :count).by(1)
 
         expect(page).to have_button 'Sorkkaeläinten ihotaudit'
@@ -97,7 +97,7 @@ describe "Hypothesis list page", js:true do
 
       it "add hypotheses to an exercise" do
         expect {
-          click_and_wait('Sorkkatauti')
+          wait_and_trigger_click('Sorkkatauti')
         }.to change(ExerciseHypothesis, :count).by(1)
 
         expect(ExerciseHypothesis.last.hypothesis.name).to eq('Sorkkatauti')
@@ -140,22 +140,22 @@ describe "Hypothesis list page", js:true do
     describe "should not be able to" do
 
       it " create a new hypothesis without a name" do
-        click_and_wait('+ Uusi diffi')
+        wait_and_trigger_click('+ Uusi diffi')
 
         fill_in('new_hypothesis_name_1', with: '')
         expect {
-          click_and_wait("save_new_hypothesis_for_group_1")
+          wait_and_trigger_click("save_new_hypothesis_for_group_1")
         }.to change(Hypothesis, :count).by(0)
 
         expect(page).to have_content 'Hypoteesin luominen epäonnistui'
       end
 
       it "create a new hypothesis group without a name" do
-        click_and_wait('+ Uusi diffiryhmä')
+        wait_and_trigger_click('+ Uusi diffiryhmä')
 
         fill_in('hypothesis_group_name', with: '')
         expect {
-          click_and_wait("new_hypothesis_group")
+          wait_and_trigger_click("new_hypothesis_group")
         }.to change(HypothesisGroup, :count).by(0)
 
         expect(page).to have_content 'Diffiryhmän luominen epäonnistui'
