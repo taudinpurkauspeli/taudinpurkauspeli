@@ -109,8 +109,7 @@ end
 
 Then(/^the task can be completed by clicking the button "(.*?)"$/) do |arg1|
   expect{
-    click_button(arg1)
-    wait_for_ajax
+    wait_and_trigger_click(arg1)
   }.to change(CompletedTask, :count).by(1)
 end
 

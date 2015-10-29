@@ -47,11 +47,11 @@ end
 
 
 When(/^I click on a button "(.*?)"$/) do |arg1|
-  click_and_wait("new_hypothesis_for_group_1")
+  wait_and_trigger_click("new_hypothesis_for_group_1")
 end
 
 When(/^I click on button "(.*?)"$/) do |arg1|
-  click_and_wait("new_hypothesis_group")
+  wait_and_trigger_click("new_hypothesis_group")
 end
 
 When(/^I fill in the hypothesis name field with a correct value$/) do
@@ -63,7 +63,7 @@ When(/^I fill in the hypothesis name field with an incorrect value$/) do
 end
 
 When(/^I save the new hypothesis with button "(.*?)"$/) do |arg1|
-  click_and_wait("save_new_hypothesis_for_group_1")
+  wait_and_trigger_click("save_new_hypothesis_for_group_1")
 end
 
 When(/^I save changes with button "(.*?)"$/) do |arg1|
@@ -76,7 +76,7 @@ When(/^I click on the delete button "(.*?)"$/) do |arg1|
 end
 
 When(/^I click on the hypothesis button "(.*?)"$/) do |arg1|
-  click_and_wait(arg1)
+  wait_and_trigger_click(arg1)
 end
 
 When(/^I click on one of the hypotheses of the case$/) do
