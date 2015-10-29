@@ -27,7 +27,7 @@ When(/^I go to the front page$/) do
 end
 
 When(/^I click on the duplication button of case "(.*?)"$/) do |arg1|
-  click_and_wait('exercises/1/dup')
+  wait_and_trigger_click('exercises/1/dup')
 end
 
 Then(/^I should see the following buttons$/) do |table|

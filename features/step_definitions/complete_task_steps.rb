@@ -31,19 +31,19 @@ Given(/^some interview tasks have been added to case$/) do
 end
 
 When(/^I choose a text task "(.*?)"$/) do |arg1|
-  click_and_wait(arg1)
+  wait_and_trigger_click(arg1)
 end
 
 When(/^I choose a multichoice task "(.*?)"$/) do |arg1|
-  click_and_wait(arg1)
+  wait_and_trigger_click(arg1)
 end
 
 When(/^I choose a radiobutton task "(.*?)"$/) do |arg1|
-  click_and_wait(arg1)
+  wait_and_trigger_click(arg1)
 end
 
 When(/^I choose an interview task "(.*?)"$/) do |arg1|
-  click_and_wait(arg1)
+  wait_and_trigger_click(arg1)
 end
 
 When(/^I check the right options$/) do
@@ -87,20 +87,20 @@ When(/^I don't check all right options$/) do
 end
 
 When(/^I ask the required questions$/) do
-  click_and_wait('ask_question_1')
-  click_and_wait('ask_question_3')
+  wait_and_trigger_click('ask_question_1')
+  wait_and_trigger_click('ask_question_3')
 end
 
 When(/^I ask the required and some allowed questions$/) do
-  click_and_wait('ask_question_1')
-  click_and_wait('ask_question_3')
-  click_and_wait('ask_question_4')
+  wait_and_trigger_click('ask_question_1')
+  wait_and_trigger_click('ask_question_3')
+  wait_and_trigger_click('ask_question_4')
 end
 
 When(/^I ask the required and some wrong questions$/) do
-  click_and_wait('ask_question_1')
-  click_and_wait('ask_question_3')
-  click_and_wait('ask_question_2')
+  wait_and_trigger_click('ask_question_1')
+  wait_and_trigger_click('ask_question_3')
+  wait_and_trigger_click('ask_question_2')
 end
 
 When(/^I don't ask any questions$/) do
@@ -116,7 +116,7 @@ end
 
 Then(/^the task cannot be completed by clicking the button "(.*?)"$/) do |arg1|
   expect{
-    click_and_wait(arg1)
+    wait_and_trigger_click(arg1)
   }.to change(CompletedTask, :count).by(0)
 end
 
