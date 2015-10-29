@@ -48,7 +48,7 @@ describe "Duplicate exercise page" do
 
     it "should be able to duplicate an exercise" do
       expect {
-        wait_and_trigger_click("Kopioi")
+        first(:button, "Kopioi").click
       }.to change(Exercise, :count).by(1)
 
       expect(current_path).to eq(exercises_path)
@@ -63,7 +63,7 @@ describe "Duplicate exercise page" do
 
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
-      wait_and_trigger_click("Kopioi")
+      first(:button, "Kopioi").click
       @new_exercise = Exercise.find(2)
     end
 
