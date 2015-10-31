@@ -55,7 +55,7 @@ describe "User show page", js:true do
           expect(updated_student.student_number).to eq(student.student_number)
           expect(updated_student.starting_year).to eq(student.starting_year)
 
-          wait_and_trigger_click('Kirjaudu ulos')
+          click_and_wait('Kirjaudu ulos')
           sign_in(username:"Opiskelija", password:"Salaisuus")
           expect(page).to have_content 'Tervetuloa takaisin!'
         end
@@ -75,7 +75,7 @@ describe "User show page", js:true do
           expect(updated_student.student_number).to eq(student.student_number)
           expect(updated_student.starting_year).to eq(student.starting_year)
 
-          wait_and_trigger_click('Kirjaudu ulos')
+          click_and_wait('Kirjaudu ulos')
           sign_in(username:"Opiskelija", password:"Salainen1")
           expect(page).to have_content 'Tervetuloa takaisin!'
         end

@@ -13,7 +13,7 @@ module WaitForAjax
     wait_for_ajax
 
     begin
-      click(element_text)
+      click_link_or_button(element_text)
       wait_for_ajax
       return
     rescue
@@ -51,7 +51,7 @@ module WaitForAjax
     wait_for_ajax
 
     begin
-      click(element)
+      click_link_or_button(element)
       wait_for_ajax
       return
     rescue
