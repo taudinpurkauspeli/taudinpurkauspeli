@@ -65,7 +65,7 @@ module WaitForAjax
     rescue
      # puts "Link '" + element + "' not found in DOM"
     end
-    
+
     begin
       click_link_or_button(element)
       wait_for_ajax

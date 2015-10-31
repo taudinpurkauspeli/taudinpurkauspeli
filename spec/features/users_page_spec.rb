@@ -37,7 +37,7 @@ describe "Users page", js:true do
 
     describe "should be able to" do
       it "visit users page and see all exercises" do
-        wait_and_trigger_click('Opiskelijoiden seuranta')
+        click_and_wait('Opiskelijoiden seuranta')
         expect(current_path).to eq(users_path)
         expect(page).to have_content 'Opiskelijoiden tiedot'
         expect(page).to have_content 'Lihanautakuolemat'
