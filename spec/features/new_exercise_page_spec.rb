@@ -17,7 +17,7 @@ describe "New Exercise page", js:true do
 			fill_in_ckeditor 'exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??'
 
 			expect{
-				wait_and_trigger_click('Tallenna')
+				click_and_wait('Tallenna')
 			}.to change(Exercise, :count).by(1)
 
 			expect(page).to have_content 'Broilerimysteeri'

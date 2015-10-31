@@ -10,6 +10,16 @@ module WaitForAjax
   end
 
   def click_and_wait(element_text)
+    wait_for_ajax
+
+    begin
+      click(element_text)
+      wait_for_ajax
+      return
+    rescue
+      # puts "Clickable thing '" + element_text + "' not found"
+    end
+
     begin
       click_button(element_text)
       wait_for_ajax
@@ -38,6 +48,16 @@ module WaitForAjax
   end
 
   def wait_and_trigger_click(element)
+    wait_for_ajax
+
+    begin
+      click(element)
+      wait_for_ajax
+      return
+    rescue
+      # puts "Clickable thing '" + element_text + "' not found"
+    end
+
     begin
       find_button(element).trigger('click')
       wait_for_ajax
