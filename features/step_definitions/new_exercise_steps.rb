@@ -21,7 +21,7 @@ Given(/^I do not fill in all the fields with correct input values$/) do
 end
 
 When(/^I press the button "(.*?)"$/) do |arg1|
-  wait_and_trigger_click(arg1)
+  click_and_wait(arg1)
 end
 
 Then(/^page should have a message: "(.*?)"$/) do |arg1|

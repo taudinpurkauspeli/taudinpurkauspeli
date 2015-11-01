@@ -43,18 +43,18 @@ When(/^I fill in question title and content$/) do
 end
 
 When(/^I go to the multichoice edit page$/) do
-  wait_and_trigger_click('Soita lääkärille')
-  wait_and_trigger_click('Monivalinta: Tykkääkö koira nappuloista?')
+  click_and_wait('Soita lääkärille')
+  click_and_wait('Monivalinta: Tykkääkö koira nappuloista?')
   end
 
 When(/^I go to the radiobutton edit page$/) do
-  wait_and_trigger_click('Soita lääkärille')
-  wait_and_trigger_click('Radio button: Kenelle pitää soittaa?')
+  click_and_wait('Soita lääkärille')
+  click_and_wait('Radio button: Kenelle pitää soittaa?')
 end
 
 When(/^I go to the interview edit page$/) do
-  wait_and_trigger_click('Soita lääkärille')
-  wait_and_trigger_click('Haastattelu')
+  click_and_wait('Soita lääkärille')
+  click_and_wait('Haastattelu')
 end
 
 When(/^I fill in multichoice question$/) do

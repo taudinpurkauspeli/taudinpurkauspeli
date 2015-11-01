@@ -20,8 +20,8 @@ end
 
 Given(/^I go to the hypothesis list of that exercise$/) do
 	visit exercises_path
-	wait_and_trigger_click('Lihanautakuolemat')
-	wait_and_trigger_click('Diffit')
+	click_and_wait('Lihanautakuolemat')
+	click_and_wait('Diffit')
 end
 
 Given(/^those hypotheses are all checked$/) do
