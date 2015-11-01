@@ -16,14 +16,14 @@ describe "Task text page for student", js:true do
     before :each do
       sign_in(username:"Opiskelija", password:"Salainen1")
 
-      click_and_wait('Lihanautakuolemat')
-      click_and_wait('Toimenpiteet')
-      click_and_wait(task_text_task.name)
+      wait_and_trigger_click('Lihanautakuolemat')
+      wait_and_trigger_click('Toimenpiteet')
+      wait_and_trigger_click(task_text_task.name)
     end
 
     it "should be able to complete text task" do
       expect {
-        click_and_wait('Jatka')
+        wait_and_trigger_click('Jatka')
       }.to change(CompletedTask, :count).by(1)
 
       expect(page).to have_content 'Tehtävä suoritettu!'
@@ -33,9 +33,9 @@ describe "Task text page for student", js:true do
     describe "after completing text task" do
 
       before :each do
-        click_and_wait('Jatka')
-        click_and_wait('Toimenpiteet')
-        click_and_wait(task_text_task.name)
+        wait_and_trigger_click('Jatka')
+        wait_and_trigger_click('Toimenpiteet')
+        wait_and_trigger_click(task_text_task.name)
       end
 
       it "should be able to view the text" do

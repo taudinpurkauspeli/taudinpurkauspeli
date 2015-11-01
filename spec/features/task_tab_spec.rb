@@ -19,14 +19,14 @@ describe "Task tab spec", js:true do
 
       visit root_path
 
-      click_and_wait('Lihanautakuolemat')
-      click_and_wait('Toimenpiteet')
+      wait_and_trigger_click('Lihanautakuolemat')
+      wait_and_trigger_click('Toimenpiteet')
     end
 
     describe "clicks on an available task" do
 
       before :each do
-        click_and_wait('Soita asiakkaalle')
+        wait_and_trigger_click('Soita asiakkaalle')
       end
 
       it "that task should open as a new tab" do
@@ -44,14 +44,14 @@ describe "Task tab spec", js:true do
 
       visit root_path
 
-      click_and_wait('Lihanautakuolemat')
-      click_and_wait('Toimenpiteet')
+      wait_and_trigger_click('Lihanautakuolemat')
+      wait_and_trigger_click('Toimenpiteet')
     end
 
     describe "clicks on a task" do
 
       before :each do
-        click_and_wait('Soita asiakkaalle')
+        wait_and_trigger_click('Soita asiakkaalle')
       end
 
       it "that task should open as a new tab" do

@@ -35,21 +35,21 @@ describe "Task show page", js:true do
 
       visit root_path
 
-      click_and_wait('Lihanautakuolemat')
-      click_and_wait('Toimenpiteet')
+      wait_and_trigger_click('Lihanautakuolemat')
+      wait_and_trigger_click('Toimenpiteet')
     end
 
     describe "should be able to view the" do
 
       it "content of the text task" do
-        click_and_wait('Soita asiakkaalle')
+        wait_and_trigger_click('Soita asiakkaalle')
         expect(page).to have_content 'Lääkäri kertoo mikä on totuus'
       end
 
       describe "question and answer options for a" do
 
         it "multichoice task" do
-          click_and_wait(multichoice_task.name)
+          wait_and_trigger_click(multichoice_task.name)
 
           expect(page).to have_content multichoice.question
           expect(page).to have_content option.content
@@ -58,7 +58,7 @@ describe "Task show page", js:true do
         end
 
         it "radiobutton task" do
-          click_and_wait(radiobutton_task.name)
+          wait_and_trigger_click(radiobutton_task.name)
 
           expect(page).to have_content radiobutton.question
           expect(page).to have_content option4.content
@@ -79,15 +79,15 @@ describe "Task show page", js:true do
 
       visit root_path
 
-      click_and_wait('Lihanautakuolemat')
-      click_and_wait('Toimenpiteet')
+      wait_and_trigger_click('Lihanautakuolemat')
+      wait_and_trigger_click('Toimenpiteet')
     end
 
     describe "should be able to preview the" do
 
       it "content of a text task" do
-        click_and_wait(task.name)
-        click_and_wait('Esikatsele')
+        wait_and_trigger_click(task.name)
+        wait_and_trigger_click('Esikatsele')
         expect(page).to have_content task_text.content
         expect(page).to have_content 'Toimenpide: ' + task.name
         expect(page).not_to have_button 'Jatka'
@@ -95,8 +95,8 @@ describe "Task show page", js:true do
 
       describe "question, answer options and explanations for a" do
         it "multichoice task" do
-          click_and_wait(multichoice_task.name)
-          click_and_wait('Esikatsele')
+          wait_and_trigger_click(multichoice_task.name)
+          wait_and_trigger_click('Esikatsele')
 
           expect(page).to have_content multichoice.question
           expect(page).to have_content option.content
@@ -111,8 +111,8 @@ describe "Task show page", js:true do
         end
 
         it "radiobutton task" do
-          click_and_wait(radiobutton_task.name)
-          click_and_wait('Esikatsele')
+          wait_and_trigger_click(radiobutton_task.name)
+          wait_and_trigger_click('Esikatsele')
 
           expect(page).to have_content radiobutton.question
           expect(page).to have_content option4.content

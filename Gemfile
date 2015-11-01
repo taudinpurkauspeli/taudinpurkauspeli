@@ -52,7 +52,6 @@ gem 'amoeba'
 # Bower for Angular dependency management
 gem 'bower-rails'
 
-
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -73,6 +72,8 @@ group :test do
   gem 'poltergeist'
   gem 'phantomjs'
 
+  # Gem for retrying failing specs
+  gem 'rspec-retry'
 end
 
 group :development do

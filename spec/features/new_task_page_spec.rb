@@ -11,16 +11,16 @@ describe "New Task page", js:true do
       visit root_path
       wait_for_ajax
       expect(page).to have_button('Lihanautakuolemat')
-      click_and_wait(exercise.name)
+      wait_and_trigger_click(exercise.name)
       expect(page).to have_content('Lihanautakuolemat')
       wait_and_trigger_click('Toimenpiteet')
-      click_and_wait('+ Luo uusi toimenpide')
+      wait_and_trigger_click('+ Luo uusi toimenpide')
     end
 
     it "should be able to create a new task without a subtask" do
       fill_in('task_name', with: "Soita asiakkaalle")
       expect {
-        click_and_wait('Tallenna')
+        wait_and_trigger_click('Tallenna')
       }.to change(Task, :count).by(1)
 
       expect(page).to have_content 'Toimenpide luotiin onnistuneesti.'
@@ -30,7 +30,7 @@ describe "New Task page", js:true do
     it "should not be able to create a new task without a name" do
       fill_in('task_name', with: "")
       expect{
-        click_and_wait('Tallenna')
+        wait_and_trigger_click('Tallenna')
       }.to change(Task, :count).by(0)
 
       expect(number_of_ex_tasks).to eq(0)
@@ -41,12 +41,12 @@ describe "New Task page", js:true do
 
       before :each do
         fill_in('task_name', with: "Soita asiakkaalle")
-        click_and_wait('Tallenna')
+        wait_and_trigger_click('Tallenna')
       end
 
       it "should not be able to edit task without a name" do
         fill_in('task_name', with: "")
-        click_and_wait('Päivitä')
+        wait_and_trigger_click('Päivitä')
         expect(page).to have_content 'Toimenpiteen päivitys epäonnistui.'
 
         expect(Task.where(level:1...999).first.name).to eq("Soita asiakkaalle")
@@ -55,12 +55,12 @@ describe "New Task page", js:true do
       describe "should be able to add a" do
 
         it "task text subtask" do
-          click_and_wait('+ Teksti')
+          wait_and_trigger_click('+ Teksti')
 
           fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira on kipeä.'
 
           expect{
-            click_and_wait('Tallenna')
+            wait_and_trigger_click('Tallenna')
           }.to change(TaskText, :count).by(1)
 
           expect(page).to have_content 'Kysymys lisättiin onnistuneesti!'
@@ -72,11 +72,11 @@ describe "New Task page", js:true do
 
         it "multichoice subtask" do
 
-          click_and_wait('+ Monivalinta tai radio button')
+          wait_and_trigger_click('+ Monivalinta tai radio button')
           fill_in('multichoice_question', with: "Mitä kysyt asiakkaalta:")
 
           expect{
-            click_and_wait('Tallenna')
+            wait_and_trigger_click('Tallenna')
           }.to change(Multichoice, :count).by(1)
 
           expect(page).to have_content 'Kysymys lisättiin onnistuneesti!'
@@ -87,11 +87,11 @@ describe "New Task page", js:true do
 
         it "interview subtask" do
 
-          click_and_wait('+ Pohdinta')
+          wait_and_trigger_click('+ Pohdinta')
           fill_in('interview_title', with: "Asiakkaan haastattelu")
 
           expect{
-            click_and_wait('Tallenna')
+            wait_and_trigger_click('Tallenna')
           }.to change(Interview, :count).by(1)
 
           expect(page).to have_content 'Pohdinta lisättiin onnistuneesti!'
@@ -104,12 +104,12 @@ describe "New Task page", js:true do
       describe "should not be able to add a" do
         it "task text subtask without content" do
 
-          click_and_wait('+ Teksti')
+          wait_and_trigger_click('+ Teksti')
 
           fill_in_ckeditor 'task_text_content', with: ""
 
           expect{
-            click_and_wait('Tallenna')
+            wait_and_trigger_click('Tallenna')
           }.to change(TaskText, :count).by(0)
 
           expect(page).to have_content 'Kysymyksen lisääminen epäonnistui!'
@@ -118,11 +118,11 @@ describe "New Task page", js:true do
 
         it "multichoice subtask without question" do
 
-          click_and_wait('+ Monivalinta tai radio button')
+          wait_and_trigger_click('+ Monivalinta tai radio button')
           fill_in('multichoice_question', with: "")
 
           expect{
-            click_and_wait('Tallenna')
+            wait_and_trigger_click('Tallenna')
           }.to change(Multichoice, :count).by(0)
 
           expect(page).to have_content 'Kysymyksen lisääminen epäonnistui!'
@@ -131,11 +131,11 @@ describe "New Task page", js:true do
 
         it "interview subtask without title" do
 
-          click_and_wait('+ Pohdinta')
+          wait_and_trigger_click('+ Pohdinta')
           fill_in('interview_title', with: "")
 
           expect{
-            click_and_wait('Tallenna')
+            wait_and_trigger_click('Tallenna')
           }.to change(Interview, :count).by(0)
 
           expect(page).to have_content 'Pohdinnan lisääminen epäonnistui!'
@@ -145,18 +145,18 @@ describe "New Task page", js:true do
 
       describe "with task text subtask" do
         before :each do
-          click_and_wait('+ Teksti')
+          wait_and_trigger_click('+ Teksti')
 
           fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira on kipeä.'
 
-          click_and_wait('Tallenna')
+          wait_and_trigger_click('Tallenna')
         end
 
         it "should be able to update the content of a task text" do
 
           fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira ei ole kipeä!'
 
-          click_and_wait('Tallenna')
+          wait_and_trigger_click('Tallenna')
 
           expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
           expect(Task.where(level:1...999).first.task_texts.first.content).to eq("<p>Asiakas kertoo, ett&auml; koira ei ole kipe&auml;!</p>\r\n")
@@ -165,7 +165,7 @@ describe "New Task page", js:true do
         it "should not be able to update task text to have no content" do
           fill_in_ckeditor 'task_text_content', with: ""
 
-          click_and_wait('Tallenna')
+          wait_and_trigger_click('Tallenna')
 
           expect(page).to have_content 'Kysymyksen päivitys epäonnistui!'
         end
@@ -173,9 +173,9 @@ describe "New Task page", js:true do
 
       describe "with multichoice subtask" do
         before :each do
-          click_and_wait('+ Monivalinta tai radio button')
+          wait_and_trigger_click('+ Monivalinta tai radio button')
           fill_in('multichoice_question', with: "Mitä kysyt asiakkaalta:")
-          click_and_wait('Tallenna')
+          wait_and_trigger_click('Tallenna')
           expect(page).to have_content 'Monivalintakysymyksen muokkaus'
         end
 
@@ -183,7 +183,7 @@ describe "New Task page", js:true do
 
           fill_in('multichoice_question', with: "Useita kysymyksiä asiakkaalle:")
 
-          click_and_wait('Päivitä')
+          wait_and_trigger_click('Päivitä')
 
           expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
           expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Useita kysymyksiä asiakkaalle:")
@@ -192,7 +192,7 @@ describe "New Task page", js:true do
         it "should not be able to update multichoice to have no question" do
           fill_in('multichoice_question', with: "")
 
-          click_and_wait('Päivitä')
+          wait_and_trigger_click('Päivitä')
 
           expect(page).to have_content 'Kysymyksen päivitys epäonnistui!'
           expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Mitä kysyt asiakkaalta:")
@@ -204,7 +204,7 @@ describe "New Task page", js:true do
           select('Pakollinen vaihtoehto', from:'option[is_correct_answer]')
 
           expect{
-            click_and_wait('Tallenna')
+            wait_and_trigger_click('Tallenna')
           }.to change(Option, :count).by(1)
 
           expect(page).to have_content 'Vaihtoehto lisättiin onnistuneesti'
@@ -218,10 +218,10 @@ describe "New Task page", js:true do
 
       describe "with radiobutton subtask" do
         before :each do
-          click_and_wait('+ Monivalinta tai radio button')
+          wait_and_trigger_click('+ Monivalinta tai radio button')
           fill_in('multichoice_question', with: "Onko tauti epidemia?")
           check 'multichoice_is_radio_button'
-          click_and_wait('Tallenna')
+          wait_and_trigger_click('Tallenna')
           expect(page).to have_content 'Monivalintakysymyksen muokkaus'
         end
 
@@ -229,7 +229,7 @@ describe "New Task page", js:true do
 
           fill_in('multichoice_question', with: "Mahtaako olla epidemiaa liikkeellä?")
 
-          click_and_wait('Päivitä')
+          wait_and_trigger_click('Päivitä')
 
           expect(page).to have_content 'Kysymys päivitettiin onnistuneesti!'
           expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Mahtaako olla epidemiaa liikkeellä?")
@@ -238,7 +238,7 @@ describe "New Task page", js:true do
         it "should not be able to update radiobutton to have no question" do
           fill_in('multichoice_question', with: "")
 
-          click_and_wait('Päivitä')
+          wait_and_trigger_click('Päivitä')
 
           expect(page).to have_content 'Kysymyksen päivitys epäonnistui!'
           expect(Task.where(level:1...999).first.multichoices.first.question).to eq("Onko tauti epidemia?")
@@ -291,9 +291,9 @@ describe "New Task page", js:true do
 
       describe "with interview subtask" do
         before :each do
-          click_and_wait('+ Pohdinta')
+          wait_and_trigger_click('+ Pohdinta')
           fill_in('interview_title', with: "Kysymyksiä asiakkaalle")
-          click_and_wait('Tallenna')
+          wait_and_trigger_click('Tallenna')
           expect(page).to have_content 'Pohdintatehtävän muokkaus'
         end
 
@@ -303,7 +303,7 @@ describe "New Task page", js:true do
 
             fill_in('interview_title', with: "Paljon kysymyksiä asiakkaalle")
 
-            click_and_wait('Päivitä')
+            wait_and_trigger_click('Päivitä')
 
             expect(page).to have_content 'Pohdinta päivitettiin onnistuneesti!'
             expect(Task.where(level:1...999).first.interviews.first.title).to eq("Paljon kysymyksiä asiakkaalle")
@@ -315,7 +315,7 @@ describe "New Task page", js:true do
             select('Pakollinen kysymys', from:'question[required]')
 
             expect{
-              click_and_wait('Tallenna')
+              wait_and_trigger_click('Tallenna')
             }.to change(Question, :count).by(1)
 
             expect(page).to have_content 'Kysymys lisättiin onnistuneesti'
@@ -333,7 +333,7 @@ describe "New Task page", js:true do
             fill_in('question_question_group_attributes_title', with: "Eläinkysymys")
 
             expect{
-              click_and_wait('Tallenna')
+              wait_and_trigger_click('Tallenna')
             }.to change(Question, :count).by(1)
 
             expect(QuestionGroup.count).to eq(1)
@@ -346,7 +346,7 @@ describe "New Task page", js:true do
         it "should not be able to update interview to have no title" do
           fill_in('interview_title', with: "")
 
-          click_and_wait('Päivitä')
+          wait_and_trigger_click('Päivitä')
 
           expect(page).to have_content 'Pohdinnan päivitys epäonnistui!'
           expect(Task.where(level:1...999).first.interviews.first.title).to eq("Kysymyksiä asiakkaalle")

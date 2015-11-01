@@ -20,9 +20,9 @@ describe "Multichoice page for student", js:true do
     before :each do
       sign_in(username:"Opiskelija", password:"Salainen1")
 
-      click_and_wait('Lihanautakuolemat')
-      click_and_wait('Toimenpiteet')
-      click_and_wait(multichoice_task.name)
+      wait_and_trigger_click('Lihanautakuolemat')
+      wait_and_trigger_click('Toimenpiteet')
+      wait_and_trigger_click(multichoice_task.name)
     end
 
     describe "should be able to complete multichoice task" do
@@ -30,7 +30,7 @@ describe "Multichoice page for student", js:true do
         check 'checked_options_1'
         check 'checked_options_3'
         expect {
-          click_and_wait('Tarkista')
+          wait_and_trigger_click('Tarkista')
         }.to change(CompletedTask, :count).by(1)
 
         expect(page).to have_content 'Valitsit oikein!'
@@ -45,7 +45,7 @@ describe "Multichoice page for student", js:true do
         check 'checked_options_3'
         check 'checked_options_4'
         expect {
-          click_and_wait('Tarkista')
+          wait_and_trigger_click('Tarkista')
         }.to change(CompletedTask, :count).by(1)
 
         expect(page).to have_content 'Valitsit oikein!'
@@ -60,7 +60,7 @@ describe "Multichoice page for student", js:true do
     describe "should not be able to complete multichoice task" do
       it "without any options selected" do
         expect {
-          click_and_wait('Tarkista')
+          wait_and_trigger_click('Tarkista')
         }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content 'Valinnoissa oli vielä virheitä!'
@@ -73,7 +73,7 @@ describe "Multichoice page for student", js:true do
         check 'checked_options_3'
 
         expect {
-          click_and_wait('Tarkista')
+          wait_and_trigger_click('Tarkista')
         }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content 'Valinnoissa oli vielä virheitä!'
@@ -88,7 +88,7 @@ describe "Multichoice page for student", js:true do
         check 'checked_options_4'
 
         expect {
-          click_and_wait('Tarkista')
+          wait_and_trigger_click('Tarkista')
         }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content 'Valinnoissa oli vielä virheitä!'
@@ -104,9 +104,9 @@ describe "Multichoice page for student", js:true do
       before :each do
         check 'checked_options_1'
         check 'checked_options_3'
-        click_and_wait('Tarkista')
-        click_and_wait('Toimenpiteet')
-        click_and_wait(multichoice_task.name)
+        wait_and_trigger_click('Tarkista')
+        wait_and_trigger_click('Toimenpiteet')
+        wait_and_trigger_click(multichoice_task.name)
       end
 
       it "should be able to view options and explanations of the multichoice" do

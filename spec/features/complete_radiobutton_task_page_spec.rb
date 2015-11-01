@@ -19,9 +19,9 @@ describe "Radiobutton page for student", js:true do
     before :each do
       sign_in(username:"Opiskelija", password:"Salainen1")
 
-      click_and_wait('Lihanautakuolemat')
-      click_and_wait('Toimenpiteet')
-      click_and_wait(radiobutton_task.name)
+      wait_and_trigger_click('Lihanautakuolemat')
+      wait_and_trigger_click('Toimenpiteet')
+      wait_and_trigger_click(radiobutton_task.name)
 
     end
 
@@ -31,7 +31,7 @@ describe "Radiobutton page for student", js:true do
         choose 'checked_options_3'
 
         expect {
-          click_and_wait('Tarkista')
+          wait_and_trigger_click('Tarkista')
         }.to change(CompletedTask, :count).by(1)
 
         expect(page).to have_content 'Valitsit oikein!'
@@ -46,7 +46,7 @@ describe "Radiobutton page for student", js:true do
       it "without any option selected" do
 
         expect {
-          click_and_wait('Tarkista')
+          wait_and_trigger_click('Tarkista')
         }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content 'Valinnoissa oli vielä virheitä!'
@@ -57,7 +57,7 @@ describe "Radiobutton page for student", js:true do
         choose 'checked_options_2'
 
         expect {
-          click_and_wait('Tarkista')
+          wait_and_trigger_click('Tarkista')
         }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content 'Valinnoissa oli vielä virheitä!'
@@ -71,7 +71,7 @@ describe "Radiobutton page for student", js:true do
         choose 'checked_options_1'
 
         expect {
-          click_and_wait('Tarkista')
+          wait_and_trigger_click('Tarkista')
         }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content 'Valinnoissa oli vielä virheitä!'
@@ -86,9 +86,9 @@ describe "Radiobutton page for student", js:true do
 
       before :each do
         choose 'checked_options_3'
-        click_and_wait('Tarkista')
-        click_and_wait('Toimenpiteet')
-        click_and_wait(radiobutton_task.name)
+        wait_and_trigger_click('Tarkista')
+        wait_and_trigger_click('Toimenpiteet')
+        wait_and_trigger_click(radiobutton_task.name)
       end
 
       it "should be able to view options and explanations of radiobutton" do

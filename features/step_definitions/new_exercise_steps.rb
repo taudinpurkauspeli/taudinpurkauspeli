@@ -21,8 +21,7 @@ Given(/^I do not fill in all the fields with correct input values$/) do
 end
 
 When(/^I press the button "(.*?)"$/) do |arg1|
-  click_button(arg1)
-  wait_for_ajax
+  click_and_wait(arg1)
 end
 
 Then(/^page should have a message: "(.*?)"$/) do |arg1|

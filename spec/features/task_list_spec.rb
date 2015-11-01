@@ -44,8 +44,8 @@ describe "Task list page", js:true do
     describe "has chosen an exercise" do
 
       before :each do
-        click_and_wait('Lihanautakuolemat')
-        click_and_wait('Toimenpiteet')
+        wait_and_trigger_click('Lihanautakuolemat')
+        wait_and_trigger_click('Toimenpiteet')
       end
 
       describe "then he should be able to" do
@@ -59,10 +59,10 @@ describe "Task list page", js:true do
         end
 
         it "complete the first correct task of an exercise" do
-          click_and_wait(task.name)
+          wait_and_trigger_click(task.name)
 
           expect {
-            click_and_wait('Jatka')
+            wait_and_trigger_click('Jatka')
           }.to change(CompletedTask, :count).by (1)
 
           expect(CompletedTask.first.task.name).to eq(task.name)
@@ -71,14 +71,14 @@ describe "Task list page", js:true do
         it "do the tasks of same level in any order (case a)" do
           FactoryGirl.create(:completed_task, task:task, user:user)
 
-          click_and_wait(task2_1.name)
+          wait_and_trigger_click(task2_1.name)
 
-          click_and_wait('Jatka')
-          click_and_wait('Toimenpiteet')
-          click_and_wait(task2_2.name)
+          wait_and_trigger_click('Jatka')
+          wait_and_trigger_click('Toimenpiteet')
+          wait_and_trigger_click(task2_2.name)
 
           expect {
-            click_and_wait('Jatka')
+            wait_and_trigger_click('Jatka')
           }.to change(CompletedTask, :count).by (1)
 
           expect(CompletedTask.count).to eq(3)
@@ -87,14 +87,14 @@ describe "Task list page", js:true do
         it "do the tasks of same level in any order (case b)" do
           FactoryGirl.create(:completed_task, task:task, user:user)
 
-          click_and_wait(task2_2.name)
+          wait_and_trigger_click(task2_2.name)
 
-          click_and_wait('Jatka')
-          click_and_wait('Toimenpiteet')
-          click_and_wait(task2_1.name)
+          wait_and_trigger_click('Jatka')
+          wait_and_trigger_click('Toimenpiteet')
+          wait_and_trigger_click(task2_1.name)
 
           expect {
-            click_and_wait('Jatka')
+            wait_and_trigger_click('Jatka')
           }.to change(CompletedTask, :count).by (1)
 
           expect(CompletedTask.count).to eq(3)
@@ -104,7 +104,7 @@ describe "Task list page", js:true do
 
       describe "but has not completed required prerequisite tasks" do
         it "he should not be able to complete task" do
-          click_and_wait('Hoida')
+          wait_and_trigger_click('Hoida')
           expect(page).to have_content('Et voi vielä suorittaa tätä toimenpidettä, vaan sinun tulee suorittaa ainakin yksi muu toimenpide ennen tätä.')
         end
       end
@@ -120,8 +120,8 @@ describe "Task list page", js:true do
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
       visit root_path
-      click_and_wait('Lihanautakuolemat')
-      click_and_wait('Toimenpiteet')
+      wait_and_trigger_click('Lihanautakuolemat')
+      wait_and_trigger_click('Toimenpiteet')
     end
 
     it "should be able to view the tasks of an exercise" do
@@ -141,7 +141,7 @@ describe "Task list page", js:true do
           expect(task2_1.level).to eq(2)
           expect(task2_2.level).to eq(2)
 
-          click_and_wait("tasks/7/up")
+          wait_and_trigger_click("tasks/7/up")
           expect(Task.last.level).to eq(2)
 
           expect(Task.where(level:1...9999).first.level).to eq(1)
@@ -150,8 +150,8 @@ describe "Task list page", js:true do
         end
 
         it "siblings and children" do
-          click_and_wait("tasks/7/up")
-          click_and_wait("tasks/7/up")
+          wait_and_trigger_click("tasks/7/up")
+          wait_and_trigger_click("tasks/7/up")
           expect(Task.last.level).to eq(2)
 
           expect(Task.where(level:1...9999).first.level).to eq(1)
@@ -160,9 +160,9 @@ describe "Task list page", js:true do
         end
 
         it "children but no siblings" do
-          click_and_wait("tasks/7/up")
-          click_and_wait("tasks/7/up")
-          click_and_wait("tasks/7/up")
+          wait_and_trigger_click("tasks/7/up")
+          wait_and_trigger_click("tasks/7/up")
+          wait_and_trigger_click("tasks/7/up")
           expect(Task.last.level).to eq(1)
 
           expect(Task.where(level:1...9999).first.level).to eq(1)
@@ -173,10 +173,10 @@ describe "Task list page", js:true do
 
       describe "down if it has" do
         it "children and siblings" do
-          click_and_wait("tasks/7/up")
-          click_and_wait("tasks/7/up")
-          click_and_wait("tasks/7/up")
-          click_and_wait("tasks/7/down")
+          wait_and_trigger_click("tasks/7/up")
+          wait_and_trigger_click("tasks/7/up")
+          wait_and_trigger_click("tasks/7/up")
+          wait_and_trigger_click("tasks/7/down")
 
           expect(Task.last.level).to eq(2)
 
@@ -187,9 +187,9 @@ describe "Task list page", js:true do
 
         it "children and no siblings" do
 
-          click_and_wait("tasks/7/up")
-          click_and_wait("tasks/7/up")
-          click_and_wait("tasks/7/down")
+          wait_and_trigger_click("tasks/7/up")
+          wait_and_trigger_click("tasks/7/up")
+          wait_and_trigger_click("tasks/7/down")
           expect(Task.last.level).to eq(2)
 
           expect(Task.where(level:1...9999).first.level).to eq(1)
@@ -200,8 +200,8 @@ describe "Task list page", js:true do
 
         it "siblings and no children" do
 
-          click_and_wait("tasks/7/up")
-          click_and_wait("tasks/7/down")
+          wait_and_trigger_click("tasks/7/up")
+          wait_and_trigger_click("tasks/7/down")
           expect(Task.last.level).to eq(3)
 
           expect(Task.where(level:1...9999).first.level).to eq(1)

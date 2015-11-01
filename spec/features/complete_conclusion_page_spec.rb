@@ -30,9 +30,9 @@ describe "Conclusion page for student", js:true do
     before :each do
       sign_in(username:"Opiskelija", password:"Salainen1")
 
-      click_and_wait('Lihanautakuolemat')
-      click_and_wait('Toimenpiteet')
-      click_and_wait(conclusion_task.name)
+      wait_and_trigger_click('Lihanautakuolemat')
+      wait_and_trigger_click('Toimenpiteet')
+      wait_and_trigger_click(conclusion_task.name)
     end
 
     describe "should be able to see" do
@@ -52,14 +52,14 @@ describe "Conclusion page for student", js:true do
       describe "all hypotheses after" do
 
         it "checking one wrong hypothesis" do
-          click_and_wait("Kurkkukipu")
+          wait_and_trigger_click("Kurkkukipu")
           expect(page).to have_button "Bakteeritauti"
           expect(page).to have_button "Kurkkukipu"
           expect(page).to have_button "Virustauti"
         end
 
         it "checking the right hypothesis" do
-          click_and_wait("Bakteeritauti")
+          wait_and_trigger_click("Bakteeritauti")
           expect(page).to have_button "Bakteeritauti"
           expect(page).to have_button "Kurkkukipu"
           expect(page).to have_button "Virustauti"
@@ -73,7 +73,7 @@ describe "Conclusion page for student", js:true do
       it "directly the right answer" do
 
         expect {
-          click_and_wait("Bakteeritauti")
+          wait_and_trigger_click("Bakteeritauti")
         }.to change(CompletedTask, :count).by(1)
 
         expect(page).to have_content "Hyvä, selvitit oikean diagnoosin!"
@@ -90,13 +90,13 @@ describe "Conclusion page for student", js:true do
 
       it "one wrong answer" do
         expect {
-          click_and_wait("Kurkkukipu")
+          wait_and_trigger_click("Kurkkukipu")
         }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content "Väärä diffi poissuljettu!"
 
         expect {
-          click_and_wait("Bakteeritauti")
+          wait_and_trigger_click("Bakteeritauti")
         }.to change(CompletedTask, :count).by(1)
 
         expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Bakteeritauti. Mitä sinun tulee vielä tehdä?"
@@ -104,11 +104,11 @@ describe "Conclusion page for student", js:true do
       end
 
       it "all wrong answers" do
-        click_and_wait("Kurkkukipu")
-        click_and_wait("Virustauti")
+        wait_and_trigger_click("Kurkkukipu")
+        wait_and_trigger_click("Virustauti")
 
         expect {
-          click_and_wait("Bakteeritauti")
+          wait_and_trigger_click("Bakteeritauti")
         }.to change(CompletedTask, :count).by(1)
 
         expect(page).to have_content "Onnittelut! Sait selville, että kyseessä oli Bakteeritauti. Mitä sinun tulee vielä tehdä?"
@@ -119,19 +119,19 @@ describe "Conclusion page for student", js:true do
 
     describe "should see the explanations for" do
       it "wrong exercise hypotheses" do
-        click_and_wait("Kurkkukipu")
+        wait_and_trigger_click("Kurkkukipu")
 
         expect(page).to have_content "Kurkkukipu ei aiheuta tällaisia oireita!"
         expect(page).to have_content "Kurkkukipu"
 
-        click_and_wait("Virustauti")
+        wait_and_trigger_click("Virustauti")
 
         expect(page).to have_content "Virustauti"
       end
 
       it "the right exercise hypothesis" do
 
-        click_and_wait("Bakteeritauti")
+        wait_and_trigger_click("Bakteeritauti")
 
         expect(page).to have_content "Bakteeritauti on tosiaan kyseessä!"
       end
@@ -141,32 +141,32 @@ describe "Conclusion page for student", js:true do
       describe "the right exercise hypothesis " do
         it "all remaining wrong exercise hypotheses should be checked" do
           expect {
-            click_and_wait("Bakteeritauti")
+            wait_and_trigger_click("Bakteeritauti")
           }.to change(CheckedHypothesis, :count).by(3)
         end
 
         it "after wrong exercise hypotheses all should be checked one by one" do
           expect {
-            click_and_wait("Kurkkukipu")
+            wait_and_trigger_click("Kurkkukipu")
           }.to change(CheckedHypothesis, :count).by(1)
 
           expect {
-            click_and_wait("Virustauti")
+            wait_and_trigger_click("Virustauti")
           }.to change(CheckedHypothesis, :count).by(1)
 
           expect {
-            click_and_wait("Bakteeritauti")
+            wait_and_trigger_click("Bakteeritauti")
           }.to change(CheckedHypothesis, :count).by(1)
         end
       end
 
       it "wrong exercise hypotheses they should be checked" do
         expect {
-          click_and_wait("Kurkkukipu")
+          wait_and_trigger_click("Kurkkukipu")
         }.to change(CheckedHypothesis, :count).by(1)
 
         expect {
-          click_and_wait("Virustauti")
+          wait_and_trigger_click("Virustauti")
         }.to change(CheckedHypothesis, :count).by(1)
       end
     end
@@ -174,9 +174,9 @@ describe "Conclusion page for student", js:true do
     describe "after completing conclusion task" do
 
       before :each do
-        click_and_wait("Bakteeritauti")
-        click_and_wait('Toimenpiteet')
-        click_and_wait(conclusion_task.name)
+        wait_and_trigger_click("Bakteeritauti")
+        wait_and_trigger_click('Toimenpiteet')
+        wait_and_trigger_click(conclusion_task.name)
       end
 
       it "should be able to view the contents of the conclusion" do

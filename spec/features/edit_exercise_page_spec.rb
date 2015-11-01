@@ -11,8 +11,8 @@ describe "Edit Exercise page", js:true do
 		before :each do
 			sign_in(username:"Testipoika", password:"Salainen1")
 
-			click_and_wait(exercise.name)
-			click_and_wait('Muokkaa')
+			wait_and_trigger_click(exercise.name)
+			wait_and_trigger_click('Muokkaa')
 		end
 
 		it "should be able to edit exercise" do
@@ -20,7 +20,7 @@ describe "Edit Exercise page", js:true do
 			fill_in('exercise_name', with: "Broilerimysteeri")
 			fill_in_ckeditor 'exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??'
 
-			click_and_wait('Tallenna')
+			wait_and_trigger_click('Tallenna')
 
 			expect(current_path).to eq(exercise_path(exercise))
 			expect(page).to have_content 'Broilerimysteeri'
@@ -33,7 +33,7 @@ describe "Edit Exercise page", js:true do
 			fill_in('exercise_name', with: "")
 			fill_in_ckeditor 'exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??'
 
-			click_and_wait('Tallenna')
+			wait_and_trigger_click('Tallenna')
 
 			expect(current_path).to eq(exercise_path(exercise))
 		end
