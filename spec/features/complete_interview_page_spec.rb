@@ -20,43 +20,43 @@ describe "Interview page for student", js:true do
     before :each do
       sign_in(username:"Opiskelija", password:"Salainen1")
 
-      click_and_wait('Lihanautakuolemat')
-      click_and_wait('Toimenpiteet')
-      click_and_wait(interview_task.name)
+      wait_and_trigger_click('Lihanautakuolemat')
+      wait_and_trigger_click('Toimenpiteet')
+      wait_and_trigger_click(interview_task.name)
     end
 
     describe "should be able to complete interview task" do
       it "with required questions asked" do
-        click_and_wait('ask_question_1')
+        wait_and_trigger_click('ask_question_1')
         expect(page).to have_content question.content
-        click_and_wait('ask_question_3')
+        wait_and_trigger_click('ask_question_3')
         expect(page).to have_content question3.content
         expect {
-          click_and_wait('Jatka')
+          wait_and_trigger_click('Jatka')
         }.to change(CompletedTask, :count).by(1)
 
         expect(page).to have_content 'Toimenpide suoritettu!'
       end
 
       it "with right and allowed questions asked" do
-        click_and_wait('ask_question_1')
-        click_and_wait('ask_question_3')
-        click_and_wait('ask_question_4')
+        wait_and_trigger_click('ask_question_1')
+        wait_and_trigger_click('ask_question_3')
+        wait_and_trigger_click('ask_question_4')
         expect(page).to have_content question4.content
         expect {
-          click_and_wait('Jatka')
+          wait_and_trigger_click('Jatka')
         }.to change(CompletedTask, :count).by(1)
 
         expect(page).to have_content 'Toimenpide suoritettu!'
       end
 
       it "with right and wrong questions asked" do
-        click_and_wait('ask_question_1')
-        click_and_wait('ask_question_3')
-        click_and_wait('ask_question_2')
+        wait_and_trigger_click('ask_question_1')
+        wait_and_trigger_click('ask_question_3')
+        wait_and_trigger_click('ask_question_2')
         expect(page).to have_content question2.content
         expect {
-          click_and_wait('Jatka')
+          wait_and_trigger_click('Jatka')
         }.to change(CompletedTask, :count).by(1)
 
         expect(page).to have_content 'Toimenpide suoritettu!'
@@ -67,18 +67,18 @@ describe "Interview page for student", js:true do
     describe "should not be able to complete interview task" do
       it "without any questions asked" do
         expect {
-          click_and_wait('Jatka')
+          wait_and_trigger_click('Jatka')
         }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content 'Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!'
       end
 
       it "when not all right questions are asked" do
-        click_and_wait('ask_question_1')
-        click_and_wait('ask_question_4')
+        wait_and_trigger_click('ask_question_1')
+        wait_and_trigger_click('ask_question_4')
 
         expect {
-          click_and_wait('Jatka')
+          wait_and_trigger_click('Jatka')
         }.not_to change(CompletedTask, :count)
 
         expect(page).to have_content 'Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!'
@@ -88,40 +88,40 @@ describe "Interview page for student", js:true do
     describe "after completing interview task" do
 
       before :each do
-        click_and_wait('ask_question_1')
-        click_and_wait('ask_question_3')
-        click_and_wait('Jatka')
-        click_and_wait('Toimenpiteet')
-        click_and_wait(interview_task.name)
+        wait_and_trigger_click('ask_question_1')
+        wait_and_trigger_click('ask_question_3')
+        wait_and_trigger_click('Jatka')
+        wait_and_trigger_click('Toimenpiteet')
+        wait_and_trigger_click(interview_task.name)
       end
 
       it "should be able to view questions and contents of the interview" do
         expect(AskedQuestion.count).to eq(2)
 
         expect(page).to have_button question.title
-        click_and_wait('asked_question_1')
+        wait_and_trigger_click('asked_question_1')
         expect(page).to have_content question.content
 
         expect(page).to have_button question2.title
-        click_and_wait('ask_question_2')
+        wait_and_trigger_click('ask_question_2')
         expect(page).to have_content question2.content
 
         expect(page).to have_button question3.title
-        click_and_wait('asked_question_3')
+        wait_and_trigger_click('asked_question_3')
         expect(page).to have_content question3.content
 
         expect(page).to have_button question4.title
-        click_and_wait('ask_question_4')
+        wait_and_trigger_click('ask_question_4')
         expect(page).to have_content question4.content
       end
 
       it "should be able to ask more questions" do
         expect(AskedQuestion.count).to eq(2)
 
-        click_and_wait('ask_question_2')
+        wait_and_trigger_click('ask_question_2')
         expect(page).to have_content question2.content
 
-        click_and_wait('ask_question_4')
+        wait_and_trigger_click('ask_question_4')
         expect(page).to have_content question4.content
 
         expect(AskedQuestion.count).to eq(4)

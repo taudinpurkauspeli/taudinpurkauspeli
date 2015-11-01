@@ -9,7 +9,7 @@ $:.unshift(File.dirname(__FILE__) + '/../../lib')
 Given(/^there is an exercise that has multiple hypotheses$/) do
 	Exercise.create name:"Lihanautakuolemat", anamnesis:"Lihanautoja on menehtynyt lukuisia"
 
-  createSomeHypotheses()	
+  createSomeHypotheses
 
 	HypothesisGroup.create name:"Taudit", id:1
 
@@ -20,9 +20,8 @@ end
 
 Given(/^I go to the hypothesis list of that exercise$/) do
 	visit exercises_path
-	click_button('Lihanautakuolemat')
-	click_link('Diffit')
-	wait_for_ajax
+	click_and_wait('Lihanautakuolemat')
+	click_and_wait('Diffit')
 end
 
 Given(/^those hypotheses are all checked$/) do
@@ -32,7 +31,7 @@ Given(/^those hypotheses are all checked$/) do
 end
 
 Given(/^there are multiple hypotheses that are not added to any exercise$/) do
-  createSomeHypotheses()  
+  createSomeHypotheses
 end
 
 Then(/^the hypothesis list should be in alphabetical order$/) do

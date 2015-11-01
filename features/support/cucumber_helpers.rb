@@ -96,8 +96,7 @@ module CucumberHelpers
 
   def go_to_case(exercise)
     visit exercises_path
-    click_button(exercise)
-    wait_for_ajax
+    wait_and_trigger_click(exercise)
   end
 
 end
