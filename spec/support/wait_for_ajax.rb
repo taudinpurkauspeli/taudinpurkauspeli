@@ -10,7 +10,7 @@ module WaitForAjax
   end
 
   def click_and_wait(element_text)
-    wait_for_ajax
+   # wait_for_ajax
 
     begin
       click_link_or_button(element_text)
@@ -48,7 +48,7 @@ module WaitForAjax
   end
 
   def wait_and_trigger_click(element)
-    wait_for_ajax
+    #wait_for_ajax
 
     begin
       find_button(element).trigger('click')

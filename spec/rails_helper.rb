@@ -28,7 +28,7 @@ Capybara.default_max_wait_time = 5
 Capybara.ignore_hidden_elements = true
 
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, {:js_errors => false})
+  Capybara::Poltergeist::Driver.new(app, {js_errors: false})
 end
 
 # Add additional requires below this line. Rails is not loaded until this point!
