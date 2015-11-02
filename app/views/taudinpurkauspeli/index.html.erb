@@ -22,8 +22,11 @@
         </div>
       </form>
     </div>
-    <h1 ng-if="searchedHypothesisGroup">
-      <small>Hait diffiryhmää:</small> {{searchedHypothesisGroup}}
-    </h1>
+    <br/>
+    <div ng-if="hypothesisGroups">
+      <div ng-repeat="hypothesisGroup in hypothesisGroups">
+        {{hypothesisGroup.name}}
+      </div>
+    </div>
   </article>
 </article>
