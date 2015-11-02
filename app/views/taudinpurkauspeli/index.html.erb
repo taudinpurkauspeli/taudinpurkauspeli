@@ -1,18 +1,29 @@
+<br/>
+<h1>Diffiryhmähaku</h1>
+
 <article ng-app="taudinpurkauspeli">
-  <header>
-    <h1 ng-if="name">Hello, {{name}}</h1>
-  </header>
-  <section>
-    <form class="form-inline">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input class="form-control"
-               name="name"
-               type="text"
-               placeholder="Enter your name"
-               autofocus
-               ng-model="name">
-      </div>
-    </form>
-  </section>
+  <article ng-controller="HypothesisGroupSearchController">
+    <br/>
+    <div class="search-form">
+      <form>
+        <label for="hypothesis-group-name">Hakusanat</label>
+        <div class="input-group">
+          <input type="text"
+                 name="hypothesis-group-name"
+                 class="form-control"
+                 placeholder="Diffiryhmän nimi"
+                 ng-model="hypothesisGroupName">
+        <span class="input-group-btn">
+        <button class="btn btn-primary"
+                ng-click="search(hypothesisGroupName)">
+          Etsi diffiryhmä
+        </button>
+        </span>
+        </div>
+      </form>
+    </div>
+    <h1 ng-if="searchedHypothesisGroup">
+      <small>Hait diffiryhmää:</small> {{searchedHypothesisGroup}}
+    </h1>
+  </article>
 </article>
