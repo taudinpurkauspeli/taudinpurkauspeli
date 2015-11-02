@@ -1,2 +1,2 @@
-asset 'angular'
+asset 'angular', '~> 1.4'
 asset 'bootstrap-sass-official'
