@@ -1,9 +1,9 @@
-var app = angular.module('taudinpurkauspeli',[ ]);
+var app = angular.module('hypothesisGroups',[ ]);
 
 var HypothesisGroupSearchController = function($scope) {
-    $scope.hypothesisGroups = [];
+    $scope.hypothesisGroupsList = [];
     $scope.search = function(searchTerm) {
-        $scope.hypothesisGroups = [
+        $scope.hypothesisGroupsList = [
             {
                 "name":"Bakteeritaudit"
 

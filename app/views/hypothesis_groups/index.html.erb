@@ -1,7 +1,7 @@
 <br/>
 <h1>Diffiryhmähaku</h1>
 
-<article ng-app="taudinpurkauspeli">
+<article ng-app="hypothesisGroups">
   <article ng-controller="HypothesisGroupSearchController">
     <br/>
     <div class="search-form">
@@ -23,8 +23,8 @@
       </form>
     </div>
     <br/>
-    <div ng-if="hypothesisGroups">
-      <div ng-repeat="hypothesisGroup in hypothesisGroups">
+    <div ng-if="hypothesisGroupsList">
+      <div ng-repeat="hypothesisGroup in hypothesisGroupsList">
         {{hypothesisGroup.name}}
       </div>
     </div>
