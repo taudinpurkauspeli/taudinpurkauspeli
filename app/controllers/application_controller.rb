@@ -2,7 +2,7 @@ require "application_responder"
 
 class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
-
+  respond_to :html, :json
   around_action :log_request, if: :current_user_is_student_in_production
 
   # Prevent CSRF attacks by raising an exception.

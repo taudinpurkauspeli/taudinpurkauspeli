@@ -1,14 +1,8 @@
 class TaskTextsController < ApplicationController
-  before_action :ensure_user_is_logged_in, except: [:index]
-  before_action :ensure_user_is_admin, except: [:check_answers, :index]
+  before_action :ensure_user_is_logged_in
+  before_action :ensure_user_is_admin, except: [:check_answers]
   before_action :set_task_text, only: [:edit, :update, :destroy, :check_answers]
   before_action :set_current_user, only: [:check_answers]
-
-
-  def index
-
-
-  end
 
   # GET /task_texts/new
   def new
