@@ -7,18 +7,13 @@
     <div class="search-form">
       <form>
         <label for="hypothesisGroupName">Hakusanat</label>
-        <div class="input-group">
+        <div class="input-group input-group-lg">
           <input type="text"
                  name="hypothesisGroupName"
-                 class="form-control"
+                 class="form-control input-lg"
                  placeholder="Diffiryhmän nimi"
+                 ng-change="search(hypothesisGroupName)"
                  ng-model="hypothesisGroupName">
-        <span class="input-group-btn">
-        <button class="btn btn-primary"
-                ng-click="search(hypothesisGroupName)">
-          Etsi diffiryhmä
-        </button>
-        </span>
         </div>
       </form>
     </div>
