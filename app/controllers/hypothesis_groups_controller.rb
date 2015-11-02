@@ -4,7 +4,11 @@ class HypothesisGroupsController < ApplicationController
   before_action :set_hypothesis_group, only: [:destroy]
 
   def index
-
+    @hypothesis_groups = HypothesisGroup.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @hypothesis_groups }
+    end
   end
 
   # POST /hypothesis_group
