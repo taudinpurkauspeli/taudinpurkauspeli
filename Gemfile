@@ -58,6 +58,10 @@ gem 'bower-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Angular html-files to Assets Pipeline
+gem "angular-rails-templates"
+gem "sprockets", "~> 2.0"
+
 group :test do
   
   gem 'factory_girl_rails'
