@@ -1,4 +1,4 @@
-var app = angular.module('hypothesisGroups',[ ]);
+var app = angular.module('hypothesisGroups',[ "ngRoute" ]);
 
 var HypothesisGroupSearchController = function($scope, $http) {
     $scope.hypothesisGroupsList = [];
