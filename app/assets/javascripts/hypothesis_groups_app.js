@@ -1,11 +1,11 @@
-var app = angular.module('hypothesisGroups',[ "ngRoute" ]);
+var app = angular.module('hypothesisGroups',[ 'ngRoute','templates' ]);
 
 app.config([
     "$routeProvider",
     function($routeProvider) {
         $routeProvider.when("/", {
             controller: "HypothesisGroupSearchController",
-            templateUrl: "hypothesis_group_search.html"
+            templateUrl: "hypothesis_groups_search.html"
         });
     }
 ]);
