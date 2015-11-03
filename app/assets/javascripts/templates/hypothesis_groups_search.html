@@ -1,0 +1,22 @@
+<article>
+    <br/>
+    <div class="search-form">
+        <form>
+            <label for="hypothesisGroupName">Hakusanat</label>
+            <div class="input-group input-group-lg">
+                <input type="text"
+                       name="hypothesisGroupName"
+                       class="form-control input-lg"
+                       placeholder="Diffiryhmän nimi"
+                       ng-change="search(hypothesisGroupName)"
+                       ng-model="hypothesisGroupName">
+            </div>
+        </form>
+    </div>
+    <br/>
+    <div ng-if="hypothesisGroupsList">
+        <div ng-repeat="hypothesisGroup in hypothesisGroupsList">
+            {{hypothesisGroup.name}}
+        </div>
+    </div>
+</article>
