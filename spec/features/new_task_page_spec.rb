@@ -56,7 +56,7 @@ describe "New Task page", js:true do
 
         it "task text subtask" do
           wait_and_trigger_click('+ Teksti')
-
+          wait_for_ckeditor("task_text_content")
           fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira on kipeä.'
 
           expect{
@@ -105,7 +105,7 @@ describe "New Task page", js:true do
         it "task text subtask without content" do
 
           wait_and_trigger_click('+ Teksti')
-
+          wait_for_ckeditor("task_text_content")
           fill_in_ckeditor 'task_text_content', with: ""
 
           expect{
@@ -146,14 +146,14 @@ describe "New Task page", js:true do
       describe "with task text subtask" do
         before :each do
           wait_and_trigger_click('+ Teksti')
-
+          wait_for_ckeditor("task_text_content")
           fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira on kipeä.'
 
           wait_and_trigger_click('Tallenna')
         end
 
         it "should be able to update the content of a task text" do
-
+          wait_for_ckeditor("task_text_content")
           fill_in_ckeditor 'task_text_content', with: 'Asiakas kertoo, että koira ei ole kipeä!'
 
           wait_and_trigger_click('Tallenna')
@@ -163,6 +163,7 @@ describe "New Task page", js:true do
         end
 
         it "should not be able to update task text to have no content" do
+          wait_for_ckeditor("task_text_content")
           fill_in_ckeditor 'task_text_content', with: ""
 
           wait_and_trigger_click('Tallenna')
@@ -200,6 +201,7 @@ describe "New Task page", js:true do
 
         it "should be able to add option to a multichoice" do
           fill_in('option_content', with: "Kysy taudeista")
+          wait_for_ckeditor("option_explanation")
           fill_in_ckeditor 'option_explanation', with: 'Taudeista on hyvä kysyä!'
           select('Pakollinen vaihtoehto', from:'option[is_correct_answer]')
 
@@ -279,6 +281,7 @@ describe "New Task page", js:true do
 
             it "the explanation of an option" do
               wait_and_trigger_click("collapse-option-link2")
+              wait_for_ckeditor("option_explanation_2")
               fill_in_ckeditor 'option_explanation_2', with: 'Taudista pitää kerätä lisätietoja!'
               wait_and_trigger_click('option_save_2')
 
@@ -311,6 +314,7 @@ describe "New Task page", js:true do
 
           it "add question without a question group to an interview" do
             fill_in('question_title', with: "Onko eläin ollut kipea?")
+            wait_for_ckeditor("question_content")
             fill_in_ckeditor 'question_content', with: 'On ollut kipeä.'
             select('Pakollinen kysymys', from:'question[required]')
 
@@ -328,6 +332,7 @@ describe "New Task page", js:true do
 
           it "add question with a question group to an interview" do
             fill_in('question_title', with: "Onko eläin ollut kipeä?")
+            wait_for_ckeditor("question_content")
             fill_in_ckeditor 'question_content', with: 'On ollut kipeä.'
             select('Pakollinen kysymys', from:'question[required]')
             fill_in('question_question_group_attributes_title', with: "Eläinkysymys")
@@ -376,6 +381,7 @@ describe "New Task page", js:true do
 
             it "change the content of a question" do
               wait_and_trigger_click("collapse-question-link2")
+              wait_for_ckeditor("question_content_2")
               fill_in_ckeditor 'question_content_2', with: 'On ollut todella kipeä!'
               wait_and_trigger_click('question_save_2')
 

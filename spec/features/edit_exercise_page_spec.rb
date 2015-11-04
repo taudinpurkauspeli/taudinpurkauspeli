@@ -18,6 +18,7 @@ describe "Edit Exercise page", js:true do
 		it "should be able to edit exercise" do
 
 			fill_in('exercise_name', with: "Broilerimysteeri")
+			wait_for_ckeditor("exercise_anamnesis")
 			fill_in_ckeditor 'exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??'
 
 			wait_and_trigger_click('Tallenna')
@@ -31,6 +32,7 @@ describe "Edit Exercise page", js:true do
 		it "should not be able to edit exercise wrong" do
 
 			fill_in('exercise_name', with: "")
+			wait_for_ckeditor("exercise_anamnesis")
 			fill_in_ckeditor 'exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??'
 
 			wait_and_trigger_click('Tallenna')
