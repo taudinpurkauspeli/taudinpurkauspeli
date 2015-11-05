@@ -31,7 +31,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
 
 # Text editor
-gem 'ckeditor', '4.1.1'
+gem 'ckeditor', github: 'Eepa/ckeditor'
 gem 'responders'
 gem "non-stupid-digest-assets"
 gem 'rails-html-sanitizer'
@@ -57,6 +57,10 @@ gem 'bower-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+# Angular html-files to Assets Pipeline
+gem "angular-rails-templates"
+gem "sprockets", "~> 2.0"
 
 group :test do
   

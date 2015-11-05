@@ -1,4 +1,15 @@
-var app = angular.module('hypothesisGroups',[ ]);
+var app = angular.module('hypothesisGroups',[ 'ngRoute','templates' ]);
+
+app.config([
+    "$routeProvider",
+    function($routeProvider) {
+        $routeProvider.when("/", {
+            controller: "HypothesisGroupSearchController",
+            templateUrl: "hypothesis_groups_search.html"
+        });
+    }
+]);
+
 
 var HypothesisGroupSearchController = function($scope, $http) {
     $scope.hypothesisGroupsList = [];
