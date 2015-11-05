@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/Eepa/ckeditor.git
-  revision: 39ac6dcf7ba6b4562bc8fc6a1a27a00e32a58a83
+  revision: 38b432698b55b215de014a39d904ab499b2b10db
   specs:
     ckeditor (4.1.1)
       cocaine
@@ -68,7 +68,7 @@ GEM
       sass (>= 3.3.0)
     bower-rails (0.10.0)
     builder (3.2.2)
-    byebug (6.0.2)
+    byebug (7.0.0)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
