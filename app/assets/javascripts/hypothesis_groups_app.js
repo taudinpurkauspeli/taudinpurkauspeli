@@ -46,16 +46,20 @@ app.controller("HypothesisGroupSearchController",
 
 
 app.controller("HypothesisGroupShowController", [
-    "$scope","$http","$routeParams",
-    function($scope , $http , $routeParams) {
+    "$scope","$http","$routeParams", "$resource",
+    function($scope , $http , $routeParams, $resource) {
         var hypothesisGroupId = $routeParams.id;
-        $scope.hypothesisGroup = {};
-        $http.get(
-            "/hypothesis_groups/" + hypothesisGroupId + ".json"
-        ).success(function(data,status,headers,config) {
-                $scope.hypothesisGroup = data;
-            }).error(function(data,status,headers,config) {
-                alert("Etsimääsi diffiryhmää ei löytynyt: " + status);
-            });
+        var HypothesisGroup = $resource('/hypothesis_groups/:hypothesisGroupId.json');
+
+        $scope.hypothesisGroup = HypothesisGroup.get({"hypothesisGroupId" : hypothesisGroupId});
+
+        //$scope.hypothesisGroup = {};
+        //$http.get(
+        //    "/hypothesis_groups/" + hypothesisGroupId + ".json"
+        //).success(function(data,status,headers,config) {
+        //        $scope.hypothesisGroup = data;
+        //    }).error(function(data,status,headers,config) {
+        //        alert("Etsimääsi diffiryhmää ei löytynyt: " + status);
+        //    });
     }
 ]);
