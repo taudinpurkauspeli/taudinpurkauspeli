@@ -1,4 +1,22 @@
 <article class="btn-hypothesis-group">
     <h1>Diffiryhmä {{hypothesisGroup.id}}</h1>
     <h2>{{hypothesisGroup.name}}</h2>
+
+    <form novalidate name="updateHypothesisGroupForm">
+        <div class="form-group">
+            <label for="hypothesisGroupName">Diffiryhmän nimi</label>
+            <input type="text" class="form-control" required pattern=".{3,}"
+                   name="hypothesisGroupName" ng-model="hypothesisGroup.name">
+            <p class="help-block" ng-messages="updateHypothesisGroupForm.hypothesisGroupName.$error">
+
+                <span ng-message="required">Nimi on pakollinen</span>
+                <span ng-message="pattern">Nimessä on oltava vähitnään 3 merkkiä</span>
+            </p>
+        </div>
+
+        <div>
+            <button ng-click="updateHypothesisGroup()" class="btn btn-lg btn-primary">Tallenna muutokset</button>
+        </div>
+    </form>
+
 </article>

@@ -1,4 +1,4 @@
-var app = angular.module('hypothesisGroups',[ 'ngRoute','templates', 'ngResource' ]);
+var app = angular.module('hypothesisGroups',[ 'ngRoute','templates', 'ngResource', 'ngMessages' ]);
 
 app.config([
     "$routeProvider",
@@ -52,6 +52,16 @@ app.controller("HypothesisGroupShowController", [
         var HypothesisGroup = $resource('/hypothesis_groups/:hypothesisGroupId.json');
 
         $scope.hypothesisGroup = HypothesisGroup.get({"hypothesisGroupId" : hypothesisGroupId});
+
+        $scope.updateHypothesisGroup = function() {
+            if ($scope.updateHypothesisGroupForm.hypothesisGroupName.$valid) {
+                alert("Oikeanlainen diffiryhmän nimi!");
+            } else if ($scope.updateHypothesisGroupForm.hypothesisGroupName.$error.required) {
+                alert("Diffiryhmän nimi on pakollinen");
+            } else if ($scope.updateHypothesisGroupForm.hypothesisGroupName.$error.pattern) {
+                alert("Diffiryhmän nimessä on oltava vähintään 3 merkkiä");
+            }
+        }
 
         //$scope.hypothesisGroup = {};
         //$http.get(
