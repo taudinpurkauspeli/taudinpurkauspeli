@@ -1,13 +1,20 @@
 class HypothesisGroupsController < ApplicationController
-  before_action :ensure_user_is_logged_in, except: [:index]
-  before_action :ensure_user_is_admin, except: [:index]
-  before_action :set_hypothesis_group, only: [:destroy]
+  before_action :ensure_user_is_logged_in, except: [:index, :show]
+  before_action :ensure_user_is_admin, except: [:index, :show]
+  before_action :set_hypothesis_group, only: [:destroy, :show]
 
   def index
     @hypothesis_groups = HypothesisGroup.all
     respond_to do |format|
       format.html
       format.json { render json: @hypothesis_groups }
+    end
+  end
+
+  def show
+    respond_to do |format|
+      format.html
+      format.json { render json: @hypothesis_group }
     end
   end
 

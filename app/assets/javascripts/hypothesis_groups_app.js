@@ -6,12 +6,15 @@ app.config([
         $routeProvider.when("/", {
             controller: "HypothesisGroupSearchController",
             templateUrl: "hypothesis_groups_search.html"
+        }).when("/:id",{
+            controller: "HypothesisGroupShowController",
+            templateUrl: "hypothesis_group_show.html"
         });
     }
 ]);
 
 
-var HypothesisGroupSearchController = function($scope, $http) {
+var HypothesisGroupSearchController = function($scope, $http, $location) {
     $scope.hypothesisGroupsList = [];
 
     $scope.search = function(searchTerm) {
@@ -31,8 +34,28 @@ var HypothesisGroupSearchController = function($scope, $http) {
             });
     };
 
+    $scope.viewHypothesisGroup = function(hypothesisGroup) {
+        $location.path("/" + hypothesisGroup.id);
+    }
+
 };
 
 app.controller("HypothesisGroupSearchController",
-    [ "$scope", "$http", HypothesisGroupSearchController ]
+    [ '$scope', '$http', '$location', HypothesisGroupSearchController ]
 );
+
+
+app.controller("HypothesisGroupShowController", [
+    "$scope","$http","$routeParams",
+    function($scope , $http , $routeParams) {
+        var hypothesisGroupId = $routeParams.id;
+        $scope.hypothesisGroup = {};
+        $http.get(
+            "/hypothesis_groups/" + hypothesisGroupId + ".json"
+        ).success(function(data,status,headers,config) {
+                $scope.hypothesisGroup = data;
+            }).error(function(data,status,headers,config) {
+                alert("Etsimääsi diffiryhmää ei löytynyt: " + status);
+            });
+    }
+]);
