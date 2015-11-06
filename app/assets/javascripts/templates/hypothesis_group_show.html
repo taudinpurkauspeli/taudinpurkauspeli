@@ -3,7 +3,10 @@
     <h2>{{hypothesisGroup.name}}</h2>
 
     <form novalidate name="updateHypothesisGroupForm">
-        <div class="form-group">
+        <div class="form-group has-feedback" ng-class="{
+'has-error': updateHypothesisGroupForm.hypothesisGroupName.$invalid && updateHypothesisGroupForm.hypothesisGroupName.$dirty,
+'has-success': updateHypothesisGroupForm.hypothesisGroupName.$valid && updateHypothesisGroupForm.hypothesisGroupName.$touched
+}">
             <label for="hypothesisGroupName">Diffiryhmän nimi</label>
             <input type="text" class="form-control" required pattern=".{3,}"
                    name="hypothesisGroupName" ng-model="hypothesisGroup.name">
@@ -15,7 +18,11 @@
         </div>
 
         <div>
-            <button ng-click="updateHypothesisGroup()" class="btn btn-lg btn-primary">Tallenna muutokset</button>
+            <button ng-click="updateHypothesisGroup()"
+                    class="btn btn-lg btn-primary"
+                    ng-disabled="updateHypothesisGroupForm.$invalid || updateHypothesisGroupForm.$pristine">
+                Tallenna muutokset
+            </button>
         </div>
     </form>
 

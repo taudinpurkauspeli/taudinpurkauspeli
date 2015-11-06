@@ -49,17 +49,24 @@ app.controller("HypothesisGroupShowController", [
     "$scope","$http","$routeParams", "$resource",
     function($scope , $http , $routeParams, $resource) {
         var hypothesisGroupId = $routeParams.id;
-        var HypothesisGroup = $resource('/hypothesis_groups/:hypothesisGroupId.json');
+        var HypothesisGroup = $resource('/hypothesis_groups/:hypothesisGroupId.json',
+            {"hypothesisGroupId": "@id"},
+            { "save": { "method": "PUT" }});
 
         $scope.hypothesisGroup = HypothesisGroup.get({"hypothesisGroupId" : hypothesisGroupId});
 
         $scope.updateHypothesisGroup = function() {
-            if ($scope.updateHypothesisGroupForm.hypothesisGroupName.$valid) {
-                alert("Oikeanlainen diffiryhmän nimi!");
-            } else if ($scope.updateHypothesisGroupForm.hypothesisGroupName.$error.required) {
-                alert("Diffiryhmän nimi on pakollinen");
-            } else if ($scope.updateHypothesisGroupForm.hypothesisGroupName.$error.pattern) {
-                alert("Diffiryhmän nimessä on oltava vähintään 3 merkkiä");
+            if ($scope.updateHypothesisGroupForm.$valid) {
+                $scope.hypothesisGroup.$save(
+                    function() {
+                        $scope.updateHypothesisGroupForm.$setPristine();
+                        $scope.updateHypothesisGroupForm.$setUntouched();
+                        alert("Save Successful!");
+                    },
+                    function() {
+                        alert("Save Failed :(");
+                    }
+                );
             }
         }
 

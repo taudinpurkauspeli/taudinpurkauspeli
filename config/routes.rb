@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :hypothesis_groups, only: [:new, :create, :destroy, :index, :show]
+  resources :hypothesis_groups, only: [:new, :create, :destroy, :index, :show, :update]
 
   resources :checked_hypotheses, only: [:new, :create, :destroy]
 

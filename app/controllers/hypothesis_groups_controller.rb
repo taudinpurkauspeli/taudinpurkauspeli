@@ -1,7 +1,10 @@
 class HypothesisGroupsController < ApplicationController
-  before_action :ensure_user_is_logged_in, except: [:index, :show]
-  before_action :ensure_user_is_admin, except: [:index, :show]
-  before_action :set_hypothesis_group, only: [:destroy, :show]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
+  before_action :ensure_user_is_logged_in
+  before_action :ensure_user_is_admin
+  before_action :set_hypothesis_group, only: [:destroy, :show, :update]
 
   def index
     @hypothesis_groups = HypothesisGroup.all
@@ -15,6 +18,18 @@ class HypothesisGroupsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @hypothesis_group }
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @hypothesis_group.update(hypothesis_group_params)
+        format.html
+        format.json { head :ok }
+      else
+        format.html
+        format.json { head :internal_server_error }
+      end
     end
   end
 
@@ -49,5 +64,11 @@ class HypothesisGroupsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def hypothesis_group_params
     params.require(:hypothesis_group).permit(:name)
+  end
+
+  protected
+
+  def json_request?
+    request.format.json?
   end
 end
