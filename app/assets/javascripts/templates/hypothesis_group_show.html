@@ -1,9 +1,11 @@
 <article class="btn-hypothesis-group">
-    <h1>Diffiryhmä {{hypothesisGroup.id}}</h1>
+    <h1>Diffiryhmä</h1>
     <h2>{{hypothesisGroup.name}}</h2>
 
+    <br/>
     <form novalidate name="updateHypothesisGroupForm">
-        <div class="form-group has-feedback" ng-class="{
+        <div class="form-group has-feedback"
+             ng-class="{
 'has-error': updateHypothesisGroupForm.hypothesisGroupName.$invalid && updateHypothesisGroupForm.hypothesisGroupName.$dirty,
 'has-success': updateHypothesisGroupForm.hypothesisGroupName.$valid && updateHypothesisGroupForm.hypothesisGroupName.$touched
 }">

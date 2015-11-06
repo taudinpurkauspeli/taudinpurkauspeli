@@ -61,14 +61,14 @@ app.controller("HypothesisGroupShowController", [
                     function() {
                         $scope.updateHypothesisGroupForm.$setPristine();
                         $scope.updateHypothesisGroupForm.$setUntouched();
-                        alert("Save Successful!");
+                        alert("Diffiryhmän päivitys onnistui!");
                     },
                     function() {
-                        alert("Save Failed :(");
+                        alert("Diffiryhmän päivitys epäonnistui!");
                     }
                 );
             }
-        }
+        };
 
         //$scope.hypothesisGroup = {};
         //$http.get(
