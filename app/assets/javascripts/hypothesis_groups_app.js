@@ -1,4 +1,4 @@
-var app = angular.module('hypothesisGroups',[ 'ngRoute','templates' ]);
+var app = angular.module('hypothesisGroups',[ 'ngRoute','templates', 'ngResource' ]);
 
 app.config([
     "$routeProvider",
