@@ -9,10 +9,10 @@ app.config([
     function($routeProvider) {
         $routeProvider.when("/", {
             controller: "HypothesisGroupSearchController",
-            templateUrl: "hypothesis_groups_search.html"
+            templateUrl: "hypothesis_groups/hypothesis_groups_search.html"
         }).when("/:id",{
             controller: "HypothesisGroupShowController",
-            templateUrl: "hypothesis_group_show.html"
+            templateUrl: "hypothesis_groups/hypothesis_group_show.html"
         });
     }
 ]);
