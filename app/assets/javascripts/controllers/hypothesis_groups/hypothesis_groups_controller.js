@@ -24,6 +24,10 @@ var HypothesisGroupsController = function($scope, $http, $location) {
         $location.path("hypothesis_groups/" + hypothesisGroup.id);
     };
 
+    $scope.deleteHypothesisGroup = function(hypothesisGroup) {
+        alert("Diffiryhmä '" + hypothesisGroup.name + "' poistettu");
+    };
+
 };
 
 app.controller("HypothesisGroupsController",

@@ -1,5 +1,16 @@
-<br/>
-<h1>Diffiryhmähaku</h1>
+<div class = "row">
+    <div class = "col-md-8">
+        <br/>
+        <br/>
+        <h1>Diffiryhmät</h1>
+    </div>
+    <br/>
+    <br/>
+    <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Pelin kaikki diffiryhmät.">Ohje</a>
+    </div>
+</div>
+<div class = "separator"></div>
 
 <article>
     <br/>
@@ -18,13 +29,26 @@
         </form>
     </div>
     <br/>
-    <div ng-if="hypothesisGroupsList">
-        <div ng-repeat="hypothesisGroup in hypothesisGroupsList">
+</article>
 
-            <button class="btn btn-small btn-primary"
-                    ng-click="viewHypothesisGroup(hypothesisGroup)">
-                {{hypothesisGroup.name}}
-            </button>
+<div ng-if="hypothesisGroupsList">
+    <div ng-repeat="hypothesisGroup in hypothesisGroupsList">
+        <div class="row">
+
+            <div class="col-md-5">
+                <button class="btn btn-default btn-exercise"
+                        ng-click="viewHypothesisGroup(hypothesisGroup)">
+                    {{hypothesisGroup.name}}
+                </button>
+            </div>
+
+            <div class="col-md-3">
+                <button class="btn btn-default btn-exercise btn-del"
+                        ng-click="deleteHypothesisGroup(hypothesisGroup)">
+                    Poista
+                </button>
+            </div>
+
         </div>
     </div>
-</article>
+</div>
