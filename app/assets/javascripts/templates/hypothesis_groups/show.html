@@ -6,13 +6,17 @@
     <form novalidate name="updateHypothesisGroupForm">
         <div class="form-group has-feedback"
              ng-class="{
-'has-error': updateHypothesisGroupForm.hypothesisGroupName.$invalid && updateHypothesisGroupForm.hypothesisGroupName.$dirty,
-'has-success': updateHypothesisGroupForm.hypothesisGroupName.$valid && updateHypothesisGroupForm.hypothesisGroupName.$touched
+'has-error': updateHypothesisGroupForm.name.$invalid && updateHypothesisGroupForm.name.$dirty,
+'has-success': updateHypothesisGroupForm.name.$valid && updateHypothesisGroupForm.name.$touched
 }">
-            <label for="hypothesisGroupName">Diffiryhmän nimi</label>
-            <input type="text" class="form-control" required pattern=".{3,}"
-                   name="hypothesisGroupName" ng-model="hypothesisGroup.name">
-            <p class="help-block" ng-messages="updateHypothesisGroupForm.hypothesisGroupName.$error">
+            <label for="name">Diffiryhmän nimi</label>
+            <input type="text"
+                   class="form-control"
+                   required pattern=".{3,}"
+                   name="name"
+                   id="name"
+                   ng-model="hypothesisGroup.name">
+            <p class="help-block" ng-messages="updateHypothesisGroupForm.name.$error">
 
                 <span ng-message="required">Nimi on pakollinen</span>
                 <span ng-message="pattern">Nimessä on oltava vähitnään 3 merkkiä</span>

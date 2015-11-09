@@ -22,7 +22,7 @@ var HypothesisGroupsController = function($scope, $http, $location) {
 
     $scope.viewHypothesisGroup = function(hypothesisGroup) {
         $location.path("hypothesis_groups/" + hypothesisGroup.id);
-    }
+    };
 
 };
 
