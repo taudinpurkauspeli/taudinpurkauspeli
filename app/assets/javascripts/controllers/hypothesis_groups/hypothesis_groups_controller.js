@@ -1,24 +1,28 @@
 var app = angular.module('diagnoseDiseases');
 
-var HypothesisGroupsController = function($scope, $http, $location) {
+var HypothesisGroupsController = function($scope, $http, $location, $resource) {
     $scope.hypothesisGroupsList = [];
 
-    $scope.search = function(searchTerm) {
+    //$scope.search = function(searchTerm) {
+    //
+    //    if(searchTerm.length < 2){
+    //        return;
+    //    };
+    //
+    //    $http.get("/hypothesis_groups.json",
+    //        { "params": { "hypothesisGroupName": searchTerm } }
+    //    ).success(
+    //        function(data,status,headers,config) {
+    //            $scope.hypothesisGroupsList = data;
+    //        }).error(
+    //        function(data,status,headers,config) {
+    //            alert("Jotakin odottamatonta kävi: " + status);
+    //        });
+    //};
 
-        if(searchTerm.length < 2){
-            return;
-        };
+    var HypothesisGroups = $resource('/hypothesis_groups.json');
 
-        $http.get("/hypothesis_groups.json",
-            { "params": { "hypothesisGroupName": searchTerm } }
-        ).success(
-            function(data,status,headers,config) {
-                $scope.hypothesisGroupsList = data;
-            }).error(
-            function(data,status,headers,config) {
-                alert("Jotakin odottamatonta kävi: " + status);
-            });
-    };
+    $scope.hypothesisGroupsList = HypothesisGroups.query();
 
     $scope.viewHypothesisGroup = function(hypothesisGroup) {
         $location.path("hypothesis_groups/" + hypothesisGroup.id);
@@ -31,5 +35,5 @@ var HypothesisGroupsController = function($scope, $http, $location) {
 };
 
 app.controller("HypothesisGroupsController",
-    [ '$scope', '$http', '$location', HypothesisGroupsController ]
+    [ '$scope', '$http', '$location', '$resource', HypothesisGroupsController ]
 );
