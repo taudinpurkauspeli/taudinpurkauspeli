@@ -1,4 +1,4 @@
-var app = angular.module('hypothesisGroups');
+var app = angular.module('diagnoseDiseases');
 
 var HypothesisGroupSearchController = function($scope, $http, $location) {
     $scope.hypothesisGroupsList = [];
@@ -21,7 +21,7 @@ var HypothesisGroupSearchController = function($scope, $http, $location) {
     };
 
     $scope.viewHypothesisGroup = function(hypothesisGroup) {
-        $location.path("/" + hypothesisGroup.id);
+        $location.path("hypothesis_groups/" + hypothesisGroup.id);
     }
 
 };

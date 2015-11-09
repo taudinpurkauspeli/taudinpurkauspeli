@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
   resources :conclusions
 
+  get 'taudinpurkauspeli', to: 'diagnose_diseases#index'
+
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
 

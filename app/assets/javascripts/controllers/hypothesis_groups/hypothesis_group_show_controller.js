@@ -1,4 +1,4 @@
-var app = angular.module('hypothesisGroups');
+var app = angular.module('diagnoseDiseases');
 
 app.controller("HypothesisGroupShowController", [
     "$scope","$http","$routeParams", "$resource",
