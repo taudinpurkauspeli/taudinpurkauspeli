@@ -42,8 +42,10 @@ class HypothesisGroupsController < ApplicationController
     respond_to do |format|
       if @hypothesis_group.save
         format.html { redirect_to hypotheses_url(:layout => get_layout)}
+        format.json { head :ok }
       else
         format.html { redirect_to hypotheses_url(:layout => get_layout), alert: "Diffiryhmän luominen epäonnistui."}
+        format.json { head :internal_server_error }
       end
     end
   end

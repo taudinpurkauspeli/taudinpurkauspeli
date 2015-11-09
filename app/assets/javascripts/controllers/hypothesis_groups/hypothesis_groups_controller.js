@@ -2,25 +2,12 @@ var app = angular.module('diagnoseDiseases');
 
 var HypothesisGroupsController = function($scope, $http, $location, $resource, $window) {
     $scope.hypothesisGroupsList = [];
-
-    //$scope.search = function(searchTerm) {
-    //
-    //    if(searchTerm.length < 2){
-    //        return;
-    //    };
-    //
-    //    $http.get("/hypothesis_groups.json",
-    //        { "params": { "hypothesisGroupName": searchTerm } }
-    //    ).success(
-    //        function(data,status,headers,config) {
-    //            $scope.hypothesisGroupsList = data;
-    //        }).error(
-    //        function(data,status,headers,config) {
-    //            alert("Jotakin odottamatonta kävi: " + status);
-    //        });
-    //};
+    $scope.newHypothesisGroup = {};
 
     var HypothesisGroups = $resource('/hypothesis_groups.json');
+    var HypothesisGroup = $resource('/hypothesis_groups/:hypothesisGroupId.json',
+        {"hypothesisGroupId": "@id"},
+        { "create": { "method": "POST" }});
 
     $scope.hypothesisGroupsList = HypothesisGroups.query();
 
@@ -34,6 +21,23 @@ var HypothesisGroupsController = function($scope, $http, $location, $resource, $
             $window.alert("Diffiryhmä '" + hypothesisGroup.name + "' poistettu");
         }
 
+    };
+
+    $scope.createHypothesisGroup = function() {
+        if ($scope.createHypothesisGroupForm.$valid) {
+            HypothesisGroup.create($scope.newHypothesisGroup,
+                function() {
+                    $scope.createHypothesisGroupForm.$setPristine();
+                    $scope.createHypothesisGroupForm.$setUntouched();
+                    $scope.hypothesisGroupsList = HypothesisGroups.query();
+                    $scope.newHypothesisGroup = {};
+                    alert("Diffiryhmän luominen onnistui!");
+                },
+                function() {
+                    alert("Diffiryhmän luominen epäonnistui!");
+                }
+            );
+        }
     };
 
 };
