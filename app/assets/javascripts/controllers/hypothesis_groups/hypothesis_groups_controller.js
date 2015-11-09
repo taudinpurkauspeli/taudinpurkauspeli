@@ -1,6 +1,6 @@
 var app = angular.module('diagnoseDiseases');
 
-var HypothesisGroupsController = function($scope, $http, $location, $resource) {
+var HypothesisGroupsController = function($scope, $http, $location, $resource, $window) {
     $scope.hypothesisGroupsList = [];
 
     //$scope.search = function(searchTerm) {
@@ -29,11 +29,15 @@ var HypothesisGroupsController = function($scope, $http, $location, $resource) {
     };
 
     $scope.deleteHypothesisGroup = function(hypothesisGroup) {
-        alert("Diffiryhmä '" + hypothesisGroup.name + "' poistettu");
+        var deleteConfirmation = $window.confirm('Oletko aivan varma, että haluat poistaa diffiryhmän ja kaikki siihen liittyvät diffit?');
+        if (deleteConfirmation) {
+            $window.alert("Diffiryhmä '" + hypothesisGroup.name + "' poistettu");
+        }
+
     };
 
 };
 
 app.controller("HypothesisGroupsController",
-    [ '$scope', '$http', '$location', '$resource', HypothesisGroupsController ]
+    [ '$scope', '$http', '$location', '$resource', '$window', HypothesisGroupsController ]
 );
