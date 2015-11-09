@@ -9,13 +9,13 @@ app.config([
     function($routeProvider) {
         $routeProvider.when("/", {
             controller: "ExercisesController",
-            templateUrl: "exercises/exercises_index.html"
+            templateUrl: "exercises/index.html"
         }).when("/hypothesis_groups", {
-            controller: "HypothesisGroupSearchController",
-            templateUrl: "hypothesis_groups/hypothesis_groups_search.html"
+            controller: "HypothesisGroupsController",
+            templateUrl: "hypothesis_groups/index.html"
         }).when("/hypothesis_groups/:id",{
-            controller: "HypothesisGroupShowController",
-            templateUrl: "hypothesis_groups/hypothesis_group_show.html"
+            controller: "HypothesisGroupsShowController",
+            templateUrl: "hypothesis_groups/show.html"
         });
     }
 ]);

@@ -1,6 +1,6 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("HypothesisGroupShowController", [
+app.controller("HypothesisGroupsShowController", [
     "$scope","$http","$routeParams", "$resource",
     function($scope , $http , $routeParams, $resource) {
         var hypothesisGroupId = $routeParams.id;

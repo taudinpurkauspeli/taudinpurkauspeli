@@ -1,6 +1,6 @@
 var app = angular.module('diagnoseDiseases');
 
-var HypothesisGroupSearchController = function($scope, $http, $location) {
+var HypothesisGroupsController = function($scope, $http, $location) {
     $scope.hypothesisGroupsList = [];
 
     $scope.search = function(searchTerm) {
@@ -26,6 +26,6 @@ var HypothesisGroupSearchController = function($scope, $http, $location) {
 
 };
 
-app.controller("HypothesisGroupSearchController",
-    [ '$scope', '$http', '$location', HypothesisGroupSearchController ]
+app.controller("HypothesisGroupsController",
+    [ '$scope', '$http', '$location', HypothesisGroupsController ]
 );
