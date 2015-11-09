@@ -22,6 +22,8 @@ class HypothesisGroupsController < ApplicationController
   end
 
   def update
+    #TODO: Check what to do with Rails validations
+
     respond_to do |format|
       if @hypothesis_group.update(hypothesis_group_params)
         format.html

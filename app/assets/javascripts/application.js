@@ -17,7 +17,8 @@
 //= require angular-resource
 //= require angular-messages
 //= require angular-rails-templates
-//= require_tree ./templates
+//= require hypothesis_groups_app
 //= require ckeditor/init
 //= require bootstrap-sprockets
+//= require_tree ./templates
 //= require_tree .
