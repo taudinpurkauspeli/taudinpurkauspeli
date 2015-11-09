@@ -14,6 +14,11 @@ class ExercisesController < ApplicationController
     session[:exhyp_ids] = nil
 
     set_view_layout
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @exercises }
+    end
   end
 
   # GET /exercises/1

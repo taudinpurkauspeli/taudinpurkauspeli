@@ -1,0 +1,41 @@
+<div class = "row">
+    <div class = "col-md-8">
+        <br/>
+        <br/>
+        <h1>Taudinpurkauspeli</h1>
+    </div>
+    <br/>
+    <br/>
+    <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Pelin kaikki caset.">Ohje</a>
+    </div>
+</div>
+<div class = "separator"></div>
+
+
+<div ng-if="exercisesList">
+    <div class="row">
+        <label for="queryName">Hakusanat</label>
+        <div class="col-md-5">
+            <input type="text"
+                   name="queryName"
+                   id="queryName"
+                   class="form-control input"
+                   placeholder="Casen nimi"
+                   ng-model="queryName">
+
+        </div>
+    </div>
+    <br/>
+
+    <div ng-repeat="exercise in exercisesList | filter:{name: queryName}">
+        <div class="row">
+
+            <div class="col-md-5">
+                <button class="btn btn-default btn-exercise">
+                    {{exercise.name}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

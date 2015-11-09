@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :hypothesis_groups, only: [:new, :create, :destroy, :index, :show]
+  resources :hypothesis_groups, only: [:new, :create, :destroy, :index, :show, :update]
 
   resources :checked_hypotheses, only: [:new, :create, :destroy]
 
@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   resources :question_groups
 
   resources :conclusions
+
+  get 'taudinpurkauspeli', to: 'diagnose_diseases#index'
 
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
