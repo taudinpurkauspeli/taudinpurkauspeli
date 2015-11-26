@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "Taudinpurkauspeli" %></title>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Taudinpurkauspeli" %>">
+  <%= stylesheet_link_tag 'application', media: 'all'%>
+  <%= javascript_include_tag 'application'%>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div role="tabpanel">
+  <header>
+    <%#= render 'layouts/navigation' %>
+  </header>
+  <main role="main">
+    <%#= render 'messages/messages' %>
+
+<!--    <%# if !current_user.nil? && !current_exercise.nil? %>
+
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="anamnesisTab"></div>
+          <div role="tabpanel" class="tab-pane" id="taskTab"></div>
+          <div role="tabpanel" class="tab-pane" id="hypothesisTab"></div>
+          <div role="tabpanel" class="tab-pane" id="currentTaskTab"></div>
+          <%#= render 'layouts/tab_contents' %>
+        </div>
+    <%# else %>-->
+        <%= yield %>
+    <%# end %>
+  </main>
+</div>
+</body>
+</html>
