@@ -1,13 +1,33 @@
-<article ng-app="diagnoseDiseases">
-  <div class="row">
-    <div class="col-md-12">
-      <div >
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" ><a ng-href="#/">Taudinpurkauspeli</a></li>
-          <li role="presentation" ><a ng-href="#/hypothesis_groups">Diffiryhmät</a></li>
-        </ul>
+<body ng-app="diagnoseDiseases" ng-controller="ApplicationController">
+<div role="tabpanel">
+  <header>
+    <%#= render 'layouts/navigation' %>
+  </header>
+  <main role="main">
+    <%#= render 'messages/messages' %>
+
+    <!--           <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="anamnesisTab"></div>
+          <div role="tabpanel" class="tab-pane" id="taskTab"></div>
+          <div role="tabpanel" class="tab-pane" id="hypothesisTab"></div>
+          <div role="tabpanel" class="tab-pane" id="currentTaskTab"></div>
+          <%#= render 'layouts/tab_contents' %>
+        </div>
+        -->
+    <article >
+      <div class="row">
+        <div class="col-md-12">
+          <div >
+            <ul class="nav nav-tabs" role="tablist">
+                <li ng-repeat="link in navigationLinksList" role="presentation" ><a ng-href={{link.path}}>{{link.title}}</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div ng-view></div>
-</article>
+      <div ng-view></div>
+    </article>
+  </main>
+</div>
+
+</body>
+
