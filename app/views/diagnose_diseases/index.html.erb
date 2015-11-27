@@ -5,9 +5,9 @@
       <ul id="navigationTabs" class="nav nav-tabs" role="tablist">
         <li ng-repeat="link in navigationLinksList" role="presentation" class="tabLink" ><a ng-href={{link.path}}>{{link.title}}</a></li>
 
-        <div class="login-container" >
-          <div class="row">
-            <form name="loginForm" ng-controller="LoginController"
+        <div class="login-container"  ng-controller="AuthenticationController">
+          <div ng-if="!currentUser" class="row">
+            <form name="loginForm"
                   ng-submit="login(credentials)" novalidate>
 
               <div class="col-md-3 no-padding">
@@ -32,18 +32,23 @@
                 </button>
               </div>
             </form>
+
+            <!--            <div class="col-md-3 no-padding">
+              <%#= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-login', :id => "btn-signup", :method => :get %>
+            </div>-->
+          </div>
+
+          <div ng-if="currentUser" class="row">
+            <div class="col-md-3 no-padding">
+              <button class="btn btn-default btn-login widthAuto"
+                      type="button"
+                      ng-click="logout()">
+                Kirjaudu ulos
+              </button>
+            </div>
           </div>
         </div>
-        <!--
-              <%# if current_user.nil? %>
-                    <div class="col-md-3 no-padding">
-                      <%#= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-login', :id => "btn-signup", :method => :get %>
-                    </div>
-              <%# else %>
-                  <%#= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-login widthAuto', :method => :delete unless current_user.nil?%>
-              <%# end %>
 
--->
       </ul>
     </div>
   </header>

@@ -1,6 +1,6 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("LoginController", [
+app.controller("AuthenticationController", [
     "$scope","$http","$routeParams", "$resource", "$location", "$rootScope", "AUTH_EVENTS", "AuthenticationService",
     function($scope , $http , $routeParams, $resource, $location, $rootScope, AUTH_EVENTS, AuthenticationService) {
 
@@ -12,14 +12,24 @@ app.controller("LoginController", [
         $scope.login = function(credentials) {
             AuthenticationService.login(credentials).success(function (user) {
                 //$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                //$scope.setCurrentUser(user);
+                $scope.setCurrentUser(user);
                 $scope.credentials = {
                     username: '',
                     password: ''
                 };
-                alert(user.id + " " + user.admin);
             }).error(function () {
                 //$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+            });
+        };
+
+        $scope.logout = function (){
+            AuthenticationService.logout().success(function () {
+                //$rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+                $scope.setCurrentUser(null);
+
+                alert("Uloskirjautuminen onnistui");
+            }).error(function () {
+                alert("Uloskirjautuminen epäonnistui");
             });
         }
 

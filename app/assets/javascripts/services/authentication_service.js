@@ -1,17 +1,21 @@
 var app = angular.module('diagnoseDiseases');
 
 app.service('Session', [
-/*    function () {
-        this.create = function (userId, userRole) {
-            this.userId = userId;
-            this.userRole = userRole;
-            alert(this.userId + " " + this.userRole)
+    "LocalStorageService",
+    function (LocalStorageService) {
+        this.create = function (user) {
+            LocalStorageService.set("current_user_id", user.id);
+            LocalStorageService.set("current_user_admin", user.admin);
+        };
+
+        this.userId = function (){
+            LocalStorageService.get("current_user_id", null);
         };
         this.destroy = function () {
-            this.userId = null;
-            this.userRole = null;
+            LocalStorageService.set("current_user_id", null);
+            LocalStorageService.set("current_user_admin", null);
         };
-    }*/
+    }
 ]);
 
 app.factory('AuthenticationService', [
@@ -23,19 +27,27 @@ app.factory('AuthenticationService', [
             return $http
                 .post('/sessions.json', credentials)
                 .success(function (data,status,headers,config) {
-                   // Session.create(response.data.user.id,
-                   //     response.data.user.admin);
-                   // return response.data.user;
+                    Session.create(data);
                     return data;
                 }).error(function(data,status,headers,config){
                     alert("Kirjautuminen epäonnistui");
                 });
         };
 
-        /*        authService.isAuthenticated = function () {
-         return !!Session.userId;
-         };
+        authService.logout = function () {
+            return $http
+                .delete('/signout.json')
+                .success(function (data,status,headers,config) {
+                    Session.destroy();
+                }).error(function(data,status,headers,config){
+                    alert("Uloskirjautuminen epäonnistui");
+                });
+        };
 
+        authService.isLoggedIn = function () {
+            return !Session.userId;
+        };
+        /*
          authService.isAuthorized = function (authorizedRoles) {
          if (!angular.isArray(authorizedRoles)) {
          authorizedRoles = [authorizedRoles];

@@ -27,7 +27,10 @@ class SessionsController < ApplicationController
     session[:exercise_id] = nil
     session[:task_id] = nil
     session[:exhyp_ids] = nil
-    redirect_to :root
+    respond_to do |format|
+      format.html { redirect_to :root}
+      format.json { head :ok }
+    end
   end
 
 end

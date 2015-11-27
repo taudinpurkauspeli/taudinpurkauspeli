@@ -10,12 +10,12 @@ app.controller("ApplicationController", [
             title: "Diffiryhmät"}
         ];
 
-        //$scope.currentUser = null;
+        $scope.currentUser = null;
         //$scope.userRoles = USER_ROLES;
-        //
-        //$scope.setCurrentUser = function (user) {
-        //    $scope.currentUser = user;
-        //};
+
+        $scope.setCurrentUser = function (user) {
+            $scope.currentUser = user;
+        };
 
     }
 ]);
