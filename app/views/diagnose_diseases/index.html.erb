@@ -5,29 +5,44 @@
       <ul id="navigationTabs" class="nav nav-tabs" role="tablist">
         <li ng-repeat="link in navigationLinksList" role="presentation" class="tabLink" ><a ng-href={{link.path}}>{{link.title}}</a></li>
 
-        <!--    <div class="login-container" >
-              <%# if current_user.nil? %>
-                  <div class="row">
+        <div class="login-container" >
+          <div class="row">
+            <form name="loginForm" ng-controller="LoginController"
+                  ng-submit="login(credentials)" novalidate>
 
-                        <div class="col-md-3 no-padding">
-                          <%#= text_field_tag :username, params[:username], placeholder: 'Käyttäjätunnus', :class => 'form-control width100' %>
-                        </div>
-                        <div class="col-md-3 no-padding">
-                          <%#= password_field_tag :password, params[:password], placeholder: 'Salasana', :class => 'form-control width100' %>
-                        </div>
-                        <div class="col-md-3 no-padding">
-                          <%#= submit_tag "Kirjaudu sisään", :class => 'btn btn-default btn-login', :id => "btn-login" %>
-                        </div>
-                    <%# end %>
+              <div class="col-md-3 no-padding">
+                <input type="text" id="username"
+                       placeholder="Käyttäjätunnus"
+                       class="form-control width100"
+                       ng-model="credentials.username">
+              </div>
+
+              <div class="col-md-3 no-padding">
+                <input type="password" id="password"
+                       placeholder="Salasana"
+                       class="form-control width100"
+                       ng-model="credentials.password">
+              </div>
+
+              <div class="col-md-3 no-padding">
+                <button type="submit"
+                        class="btn btn-default btn-login"
+                        id="btn-login">
+                  Kirjaudu sisään
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!--
+              <%# if current_user.nil? %>
                     <div class="col-md-3 no-padding">
                       <%#= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-login', :id => "btn-signup", :method => :get %>
                     </div>
-                  </div>
-
               <%# else %>
                   <%#= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-login widthAuto', :method => :delete unless current_user.nil?%>
               <%# end %>
-            </div>
+
 -->
       </ul>
     </div>
