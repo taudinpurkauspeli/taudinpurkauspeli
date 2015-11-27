@@ -12,7 +12,7 @@ app.controller("AuthenticationController", [
         $scope.login = function(credentials) {
             AuthenticationService.login(credentials).success(function (user) {
                 //$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                $scope.setCurrentUser(user);
+                $scope.setCurrentUser(AuthenticationService.isLoggedIn());
                 $scope.credentials = {
                     username: '',
                     password: ''
@@ -25,7 +25,7 @@ app.controller("AuthenticationController", [
         $scope.logout = function (){
             AuthenticationService.logout().success(function () {
                 //$rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-                $scope.setCurrentUser(null);
+                $scope.setCurrentUser(AuthenticationService.isLoggedIn());
 
                 alert("Uloskirjautuminen onnistui");
             }).error(function () {

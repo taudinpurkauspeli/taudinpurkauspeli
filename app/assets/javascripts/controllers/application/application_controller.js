@@ -10,7 +10,7 @@ app.controller("ApplicationController", [
             title: "Diffiryhmät"}
         ];
 
-        $scope.currentUser = null;
+        $scope.currentUser = AuthenticationService.isLoggedIn();
         //$scope.userRoles = USER_ROLES;
 
         $scope.setCurrentUser = function (user) {

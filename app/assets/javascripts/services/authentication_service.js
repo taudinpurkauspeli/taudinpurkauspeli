@@ -9,11 +9,11 @@ app.service('Session', [
         };
 
         this.userId = function (){
-            LocalStorageService.get("current_user_id", null);
+            return LocalStorageService.get("current_user_id", null);
         };
         this.destroy = function () {
-            LocalStorageService.set("current_user_id", null);
-            LocalStorageService.set("current_user_admin", null);
+            LocalStorageService.remove("current_user_id");
+            LocalStorageService.remove("current_user_admin");
         };
     }
 ]);
@@ -28,6 +28,7 @@ app.factory('AuthenticationService', [
                 .post('/sessions.json', credentials)
                 .success(function (data,status,headers,config) {
                     Session.create(data);
+                    alert(Session.userId());
                     return data;
                 }).error(function(data,status,headers,config){
                     alert("Kirjautuminen epäonnistui");
@@ -39,13 +40,14 @@ app.factory('AuthenticationService', [
                 .delete('/signout.json')
                 .success(function (data,status,headers,config) {
                     Session.destroy();
+                    alert(Session.userId());
                 }).error(function(data,status,headers,config){
                     alert("Uloskirjautuminen epäonnistui");
                 });
         };
 
         authService.isLoggedIn = function () {
-            return !Session.userId;
+            return Session.userId();
         };
         /*
          authService.isAuthorized = function (authorizedRoles) {
