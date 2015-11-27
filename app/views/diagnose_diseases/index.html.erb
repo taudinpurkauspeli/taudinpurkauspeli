@@ -1,29 +1,41 @@
 <body ng-app="diagnoseDiseases" ng-controller="ApplicationController">
 <div role="tabpanel">
   <header>
-    <%#= render 'layouts/navigation' %>
+    <div id = "navigationTabsContainer">
+      <ul id="navigationTabs" class="nav nav-tabs" role="tablist">
+        <li ng-repeat="link in navigationLinksList" role="presentation" class="tabLink" ><a ng-href={{link.path}}>{{link.title}}</a></li>
+
+        <!--    <div class="login-container" >
+              <%# if current_user.nil? %>
+                  <div class="row">
+
+                        <div class="col-md-3 no-padding">
+                          <%#= text_field_tag :username, params[:username], placeholder: 'Käyttäjätunnus', :class => 'form-control width100' %>
+                        </div>
+                        <div class="col-md-3 no-padding">
+                          <%#= password_field_tag :password, params[:password], placeholder: 'Salasana', :class => 'form-control width100' %>
+                        </div>
+                        <div class="col-md-3 no-padding">
+                          <%#= submit_tag "Kirjaudu sisään", :class => 'btn btn-default btn-login', :id => "btn-login" %>
+                        </div>
+                    <%# end %>
+                    <div class="col-md-3 no-padding">
+                      <%#= button_to 'Luo uusi tunnus', new_user_path, :class => 'btn btn-default btn-login', :id => "btn-signup", :method => :get %>
+                    </div>
+                  </div>
+
+              <%# else %>
+                  <%#= button_to 'Kirjaudu ulos', '/signout', :class => 'btn btn-default btn-login widthAuto', :method => :delete unless current_user.nil?%>
+              <%# end %>
+            </div>
+-->
+      </ul>
+    </div>
   </header>
   <main role="main">
     <%#= render 'messages/messages' %>
 
-    <!--           <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="anamnesisTab"></div>
-          <div role="tabpanel" class="tab-pane" id="taskTab"></div>
-          <div role="tabpanel" class="tab-pane" id="hypothesisTab"></div>
-          <div role="tabpanel" class="tab-pane" id="currentTaskTab"></div>
-          <%#= render 'layouts/tab_contents' %>
-        </div>
-        -->
     <article >
-      <div class="row">
-        <div class="col-md-12">
-          <div >
-            <ul class="nav nav-tabs" role="tablist">
-                <li ng-repeat="link in navigationLinksList" role="presentation" ><a ng-href={{link.path}}>{{link.title}}</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
       <div ng-view></div>
     </article>
   </main>
