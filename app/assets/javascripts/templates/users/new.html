@@ -1,0 +1,194 @@
+<div class = "row">
+    <div class = "col-md-8">
+        <br/>
+        <br/>
+        <h1>Uuden käyttäjätunnuksen luominen</h1>
+    </div>
+    <br/>
+    <br/>
+    <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Täytä kentät ja luo uusi tunnus.">Ohje</a>
+    </div>
+</div>
+<div class = "separator"></div>
+
+<div class="row">
+    <div class="col-md-5">
+        <form novalidate name="createUserForm">
+            <div class="form-group has-feedback"
+                 ng-class="{
+'has-error': createUserForm.username.$invalid && createUserForm.username.$dirty,
+'has-success': createUserForm.username.$valid && createUserForm.username.$touched
+}">
+                <label for="username">Käyttäjätunnus</label>
+                <input type="text"
+                       class="form-control"
+                       required pattern=".{3,}"
+                       name="username"
+                       id="username"
+                       placeholder="Käyttäjätunnus"
+                       ng-model="newUser.username">
+
+                <p class="help-block" ng-messages="createUserForm.username.$error" ng-if="!createUserForm.username.$pristine">
+                    <span ng-message="required">Käyttäjätunnus on pakollinen</span>
+                    <span ng-message="pattern">Käyttäjätunnuksessa on oltava vähintään 3 merkkiä</span>
+                </p>
+
+
+            </div>
+
+
+
+            <div class="form-group has-feedback"
+                 ng-class="{
+'has-error': createUserForm.password.$invalid && createUserForm.password.$dirty,
+'has-success': createUserForm.password.$valid && createUserForm.password.$touched
+}">
+                <label for="password">Salasana</label>
+                <input type="password"
+                       class="form-control"
+                       required
+                       name="password"
+                       id="password"
+                       placeholder="Salasana"
+                       ng-model="newUser.password">
+
+                <p class="help-block" ng-messages="createUserForm.password.$error" ng-if="!createUserForm.password.$pristine">
+                    <span ng-message="required">Salasana on pakollinen</span>
+                </p>
+            </div>
+
+            <div class="form-group has-feedback"
+                 ng-class="{
+'has-error': createUserForm.password_confirmation.$invalid && createUserForm.password_confirmation.$dirty,
+'has-success': createUserForm.password_confirmation.$valid && createUserForm.password_confirmation.$touched
+}">
+                <label for="password_confirmation">Salasanan vahvistus</label>
+                <input type="password"
+                       class="form-control"
+                       required
+                       name="password_confirmation"
+                       id="password_confirmation"
+                       placeholder="Salasanan vahvistus"
+                       ng-model="newUser.password_confirmation">
+
+                <p class="help-block" ng-messages="createUserForm.password_confirmation.$error" ng-if="!createUserForm.password_confirmation.$pristine">
+                    <span ng-message="required">Salasana on pakollinen</span>
+                </p>
+            </div>
+
+
+            <div class="form-group has-feedback"
+                 ng-class="{
+'has-error': createUserForm.first_name.$invalid && createUserForm.first_name.$dirty,
+'has-success': createUserForm.first_name.$valid && createUserForm.first_name.$touched
+}">
+                <label for="first_name">Etunimi</label>
+                <input type="text"
+                       class="form-control"
+                       required pattern=".{3,}"
+                       name="first_name"
+                       id="first_name"
+                       placeholder="Etunimi"
+                       ng-model="newUser.first_name">
+
+                <p class="help-block" ng-messages="createUserForm.first_name.$error" ng-if="!createUserForm.first_name.$pristine">
+                    <span ng-message="required">Etunimi on pakollinen</span>
+                    <span ng-message="pattern">Etunimessä on oltava vähintään 3 merkkiä</span>
+                </p>
+            </div>
+
+            <div class="form-group has-feedback"
+                 ng-class="{
+'has-error': createUserForm.last_name.$invalid && createUserForm.last_name.$dirty,
+'has-success': createUserForm.last_name.$valid && createUserForm.last_name.$touched
+}">
+
+                <label for="last_name">Sukunimi</label>
+                <input type="text"
+                       class="form-control"
+                       required pattern=".{3,}"
+                       name="last_name"
+                       id="last_name"
+                       placeholder="Sukunimi"
+                       ng-model="newUser.last_name">
+
+                <p class="help-block" ng-messages="createUserForm.last_name.$error" ng-if="!createUserForm.last_name.$pristine">
+                    <span ng-message="required">Sukunimi on pakollinen</span>
+                    <span ng-message="pattern">Sukunimessä on oltava vähintään 3 merkkiä</span>
+                </p>
+            </div>
+
+
+            <div class="form-group has-feedback"
+                 ng-class="{
+'has-error': createUserForm.student_number.$invalid && createUserForm.student_number.$dirty,
+'has-success': createUserForm.student_number.$valid && createUserForm.student_number.$touched
+}">
+
+                <label for="student_number">Opiskelijanumero</label>
+                <input type="text"
+                       class="form-control"
+                       required pattern="^\d{1,9}$"
+                       name="student_number"
+                       id="student_number"
+                       placeholder="Opiskelijanumero"
+                       ng-model="newUser.student_number">
+
+                <p class="help-block" ng-messages="createUserForm.student_number.$error" ng-if="!createUserForm.student_number.$pristine">
+                    <span ng-message="required">Opiskelijanumero on pakollinen</span>
+                    <span ng-message="pattern">Opiskelijanumerossa on oltava 9 numeroa</span>
+                </p>
+            </div>
+
+
+            <div class="form-group has-feedback"
+                 ng-class="{
+'has-error': createUserForm.email.$invalid && createUserForm.email.$dirty,
+'has-success': createUserForm.email.$valid && createUserForm.email.$touched
+}">
+
+                <label for="email">Sähköposti</label>
+                <input type="text"
+                       class="form-control"
+                       name="email"
+                       id="email"
+                       placeholder="Sähköposti"
+                       ng-model="newUser.email">
+
+                <p class="help-block" ng-messages="createUserForm.email.$error" ng-if="!createUserForm.email.$pristine">
+                    <span ng-message="required">Sukunimi on pakollinen</span>
+                </p>
+            </div>
+
+            <div class="form-grouphas-feedback"
+                 ng-class="{
+'has-error': createUserForm.starting_year.$invalid && createUserForm.starting_year.$dirty,
+'has-success': createUserForm.starting_year.$valid && createUserForm.starting_year.$touched
+}">
+                <label for="starting_year">Epidemiologian kurssin aloitusvuosi</label>
+                <select ng-model="newUser.starting_year"
+                        class="form-control"
+                        required
+                        name="starting_year"
+                        id="starting_year"
+                        ng-options="n for n in [] | range:2000:2015"></select>
+
+
+                <p class="help-block" ng-messages="createUserForm.starting_year.$error" ng-if="!createUserForm.starting_year.$pristine">
+                    <span ng-message="required">Aloitusvuosi on pakollinen</span>
+                </p>
+            </div>
+
+            <div>
+                <button ng-click="createUser()"
+                        class="btn btn-default btn-save widthAuto"
+                        ng-disabled="createUserForm.$invalid || createUserForm.$pristine">
+                    Tallenna
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+</div>

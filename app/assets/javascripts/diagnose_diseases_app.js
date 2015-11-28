@@ -34,6 +34,9 @@ app.config([
                     }
                 }]
             }
+        }).when("/signup",{
+            controller: "UsersNewController",
+            templateUrl: "users/new.html"
         });
     }
 ]);
