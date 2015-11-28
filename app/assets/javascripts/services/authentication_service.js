@@ -11,6 +11,9 @@ app.service('Session', [
         this.userId = function (){
             return LocalStorageService.get("current_user_id", null);
         };
+        this.userAdmin = function (){
+            return LocalStorageService.get("current_user_admin", null);
+        };
         this.destroy = function () {
             LocalStorageService.remove("current_user_id");
             LocalStorageService.remove("current_user_admin");
@@ -28,7 +31,7 @@ app.factory('AuthenticationService', [
                 .post('/sessions.json', credentials)
                 .success(function (data,status,headers,config) {
                     Session.create(data);
-                    alert(Session.userId());
+                    //alert(Session.userId());
                     return data;
                 }).error(function(data,status,headers,config){
                     alert("Kirjautuminen epäonnistui");
@@ -40,7 +43,7 @@ app.factory('AuthenticationService', [
                 .delete('/signout.json')
                 .success(function (data,status,headers,config) {
                     Session.destroy();
-                    alert(Session.userId());
+                    //alert(Session.userId());
                 }).error(function(data,status,headers,config){
                     alert("Uloskirjautuminen epäonnistui");
                 });
@@ -49,14 +52,12 @@ app.factory('AuthenticationService', [
         authService.isLoggedIn = function () {
             return Session.userId();
         };
-        /*
-         authService.isAuthorized = function (authorizedRoles) {
-         if (!angular.isArray(authorizedRoles)) {
-         authorizedRoles = [authorizedRoles];
-         }
-         return (authService.isAuthenticated() &&
-         authorizedRoles.indexOf(Session.userRole) !== -1);
-         };*/
+
+        authService.isAdmin = function () {
+            return Session.userAdmin() === "true";
+        };
+
+
 
         return authService;
     }

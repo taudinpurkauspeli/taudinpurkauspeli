@@ -2,7 +2,7 @@ var app = angular.module('diagnoseDiseases');
 
 app.controller("ApplicationController", [
     "$scope","$http","$routeParams", "$resource", "$location", "USER_ROLES", "AuthenticationService",
-    function($scope , $http , $routeParams, $resource, $location, USER_ROLES, AuthenticationService) {
+    function($scope , $http , $routeParams, $resource, $location, AuthenticationService) {
         $scope.navigationLinksList = [
             {path: "#/",
             title: "Taudinpurkauspeli"},
@@ -11,10 +11,11 @@ app.controller("ApplicationController", [
         ];
 
         $scope.currentUser = AuthenticationService.isLoggedIn();
-        //$scope.userRoles = USER_ROLES;
+        $scope.currentUserAdmin = AuthenticationService.isAdmin();
 
-        $scope.setCurrentUser = function (user) {
-            $scope.currentUser = user;
+        $scope.setCurrentUser = function (userId, userAdmin) {
+            $scope.currentUser = userId;
+            $scope.currentUserAdmin = userAdmin;
         };
 
     }

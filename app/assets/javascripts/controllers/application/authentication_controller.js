@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("AuthenticationController", [
-    "$scope","$http","$routeParams", "$resource", "$location", "$rootScope", "AUTH_EVENTS", "AuthenticationService",
-    function($scope , $http , $routeParams, $resource, $location, $rootScope, AUTH_EVENTS, AuthenticationService) {
+    "$scope","$http","$routeParams", "$resource", "$location", "$rootScope", "AuthenticationService",
+    function($scope , $http , $routeParams, $resource, $location, $rootScope, AuthenticationService) {
 
         $scope.credentials = {
             username: '',
@@ -11,21 +11,19 @@ app.controller("AuthenticationController", [
 
         $scope.login = function(credentials) {
             AuthenticationService.login(credentials).success(function (user) {
-                //$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                $scope.setCurrentUser(AuthenticationService.isLoggedIn());
+                $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin());
                 $scope.credentials = {
                     username: '',
                     password: ''
                 };
             }).error(function () {
-                //$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+
             });
         };
 
         $scope.logout = function (){
             AuthenticationService.logout().success(function () {
-                //$rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-                $scope.setCurrentUser(AuthenticationService.isLoggedIn());
+                $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin());
 
                 alert("Uloskirjautuminen onnistui");
             }).error(function () {

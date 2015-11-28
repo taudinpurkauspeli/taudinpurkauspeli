@@ -21,4 +21,5 @@ app.factory('LocalStorageService', [
                 return JSON.parse($window.localStorage[key] || '{}');
             }
         }
-    }]);
+    }
+]);
