@@ -3,7 +3,8 @@
   <header>
     <div id = "navigationTabsContainer">
       <ul id="navigationTabs" class="nav nav-tabs" role="tablist">
-        <li ng-repeat="link in navigationLinksList" role="presentation" class="tabLink" ><a ng-href={{link.path}}>{{link.title}}</a></li>
+        <li role="presentation" class="tabLink" ><a ng-href="#/">Taudinpurkauspeli</a></li>
+        <li role="presentation" class="tabLink" ng-if="currentUserAdmin"><a ng-href="#/hypothesis_groups">Diffiryhmät</a></li>
 
         <div class="login-container"  ng-controller="AuthenticationController">
           <div ng-if="!currentUser" class="row">
