@@ -1,6 +1,5 @@
 var app = angular.module('diagnoseDiseases');
 
-
 app.factory('LocalStorageService', [
     "$window",
     function($window) {

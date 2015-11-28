@@ -1,7 +1,7 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ApplicationController", [
-    "$scope","$http","$routeParams", "$resource", "$location", "USER_ROLES", "AuthenticationService",
+    "$scope","$http","$routeParams", "$resource", "$location", "AuthenticationService",
     function($scope , $http , $routeParams, $resource, $location, AuthenticationService) {
         $scope.navigationLinksList = [
             {path: "#/",

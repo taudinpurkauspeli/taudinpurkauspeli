@@ -22,8 +22,8 @@ app.service('Session', [
 ]);
 
 app.factory('AuthenticationService', [
-    "$http","Session",
-    function ($http, Session) {
+    "$http","Session", "$location",
+    function ($http, Session, $location) {
         var authService = {};
 
         authService.login = function (credentials) {
@@ -44,6 +44,7 @@ app.factory('AuthenticationService', [
                 .success(function (data,status,headers,config) {
                     Session.destroy();
                     //alert(Session.userId());
+                    $location.path("/");
                 }).error(function(data,status,headers,config){
                     alert("Uloskirjautuminen epäonnistui");
                 });
@@ -56,8 +57,6 @@ app.factory('AuthenticationService', [
         authService.isAdmin = function () {
             return Session.userAdmin() === "true";
         };
-
-
 
         return authService;
     }

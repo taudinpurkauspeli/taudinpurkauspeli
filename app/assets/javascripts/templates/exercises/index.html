@@ -13,7 +13,7 @@
 <div class = "separator"></div>
 
 
-<div ng-if="exercisesList && currentUser">
+<div ng-if="exercisesList">
     <div class="row">
         <label for="queryName">Hakusanat</label>
         <div class="col-md-5">
@@ -32,7 +32,7 @@
         <div class="row">
 
             <div class="col-md-5">
-                <button class="btn btn-default btn-exercise">
+                <button class="btn btn-default btn-exercise" ng-class="{'disabled': !currentUser}">
                     {{exercise.name}}
                 </button>
             </div>
