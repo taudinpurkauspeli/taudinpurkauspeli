@@ -9,14 +9,21 @@
 
     <div class="row">
         <div class="col-md-5">
-            <div ng-repeat="(hypothesis_group, data) in exerciseHypotheses" >
-                <button class="btn btn-default btn-hypothesis multiline btn-save" >{{data[0].hypothesis.hypothesis_group.name}}</button>
+            <ul ng-repeat="(hypothesis_group, exercise_hypotheses) in exerciseHypotheses"
+                dnd-list="exercise_hypotheses"
+                dnd-allowed-types="['hypothesis_in_bank']">
+                <button class="btn btn-default btn-hypothesis multiline btn-save" >{{exercise_hypotheses[0].hypothesis.hypothesis_group.name}}</button>
 
-                <div ng-repeat="exercise_hypothesis in data">
-                    <button class="btn btn-default btn-hypothesis multiline">{{exercise_hypothesis.hypothesis.name}}</button>
-                </div>
+                <li class="btn btn-default btn-hypothesis multiline"
+                    ng-repeat="exercise_hypothesis in exercise_hypotheses"
+                    dnd-draggable="exercise_hypothesis"
+                    dnd-effect-allowed="move"
+                    dnd-moved="removedFromExercise()"
+                    dnd-type="'hypothesis_in_exercise'">
+                    {{exercise_hypothesis.hypothesis.name}}
+                </li>
 
-            </div>
+            </ul>
         </div>
 
         <div class="col-md-2">
@@ -26,14 +33,24 @@
         </div>
 
         <div class="col-md-5">
-            <div ng-repeat="(hypothesis_group, data) in hypothesisBank" >
-                <button class="btn btn-default btn-hypothesis multiline btn-save" >{{data[0].hypothesis_group.name}}</button>
 
-                <div ng-repeat="hypothesis in data">
-                    <button class="btn btn-default btn-hypothesis multiline" >{{hypothesis.name}}</button>
-                </div>
+            <ul ng-repeat="(hypothesis_group, hypotheses) in hypothesisBank"
+                dnd-list="hypotheses"
+                dnd-allowed-types="['hypothesis_in_exercise']">
+                <button class="btn btn-default btn-hypothesis multiline btn-save" >{{hypotheses[0].hypothesis_group.name}}</button>
 
-            </div>
+                <li class="btn btn-default btn-hypothesis multiline"
+                    ng-repeat="hypothesis in hypotheses"
+                    dnd-draggable="hypothesis"
+                    dnd-effect-allowed="move"
+                    dnd-moved="addedToExercise()"
+                    dnd-type="'hypothesis_in_bank'">
+                    {{hypothesis.name}}
+                </li>
+
+
+            </ul>
+
         </div>
     </div>
 

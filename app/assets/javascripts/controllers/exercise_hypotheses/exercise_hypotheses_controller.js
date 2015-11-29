@@ -11,5 +11,12 @@ app.controller("ExerciseHypothesesController", [
         var HypothesisBank = $resource('/hypothesis_bank.json');
         $scope.hypothesisBank= HypothesisBank.get({"exercise_id": $routeParams.id});
 
+        $scope.removedFromExercise = function(){
+            alert("Poistettu ryhmästä");
+        }
+        $scope.addedToExercise = function(){
+            alert("Lisätty ryhmään");
+        }
+
     }
 ]);
