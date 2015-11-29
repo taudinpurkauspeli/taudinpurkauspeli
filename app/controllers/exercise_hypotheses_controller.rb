@@ -1,7 +1,33 @@
 class ExerciseHypothesesController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
   before_action :set_exercise_hypothesis, only: [:update, :destroy]
+
+  # GET /exercise_hypotheses
+  # GET /exercise_hypotheses.json
+  def index
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+
+        exercise_hypotheses = exercise.get_hypotheses
+        hypothesis_bank = exercise.get_hypothesis_bank
+
+        response = {exercise_hypotheses: exercise_hypotheses, hypothesis_bank: hypothesis_bank}
+
+        format.html
+        format.json {render json: response}
+      else
+        format.html
+        format.json {head :not_found}
+      end
+    end
+
+  end
 
   # POST /exercise_hypotheses
   # POST /exercise_hypotheses.json
@@ -49,5 +75,9 @@ class ExerciseHypothesesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def exercise_hypothesis_params
     params.require(:exercise_hypothesis).permit(:exercise_id, :hypothesis_id, :explanation, :task_id)
+  end
+
+  def exercise_hypothesis_other_params
+    params.permit(:exercise_id)
   end
 end
