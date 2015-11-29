@@ -1,4 +1,7 @@
 class ExercisesController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   before_action :ensure_user_is_logged_in, except: [:index]
   before_action :ensure_user_is_admin, except: [:index, :show]
   before_action :set_exercise, only: [:show, :edit, :update, :destroy, :duplicate_exercise, :toggle_hidden]
@@ -32,6 +35,11 @@ class ExercisesController < ApplicationController
     @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
 
     set_view_layout
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @exercise }
+    end
   end
 
   # GET /exercises/new

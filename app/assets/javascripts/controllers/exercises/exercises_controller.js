@@ -7,5 +7,12 @@ app.controller("ExercisesController", [
 
         var Exercises = $resource('/exercises.json');
         $scope.exercisesList = Exercises.query();
+
+
+        $scope.viewExercise = function(exercise) {
+            $location.path("exercises/" + exercise.id);
+        };
+
+
     }
 ]);

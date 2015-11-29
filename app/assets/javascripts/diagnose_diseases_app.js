@@ -37,6 +37,18 @@ app.config([
         }).when("/signup",{
             controller: "UsersNewController",
             templateUrl: "users/new.html"
+        }).when("/exercises/:id",{
+            controller: "ExercisesShowController",
+            templateUrl: "exercises/show.html",
+            resolve: {
+                auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                    var userAdmin = AuthenticationService.isAdmin();
+
+                    if (!userAdmin) {
+                        return $q.reject({ authenticated: false });
+                    }
+                }]
+            }
         });
     }
 ]);
