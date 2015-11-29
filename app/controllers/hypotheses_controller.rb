@@ -2,8 +2,8 @@ class HypothesesController < ApplicationController
   protect_from_forgery
   skip_before_action :verify_authenticity_token, if: :json_request?
 
-  before_action :ensure_user_is_logged_in, except: [:hypotheses_all]
-  before_action :ensure_user_is_admin, except: [:index, :hypotheses_all]
+  before_action :ensure_user_is_logged_in
+  before_action :ensure_user_is_admin, except: [:index]
   before_action :set_hypothesis, only: [:destroy]
   before_action :set_current_user, only: [:index]
 

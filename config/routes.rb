@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   get 'taudinpurkauspeli', to: 'diagnose_diseases#index'
   get 'hypotheses_all', to: 'hypotheses#hypotheses_all'
+  get 'exercises_one/:id', to: 'exercises#exercises_one'
 
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
