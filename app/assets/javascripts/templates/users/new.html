@@ -64,14 +64,15 @@
                 <label for="password_confirmation">Salasanan vahvistus</label>
                 <input type="password"
                        class="form-control"
-                       required
+                       required match="newUser.password"
                        name="password_confirmation"
                        id="password_confirmation"
                        placeholder="Salasanan vahvistus"
                        ng-model="newUser.password_confirmation">
 
                 <p class="help-block" ng-messages="createUserForm.password_confirmation.$error" ng-if="!createUserForm.password_confirmation.$pristine">
-                    <span ng-message="required">Salasana on pakollinen</span>
+                    <span ng-message="required">Salasanan vahvistus on pakollinen</span>
+                    <span ng-message="match">Salasanan vahvistus ei vastaa salasanaa</span>
                 </p>
             </div>
 
@@ -182,6 +183,7 @@
 
 
             <div>
+                <br/>
                 <button ng-click="createUser()"
                         class="btn btn-default btn-save widthAuto"
                         ng-disabled="createUserForm.$invalid || createUserForm.$pristine">
