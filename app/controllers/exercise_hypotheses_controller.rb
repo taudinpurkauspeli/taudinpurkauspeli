@@ -14,13 +14,10 @@ class ExerciseHypothesesController < ApplicationController
     respond_to do |format|
       if exercise
 
-        exercise_hypotheses = exercise.get_hypotheses
-        hypothesis_bank = exercise.get_hypothesis_bank
-
-        response = {exercise_hypotheses: exercise_hypotheses, hypothesis_bank: hypothesis_bank}
+        exercise_hypotheses = exercise.get_hypotheses_json
 
         format.html
-        format.json {render json: response}
+        format.json {render json: exercise_hypotheses}
       else
         format.html
         format.json {head :not_found}
@@ -77,7 +74,4 @@ class ExerciseHypothesesController < ApplicationController
     params.require(:exercise_hypothesis).permit(:exercise_id, :hypothesis_id, :explanation, :task_id)
   end
 
-  def exercise_hypothesis_other_params
-    params.permit(:exercise_id)
-  end
 end

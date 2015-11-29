@@ -8,12 +8,8 @@ app.controller("ExerciseHypothesesController", [
         var ExerciseHypotheses = $resource('/exercise_hypotheses.json');
         $scope.exerciseHypotheses = ExerciseHypotheses.get({"exercise_id": $routeParams.id});
 
-        var HypothesisGroups = $resource('/hypothesis_groups.json');
-        $scope.hypothesisGroups = HypothesisGroups.query();
-
-        var Hypotheses = $resource('/hypotheses_all.json');
-        $scope.hypotheses = Hypotheses.query();
-
+        var HypothesisBank = $resource('/hypothesis_bank.json');
+        $scope.hypothesisBank= HypothesisBank.get({"exercise_id": $routeParams.id});
 
     }
 ]);

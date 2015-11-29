@@ -48,6 +48,25 @@ class HypothesesController < ApplicationController
     end
   end
 
+  # GET /hypothesis_bank.json
+
+  def hypothesis_bank
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+
+        hypothesis_bank = exercise.get_hypothesis_bank_json
+
+        format.html
+        format.json {render json: hypothesis_bank}
+      else
+        format.html
+        format.json {head :not_found}
+      end
+    end
+  end
+
   # GET /hypotheses/new
   def new
     @hypothesis = Hypothesis.new

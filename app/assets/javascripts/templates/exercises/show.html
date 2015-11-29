@@ -5,17 +5,36 @@
 </div>
 <div class = "separator"></div>
 
-{{exercise}}
-<div class = "separator"></div>
-
 <div ng-controller="ExerciseHypothesesController">
-    {{exerciseHypotheses}}
 
-    <div class = "separator"></div>
-    {{hypothesisGroups}}
+    <div class="row">
+        <div class="col-md-5">
+            <div ng-repeat="(hypothesis_group, data) in exerciseHypotheses" >
+                <button class="btn btn-default btn-hypothesis multiline btn-save" >{{data[0].hypothesis.hypothesis_group.name}}</button>
 
-    <div class = "separator"></div>
+                <div ng-repeat="exercise_hypothesis in data">
+                    <button class="btn btn-default btn-hypothesis multiline">{{exercise_hypothesis.hypothesis.name}}</button>
+                </div>
 
-    {{hypotheses}}
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <br/>
+            <br/>
+            <br/>
+        </div>
+
+        <div class="col-md-5">
+            <div ng-repeat="(hypothesis_group, data) in hypothesisBank" >
+                <button class="btn btn-default btn-hypothesis multiline btn-save" >{{data[0].hypothesis_group.name}}</button>
+
+                <div ng-repeat="hypothesis in data">
+                    <button class="btn btn-default btn-hypothesis multiline" >{{hypothesis.name}}</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </div>
