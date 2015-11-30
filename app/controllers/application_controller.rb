@@ -30,11 +30,21 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_user_is_logged_in
-    redirect_to exercises_path, alert: "Toiminto vaatii sisäänkirjautumisen" if current_user.nil?
+    if current_user.nil?
+      respond_to do |format|
+        format.html { redirect_to exercises_path, alert: "Toiminto vaatii sisäänkirjautumisen"}
+        format.json { head :unauthorized }
+      end
+    end
   end
 
   def ensure_user_is_admin
-    redirect_to exercises_path, alert: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia" unless current_user.try(:admin)
+    unless current_user.try(:admin)
+      respond_to do |format|
+        format.html {redirect_to exercises_path, alert: "Sinulla ei ole toimintoon vaadittavia käyttöoikeuksia" }
+        format.json { head :forbidden }
+      end
+    end
   end
 
   def get_layout
@@ -100,4 +110,9 @@ class ApplicationController < ActionController::Base
     return false
   end
 
+  protected
+
+  def json_request?
+    request.format.json?
+  end
 end

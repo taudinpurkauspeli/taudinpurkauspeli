@@ -1,4 +1,7 @@
 class HypothesesController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index]
   before_action :set_hypothesis, only: [:destroy]
@@ -31,6 +34,37 @@ class HypothesesController < ApplicationController
     end
 
     set_view_layout
+  end
+
+
+  # GET /hypotheses_all.json
+
+  def hypotheses_all
+    @hypotheses = Hypothesis.all
+
+    respond_to do |format|
+      format.html
+      format.json {render json: @hypotheses}
+    end
+  end
+
+  # GET /hypothesis_bank.json
+
+  def hypothesis_bank
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+
+        hypothesis_bank = exercise.get_hypothesis_bank_json
+
+        format.html
+        format.json {render json: hypothesis_bank}
+      else
+        format.html
+        format.json {head :not_found}
+      end
+    end
   end
 
   # GET /hypotheses/new

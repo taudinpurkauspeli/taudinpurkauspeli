@@ -1,7 +1,10 @@
 class ExercisesController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   before_action :ensure_user_is_logged_in, except: [:index]
   before_action :ensure_user_is_admin, except: [:index, :show]
-  before_action :set_exercise, only: [:show, :edit, :update, :destroy, :duplicate_exercise, :toggle_hidden]
+  before_action :set_exercise, only: [:show, :edit, :update, :destroy, :duplicate_exercise, :toggle_hidden, :exercises_one]
   before_action :set_current_user, only: [:show, :index]
 
   # GET /exercises
@@ -23,6 +26,15 @@ class ExercisesController < ApplicationController
 
   # GET /exercises/1
   # GET /exercises/1.json
+  def exercises_one
+    respond_to do |format|
+      format.html
+      format.json { render json: @exercise }
+    end
+  end
+
+  # GET /exercises_one/1
+  # GET /exercises_one/1.json
   def show
     session[:exercise_id] = params[:id]
 

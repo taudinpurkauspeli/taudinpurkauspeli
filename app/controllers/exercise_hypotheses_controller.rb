@@ -1,7 +1,30 @@
 class ExerciseHypothesesController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
   before_action :set_exercise_hypothesis, only: [:update, :destroy]
+
+  # GET /exercise_hypotheses
+  # GET /exercise_hypotheses.json
+  def index
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+
+        exercise_hypotheses = exercise.get_hypotheses_json
+
+        format.html
+        format.json {render json: exercise_hypotheses}
+      else
+        format.html
+        format.json {head :not_found}
+      end
+    end
+
+  end
 
   # POST /exercise_hypotheses
   # POST /exercise_hypotheses.json
@@ -13,8 +36,10 @@ class ExerciseHypothesesController < ApplicationController
     respond_to do |format|
       if @exercise_hypothesis.save
         format.html { redirect_to hypotheses_url(:layout => get_layout)}
+        format.json {head :ok}
       else
         format.html { redirect_to hypotheses_url(:layout => get_layout), alert: 'Diffin liittäminen caseen epäonnistui.' }
+        format.json {head :internal_server_error}
       end
     end
   end
@@ -37,6 +62,7 @@ class ExerciseHypothesesController < ApplicationController
     @exercise_hypothesis.destroy
     respond_to do |format|
       format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Diffi poistettu casesta.'}
+      format.json {head :ok}
     end
   end
 
@@ -50,4 +76,5 @@ class ExerciseHypothesesController < ApplicationController
   def exercise_hypothesis_params
     params.require(:exercise_hypothesis).permit(:exercise_id, :hypothesis_id, :explanation, :task_id)
   end
+
 end

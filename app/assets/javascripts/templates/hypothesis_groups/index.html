@@ -49,6 +49,7 @@
 </div>
 
 <br/>
+
 <div class = "separator"></div>
 
 <div class="row">
@@ -76,10 +77,10 @@
                        placeholder="Diffiryhmän nimi"
                        ng-model="newHypothesisGroup.name">
 
-                    <p class="help-block" ng-messages="createHypothesisGroupForm.name.$error" ng-if="!createHypothesisGroupForm.name.$pristine">
-                        <span ng-message="required">Nimi on pakollinen</span>
-                        <span ng-message="pattern">Nimessä on oltava vähintään 3 merkkiä</span>
-                    </p>
+                <p class="help-block" ng-messages="createHypothesisGroupForm.name.$error" ng-if="!createHypothesisGroupForm.name.$pristine">
+                    <span ng-message="required">Nimi on pakollinen</span>
+                    <span ng-message="pattern">Nimessä on oltava vähintään 3 merkkiä</span>
+                </p>
             </div>
 
             <div>
