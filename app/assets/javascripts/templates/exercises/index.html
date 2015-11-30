@@ -32,7 +32,9 @@
         <div class="row">
 
             <div class="col-md-5">
-                <button class="btn btn-default btn-exercise">
+                <button class="btn btn-default btn-exercise"
+                        ng-class="{'disabled': !currentUser}"
+                        ng-click="viewExercise(exercise)">
                     {{exercise.name}}
                 </button>
             </div>

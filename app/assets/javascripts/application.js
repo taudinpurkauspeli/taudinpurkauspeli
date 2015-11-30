@@ -20,5 +20,7 @@
 //= require diagnose_diseases_app
 //= require ckeditor/init
 //= require bootstrap-sprockets
+//= require angular-validation-match
+//= require angular-drag-and-drop-lists
 //= require_tree ./templates
 //= require_tree .

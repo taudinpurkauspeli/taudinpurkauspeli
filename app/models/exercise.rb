@@ -41,8 +41,16 @@ class Exercise < ActiveRecord::Base
     return exercise_hypotheses.group_by{|exhyp| exhyp.hypothesis.hypothesis_group_id}
   end
 
+  def get_hypotheses_json
+    return exercise_hypotheses.group_by{|exhyp| exhyp.hypothesis.hypothesis_group.id}.to_json(include: {:hypothesis => {include: :hypothesis_group}})
+  end
+
   def get_hypothesis_bank
     return (Hypothesis.all - hypotheses).group_by(&:hypothesis_group_id)
+  end
+
+  def get_hypothesis_bank_json
+    return (Hypothesis.all - hypotheses).group_by(&:hypothesis_group_id).to_json(include: :hypothesis_group)
   end
 
   def get_checked_hypotheses_for(user)

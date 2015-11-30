@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+  wrap_parameters include: User.attribute_names + [:password] + [:password_confirmation]
+
   before_action :ensure_user_is_logged_in, except: [:new, :create]
   before_action :ensure_user_is_admin, only: [:index]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
@@ -67,8 +71,10 @@ class UsersController < ApplicationController
         @user.authenticate(user_params[:password])
         session[:user_id] = @user.id
         format.html { redirect_to exercises_path, notice: 'Käyttäjätunnuksen luominen onnistui!' }
+        format.json { head :ok }
       else
         format.html { render :new }
+        format.json { head :internal_server_error }
       end
     end
   end

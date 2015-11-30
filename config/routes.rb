@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   resources :conclusions
 
   get 'taudinpurkauspeli', to: 'diagnose_diseases#index'
+  get 'hypothesis_bank', to: 'hypotheses#hypothesis_bank'
+  get 'hypotheses_all', to: 'hypotheses#hypotheses_all'
+  get 'exercises_one/:id', to: 'exercises#exercises_one'
 
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'

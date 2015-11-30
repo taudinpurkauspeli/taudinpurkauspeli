@@ -71,9 +71,4 @@ class HypothesisGroupsController < ApplicationController
     params.require(:hypothesis_group).permit(:name)
   end
 
-  protected
-
-  def json_request?
-    request.format.json?
-  end
 end
