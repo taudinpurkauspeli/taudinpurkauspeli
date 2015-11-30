@@ -36,8 +36,10 @@ class ExerciseHypothesesController < ApplicationController
     respond_to do |format|
       if @exercise_hypothesis.save
         format.html { redirect_to hypotheses_url(:layout => get_layout)}
+        format.json {head :ok}
       else
         format.html { redirect_to hypotheses_url(:layout => get_layout), alert: 'Diffin liittäminen caseen epäonnistui.' }
+        format.json {head :internal_server_error}
       end
     end
   end
@@ -60,6 +62,7 @@ class ExerciseHypothesesController < ApplicationController
     @exercise_hypothesis.destroy
     respond_to do |format|
       format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Diffi poistettu casesta.'}
+      format.json {head :ok}
     end
   end
 

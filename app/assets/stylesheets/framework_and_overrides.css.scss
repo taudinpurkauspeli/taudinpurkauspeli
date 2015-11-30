@@ -23,7 +23,7 @@ $DisabledButtonText   : #666;
 img {
   @extend .img-responsive;
   margin: 0 auto;
-  }
+}
 
 body{
   background-color: black;
@@ -80,7 +80,7 @@ li.active>a{
 
 .login-container{
   display: table;
-  width: auto;  
+  width: auto;
   position: absolute;
   //top: 10px;
   right: 20px;
@@ -417,16 +417,16 @@ span.progress-percent{
 
 //doesn't really do anything yet
 input[type="checkbox"] {
-    display:inline-block;
-    width:15px;
-    height:15px;
-    //margin:-1px 4px 0 0;
-    vertical-align:middle;
-    //background:url(check_radio_sheet.png) left top no-repeat;
-    cursor:pointer;
+  display:inline-block;
+  width:15px;
+  height:15px;
+  //margin:-1px 4px 0 0;
+  vertical-align:middle;
+  //background:url(check_radio_sheet.png) left top no-repeat;
+  cursor:pointer;
 }
 input[type="checkbox"]:checked {
-    //background:url(check_radio_sheet.png) -19px top no-repeat;
+  //background:url(check_radio_sheet.png) -19px top no-repeat;
 }
 
 //***************
@@ -560,19 +560,19 @@ th.user{
 .column {
   @extend .col-md-6;
   @extend .text-center;
-  }
+}
 .form {
   @extend .col-md-6;
-  }
+}
 .form-centered {
   @extend .col-md-6;
   @extend .text-center;
-  }
+}
 .submit {
   @extend .btn;
   @extend .btn-primary;
   @extend .btn-lg;
-  }
+}
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
@@ -582,8 +582,19 @@ main {
   width: 100%;
   max-width: 1170px;
   //margin-top: 50px; // accommodate the navbar
-  }
+}
 section {
   @extend .row;
   margin-top: 20px;
-  }
+}
+
+// Drag and drop placeholder
+
+ul[dnd-list] .dndPlaceholder {
+  //display: none;
+  display: block;
+  background-color: #ddd;
+  min-height: 42px;
+  border-radius: 7px;
+  margin-bottom: 5px;
+}

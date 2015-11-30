@@ -19,13 +19,11 @@ var HypothesisGroupsController = function($scope, $http, $location, $resource, $
         var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa diffiryhmän ja kaikki siihen liittyvät diffit?");
 
         if (deleteConfirmation) {
-            hypothesisGroupToDelete = HypothesisGroup.get({"hypothesisGroupId" : hypothesisGroup.id},
-                function(){
-                    hypothesisGroupToDelete.$delete(function() {
-                        $window.alert("Diffiryhmän poistaminen onnistui!");
-                        $scope.hypothesisGroupsList = HypothesisGroups.query();
-                    });
-                });
+            HypothesisGroup.delete({hypothesisGroupId : hypothesisGroup.id}, function() {
+                $window.alert("Diffiryhmän poistaminen onnistui!");
+                $scope.hypothesisGroupsList = HypothesisGroups.query();
+            });
+
         } else {
             $window.alert("Diffiryhmää '" + hypothesisGroup.name + "' ei poistettu");
         }
