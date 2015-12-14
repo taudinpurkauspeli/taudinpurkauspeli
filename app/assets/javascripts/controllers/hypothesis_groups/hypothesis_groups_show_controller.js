@@ -1,9 +1,9 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("HypothesisGroupsShowController", [
-    "$scope","$http","$routeParams", "$resource",
-    function($scope , $http , $routeParams, $resource) {
-        var hypothesisGroupId = $routeParams.id;
+    "$scope","$http","$stateParams", "$resource",
+    function($scope , $http , $stateParams, $resource) {
+        var hypothesisGroupId = $stateParams.id;
         var HypothesisGroup = $resource('/hypothesis_groups/:hypothesisGroupId.json',
             {"hypothesisGroupId": "@id"},
             { "save": { "method": "PUT" }});

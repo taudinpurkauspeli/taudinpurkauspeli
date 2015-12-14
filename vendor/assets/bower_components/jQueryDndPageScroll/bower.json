@@ -1,0 +1,14 @@
+{
+  "name": "jQueryDndPageScroll",
+  "homepage": "https://github.com/martindrapeau/jQueryDndPageScroll",
+  "main": "jquery.dnd_page_scroll.js",
+  "_release": "e378def643",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e378def643ce9cec4d93c9ed3d1fb3033dd132fe"
+  },
+  "_source": "git@github.com:martindrapeau/jQueryDndPageScroll.git",
+  "_target": "*",
+  "_originalSource": "git@github.com:martindrapeau/jQueryDndPageScroll.git"
+}

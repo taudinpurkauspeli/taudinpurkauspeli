@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("AuthenticationController", [
-    "$scope","$http","$routeParams", "$resource", "$location", "$rootScope", "AuthenticationService",
-    function($scope , $http , $routeParams, $resource, $location, $rootScope, AuthenticationService) {
+    "$scope","$http","$stateParams", "$resource", "$location", "$rootScope", "AuthenticationService",
+    function($scope , $http , $stateParams, $resource, $location, $rootScope, AuthenticationService) {
 
         $scope.credentials = {
             username: '',
