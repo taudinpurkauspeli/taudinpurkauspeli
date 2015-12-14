@@ -18,8 +18,13 @@ app.controller("ExerciseHypothesesController", [
         $scope.removedFromExercise = function(exercise_hypothesis){
 
             ExerciseHypothesis.delete({exerciseHypothesisId: exercise_hypothesis.id}, function() {
-                $scope.exerciseHypotheses = ExerciseHypotheses.get({"exercise_id": $stateParams.id});
-                $scope.hypothesisBank= HypothesisBank.get({"exercise_id": $stateParams.id});
+                ExerciseHypotheses.get({"exercise_id": $stateParams.id}, function(data){
+                    $scope.exerciseHypotheses = data;
+                });
+
+                HypothesisBank.get({"exercise_id": $stateParams.id}, function(data){
+                    $scope.hypothesisBank = data;
+                });
                 // $window.alert("Diffin poistaminen casesta onnistui!");
             });
 
@@ -32,8 +37,13 @@ app.controller("ExerciseHypothesesController", [
             };
             ExerciseHypotheses.save(newExerciseHypothesis,
                 function() {
-                    $scope.exerciseHypotheses = ExerciseHypotheses.get({"exercise_id": $stateParams.id});
-                    $scope.hypothesisBank= HypothesisBank.get({"exercise_id": $stateParams.id});
+                    ExerciseHypotheses.get({"exercise_id": $stateParams.id}, function(data){
+                        $scope.exerciseHypotheses = data;
+                    });
+
+                    HypothesisBank.get({"exercise_id": $stateParams.id}, function(data){
+                        $scope.hypothesisBank = data;
+                    });
                     //   $window.alert(hypothesis.id + " Lisätty ryhmään " + $stateParams.id);
                 },
                 function() {

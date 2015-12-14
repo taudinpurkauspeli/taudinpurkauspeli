@@ -1,11 +1,15 @@
 <div ng-controller="ExerciseHypothesesController">
 
     <div class="row">
-        <div class="col-md-5">
-            <ul dnd-list="[]"
-                dnd-allowed-types="['hypothesis_in_bank']">
-                <li class="btn btn-default btn-hypothesis multiline btn-save" >Lisää diffi caseen</li>
-            </ul>
+        <div class="col-md-5 border"
+             dnd-list="[]"
+             dnd-allowed-types="['hypothesis_in_bank']">
+            <h2>Casen {{exercise.name}} diffit</h2>
+            <br/>
+            <!--            <ul dnd-list="[]"
+                            dnd-allowed-types="['hypothesis_in_bank']">
+                            <li class="btn btn-default btn-hypothesis multiline btn-save" >Lisää diffi caseen</li>
+                        </ul>-->
 
             <ul ng-repeat="(hypothesis_group, exercise_hypotheses) in exerciseHypotheses"
                 dnd-list="exercise_hypotheses"
@@ -30,12 +34,15 @@
             <br/>
         </div>
 
-        <div class="col-md-5">
-
-            <ul dnd-list="[]"
-                dnd-allowed-types="['hypothesis_in_exercise']">
-                <li class="btn btn-default btn-hypothesis multiline btn-save" >Poista diffi casesta</li>
-            </ul>
+        <div class="col-md-5 border"
+             dnd-list="[]"
+             dnd-allowed-types="['hypothesis_in_exercise']">
+            <h2>Diffipankki</h2>
+            <br/>
+            <!--            <ul dnd-list="[]"
+                            dnd-allowed-types="['hypothesis_in_exercise']">
+                            <li class="btn btn-default btn-hypothesis multiline btn-save" >Poista diffi casesta</li>
+                        </ul>-->
 
 
             <ul ng-repeat="(hypothesis_group, hypotheses) in hypothesisBank"

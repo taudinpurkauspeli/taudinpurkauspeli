@@ -598,3 +598,12 @@ ul[dnd-list] .dndPlaceholder {
   border-radius: 7px;
   margin-bottom: 5px;
 }
+
+.dndPlaceholder {
+  display: none;
+}
+
+.border {
+  border-style: solid;
+  border-color: #445588;
+}
