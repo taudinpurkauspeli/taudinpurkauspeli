@@ -1,17 +1,71 @@
 (function() {
     var app = angular.module('diagnoseDiseases',[ 'ngRoute','templates',
-        'ngResource', 'ngMessages', 'validation.match', 'dndLists' ]);
+        'ngResource', 'ngMessages', 'validation.match', 'dndLists', 'ui.router' ]);
 })();
 
 var app = angular.module('diagnoseDiseases');
 
+/*app.config([
+ "$routeProvider",
+ function($routeProvider) {
+ $routeProvider.when("/", {
+ controller: "ExercisesController",
+ templateUrl: "exercises/index.html"
+ }).when("/hypothesis_groups", {
+ controller: "HypothesisGroupsController",
+ templateUrl: "hypothesis_groups/index.html",
+ resolve: {
+ auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+ var userAdmin = AuthenticationService.isAdmin();
+
+ if (!userAdmin) {
+ return $q.reject({ authenticated: false });
+ }
+ }]
+ }
+ }).when("/hypothesis_groups/:id",{
+ controller: "HypothesisGroupsShowController",
+ templateUrl: "hypothesis_groups/show.html",
+ resolve: {
+ auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+ var userAdmin = AuthenticationService.isAdmin();
+
+ if (!userAdmin) {
+ return $q.reject({ authenticated: false });
+ }
+ }]
+ }
+ }).when("/signup",{
+ controller: "UsersNewController",
+ templateUrl: "users/new.html"
+ }).when("/exercises/:id",{
+ controller: "ExercisesShowController",
+ templateUrl: "exercises/show.html",
+ resolve: {
+ auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+ var userAdmin = AuthenticationService.isAdmin();
+
+ if (!userAdmin) {
+ return $q.reject({ authenticated: false });
+ }
+ }]
+ }
+ });
+ }
+ ]);*/
+
 app.config([
-    "$routeProvider",
-    function($routeProvider) {
-        $routeProvider.when("/", {
+    "$stateProvider", "$urlRouterProvider",
+    function($stateProvider, $urlRouterProvider) {
+
+        $urlRouterProvider.otherwise("/");
+
+        $stateProvider.state("app_root", {
+            url: "/",
             controller: "ExercisesController",
             templateUrl: "exercises/index.html"
-        }).when("/hypothesis_groups", {
+        }).state("hypothesis_groups", {
+            url: "/hypothesis_groups",
             controller: "HypothesisGroupsController",
             templateUrl: "hypothesis_groups/index.html",
             resolve: {
@@ -23,7 +77,8 @@ app.config([
                     }
                 }]
             }
-        }).when("/hypothesis_groups/:id",{
+        }).state("hypothesis_groups_show",{
+            url: "/hypothesis_groups/:id",
             controller: "HypothesisGroupsShowController",
             templateUrl: "hypothesis_groups/show.html",
             resolve: {
@@ -35,10 +90,12 @@ app.config([
                     }
                 }]
             }
-        }).when("/signup",{
+        }).state("signup",{
+            url: "/signup",
             controller: "UsersNewController",
             templateUrl: "users/new.html"
-        }).when("/exercises/:id",{
+        }).state("exercises_show",{
+            url: "/exercises/:id",
             controller: "ExercisesShowController",
             templateUrl: "exercises/show.html",
             resolve: {

@@ -23,5 +23,6 @@
 //= require angular-validation-match
 //= require angular-drag-and-drop-lists
 //= require jQueryDndPageScroll
+//= require angular-ui-router
 //= require_tree ./templates
 //= require_tree .
