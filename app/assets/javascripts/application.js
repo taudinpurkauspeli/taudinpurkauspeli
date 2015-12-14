@@ -22,5 +22,6 @@
 //= require bootstrap-sprockets
 //= require angular-validation-match
 //= require angular-drag-and-drop-lists
+//= require jQueryDndPageScroll
 //= require_tree ./templates
 //= require_tree .

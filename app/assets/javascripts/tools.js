@@ -54,4 +54,5 @@ function CKupdate(){
 */
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();
+    $().dndPageScroll();
 });

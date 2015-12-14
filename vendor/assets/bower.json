@@ -7,6 +7,7 @@
     "angular-resource": "latest",
     "angular-messages": "latest",
     "angular-validation-match": "latest",
-    "angular-drag-and-drop-lists": "latest"
+    "angular-drag-and-drop-lists": "latest",
+    "jQueryDndPageScroll": "git@github.com:martindrapeau/jQueryDndPageScroll.git"
   }
 }
