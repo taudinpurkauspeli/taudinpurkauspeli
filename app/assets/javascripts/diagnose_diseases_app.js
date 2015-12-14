@@ -96,17 +96,34 @@ app.config([
             templateUrl: "users/new.html"
         }).state("exercises_show",{
             url: "/exercises/:id",
-            controller: "ExercisesShowController",
-            templateUrl: "exercises/show.html",
-            resolve: {
-                auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
-                    var userAdmin = AuthenticationService.isAdmin();
+            views: {
+                "@": {
+                    controller: "ExercisesShowController",
+                    templateUrl: "exercises/show.html",
+                    resolve: {
+                        auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                            var userAdmin = AuthenticationService.isAdmin();
 
-                    if (!userAdmin) {
-                        return $q.reject({ authenticated: false });
+                            if (!userAdmin) {
+                                return $q.reject({ authenticated: false });
+                            }
+                        }]
                     }
-                }]
+                },
+                "exercise_hypothesis_list@exercises_show": {
+                    templateUrl: "exercises/exercise_hypotheses_list_teacher.html",
+                    controller: "ExerciseHypothesesController"
+                },
+                "task_list@exercises_show": {
+                    templateUrl: "exercises/tasks_list_teacher.html"
+                    //controller: "ExerciseHypothesesController"
+                },
+                "anamnesis@exercises_show": {
+                    templateUrl: "exercises/anamnesis_teacher.html"
+                    //controller: "ExerciseHypothesesController"
+                }
             }
+
         });
     }
 ]);
