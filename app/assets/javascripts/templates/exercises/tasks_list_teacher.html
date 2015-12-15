@@ -15,14 +15,13 @@
             <tr>
                 <td class="task-level-header">{{level}}</td>
                 <td>
-                    <ul dnd-list="[]"
-                        dnd-drop="dropCallback(event, item)">
+                    <ul dnd-list="[]" dnd-drop="moveTask(item, type, level)">
                         <div class="panel-body">
                             <div class="div-task-order-container"  ng-repeat="task in tasks">
                                 <div class="div-task-order-taskbutton">
                                     <li class="btn btn-default btn-task-order multiline"
                                         dnd-draggable="task"
-                                        dnd-moved="moveTask(task, level)"
+                                        dnd-type="level"
                                         dnd-effect-allowed="move">
                                         {{task.name}}
                                     </li>

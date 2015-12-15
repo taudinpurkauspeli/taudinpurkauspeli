@@ -154,6 +154,7 @@ class TasksController < ApplicationController
     @task.move_up
     respond_to do |format|
       format.html { redirect_to tasks_url(:layout => get_layout) }
+      format.json { head :ok}
     end
   end
 
@@ -161,6 +162,7 @@ class TasksController < ApplicationController
     @task.move_down
     respond_to do |format|
       format.html { redirect_to tasks_url(:layout => get_layout) }
+      format.json { head :ok}
     end
   end
 
