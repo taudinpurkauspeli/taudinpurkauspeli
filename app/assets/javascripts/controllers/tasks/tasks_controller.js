@@ -11,7 +11,7 @@ app.controller("TasksController", [
             { "update": { "method": "PUT" }});
 
         var Tasks = $resource('/tasks_all.json');
-        $scope.tasksList = Tasks.query({"exercise_id": $stateParams.id});
+        $scope.tasksList = Tasks.get({"exercise_id": $stateParams.id});
 
     }
 ]);

@@ -65,6 +65,10 @@ class Exercise < ActiveRecord::Base
     tasks.where(level: level).count
   end
 
+  def get_tasks_json
+    return tasks.where("level > ?", 0).group_by{|task| task.level}
+  end
+
   def create_duplicate(exercise)
     exercise_dup = exercise.amoeba_dup
     if exercise_dup.save

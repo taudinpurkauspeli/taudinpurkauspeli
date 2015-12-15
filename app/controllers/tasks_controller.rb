@@ -35,7 +35,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if exercise
 
-        tasks = exercise.tasks.where("level > ?", 0).order("level")
+        tasks = exercise.get_tasks_json
 
         format.html
         format.json {render json: tasks}

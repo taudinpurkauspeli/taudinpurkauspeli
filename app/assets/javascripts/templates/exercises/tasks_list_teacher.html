@@ -8,9 +8,28 @@
     </div>
 </div>
 
-<div ng-repeat="task in tasksList">
-    {{task}}
+<div class="div-tasks-container-admin">
+    <div class="panel panel-default panel-grey" ng-repeat="(level, tasks) in tasksList">
+        <table>
+            <tr>
+                <td class="task-level-header">{{level}}</td>
+                <td>
+                    <div class="panel-body">
+                        <div class="div-task-order-container"  ng-repeat="task in tasks">
+                            <div class="div-task-order-taskbutton">
+                                <button class="btn btn-default btn-task-order multiline" >
+                                    {{task.name}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
+
+
 
 <!--
 <div class = "div-tasks-container-admin">
