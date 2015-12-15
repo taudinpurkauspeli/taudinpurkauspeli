@@ -13,5 +13,13 @@ app.controller("TasksController", [
         var Tasks = $resource('/tasks_all.json');
         $scope.tasksList = Tasks.get({"exercise_id": $stateParams.id});
 
+        $scope.moveTask = function(task, level){
+            alert("Siirrettiin taskia " + task.name + " tasolta " + level);
+        };
+
+        $scope.dropCallback = function(event, index, item, type){
+            alert("Pudotettiin " + index.level);
+        };
+
     }
 ]);

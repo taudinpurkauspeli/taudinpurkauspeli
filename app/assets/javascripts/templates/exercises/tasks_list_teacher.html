@@ -9,24 +9,32 @@
 </div>
 
 <div class="div-tasks-container-admin">
+
     <div class="panel panel-default panel-grey" ng-repeat="(level, tasks) in tasksList">
         <table>
             <tr>
                 <td class="task-level-header">{{level}}</td>
                 <td>
-                    <div class="panel-body">
-                        <div class="div-task-order-container"  ng-repeat="task in tasks">
-                            <div class="div-task-order-taskbutton">
-                                <button class="btn btn-default btn-task-order multiline" >
-                                    {{task.name}}
-                                </button>
+                    <ul dnd-list="[]"
+                        dnd-drop="dropCallback(event, item)">
+                        <div class="panel-body">
+                            <div class="div-task-order-container"  ng-repeat="task in tasks">
+                                <div class="div-task-order-taskbutton">
+                                    <li class="btn btn-default btn-task-order multiline"
+                                        dnd-draggable="task"
+                                        dnd-moved="moveTask(task, level)"
+                                        dnd-effect-allowed="move">
+                                        {{task.name}}
+                                    </li>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </ul>
                 </td>
             </tr>
         </table>
     </div>
+
 </div>
 
 
