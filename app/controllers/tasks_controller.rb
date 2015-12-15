@@ -1,7 +1,10 @@
 class TasksController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
-  before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down]
+  before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down, :tasks_one]
   before_action :set_current_user, only: [:index, :show]
 
   # GET /tasks
@@ -22,6 +25,25 @@ class TasksController < ApplicationController
     end
 
     set_view_layout
+  end
+
+  # GET /tasks_all
+  # GET /tasks_all.json
+  def tasks_all
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+
+        tasks = exercise.tasks.where("level > ?", 0).order("level")
+
+        format.html
+        format.json {render json: tasks}
+      else
+        format.html
+        format.json {head :not_found}
+      end
+    end
   end
 
   # GET /tasks/1
@@ -63,6 +85,15 @@ class TasksController < ApplicationController
 
     set_view_layout
 
+  end
+
+  # GET /tasks_one/1
+  # GET /tasks_one/1.json
+  def tasks_one
+    respond_to do |format|
+      format.html
+      format.json { render json: @task }
+    end
   end
 
   # GET /tasks/new

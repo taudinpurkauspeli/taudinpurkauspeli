@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   get 'hypothesis_bank', to: 'hypotheses#hypothesis_bank'
   get 'hypotheses_all', to: 'hypotheses#hypotheses_all'
   get 'exercises_one/:id', to: 'exercises#exercises_one'
+  get 'tasks_one/:id', to: 'tasks#tasks_one'
+  get 'tasks_all', to: 'tasks#tasks_all'
 
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'

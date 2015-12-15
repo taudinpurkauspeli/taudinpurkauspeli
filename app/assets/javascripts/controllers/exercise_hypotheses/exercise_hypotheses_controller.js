@@ -3,7 +3,6 @@ var app = angular.module('diagnoseDiseases');
 app.controller("ExerciseHypothesesController", [
     "$scope","$http","$stateParams", "$resource", "$location", "$window", "$state",
     function($scope , $http , $stateParams, $resource, $location, $window, $state) {
-        $scope.exercisesList = [];
 
         var ExerciseHypothesis = $resource('/exercise_hypotheses/:exerciseHypothesisId.json',
             {"exerciseHypothesisId": "@id"},

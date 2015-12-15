@@ -1,1 +1,59 @@
-Toimenpidelista välilehti
+<div class = "row">
+    <div class = "col-md-8">
+        <h1>Toimenpiteet</h1>
+    </div>
+
+    <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteiden luominen ja järjestely" data-content="Tällä sivulla voit luoda uusia toimenpiteitä ja päätöstoimenpiteen. Kussakin casessa voi olla vain yksi päätöstoimenpide. Toimenpiteiden suoritusjärjestystä voi muokata toimenpiteen vieressä olevilla nuolilla. Samassa numeroidussa ryhmässä olevat toimenpiteet voi suorittaa valinnaisessa järjestyksessä. Ryhmät taas suoritetaan numerojärjestyksessä ykkösestä alkaen.">Ohje</a>
+    </div>
+</div>
+
+<div ng-repeat="task in tasksList">
+    {{task}}
+</div>
+
+<!--
+<div class = "div-tasks-container-admin">
+    <% previous_level = 0 %>
+    <% @tasks.each do |task| %>
+
+    <% if task.level > previous_level %>
+    <% if previous_level > 0 %>
+</div>
+</td></tr></table>
+</div>
+<% end %>
+<div class="panel panel-default panel-grey">
+    <table><tr><td class = "task-level-header"><%= task.level %></td><td>
+        <div class="panel-body">
+            <% end %>
+
+            <div class = "div-task-order-container">
+                <div class = "div-task-order-taskbutton">
+                    <%if !task.conclusions.empty? %>
+                    <%= button_to task.name, edit_conclusion_path(task.conclusions.first), method: :get, :class => 'btn btn-default btn-task-order multiline', :form_class => "form-button-to-task height100" %>
+                    <%else%>
+                    <%= button_to task.name, edit_task_path(task), method: :get, :class => 'btn btn-default btn-task-order multiline', :form_class => "form-button-to-task height100" %>
+                    <%end%>
+                </div>
+                <div class = "div-task-order-updown">
+                    <%= button_to 'tasks/' + task.id.to_s + '/up', method: :post, :class => 'btn btn-default btn-task-up multiline', :form_class => "height50", id: 'tasks/' + task.id.to_s + '/up' do %>
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+                    <% end %>
+
+                    <%= button_to 'tasks/' + task.id.to_s + '/down', method: :post, :class => 'btn btn-default btn-task-down multiline', :form_class => "height50", id: 'tasks/' + task.id.to_s + '/down' do %>
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                    <% end %>
+
+                </div>
+            </div>
+            <% previous_level = task.level %>
+            <% end %>
+
+            <% if previous_level > 0 %>
+        </div>
+    </td></tr></table>
+</div>
+<% end %>
+
+</div>-->
