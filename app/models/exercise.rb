@@ -66,7 +66,7 @@ class Exercise < ActiveRecord::Base
   end
 
   def get_tasks_json
-    return tasks.where("level > ?", 0).group_by{|task| task.level}
+    return tasks.where("level > ?", 0).order(:level).group_by{|t| t.level}.map{|item| item}
   end
 
   def create_duplicate(exercise)

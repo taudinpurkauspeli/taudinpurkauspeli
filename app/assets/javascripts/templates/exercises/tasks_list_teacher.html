@@ -8,35 +8,64 @@
     </div>
 </div>
 
-<div class="div-tasks-container-admin">
+<!--<ul dnd-list="tasksList">
+    <div class="div-tasks-container-admin">
 
-    <div class="panel panel-default panel-grey" ng-repeat="(level, tasks) in tasksList">
-        <table>
-            <tr>
-                <td class="task-level-header">{{level}}</td>
-                <td>
-                    <ul dnd-list="[]" dnd-drop="moveTask(item, type, level)">
-                        <div class="panel-body">
-                            <div class="div-task-order-container"  ng-repeat="task in tasks">
-                                <div class="div-task-order-taskbutton">
-                                    <li class="btn btn-default btn-task-order multiline"
-                                        dnd-draggable="task"
-                                        dnd-type="level"
-                                        dnd-effect-allowed="move">
-                                        {{task.name}}
-                                    </li>
+        <li class="panel panel-default panel-grey" ng-repeat="(level, tasks) in tasksList"
+                dnd-draggable="tasks">
+            <table>
+                <tr>
+                    <td class="task-level-header">{{level}}</td>
+                    <td>
+                        <ul dnd-list="[]" dnd-drop="moveTask(item, type, level)">
+                            <div class="panel-body">
+                                <div class="div-task-order-container"  ng-repeat="task in tasks">
+                                    <div class="div-task-order-taskbutton">
+                                        <li class="btn btn-default btn-task-order multiline"
+                                            dnd-draggable="task"
+                                            dnd-type="level"
+                                            dnd-effect-allowed="move">
+                                            {{task.name}}
+                                        </li>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </ul>
-                </td>
-            </tr>
-        </table>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </li>
+
     </div>
+</ul>-->
 
-</div>
+<ul dnd-list="[]"
+    dnd-drop="moveTaskToNewLevel(index, item)">
 
 
+    <li ng-repeat="(level, tasks) in tasksList" class="border margin">
+        {{tasks[0]}}
+        <!--<ul  dnd-drop="moveTask(item, type, level)">-->
+        <ul  dnd-list="[]"
+                dnd-drop="moveTaskFromLevelToLevel(item, type, tasks[0])">
+
+            <li ng-repeat="task in tasks[1]"
+                dnd-draggable="task"
+                dnd-type="tasks[0]"
+                dnd-effect-allowed="move">
+                {{task}}
+            </li>
+
+
+
+        </ul>
+
+    </li>
+
+
+</ul>
+
+{{prettyList}}
 
 <!--
 <div class = "div-tasks-container-admin">
