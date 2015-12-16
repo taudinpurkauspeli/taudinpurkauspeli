@@ -39,30 +39,34 @@
     </div>
 -->
 
-<ul dnd-list="[]"
-    dnd-drop="moveTaskToNewLevel(index, item)"
-    class="list-unstyled">
+<div class="task-list">
+    <div class="dropzone">
+        <ul dnd-list="[]"
+            dnd-drop="moveTaskToNewLevel(index, item)"
+            class="list-unstyled">
 
 
-    <li ng-repeat="(level, tasks) in tasksList"
-        class="border padding">
-        {{tasks[0]}}
+            <li ng-repeat="(level, tasks) in tasksList"
+                class="border padding">
+                {{tasks[0]}}
 
-        <ul  dnd-list="[]"
-             dnd-drop="moveTaskFromLevelToLevel(item, type, tasks[0])"
-             dnd-horizontal-list="true"
-             class="list-unstyled">
+                <ul  dnd-list="[]"
+                     dnd-drop="moveTaskFromLevelToLevel(item, type, tasks[0])"
+                     dnd-horizontal-list="true"
+                     class="list-unstyled">
 
-            <li ng-repeat="task in tasks[1]"
-                dnd-draggable="task"
-                dnd-type="tasks[0]"
-                dnd-effect-allowed="move">
-                {{task.name}}
+                    <li ng-repeat="task in tasks[1]"
+                        dnd-draggable="task"
+                        dnd-type="tasks[0]"
+                        dnd-effect-allowed="move">
+                        {{task.name}}
+                    </li>
+
+                </ul>
+
             </li>
 
+
         </ul>
-
-    </li>
-
-
-</ul>
+    </div>
+</div>

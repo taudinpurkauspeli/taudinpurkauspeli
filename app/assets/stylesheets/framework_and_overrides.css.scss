@@ -588,22 +588,21 @@ section {
   margin-top: 20px;
 }
 
-// Drag and drop placeholder
+// Drag and drop hypothesis-list
 
-ul[dnd-list] .dndPlaceholder {
-  //display: none;
-  display: block;
-  background-color: #ddd;
-  min-height: 42px;
-  border-radius: 7px;
-  margin-bottom: 5px;
-}
-
-.dndPlaceholder {
+.hypothesis-list div[dnd-list] .dndPlaceholder,
+.hypothesis-list ul[dnd-list] .dndPlaceholder {
   display: none;
 }
 
-// Drag and drop lists
+.hypothesis-list .dropzone ul[dnd-list],
+.hypothesis-list .dropzone div[dnd-list] {
+  min-height: 50px;
+  margin: 0px;
+  padding-left: 0px;
+}
+
+// Drag and drop task-list
 
 .border {
   border-style: solid;
@@ -614,8 +613,35 @@ ul[dnd-list] .dndPlaceholder {
   padding: 40px;
 }
 
-.dnd-ul {
-  list-style-type: none;
+.task-list ul[dnd-list],
+.task-list ul[dnd-list] > li{
+  position: relative;
+}
+
+.task-list .dropzone ul[dnd-list] {
+  min-height: 42px;
+  margin: 0px;
+  padding-left: 0px;
+}
+
+.task-list .dropzone li {
+  display: block;
+}
+
+.task-list .dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+.task-list .dropzone .dndDraggingSource {
+  display: none;
+}
+
+.task-list ul[dnd-list] .dndPlaceholder {
+  background-color: #ddd !important;
+  min-height: 42px;
+  display: block;
+  position: relative;
+  border-radius: 5px;
 }
 
 .task-level-header{
