@@ -4,7 +4,8 @@ class TasksController < ApplicationController
 
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
-  before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down, :tasks_one, :move_level_up, :move_level_down, :move_task_up]
+  before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down,
+                                  :tasks_one, :move_level_up, :move_level_down, :move_task_up, :move_task_down]
   before_action :set_current_user, only: [:index, :show]
 
   # GET /tasks
@@ -186,6 +187,14 @@ class TasksController < ApplicationController
 
   def move_level_down
     @task.move_level_down(params[:new_level])
+    respond_to do |format|
+      format.html { redirect_to tasks_url(:layout => get_layout) }
+      format.json { head :ok}
+    end
+  end
+
+  def move_task_down
+    @task.move_task_down(params[:new_level])
     respond_to do |format|
       format.html { redirect_to tasks_url(:layout => get_layout) }
       format.json { head :ok}

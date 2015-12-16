@@ -55,7 +55,7 @@ Rails.application.routes.draw do
   post 'tasks/:id/move_down', to: 'tasks#move_level_down'
 
   post 'tasks/:id/move_task_up', to: 'tasks#move_task_up'
- # post 'tasks/:id/move_down', to: 'tasks#move_level_down'
+  post 'tasks/:id/move_task_down', to: 'tasks#move_task_down'
 
   get 'tasks/:id/up', to: 'tasks#level_up'
   get 'tasks/:id/down', to: 'tasks#level_down'

@@ -14,6 +14,9 @@ app.controller("TasksController", [
         var TaskMoveDown = $resource('/tasks/:id/move_down.json',
             {"id": '@id'});
 
+        var MoveTaskDown = $resource('/tasks/:id/move_task_down.json',
+            {"id": '@id'});
+
         var Tasks = $resource('/tasks_all.json');
         $scope.tasksList = Tasks.query({"exercise_id": $stateParams.id});
 
@@ -58,36 +61,13 @@ app.controller("TasksController", [
                     console.log("taskin ylöspäin siirto onnistui");
                 });
             } else if (index >= item.level){
-                console.log("Mentiin alaspäin");
-            }
-
-
-/*
-            var sourceInt = parseInt(sourceLevel);
-            var destinationInt = parseInt(destinationLevel);
-
-            var movement = destinationInt - sourceInt;
-
-            if(movement < 0){
-                for(var i = movement; i < 0; i++){
-
-                    TaskUp.save({id: task.id}, function(){
-                        Tasks.get({"exercise_id": $stateParams.id}, function(data){
-                            $scope.tasksList = data;
-                        });
+                MoveTaskDown.save({id: item.id, new_level: newLevel}, function(){
+                    Tasks.query({"exercise_id": $stateParams.id}, function(data){
+                        $scope.tasksList = data;
                     });
-                }
-            } else if (movement > 0){
-                for(var j = movement; j > 0; j--){
-                    TaskDown.save({id: task.id}, function(){
-                        Tasks.get({"exercise_id": $stateParams.id}, function(data){
-                            $scope.tasksList = data;
-                        });
-                    });
-                }
+                    console.log("taskin ALASPÄIn siirto onnistui");
+                });
             }
-*/
-
 
             return item;
         };
