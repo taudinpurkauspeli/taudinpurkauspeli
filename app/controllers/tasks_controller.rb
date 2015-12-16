@@ -4,7 +4,7 @@ class TasksController < ApplicationController
 
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
-  before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down, :tasks_one]
+  before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down, :tasks_one, :move_level_up]
   before_action :set_current_user, only: [:index, :show]
 
   # GET /tasks
@@ -133,8 +133,10 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide päivitettiin onnistuneesti.' }
+        format.json {head :ok}
       else
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), alert: 'Toimenpiteen päivitys epäonnistui.' }
+        format.json {head :bad_request}
       end
     end
   end
@@ -152,6 +154,14 @@ class TasksController < ApplicationController
 
   def level_up
     @task.move_up
+    respond_to do |format|
+      format.html { redirect_to tasks_url(:layout => get_layout) }
+      format.json { head :ok}
+    end
+  end
+
+  def move_level_up
+    @task.move_level_up(params[:new_level])
     respond_to do |format|
       format.html { redirect_to tasks_url(:layout => get_layout) }
       format.json { head :ok}

@@ -5,7 +5,7 @@ app.controller("TasksController", [
     function($scope , $http , $stateParams, $resource, $location, $window, $state) {
         $scope.tasksList = [];
 
-        var TaskDown = $resource('/tasks/:id/down.json',
+        var TaskMoveUp = $resource('/tasks/:id/move_up.json',
             {"id": "@id"});
 
         var TaskUp = $resource('/tasks/:id/up.json',
@@ -20,6 +20,14 @@ app.controller("TasksController", [
             console.log(task.id + " was dragged from list " +
             sourceLevel + " to list " + destinationLevel);
 
+            task.level = destinationLevel;
+
+            TaskMoveUp.save({id: task.id, new_level: destinationLevel}, function(){
+                Tasks.query({"exercise_id": $stateParams.id}, function(data){
+                    $scope.tasksList = data;
+                });
+                console.log("päivitys onnistui");
+            });
 /*
             var sourceInt = parseInt(sourceLevel);
             var destinationInt = parseInt(destinationLevel);
