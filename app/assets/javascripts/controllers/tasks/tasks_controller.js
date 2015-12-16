@@ -8,6 +8,9 @@ app.controller("TasksController", [
         var TaskMoveUp = $resource('/tasks/:id/move_up.json',
             {"id": "@id"});
 
+        var MoveTaskUp = $resource('/tasks/:id/move_task_up.json',
+            {"id": "@id"});
+
         var TaskMoveDown = $resource('/tasks/:id/move_down.json',
             {"id": '@id'});
 
@@ -44,6 +47,15 @@ app.controller("TasksController", [
 
         $scope.moveTaskToNewLevel = function(index, item) {
             console.log(item.id + " was dragged from list X to index " + index);
+
+            var newLevel = index + 1;
+
+            MoveTaskUp.save({id: item.id, new_level: newLevel}, function(){
+                Tasks.query({"exercise_id": $stateParams.id}, function(data){
+                    $scope.tasksList = data;
+                });
+                console.log("taskin ylöspäin siirto onnistui");
+            });
 
 /*
             var sourceInt = parseInt(sourceLevel);

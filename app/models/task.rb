@@ -62,6 +62,42 @@ class Task < ActiveRecord::Base
     end
   end
 
+  def move_task_up(new_level)
+
+    siblings = exercise.tasks.where level:level
+
+    if siblings.count > 1 then
+      update(level: new_level)
+      new_siblings = exercise.tasks.where level:new_level
+      children = exercise.tasks.where("level > ?", new_level)
+
+      children.each do |task|
+        task.update(level: task.level + 1)
+      end
+      new_siblings.each do |task|
+        if task != self
+          task.update(level: task.level + 1)
+        end
+      end
+
+    else
+      move_level_up(new_level)
+
+      new_siblings = exercise.tasks.where level:level
+      children = exercise.tasks.where("level > ?", level)
+
+      children.each do |task|
+        task.update(level: task.level + 1)
+      end
+      new_siblings.each do |task|
+        if task != self
+          task.update(level: task.level + 1)
+        end
+      end
+
+    end
+  end
+
   def move_down
     children = exercise.tasks.where("level > ?", level)
     siblings = exercise.tasks.where level:level
