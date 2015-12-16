@@ -603,6 +603,8 @@ ul[dnd-list] .dndPlaceholder {
   display: none;
 }
 
+// Drag and drop lists
+
 .border {
   border-style: solid;
   border-color: #d3d3d3;
@@ -610,4 +612,16 @@ ul[dnd-list] .dndPlaceholder {
 
 .padding {
   padding: 40px;
+}
+
+.dnd-ul {
+  list-style-type: none;
+}
+
+.task-level-header{
+  background-color: #cacaca;
+  padding: 7px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-weight: bold;
 }
