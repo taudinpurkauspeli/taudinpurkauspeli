@@ -42,13 +42,25 @@ Rails.application.routes.draw do
   get 'hypothesis_bank', to: 'hypotheses#hypothesis_bank'
   get 'hypotheses_all', to: 'hypotheses#hypotheses_all'
   get 'exercises_one/:id', to: 'exercises#exercises_one'
+  get 'tasks_one/:id', to: 'tasks#tasks_one'
+  get 'tasks_all', to: 'tasks#tasks_all'
 
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
 
+  # Old level_up and level_down routes
   post 'tasks/:id/up', to: 'tasks#level_up'
   post 'tasks/:id/down', to: 'tasks#level_down'
 
+  # New level up and down routes for directly from level to level movement
+  post 'tasks/:id/move_up', to: 'tasks#move_level_up'
+  post 'tasks/:id/move_down', to: 'tasks#move_level_down'
+
+  # New level up and down routes for movement from level to between levels
+  post 'tasks/:id/move_task_up', to: 'tasks#move_task_up'
+  post 'tasks/:id/move_task_down', to: 'tasks#move_task_down'
+
+  # Not sure what these are for
   get 'tasks/:id/up', to: 'tasks#level_up'
   get 'tasks/:id/down', to: 'tasks#level_down'
 

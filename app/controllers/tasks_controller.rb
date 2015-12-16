@@ -1,7 +1,11 @@
 class TasksController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index, :show]
-  before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down]
+  before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down,
+                                  :tasks_one, :move_level_up, :move_level_down, :move_task_up, :move_task_down]
   before_action :set_current_user, only: [:index, :show]
 
   # GET /tasks
@@ -22,6 +26,25 @@ class TasksController < ApplicationController
     end
 
     set_view_layout
+  end
+
+  # GET /tasks_all
+  # GET /tasks_all.json
+  def tasks_all
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+
+        tasks = exercise.get_tasks_json
+
+        format.html
+        format.json {render json: tasks}
+      else
+        format.html
+        format.json {head :not_found}
+      end
+    end
   end
 
   # GET /tasks/1
@@ -65,6 +88,15 @@ class TasksController < ApplicationController
 
   end
 
+  # GET /tasks_one/1
+  # GET /tasks_one/1.json
+  def tasks_one
+    respond_to do |format|
+      format.html
+      format.json { render json: @task }
+    end
+  end
+
   # GET /tasks/new
   def new
     @task = Task.new
@@ -102,8 +134,10 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide päivitettiin onnistuneesti.' }
+        format.json {head :ok}
       else
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), alert: 'Toimenpiteen päivitys epäonnistui.' }
+        format.json {head :bad_request}
       end
     end
   end
@@ -119,17 +153,57 @@ class TasksController < ApplicationController
     end
   end
 
+  # Old level_up function
   def level_up
     @task.move_up
     respond_to do |format|
       format.html { redirect_to tasks_url(:layout => get_layout) }
+      format.json { head :ok}
     end
   end
 
+  # New level up directly from level to level
+  def move_level_up
+    @task.move_level_up(params[:new_level])
+    respond_to do |format|
+      format.html { redirect_to tasks_url(:layout => get_layout) }
+      format.json { head :ok}
+    end
+  end
+
+  # New level up from level to between levels
+  def move_task_up
+    @task.move_task_up(params[:new_level])
+    respond_to do |format|
+      format.html { redirect_to tasks_url(:layout => get_layout) }
+      format.json { head :ok}
+    end
+  end
+
+  # Old level_down function
   def level_down
     @task.move_down
     respond_to do |format|
       format.html { redirect_to tasks_url(:layout => get_layout) }
+      format.json { head :ok}
+    end
+  end
+
+  # New level down directly from level to level
+  def move_level_down
+    @task.move_level_down(params[:new_level])
+    respond_to do |format|
+      format.html { redirect_to tasks_url(:layout => get_layout) }
+      format.json { head :ok}
+    end
+  end
+
+  # New level down from level to between levels
+  def move_task_down
+    @task.move_task_down(params[:new_level])
+    respond_to do |format|
+      format.html { redirect_to tasks_url(:layout => get_layout) }
+      format.json { head :ok}
     end
   end
 

@@ -588,22 +588,78 @@ section {
   margin-top: 20px;
 }
 
-// Drag and drop placeholder
+// Drag and drop hypothesis-list
 
-ul[dnd-list] .dndPlaceholder {
-  //display: none;
-  display: block;
-  background-color: #ddd;
-  min-height: 42px;
-  border-radius: 7px;
-  margin-bottom: 5px;
-}
-
-.dndPlaceholder {
+.hypothesis-list div[dnd-list] .dndPlaceholder,
+.hypothesis-list ul[dnd-list] .dndPlaceholder {
   display: none;
 }
+
+.hypothesis-list .dropzone ul[dnd-list],
+.hypothesis-list .dropzone div[dnd-list] {
+  min-height: 50px;
+  margin: 0px;
+  padding-left: 0px;
+}
+
+// Drag and drop task-list
 
 .border {
   border-style: solid;
   border-color: #d3d3d3;
+}
+
+.padding {
+  padding: 40px;
+}
+
+.task-list ul[dnd-list],
+.task-list ul[dnd-list] > li{
+  position: relative;
+}
+
+.task-list .dropzone ul[dnd-list] {
+  min-height: 42px;
+  margin: 0px;
+  padding-left: 0px;
+}
+
+.task-list .dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+.task-list .dropzone .dndDraggingSource {
+  display: none;
+}
+
+.task-list .dropzone .itemlist ul {
+  display: table;
+}
+
+.task-list .dropzone .itemlist li {
+  border: none;
+  border-radius: 7px;
+  color: #000000;
+  float: left;
+  margin: 5px;
+  padding: 3px;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: normal;
+  font-size: 14px;
+  height: 5em;
+  width: 20em;
+  background-color: #cacaca;
+  white-space: normal;
+  display: table-cell;
+}
+
+.task-list ul[dnd-list] .dndPlaceholder {
+  background-color: $PaleLightGreen !important;
+  height: 5em;
+  width: 20em;
+  display: block;
+  position: relative;
+  border-radius: 7px;
+  margin-bottom: 5px;
 }

@@ -24,8 +24,8 @@ class ExercisesController < ApplicationController
     end
   end
 
-  # GET /exercises/1
-  # GET /exercises/1.json
+  # GET /exercises_one/1
+  # GET /exercises_one/1.json
   def exercises_one
     respond_to do |format|
       format.html
@@ -33,8 +33,8 @@ class ExercisesController < ApplicationController
     end
   end
 
-  # GET /exercises_one/1
-  # GET /exercises_one/1.json
+  # GET /exercises/1
+  # GET /exercises/1.json
   def show
     session[:exercise_id] = params[:id]
 
