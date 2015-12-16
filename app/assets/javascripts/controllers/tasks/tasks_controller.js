@@ -50,12 +50,17 @@ app.controller("TasksController", [
 
             var newLevel = index + 1;
 
-            MoveTaskUp.save({id: item.id, new_level: newLevel}, function(){
-                Tasks.query({"exercise_id": $stateParams.id}, function(data){
-                    $scope.tasksList = data;
+            if(index < item.level){
+                MoveTaskUp.save({id: item.id, new_level: newLevel}, function(){
+                    Tasks.query({"exercise_id": $stateParams.id}, function(data){
+                        $scope.tasksList = data;
+                    });
+                    console.log("taskin ylöspäin siirto onnistui");
                 });
-                console.log("taskin ylöspäin siirto onnistui");
-            });
+            } else if (index >= item.level){
+                console.log("Mentiin alaspäin");
+            }
+
 
 /*
             var sourceInt = parseInt(sourceLevel);

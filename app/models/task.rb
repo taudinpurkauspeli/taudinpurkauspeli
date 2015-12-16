@@ -81,20 +81,22 @@ class Task < ActiveRecord::Base
       end
 
     else
-      move_level_up(new_level)
+      if level > 1 then
+        move_level_up(new_level)
 
-      new_siblings = exercise.tasks.where level:level
-      children = exercise.tasks.where("level > ?", level)
+        new_siblings = exercise.tasks.where level:level
+        children = exercise.tasks.where("level > ?", level)
 
-      children.each do |task|
-        task.update(level: task.level + 1)
-      end
-      new_siblings.each do |task|
-        if task != self
+        children.each do |task|
           task.update(level: task.level + 1)
         end
-      end
+        new_siblings.each do |task|
+          if task != self
+            task.update(level: task.level + 1)
+          end
+        end
 
+      end
     end
   end
 
