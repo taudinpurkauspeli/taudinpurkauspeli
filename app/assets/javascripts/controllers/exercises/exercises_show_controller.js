@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesShowController", [
-    "$scope","$http","$stateParams", "$resource", "$state",
-    function($scope , $http , $stateParams, $resource, $state) {
+    "$scope","$http","$stateParams", "$resource", "$state", "LocalStorageService",
+    function($scope , $http , $stateParams, $resource, $state, LocalStorageService) {
         var exerciseId = $stateParams.id;
         var Exercise = $resource('/exercises_one/:exerciseId.json',
             {"exerciseId": "@id"},
@@ -10,6 +10,17 @@ app.controller("ExercisesShowController", [
 
         $scope.exercise = Exercise.get({"exerciseId" : exerciseId});
 
-        $scope.current_tab = 1;
+        $scope.setCurrentTab = function(){
+            $scope.current_tab = LocalStorageService.get("current_tab", "1");
+        };
+
+        $scope.setCurrentTab();
+
+        $scope.changeCurrentTab = function(newTab){
+            $scope.current_tab = newTab;
+            LocalStorageService.set("current_tab", newTab);
+        };
+
+
     }
 ]);
