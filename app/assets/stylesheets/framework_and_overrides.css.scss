@@ -624,10 +624,6 @@ section {
   padding-left: 0px;
 }
 
-.task-list .dropzone li {
-  display: block;
-}
-
 .task-list .dropzone .dndDragging {
   opacity: 0.7;
 }
@@ -636,18 +632,34 @@ section {
   display: none;
 }
 
-.task-list ul[dnd-list] .dndPlaceholder {
-  background-color: #ddd !important;
-  min-height: 42px;
-  display: block;
-  position: relative;
-  border-radius: 5px;
+.task-list .dropzone .itemlist ul {
+  display: table;
 }
 
-.task-level-header{
+.task-list .dropzone .itemlist li {
+  border: none;
+  border-radius: 7px;
+  color: #000000;
+  float: left;
+  margin: 5px;
+  padding: 3px;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: normal;
+  font-size: 14px;
+  height: 5em;
+  width: 20em;
   background-color: #cacaca;
-  padding: 7px;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  font-weight: bold;
+  white-space: normal;
+  display: table-cell;
+}
+
+.task-list ul[dnd-list] .dndPlaceholder {
+  background-color: $PaleLightGreen !important;
+  height: 5em;
+  width: 20em;
+  display: block;
+  position: relative;
+  border-radius: 7px;
+  margin-bottom: 5px;
 }

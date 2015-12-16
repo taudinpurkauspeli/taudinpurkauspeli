@@ -7,7 +7,8 @@
         <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteiden luominen ja järjestely" data-content="Tällä sivulla voit luoda uusia toimenpiteitä ja päätöstoimenpiteen. Kussakin casessa voi olla vain yksi päätöstoimenpide. Toimenpiteiden suoritusjärjestystä voi muokata toimenpiteen vieressä olevilla nuolilla. Samassa numeroidussa ryhmässä olevat toimenpiteet voi suorittaa valinnaisessa järjestyksessä. Ryhmät taas suoritetaan numerojärjestyksessä ykkösestä alkaen.">Ohje</a>
     </div>
 </div>
-
+<div class = "separator"></div>
+<br/>
 <!--
     <div class="div-tasks-container-admin">
 
@@ -45,27 +46,30 @@
             dnd-drop="moveTaskToNewLevel(index, item)"
             class="list-unstyled">
 
-
             <li ng-repeat="(level, tasks) in tasksList"
-                class="border padding">
-                {{tasks[0]}}
+                class="panel panel-default itemlist">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        {{tasks[0]}}
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <ul  dnd-list="[]"
+                         dnd-drop="moveTaskFromLevelToLevel(item, type, tasks[0])"
+                         dnd-horizontal-list="true"
+                         class="list-unstyled">
 
-                <ul  dnd-list="[]"
-                     dnd-drop="moveTaskFromLevelToLevel(item, type, tasks[0])"
-                     dnd-horizontal-list="true"
-                     class="list-unstyled">
+                        <li ng-repeat="task in tasks[1]"
+                            dnd-draggable="task"
+                            dnd-type="tasks[0]"
+                            dnd-effect-allowed="move">
+                            {{task.name}}
+                        </li>
 
-                    <li ng-repeat="task in tasks[1]"
-                        dnd-draggable="task"
-                        dnd-type="tasks[0]"
-                        dnd-effect-allowed="move">
-                        {{task.name}}
-                    </li>
-
-                </ul>
-
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
             </li>
-
 
         </ul>
     </div>
