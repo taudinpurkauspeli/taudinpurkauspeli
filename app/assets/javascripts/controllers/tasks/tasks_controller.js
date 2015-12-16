@@ -8,52 +8,36 @@ app.controller("TasksController", [
         var TaskMoveUp = $resource('/tasks/:id/move_up.json',
             {"id": "@id"});
 
-        var TaskUp = $resource('/tasks/:id/up.json',
+        var TaskMoveDown = $resource('/tasks/:id/move_down.json',
             {"id": '@id'});
 
         var Tasks = $resource('/tasks_all.json');
-        $scope.tasksList = Tasks.query({"exercise_id": $stateParams.id}, function(data){
-            $scope.prettyList = JSON.stringify(data, null, ' ');
-        });
+        $scope.tasksList = Tasks.query({"exercise_id": $stateParams.id});
 
         $scope.moveTaskFromLevelToLevel = function(task, sourceLevel, destinationLevel) {
             console.log(task.id + " was dragged from list " +
             sourceLevel + " to list " + destinationLevel);
 
-            task.level = destinationLevel;
-
-            TaskMoveUp.save({id: task.id, new_level: destinationLevel}, function(){
-                Tasks.query({"exercise_id": $stateParams.id}, function(data){
-                    $scope.tasksList = data;
-                });
-                console.log("päivitys onnistui");
-            });
-/*
             var sourceInt = parseInt(sourceLevel);
             var destinationInt = parseInt(destinationLevel);
 
             var movement = destinationInt - sourceInt;
 
             if(movement < 0){
-                for(var i = movement; i < 0; i++){
-
-                    TaskUp.save({id: task.id}, function(){
-                        Tasks.get({"exercise_id": $stateParams.id}, function(data){
-                            $scope.tasksList = data;
-                        });
+                TaskMoveUp.save({id: task.id, new_level: destinationLevel}, function(){
+                    Tasks.query({"exercise_id": $stateParams.id}, function(data){
+                        $scope.tasksList = data;
                     });
-                }
+                    console.log("ylöspäin päivitys onnistui");
+                });
             } else if (movement > 0){
-                for(var j = movement; j > 0; j--){
-                    TaskDown.save({id: task.id}, function(){
-                        Tasks.get({"exercise_id": $stateParams.id}, function(data){
-                            $scope.tasksList = data;
-                        });
+                TaskMoveDown.save({id: task.id, new_level: destinationLevel}, function(){
+                    Tasks.query({"exercise_id": $stateParams.id}, function(data){
+                        $scope.tasksList = data;
                     });
-                }
+                    console.log("alaspäin päivitys onnistui");
+                });
             }
-*/
-
 
             return task;
         };

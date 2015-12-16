@@ -77,6 +77,18 @@ class Task < ActiveRecord::Base
     end
   end
 
+  def move_level_down(new_level)
+    children = exercise.tasks.where("level > ?", level)
+    siblings = exercise.tasks.where level:level
+    if siblings.count > 1 then
+      update(level: new_level)
+    else
+      children.each do |task|
+        task.update(level: task.level - 1)
+      end
+    end
+  end
+
   def short_name
     return_string = ''
     if name.split.size > 3

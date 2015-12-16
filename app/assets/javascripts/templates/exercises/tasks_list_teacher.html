@@ -43,7 +43,7 @@
     dnd-drop="moveTaskToNewLevel(index, item)">
 
 
-    <li ng-repeat="(level, tasks) in tasksList" class="border margin">
+    <li ng-repeat="(level, tasks) in tasksList" class="border padding">
         {{tasks[0]}}
         <!--<ul  dnd-drop="moveTask(item, type, level)">-->
         <ul  dnd-list="[]"
@@ -64,8 +64,6 @@
 
 
 </ul>
-
-{{prettyList}}
 
 <!--
 <div class = "div-tasks-container-admin">
