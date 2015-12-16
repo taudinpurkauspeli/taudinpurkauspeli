@@ -20,58 +20,50 @@ app.controller("TasksController", [
         var Tasks = $resource('/tasks_all.json');
         $scope.tasksList = Tasks.query({"exercise_id": $stateParams.id});
 
+        $scope.updateTasksList = function(){
+            Tasks.query({"exercise_id": $stateParams.id}, function(data){
+                $scope.tasksList = data;
+            });
+        };
+
         $scope.moveTaskFromLevelToLevel = function(task, sourceLevel, destinationLevel) {
-            console.log(task.id + " was dragged from list " +
-            sourceLevel + " to list " + destinationLevel);
+            // console.log(task.id + " was dragged from list " +
+            // sourceLevel + " to list " + destinationLevel);
 
-            var sourceInt = parseInt(sourceLevel);
-            var destinationInt = parseInt(destinationLevel);
-
-            var movement = destinationInt - sourceInt;
-
-            if(movement < 0){
+            if(destinationLevel < sourceLevel){
                 TaskMoveUp.save({id: task.id, new_level: destinationLevel}, function(){
-                    Tasks.query({"exercise_id": $stateParams.id}, function(data){
-                        $scope.tasksList = data;
-                    });
-                    console.log("ylöspäin päivitys onnistui");
+                    $scope.updateTasksList();
+                    console.log("Ylöspäin päivitys onnistui");
                 });
-            } else if (movement > 0){
+            } else if (destinationLevel > sourceLevel){
                 TaskMoveDown.save({id: task.id, new_level: destinationLevel}, function(){
-                    Tasks.query({"exercise_id": $stateParams.id}, function(data){
-                        $scope.tasksList = data;
-                    });
-                    console.log("alaspäin päivitys onnistui");
+                    $scope.updateTasksList();
+                    console.log("Alaspäin päivitys onnistui");
                 });
             }
 
             return task;
         };
 
-        $scope.moveTaskToNewLevel = function(index, item) {
-            console.log(item.id + " was dragged from list X to index " + index);
+        $scope.moveTaskToNewLevel = function(levelIndex, task) {
+            // console.log(task.id + " was dragged from list X to levelIndex " + levelIndex);
 
-            var newLevel = index + 1;
+            var newLevel = levelIndex + 1;
 
-            if(index < item.level){
-                MoveTaskUp.save({id: item.id, new_level: newLevel}, function(){
-                    Tasks.query({"exercise_id": $stateParams.id}, function(data){
-                        $scope.tasksList = data;
-                    });
-                    console.log("taskin ylöspäin siirto onnistui");
+            if(levelIndex < task.level){
+                MoveTaskUp.save({id: task.id, new_level: newLevel}, function(){
+                    $scope.updateTasksList();
+                    console.log("Taskin ylöspäin siirto onnistui");
                 });
-            } else if (index >= item.level){
-                MoveTaskDown.save({id: item.id, new_level: newLevel}, function(){
-                    Tasks.query({"exercise_id": $stateParams.id}, function(data){
-                        $scope.tasksList = data;
-                    });
-                    console.log("taskin ALASPÄIn siirto onnistui");
+            } else if (levelIndex >= task.level){
+                MoveTaskDown.save({id: task.id, new_level: newLevel}, function(){
+                    $scope.updateTasksList();
+                    console.log("Taskin alaspäin siirto onnistui");
                 });
             }
 
-            return item;
+            return task;
         };
-
-
+        
     }
 ]);
