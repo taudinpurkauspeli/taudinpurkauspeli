@@ -28,143 +28,109 @@ class Task < ActiveRecord::Base
   def move_up
     children = exercise.tasks.where("level > ?", level)
     siblings = exercise.tasks.where level:level
-    if siblings.count > 1 then
-      children.each do |task|
-        task.update(level: task.level + 1)
-      end
-      siblings.each do |task|
-        if task != self
-          task.update(level: task.level + 1)
-        end
-      end
+
+    if siblings.count > 1
+      move_children_down(children)
+      move_siblings_down(siblings)
+
     else
-      if level > 1 then
-        children.each do |task|
-          task.update(level: task.level - 1)
-        end
+      if level > 1
+        move_children_up(children)
         update(level: level - 1)
       end
     end
+
   end
 
   def move_level_up(new_level)
     children = exercise.tasks.where("level > ?", level)
-    siblings = exercise.tasks.where level:level
-    if siblings.count > 1 then
+    siblings = exercise.tasks.where(level:level).count
+
+    if siblings > 1
       update(level: new_level)
+
     else
-      if level > 1 then
-        children.each do |task|
-          task.update(level: task.level - 1)
-        end
+      if level > 1
+        move_children_up(children)
         update(level: new_level)
       end
     end
+
   end
 
   def move_task_up(new_level)
 
-    siblings = exercise.tasks.where level:level
+    siblings = exercise.tasks.where(level:level).count
 
-    if siblings.count > 1 then
+    if siblings > 1
       update(level: new_level)
+
       new_siblings = exercise.tasks.where level:new_level
       children = exercise.tasks.where("level > ?", new_level)
 
-      children.each do |task|
-        task.update(level: task.level + 1)
-      end
-      new_siblings.each do |task|
-        if task != self
-          task.update(level: task.level + 1)
-        end
-      end
+      move_children_down(children)
+      move_siblings_down(new_siblings)
 
     else
-      if level > 1 then
+      if level > 1
         move_level_up(new_level)
 
         new_siblings = exercise.tasks.where level:level
         children = exercise.tasks.where("level > ?", level)
 
-        children.each do |task|
-          task.update(level: task.level + 1)
-        end
-        new_siblings.each do |task|
-          if task != self
-            task.update(level: task.level + 1)
-          end
-        end
-
+        move_children_down(children)
+        move_siblings_down(new_siblings)
       end
     end
+
   end
 
   def move_down
     children = exercise.tasks.where("level > ?", level)
-    siblings = exercise.tasks.where level:level
-    if siblings.count > 1 then
-      children.each do |task|
-        task.update(level: task.level + 1)
-      end
+    siblings = exercise.tasks.where(level:level).count
+
+    if siblings.count > 1
+      move_children_down(children)
       update(level: level+1)
     else
-      children.each do |task|
-        task.update(level: task.level - 1)
-      end
+      move_children_up(children)
     end
   end
 
   def move_level_down(new_level)
     children = exercise.tasks.where("level > ?", level)
-    siblings = exercise.tasks.where level:level
-    if siblings.count > 1 then
+    siblings = exercise.tasks.where(level:level).count
+
+    if siblings > 1
       update(level: new_level)
     else
-      children.each do |task|
-        task.update(level: task.level - 1)
-      end
-      update(level: (new_level-1))
+      move_children_up(children)
+      update(level: (new_level - 1))
     end
   end
 
   def move_task_down(new_level)
 
-    siblings = exercise.tasks.where level:level
+    siblings = exercise.tasks.where(level:level).count
 
-    if siblings.count > 1 then
+    if siblings > 1
       update(level: new_level)
       new_siblings = exercise.tasks.where level:new_level
       children = exercise.tasks.where("level > ?", new_level)
 
-      children.each do |task|
-        task.update(level: task.level + 1)
-      end
-      new_siblings.each do |task|
-        if task != self
-          task.update(level: task.level + 1)
-        end
-      end
+      move_children_down(children)
+      move_siblings_down(new_siblings)
 
     else
-
       move_level_down(new_level)
 
       new_siblings = exercise.tasks.where level:level
       children = exercise.tasks.where("level > ?", level)
 
-      children.each do |task|
-        task.update(level: task.level + 1)
-      end
-      new_siblings.each do |task|
-        if task != self
-          task.update(level: task.level + 1)
-        end
-      end
-
+      move_children_down(children)
+      move_siblings_down(new_siblings)
     end
   end
-
 
   def short_name
     return_string = ''
@@ -182,6 +148,29 @@ class Task < ActiveRecord::Base
     exercise_hypotheses.each do |ex_hyp|
       ex_hyp.update(task:anamnesis)
     end
-
   end
+
+  private
+
+  def move_children_up(children)
+    children.each do |task|
+      task.update(level: task.level - 1)
+    end
+  end
+
+  def move_children_down(children)
+    children.each do |task|
+      task.update(level: task.level + 1)
+    end
+  end
+
+  def move_siblings_down(siblings)
+    siblings.each do |task|
+      if task != self
+        task.update(level: task.level + 1)
+      end
+    end
+  end
+
+
 end

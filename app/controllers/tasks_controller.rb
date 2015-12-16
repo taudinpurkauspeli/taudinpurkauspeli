@@ -153,6 +153,7 @@ class TasksController < ApplicationController
     end
   end
 
+  # Old level_up function
   def level_up
     @task.move_up
     respond_to do |format|
@@ -161,6 +162,7 @@ class TasksController < ApplicationController
     end
   end
 
+  # New level up directly from level to level
   def move_level_up
     @task.move_level_up(params[:new_level])
     respond_to do |format|
@@ -169,6 +171,7 @@ class TasksController < ApplicationController
     end
   end
 
+  # New level up from level to between levels
   def move_task_up
     @task.move_task_up(params[:new_level])
     respond_to do |format|
@@ -177,6 +180,7 @@ class TasksController < ApplicationController
     end
   end
 
+  # Old level_down function
   def level_down
     @task.move_down
     respond_to do |format|
@@ -185,6 +189,7 @@ class TasksController < ApplicationController
     end
   end
 
+  # New level down directly from level to level
   def move_level_down
     @task.move_level_down(params[:new_level])
     respond_to do |format|
@@ -193,6 +198,7 @@ class TasksController < ApplicationController
     end
   end
 
+  # New level down from level to between levels
   def move_task_down
     @task.move_task_down(params[:new_level])
     respond_to do |format|

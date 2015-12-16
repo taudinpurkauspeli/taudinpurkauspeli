@@ -64,6 +64,6 @@ app.controller("TasksController", [
 
             return task;
         };
-        
+
     }
 ]);
