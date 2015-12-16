@@ -89,7 +89,7 @@ class Task < ActiveRecord::Base
     children = exercise.tasks.where("level > ?", level)
     siblings = exercise.tasks.where(level:level).count
 
-    if siblings.count > 1
+    if siblings > 1
       move_children_down(children)
       update(level: level+1)
     else
