@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ApplicationController", [
-    "$scope","$http","$stateParams", "$resource", "$location", "AuthenticationService", "LocalStorageService",
-    function($scope , $http , $stateParams, $resource, $location, AuthenticationService, LocalStorageService) {
+    "$scope","$http","$stateParams", "$resource", "$location", "AuthenticationService", "LocalStorageService", "$sce",
+    function($scope , $http , $stateParams, $resource, $location, AuthenticationService, LocalStorageService, $sce) {
 
         $scope.resetCurrentExercise = function(){
             LocalStorageService.remove("current_tab");
@@ -29,6 +29,9 @@ app.controller("ApplicationController", [
             $scope.currentUserAdmin = userAdmin;
         };
 
+        $scope.getHtml = function(text){
+            return $sce.trustAsHtml(text);
+        };
 
     }
 ]);

@@ -8,7 +8,13 @@ app.controller("ExercisesShowController", [
             {"exerciseId": "@id"},
             { "save": { "method": "PUT" }});
 
-        $scope.exercise = Exercise.get({"exerciseId" : exerciseId});
+        $scope.anamnesis = "";
+        $scope.exercise = {};
+
+        Exercise.get({"exerciseId" : exerciseId}, function(data){
+            $scope.exercise = data;
+            $scope.anamnesis = data.anamnesis;
+        });
 
         $scope.setCurrentTab = function(){
             $scope.current_tab = LocalStorageService.get("current_tab", "1");
