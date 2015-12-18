@@ -1,6 +1,6 @@
 (function() {
     var app = angular.module('diagnoseDiseases',[ 'ngRoute','templates',
-        'ngResource', 'ngMessages', 'validation.match', 'dndLists', 'ui.router' ]);
+        'ngResource', 'ngMessages', 'validation.match', 'dndLists', 'ui.router', 'textAngular']);
 })();
 
 var app = angular.module('diagnoseDiseases');
@@ -131,8 +131,8 @@ app.config([
 app.run([
     "$rootScope", "$location",
     function($rootScope, $location){
-        $rootScope.$on("$routeChangeError", function(event, current, previous, eventObj) {
-            if (eventObj.authenticated === false) {
+        $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+            if (error.authenticated === false) {
                 alert("Sinulla ei ole tarvittavia oikeuksia päästäksesi sivulle");
                 $location.path("/");
             }
