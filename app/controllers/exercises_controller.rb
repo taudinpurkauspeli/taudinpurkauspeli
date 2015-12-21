@@ -4,7 +4,8 @@ class ExercisesController < ApplicationController
 
   before_action :ensure_user_is_logged_in, except: [:index]
   before_action :ensure_user_is_admin, except: [:index, :show]
-  before_action :set_exercise, only: [:show, :edit, :update, :destroy, :duplicate_exercise, :toggle_hidden, :exercises_one]
+  before_action :set_exercise, only: [:show, :edit, :update, :destroy, :duplicate_exercise, :toggle_hidden,
+                                      :exercises_one, :update_one]
   before_action :set_current_user, only: [:show, :index]
 
   # GET /exercises
@@ -30,6 +31,20 @@ class ExercisesController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @exercise }
+    end
+  end
+
+  # PATCH/PUT /exercises_one/1
+  # PATCH/PUT /exercises_one/1.json
+  def update_one
+    respond_to do |format|
+      if @exercise.update(exercise_params)
+        format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen päivitys onnistui!' }
+        format.json { head :ok }
+      else
+        format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), alert: 'Casen päivitys epäonnistui!' }
+        format.json { head :internal_server_error}
+      end
     end
   end
 

@@ -39,6 +39,31 @@
 
 <h3>Muokkaa anamneesia</h3>
 
-<div text-angular="text-angular" ng-model="exercise.anamnesis" ng-if="exercise" placeholder="Casen anamneesi" name="anamnesis"
-     ta-text-editor-class="form-content" ta-html-editor-class="form-content" ta-focussed-class="focussed">
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="updateExerciseAnamnesisForm">
+            <div class="form-group">
+                <label for="anamnesis">Anamneesi</label>
+                <div text-angular="text-angular"
+                     ng-model="exercise.anamnesis"
+                     ng-if="exercise"
+                     placeholder="Casen anamneesi"
+                     name="anamnesis"
+                     id="anamnesis"
+                     ta-text-editor-class="form-content"
+                     ta-html-editor-class="form-content"
+                     ta-focussed-class="focussed">
+                </div>
+            </div>
+
+            <div>
+                <button ng-click="updateAnamnesis()"
+                        class="btn btn-default btn-save"
+                        ng-disabled="updateExerciseAnamnesisForm.$pristine">
+                    Tallenna muutokset
+                </button>
+            </div>
+        </form>
+
+    </div>
 </div>

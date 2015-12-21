@@ -41,7 +41,10 @@ Rails.application.routes.draw do
   get 'taudinpurkauspeli', to: 'diagnose_diseases#index'
   get 'hypothesis_bank', to: 'hypotheses#hypothesis_bank'
   get 'hypotheses_all', to: 'hypotheses#hypotheses_all'
+
   get 'exercises_one/:id', to: 'exercises#exercises_one'
+  put 'exercises_one/:id', to: 'exercises#update_one'
+
   get 'tasks_one/:id', to: 'tasks#tasks_one'
   get 'tasks_all', to: 'tasks#tasks_all'
 

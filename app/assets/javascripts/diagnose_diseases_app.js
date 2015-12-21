@@ -120,7 +120,7 @@ app.config([
                 },
                 "anamnesis@exercises_show": {
                     templateUrl: "exercises/anamnesis_teacher.html",
-                    controller: "ExercisesAnamnesisController"
+                    controller: "ExercisesShowController"
                 }
             }
 
