@@ -10,6 +10,7 @@
     "angular-drag-and-drop-lists": "latest",
     "angular-ui-router": "latest",
     "jQueryDndPageScroll": "git@github.com:martindrapeau/jQueryDndPageScroll.git",
-    "textAngular": "latest"
+    "textAngular": "latest",
+    "font-awesome": "latest"
   }
 }

@@ -69,9 +69,9 @@ app.config([
                     templateUrl: "exercises/tasks_list_teacher.html",
                     controller: "TasksController"
                 },
-                "anamnesis@exercises_show": {
+                "anamnesis_tab@exercises_show": {
                     templateUrl: "exercises/anamnesis_teacher.html",
-                    controller: "ExercisesShowController"
+                    controller: "ExercisesAnamnesisController"
                 }
             }
 

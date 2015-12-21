@@ -23,19 +23,5 @@ app.controller("ExercisesShowController", [
             LocalStorageService.set("current_tab", newTab);
         };
 
-        $scope.updateAnamnesis = function(){
-            if ($scope.updateExerciseAnamnesisForm.$valid) {
-                $scope.exercise.$save(
-                    function() {
-                        $scope.updateExerciseAnamnesisForm.$setPristine();
-                        $scope.updateExerciseAnamnesisForm.$setUntouched();
-                        alert("Anamneesin päivitys onnistui!");
-                    },
-                    function() {
-                        alert("Anamneesin päivitys epäonnistui!");
-                    }
-                );
-            }
-        };
     }
 ]);
