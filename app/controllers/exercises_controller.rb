@@ -43,7 +43,7 @@ class ExercisesController < ApplicationController
         format.json { head :ok }
       else
         format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), alert: 'Casen päivitys epäonnistui!' }
-        format.json { head :internal_server_error}
+        format.json { head :internal_server_error }
       end
     end
   end

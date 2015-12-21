@@ -36,6 +36,6 @@ app.controller("ExercisesShowController", [
                     }
                 );
             }
-        }
+        };
     }
 ]);

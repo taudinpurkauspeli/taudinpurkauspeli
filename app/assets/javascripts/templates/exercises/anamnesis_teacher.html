@@ -9,6 +9,14 @@
 </div>
 <div class = "separator"></div>
 <br/>
+
+<div ng-if="exercise.hidden">
+    <p>Tämä case on piilotettu opiskelijoilta. Muokkaa casea tehdäksesi siitä näkyvä.</p>
+    <br/>
+    <div class="separator"></div>
+    <br/>
+</div>
+
 <h3>Anamneesi</h3>
 
 <br/>
@@ -21,7 +29,6 @@
     <div class="panel-body">
         {{exercise.anamnesis}}
     </div>
-
 </div>
 
 
@@ -31,7 +38,6 @@
     TA_TAVALLA NÄYTETTY:
     <div ta-bind="text" ng-model="exercise.anamnesis" class="panel-body">
     </div>
-
 </div>
 
 <br />
