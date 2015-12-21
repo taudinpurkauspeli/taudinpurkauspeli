@@ -17,16 +17,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
     </div>
-
-    <div ng-bind-html="getHtml(exercise.anamnesis)" class="panel-body">
-        {{exercise.anamnesis}}
-    </div>
-
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-    </div>
     ILMAN MITÄÄN NÄYTETTY:
     <div class="panel-body">
         {{exercise.anamnesis}}
@@ -39,7 +29,7 @@
     <div class="panel-heading">
     </div>
     TA_TAVALLA NÄYTETTY:
-    <div ta-bind ng-model="anamnesis" class="panel-body">
+    <div ta-bind="text" ng-model="exercise.anamnesis" class="panel-body">
     </div>
 
 </div>
@@ -49,5 +39,6 @@
 
 <h3>Muokkaa anamneesia</h3>
 
-<div text-angular ng-model="anamnesis" ng-if="anamnesis">
+<div text-angular="text-angular" ng-model="exercise.anamnesis" ng-if="exercise" placeholder="Casen anamneesi" name="anamnesis"
+     ta-text-editor-class="form-content" ta-html-editor-class="form-content" ta-focussed-class="focussed">
 </div>
