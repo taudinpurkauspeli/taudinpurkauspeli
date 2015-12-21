@@ -1,1 +1,75 @@
-Anamneesi välilehti!
+<div class = "row">
+    <div class = "col-md-8">
+        <h1>Case: {{exercise.name}}</h1>
+    </div>
+
+    <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteiden luominen ja järjestely" data-content="Tällä sivulla voit luoda uusia toimenpiteitä ja päätöstoimenpiteen. Kussakin casessa voi olla vain yksi päätöstoimenpide. Toimenpiteiden suoritusjärjestystä voi muokata toimenpiteen vieressä olevilla nuolilla. Samassa numeroidussa ryhmässä olevat toimenpiteet voi suorittaa valinnaisessa järjestyksessä. Ryhmät taas suoritetaan numerojärjestyksessä ykkösestä alkaen.">Ohje</a>
+    </div>
+</div>
+<div class = "separator"></div>
+<br/>
+
+<div ng-if="exercise.hidden">
+    <p>Tämä case on piilotettu opiskelijoilta. Muokkaa casea tehdäksesi siitä näkyvä.</p>
+    <br/>
+    <div class="separator"></div>
+    <br/>
+</div>
+
+<h3>Anamneesi</h3>
+
+<br/>
+<br/>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+    </div>
+    ILMAN MITÄÄN NÄYTETTY:
+    <div class="panel-body">
+        {{exercise.anamnesis}}
+    </div>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+    </div>
+    TA_TAVALLA NÄYTETTY:
+    <div ta-bind="text" ng-model="exercise.anamnesis" class="panel-body">
+    </div>
+</div>
+
+<br />
+<div class = "separator"></div>
+
+<h3>Muokkaa anamneesia</h3>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="updateExerciseAnamnesisForm">
+            <div class="form-group">
+                <label for="anamnesis">Anamneesi</label>
+                <div text-angular="text-angular"
+                     ng-model="exercise.anamnesis"
+                     ng-if="exercise"
+                     placeholder="Casen anamneesi"
+                     name="anamnesis"
+                     id="anamnesis"
+                     ta-text-editor-class="form-content"
+                     ta-html-editor-class="form-content"
+                     ta-focussed-class="focussed">
+                </div>
+            </div>
+
+            <div>
+                <button ng-click="updateAnamnesis()"
+                        class="btn btn-default btn-save"
+                        ng-disabled="updateExerciseAnamnesisForm.$pristine">
+                    Tallenna muutokset
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>

@@ -24,5 +24,9 @@
 //= require angular-drag-and-drop-lists
 //= require jQueryDndPageScroll
 //= require angular-ui-router
+//= require textAngular
+//= require textAngular/dist/textAngular-sanitize.min
+//= require textAngular/dist/textAngularSetup
+//= require textAngular/dist/textAngular-rangy.min
 //= require_tree ./templates
 //= require_tree .

@@ -29,6 +29,5 @@ app.controller("ApplicationController", [
             $scope.currentUserAdmin = userAdmin;
         };
 
-
     }
 ]);
