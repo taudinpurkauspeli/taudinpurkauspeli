@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'sass/rails'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -28,8 +29,9 @@ module Taudinpurkauspeli
 
     config.assets.paths << Rails.root.join("vendor","assets","bower_components")
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass-official","assets","fonts")
+    config.assets.paths << Rails.root.join("vendor","assets","bower_components","font-awesome","fonts")
 
-    config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff|woff2)$)
+    config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff|woff2|otf)$)
 
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
     config.assets.precompile += Ckeditor.assets
