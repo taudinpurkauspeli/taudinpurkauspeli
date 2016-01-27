@@ -1,0 +1,34 @@
+/*!
+ * Override Font Awesome 4.5.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License) font path configuration
+ * in order to fix font problem in production (fonts required in production with wrong path).
+ */
+
+/* FONT PATH
+ * -------------------------- */
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: font-url('fontawesome-webfont.eot');
+  src: font-url('fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
+  font-url('fontawesome-webfont.woff2') format('woff2'),
+  font-url('fontawesome-webfont.woff') format('woff'),
+  font-url('fontawesome-webfont.ttf') format('truetype'),
+  font-url('fontawesome-webfont.svg?#fontawesomeregular') format('svg');
+  //  src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype'); // used when developing fonts
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@import "font-awesome/scss/variables";
+@import "font-awesome/scss/mixins";
+@import "font-awesome/scss/core";
+@import "font-awesome/scss/larger";
+@import "font-awesome/scss/fixed-width";
+@import "font-awesome/scss/list";
+@import "font-awesome/scss/bordered-pulled";
+@import "font-awesome/scss/animated";
+@import "font-awesome/scss/rotated-flipped";
+@import "font-awesome/scss/stacked";
+@import "font-awesome/scss/icons";
