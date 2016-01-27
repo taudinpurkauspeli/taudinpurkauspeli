@@ -22,7 +22,7 @@
 //= require bootstrap-sprockets
 //= require angular-validation-match
 //= require angular-drag-and-drop-lists
-//= require jQueryDndPageScroll
+//= require jQueryDndPageScroll/jquery.dnd_page_scroll
 //= require angular-ui-router
 //= require textAngular
 //= require textAngular/dist/textAngular-sanitize.min
