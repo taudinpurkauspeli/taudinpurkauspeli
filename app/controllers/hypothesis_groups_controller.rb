@@ -14,6 +14,14 @@ class HypothesisGroupsController < ApplicationController
     end
   end
 
+  def index_hypotheses
+    hypothesis_groups = HypothesisGroup.all.to_json(include: :hypotheses)
+    respond_to do |format|
+      format.html
+      format.json { render json: hypothesis_groups }
+    end
+  end
+
   def show
     respond_to do |format|
       format.html

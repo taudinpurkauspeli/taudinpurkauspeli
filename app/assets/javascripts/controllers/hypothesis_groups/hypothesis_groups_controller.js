@@ -11,6 +11,10 @@ var HypothesisGroupsController = function($scope, $http, $location, $resource, $
 
     $scope.hypothesisGroupsList = HypothesisGroups.query();
 
+    var HypothesisGroupsAndHypotheses = $resource('/index_hypotheses.json');
+
+    $scope.hypothesisGroupsWithHypotheses = HypothesisGroupsAndHypotheses.query();
+
     $scope.viewHypothesisGroup = function(hypothesisGroup) {
         $location.path("hypothesis_groups/" + hypothesisGroup.id);
     };
