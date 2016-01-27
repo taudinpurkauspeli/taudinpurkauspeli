@@ -17,7 +17,10 @@ app.controller("AuthenticationController", [
                     password: ''
                 };
             }).error(function () {
-
+                $scope.credentials = {
+                    username: '',
+                    password: ''
+                };
             });
         };
 
