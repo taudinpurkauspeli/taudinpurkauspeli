@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("HypothesisGroupsController", [
-    '$scope', '$http', '$location', '$resource', '$window',
-    function($scope, $http, $location, $resource, $window) {
+    '$scope', '$http', '$location', '$resource', '$window', '$uibModal',
+    function($scope, $http, $location, $resource, $window, $uibModal) {
         $scope.hypothesisGroupsAndHypothesesList = [];
         $scope.newHypothesisGroup = {};
 
@@ -52,6 +52,37 @@ app.controller("HypothesisGroupsController", [
                     }
                 );
             }
+        };
+
+        $scope.updateHypothesis = function () {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'updateHypothesisModal.html',
+                controller: 'UpdateHypothesisModalController',
+                size: 'lg'
+            });
+
+            modalInstance.result.then(function () {
+                alert("Diffi päivitettiin onnistuneesti");
+            }, function () {
+                alert("Diffin päivitys peruttu");
+            });
+        };
+
+
+    }
+]);
+
+app.controller("UpdateHypothesisModalController", [
+    '$scope', '$uibModalInstance',
+    function($scope, $uibModalInstance) {
+        $scope.confirmUpdate = function () {
+            $uibModalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
         };
 
     }

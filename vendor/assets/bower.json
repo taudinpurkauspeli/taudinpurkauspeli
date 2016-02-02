@@ -11,6 +11,8 @@
     "angular-ui-router": "latest",
     "jQueryDndPageScroll": "git@github.com:martindrapeau/jQueryDndPageScroll.git",
     "textAngular": "latest",
-    "font-awesome": "latest"
+    "font-awesome": "latest",
+    "angular-bootstrap": "latest",
+    "angular-animate": "latest"
   }
 }

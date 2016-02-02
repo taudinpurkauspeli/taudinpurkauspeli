@@ -1,6 +1,6 @@
 (function() {
     var app = angular.module('diagnoseDiseases',[ 'ngRoute','templates',
-        'ngResource', 'ngMessages', 'validation.match', 'dndLists', 'ui.router', 'textAngular']);
+        'ngResource', 'ngMessages', 'validation.match', 'dndLists', 'ui.router', 'textAngular', 'ngAnimate', 'ui.bootstrap']);
 })();
 
 var app = angular.module('diagnoseDiseases');
