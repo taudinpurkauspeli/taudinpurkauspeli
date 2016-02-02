@@ -5,8 +5,8 @@ app.controller("ExerciseHypothesesController", [
     function($scope , $http , $stateParams, $resource, $location, $window, $state) {
 
         var ExerciseHypothesis = $resource('/exercise_hypotheses/:exerciseHypothesisId.json',
-            {"exerciseHypothesisId": "@id"},
-            { "create": { "method": "POST" }});
+            { exerciseHypothesisId: "@id"},
+            { create: { method: 'POST' }});
 
         var ExerciseHypotheses = $resource('/exercise_hypotheses.json');
         $scope.exerciseHypotheses = ExerciseHypotheses.get({"exercise_id": $stateParams.id});

@@ -5,10 +5,10 @@ app.controller("HypothesisGroupsShowController", [
     function($scope , $http , $stateParams, $resource) {
         var hypothesisGroupId = $stateParams.id;
         var HypothesisGroup = $resource('/hypothesis_groups/:hypothesisGroupId.json',
-            {"hypothesisGroupId": "@id"},
-            { "save": { "method": "PUT" }});
+            { hypothesisGroupId: "@id"},
+            { save: { method: 'PUT' }});
 
-        $scope.hypothesisGroup = HypothesisGroup.get({"hypothesisGroupId" : hypothesisGroupId});
+        $scope.hypothesisGroup = HypothesisGroup.get({hypothesisGroupId : hypothesisGroupId});
 
         $scope.updateHypothesisGroup = function() {
             if ($scope.updateHypothesisGroupForm.$valid) {
