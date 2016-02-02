@@ -58,7 +58,7 @@ app.controller("HypothesisGroupsController", [
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'updateHypothesisModal.html',
+                templateUrl: 'hypotheses/update_hypothesis_modal.html',
                 controller: 'UpdateHypothesisModalController',
                 size: 'lg',
                 resolve: {
@@ -71,24 +71,6 @@ app.controller("HypothesisGroupsController", [
             }, function () {
                 alert("Diffin päivitys peruttu");
             });
-        };
-
-
-    }
-]);
-
-app.controller("UpdateHypothesisModalController", [
-    '$scope', '$uibModalInstance', 'hypothesis',
-    function($scope, $uibModalInstance, hypothesis) {
-
-        $scope.hypothesis = hypothesis;
-
-        $scope.confirmUpdate = function () {
-            $uibModalInstance.close();
-        };
-
-        $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
         };
 
     }
