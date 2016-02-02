@@ -31,14 +31,14 @@
         <div class="row">
 
             <div class="col-md-5">
-                <button class="btn btn-default btn-exercise"
+                <button class="btn btn-default btn-hypothesis"
                         ng-click="viewHypothesisGroup(hypothesisGroup)">
                     {{hypothesisGroup.name}}
                 </button>
             </div>
 
             <div class="col-md-3">
-                <button class="btn btn-default btn-exercise btn-del"
+                <button class="btn btn-default btn-hypothesis btn-del"
                         ng-click="deleteHypothesisGroup(hypothesisGroup)">
                     Poista
                 </button>
@@ -51,9 +51,15 @@
 
             </div>
             <div class="col-md-4">
-                <button class="btn btn-default btn-hypothesis multiline"
-                        ng-click="updateHypothesis()">
+                <button class="btn btn-default btn-hypothesis multiline">
                     {{hypothesis.name}}
+                </button>
+            </div>
+
+            <div class="col-md-1">
+                <button class="btn btn-default btn-hypothesis btn-save"
+                        ng-click="updateHypothesis(hypothesis)">
+                    Päivitä
                 </button>
             </div>
 
@@ -111,10 +117,10 @@
 
 <script type="text/ng-template" id="updateHypothesisModal.html">
     <div class="modal-header">
-        <h3 class="modal-title">Päivitä diffiä</h3>
+        <h3 class="modal-title">Päivitä diffiä "{{hypothesis.name}}"</h3>
     </div>
     <div class="modal-body">
-        Tähän tulee diffin päivityslomake.
+        Tähän tulee diffin "{{hypothesis.name}}" päivityslomake.
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" type="button" ng-click="confirmUpdate()">Päivitä</button>

@@ -54,13 +54,16 @@ app.controller("HypothesisGroupsController", [
             }
         };
 
-        $scope.updateHypothesis = function () {
+        $scope.updateHypothesis = function (hypothesis) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'updateHypothesisModal.html',
                 controller: 'UpdateHypothesisModalController',
-                size: 'lg'
+                size: 'lg',
+                resolve: {
+                    hypothesis: hypothesis
+                }
             });
 
             modalInstance.result.then(function () {
@@ -75,8 +78,11 @@ app.controller("HypothesisGroupsController", [
 ]);
 
 app.controller("UpdateHypothesisModalController", [
-    '$scope', '$uibModalInstance',
-    function($scope, $uibModalInstance) {
+    '$scope', '$uibModalInstance', 'hypothesis',
+    function($scope, $uibModalInstance, hypothesis) {
+
+        $scope.hypothesis = hypothesis;
+
         $scope.confirmUpdate = function () {
             $uibModalInstance.close();
         };
