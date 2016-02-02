@@ -6,9 +6,6 @@ app.controller("HypothesisGroupsController", [
         $scope.hypothesisGroupsAndHypothesesList = [];
 
         var HypothesisGroupsAndHypotheses = $resource('/hypothesis_groups_and_hypotheses.json');
-        var HypothesisGroup = $resource('/hypothesis_groups/:hypothesisGroupId.json',
-            {"hypothesisGroupId": "@id"},
-            { "create": { "method": "POST" }});
 
         $scope.updateHypothesisGroupList = function(){
             HypothesisGroupsAndHypotheses.query(function(data){
@@ -18,22 +15,27 @@ app.controller("HypothesisGroupsController", [
 
         $scope.updateHypothesisGroupList();
 
-        $scope.viewHypothesisGroup = function(hypothesisGroup) {
-            $location.path("hypothesis_groups/" + hypothesisGroup.id);
-        };
+        //$scope.viewHypothesisGroup = function(hypothesisGroup) {
+        //    $location.path("hypothesis_groups/" + hypothesisGroup.id);
+        //};
 
-        $scope.deleteHypothesisGroup = function(hypothesisGroup) {
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa diffiryhmän ja kaikki siihen liittyvät diffit?");
+        $scope.updateHypothesisGroup = function (hypothesisGroup) {
 
-            if (deleteConfirmation) {
-                HypothesisGroup.delete({hypothesisGroupId : hypothesisGroup.id}, function() {
-                    $window.alert("Diffiryhmän poistaminen onnistui!");
-                    $scope.updateHypothesisGroupList();
-                });
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'hypothesis_groups/update_hypothesis_group_modal.html',
+                controller: 'UpdateHypothesisGroupModalController',
+                size: 'lg',
+                resolve: {
+                    hypothesisGroup: hypothesisGroup
+                }
+            });
 
-            } else {
-                $window.alert("Diffiryhmää '" + hypothesisGroup.name + "' ei poistettu");
-            }
+            modalInstance.result.then(function () {
+                $scope.updateHypothesisGroupList();
+            }, function () {
+                alert("Diffiryhmän päivitys peruttu.");
+            });
         };
 
 
@@ -47,7 +49,7 @@ app.controller("HypothesisGroupsController", [
             modalInstance.result.then(function () {
                 $scope.updateHypothesisGroupList();
             }, function () {
-                alert("Diffiryhmän luominen peruttu");
+                alert("Diffiryhmän luominen peruttu.");
             });
         };
 
@@ -64,9 +66,9 @@ app.controller("HypothesisGroupsController", [
             });
 
             modalInstance.result.then(function () {
-                alert("Diffi päivitettiin onnistuneesti");
+                alert("Diffi päivitettiin onnistuneesti.");
             }, function () {
-                alert("Diffin päivitys peruttu");
+                alert("Diffin päivitys peruttu.");
             });
         };
 
