@@ -28,19 +28,6 @@ app.config([
                     }
                 }]
             }
-        }).state("hypothesis_groups_show",{
-            url: "/hypothesis_groups/:id",
-            controller: "HypothesisGroupsShowController",
-            templateUrl: "hypothesis_groups/show.html",
-            resolve: {
-                auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
-                    var userAdmin = AuthenticationService.isAdmin();
-
-                    if (!userAdmin) {
-                        return $q.reject({ authenticated: false });
-                    }
-                }]
-            }
         }).state("signup",{
             url: "/signup",
             controller: "UsersNewController",

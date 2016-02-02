@@ -15,10 +15,6 @@ app.controller("HypothesisGroupsController", [
 
         $scope.updateHypothesisGroupList();
 
-        //$scope.viewHypothesisGroup = function(hypothesisGroup) {
-        //    $location.path("hypothesis_groups/" + hypothesisGroup.id);
-        //};
-
         $scope.updateHypothesisGroup = function (hypothesisGroup) {
 
             var modalInstance = $uibModal.open({
@@ -37,7 +33,6 @@ app.controller("HypothesisGroupsController", [
                 alert("Diffiryhmän päivitys peruttu.");
             });
         };
-
 
         $scope.createHypothesisGroup = function(){
             var modalInstance = $uibModal.open({
