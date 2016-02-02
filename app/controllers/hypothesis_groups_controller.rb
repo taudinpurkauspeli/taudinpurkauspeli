@@ -43,8 +43,8 @@ class HypothesisGroupsController < ApplicationController
     end
   end
 
-  # POST /hypothesis_group
-  # POST /hypothesis_group.json
+  # POST /hypothesis_groups
+  # POST /hypothesis_groups.json
   def create
     @hypothesis_group = HypothesisGroup.new(hypothesis_group_params)
     respond_to do |format|

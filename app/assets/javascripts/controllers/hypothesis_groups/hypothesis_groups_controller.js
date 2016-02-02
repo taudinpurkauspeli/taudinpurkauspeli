@@ -4,7 +4,6 @@ app.controller("HypothesisGroupsController", [
     '$scope', '$http', '$location', '$resource', '$window', '$uibModal',
     function($scope, $http, $location, $resource, $window, $uibModal) {
         $scope.hypothesisGroupsAndHypothesesList = [];
-        $scope.newHypothesisGroup = {};
 
         var HypothesisGroupsAndHypotheses = $resource('/hypothesis_groups_and_hypotheses.json');
         var HypothesisGroup = $resource('/hypothesis_groups/:hypothesisGroupId.json',
@@ -37,21 +36,19 @@ app.controller("HypothesisGroupsController", [
             }
         };
 
-        $scope.createHypothesisGroup = function() {
-            if ($scope.createHypothesisGroupForm.$valid) {
-                HypothesisGroup.create($scope.newHypothesisGroup,
-                    function() {
-                        $scope.createHypothesisGroupForm.$setPristine();
-                        $scope.createHypothesisGroupForm.$setUntouched();
-                        $scope.updateHypothesisGroupList();
-                        $scope.newHypothesisGroup = {};
-                        $window.alert("Diffiryhmän luominen onnistui!");
-                    },
-                    function() {
-                        $window.alert("Diffiryhmän luominen epäonnistui!");
-                    }
-                );
-            }
+
+        $scope.createHypothesisGroup = function(){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'hypothesis_groups/create_hypothesis_group_modal.html',
+                controller: 'CreateHypothesisGroupModalController'
+            });
+
+            modalInstance.result.then(function () {
+                $scope.updateHypothesisGroupList();
+            }, function () {
+                alert("Diffiryhmän luominen peruttu");
+            });
         };
 
         $scope.updateHypothesis = function (hypothesis) {

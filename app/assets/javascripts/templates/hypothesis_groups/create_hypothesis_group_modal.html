@@ -1,0 +1,45 @@
+
+<div class="modal-header">
+    <h3 class="modal-title">Uusi diffiryhmä</h3>
+</div>
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-5">
+            <form novalidate name="createHypothesisGroupForm">
+                <div class="form-group has-feedback"
+                     ng-class="{
+'has-error': createHypothesisGroupForm.name.$invalid && createHypothesisGroupForm.name.$dirty,
+'has-success': createHypothesisGroupForm.name.$valid && createHypothesisGroupForm.name.$touched
+}">
+                    <label for="name">Diffiryhmän nimi</label>
+                    <input type="text"
+                           class="form-control"
+                           required pattern=".{3,}"
+                           name="name"
+                           id="name"
+                           placeholder="Diffiryhmän nimi"
+                           ng-model="newHypothesisGroup.name">
+
+                    <p class="help-block" ng-messages="createHypothesisGroupForm.name.$error" ng-if="!createHypothesisGroupForm.name.$pristine">
+                        <span ng-message="required">Nimi on pakollinen</span>
+                        <span ng-message="pattern">Nimessä on oltava vähintään 3 merkkiä</span>
+                    </p>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary"
+            type="button"
+            ng-click="createHypothesisGroup()"
+            ng-disabled="createHypothesisGroupForm.$invalid || createHypothesisGroupForm.$pristine">
+        Luo
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+</div>
+
