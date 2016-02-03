@@ -16,8 +16,8 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
                         <button class="btn btn-default btn-hypothesis multiline"
-                            ng-repeat="exercise_hypothesis in exercise_hypotheses"
-                            ng-click="removeFromExercise(exercise_hypothesis)">
+                                ng-repeat="exercise_hypothesis in exercise_hypotheses"
+                                ng-click="removeFromExercise(exercise_hypothesis)">
                             {{exercise_hypothesis.hypothesis.name}}
                         </button>
                     </div>
@@ -31,29 +31,62 @@
             <br/>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-5" ng-controller="HypothesisGroupsController">
             <h3>Diffipankki</h3>
             <br/>
 
             <div ng-repeat="(hypothesis_group, hypotheses) in hypothesisBank">
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-9">
                         <button class="btn btn-default btn-hypothesis multiline btn-save" >{{hypotheses[0].hypothesis_group.name}}</button>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-11">
-                        <button class="btn btn-default btn-hypothesis multiline"
-                            ng-repeat="hypothesis in hypotheses"
-                            ng-click="addToExercise(hypothesis)">
-                            {{hypothesis.name}}
+                    <div class="col-md-3">
+                        <button class="btn btn-default btn-hypothesis multiline btn-save"
+                                ng-click="updateHypothesisGroup(hypotheses[0].hypothesis_group)">
+                            Muokkaa
                         </button>
                     </div>
                 </div>
 
+                <div class="row" ng-repeat="hypothesis in hypotheses">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-8">
+                        <button class="btn btn-default btn-hypothesis multiline"
+                                ng-click="addToExercise(hypothesis)">
+                            {{hypothesis.name}}
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-default btn-hypothesis btn-save"
+                                ng-click="updateHypothesis(hypothesis)">
+                            Muokkaa
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-1">
+
+                    </div>
+                    <div class="col-md-8">
+                        <button class="btn btn-default btn-hypothesis btn-save multiline"
+                                ng-click="createHypothesis(hypotheses[0].hypothesis_group)">
+                            + Luo uusi diffi
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-9">
+                    <button class="btn btn-default btn-hypothesis btn-save"
+                            ng-click="createHypothesisGroup()">
+                        + Luo uusi diffiryhmä
+                    </button>
+                </div>
             </div>
 
         </div>
