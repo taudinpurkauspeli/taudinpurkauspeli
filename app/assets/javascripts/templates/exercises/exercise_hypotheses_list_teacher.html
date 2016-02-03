@@ -4,8 +4,7 @@
             <h3>Casen {{exercise.name}} diffit</h3>
             <br/>
 
-            <ul ng-repeat="(hypothesis_group, exercise_hypotheses) in exerciseHypotheses"
-                class="list-unstyled">
+            <div ng-repeat="(hypothesis_group, exercise_hypotheses) in exerciseHypotheses">
 
                 <div class="row">
                     <div class="col-md-12">
@@ -16,14 +15,14 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
-                        <li class="btn btn-default btn-hypothesis multiline"
+                        <button class="btn btn-default btn-hypothesis multiline"
                             ng-repeat="exercise_hypothesis in exercise_hypotheses"
-                            ng-click="removedFromExercise(exercise_hypothesis)">
+                            ng-click="removeFromExercise(exercise_hypothesis)">
                             {{exercise_hypothesis.hypothesis.name}}
-                        </li>
+                        </button>
                     </div>
                 </div>
-            </ul>
+            </div>
         </div>
 
         <div class="col-md-2">
@@ -32,14 +31,11 @@
             <br/>
         </div>
 
-        <div class="col-md-5"
-             dnd-list="[]"
-             dnd-allowed-types="['hypothesis_in_exercise']">
+        <div class="col-md-5">
             <h3>Diffipankki</h3>
             <br/>
 
-            <ul ng-repeat="(hypothesis_group, hypotheses) in hypothesisBank"
-                class="list-unstyled">
+            <div ng-repeat="(hypothesis_group, hypotheses) in hypothesisBank">
 
                 <div class="row">
                     <div class="col-md-12">
@@ -50,15 +46,15 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
-                        <li class="btn btn-default btn-hypothesis multiline"
+                        <button class="btn btn-default btn-hypothesis multiline"
                             ng-repeat="hypothesis in hypotheses"
-                            ng-click="addedToExercise(hypothesis)">
+                            ng-click="addToExercise(hypothesis)">
                             {{hypothesis.name}}
-                        </li>
+                        </button>
                     </div>
                 </div>
 
-            </ul>
+            </div>
 
         </div>
     </div>

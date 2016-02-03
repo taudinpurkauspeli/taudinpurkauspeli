@@ -9,41 +9,41 @@ app.controller("ExerciseHypothesesController", [
             { create: { method: 'POST' }});
 
         var ExerciseHypotheses = $resource('/exercise_hypotheses.json');
-        $scope.exerciseHypotheses = ExerciseHypotheses.get({"exercise_id": $stateParams.id});
-
         var HypothesisBank = $resource('/hypothesis_bank.json');
-        $scope.hypothesisBank= HypothesisBank.get({"exercise_id": $stateParams.id});
 
-        $scope.removedFromExercise = function(exercise_hypothesis){
+        $scope.updateExerciseHypotheses = function(){
+            ExerciseHypotheses.get({"exercise_id": $stateParams.id}, function(data){
+                $scope.exerciseHypotheses = data;
+            });
+        };
+
+        $scope.updateHypothesisBank = function(){
+            HypothesisBank.get({"exercise_id": $stateParams.id}, function(data){
+                $scope.hypothesisBank = data;
+            });
+        };
+
+        $scope.updateExerciseHypotheses();
+        $scope.updateHypothesisBank();
+
+        $scope.removeFromExercise = function(exercise_hypothesis){
 
             ExerciseHypothesis.delete({exerciseHypothesisId: exercise_hypothesis.id}, function() {
-                ExerciseHypotheses.get({"exercise_id": $stateParams.id}, function(data){
-                    $scope.exerciseHypotheses = data;
-                });
-
-                HypothesisBank.get({"exercise_id": $stateParams.id}, function(data){
-                    $scope.hypothesisBank = data;
-                });
-                // $window.alert("Diffin poistaminen casesta onnistui!");
+                $scope.updateExerciseHypotheses();
+                $scope.updateHypothesisBank();
             });
 
         };
 
-        $scope.addedToExercise = function(hypothesis){
+        $scope.addToExercise = function(hypothesis){
             newExerciseHypothesis = {
                 exercise_id: $stateParams.id,
                 hypothesis_id: hypothesis.id
             };
             ExerciseHypotheses.save(newExerciseHypothesis,
                 function() {
-                    ExerciseHypotheses.get({"exercise_id": $stateParams.id}, function(data){
-                        $scope.exerciseHypotheses = data;
-                    });
-
-                    HypothesisBank.get({"exercise_id": $stateParams.id}, function(data){
-                        $scope.hypothesisBank = data;
-                    });
-                    //   $window.alert(hypothesis.id + " Lisätty ryhmään " + $stateParams.id);
+                    $scope.updateExerciseHypotheses();
+                    $scope.updateHypothesisBank();
                 },
                 function() {
                     $window.alert("Diffiä ei voitu lisätä caseen.");
