@@ -35,21 +35,21 @@
             <h3>Diffipankki</h3>
             <br/>
 
-            <div ng-repeat="hypothesis_group in hypothesisGroupsAndHypothesesList">
+            <div ng-repeat="hypothesisGroup in hypothesisGroupsAndHypothesesList">
 
                 <div class="row">
                     <div class="col-md-9">
-                        <button class="btn btn-default btn-hypothesis multiline btn-save" >{{hypothesis_group.name}}</button>
+                        <button class="btn btn-default btn-hypothesis multiline btn-save" >{{hypothesisGroup.name}}</button>
                     </div>
                     <div class="col-md-3">
                         <button class="btn btn-default btn-hypothesis multiline btn-save"
-                                ng-click="updateHypothesisGroup(hypothesis_group)">
+                                ng-click="updateHypothesisGroup(hypothesisGroup)">
                             Muokkaa
                         </button>
                     </div>
                 </div>
 
-                <div class="row" ng-repeat="hypothesis in hypothesis_group.hypotheses">
+                <div class="row" ng-repeat="hypothesis in hypothesisGroup.hypotheses">
                     <div class="col-md-1"></div>
                     <div class="col-md-8">
                         <button class="btn btn-default btn-hypothesis multiline"
@@ -71,7 +71,7 @@
                     </div>
                     <div class="col-md-8">
                         <button class="btn btn-default btn-hypothesis btn-save multiline"
-                                ng-click="createHypothesis(hypothesis_group)">
+                                ng-click="createHypothesis(hypothesisGroup)">
                             + Luo uusi diffi
                         </button>
                     </div>
