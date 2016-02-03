@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("UpdateHypothesisGroupModalController", [
-    '$scope', '$uibModalInstance', '$resource', '$window', 'hypothesisGroup', '$http' , '$stateParams',
-    function($scope, $uibModalInstance, $resource, $window, hypothesisGroup, $http , $stateParams) {
+    '$scope', '$uibModalInstance', '$resource', '$window', 'hypothesisGroup',
+    function($scope, $uibModalInstance, $resource, $window, hypothesisGroup) {
 
         $scope.hypothesisGroup = hypothesisGroup;
 

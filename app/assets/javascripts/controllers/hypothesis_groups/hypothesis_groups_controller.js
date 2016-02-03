@@ -53,14 +53,13 @@ app.controller("HypothesisGroupsController", [
                 animation: true,
                 templateUrl: 'hypotheses/update_hypothesis_modal.html',
                 controller: 'UpdateHypothesisModalController',
-                size: 'lg',
                 resolve: {
                     hypothesis: hypothesis
                 }
             });
 
             modalInstance.result.then(function () {
-                alert("Diffi päivitettiin onnistuneesti.");
+                $scope.updateHypothesisGroupList();
             }, function () {
                 alert("Diffin päivitys peruttu.");
             });

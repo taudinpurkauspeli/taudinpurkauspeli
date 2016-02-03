@@ -4,7 +4,7 @@ class HypothesesController < ApplicationController
 
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index]
-  before_action :set_hypothesis, only: [:destroy]
+  before_action :set_hypothesis, only: [:destroy, :update]
   before_action :set_current_user, only: [:index]
 
   # GET /hypotheses
@@ -87,12 +87,27 @@ class HypothesesController < ApplicationController
     end
   end
 
+  def update
+    #TODO: Check what to do with Rails validations
+
+    respond_to do |format|
+      if @hypothesis.update(hypothesis_params)
+        format.html
+        format.json { head :ok }
+      else
+        format.html
+        format.json { head :internal_server_error }
+      end
+    end
+  end
+
   # DELETE /hypotheses/1
   # DELETE /hypotheses/1.json
   def destroy
     @hypothesis.destroy
     respond_to do |format|
       format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Hypoteesin poisto onnistui!' }
+      format.json { head :ok }
     end
   end
 
