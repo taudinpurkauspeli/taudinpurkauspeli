@@ -21,7 +21,6 @@ app.controller("HypothesisGroupsController", [
                 animation: true,
                 templateUrl: 'hypothesis_groups/update_hypothesis_group_modal.html',
                 controller: 'UpdateHypothesisGroupModalController',
-                size: 'lg',
                 resolve: {
                     hypothesisGroup: hypothesisGroup
                 }
@@ -64,6 +63,23 @@ app.controller("HypothesisGroupsController", [
                 alert("Diffi päivitettiin onnistuneesti.");
             }, function () {
                 alert("Diffin päivitys peruttu.");
+            });
+        };
+
+        $scope.createHypothesis = function(hypothesisGroup){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'hypotheses/create_hypothesis_modal.html',
+                controller: 'CreateHypothesisModalController',
+                resolve: {
+                    hypothesisGroup: hypothesisGroup
+                }
+            });
+
+            modalInstance.result.then(function () {
+                $scope.updateHypothesisGroupList();
+            }, function () {
+                alert("Diffin luominen peruttu.");
             });
         };
 

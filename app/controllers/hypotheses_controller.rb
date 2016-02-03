@@ -79,8 +79,10 @@ class HypothesesController < ApplicationController
     respond_to do |format|
       if @hypothesis.save
         format.html { redirect_to hypotheses_path(:layout => get_layout), notice: 'Hypoteesin luominen onnistui!' }
+        format.json { head :ok }
       else
         format.html { redirect_to hypotheses_path(:layout => get_layout), alert: 'Hypoteesin luominen epäonnistui!' }
+        format.json { head :internal_server_error }
       end
     end
   end
