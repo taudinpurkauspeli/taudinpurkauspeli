@@ -9,7 +9,7 @@ app.controller("ExerciseHypothesesController", [
             { create: { method: 'POST' }});
 
         var ExerciseHypotheses = $resource('/exercise_hypotheses.json');
-        var HypothesisBank = $resource('/hypothesis_bank.json');
+        var ExerciseHypothesesOnly = $resource('/exercise_hypotheses_only.json');
 
         $scope.updateExerciseHypotheses = function(){
             ExerciseHypotheses.get({"exercise_id": $stateParams.id}, function(data){
@@ -17,20 +17,20 @@ app.controller("ExerciseHypothesesController", [
             });
         };
 
-        $scope.updateHypothesisBank = function(){
-            HypothesisBank.get({"exercise_id": $stateParams.id}, function(data){
-                $scope.hypothesisBank = data;
+        $scope.updateExerciseHypothesesOnly = function(){
+            ExerciseHypothesesOnly.query({"exercise_id": $stateParams.id}, function(data){
+                $scope.exerciseHypothesesOnly = data;
             });
         };
 
+        $scope.updateExerciseHypothesesOnly();
         $scope.updateExerciseHypotheses();
-        $scope.updateHypothesisBank();
 
         $scope.removeFromExercise = function(exercise_hypothesis){
 
             ExerciseHypothesis.delete({exerciseHypothesisId: exercise_hypothesis.id}, function() {
                 $scope.updateExerciseHypotheses();
-                $scope.updateHypothesisBank();
+                $scope.updateExerciseHypothesesOnly();
             });
 
         };
@@ -43,13 +43,25 @@ app.controller("ExerciseHypothesesController", [
             ExerciseHypotheses.save(newExerciseHypothesis,
                 function() {
                     $scope.updateExerciseHypotheses();
-                    $scope.updateHypothesisBank();
+                    $scope.updateExerciseHypothesesOnly();
+
                 },
                 function() {
                     $window.alert("Diffiä ei voitu lisätä caseen.");
                 }
             );
         };
+
+        $scope.belongsToExercise = function(hypothesis){
+
+            for(var i = 0; i < $scope.exerciseHypothesesOnly.length; i++){
+                var hypothesisValue = $scope.exerciseHypothesesOnly[i];
+                if(hypothesisValue.id == hypothesis.id){
+                    return true;
+                }
+            }
+            return false;
+        }
 
     }
 ]);

@@ -76,4 +76,6 @@ Rails.application.routes.draw do
 
   post 'exercises/:id/dup', to: 'exercises#duplicate_exercise'
   post 'exercises/:id/hide', to: 'exercises#toggle_hidden'
+
+  get 'exercise_hypotheses_only', to: 'exercise_hypotheses#only_exercise_hypotheses'
 end

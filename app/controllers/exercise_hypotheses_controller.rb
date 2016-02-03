@@ -23,7 +23,23 @@ class ExerciseHypothesesController < ApplicationController
         format.json {head :not_found}
       end
     end
+  end
 
+  def only_exercise_hypotheses
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+
+        exercise_hypotheses = exercise.hypotheses.to_json
+
+        format.html
+        format.json {render json: exercise_hypotheses}
+      else
+        format.html
+        format.json {head :not_found}
+      end
+    end
   end
 
   # POST /exercise_hypotheses
