@@ -23,14 +23,17 @@ app.controller("ExerciseHypothesesController", [
             });
         };
 
-        $scope.updateExerciseHypothesesOnly();
-        $scope.updateExerciseHypotheses();
+        $scope.updateAllExerciseHypotheses = function(){
+            $scope.updateExerciseHypothesesOnly();
+            $scope.updateExerciseHypotheses();
+        };
+
+        $scope.updateAllExerciseHypotheses();
 
         $scope.removeFromExercise = function(exercise_hypothesis){
 
             ExerciseHypothesis.delete({exerciseHypothesisId: exercise_hypothesis.id}, function() {
-                $scope.updateExerciseHypotheses();
-                $scope.updateExerciseHypothesesOnly();
+                $scope.updateAllExerciseHypotheses();
             });
 
         };
@@ -42,8 +45,7 @@ app.controller("ExerciseHypothesesController", [
             };
             ExerciseHypotheses.save(newExerciseHypothesis,
                 function() {
-                    $scope.updateExerciseHypotheses();
-                    $scope.updateExerciseHypothesesOnly();
+                    $scope.updateAllExerciseHypotheses();
 
                 },
                 function() {

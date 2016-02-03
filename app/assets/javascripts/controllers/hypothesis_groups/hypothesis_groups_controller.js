@@ -15,7 +15,7 @@ app.controller("HypothesisGroupsController", [
 
         $scope.updateHypothesisGroupList();
 
-        $scope.updateHypothesisGroup = function (hypothesisGroup) {
+        $scope.updateHypothesisGroup = function (hypothesisGroup, callback) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -28,6 +28,9 @@ app.controller("HypothesisGroupsController", [
 
             modalInstance.result.then(function () {
                 $scope.updateHypothesisGroupList();
+                if(callback){
+                    callback();
+                }
             }, function () {
                 alert("Diffiryhmän päivitys peruttu.");
             });
@@ -47,7 +50,7 @@ app.controller("HypothesisGroupsController", [
             });
         };
 
-        $scope.updateHypothesis = function (hypothesis) {
+        $scope.updateHypothesis = function (hypothesis, callback) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -60,6 +63,9 @@ app.controller("HypothesisGroupsController", [
 
             modalInstance.result.then(function () {
                 $scope.updateHypothesisGroupList();
+                if(callback){
+                    callback();
+                }
             }, function () {
                 alert("Diffin päivitys peruttu.");
             });
