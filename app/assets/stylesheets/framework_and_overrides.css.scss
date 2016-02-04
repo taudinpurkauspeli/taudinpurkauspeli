@@ -70,6 +70,12 @@ label {
 li.tabLink>a{
   color: white;
 }
+li.exerciseTabLink{
+  cursor: pointer;
+}
+li.exerciseTabLink>a{
+  color: black !important;
+}
 li.active>a{
   background-color: #EEE !important;
 }
