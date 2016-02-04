@@ -5,51 +5,65 @@ app.controller("ExerciseHypothesesController", [
     function($scope , $http , $stateParams, $resource, $location, $window, $state) {
 
         var ExerciseHypothesis = $resource('/exercise_hypotheses/:exerciseHypothesisId.json',
-            {"exerciseHypothesisId": "@id"},
-            { "create": { "method": "POST" }});
+            { exerciseHypothesisId: "@id"},
+            { create: { method: 'POST' }});
 
         var ExerciseHypotheses = $resource('/exercise_hypotheses.json');
-        $scope.exerciseHypotheses = ExerciseHypotheses.get({"exercise_id": $stateParams.id});
+        var ExerciseHypothesesOnly = $resource('/exercise_hypotheses_only.json');
 
-        var HypothesisBank = $resource('/hypothesis_bank.json');
-        $scope.hypothesisBank= HypothesisBank.get({"exercise_id": $stateParams.id});
+        $scope.updateExerciseHypotheses = function(){
+            ExerciseHypotheses.get({"exercise_id": $stateParams.id}, function(data){
+                $scope.exerciseHypotheses = data;
+            });
+        };
 
-        $scope.removedFromExercise = function(exercise_hypothesis){
+        $scope.updateExerciseHypothesesOnly = function(){
+            ExerciseHypothesesOnly.query({"exercise_id": $stateParams.id}, function(data){
+                $scope.exerciseHypothesesOnly = data;
+            });
+        };
+
+        $scope.updateAllExerciseHypotheses = function(){
+            $scope.updateExerciseHypothesesOnly();
+            $scope.updateExerciseHypotheses();
+        };
+
+        $scope.updateAllExerciseHypotheses();
+
+        $scope.removeFromExercise = function(exercise_hypothesis){
 
             ExerciseHypothesis.delete({exerciseHypothesisId: exercise_hypothesis.id}, function() {
-                ExerciseHypotheses.get({"exercise_id": $stateParams.id}, function(data){
-                    $scope.exerciseHypotheses = data;
-                });
-
-                HypothesisBank.get({"exercise_id": $stateParams.id}, function(data){
-                    $scope.hypothesisBank = data;
-                });
-                // $window.alert("Diffin poistaminen casesta onnistui!");
+                $scope.updateAllExerciseHypotheses();
             });
 
         };
 
-        $scope.addedToExercise = function(hypothesis){
+        $scope.addToExercise = function(hypothesis){
             newExerciseHypothesis = {
                 exercise_id: $stateParams.id,
                 hypothesis_id: hypothesis.id
             };
             ExerciseHypotheses.save(newExerciseHypothesis,
                 function() {
-                    ExerciseHypotheses.get({"exercise_id": $stateParams.id}, function(data){
-                        $scope.exerciseHypotheses = data;
-                    });
+                    $scope.updateAllExerciseHypotheses();
 
-                    HypothesisBank.get({"exercise_id": $stateParams.id}, function(data){
-                        $scope.hypothesisBank = data;
-                    });
-                    //   $window.alert(hypothesis.id + " Lisätty ryhmään " + $stateParams.id);
                 },
                 function() {
                     $window.alert("Diffiä ei voitu lisätä caseen.");
                 }
             );
         };
+
+        $scope.belongsToExercise = function(hypothesis){
+
+            for(var i = 0; i < $scope.exerciseHypothesesOnly.length; i++){
+                var hypothesisValue = $scope.exerciseHypothesesOnly[i];
+                if(hypothesisValue.id == hypothesis.id){
+                    return true;
+                }
+            }
+            return false;
+        }
 
     }
 ]);

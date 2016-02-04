@@ -5,10 +5,10 @@ app.controller("ExercisesShowController", [
     function($scope , $http , $stateParams, $resource, $state, LocalStorageService) {
         var exerciseId = $stateParams.id;
         var Exercise = $resource('/exercises_one/:exerciseId.json',
-            {"exerciseId": "@id"},
-            { "save": { "method": "PUT" }});
+            { exerciseId: "@id"},
+            { save: { method: 'PUT' }});
 
-        Exercise.get({"exerciseId" : exerciseId}, function(data){
+        Exercise.get({exerciseId : exerciseId}, function(data){
             $scope.exercise = data;
         });
 

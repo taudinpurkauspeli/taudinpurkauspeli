@@ -14,6 +14,14 @@ class HypothesisGroupsController < ApplicationController
     end
   end
 
+  def hypothesis_groups_and_hypotheses
+    hypothesis_groups = HypothesisGroup.all.to_json(include: :hypotheses)
+    respond_to do |format|
+      format.html
+      format.json { render json: hypothesis_groups }
+    end
+  end
+
   def show
     respond_to do |format|
       format.html
@@ -35,8 +43,8 @@ class HypothesisGroupsController < ApplicationController
     end
   end
 
-  # POST /hypothesis_group
-  # POST /hypothesis_group.json
+  # POST /hypothesis_groups
+  # POST /hypothesis_groups.json
   def create
     @hypothesis_group = HypothesisGroup.new(hypothesis_group_params)
     respond_to do |format|

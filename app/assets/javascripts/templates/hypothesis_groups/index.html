@@ -12,7 +12,7 @@
 </div>
 <div class = "separator"></div>
 
-<div ng-if="hypothesisGroupsList">
+<div ng-if="hypothesisGroupsAndHypothesesList">
     <div class="row">
         <label for="queryName">Hakusanat</label>
         <div class="col-md-5">
@@ -27,24 +27,56 @@
     </div>
     <br/>
 
-    <div ng-repeat="hypothesisGroup in hypothesisGroupsList | filter:{name: queryName}">
+    <div ng-repeat="hypothesisGroup in hypothesisGroupsAndHypothesesList | filter:{name: queryName}">
         <div class="row">
 
             <div class="col-md-5">
-                <button class="btn btn-default btn-exercise"
-                        ng-click="viewHypothesisGroup(hypothesisGroup)">
+                <button class="btn btn-default btn-hypothesis">
                     {{hypothesisGroup.name}}
                 </button>
             </div>
 
             <div class="col-md-3">
-                <button class="btn btn-default btn-exercise btn-del"
-                        ng-click="deleteHypothesisGroup(hypothesisGroup)">
-                    Poista
+                <button class="btn btn-default btn-hypothesis btn-save"
+                        ng-click="updateHypothesisGroup(hypothesisGroup)">
+                    Muokkaa
                 </button>
             </div>
 
         </div>
+
+        <div class="row" ng-repeat="hypothesis in hypothesisGroup.hypotheses">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-default btn-hypothesis multiline">
+                    {{hypothesis.name}}
+                </button>
+            </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-default btn-hypothesis btn-save"
+                        ng-click="updateHypothesis(hypothesis)">
+                    Muokkaa
+                </button>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-default btn-hypothesis btn-save multiline"
+                        ng-click="createHypothesis(hypothesisGroup)">
+                    + Luo uusi diffi
+                </button>
+            </div>
+
+        </div>
+
     </div>
 </div>
 
@@ -52,46 +84,15 @@
 
 <div class = "separator"></div>
 
+
 <div class="row">
 
     <div class="col-md-5">
-        <h2>Uusi diffiryhmä</h2>
+        <button class="btn btn-default btn-hypothesis btn-save"
+                ng-click="createHypothesisGroup()">
+            + Luo uusi diffiryhmä
+        </button>
     </div>
 
 </div>
 
-<div class="row">
-    <div class="col-md-5">
-        <form novalidate name="createHypothesisGroupForm">
-            <div class="form-group has-feedback"
-                 ng-class="{
-'has-error': createHypothesisGroupForm.name.$invalid && createHypothesisGroupForm.name.$dirty,
-'has-success': createHypothesisGroupForm.name.$valid && createHypothesisGroupForm.name.$touched
-}">
-                <label for="name">Diffiryhmän nimi</label>
-                <input type="text"
-                       class="form-control"
-                       required pattern=".{3,}"
-                       name="name"
-                       id="name"
-                       placeholder="Diffiryhmän nimi"
-                       ng-model="newHypothesisGroup.name">
-
-                <p class="help-block" ng-messages="createHypothesisGroupForm.name.$error" ng-if="!createHypothesisGroupForm.name.$pristine">
-                    <span ng-message="required">Nimi on pakollinen</span>
-                    <span ng-message="pattern">Nimessä on oltava vähintään 3 merkkiä</span>
-                </p>
-            </div>
-
-            <div>
-                <button ng-click="createHypothesisGroup()"
-                        class="btn btn-default btn-save"
-                        ng-disabled="createHypothesisGroupForm.$invalid || createHypothesisGroupForm.$pristine">
-                    Tallenna muutokset
-                </button>
-            </div>
-        </form>
-
-    </div>
-
-</div>

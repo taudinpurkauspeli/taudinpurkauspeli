@@ -1,6 +1,6 @@
 (function() {
     var app = angular.module('diagnoseDiseases',[ 'ngRoute','templates',
-        'ngResource', 'ngMessages', 'validation.match', 'dndLists', 'ui.router', 'textAngular']);
+        'ngResource', 'ngMessages', 'validation.match', 'dndLists', 'ui.router', 'textAngular', 'ngAnimate', 'ui.bootstrap']);
 })();
 
 var app = angular.module('diagnoseDiseases');
@@ -19,19 +19,6 @@ app.config([
             url: "/hypothesis_groups",
             controller: "HypothesisGroupsController",
             templateUrl: "hypothesis_groups/index.html",
-            resolve: {
-                auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
-                    var userAdmin = AuthenticationService.isAdmin();
-
-                    if (!userAdmin) {
-                        return $q.reject({ authenticated: false });
-                    }
-                }]
-            }
-        }).state("hypothesis_groups_show",{
-            url: "/hypothesis_groups/:id",
-            controller: "HypothesisGroupsShowController",
-            templateUrl: "hypothesis_groups/show.html",
             resolve: {
                 auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
                     var userAdmin = AuthenticationService.isAdmin();

@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   get 'taudinpurkauspeli', to: 'diagnose_diseases#index'
   get 'hypothesis_bank', to: 'hypotheses#hypothesis_bank'
   get 'hypotheses_all', to: 'hypotheses#hypotheses_all'
+  get 'hypothesis_groups_and_hypotheses', to: 'hypothesis_groups#hypothesis_groups_and_hypotheses'
 
   get 'exercises_one/:id', to: 'exercises#exercises_one'
   put 'exercises_one/:id', to: 'exercises#update_one'
@@ -75,4 +76,6 @@ Rails.application.routes.draw do
 
   post 'exercises/:id/dup', to: 'exercises#duplicate_exercise'
   post 'exercises/:id/hide', to: 'exercises#toggle_hidden'
+
+  get 'exercise_hypotheses_only', to: 'exercise_hypotheses#only_exercise_hypotheses'
 end

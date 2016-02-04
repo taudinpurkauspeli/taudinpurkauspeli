@@ -6,16 +6,16 @@ app.controller("TasksController", [
         $scope.tasksList = [];
 
         var TaskMoveUp = $resource('/tasks/:id/move_up.json',
-            {"id": "@id"});
+            {id: "@id"});
 
         var MoveTaskUp = $resource('/tasks/:id/move_task_up.json',
-            {"id": "@id"});
+            {id: "@id"});
 
         var TaskMoveDown = $resource('/tasks/:id/move_down.json',
-            {"id": '@id'});
+            {id: '@id'});
 
         var MoveTaskDown = $resource('/tasks/:id/move_task_down.json',
-            {"id": '@id'});
+            {id: '@id'});
 
         var Tasks = $resource('/tasks_all.json');
         $scope.tasksList = Tasks.query({"exercise_id": $stateParams.id});

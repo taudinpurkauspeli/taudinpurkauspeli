@@ -28,5 +28,7 @@
 //= require textAngular/dist/textAngular-sanitize.min
 //= require textAngular/dist/textAngularSetup
 //= require textAngular/dist/textAngular-rangy.min
+//= require angular-bootstrap
+//= require angular-animate
 //= require_tree ./templates
 //= require_tree .

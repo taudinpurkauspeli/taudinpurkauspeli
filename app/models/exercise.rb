@@ -42,7 +42,8 @@ class Exercise < ActiveRecord::Base
   end
 
   def get_hypotheses_json
-    return exercise_hypotheses.group_by{|exhyp| exhyp.hypothesis.hypothesis_group.id}.to_json(include: {:hypothesis => {include: :hypothesis_group}})
+    result = exercise_hypotheses.group_by{|exhyp| exhyp.hypothesis.hypothesis_group.name}
+    return result.slice(*result.keys.sort).to_json(include: :hypothesis)
   end
 
   def get_hypothesis_bank
