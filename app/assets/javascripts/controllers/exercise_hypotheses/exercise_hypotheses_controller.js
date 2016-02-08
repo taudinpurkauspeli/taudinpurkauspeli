@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExerciseHypothesesController", [
-    "$scope","$http","$stateParams", "$resource", "$location", "$window", "$state",
-    function($scope , $http , $stateParams, $resource, $location, $window, $state) {
+    "$scope","$http","$stateParams", "$resource", "$location", "$window", "$state", "$uibModal",
+    function($scope , $http , $stateParams, $resource, $location, $window, $state, $uibModal) {
 
         var ExerciseHypothesis = $resource('/exercise_hypotheses/:exerciseHypothesisId.json',
             { exerciseHypothesisId: "@id"},
@@ -30,13 +30,6 @@ app.controller("ExerciseHypothesesController", [
 
         $scope.updateAllExerciseHypotheses();
 
-        $scope.removeFromExercise = function(exercise_hypothesis){
-
-            ExerciseHypothesis.delete({exerciseHypothesisId: exercise_hypothesis.id}, function() {
-                $scope.updateAllExerciseHypotheses();
-            });
-
-        };
 
         $scope.addToExercise = function(hypothesis){
             newExerciseHypothesis = {
@@ -63,7 +56,27 @@ app.controller("ExerciseHypothesesController", [
                 }
             }
             return false;
-        }
+        };
+
+
+        $scope.updateExerciseHypothesis = function (exerciseHypothesis) {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'exercise_hypotheses/update_exercise_hypothesis_modal.html',
+                controller: 'UpdateExerciseHypothesisModalController',
+                size: 'lg',
+                resolve: {
+                    exerciseHypothesis: exerciseHypothesis
+                }
+            });
+
+            modalInstance.result.then(function () {
+                $scope.updateAllExerciseHypotheses();
+            }, function () {
+                alert("Casen diffin päivitys peruttu.");
+            });
+        };
 
     }
 ]);
