@@ -1,15 +1,26 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("UpdateExerciseHypothesisModalController", [
-    '$scope', '$uibModalInstance', '$resource', '$window', 'exerciseHypothesis',
-    function($scope, $uibModalInstance, $resource, $window, exerciseHypothesis) {
+    '$scope', '$uibModalInstance', '$resource', '$window', 'exerciseHypothesis', '$stateParams',
+    function($scope, $uibModalInstance, $resource, $window, exerciseHypothesis, $stateParams) {
 
         $scope.exerciseHypothesis = exerciseHypothesis;
+        $scope.tasks = [];
+
+        var AllTasks = $resource('/tasks_all.json');
 
         var ExerciseHypothesis = $resource('/exercise_hypotheses/:exerciseHypothesisId.json',
             { exerciseHypothesisId: "@id"},
             { update: { method: 'PUT' }});
 
+
+        $scope.updateTasks = function(){
+            AllTasks.query({"exercise_id": $stateParams.id}, function(data){
+                $scope.tasks = data;
+            });
+        };
+
+        $scope.updateTasks();
 
         $scope.updateExerciseHypothesis = function() {
             if ($scope.updateExerciseHypothesisForm.$valid) {
@@ -21,8 +32,6 @@ app.controller("UpdateExerciseHypothesisModalController", [
                 });
             }
         };
-
-
 
         $scope.removeFromExercise = function(){
             var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa diffin casesta?");

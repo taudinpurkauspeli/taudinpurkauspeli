@@ -17,14 +17,15 @@ app.controller("TasksController", [
         var MoveTaskDown = $resource('/tasks/:id/move_task_down.json',
             {id: '@id'});
 
-        var Tasks = $resource('/tasks_all.json');
-        $scope.tasksList = Tasks.query({"exercise_id": $stateParams.id});
+        var TasksByLevel = $resource('/tasks_all_by_level.json');
 
         $scope.updateTasksList = function(){
-            Tasks.query({"exercise_id": $stateParams.id}, function(data){
+            TasksByLevel.query({"exercise_id": $stateParams.id}, function(data){
                 $scope.tasksList = data;
             });
         };
+
+        $scope.updateTasksList();
 
         $scope.moveTaskFromLevelToLevel = function(task, sourceLevel, destinationLevel) {
             // console.log(task.id + " was dragged from list " +

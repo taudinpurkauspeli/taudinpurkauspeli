@@ -3,12 +3,19 @@
 </div>
 
 <div class="modal-body">
-    {{exerciseHypothesis}}
 
     <div class="row">
         <div class="col-md-12">
             <form novalidate name="updateExerciseHypothesisForm">
                 <div class="form-group">
+
+                    <label for="taskId">Esitietovaatimus</label>
+                    <select name="taskId" id="taskId"
+                            ng-model="exerciseHypothesis.task_id"
+                            ng-options="task.id as task.name for task in tasks">
+                    </select>
+
+                    <br/>
                     <label for="explanation">Selitys</label>
 
                     <div text-angular="text-angular"
@@ -41,7 +48,7 @@
 
     <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
 
-   <button class="btn btn-danger"
+    <button class="btn btn-danger"
             ng-click="removeFromExercise()">
         Poista
     </button>

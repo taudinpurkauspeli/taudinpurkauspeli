@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   put 'exercises_one/:id', to: 'exercises#update_one'
 
   get 'tasks_one/:id', to: 'tasks#tasks_one'
+  get 'tasks_all_by_level', to: 'tasks#tasks_all_by_level'
   get 'tasks_all', to: 'tasks#tasks_all'
 
   get 'signin', to: 'sessions#new'

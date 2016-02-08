@@ -30,7 +30,6 @@ app.controller("ExerciseHypothesesController", [
 
         $scope.updateAllExerciseHypotheses();
 
-
         $scope.addToExercise = function(hypothesis){
             var newExerciseHypothesis = {
                 exercise_id: $stateParams.id,
