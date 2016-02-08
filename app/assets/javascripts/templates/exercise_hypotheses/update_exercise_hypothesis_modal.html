@@ -3,46 +3,41 @@
 </div>
 
 <div class="modal-body">
-
     {{exerciseHypothesis}}
-<!--
+
     <div class="row">
         <div class="col-md-12">
-            <form novalidate name="updateHypothesisGroupForm">
-                <div class="form-group has-feedback"
-                     ng-class="{
-'has-error': updateHypothesisGroupForm.name.$invalid && updateHypothesisGroupForm.name.$dirty,
-'has-success': updateHypothesisGroupForm.name.$valid && updateHypothesisGroupForm.name.$touched
-}">
-                    <label for="name">Diffiryhmän nimi</label>
-                    <input type="text"
-                           class="form-control"
-                           required pattern=".{3,}"
-                           name="name"
-                           id="name"
-                           placeholder="Diffiryhmän nimi"
-                           ng-model="hypothesisGroup.name">
-                    <p class="help-block" ng-messages="updateHypothesisGroupForm.name.$error">
+            <form novalidate name="updateExerciseHypothesisForm">
+                <div class="form-group">
+                    <label for="explanation">Selitys</label>
 
-                        <span ng-message="required">Nimi on pakollinen</span>
-                        <span ng-message="pattern">Nimessä on oltava vähintään 3 merkkiä</span>
-                    </p>
+                    <div text-angular="text-angular"
+                         ng-model="exerciseHypothesis.explanation"
+                         ng-if="exerciseHypothesis"
+                         placeholder="Selitys"
+                         name="explanation"
+                         id="explanation"
+                         ta-text-editor-class="form-content"
+                         ta-html-editor-class="form-content"
+                         ta-focussed-class="focussed">
+                    </div>
+
                 </div>
             </form>
         </div>
     </div>
--->
+
 
 </div>
 
 <div class="modal-footer">
 
-<!--    <button class="btn btn-primary"
+    <button class="btn btn-primary"
             type="button"
-            ng-click="updateHypothesisGroup()"
-            ng-disabled="updateHypothesisGroupForm.$invalid || updateHypothesisGroupForm.$pristine">
+            ng-click="updateExerciseHypothesis()"
+            ng-disabled="updateExerciseHypothesisForm.$pristine">
         Päivitä
-    </button>-->
+    </button>
 
     <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
 

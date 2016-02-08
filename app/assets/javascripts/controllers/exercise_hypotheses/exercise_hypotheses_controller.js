@@ -32,9 +32,10 @@ app.controller("ExerciseHypothesesController", [
 
 
         $scope.addToExercise = function(hypothesis){
-            newExerciseHypothesis = {
+            var newExerciseHypothesis = {
                 exercise_id: $stateParams.id,
-                hypothesis_id: hypothesis.id
+                hypothesis_id: hypothesis.id,
+                explanation: ""
             };
             ExerciseHypotheses.save(newExerciseHypothesis,
                 function() {

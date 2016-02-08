@@ -8,46 +8,34 @@ app.controller("UpdateExerciseHypothesisModalController", [
 
         var ExerciseHypothesis = $resource('/exercise_hypotheses/:exerciseHypothesisId.json',
             { exerciseHypothesisId: "@id"},
-            { create: { method: 'POST' }});
-/*
-        var HypothesisGroup = $resource('/hypothesis_groups/:hypothesisGroupId.json',
-            { hypothesisGroupId: "@id"},
             { update: { method: 'PUT' }});
 
-        $scope.deleteHypothesisGroup = function() {
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa diffiryhmän ja kaikki siihen liittyvät diffit?");
+
+        $scope.updateExerciseHypothesis = function() {
+            if ($scope.updateExerciseHypothesisForm.$valid) {
+                ExerciseHypothesis.update({exerciseHypothesisId: exerciseHypothesis.id}, $scope.exerciseHypothesis, function(){
+                    alert("Caseen liitetyn diffin päivitys onnistui!");
+                    $uibModalInstance.close();
+                }, function() {
+                    alert("Caseen liitetyn diffin päivitys epäonnistui!");
+                });
+            }
+        };
+
+
+
+        $scope.removeFromExercise = function(){
+            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa diffin casesta?");
 
             if (deleteConfirmation) {
-                HypothesisGroup.delete({hypothesisGroupId : hypothesisGroup.id}, function() {
-                    $window.alert("Diffiryhmän poistaminen onnistui!");
+                ExerciseHypothesis.delete({exerciseHypothesisId: exerciseHypothesis.id}, function() {
+                    $window.alert("Diffi poistettu casesta");
                     $uibModalInstance.close();
                 });
 
             } else {
-                $window.alert("Diffiryhmää '" + hypothesisGroup.name + "' ei poistettu");
+                $window.alert("Diffiä ei poistettu casesta.");
             }
-        };
-
-        $scope.updateHypothesisGroup = function() {
-            if ($scope.updateHypothesisGroupForm.$valid) {
-                HypothesisGroup.update({hypothesisGroupId: hypothesisGroup.id}, $scope.hypothesisGroup, function(){
-                    alert("Diffiryhmän päivitys onnistui!");
-                    $uibModalInstance.close();
-                }, function() {
-                    alert("Diffiryhmän päivitys epäonnistui!");
-                });
-            }
-        };
-*/
-
-
-        $scope.removeFromExercise = function(){
-
-            ExerciseHypothesis.delete({exerciseHypothesisId: exerciseHypothesis.id}, function() {
-                $window.alert("Diffi poistettu casesta");
-                $uibModalInstance.close();
-            });
-
         };
 
         $scope.cancel = function () {

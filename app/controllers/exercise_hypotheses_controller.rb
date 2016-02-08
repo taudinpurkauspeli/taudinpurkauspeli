@@ -66,8 +66,10 @@ class ExerciseHypothesesController < ApplicationController
     respond_to do |format|
       if @exercise_hypothesis.update(exercise_hypothesis_params)
         format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Diffin tiedot on päivitetty.' }
+        format.json {head :ok}
       else
         format.html { redirect_to hypotheses_url(:layout => get_layout), alert: 'Diffin päivittäminen epäonnistui.' }
+        format.json {head :internal_server_error}
       end
     end
   end
