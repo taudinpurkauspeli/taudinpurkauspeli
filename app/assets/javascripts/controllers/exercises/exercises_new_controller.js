@@ -1,21 +1,28 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesNewController", [
-    "$scope","$http","$stateParams", "$resource", "$location",
-    function($scope , $http , $stateParams, $resource, $location) {
-        //$scope.exercisesList = [];
-        //
-        //var Exercises = $resource('/exercises.json');
-        //$scope.exercisesList = Exercises.query();
-        //
-        //
-        //$scope.viewExercise = function(exercise) {
-        //    $location.path("exercises/" + exercise.id);
-        //};
-        //
-        //$scope.createExercise = function(){
-        //    alert("Tästä napista luodaan case");
-        //}
+    "$scope","$http","$stateParams", "$resource", "$location", "$window",
+    function($scope , $http , $stateParams, $resource, $location, $window) {
+        $scope.newExercise = {
+            hidden: false,
+            anamnesis: ""
+        };
+
+        var Exercise = $resource('/exercises.json');
+
+        $scope.createExercise = function() {
+            if ($scope.createExerciseForm.$valid) {
+                Exercise.save($scope.newExercise,
+                    function(data) {
+                        $window.alert("Casen luominen onnistui!");
+                        $location.path("/exercises/" + data.id);
+                    },
+                    function() {
+                        $window.alert("Casen luominen epäonnistui!");
+                    }
+                );
+            }
+        };
 
 
     }

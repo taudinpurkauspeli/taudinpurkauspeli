@@ -10,11 +10,11 @@ app.controller("ExercisesController", [
 
 
         $scope.viewExercise = function(exercise) {
-            $location.path("exercises/" + exercise.id);
+            $location.path("/exercises/" + exercise.id);
         };
 
-        $scope.createExercise = function(){
-            $location.path("exercises/new");
+        $scope.newExercisePage = function(){
+            $location.path("/exercises/new");
         }
 
 
