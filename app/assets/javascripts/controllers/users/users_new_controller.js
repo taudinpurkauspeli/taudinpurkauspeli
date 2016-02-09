@@ -5,6 +5,7 @@ app.controller("UsersNewController", [
     function($scope, $http, $location, $resource, $window, AuthenticationService) {
 
         $scope.newUser = {};
+        $scope.currentYear = new Date().getFullYear();
 
         var Users = $resource('/users.json');
 

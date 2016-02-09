@@ -13,6 +13,10 @@ app.controller("ExercisesController", [
             $location.path("exercises/" + exercise.id);
         };
 
+        $scope.createExercise = function(){
+            $location.path("exercises/new");
+        }
+
 
     }
 ]);

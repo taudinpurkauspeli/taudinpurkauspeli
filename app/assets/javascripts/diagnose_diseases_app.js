@@ -62,6 +62,19 @@ app.config([
                 }
             }
 
+        }).state("exercises_new", {
+            url: "/exercises/new",
+            controller: "ExercisesNewController",
+            templateUrl: "exercises/new.html",
+            resolve: {
+                auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                    var userAdmin = AuthenticationService.isAdmin();
+
+                    if (!userAdmin) {
+                        return $q.reject({ authenticated: false });
+                    }
+                }]
+            }
         });
     }
 ]);
