@@ -39,11 +39,28 @@
                 </button>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1"
+                 ng-if="currentUserAdmin">
                 <button class="btn btn-default btn-exercise btn-del"
-                        ng-if="currentUserAdmin"
                         ng-click="removeExercise(exercise)">
                     Poista
+                </button>
+            </div>
+
+            <div class="col-md-1"
+                 ng-if="currentUserAdmin">
+                <button class="btn btn-default btn-exercise"
+                        ng-click="copyExercise(exercise)">
+                    Kopioi
+                </button>
+            </div>
+
+            <div class="col-md-2"
+                 ng-if="currentUserAdmin">
+                <button class="btn btn-default btn-exercise"
+                        ng-click="toggleHiddenExercise(exercise)">
+                    <span ng-if="exercise.hidden">Tee näkyväksi</span>
+                    <span ng-if="!exercise.hidden">Piilota opiskelijoilta</span>
                 </button>
             </div>
 

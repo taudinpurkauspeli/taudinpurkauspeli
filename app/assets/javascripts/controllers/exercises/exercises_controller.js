@@ -11,6 +11,9 @@ app.controller("ExercisesController", [
             { exerciseId: "@id"},
             { update: { method: 'PUT' }});
 
+        var ExerciseDuplicate = $resource('/exercises/:exerciseId/dup.json',
+            { exerciseId: "@id"});
+
         $scope.updateExercisesList = function(){
             Exercises.query(function(data){
                 $scope.exercisesList = data;
@@ -39,8 +42,33 @@ app.controller("ExercisesController", [
 
         $scope.newExercisePage = function(){
             $state.go('exercises_new');
-        }
+        };
 
+        $scope.toggleHiddenExercise = function(exercise) {
+            exercise.hidden = !exercise.hidden;
+            Exercise.update({exerciseId : exercise.id}, exercise, function(){
+                $window.alert("Casen näkyvyyttä muokattu!");
+                $scope.updateExercisesList();
+            }, function(){
+                $window.alert("Casen näkyvyyden muokkaus epäonnistui!");
+            });
+        };
+
+        $scope.copyExercise = function(exercise) {
+
+            var duplicateConfirmation = $window.confirm("Oletko aivan varma, että haluat kopioida koko casen?");
+
+            if (duplicateConfirmation) {
+                ExerciseDuplicate.save({exerciseId : exercise.id}, exercise, function(){
+                    $window.alert("Casen kopioitu!");
+                    $scope.updateExercisesList();
+                }, function(){
+                    $window.alert("Casen kopiointi epäonnistui!");
+                });
+            } else {
+                $window.alert("Casea ei kopioitu");
+            }
+        };
 
     }
 ]);
