@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesController", [
-    "$scope","$http","$stateParams", "$resource", "$location",
-    function($scope , $http , $stateParams, $resource, $location) {
+    "$scope","$http","$stateParams", "$resource", "$state",
+    function($scope , $http , $stateParams, $resource, $state) {
         $scope.exercisesList = [];
 
         var Exercises = $resource('/exercises.json');
@@ -10,11 +10,11 @@ app.controller("ExercisesController", [
 
 
         $scope.viewExercise = function(exercise) {
-            $location.path("/exercises/" + exercise.id);
+            $state.go('exercises_show', {id: exercise.id});
         };
 
         $scope.newExercisePage = function(){
-            $location.path("/exercises/new");
+            $state.go('exercises_new');
         }
 
 

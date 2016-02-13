@@ -63,7 +63,7 @@ app.config([
             }
 
         }).state("exercises_new", {
-            url: "/exercises/new",
+            url: "/exercises_new",
             controller: "ExercisesNewController",
             templateUrl: "exercises/new.html",
             resolve: {
