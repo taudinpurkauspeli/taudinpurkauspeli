@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesShowController", [
-    "$scope","$http","$stateParams", "$resource", "$state", "LocalStorageService",
-    function($scope , $http , $stateParams, $resource, $state, LocalStorageService) {
+    "$scope","$http","$stateParams", "$resource", "$state", "LocalStorageService", "$uibModal",
+    function($scope , $http , $stateParams, $resource, $state, LocalStorageService, $uibModal) {
         $scope.exercise = {};
         
         var exerciseId = $stateParams.id;
@@ -27,6 +27,27 @@ app.controller("ExercisesShowController", [
             $scope.current_tab = newTab;
             LocalStorageService.set("current_tab", newTab);
         };
+
+        $scope.updateExercise = function () {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'exercises/update_exercise_modal.html',
+                controller: 'UpdateExerciseModalController',
+                size: 'lg',
+                resolve: {
+                    exercise: $scope.exercise
+                }
+            });
+
+            modalInstance.result.then(function (data) {
+                $scope.setExercise();
+
+            }, function () {
+                alert("Casen päivitys peruttu.");
+            });
+        };
+
 
     }
 ]);
