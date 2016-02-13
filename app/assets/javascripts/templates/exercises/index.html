@@ -34,6 +34,7 @@
             <div class="col-md-5">
                 <button class="btn btn-default btn-exercise"
                         ng-class="{'disabled': !currentUser}"
+                        ng-if="!(!currentUserAdmin && exercise.hidden)"
                         ng-click="viewExercise(exercise)">
                     {{exercise.name}}
                 </button>
