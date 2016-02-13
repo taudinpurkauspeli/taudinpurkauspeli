@@ -3,15 +3,14 @@ var app = angular.module('diagnoseDiseases');
 app.controller("ExercisesShowController", [
     "$scope","$http","$stateParams", "$resource", "$state", "LocalStorageService",
     function($scope , $http , $stateParams, $resource, $state, LocalStorageService) {
-        var exerciseId = $stateParams.id;
-        var Exercise = $resource('/exercises_one/:exerciseId.json',
-            { exerciseId: "@id"},
-            { save: { method: 'PUT' }});
-
         $scope.exercise = {};
+        
+        var exerciseId = $stateParams.id;
+        var ExerciseOne = $resource('/exercises_one/:exerciseId.json',
+            { exerciseId: "@id"});
 
         $scope.setExercise = function(){
-            Exercise.get({exerciseId : exerciseId}, function(data){
+            ExerciseOne.get({exerciseId : exerciseId}, function(data){
                 $scope.exercise = data;
             });
         };

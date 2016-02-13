@@ -38,6 +38,15 @@
                     {{exercise.name}}
                 </button>
             </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-default btn-exercise btn-del"
+                        ng-if="currentUserAdmin"
+                        ng-click="removeExercise(exercise)">
+                    Poista
+                </button>
+            </div>
+
         </div>
     </div>
 </div>
