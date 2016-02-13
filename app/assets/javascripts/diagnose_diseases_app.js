@@ -58,7 +58,7 @@ app.config([
                 },
                 "anamnesis_tab@exercises_show": {
                     templateUrl: "exercises/anamnesis_teacher.html",
-                    controller: "ExercisesShowController"
+                    controller: "ExercisesAnamnesisController"
                 }
             }
 
