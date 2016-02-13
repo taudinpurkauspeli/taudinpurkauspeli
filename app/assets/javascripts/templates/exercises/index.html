@@ -28,7 +28,7 @@
     </div>
     <br/>
 
-    <div ng-repeat="exercise in exercisesList | filter:{name: queryName}">
+    <div ng-repeat="exercise in exercisesList | orderBy: 'name' | filter:{name: queryName}">
         <div class="row">
 
             <div class="col-md-5">
