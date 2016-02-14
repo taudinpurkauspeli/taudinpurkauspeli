@@ -74,7 +74,7 @@ app.controller("ExerciseHypothesesController", [
             modalInstance.result.then(function () {
                 $scope.updateAllExerciseHypotheses();
             }, function () {
-                alert("Casen diffin päivitys peruttu.");
+                $window.alert("Casen diffin päivitys peruttu.");
             });
         };
 

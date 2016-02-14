@@ -25,10 +25,10 @@ app.controller("UpdateExerciseHypothesisModalController", [
         $scope.updateExerciseHypothesis = function() {
             if ($scope.updateExerciseHypothesisForm.$valid) {
                 ExerciseHypothesis.update({exerciseHypothesisId: exerciseHypothesis.id}, $scope.exerciseHypothesis, function(){
-                    alert("Caseen liitetyn diffin päivitys onnistui!");
+                    $window.alert("Caseen liitetyn diffin päivitys onnistui!");
                     $uibModalInstance.close();
                 }, function() {
-                    alert("Caseen liitetyn diffin päivitys epäonnistui!");
+                    $window.alert("Caseen liitetyn diffin päivitys epäonnistui!");
                 });
             }
         };

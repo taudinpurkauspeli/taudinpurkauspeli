@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("AuthenticationController", [
-    "$scope", "AuthenticationService",
-    function($scope, AuthenticationService) {
+    "$scope", "AuthenticationService", "$window",
+    function($scope, AuthenticationService, $window) {
 
         $scope.credentials = {
             username: '',
@@ -28,9 +28,9 @@ app.controller("AuthenticationController", [
             AuthenticationService.logout().success(function () {
                 $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin());
 
-                alert("Uloskirjautuminen onnistui");
+                $window.alert("Uloskirjautuminen onnistui");
             }).error(function () {
-                alert("Uloskirjautuminen epäonnistui");
+                $window.alert("Uloskirjautuminen epäonnistui");
             });
         }
 
