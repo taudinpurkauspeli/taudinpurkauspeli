@@ -60,7 +60,7 @@ app.controller("ExercisesController", [
 
             if (duplicateConfirmation) {
                 ExerciseDuplicate.save({exerciseId : exercise.id}, exercise, function(){
-                    $window.alert("Casen kopioitu!");
+                    $window.alert("Casen kopiointi onnistui!");
                     $scope.updateExercisesList();
                 }, function(){
                     $window.alert("Casen kopiointi epäonnistui!");

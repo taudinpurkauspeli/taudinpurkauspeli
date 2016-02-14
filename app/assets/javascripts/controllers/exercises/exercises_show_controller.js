@@ -4,7 +4,7 @@ app.controller("ExercisesShowController", [
     "$scope","$http","$stateParams", "$resource", "$state", "LocalStorageService", "$uibModal",
     function($scope , $http , $stateParams, $resource, $state, LocalStorageService, $uibModal) {
         $scope.exercise = {};
-        
+
         var exerciseId = $stateParams.id;
         var ExerciseOne = $resource('/exercises_one/:exerciseId.json',
             { exerciseId: "@id"});
