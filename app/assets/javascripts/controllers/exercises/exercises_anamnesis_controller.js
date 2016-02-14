@@ -3,7 +3,7 @@ var app = angular.module('diagnoseDiseases');
 app.controller("ExercisesAnamnesisController", [
     "$scope", "$uibModal", "$window",
     function($scope, $uibModal, $window) {
-        $scope.updateExercise = function () {
+        $scope.updateExercise = function() {
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -15,10 +15,10 @@ app.controller("ExercisesAnamnesisController", [
                 }
             });
 
-            modalInstance.result.then(function (data) {
+            modalInstance.result.then(function() {
                 $scope.setExercise();
 
-            }, function () {
+            }, function() {
                 $window.alert("Casen päivitys peruttu.");
             });
         };

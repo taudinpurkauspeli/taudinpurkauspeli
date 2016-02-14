@@ -46,7 +46,7 @@ app.controller("UpdateExerciseHypothesisModalController", [
             }
         };
 
-        $scope.cancel = function () {
+        $scope.cancel = function() {
             $uibModalInstance.dismiss('cancel');
         };
 
