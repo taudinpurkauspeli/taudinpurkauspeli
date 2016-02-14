@@ -28,16 +28,54 @@
     </div>
     <br/>
 
-    <div ng-repeat="exercise in exercisesList | filter:{name: queryName}">
+    <div ng-repeat="exercise in exercisesList | orderBy: 'name' | filter:{name: queryName}">
         <div class="row">
 
             <div class="col-md-5">
                 <button class="btn btn-default btn-exercise"
                         ng-class="{'disabled': !currentUser}"
+                        ng-if="!(!currentUserAdmin && exercise.hidden)"
                         ng-click="viewExercise(exercise)">
                     {{exercise.name}}
                 </button>
             </div>
+
+            <div class="col-md-1"
+                 ng-if="currentUserAdmin">
+                <button class="btn btn-default btn-exercise btn-del"
+                        ng-click="removeExercise(exercise)">
+                    Poista
+                </button>
+            </div>
+
+            <div class="col-md-1"
+                 ng-if="currentUserAdmin">
+                <button class="btn btn-default btn-exercise"
+                        ng-click="copyExercise(exercise)">
+                    Kopioi
+                </button>
+            </div>
+
+            <div class="col-md-2"
+                 ng-if="currentUserAdmin">
+                <button class="btn btn-default btn-exercise"
+                        ng-click="toggleHiddenExercise(exercise)">
+                    <span ng-if="exercise.hidden">Tee näkyväksi</span>
+                    <span ng-if="!exercise.hidden">Piilota opiskelijoilta</span>
+                </button>
+            </div>
+
         </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-5">
+        <button class="btn btn-default btn-exercise btn-save"
+                ng-if="currentUserAdmin"
+                ng-click="newExercisePage()">
+            + Luo uusi case
+        </button>
     </div>
 </div>

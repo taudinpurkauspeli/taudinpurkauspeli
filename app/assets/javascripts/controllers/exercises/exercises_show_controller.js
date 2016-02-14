@@ -1,16 +1,21 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesShowController", [
-    "$scope","$http","$stateParams", "$resource", "$state", "LocalStorageService",
-    function($scope , $http , $stateParams, $resource, $state, LocalStorageService) {
+    "$scope","$http","$stateParams", "$resource", "$state", "LocalStorageService", "$uibModal",
+    function($scope , $http , $stateParams, $resource, $state, LocalStorageService, $uibModal) {
+        $scope.exercise = {};
+        
         var exerciseId = $stateParams.id;
-        var Exercise = $resource('/exercises_one/:exerciseId.json',
-            {"exerciseId": "@id"},
-            { "save": { "method": "PUT" }});
+        var ExerciseOne = $resource('/exercises_one/:exerciseId.json',
+            { exerciseId: "@id"});
 
-        Exercise.get({"exerciseId" : exerciseId}, function(data){
-            $scope.exercise = data;
-        });
+        $scope.setExercise = function(){
+            ExerciseOne.get({exerciseId : exerciseId}, function(data){
+                $scope.exercise = data;
+            });
+        };
+
+        $scope.setExercise();
 
         $scope.setCurrentTab = function(){
             $scope.current_tab = LocalStorageService.get("current_tab", "1");
@@ -27,6 +32,5 @@ app.controller("ExercisesShowController", [
                 $("#" + tabID).addClass("active")
             }
         };
-
     }
 ]);

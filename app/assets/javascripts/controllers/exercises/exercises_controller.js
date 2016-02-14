@@ -1,18 +1,74 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesController", [
-    "$scope","$http","$stateParams", "$resource", "$location",
-    function($scope , $http , $stateParams, $resource, $location) {
+    "$scope","$http","$stateParams", "$resource", "$state", "$window",
+    function($scope , $http , $stateParams, $resource, $state, $window) {
         $scope.exercisesList = [];
 
         var Exercises = $resource('/exercises.json');
-        $scope.exercisesList = Exercises.query();
 
+        var Exercise = $resource('/exercises/:exerciseId.json',
+            { exerciseId: "@id"},
+            { update: { method: 'PUT' }});
 
-        $scope.viewExercise = function(exercise) {
-            $location.path("exercises/" + exercise.id);
+        var ExerciseDuplicate = $resource('/exercises/:exerciseId/dup.json',
+            { exerciseId: "@id"});
+
+        $scope.updateExercisesList = function(){
+            Exercises.query(function(data){
+                $scope.exercisesList = data;
+            });
         };
 
+        $scope.updateExercisesList();
+
+        $scope.viewExercise = function(exercise) {
+            $state.go('exercises_show', {id: exercise.id});
+        };
+
+        $scope.removeExercise = function(exercise) {
+
+            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa casen?");
+
+            if (deleteConfirmation) {
+                Exercise.delete({exerciseId : exercise.id}, function(){
+                    $window.alert("Casen poistaminen onnistui!");
+                    $scope.updateExercisesList();
+                });
+            } else {
+                $window.alert("Casea '" + exercise.name + "' ei poistettu");
+            }
+        };
+
+        $scope.newExercisePage = function(){
+            $state.go('exercises_new');
+        };
+
+        $scope.toggleHiddenExercise = function(exercise) {
+            exercise.hidden = !exercise.hidden;
+            Exercise.update({exerciseId : exercise.id}, exercise, function(){
+                $window.alert("Casen näkyvyyttä muokattu!");
+                $scope.updateExercisesList();
+            }, function(){
+                $window.alert("Casen näkyvyyden muokkaus epäonnistui!");
+            });
+        };
+
+        $scope.copyExercise = function(exercise) {
+
+            var duplicateConfirmation = $window.confirm("Oletko aivan varma, että haluat kopioida koko casen?");
+
+            if (duplicateConfirmation) {
+                ExerciseDuplicate.save({exerciseId : exercise.id}, exercise, function(){
+                    $window.alert("Casen kopioitu!");
+                    $scope.updateExercisesList();
+                }, function(){
+                    $window.alert("Casen kopiointi epäonnistui!");
+                });
+            } else {
+                $window.alert("Casea ei kopioitu");
+            }
+        };
 
     }
 ]);

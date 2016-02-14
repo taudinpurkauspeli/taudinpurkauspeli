@@ -4,7 +4,7 @@ class HypothesesController < ApplicationController
 
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:index]
-  before_action :set_hypothesis, only: [:destroy]
+  before_action :set_hypothesis, only: [:destroy, :update]
   before_action :set_current_user, only: [:index]
 
   # GET /hypotheses
@@ -79,8 +79,24 @@ class HypothesesController < ApplicationController
     respond_to do |format|
       if @hypothesis.save
         format.html { redirect_to hypotheses_path(:layout => get_layout), notice: 'Hypoteesin luominen onnistui!' }
+        format.json { head :ok }
       else
         format.html { redirect_to hypotheses_path(:layout => get_layout), alert: 'Hypoteesin luominen epäonnistui!' }
+        format.json { head :internal_server_error }
+      end
+    end
+  end
+
+  def update
+    #TODO: Check what to do with Rails validations
+
+    respond_to do |format|
+      if @hypothesis.update(hypothesis_params)
+        format.html
+        format.json { head :ok }
+      else
+        format.html
+        format.json { head :internal_server_error }
       end
     end
   end
@@ -91,6 +107,7 @@ class HypothesesController < ApplicationController
     @hypothesis.destroy
     respond_to do |format|
       format.html { redirect_to hypotheses_url(:layout => get_layout), notice: 'Hypoteesin poisto onnistui!' }
+      format.json { head :ok }
     end
   end
 
