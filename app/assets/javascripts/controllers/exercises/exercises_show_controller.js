@@ -23,9 +23,14 @@ app.controller("ExercisesShowController", [
 
         $scope.setCurrentTab();
 
-        $scope.changeCurrentTab = function(newTab){
+        $scope.changeCurrentTab = function(newTab, tabID){
             $scope.current_tab = newTab;
             LocalStorageService.set("current_tab", newTab);
+
+            if (tabID != undefined){
+                $(".exerciseTabLink").removeClass("active")
+                $("#" + tabID).addClass("active")
+            }
         };
     }
 ]);
