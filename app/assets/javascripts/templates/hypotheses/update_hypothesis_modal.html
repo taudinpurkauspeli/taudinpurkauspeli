@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <h3 class="modal-title">Muokkaa diffiä {{hypothesis.name}}</h3>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12">
+            <form novalidate name="updateHypothesisForm">
+                <div class="form-group has-feedback"
+                     ng-class="{
+'has-error': updateHypothesisForm.name.$invalid && updateHypothesisForm.name.$dirty,
+'has-success': updateHypothesisForm.name.$valid && updateHypothesisForm.name.$touched
+}">
+                    <label for="name">Diffin nimi</label>
+                    <input type="text"
+                           class="form-control"
+                           required pattern=".{3,}"
+                           name="name"
+                           id="name"
+                           placeholder="Diffin nimi"
+                           ng-model="hypothesis.name">
+                    <p class="help-block" ng-messages="updateHypothesisForm.name.$error">
+
+                        <span ng-message="required">Nimi on pakollinen</span>
+                        <span ng-message="pattern">Nimessä on oltava vähintään 3 merkkiä</span>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+
+    <button class="btn btn-primary"
+            type="button"
+            ng-click="updateHypothesis()"
+            ng-disabled="updateHypothesisForm.$invalid || updateHypothesisForm.$pristine">
+        Päivitä
+    </button>
+
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+
+    <button class="btn btn-danger"
+            ng-click="deleteHypothesis()">
+        Poista
+    </button>
+</div>
+

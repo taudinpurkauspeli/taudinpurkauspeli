@@ -20,56 +20,24 @@
 <h3>Anamneesi</h3>
 
 <br/>
-<br/>
 
 <div class="panel panel-default">
     <div class="panel-heading">
     </div>
-    ILMAN MITÄÄN NÄYTETTY:
-    <div class="panel-body">
-        {{exercise.anamnesis}}
-    </div>
-</div>
-
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-    </div>
-    TA_TAVALLA NÄYTETTY:
     <div ta-bind="text" ng-model="exercise.anamnesis" class="panel-body">
     </div>
 </div>
 
-<br />
 <div class = "separator"></div>
-
-<h3>Muokkaa anamneesia</h3>
+<br />
 
 <div class="row">
-    <div class="col-md-12">
-        <form novalidate name="updateExerciseAnamnesisForm">
-            <div class="form-group">
-                <label for="anamnesis">Anamneesi</label>
-                <div text-angular="text-angular"
-                     ng-model="exercise.anamnesis"
-                     ng-if="exercise"
-                     placeholder="Casen anamneesi"
-                     name="anamnesis"
-                     id="anamnesis"
-                     ta-text-editor-class="form-content"
-                     ta-html-editor-class="form-content"
-                     ta-focussed-class="focussed">
-                </div>
-            </div>
 
-            <div>
-                <button ng-click="updateAnamnesis()"
-                        class="btn btn-default btn-save"
-                        ng-disabled="updateExerciseAnamnesisForm.$pristine">
-                    Tallenna muutokset
-                </button>
-            </div>
-        </form>
-
+    <div class="col-md-5">
+        <button class="btn btn-default btn-exercise btn-save"
+                ng-if="currentUserAdmin && exercise"
+                ng-click="updateExercise()">
+            Muokkaa
+        </button>
     </div>
 </div>

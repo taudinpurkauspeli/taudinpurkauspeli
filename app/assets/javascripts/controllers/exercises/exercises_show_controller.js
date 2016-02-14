@@ -1,27 +1,36 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesShowController", [
-    "$scope","$http","$stateParams", "$resource", "$state", "LocalStorageService",
-    function($scope , $http , $stateParams, $resource, $state, LocalStorageService) {
+    "$scope", "$stateParams", "$resource", "LocalStorageService",
+    function($scope, $stateParams, $resource, LocalStorageService) {
+        $scope.exercise = {};
+
         var exerciseId = $stateParams.id;
-        var Exercise = $resource('/exercises_one/:exerciseId.json',
-            {"exerciseId": "@id"},
-            { "save": { "method": "PUT" }});
+        var ExerciseOne = $resource('/exercises_one/:exerciseId.json',
+            { exerciseId: "@id"});
 
-        Exercise.get({"exerciseId" : exerciseId}, function(data){
-            $scope.exercise = data;
-        });
+        $scope.setExercise = function() {
+            ExerciseOne.get({exerciseId : exerciseId}, function(data) {
+                $scope.exercise = data;
+            });
+        };
 
-        $scope.setCurrentTab = function(){
+        $scope.setExercise();
+
+        $scope.setCurrentTab = function() {
             $scope.current_tab = LocalStorageService.get("current_tab", "1");
         };
 
         $scope.setCurrentTab();
-
-        $scope.changeCurrentTab = function(newTab){
+        
+        $scope.changeCurrentTab = function(newTab, tabID) {
             $scope.current_tab = newTab;
             LocalStorageService.set("current_tab", newTab);
-        };
 
+            if (tabID != undefined){
+                $(".exerciseTabLink").removeClass("active");
+                $("#" + tabID).addClass("active");
+            }
+        };
     }
 ]);

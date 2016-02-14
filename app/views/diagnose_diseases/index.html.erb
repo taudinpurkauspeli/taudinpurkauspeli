@@ -3,7 +3,7 @@
   <header>
     <div id = "navigationTabsContainer">
       <ul id="navigationTabs" class="nav nav-tabs" role="tablist">
-        <li ng-repeat="link in navigationLinksList" ng-show={{link.visibility}} role="presentation" class="tabLink" ><a ng-href={{link.path}} ng-click="link.click()">{{link.title}}</a></li>
+        <li ng-repeat="link in navigationLinksList" ng-show={{link.visibility}} role="presentation" class="tabLink" ><a ui-sref={{link.state}} ng-click="link.click()">{{link.title}}</a></li>
 
         <div class="login-container"  ng-controller="AuthenticationController">
           <div ng-if="!currentUser" class="row">

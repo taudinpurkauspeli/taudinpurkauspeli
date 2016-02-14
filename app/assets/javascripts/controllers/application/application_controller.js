@@ -1,22 +1,20 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ApplicationController", [
-    "$scope","$http","$stateParams", "$resource", "$location", "AuthenticationService", "LocalStorageService",
-    function($scope , $http , $stateParams, $resource, $location, AuthenticationService, LocalStorageService) {
+    "$scope", "AuthenticationService", "LocalStorageService",
+    function($scope, AuthenticationService, LocalStorageService) {
 
         $scope.resetCurrentExercise = function(){
             LocalStorageService.remove("current_tab");
         };
 
         $scope.navigationLinksList = [
-            {path: "#/",
+            {state: "app_root",
                 title: "Taudinpurkauspeli",
-                loggedIn: true,
                 visibility: "currentUser",
                 click: $scope.resetCurrentExercise},
-            {path: "#/hypothesis_groups",
-                title: "Diffiryhmät",
-                loggedIn: true,
+            {state: "users",
+                title: "Opiskelijoiden seuranta",
                 visibility: "currentUserAdmin",
                 click: $scope.resetCurrentExercise}
         ];

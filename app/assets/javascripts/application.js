@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular
-//= require angular-route
 //= require angular-resource
 //= require angular-messages
 //= require angular-rails-templates
@@ -28,5 +27,7 @@
 //= require textAngular/dist/textAngular-sanitize.min
 //= require textAngular/dist/textAngularSetup
 //= require textAngular/dist/textAngular-rangy.min
+//= require angular-bootstrap
+//= require angular-animate
 //= require_tree ./templates
 //= require_tree .

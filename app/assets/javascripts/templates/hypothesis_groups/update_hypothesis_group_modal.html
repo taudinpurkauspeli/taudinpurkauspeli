@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <h3 class="modal-title">Muokkaa diffiryhmää {{hypothesisGroup.name}}</h3>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12">
+            <form novalidate name="updateHypothesisGroupForm">
+                <div class="form-group has-feedback"
+                     ng-class="{
+'has-error': updateHypothesisGroupForm.name.$invalid && updateHypothesisGroupForm.name.$dirty,
+'has-success': updateHypothesisGroupForm.name.$valid && updateHypothesisGroupForm.name.$touched
+}">
+                    <label for="name">Diffiryhmän nimi</label>
+                    <input type="text"
+                           class="form-control"
+                           required pattern=".{3,}"
+                           name="name"
+                           id="name"
+                           placeholder="Diffiryhmän nimi"
+                           ng-model="hypothesisGroup.name">
+                    <p class="help-block" ng-messages="updateHypothesisGroupForm.name.$error">
+
+                        <span ng-message="required">Nimi on pakollinen</span>
+                        <span ng-message="pattern">Nimessä on oltava vähintään 3 merkkiä</span>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+
+    <button class="btn btn-primary"
+            type="button"
+            ng-click="updateHypothesisGroup()"
+            ng-disabled="updateHypothesisGroupForm.$invalid || updateHypothesisGroupForm.$pristine">
+        Päivitä
+    </button>
+
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+
+    <button class="btn btn-danger"
+            ng-click="deleteHypothesisGroup()">
+        Poista
+    </button>
+</div>
+

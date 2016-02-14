@@ -1,23 +1,28 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesAnamnesisController", [
-    "$scope","$http","$stateParams", "$resource", "$state", "LocalStorageService",
-    function($scope , $http , $stateParams, $resource, $state, LocalStorageService) {
+    "$scope", "$uibModal", "$window",
+    function($scope, $uibModal, $window) {
+        $scope.updateExercise = function() {
 
-        $scope.updateAnamnesis = function(){
-            if ($scope.updateExerciseAnamnesisForm.$valid) {
-                $scope.exercise.$save(
-                    function() {
-                        $scope.updateExerciseAnamnesisForm.$setPristine();
-                        $scope.updateExerciseAnamnesisForm.$setUntouched();
-                        alert("Anamneesin päivitys onnistui!");
-                    },
-                    function() {
-                        alert("Anamneesin päivitys epäonnistui!");
-                    }
-                );
-            }
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'exercises/update_exercise_modal.html',
+                controller: 'UpdateExerciseModalController',
+                size: 'lg',
+                resolve: {
+                    exercise: $scope.exercise
+                }
+            });
+
+            modalInstance.result.then(function() {
+                $scope.setExercise();
+
+            }, function() {
+                $window.alert("Casen päivitys peruttu.");
+            });
         };
+
 
     }
 ]);

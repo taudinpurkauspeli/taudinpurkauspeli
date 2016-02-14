@@ -28,6 +28,25 @@ class TasksController < ApplicationController
     set_view_layout
   end
 
+  # GET /tasks_all_by_level
+  # GET /tasks_all_by_level.json
+  def tasks_all_by_level
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+
+        tasks = exercise.get_tasks_by_level_json
+
+        format.html
+        format.json {render json: tasks}
+      else
+        format.html
+        format.json {head :not_found}
+      end
+    end
+  end
+
   # GET /tasks_all
   # GET /tasks_all.json
   def tasks_all

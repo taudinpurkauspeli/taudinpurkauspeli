@@ -42,7 +42,8 @@ class Exercise < ActiveRecord::Base
   end
 
   def get_hypotheses_json
-    return exercise_hypotheses.group_by{|exhyp| exhyp.hypothesis.hypothesis_group.id}.to_json(include: {:hypothesis => {include: :hypothesis_group}})
+    result = exercise_hypotheses.group_by{|exhyp| exhyp.hypothesis.hypothesis_group.name}
+    return result.slice(*result.keys.sort).to_json(include: :hypothesis)
   end
 
   def get_hypothesis_bank
@@ -65,8 +66,12 @@ class Exercise < ActiveRecord::Base
     tasks.where(level: level).count
   end
 
-  def get_tasks_json
+  def get_tasks_by_level_json
     return tasks.where("level > ?", 0).order(:level).group_by{|t| t.level}.map{|item| item}
+  end
+
+  def get_tasks_json
+    return tasks.order(:name)
   end
 
   def create_duplicate(exercise)

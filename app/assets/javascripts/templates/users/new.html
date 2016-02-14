@@ -173,7 +173,7 @@
                         required
                         name="starting_year"
                         id="starting_year"
-                        ng-options="n for n in [] | range:2000:2015"></select>
+                        ng-options="n for n in [] | range:2000:currentYear"></select>
 
 
                 <p class="help-block" ng-messages="createUserForm.starting_year.$error" ng-if="!createUserForm.starting_year.$pristine">
