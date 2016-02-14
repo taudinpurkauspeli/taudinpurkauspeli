@@ -18,7 +18,6 @@ app.controller("UpdateHypothesisModalController", [
                     $window.alert("Diffin poistaminen onnistui!");
                     $uibModalInstance.close();
                 });
-
             } else {
                 $window.alert("Diffiä '" + hypothesis.name + "' ei poistettu");
             }
@@ -26,7 +25,7 @@ app.controller("UpdateHypothesisModalController", [
 
         $scope.updateHypothesis = function() {
             if ($scope.updateHypothesisForm.$valid) {
-                Hypothesis.update({hypothesisId: hypothesis.id}, $scope.hypothesis, function(){
+                Hypothesis.update({hypothesisId: hypothesis.id}, $scope.hypothesis, function() {
                     $window.alert("Diffin päivitys onnistui!");
                     $uibModalInstance.close();
                 }, function() {
@@ -35,7 +34,7 @@ app.controller("UpdateHypothesisModalController", [
             }
         };
 
-        $scope.cancel = function () {
+        $scope.cancel = function() {
             $uibModalInstance.dismiss('cancel');
         };
 

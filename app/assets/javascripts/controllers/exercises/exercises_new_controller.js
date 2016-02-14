@@ -24,6 +24,5 @@ app.controller("ExercisesNewController", [
             }
         };
 
-
     }
 ]);
