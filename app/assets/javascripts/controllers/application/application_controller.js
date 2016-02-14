@@ -13,8 +13,8 @@ app.controller("ApplicationController", [
                 title: "Taudinpurkauspeli",
                 visibility: "currentUser",
                 click: $scope.resetCurrentExercise},
-            {state: "hypothesis_groups",
-                title: "Diffiryhmät",
+            {state: "users",
+                title: "Opiskelijoiden seuranta",
                 visibility: "currentUserAdmin",
                 click: $scope.resetCurrentExercise}
         ];
