@@ -4,42 +4,38 @@ app.controller("ExerciseHypothesesController", [
     "$scope", "$stateParams", "$resource", "$window", "$uibModal",
     function($scope, $stateParams, $resource, $window, $uibModal) {
 
-        var ExerciseHypothesis = $resource('/exercise_hypotheses/:exerciseHypothesisId.json',
-            { exerciseHypothesisId: "@id"},
-            { create: { method: 'POST' }});
-
         var ExerciseHypotheses = $resource('/exercise_hypotheses.json');
         var ExerciseHypothesesOnly = $resource('/exercise_hypotheses_only.json');
 
-        $scope.updateExerciseHypotheses = function(){
-            ExerciseHypotheses.get({"exercise_id": $stateParams.id}, function(data){
+        $scope.updateExerciseHypotheses = function() {
+            ExerciseHypotheses.get({"exercise_id": $stateParams.id}, function(data) {
                 $scope.exerciseHypotheses = data;
             });
         };
 
-        $scope.updateExerciseHypothesesOnly = function(){
-            ExerciseHypothesesOnly.query({"exercise_id": $stateParams.id}, function(data){
+        $scope.updateExerciseHypothesesOnly = function() {
+            ExerciseHypothesesOnly.query({"exercise_id": $stateParams.id}, function(data) {
                 $scope.exerciseHypothesesOnly = data;
             });
         };
 
-        $scope.updateAllExerciseHypotheses = function(){
+        $scope.updateAllExerciseHypotheses = function() {
             $scope.updateExerciseHypothesesOnly();
             $scope.updateExerciseHypotheses();
         };
 
         $scope.updateAllExerciseHypotheses();
 
-        $scope.addToExercise = function(hypothesis){
+        $scope.addToExercise = function(hypothesis) {
             var newExerciseHypothesis = {
                 exercise_id: $stateParams.id,
                 hypothesis_id: hypothesis.id,
                 explanation: ""
             };
+
             ExerciseHypotheses.save(newExerciseHypothesis,
                 function() {
                     $scope.updateAllExerciseHypotheses();
-
                 },
                 function() {
                     $window.alert("Diffiä ei voitu lisätä caseen.");
@@ -47,9 +43,9 @@ app.controller("ExerciseHypothesesController", [
             );
         };
 
-        $scope.belongsToExercise = function(hypothesis){
+        $scope.belongsToExercise = function(hypothesis) {
 
-            for(var i = 0; i < $scope.exerciseHypothesesOnly.length; i++){
+            for(var i = 0; i < $scope.exerciseHypothesesOnly.length; i++) {
                 var hypothesisValue = $scope.exerciseHypothesesOnly[i];
                 if(hypothesisValue.id == hypothesis.id){
                     return true;
@@ -59,7 +55,7 @@ app.controller("ExerciseHypothesesController", [
         };
 
 
-        $scope.updateExerciseHypothesis = function (exerciseHypothesis) {
+        $scope.updateExerciseHypothesis = function(exerciseHypothesis) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -71,9 +67,9 @@ app.controller("ExerciseHypothesesController", [
                 }
             });
 
-            modalInstance.result.then(function () {
+            modalInstance.result.then(function() {
                 $scope.updateAllExerciseHypotheses();
-            }, function () {
+            }, function() {
                 $window.alert("Casen diffin päivitys peruttu.");
             });
         };
