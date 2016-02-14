@@ -9,14 +9,12 @@ app.controller("ApplicationController", [
         };
 
         $scope.navigationLinksList = [
-            {path: "#/",
+            {state: "app_root",
                 title: "Taudinpurkauspeli",
-                loggedIn: true,
                 visibility: "currentUser",
                 click: $scope.resetCurrentExercise},
-            {path: "#/hypothesis_groups",
+            {state: "hypothesis_groups",
                 title: "Diffiryhmät",
-                loggedIn: true,
                 visibility: "currentUserAdmin",
                 click: $scope.resetCurrentExercise}
         ];

@@ -11,9 +11,11 @@ app.service('Session', [
         this.userId = function (){
             return LocalStorageService.get("current_user_id", null);
         };
+
         this.userAdmin = function (){
             return LocalStorageService.get("current_user_admin", null);
         };
+
         this.destroy = function () {
             LocalStorageService.remove("current_user_id");
             LocalStorageService.remove("current_user_admin");
