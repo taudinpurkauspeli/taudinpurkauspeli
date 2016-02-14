@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module('diagnoseDiseases',[ 'ngRoute','templates',
+    var app = angular.module('diagnoseDiseases',[ 'templates',
         'ngResource', 'ngMessages', 'validation.match', 'dndLists', 'ui.router', 'textAngular', 'ngAnimate', 'ui.bootstrap']);
 })();
 
@@ -62,6 +62,19 @@ app.config([
                 }
             }
 
+        }).state("exercises_new", {
+            url: "/exercises_new",
+            controller: "ExercisesNewController",
+            templateUrl: "exercises/new.html",
+            resolve: {
+                auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                    var userAdmin = AuthenticationService.isAdmin();
+
+                    if (!userAdmin) {
+                        return $q.reject({ authenticated: false });
+                    }
+                }]
+            }
         });
     }
 ]);

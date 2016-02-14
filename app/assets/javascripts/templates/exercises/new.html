@@ -1,0 +1,86 @@
+<br/>
+<br/>
+<div class = "row">
+    <div class = "col-md-8">
+        <h1>Uuden casen luominen</h1>
+    </div>
+
+    <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Uuden casen luominen" data-content="Tällä sivulla voi luoda uuden casen.">Ohje</a>
+    </div>
+</div>
+<div class = "separator"></div>
+<br/>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="createExerciseForm">
+
+
+            <div class="form-group has-feedback"
+                 ng-class="{
+'has-error': createExerciseForm.name.$invalid && createExerciseForm.name.$dirty,
+'has-success': createExerciseForm.name.$valid && createExerciseForm.name.$touched
+}">
+                <label for="name">Nimi</label>
+                <input type="text"
+                       class="form-control"
+                       required pattern=".{2,}"
+                       name="name"
+                       id="name"
+                       placeholder="Casen nimi"
+                       ng-model="newExercise.name">
+
+                <p class="help-block" ng-messages="createExerciseForm.name.$error" ng-if="!createExerciseForm.name.$pristine">
+                    <span ng-message="required">Nimi on pakollinen</span>
+                    <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
+                </p>
+            </div>
+
+            <br/>
+            <br/>
+
+            <div class="form-group">
+                <label for="newAnamnesis">Anamneesi</label>
+                <div text-angular="text-angular"
+                     ng-model="newExercise.anamnesis"
+                     ng-if="newExercise"
+                     placeholder="Casen anamneesi"
+                     name="newAanamnesis"
+                     id="newAnamnesis"
+                     ta-text-editor-class="form-content"
+                     ta-html-editor-class="form-content"
+                     ta-focussed-class="focussed">
+                </div>
+            </div>
+
+            <br/>
+            <br/>
+
+            <div class="form-group">
+                <label for="hidden">Piilota case opiskelijoilta</label>
+                <br/>
+                <input type="checkbox"
+                       name="hidden"
+                       id="hidden"
+                       ng-model="newExercise.hidden">
+            </div>
+
+            <br/>
+            <br/>
+
+            <div>
+                <button ng-click="createExercise()"
+                        class="btn btn-default btn-save"
+                        ng-disabled="createExerciseForm.$invalid || createExerciseForm.$pristine">
+                    Tallenna
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+ 

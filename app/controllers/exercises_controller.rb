@@ -78,8 +78,10 @@ class ExercisesController < ApplicationController
     respond_to do |format|
       if @exercise.save
         format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen luominen onnistui!' }
+        format.json { render json: @exercise }
       else
         format.html { redirect_to new_exercise_path(:layout => get_layout), alert: 'Casen luominen epäonnistui!' }
+        format.json { head :internal_server_error }
       end
     end
   end
@@ -90,8 +92,10 @@ class ExercisesController < ApplicationController
     respond_to do |format|
       if @exercise.update(exercise_params)
         format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen päivitys onnistui!' }
+        format.json { head :ok }
       else
         format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), alert: 'Casen päivitys epäonnistui!' }
+        format.json { head :internal_server_error }
       end
     end
   end
@@ -102,6 +106,7 @@ class ExercisesController < ApplicationController
     @exercise.destroy
     respond_to do |format|
       format.html { redirect_to exercises_url, notice: 'Casen poistaminen onnistui!' }
+      format.json { head :ok }
     end
   end
 
@@ -109,8 +114,10 @@ class ExercisesController < ApplicationController
     respond_to do |format|
       if @exercise.create_duplicate(@exercise)
         format.html { redirect_to exercises_path(:layout => get_layout), notice: 'Casen kopioiminen onnistui!' }
+        format.json { head :ok }
       else
         format.html { redirect_to exercises_path(:layout => get_layout), notice: 'Casen kopioiminen epäonnistui!' }
+        format.json { head :internal_server_error }
       end
     end
   end
