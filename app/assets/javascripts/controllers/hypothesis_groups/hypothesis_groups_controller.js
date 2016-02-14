@@ -1,13 +1,13 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("HypothesisGroupsController", [
-    '$scope', '$http', '$location', '$resource', '$window', '$uibModal',
-    function($scope, $http, $location, $resource, $window, $uibModal) {
+    '$scope', '$resource', '$window', '$uibModal',
+    function($scope, $resource, $window, $uibModal) {
         $scope.hypothesisGroupsAndHypothesesList = [];
 
         var HypothesisGroupsAndHypotheses = $resource('/hypothesis_groups_and_hypotheses.json');
 
-        $scope.updateHypothesisGroupList = function(){
+        $scope.updateHypothesisGroupList = function() {
             HypothesisGroupsAndHypotheses.query(function(data){
                 $scope.hypothesisGroupsAndHypothesesList = data;
             });
@@ -15,7 +15,7 @@ app.controller("HypothesisGroupsController", [
 
         $scope.updateHypothesisGroupList();
 
-        $scope.updateHypothesisGroup = function (hypothesisGroup, callback) {
+        $scope.updateHypothesisGroup = function(hypothesisGroup, callback) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -26,31 +26,31 @@ app.controller("HypothesisGroupsController", [
                 }
             });
 
-            modalInstance.result.then(function () {
+            modalInstance.result.then(function() {
                 $scope.updateHypothesisGroupList();
                 if(callback){
                     callback();
                 }
-            }, function () {
-                alert("Diffiryhmän päivitys peruttu.");
+            }, function() {
+                $window.alert("Diffiryhmän päivitys peruttu.");
             });
         };
 
-        $scope.createHypothesisGroup = function(){
+        $scope.createHypothesisGroup = function() {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'hypothesis_groups/create_hypothesis_group_modal.html',
                 controller: 'CreateHypothesisGroupModalController'
             });
 
-            modalInstance.result.then(function () {
+            modalInstance.result.then(function() {
                 $scope.updateHypothesisGroupList();
-            }, function () {
-                alert("Diffiryhmän luominen peruttu.");
+            }, function() {
+                $window.alert("Diffiryhmän luominen peruttu.");
             });
         };
 
-        $scope.updateHypothesis = function (hypothesis, callback) {
+        $scope.updateHypothesis = function(hypothesis, callback) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -61,17 +61,17 @@ app.controller("HypothesisGroupsController", [
                 }
             });
 
-            modalInstance.result.then(function () {
+            modalInstance.result.then(function() {
                 $scope.updateHypothesisGroupList();
                 if(callback){
                     callback();
                 }
-            }, function () {
-                alert("Diffin päivitys peruttu.");
+            }, function() {
+                $window.alert("Diffin päivitys peruttu.");
             });
         };
 
-        $scope.createHypothesis = function(hypothesisGroup){
+        $scope.createHypothesis = function(hypothesisGroup) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'hypotheses/create_hypothesis_modal.html',
@@ -81,10 +81,10 @@ app.controller("HypothesisGroupsController", [
                 }
             });
 
-            modalInstance.result.then(function () {
+            modalInstance.result.then(function() {
                 $scope.updateHypothesisGroupList();
-            }, function () {
-                alert("Diffin luominen peruttu.");
+            }, function() {
+                $window.alert("Diffin luominen peruttu.");
             });
         };
 

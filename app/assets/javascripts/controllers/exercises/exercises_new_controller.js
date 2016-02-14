@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesNewController", [
-    "$scope","$http","$stateParams", "$resource", "$location", "$window",
-    function($scope , $http , $stateParams, $resource, $location, $window) {
+    "$scope", "$resource", "$state", "$window",
+    function($scope, $resource, $state, $window) {
         $scope.newExercise = {
             hidden: false,
             anamnesis: ""
@@ -15,7 +15,7 @@ app.controller("ExercisesNewController", [
                 Exercise.save($scope.newExercise,
                     function(data) {
                         $window.alert("Casen luominen onnistui!");
-                        $location.path("/exercises/" + data.id);
+                        $state.go('exercises_show', {id: data.id});
                     },
                     function() {
                         $window.alert("Casen luominen epäonnistui!");
@@ -23,7 +23,6 @@ app.controller("ExercisesNewController", [
                 );
             }
         };
-
 
     }
 ]);

@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesController", [
-    "$scope","$http","$stateParams", "$resource", "$state", "$window",
-    function($scope , $http , $stateParams, $resource, $state, $window) {
+    "$scope", "$resource", "$state", "$window",
+    function($scope, $resource, $state, $window) {
         $scope.exercisesList = [];
 
         var Exercises = $resource('/exercises.json');
@@ -14,8 +14,8 @@ app.controller("ExercisesController", [
         var ExerciseDuplicate = $resource('/exercises/:exerciseId/dup.json',
             { exerciseId: "@id"});
 
-        $scope.updateExercisesList = function(){
-            Exercises.query(function(data){
+        $scope.updateExercisesList = function() {
+            Exercises.query(function(data) {
                 $scope.exercisesList = data;
             });
         };
@@ -31,7 +31,7 @@ app.controller("ExercisesController", [
             var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa casen?");
 
             if (deleteConfirmation) {
-                Exercise.delete({exerciseId : exercise.id}, function(){
+                Exercise.delete({exerciseId : exercise.id}, function() {
                     $window.alert("Casen poistaminen onnistui!");
                     $scope.updateExercisesList();
                 });
@@ -40,16 +40,16 @@ app.controller("ExercisesController", [
             }
         };
 
-        $scope.newExercisePage = function(){
+        $scope.newExercisePage = function() {
             $state.go('exercises_new');
         };
 
         $scope.toggleHiddenExercise = function(exercise) {
             exercise.hidden = !exercise.hidden;
-            Exercise.update({exerciseId : exercise.id}, exercise, function(){
+            Exercise.update({exerciseId : exercise.id}, exercise, function() {
                 $window.alert("Casen näkyvyyttä muokattu!");
                 $scope.updateExercisesList();
-            }, function(){
+            }, function() {
                 $window.alert("Casen näkyvyyden muokkaus epäonnistui!");
             });
         };
@@ -59,10 +59,10 @@ app.controller("ExercisesController", [
             var duplicateConfirmation = $window.confirm("Oletko aivan varma, että haluat kopioida koko casen?");
 
             if (duplicateConfirmation) {
-                ExerciseDuplicate.save({exerciseId : exercise.id}, exercise, function(){
-                    $window.alert("Casen kopioitu!");
+                ExerciseDuplicate.save({exerciseId : exercise.id}, exercise, function() {
+                    $window.alert("Casen kopiointi onnistui!");
                     $scope.updateExercisesList();
-                }, function(){
+                }, function() {
                     $window.alert("Casen kopiointi epäonnistui!");
                 });
             } else {

@@ -15,10 +15,10 @@ app.config([
             url: "/",
             controller: "ExercisesController",
             templateUrl: "exercises/index.html"
-        }).state("hypothesis_groups", {
-            url: "/hypothesis_groups",
-            controller: "HypothesisGroupsController",
-            templateUrl: "hypothesis_groups/index.html",
+        }).state("users", {
+            url: "/users",
+            controller: "UsersController",
+            templateUrl: "users/index.html",
             resolve: {
                 auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
                     var userAdmin = AuthenticationService.isAdmin();

@@ -5,7 +5,7 @@ app.controller("UpdateExerciseHypothesisModalController", [
     function($scope, $uibModalInstance, $resource, $window, exerciseHypothesis, $stateParams) {
 
         $scope.exerciseHypothesis = exerciseHypothesis;
-        $scope.tasks = [];
+        $scope.allTasks = [];
 
         var AllTasks = $resource('/tasks_all.json');
 
@@ -14,9 +14,9 @@ app.controller("UpdateExerciseHypothesisModalController", [
             { update: { method: 'PUT' }});
 
 
-        $scope.updateTasks = function(){
+        $scope.updateTasks = function() {
             AllTasks.query({"exercise_id": $stateParams.id}, function(data){
-                $scope.tasks = data;
+                $scope.allTasks = data;
             });
         };
 
@@ -25,15 +25,15 @@ app.controller("UpdateExerciseHypothesisModalController", [
         $scope.updateExerciseHypothesis = function() {
             if ($scope.updateExerciseHypothesisForm.$valid) {
                 ExerciseHypothesis.update({exerciseHypothesisId: exerciseHypothesis.id}, $scope.exerciseHypothesis, function(){
-                    alert("Caseen liitetyn diffin päivitys onnistui!");
+                    $window.alert("Caseen liitetyn diffin päivitys onnistui!");
                     $uibModalInstance.close();
                 }, function() {
-                    alert("Caseen liitetyn diffin päivitys epäonnistui!");
+                    $window.alert("Caseen liitetyn diffin päivitys epäonnistui!");
                 });
             }
         };
 
-        $scope.removeFromExercise = function(){
+        $scope.removeFromExercise = function() {
             var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa diffin casesta?");
 
             if (deleteConfirmation) {
@@ -41,13 +41,12 @@ app.controller("UpdateExerciseHypothesisModalController", [
                     $window.alert("Diffi poistettu casesta");
                     $uibModalInstance.close();
                 });
-
             } else {
                 $window.alert("Diffiä ei poistettu casesta.");
             }
         };
 
-        $scope.cancel = function () {
+        $scope.cancel = function() {
             $uibModalInstance.dismiss('cancel');
         };
 

@@ -12,16 +12,16 @@ app.controller("UpdateExerciseModalController", [
 
         $scope.updateExercise = function() {
             if ($scope.updateExerciseForm.$valid) {
-                Exercise.update({exerciseId: exercise.id}, $scope.exercise, function(){
-                    alert("Casen päivitys onnistui!");
+                Exercise.update({exerciseId: exercise.id}, $scope.exercise, function() {
+                    $window.alert("Casen päivitys onnistui!");
                     $uibModalInstance.close();
                 }, function() {
-                    alert("Casen päivitys epäonnistui!");
+                    $window.alert("Casen päivitys epäonnistui!");
                 });
             }
         };
 
-        $scope.cancel = function () {
+        $scope.cancel = function() {
             $uibModalInstance.dismiss('cancel');
         };
 

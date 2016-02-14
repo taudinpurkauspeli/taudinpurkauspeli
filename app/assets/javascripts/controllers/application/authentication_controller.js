@@ -1,36 +1,35 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("AuthenticationController", [
-    "$scope","$http","$stateParams", "$resource", "$location", "$rootScope", "AuthenticationService",
-    function($scope , $http , $stateParams, $resource, $location, $rootScope, AuthenticationService) {
+    "$scope", "AuthenticationService", "$window",
+    function($scope, AuthenticationService, $window) {
 
-        $scope.credentials = {
-            username: '',
-            password: ''
+        $scope.credentials = {};
+
+        $scope.resetCredentials = function() {
+            $scope.credentials = {
+                username: '',
+                password: ''
+            };
         };
 
+        $scope.resetCredentials();
+
         $scope.login = function(credentials) {
-            AuthenticationService.login(credentials).success(function (user) {
+            AuthenticationService.login(credentials).success(function() {
                 $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin());
-                $scope.credentials = {
-                    username: '',
-                    password: ''
-                };
-            }).error(function () {
-                $scope.credentials = {
-                    username: '',
-                    password: ''
-                };
+                $scope.resetCredentials();
+            }).error(function() {
+                $scope.resetCredentials();
             });
         };
 
-        $scope.logout = function (){
-            AuthenticationService.logout().success(function () {
+        $scope.logout = function() {
+            AuthenticationService.logout().success(function() {
                 $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin());
-
-                alert("Uloskirjautuminen onnistui");
-            }).error(function () {
-                alert("Uloskirjautuminen epäonnistui");
+                $window.alert("Uloskirjautuminen onnistui");
+            }).error(function() {
+                $window.alert("Uloskirjautuminen epäonnistui");
             });
         }
 
