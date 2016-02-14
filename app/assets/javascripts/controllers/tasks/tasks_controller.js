@@ -19,8 +19,8 @@ app.controller("TasksController", [
 
         var TasksByLevel = $resource('/tasks_all_by_level.json');
 
-        $scope.updateTasksList = function(){
-            TasksByLevel.query({"exercise_id": $stateParams.id}, function(data){
+        $scope.updateTasksList = function() {
+            TasksByLevel.query({"exercise_id": $stateParams.id}, function(data) {
                 $scope.tasksList = data;
             });
         };
@@ -28,18 +28,14 @@ app.controller("TasksController", [
         $scope.updateTasksList();
 
         $scope.moveTaskFromLevelToLevel = function(task, sourceLevel, destinationLevel) {
-            // console.log(task.id + " was dragged from list " +
-            // sourceLevel + " to list " + destinationLevel);
 
             if(destinationLevel < sourceLevel){
-                TaskMoveUp.save({id: task.id, new_level: destinationLevel}, function(){
+                TaskMoveUp.save({id: task.id, new_level: destinationLevel}, function() {
                     $scope.updateTasksList();
-                    console.log("Ylöspäin päivitys onnistui");
                 });
             } else if (destinationLevel > sourceLevel){
-                TaskMoveDown.save({id: task.id, new_level: destinationLevel}, function(){
+                TaskMoveDown.save({id: task.id, new_level: destinationLevel}, function() {
                     $scope.updateTasksList();
-                    console.log("Alaspäin päivitys onnistui");
                 });
             }
 
@@ -47,19 +43,16 @@ app.controller("TasksController", [
         };
 
         $scope.moveTaskToNewLevel = function(levelIndex, task) {
-            // console.log(task.id + " was dragged from list X to levelIndex " + levelIndex);
 
             var newLevel = levelIndex + 1;
 
             if(levelIndex < task.level){
-                MoveTaskUp.save({id: task.id, new_level: newLevel}, function(){
+                MoveTaskUp.save({id: task.id, new_level: newLevel}, function() {
                     $scope.updateTasksList();
-                    console.log("Taskin ylöspäin siirto onnistui");
                 });
             } else if (levelIndex >= task.level){
-                MoveTaskDown.save({id: task.id, new_level: newLevel}, function(){
+                MoveTaskDown.save({id: task.id, new_level: newLevel}, function() {
                     $scope.updateTasksList();
-                    console.log("Taskin alaspäin siirto onnistui");
                 });
             }
 
