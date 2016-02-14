@@ -12,7 +12,7 @@
                     <label for="taskId">Esitietovaatimus</label>
                     <select name="taskId" id="taskId"
                             ng-model="exerciseHypothesis.task_id"
-                            ng-options="task.id as task.name for task in tasks">
+                            ng-options="task.id as task.name for task in allTasks">
                     </select>
 
                     <br/>
