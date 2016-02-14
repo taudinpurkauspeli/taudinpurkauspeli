@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesNewController", [
-    "$scope","$http","$stateParams", "$resource", "$location", "$window",
-    function($scope , $http , $stateParams, $resource, $location, $window) {
+    "$scope", "$resource", "$location", "$window",
+    function($scope, $resource, $location, $window) {
         $scope.newExercise = {
             hidden: false,
             anamnesis: ""

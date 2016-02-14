@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("UsersNewController", [
-    "$scope", "$http", "$location", "$resource", "$window", "AuthenticationService",
-    function($scope, $http, $location, $resource, $window, AuthenticationService) {
+    "$scope", "$location", "$resource", "$window", "AuthenticationService",
+    function($scope, $location, $resource, $window, AuthenticationService) {
 
         $scope.newUser = {};
         $scope.currentYear = new Date().getFullYear();

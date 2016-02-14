@@ -27,10 +27,10 @@ app.controller("UpdateHypothesisGroupModalController", [
         $scope.updateHypothesisGroup = function() {
             if ($scope.updateHypothesisGroupForm.$valid) {
                 HypothesisGroup.update({hypothesisGroupId: hypothesisGroup.id}, $scope.hypothesisGroup, function(){
-                    alert("Diffiryhmän päivitys onnistui!");
+                    $window.alert("Diffiryhmän päivitys onnistui!");
                     $uibModalInstance.close();
                 }, function() {
-                    alert("Diffiryhmän päivitys epäonnistui!");
+                    $window.alert("Diffiryhmän päivitys epäonnistui!");
                 });
             }
         };

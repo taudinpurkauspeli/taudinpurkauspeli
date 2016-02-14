@@ -27,10 +27,10 @@ app.controller("UpdateHypothesisModalController", [
         $scope.updateHypothesis = function() {
             if ($scope.updateHypothesisForm.$valid) {
                 Hypothesis.update({hypothesisId: hypothesis.id}, $scope.hypothesis, function(){
-                    alert("Diffin päivitys onnistui!");
+                    $window.alert("Diffin päivitys onnistui!");
                     $uibModalInstance.close();
                 }, function() {
-                    alert("Diffin päivitys epäonnistui!");
+                    $window.alert("Diffin päivitys epäonnistui!");
                 });
             }
         };

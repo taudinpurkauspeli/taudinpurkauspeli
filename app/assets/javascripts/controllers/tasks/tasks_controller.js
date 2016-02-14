@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("TasksController", [
-    "$scope","$http","$stateParams", "$resource", "$location", "$window", "$state",
-    function($scope , $http , $stateParams, $resource, $location, $window, $state) {
+    "$scope", "$stateParams", "$resource",
+    function($scope, $stateParams, $resource) {
         $scope.tasksList = [];
 
         var TaskMoveUp = $resource('/tasks/:id/move_up.json',

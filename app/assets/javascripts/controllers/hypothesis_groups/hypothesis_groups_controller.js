@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("HypothesisGroupsController", [
-    '$scope', '$http', '$location', '$resource', '$window', '$uibModal',
-    function($scope, $http, $location, $resource, $window, $uibModal) {
+    '$scope', '$resource', '$window', '$uibModal',
+    function($scope, $resource, $window, $uibModal) {
         $scope.hypothesisGroupsAndHypothesesList = [];
 
         var HypothesisGroupsAndHypotheses = $resource('/hypothesis_groups_and_hypotheses.json');
@@ -32,7 +32,7 @@ app.controller("HypothesisGroupsController", [
                     callback();
                 }
             }, function () {
-                alert("Diffiryhmän päivitys peruttu.");
+                $window.alert("Diffiryhmän päivitys peruttu.");
             });
         };
 
@@ -46,7 +46,7 @@ app.controller("HypothesisGroupsController", [
             modalInstance.result.then(function () {
                 $scope.updateHypothesisGroupList();
             }, function () {
-                alert("Diffiryhmän luominen peruttu.");
+                $window.alert("Diffiryhmän luominen peruttu.");
             });
         };
 
@@ -67,7 +67,7 @@ app.controller("HypothesisGroupsController", [
                     callback();
                 }
             }, function () {
-                alert("Diffin päivitys peruttu.");
+                $window.alert("Diffin päivitys peruttu.");
             });
         };
 
@@ -84,7 +84,7 @@ app.controller("HypothesisGroupsController", [
             modalInstance.result.then(function () {
                 $scope.updateHypothesisGroupList();
             }, function () {
-                alert("Diffin luominen peruttu.");
+                $window.alert("Diffin luominen peruttu.");
             });
         };
 

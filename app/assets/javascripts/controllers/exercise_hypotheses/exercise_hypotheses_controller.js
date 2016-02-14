@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExerciseHypothesesController", [
-    "$scope","$http","$stateParams", "$resource", "$location", "$window", "$state", "$uibModal",
-    function($scope , $http , $stateParams, $resource, $location, $window, $state, $uibModal) {
+    "$scope", "$stateParams", "$resource", "$window", "$uibModal",
+    function($scope, $stateParams, $resource, $window, $uibModal) {
 
         var ExerciseHypothesis = $resource('/exercise_hypotheses/:exerciseHypothesisId.json',
             { exerciseHypothesisId: "@id"},

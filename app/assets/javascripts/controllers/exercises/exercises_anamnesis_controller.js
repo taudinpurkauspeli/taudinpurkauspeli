@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesAnamnesisController", [
-    "$scope","$http","$stateParams", "$resource", "$state", "$uibModal",
-    function($scope , $http , $stateParams, $resource, $state, $uibModal) {
+    "$scope", "$uibModal",
+    function($scope, $uibModal) {
         $scope.updateExercise = function () {
 
             var modalInstance = $uibModal.open({

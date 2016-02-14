@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesShowController", [
-    "$scope","$http","$stateParams", "$resource", "$state", "LocalStorageService", "$uibModal",
-    function($scope , $http , $stateParams, $resource, $state, LocalStorageService, $uibModal) {
+    "$scope", "$stateParams", "$resource", "LocalStorageService",
+    function($scope, $stateParams, $resource, LocalStorageService) {
         $scope.exercise = {};
 
         var exerciseId = $stateParams.id;

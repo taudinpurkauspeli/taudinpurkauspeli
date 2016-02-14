@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesController", [
-    "$scope","$http","$stateParams", "$resource", "$state", "$window",
-    function($scope , $http , $stateParams, $resource, $state, $window) {
+    "$scope", "$resource", "$state", "$window",
+    function($scope, $resource, $state, $window) {
         $scope.exercisesList = [];
 
         var Exercises = $resource('/exercises.json');
