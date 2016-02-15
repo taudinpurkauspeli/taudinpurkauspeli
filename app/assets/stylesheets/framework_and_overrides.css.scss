@@ -443,7 +443,11 @@ input[type="checkbox"]:checked {
 //*   Forms     *
 //***************
 
-
+.form-content{
+  border: 1px solid #BBB;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+}
 
 //*******************
 //*   Layout divs   *
