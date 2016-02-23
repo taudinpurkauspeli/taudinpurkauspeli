@@ -10,8 +10,21 @@
             {{link.title}}
         </a>
     </li>
+    <li id="CurrentTaskTab"
+        role="presentation"
+        ng-if="current_task"
+        class="tabLink exerciseTabLink" >
+        <a ng-click='changeCurrentTab("4", "CurrentTaskTab")'>
+            Nykyinen task
+        </a>
+    </li>
 </ul>
 
 <br/>
 
+<button ng-click="changeCurrentTask(25)">Lisaa task</button>
+<button ng-click="removeCurrentTask()">Poista task</button>
+
 <div ng-repeat="view in views" ui-view={{view.viewName}} ng-show='current_tab === view.tabId' ng-if=view.visibility></div>
+
+<current-task ng-if='current_task && current_tab === "4"'></current-task>

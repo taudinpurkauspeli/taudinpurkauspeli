@@ -42,13 +42,17 @@ app.controller("ExercisesShowController", [
             });
         };
 
-        $scope.setExercise();
-
         $scope.setCurrentTab = function() {
             $scope.current_tab = LocalStorageService.get("current_tab", "1");
         };
 
+        $scope.setCurrentTask = function() {
+            $scope.current_task = LocalStorageService.get("current_task", null);
+        };
+
         $scope.setCurrentTab();
+        $scope.setExercise();
+        $scope.setCurrentTask();
 
         $scope.changeCurrentTab = function(newTab, tabID) {
             $scope.current_tab = newTab;
@@ -58,6 +62,18 @@ app.controller("ExercisesShowController", [
                 $(".exerciseTabLink").removeClass("active");
                 $("#" + tabID).addClass("active");
             }
+        };
+
+        $scope.changeCurrentTask = function(newTask) {
+            $scope.current_task = newTask;
+            LocalStorageService.set("current_task", newTask);
+            $scope.changeCurrentTab("4", "CurrentTaskTab");
+        };
+
+        $scope.removeCurrentTask = function() {
+            $scope.current_task = null;
+            LocalStorageService.remove("current_task");
+            $scope.changeCurrentTab("2", "TaskTab");
         };
     }
 ]);
