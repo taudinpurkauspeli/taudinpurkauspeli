@@ -5,7 +5,8 @@ app.directive('currentTask', [
         return {
             restrict: 'E',
             scope: {
-              taskAtHand: '=taskForShow'
+                currentTask: '=taskForShow',
+                currentExercise: '=currentExercise'
             },
             templateUrl: "tasks/show.html"
         };
