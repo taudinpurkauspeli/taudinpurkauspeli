@@ -16,13 +16,12 @@
         class="tabLink exerciseTabLink" >
         <a ng-click='changeCurrentTab("4", "CurrentTaskTab")'>
             {{taskForShow.name}}
+            <span ng-click="removeCurrentTask()">X</span>
         </a>
     </li>
 </ul>
 
 <br/>
-
-<button ng-click="removeCurrentTask()">Poista task</button>
 
 <div ng-repeat="view in views" ui-view={{view.viewName}} ng-show='current_tab === view.tabId' ng-if=view.visibility></div>
 

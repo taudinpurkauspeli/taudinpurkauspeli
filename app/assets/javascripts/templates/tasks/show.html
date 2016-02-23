@@ -1,3 +1,37 @@
-<h1>{{currentTask}}</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default panel-grey">
+                <div class = "panel-heading panel-heading-grey">
+                    <div class = "row">
+                        <div class = "col-md-6">
+                            <h4>Toimenpiteen {{currentTask.name}} muokkaus</h4>
+                        </div>
+                        <div class= "col-md-6">
+                            <button class="btn btn-default btn-del widthAuto floatRight margin-em">Poista toimenpide</button>
+                            <button class="btn btn-default widthAuto floatRight margin-em">Esikatsele</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <p>Editoi nimeä formi</p>
+                    <br>
+                    <div ng-if="!currentTask.subtasks">Toimenpiteelle ei ole vielä lisätty alakohtia.</div>
+                </div>
+            </div>
+        </div>
 
-<h2>{{currentExercise}}</h2>
+        <div class="col-md-4">
+            <div class="panel panel-default panel-grey">
+                <div class = "panel-heading panel-heading-grey">
+                    Lisää alakohta
+                </div>
+                <div class="panel-body">
+                    <button class="btn btn-default btn-exercise btn-subtask">+ Teksti</button>
+                    <button class="btn btn-default btn-exercise btn-subtask">+ Monivalinta tai radio button</button>
+                    <button class="btn btn-default btn-exercise btn-subtask">+ Pohdinta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

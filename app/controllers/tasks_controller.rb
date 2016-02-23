@@ -112,7 +112,7 @@ class TasksController < ApplicationController
   def tasks_one
     respond_to do |format|
       format.html
-      format.json { render json: @task }
+      format.json { render json: @task.to_json(:include => {:subtasks => {:include => [:task_text, :multichoice, :interview, :conclusion]}}) }
     end
   end
 
