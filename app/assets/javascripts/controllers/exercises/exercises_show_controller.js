@@ -4,6 +4,7 @@ app.controller("ExercisesShowController", [
     "$scope", "$stateParams", "$resource", "LocalStorageService",
     function($scope, $stateParams, $resource, LocalStorageService) {
         $scope.exercise = {};
+        $scope.taskForShow = {};
 
         $scope.views = [
             {viewName: "anamnesis_tab",
@@ -35,6 +36,8 @@ app.controller("ExercisesShowController", [
         var exerciseId = $stateParams.id;
         var ExerciseOne = $resource('/exercises_one/:exerciseId.json',
             { exerciseId: "@id"});
+        var TaskOne = $resource('/tasks_one/:taskId.json',
+            { taskId: "@id"});
 
         $scope.setExercise = function() {
             ExerciseOne.get({exerciseId : exerciseId}, function(data) {
@@ -48,6 +51,13 @@ app.controller("ExercisesShowController", [
 
         $scope.setCurrentTask = function() {
             $scope.current_task = LocalStorageService.get("current_task", null);
+            if($scope.current_task){
+                TaskOne.get({taskId : $scope.current_task}, function(data) {
+                    $scope.taskForShow = data;
+                });
+            } else {
+                $scope.taskForShow = {};
+            }
         };
 
         $scope.setCurrentTab();
@@ -65,14 +75,14 @@ app.controller("ExercisesShowController", [
         };
 
         $scope.changeCurrentTask = function(newTask) {
-            $scope.current_task = newTask;
             LocalStorageService.set("current_task", newTask);
+            $scope.setCurrentTask();
             $scope.changeCurrentTab("4", "CurrentTaskTab");
         };
 
         $scope.removeCurrentTask = function() {
-            $scope.current_task = null;
             LocalStorageService.remove("current_task");
+            $scope.setCurrentTask();
             $scope.changeCurrentTab("2", "TaskTab");
         };
     }

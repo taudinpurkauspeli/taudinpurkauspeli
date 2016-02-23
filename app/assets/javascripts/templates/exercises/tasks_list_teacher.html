@@ -32,6 +32,7 @@
                         <li ng-repeat="task in tasks[1]"
                             dnd-draggable="task"
                             dnd-type="tasks[0]"
+                            dnd-selected="changeCurrentTask(task.id)"
                             dnd-effect-allowed="move">
                             {{task.name}}
                         </li>
