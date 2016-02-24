@@ -4,11 +4,8 @@ app.directive('currentTask', [
     function() {
         return {
             restrict: 'E',
-            scope: {
-                currentTask: '=taskForShow',
-                currentExercise: '=currentExercise'
-            },
-            templateUrl: "tasks/show.html"
+            templateUrl: "tasks/show.html",
+            controller: "TasksShowController"
         };
     }
 ]);

@@ -153,10 +153,10 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide päivitettiin onnistuneesti.' }
-        format.json {head :ok}
+        format.json { head :ok }
       else
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), alert: 'Toimenpiteen päivitys epäonnistui.' }
-        format.json {head :bad_request}
+        format.json { head :bad_request }
       end
     end
   end

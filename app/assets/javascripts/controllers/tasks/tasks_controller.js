@@ -3,7 +3,6 @@ var app = angular.module('diagnoseDiseases');
 app.controller("TasksController", [
     "$scope", "$stateParams", "$resource",
     function($scope, $stateParams, $resource) {
-        $scope.tasksList = [];
 
         var TaskMoveUp = $resource('/tasks/:id/move_up.json',
             {id: "@id"});
@@ -16,14 +15,6 @@ app.controller("TasksController", [
 
         var MoveTaskDown = $resource('/tasks/:id/move_task_down.json',
             {id: '@id'});
-
-        var TasksByLevel = $resource('/tasks_all_by_level.json');
-
-        $scope.updateTasksList = function() {
-            TasksByLevel.query({"exercise_id": $stateParams.id}, function(data) {
-                $scope.tasksList = data;
-            });
-        };
 
         $scope.updateTasksList();
 

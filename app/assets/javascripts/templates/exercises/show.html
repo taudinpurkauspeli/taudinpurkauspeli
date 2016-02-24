@@ -25,4 +25,4 @@
 
 <div ng-repeat="view in views" ui-view={{view.viewName}} ng-show='current_tab === view.tabId' ng-if=view.visibility></div>
 
-<current-task ng-if='current_task && current_tab === "4"' task-for-show="taskForShow" current-exercise="exercise"></current-task>
+<current-task ng-if='current_task && current_tab === "4"'></current-task>

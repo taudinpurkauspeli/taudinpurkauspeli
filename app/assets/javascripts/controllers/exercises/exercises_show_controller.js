@@ -5,6 +5,7 @@ app.controller("ExercisesShowController", [
     function($scope, $stateParams, $resource, LocalStorageService) {
         $scope.exercise = {};
         $scope.taskForShow = {};
+        $scope.tasksList = [];
 
         $scope.views = [
             {viewName: "anamnesis_tab",
@@ -38,6 +39,7 @@ app.controller("ExercisesShowController", [
             { exerciseId: "@id"});
         var TaskOne = $resource('/tasks_one/:taskId.json',
             { taskId: "@id"});
+        var TasksByLevel = $resource('/tasks_all_by_level.json');
 
         $scope.setExercise = function() {
             ExerciseOne.get({exerciseId : exerciseId}, function(data) {
@@ -84,6 +86,12 @@ app.controller("ExercisesShowController", [
             LocalStorageService.remove("current_task");
             $scope.setCurrentTask();
             $scope.changeCurrentTab("2", "TaskTab");
+        };
+
+        $scope.updateTasksList = function() {
+            TasksByLevel.query({"exercise_id": $stateParams.id}, function(data) {
+                $scope.tasksList = data;
+            });
         };
     }
 ]);
