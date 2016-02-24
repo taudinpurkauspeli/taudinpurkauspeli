@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   get 'tasks_one/:id', to: 'tasks#tasks_one'
   get 'tasks_all_by_level', to: 'tasks#tasks_all_by_level'
   get 'tasks_all', to: 'tasks#tasks_all'
+  post 'json_tasks_create', to: 'tasks#json_create'
 
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'

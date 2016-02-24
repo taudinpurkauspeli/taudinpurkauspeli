@@ -147,6 +147,23 @@ class TasksController < ApplicationController
     end
   end
 
+  # POST /json_tasks_create
+  # POST /json_tasks_create.json
+  def json_create
+    @task = Task.new(task_params)
+    @task.level = Task.get_highest_level(@task.exercise) + 1
+
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide luotiin onnistuneesti.' }
+        format.json { render json: @task }
+      else
+        format.html { redirect_to new_task_path(:layout => get_layout), alert: 'Toimenpiteen luonti epäonnistui.' }
+        format.json { head :internal_server_error }
+      end
+    end
+  end
+
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
@@ -235,6 +252,6 @@ class TasksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    params.require(:task).permit(:name)
+    params.require(:task).permit(:name, :exercise_id)
   end
 end

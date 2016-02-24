@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("TasksController", [
-    "$scope", "$stateParams", "$resource",
-    function($scope, $stateParams, $resource) {
+    "$scope", "$stateParams", "$resource", "$uibModal", "$window",
+    function($scope, $stateParams, $resource, $uibModal, $window) {
 
         var TaskMoveUp = $resource('/tasks/:id/move_up.json',
             {id: "@id"});
@@ -48,6 +48,24 @@ app.controller("TasksController", [
             }
 
             return task;
+        };
+
+        $scope.createTask = function() {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'tasks/create_task_modal.html',
+                controller: 'CreateTaskModalController',
+                resolve: {
+                    exercise: $scope.exercise
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+                $scope.updateTasksList();
+                $scope.changeCurrentTask(data.id);
+            }, function() {
+                $window.alert("Toimenpiteen luominen peruttu.");
+            });
         };
 
     }
