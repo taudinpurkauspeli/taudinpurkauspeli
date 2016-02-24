@@ -169,6 +169,7 @@ class TasksController < ApplicationController
     @task.destroy
     respond_to do |format|
       format.html { redirect_to tasks_url(:layout => get_layout), notice: 'Toimenpide poistettu.' }
+      format.json { head :ok }
     end
   end
 

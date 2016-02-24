@@ -21,6 +21,20 @@ app.controller("TasksShowController", [
             }
         };
 
+        $scope.deleteTask = function() {
+            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa toimenpiteen ja kaikki sen alakohdat?");
+
+            if (deleteConfirmation) {
+                Task.delete({taskId : $scope.taskForShow.id}, function() {
+                    $window.alert("Toimenpiteen poistaminen onnistui!");
+                    $scope.updateTasksList();
+                    $scope.removeCurrentTask();
+                });
+            } else {
+                $window.alert("Toimenpidettä '" + $scope.taskForShow.name + "' ei poistettu");
+            }
+        };
+
 
     }
 ]);
