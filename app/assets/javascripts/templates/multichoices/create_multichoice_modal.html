@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <h3 class="modal-title">Uusi monivalinta-alakohta</h3>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12">
+            <form novalidate name="createMultichoiceForm">
+                <div class="form-group has-feedback"
+                     ng-class="{
+'has-error': createMultichoiceForm.question.$invalid && createMultichoiceForm.question.$dirty,
+'has-success': createMultichoiceForm.question.$valid && createMultichoiceForm.question.$touched
+}">
+                    <label for="question">Kysymys</label>
+                    <input type="text"
+                           class="form-control"
+                           required
+                           name="question"
+                           id="question"
+                           placeholder="Kysymys"
+                           ng-model="newMultichoice.question">
+
+                    <p class="help-block" ng-messages="createMultichoiceForm.question.$error" ng-if="!createMultichoiceForm.question.$pristine">
+                        <span ng-message="required">Kysymys on pakollinen</span>
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label for="is_radio_button">Radiobutton?</label>
+                    <br/>
+                    <input type="checkbox"
+                           name="is_radio_button"
+                           id="is_radio_button"
+                           ng-model="newMultichoice.is_radio_button">
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary"
+            type="button"
+            ng-click="createMultichoice()"
+            ng-disabled="createMultichoiceForm.$invalid || createMultichoiceForm.$pristine">
+        Luo
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+</div>
+

@@ -41,7 +41,6 @@ app.controller("TasksShowController", [
             }
         };
 
-
         $scope.createTaskText = function(task) {
 
             var modalInstance = $uibModal.open({
@@ -59,6 +58,25 @@ app.controller("TasksShowController", [
                 $scope.editTaskText(data);
             }, function() {
                 $window.alert("Tekstialakohdan luominen peruttu.");
+            });
+        };
+
+        $scope.createMultichoice= function(task) {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'multichoices/create_multichoice_modal.html',
+                controller: 'CreateMultichoiceModalController',
+                size: 'lg',
+                resolve: {
+                    task: task
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+                $scope.setCurrentTask();
+            }, function() {
+                $window.alert("Monivalinnan luominen peruttu.");
             });
         };
 

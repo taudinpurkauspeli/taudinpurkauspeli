@@ -1,4 +1,7 @@
 class MultichoicesController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:check_answers]
   before_action :set_multichoice, only: [:edit, :update, :check_answers]
@@ -32,6 +35,26 @@ class MultichoicesController < ApplicationController
         format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), notice: 'Kysymys lisättiin onnistuneesti!' }
       else
         format.html { redirect_to new_multichoice_path(:layout => get_layout), alert: 'Kysymyksen lisääminen epäonnistui!' }
+      end
+    end
+  end
+
+
+  def json_create
+    @task = Task.find(params[:task_id])
+
+    # This can be done for each different type of subtask in their respective controllers
+    subtask = @task.subtasks.build
+    @multichoice = subtask.build_multichoice(question:multichoice_params[:question], is_radio_button:multichoice_params[:is_radio_button])
+
+    respond_to do |format|
+      if @multichoice.save
+        subtask.save
+        format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), notice: 'Kysymys lisättiin onnistuneesti!' }
+        format.json { render json: @multichoice }
+      else
+        format.html { redirect_to new_multichoice_path(:layout => get_layout), alert: 'Kysymyksen lisääminen epäonnistui!' }
+        format.json { head :internal_server_error }
       end
     end
   end
@@ -74,7 +97,7 @@ class MultichoicesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def multichoice_params
-    params.require(:multichoice).permit(:question, :is_radio_button)
+    params.require(:multichoice).permit(:question, :is_radio_button, :task_id)
 
   end
 
