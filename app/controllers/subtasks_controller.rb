@@ -1,7 +1,10 @@
 class SubtasksController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
-  before_action :set_subtask, only: [:edit, :destroy]
+  before_action :set_subtask, only: [:edit, :destroy, :move_down, :move_up]
 
 
   # GET /subtasks/1/edit
@@ -26,6 +29,22 @@ class SubtasksController < ApplicationController
     @subtask.destroy
     respond_to do |format|
       format.html { redirect_to edit_task_path(task_id, :layout => get_layout), notice: 'Alakohta poistettu.' }
+    end
+  end
+
+  def move_up
+    @subtask.move_up(params[:new_level])
+    respond_to do |format|
+      format.html { redirect_to tasks_url(:layout => get_layout) }
+      format.json { head :ok }
+    end
+  end
+
+  def move_down
+    @subtask.move_down(params[:new_level])
+    respond_to do |format|
+      format.html { redirect_to tasks_url(:layout => get_layout) }
+      format.json { head :ok }
     end
   end
 

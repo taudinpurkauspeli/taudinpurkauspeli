@@ -70,6 +70,10 @@ Rails.application.routes.draw do
   get 'tasks/:id/up', to: 'tasks#level_up'
   get 'tasks/:id/down', to: 'tasks#level_down'
 
+  # Subtask up and down levels
+  post 'subtasks/:id/move_up', to: 'subtasks#move_up'
+  post 'subtasks/:id/move_down', to: 'subtasks#move_down'
+
   post 'multichoices/:id/check_answers', to: 'multichoices#check_answers'
   post 'interviews/:id/ask_question', to: 'interviews#ask_question'
   post 'interviews/:id/check_answers', to: 'interviews#check_answers'

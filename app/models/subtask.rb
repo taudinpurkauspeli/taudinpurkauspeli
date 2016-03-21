@@ -52,6 +52,28 @@ class Subtask < ActiveRecord::Base
     end
   end
 
+  def move_down(new_level)
+    unless task.nil?
+      current_level = level
+      other_subtasks = task.subtasks.where("level > ? and level <= ?", current_level, new_level)
+      unless other_subtasks.empty?
+        other_subtasks.each{ |current_subtask| current_subtask.update(level:(current_subtask.level - 1)) }
+      end
+    end
+    update(level:new_level)
+  end
+
+  def move_up(new_level)
+    unless task.nil?
+      current_level = level
+      other_subtasks = task.subtasks.where("level < ? and level >= ?", current_level, new_level)
+      unless other_subtasks.empty?
+        other_subtasks.each{ |current_subtask| current_subtask.update(level:(current_subtask.level + 1)) }
+      end
+    end
+    update(level:new_level)
+  end
+
 
   def to_s
     full_sanitizer = Rails::Html::FullSanitizer.new
