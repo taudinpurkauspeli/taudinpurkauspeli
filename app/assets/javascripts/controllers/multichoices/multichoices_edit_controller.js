@@ -3,10 +3,21 @@ var app = angular.module('diagnoseDiseases');
 app.controller("MultichoicesEditController", [
     "$scope", "$resource", "$window",
     function($scope, $resource, $window) {
-/*
-        var TaskText = $resource('/task_texts/:taskTextId.json',
-            { taskTextId: "@id"},
+
+        var Multichoice = $resource('/multichoices/:multichoiceId.json',
+            { multichoiceId: "@id"},
             { update: { method: 'PUT' }});
+
+
+        $scope.setMultichoice = function() {
+            Multichoice.get({ multichoiceId : $scope.multichoice.id}, function(data) {
+                $scope.multichoice = data;
+            });
+        };
+
+        $scope.setMultichoice();
+
+        /*
 
         $scope.updateTaskText = function() {
             if ($scope.updateTaskTextForm.$valid) {
