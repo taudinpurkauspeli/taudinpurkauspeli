@@ -1,0 +1,16 @@
+<div class="subtask-list">
+    <div class="dropzone">
+        <ul dnd-list="[]"
+            dnd-drop="moveSubaskToNewLevel(index, item, type)"
+            class="list-unstyled itemlist">
+
+            <li ng-repeat="(level, subtask) in taskForShow.subtasks"
+                dnd-draggable="subtask"
+                dnd-type="level"
+                dnd-effect-allowed="move">
+                {{subtask.level}}
+            </li>
+
+        </ul>
+    </div>
+</div>
