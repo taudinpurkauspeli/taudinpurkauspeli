@@ -52,9 +52,22 @@ class TaskTextsController < ApplicationController
     respond_to do |format|
       if @task_text.update(task_text_params)
         format.html { redirect_to edit_task_text_path(@task_text.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti!' }
+        format.json { head :ok }
       else
         format.html { redirect_to edit_task_text_path(@task_text.id, :layout => get_layout), alert: 'Kysymyksen päivitys epäonnistui!' }
+        format.json { head :internal_server_error }
       end
+    end
+  end
+
+  # DELETE /task_texts/1
+  # DELETE /task_texts/1.json
+  def destroy
+    @task_text.subtask.update_levels_before_deleting
+    @task_text.destroy
+    respond_to do |format|
+      format.html
+      format.json { head :ok }
     end
   end
 
