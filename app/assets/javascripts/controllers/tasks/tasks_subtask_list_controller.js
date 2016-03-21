@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("TasksSubtaskListController", [
-    "$scope", "$resource", "$window",
-    function($scope, $resource, $window) {
+    "$scope", "$resource",
+    function($scope, $resource) {
 
         var MoveSubtaskUp = $resource('/subtasks/:id/move_up.json',
             {id: "@id"});
@@ -11,31 +11,68 @@ app.controller("TasksSubtaskListController", [
             {id: '@id'});
 
         $scope.moveSubaskToNewLevel = function(newLevel, subtask, previousLevel) {
-            console.log("uusi taso: " + newLevel + " edellinen taso: " + previousLevel + " subtask taso: " + subtask.level);
-
             if(newLevel >= 0 && newLevel != previousLevel){
 
                 var levelChange = newLevel - subtask.level;
 
                 if(levelChange < 0){
                     var realNewLevel = newLevel + 1;
-                    console.log("ylöspäin tasolle " + realNewLevel);
                     MoveSubtaskUp.save({id: subtask.id, new_level: realNewLevel}, function() {
-                        console.log("Siirretty ylös");
                         $scope.setCurrentTask();
                     });
 
                 } else if(levelChange > 0){
-                    console.log("alaspäin tasolle " + newLevel);
                     MoveSubtaskDown.save({id: subtask.id, new_level: newLevel}, function() {
-                        console.log("Siirretty alas");
                         $scope.setCurrentTask();
                     });
                 }
             }
-
             return subtask;
-        }
+        };
+
+        $scope.subtaskTitle = function(subtask) {
+
+            if(subtask.task_text){
+                return taskTextTitle(subtask.task_text);
+
+            } else if(subtask.interview){
+                return interviewTitle(subtask.interview);
+
+            } else if(subtask.multichoice){
+                return multichoiceTitle(subtask.multichoice);
+
+            } else if(subtask.conclusion){
+                return conclusionTitle(subtask.conclusion);
+            }
+        };
+
+        var taskTextTitle = function(task_text){
+            var words = task_text.content.match(/\S+/gi);
+            var returnString = "Teksti: " + words[0];
+            if(words.length > 1){
+                returnString += " " + words[1];
+            }
+            return returnString;
+        };
+
+        var interviewTitle = function(interview){
+            return "Pohdinta: " + interview.title;
+        };
+
+        var conclusionTitle = function(conclusion){
+            return "Diagnoosi: " + conclusion.title;
+        };
+
+        var multichoiceTitle = function(multichoice){
+            var returnString = "";
+            if(multichoice.is_radio_button){
+                returnString += "Radio button: ";
+            } else {
+                returnString += "Monivalinta: ";
+            }
+            return returnString + multichoice.question;
+        };
+
 
     }
 ]);
