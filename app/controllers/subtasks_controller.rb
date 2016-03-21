@@ -22,6 +22,7 @@ class SubtasksController < ApplicationController
   # DELETE /subtasks/1.json
   def destroy
     task_id = @subtask.task.id
+    @subtask.update_levels_before_deleting
     @subtask.destroy
     respond_to do |format|
       format.html { redirect_to edit_task_path(task_id, :layout => get_layout), notice: 'Alakohta poistettu.' }

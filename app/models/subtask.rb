@@ -40,8 +40,18 @@ class Subtask < ActiveRecord::Base
     else
       update(level:1)
     end
-
   end
+
+  def update_levels_before_deleting
+    unless task.nil?
+      current_level = level
+      other_subtasks = task.subtasks.where("level > ?", current_level)
+      unless other_subtasks.empty?
+        other_subtasks.each{ |current_subtask| current_subtask.update(level:(current_subtask.level - 1)) }
+      end
+    end
+  end
+
 
   def to_s
     full_sanitizer = Rails::Html::FullSanitizer.new
