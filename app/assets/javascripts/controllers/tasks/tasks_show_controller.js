@@ -4,8 +4,14 @@ app.controller("TasksShowController", [
     "$scope", "$resource", "$window",
     function($scope, $resource, $window) {
 
+        $scope.taskText = null;
+
         var Task = $resource('/tasks/:taskId.json',
             { taskId: "@id"},
+            { update: { method: 'PUT' }});
+
+        var TaskText = $resource('/task_texts/:taskTextId.json',
+            { taskTextId: "@id"},
             { update: { method: 'PUT' }});
 
         $scope.updateTask = function(){
@@ -33,6 +39,14 @@ app.controller("TasksShowController", [
             } else {
                 $window.alert("Toimenpidettä '" + $scope.taskForShow.name + "' ei poistettu");
             }
+        };
+
+        $scope.editTaskText = function(task_text) {
+            $scope.taskText = task_text;
+        };
+
+        $scope.returnToTask = function() {
+            $scope.taskText = null;
         };
 
 

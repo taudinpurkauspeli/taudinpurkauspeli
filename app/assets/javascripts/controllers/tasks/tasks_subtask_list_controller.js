@@ -30,6 +30,12 @@ app.controller("TasksSubtaskListController", [
             return subtask;
         };
 
+        $scope.editSubtask = function(subtask) {
+            if(subtask.task_text){
+                $scope.editTaskText(subtask.task_text);
+            }
+        };
+
         $scope.subtaskTitle = function(subtask) {
 
             if(subtask.task_text){

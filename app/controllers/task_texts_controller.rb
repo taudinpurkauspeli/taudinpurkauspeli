@@ -1,7 +1,10 @@
 class TaskTextsController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:check_answers]
-  before_action :set_task_text, only: [:edit, :update, :destroy, :check_answers]
+  before_action :set_task_text, only: [:edit, :update, :destroy, :check_answers, :show]
   before_action :set_current_user, only: [:check_answers]
 
   # GET /task_texts/new
@@ -14,6 +17,14 @@ class TaskTextsController < ApplicationController
   # GET /task_texts/1/edit
   def edit
     set_view_layout
+  end
+
+  # GET /task_texts/1
+  def show
+    respond_to do |format|
+      format.html
+      format.json { render json: @task_text }
+    end
   end
 
   # POST /task_texts

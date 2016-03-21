@@ -7,6 +7,7 @@
             <li ng-repeat="(level, subtask) in taskForShow.subtasks"
                 dnd-draggable="subtask"
                 dnd-type="level"
+                dnd-selected="editSubtask(subtask)"
                 dnd-effect-allowed="move">
                 {{subtaskTitle(subtask)}}
             </li>
