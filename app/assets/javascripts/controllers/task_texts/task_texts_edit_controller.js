@@ -12,6 +12,7 @@ app.controller("TaskTextsEditController", [
             if ($scope.updateTaskTextForm.$valid) {
                 TaskText.update({taskTextId: $scope.taskText.id}, $scope.taskText, function() {
                     $window.alert("Tekstialakohdan päivitys onnistui!");
+                    $scope.setCurrentTask();
                 }, function() {
                     $window.alert("Tekstialakohdan päivitys epäonnistui!");
                 });

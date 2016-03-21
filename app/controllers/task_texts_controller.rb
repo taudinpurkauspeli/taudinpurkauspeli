@@ -46,6 +46,28 @@ class TaskTextsController < ApplicationController
     end
   end
 
+  # POST /task_texts_json_create
+  # POST /task_texts_json_create.json
+  def json_create
+    @task = Task.find(params[:task_id])
+
+    # This can be done for each different type of subtask in their respective controllers
+    subtask = @task.subtasks.build
+    @task_text = subtask.build_task_text(content:task_text_params[:content])
+
+    respond_to do |format|
+      if @task_text.save
+        subtask.save
+        format.html { redirect_to edit_task_text_path(@task_text.id, :layout => get_layout), notice: 'Kysymys lisättiin onnistuneesti!' }
+        format.json { render json: @task_text }
+      else
+        format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), alert: 'Kysymyksen lisääminen epäonnistui!' }
+        format.json { head :internal_server_error }
+      end
+    end
+
+  end
+
   # PATCH/PUT /task_texts/1
   # PATCH/PUT /task_texts/1.json
   def update
@@ -92,6 +114,6 @@ class TaskTextsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_text_params
-    params.require(:task_text).permit(:content)
+    params.require(:task_text).permit(:content, :task_id)
   end
 end

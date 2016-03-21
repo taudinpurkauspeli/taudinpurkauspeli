@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("TasksShowController", [
-    "$scope", "$resource", "$window",
-    function($scope, $resource, $window) {
+    "$scope", "$resource", "$window", "$uibModal",
+    function($scope, $resource, $window, $uibModal) {
 
         $scope.taskText = null;
 
@@ -39,6 +39,27 @@ app.controller("TasksShowController", [
             } else {
                 $window.alert("Toimenpidettä '" + $scope.taskForShow.name + "' ei poistettu");
             }
+        };
+
+
+        $scope.createTaskText = function(task) {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'task_texts/create_task_text_modal.html',
+                controller: 'CreateTaskTextModalController',
+                size: 'lg',
+                resolve: {
+                    task: task
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+                $scope.setCurrentTask();
+                $scope.editTaskText(data);
+            }, function() {
+                $window.alert("Tekstialakohdan luominen peruttu.");
+            });
         };
 
         $scope.editTaskText = function(task_text) {
