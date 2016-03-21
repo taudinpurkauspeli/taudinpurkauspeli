@@ -5,6 +5,7 @@ app.controller("TasksShowController", [
     function($scope, $resource, $window, $uibModal) {
 
         $scope.taskText = null;
+        $scope.multichoice = null;
 
         var Task = $resource('/tasks/:taskId.json',
             { taskId: "@id"},
@@ -84,8 +85,13 @@ app.controller("TasksShowController", [
             $scope.taskText = task_text;
         };
 
+        $scope.editMultichoice= function(multichoice) {
+            $scope.multichoice = multichoice;
+        };
+
         $scope.returnToTask = function() {
             $scope.taskText = null;
+            $scope.multichoice = null;
         };
 
 

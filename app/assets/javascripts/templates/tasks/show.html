@@ -1,4 +1,4 @@
-<div class="container-fluid" ng-if="!taskText">
+<div class="container-fluid" ng-if="!taskText && !multichoice">
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default panel-grey">
@@ -70,4 +70,8 @@
 
 <div class="container-fluid" ng-if="taskText" >
     <task-text></task-text>
+</div>
+
+<div class="container-fluid" ng-if="multichoice" >
+    <multichoice></multichoice>
 </div>

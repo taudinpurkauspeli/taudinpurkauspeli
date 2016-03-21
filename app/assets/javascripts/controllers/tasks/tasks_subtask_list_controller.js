@@ -33,6 +33,11 @@ app.controller("TasksSubtaskListController", [
         $scope.editSubtask = function(subtask) {
             if(subtask.task_text){
                 $scope.editTaskText(subtask.task_text);
+
+            } else if(subtask.multichoice){
+                $scope.editMultichoice(subtask.multichoice);
+
+
             }
         };
 
