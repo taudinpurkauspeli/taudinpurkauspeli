@@ -4,6 +4,21 @@ app.controller("OptionsEditController", [
     "$scope", "$resource", "$window", "$uibModal",
     function($scope, $resource, $window, $uibModal) {
 
+        $scope.answer_types = [{
+            name_fi: "Pakolliset vaihtoehdot",
+            name_en: "required",
+            allowed_types: ['allowed', 'wrong']
+        }, {
+            name_fi: "Sallitut vaihtoehdot",
+            name_en: "allowed",
+            allowed_types: ['required', 'wrong']
+        }, {
+            name_fi: "Väärät vaihtoehdot",
+            name_en: "wrong",
+            allowed_types: ['required', 'allowed']
+        }
+        ];
+
         var Options = $resource('/options.json');
 
         var Option = $resource('/options/:optionId.json',

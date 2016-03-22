@@ -6,14 +6,13 @@
 <div class = "separator"></div>
 <br/>
 
-
-<div class="options-list">
+<div class="options-list" ng-repeat="answer_type in answer_types">
     <div class="dropzone">
 
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="panel-title">
-                    Pakolliset vaihtoehdot
+                    {{answer_type.name_fi}}
                 </div>
             </div>
             <div class="panel-body">
@@ -21,80 +20,12 @@
                 <div class="itemlist">
                     <ul dnd-list="[]"
                         class="list-unstyled"
-                        dnd-drop="moveOptionToNewType(item, 'required')"
-                        dnd-allowed-types="['allowed', 'wrong']">
+                        dnd-drop="moveOptionToNewType(item, answer_type.name_en)"
+                        dnd-allowed-types="answer_type.allowed_types">
 
-                        <li ng-repeat="option in options['required']"
+                        <li ng-repeat="option in options[answer_type.name_en]"
                             dnd-draggable="option"
-                            dnd-type="'required'"
-                            dnd-selected="updateOption(option)"
-                            dnd-effect-allowed="move">
-                            {{option.content}}
-                        </li>
-
-
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div class="options-list">
-    <div class="dropzone">
-
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    Sallitut vaihtoehdot
-                </div>
-            </div>
-            <div class="panel-body">
-
-                <div class="itemlist">
-                    <ul dnd-list="[]"
-                        class="list-unstyled"
-                        dnd-drop="moveOptionToNewType(item, 'allowed')"
-                        dnd-allowed-types="['required', 'wrong']">
-
-                        <li ng-repeat="option in options['allowed']"
-                            dnd-draggable="option"
-                            dnd-type="'allowed'"
-                            dnd-selected="updateOption(option)"
-                            dnd-effect-allowed="move">
-                            {{option.content}}
-                        </li>
-
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="options-list">
-    <div class="dropzone">
-
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    Väärät vaihtoehdot
-                </div>
-            </div>
-            <div class="panel-body">
-
-                <div class="itemlist">
-                    <ul dnd-list="[]"
-                        class="list-unstyled"
-                        dnd-drop="moveOptionToNewType(item, 'wrong')"
-                        dnd-allowed-types="['required', 'allowed']">
-
-                        <li ng-repeat="option in options['wrong']"
-                            dnd-draggable="option"
-                            dnd-type="'wrong'"
+                            dnd-type="answer_type.name_en"
                             dnd-selected="updateOption(option)"
                             dnd-effect-allowed="move">
                             {{option.content}}
