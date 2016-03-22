@@ -21,7 +21,7 @@
                 <div class="itemlist">
                     <ul dnd-list="[]"
                         class="list-unstyled"
-                        dnd-drop="moveOptionToNewType(index, item, type)"
+                        dnd-drop="moveOptionToNewType(item, 'required')"
                         dnd-allowed-types="['allowed', 'wrong']">
 
                         <li ng-repeat="option in options['required']"
@@ -55,7 +55,7 @@
                 <div class="itemlist">
                     <ul dnd-list="[]"
                         class="list-unstyled"
-                        dnd-drop="moveOptionToNewType(index, item, type)"
+                        dnd-drop="moveOptionToNewType(item, 'allowed')"
                         dnd-allowed-types="['required', 'wrong']">
 
                         <li ng-repeat="option in options['allowed']"
@@ -87,7 +87,7 @@
                 <div class="itemlist">
                     <ul dnd-list="[]"
                         class="list-unstyled"
-                        dnd-drop="moveOptionToNewType(index, item, type)"
+                        dnd-drop="moveOptionToNewType(item, 'wrong')"
                         dnd-allowed-types="['required', 'allowed']">
 
                         <li ng-repeat="option in options['wrong']"

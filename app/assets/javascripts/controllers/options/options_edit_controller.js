@@ -18,32 +18,43 @@ app.controller("OptionsEditController", [
 
         $scope.setOptions();
 
+        $scope.moveOptionToNewType = function(option, newType){
 
-       /* $scope.updateMultichoice = function() {
-            if ($scope.updateMultichoiceForm.$valid) {
-                Multichoice.update({multichoiceId: $scope.multichoice.id}, $scope.multichoice, function() {
-                    $window.alert("Monivalinnan päivitys onnistui!");
-                    $scope.setCurrentTask();
-                }, function() {
-                    $window.alert("Monivalinnan päivitys epäonnistui!");
-                });
-            }
+            option.is_correct_answer = newType;
+
+            Option.update({optionId: option.id}, option, function() {
+                $scope.setOptions();
+            }, function() {
+                $window.alert("Vastausvaihtoehdon päivitys epäonnistui!");
+            });
         };
 
-        $scope.deleteMultichoice = function() {
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa monivalinta-alakohdan?");
 
-            if (deleteConfirmation) {
-                Multichoice.delete({multichoiceId : $scope.multichoice.id}, function() {
-                    $window.alert("Monivalinnan poistaminen onnistui!");
-                    $scope.setCurrentTask();
-                    $scope.returnToTask();
-                });
+        /* $scope.updateMultichoice = function() {
+         if ($scope.updateMultichoiceForm.$valid) {
+         Multichoice.update({multichoiceId: $scope.multichoice.id}, $scope.multichoice, function() {
+         $window.alert("Monivalinnan päivitys onnistui!");
+         $scope.setCurrentTask();
+         }, function() {
+         $window.alert("Monivalinnan päivitys epäonnistui!");
+         });
+         }
+         };
 
-            } else {
-                $window.alert("Monivalintaa ei poistettu!");
-            }
-        };*/
+         $scope.deleteMultichoice = function() {
+         var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa monivalinta-alakohdan?");
+
+         if (deleteConfirmation) {
+         Multichoice.delete({multichoiceId : $scope.multichoice.id}, function() {
+         $window.alert("Monivalinnan poistaminen onnistui!");
+         $scope.setCurrentTask();
+         $scope.returnToTask();
+         });
+
+         } else {
+         $window.alert("Monivalintaa ei poistettu!");
+         }
+         };*/
 
     }
 ]);

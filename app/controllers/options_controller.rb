@@ -7,7 +7,7 @@ class OptionsController < ApplicationController
   before_action :set_option, only: [:update, :destroy]
 
   def index
-    options = Option.where(multichoice_id: params[:multichoice_id]).group_by(&:is_correct_answer)
+    options = Option.where(multichoice_id: params[:multichoice_id]).order(:content).group_by(&:is_correct_answer)
 
     respond_to do |format|
       format.html
@@ -42,8 +42,10 @@ class OptionsController < ApplicationController
           uncheck_other_options(@option)
         end
         format.html { redirect_to edit_multichoice_path(@option.multichoice.id, :layout => get_layout), notice: 'Vaihtoehto päivitettiin onnistuneesti.' }
+        format.json { head :ok }
       else
         format.html { redirect_to edit_multichoice_path(@option.multichoice.id, :layout => get_layout), alert: 'Vaihtoehdon päivitys epäonnistui!.' }
+        format.json { head :internal_server_error }
       end
     end
   end
