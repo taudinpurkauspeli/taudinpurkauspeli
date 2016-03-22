@@ -1,1 +1,146 @@
-{{options}}
+<div class = "row">
+    <div class = "col-md-8">
+        <h3>Vastausvaihtoehdot</h3>
+    </div>
+</div>
+<div class = "separator"></div>
+<br/>
+
+
+<div class="options-list">
+    <div class="dropzone">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Pakolliset vaihtoehdot
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="itemlist">
+                    <ul dnd-list="[]"
+                        class="list-unstyled"
+                        dnd-drop="moveOptionToNewType(index, item, type)"
+                        dnd-allowed-types="['allowed', 'wrong']">
+
+                        <li ng-repeat="option in options['required']"
+                            dnd-draggable="option"
+                            dnd-type="'required'"
+                            dnd-effect-allowed="move">
+                            {{option.content}}
+                        </li>
+
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="options-list">
+    <div class="dropzone">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Sallitut vaihtoehdot
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="itemlist">
+                    <ul dnd-list="[]"
+                        class="list-unstyled"
+                        dnd-drop="moveOptionToNewType(index, item, type)"
+                        dnd-allowed-types="['required', 'wrong']">
+
+                        <li ng-repeat="option in options['allowed']"
+                            dnd-draggable="option"
+                            dnd-type="'allowed'"
+                            dnd-effect-allowed="move">
+                            {{option.content}}
+                        </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="options-list">
+    <div class="dropzone">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Väärät vaihtoehdot
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="itemlist">
+                    <ul dnd-list="[]"
+                        class="list-unstyled"
+                        dnd-drop="moveOptionToNewType(index, item, type)"
+                        dnd-allowed-types="['required', 'allowed']">
+
+                        <li ng-repeat="option in options['wrong']"
+                            dnd-draggable="option"
+                            dnd-type="'wrong'"
+                            dnd-effect-allowed="move">
+                            {{option.content}}
+                        </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--
+<div class="options-list">
+    <div class="dropzone">
+        <ul dnd-list="[]"
+            dnd-drop="moveOptionToGroup(index, item)"
+            class="list-unstyled">
+
+            <li ng-repeat="(level, option) in options"
+                class="panel panel-default itemlist">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        {{tasks[0]}}
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <ul  dnd-list="[]"
+                         dnd-drop="moveTaskFromLevelToLevel(item, type, tasks[0])"
+                         dnd-horizontal-list="true"
+                         class="list-unstyled">
+
+                        <li ng-repeat="task in tasks[1]"
+                            dnd-draggable="task"
+                            dnd-type="tasks[0]"
+                            dnd-selected="changeCurrentTask(task.id)"
+                            dnd-effect-allowed="move">
+                            {{task.name}}
+                        </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<button class="btn btn-default btn-save btn-new-task" ng-click="createTask()">+ Luo uusi toimenpide</button>-->

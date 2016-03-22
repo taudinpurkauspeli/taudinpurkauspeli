@@ -728,6 +728,64 @@ section {
   margin-bottom: 5px;
 }
 
+
+// Drag and drop options-list
+
+
+.options-list ul[dnd-list],
+.options-list ul[dnd-list] > li{
+  position: relative;
+}
+
+.options-list .dropzone ul[dnd-list] {
+  min-height: 5em;
+  min-width: 20em;
+  margin: 0px;
+  padding-left: 0px;
+}
+
+
+.options-list .dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+.options-list .dropzone ul[dnd-list] .dndDraggingSource {
+  display: none;
+}
+
+.options-list .dropzone .itemlist ul {
+  display: table;
+}
+
+.options-list .dropzone .itemlist li {
+  border: none;
+  border-radius: 7px;
+  color: #000000;
+  float: left;
+  margin: 5px;
+  padding: 3px;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: normal;
+  font-size: 14px;
+  height: 5em;
+  width: 20em;
+  background-color: #cacaca;
+  white-space: normal;
+  display: table-cell;
+}
+
+.options-list ul[dnd-list] .dndPlaceholder {
+  background-color: $PaleLightGreen !important;
+  height: 5em;
+  width: 20em;
+  display: block;
+  position: relative;
+  border-radius: 7px;
+  margin-bottom: 5px;
+}
+
+
 // TextAngular editor
 
 .ta-editor {
