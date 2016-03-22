@@ -1,15 +1,25 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("MultichoicesEditController", [
+app.controller("OptionsEditController", [
     "$scope", "$resource", "$window",
     function($scope, $resource, $window) {
 
-        var Multichoice = $resource('/multichoices/:multichoiceId.json',
-            { multichoiceId: "@id"},
+        var Options = $resource('/options.json');
+
+        var Option = $resource('/options/:optionId.json',
+            { optionId: "@id"},
             { update: { method: 'PUT' }});
 
+        $scope.setOptions = function() {
+            Options.get({ multichoice_id : $scope.multichoice.id}, function(data) {
+                $scope.options = data;
+            });
+        };
 
-        $scope.updateMultichoice = function() {
+        $scope.setOptions();
+
+
+       /* $scope.updateMultichoice = function() {
             if ($scope.updateMultichoiceForm.$valid) {
                 Multichoice.update({multichoiceId: $scope.multichoice.id}, $scope.multichoice, function() {
                     $window.alert("Monivalinnan päivitys onnistui!");
@@ -33,7 +43,7 @@ app.controller("MultichoicesEditController", [
             } else {
                 $window.alert("Monivalintaa ei poistettu!");
             }
-        };
+        };*/
 
     }
 ]);

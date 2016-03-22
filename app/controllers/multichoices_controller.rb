@@ -16,7 +16,7 @@ class MultichoicesController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json { render json: @multichoice.to_json(:include => :options) }
+      format.json { render json: @multichoice }
     end
   end
 
