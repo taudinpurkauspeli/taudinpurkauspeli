@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("OptionsEditController", [
-    "$scope", "$resource", "$window",
-    function($scope, $resource, $window) {
+    "$scope", "$resource", "$window", "$uibModal",
+    function($scope, $resource, $window, $uibModal) {
 
         var Options = $resource('/options.json');
 
@@ -27,6 +27,26 @@ app.controller("OptionsEditController", [
             }, function() {
                 $window.alert("Vastausvaihtoehdon päivitys epäonnistui!");
             });
+        };
+
+        $scope.createOption = function(multichoice){
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'options/create_option_modal.html',
+                controller: 'CreateOptionModalController',
+                size: 'lg',
+                resolve: {
+                    multichoice: multichoice
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+                $scope.setOptions();
+            }, function() {
+                $window.alert("Vastausvaihtoehdon luominen peruttu.");
+            });
+
         };
 
 

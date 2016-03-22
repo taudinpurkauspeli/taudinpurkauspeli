@@ -32,6 +32,23 @@ class OptionsController < ApplicationController
     end
   end
 
+  def json_create
+    @option = Option.new(option_params)
+
+    respond_to do |format|
+      if @option.save
+        if @option.multichoice.is_radio_button
+          uncheck_other_options(@option)
+        end
+        format.html { redirect_to edit_multichoice_path(@option.multichoice.id, :layout => get_layout), notice: 'Vaihtoehto lisättiin onnistuneesti.' }
+        format.json { head :ok }
+      else
+        format.html { redirect_to edit_multichoice_path(Multichoice.find(option_params[:multichoice_id]), :layout => get_layout), alert: 'Vaihtoehdon tiedot puuttelliset.' }
+        format.json { head :internal_server_error }
+      end
+    end
+  end
+
   # PATCH/PUT /task_texts/1
   # PATCH/PUT /task_texts/1.json
   def update

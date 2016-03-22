@@ -14,6 +14,8 @@ app.controller("MultichoicesEditController", [
                 Multichoice.update({multichoiceId: $scope.multichoice.id}, $scope.multichoice, function() {
                     $window.alert("Monivalinnan päivitys onnistui!");
                     $scope.setCurrentTask();
+                    $scope.updateMultichoiceForm.$setPristine();
+                    $scope.updateMultichoiceForm.$setUntouched();
                 }, function() {
                     $window.alert("Monivalinnan päivitys epäonnistui!");
                 });
