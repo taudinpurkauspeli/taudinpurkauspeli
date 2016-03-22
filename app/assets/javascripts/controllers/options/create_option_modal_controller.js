@@ -22,9 +22,9 @@ app.controller("CreateOptionModalController", [
         $scope.createOption = function() {
             if ($scope.createOptionForm.$valid) {
                 Option.save($scope.newOption,
-                    function(data) {
+                    function() {
                         $window.alert("Vastausvaihtoehdon luominen onnistui!");
-                        $uibModalInstance.close(data);
+                        $uibModalInstance.close();
                     },
                     function() {
                         $window.alert("Vastausvaihtoehdon luominen epäonnistui!");

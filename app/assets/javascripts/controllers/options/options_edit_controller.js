@@ -41,7 +41,7 @@ app.controller("OptionsEditController", [
                 }
             });
 
-            modalInstance.result.then(function(data) {
+            modalInstance.result.then(function() {
                 $scope.setOptions();
             }, function() {
                 $window.alert("Vastausvaihtoehdon luominen peruttu.");
@@ -49,32 +49,25 @@ app.controller("OptionsEditController", [
 
         };
 
+        $scope.updateOption = function(option){
 
-        /* $scope.updateMultichoice = function() {
-         if ($scope.updateMultichoiceForm.$valid) {
-         Multichoice.update({multichoiceId: $scope.multichoice.id}, $scope.multichoice, function() {
-         $window.alert("Monivalinnan päivitys onnistui!");
-         $scope.setCurrentTask();
-         }, function() {
-         $window.alert("Monivalinnan päivitys epäonnistui!");
-         });
-         }
-         };
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'options/update_option_modal.html',
+                controller: 'UpdateOptionModalController',
+                size: 'lg',
+                resolve: {
+                    option: option
+                }
+            });
 
-         $scope.deleteMultichoice = function() {
-         var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa monivalinta-alakohdan?");
+            modalInstance.result.then(function() {
+                $scope.setOptions();
+            }, function() {
+                $window.alert("Vastausvaihtoehdon muokkaaminen peruttu.");
+            });
 
-         if (deleteConfirmation) {
-         Multichoice.delete({multichoiceId : $scope.multichoice.id}, function() {
-         $window.alert("Monivalinnan poistaminen onnistui!");
-         $scope.setCurrentTask();
-         $scope.returnToTask();
-         });
-
-         } else {
-         $window.alert("Monivalintaa ei poistettu!");
-         }
-         };*/
+        };
 
     }
 ]);
