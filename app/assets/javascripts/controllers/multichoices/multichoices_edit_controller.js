@@ -17,33 +17,32 @@ app.controller("MultichoicesEditController", [
 
         $scope.setMultichoice();
 
-        /*
 
-        $scope.updateTaskText = function() {
-            if ($scope.updateTaskTextForm.$valid) {
-                TaskText.update({taskTextId: $scope.taskText.id}, $scope.taskText, function() {
-                    $window.alert("Tekstialakohdan päivitys onnistui!");
+        $scope.updateMultichoice = function() {
+            if ($scope.updateMultichoiceForm.$valid) {
+                Multichoice.update({multichoiceId: $scope.multichoice.id}, $scope.multichoice, function() {
+                    $window.alert("Monivalinnan päivitys onnistui!");
                     $scope.setCurrentTask();
                 }, function() {
-                    $window.alert("Tekstialakohdan päivitys epäonnistui!");
+                    $window.alert("Monivalinnan päivitys epäonnistui!");
                 });
             }
         };
 
-        $scope.deleteTaskText = function() {
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa tekstialakohdan?");
+        $scope.deleteMultichoice = function() {
+            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa monivalinta-alakohdan?");
 
             if (deleteConfirmation) {
-                TaskText.delete({taskTextId : $scope.taskText.id}, function() {
-                    $window.alert("Tekstialakohdan poistaminen onnistui!");
+                Multichoice.delete({multichoiceId : $scope.multichoice.id}, function() {
+                    $window.alert("Monivalinnan poistaminen onnistui!");
                     $scope.setCurrentTask();
                     $scope.returnToTask();
                 });
 
             } else {
-                $window.alert("Tekstialakohtaa ei poistettu!");
+                $window.alert("Monivalintaa ei poistettu!");
             }
-        };*/
+        };
 
     }
 ]);

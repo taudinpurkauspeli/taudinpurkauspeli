@@ -76,6 +76,7 @@ app.controller("TasksShowController", [
 
             modalInstance.result.then(function(data) {
                 $scope.setCurrentTask();
+                $scope.editMultichoice(data);
             }, function() {
                 $window.alert("Monivalinnan luominen peruttu.");
             });

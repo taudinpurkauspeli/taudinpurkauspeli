@@ -4,7 +4,7 @@ class MultichoicesController < ApplicationController
 
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin, except: [:check_answers]
-  before_action :set_multichoice, only: [:edit, :update, :check_answers, :show]
+  before_action :set_multichoice, only: [:edit, :update, :destroy, :check_answers, :show]
   before_action :set_current_user, only: [:check_answers]
 
   def new
@@ -72,10 +72,23 @@ class MultichoicesController < ApplicationController
     respond_to do |format|
       if @multichoice.update(multichoice_params)
         format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), notice: 'Kysymys päivitettiin onnistuneesti!' }
+        format.json { head :ok }
       else
         @new_option = Option.new
         format.html { redirect_to edit_multichoice_path(@multichoice.id, :layout => get_layout), alert: 'Kysymyksen päivitys epäonnistui!' }
+        format.json { head :internal_server_error }
       end
+    end
+  end
+
+  # DELETE /multichoices/1
+  # DELETE /multichoices/1.json
+  def destroy
+    @multichoice.subtask.update_levels_before_deleting
+    @multichoice.destroy
+    respond_to do |format|
+      format.html
+      format.json { head :ok }
     end
   end
 
