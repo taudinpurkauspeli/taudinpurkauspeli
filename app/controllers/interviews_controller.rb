@@ -4,7 +4,7 @@ class InterviewsController < ApplicationController
 
 	before_action :ensure_user_is_logged_in
 	before_action :ensure_user_is_admin, except: [:ask_question, :check_answers]
-	before_action :set_interview, only: [:edit, :update, :ask_question, :check_answers]
+	before_action :set_interview, only: [:edit, :update, :ask_question, :check_answers, :destroy]
 	before_action :set_current_user, only: [:ask_question, :check_answers]
 
 	def new
@@ -66,9 +66,11 @@ class InterviewsController < ApplicationController
 		respond_to do |format|
 			if @interview.update(interview_params)
 				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Pohdinta päivitettiin onnistuneesti!' }
+				format.json { head :ok }
 			else
 				@new_question = Question.new
 				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), alert: 'Pohdinnan päivitys epäonnistui!' }
+				format.json { head :internal_server_error }
 			end
 		end
 	end
@@ -82,6 +84,17 @@ class InterviewsController < ApplicationController
 			else
 				format.html { redirect_to exercise_path(current_exercise, :layout => get_layout, :last_clicked_question_id => question_params[:question_id]) }
 			end
+		end
+	end
+
+	# DELETE /interviews/1
+	# DELETE /interviews/1.json
+	def destroy
+		@interview.subtask.update_levels_before_deleting
+		@interview.destroy
+		respond_to do |format|
+			format.html
+			format.json { head :ok }
 		end
 	end
 
@@ -111,6 +124,6 @@ class InterviewsController < ApplicationController
 	end
 
 	def interview_params
-		params.require(:interview).permit(:title)
+		params.require(:interview).permit(:title, :task_id)
 	end
 end

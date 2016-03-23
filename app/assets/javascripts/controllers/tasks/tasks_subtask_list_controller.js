@@ -37,7 +37,8 @@ app.controller("TasksSubtaskListController", [
             } else if(subtask.multichoice){
                 $scope.editMultichoice(subtask.multichoice);
 
-
+            } else if(subtask.interview){
+                $scope.editInterview(subtask.interview);
             }
         };
 

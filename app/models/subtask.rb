@@ -5,7 +5,7 @@ class Subtask < ActiveRecord::Base
 
   has_one :task_text
   has_one :multichoice
-  has_one :interview, dependent: :destroy
+  has_one :interview
   has_one :conclusion, dependent: :destroy
 
 
