@@ -1,7 +1,7 @@
 class Interview < ActiveRecord::Base
 	validates :title, presence: true
 
-	belongs_to :subtask
+	belongs_to :subtask, dependent: :destroy
 	has_many :questions, dependent: :destroy
 	has_many :question_groups, through: :questions
 

@@ -1,0 +1,45 @@
+<div class = "row">
+    <div class = "col-md-8">
+        <h3>Kysymykset</h3>
+    </div>
+</div>
+<div class = "separator"></div>
+<br/>
+
+<div class="questions-list" ng-repeat="answer_type in answer_types">
+    <div class="dropzone">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    {{answer_type.name_fi}}
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="itemlist">
+                    <ul dnd-list="[]"
+                        class="list-unstyled"
+                        dnd-drop="moveQuestionToNewType(item, answer_type.name_en)"
+                        dnd-allowed-types="answer_type.allowed_types">
+
+                        <li ng-repeat="question in questions[answer_type.name_en]"
+                            dnd-draggable="question"
+                            dnd-type="answer_type.name_en"
+                            dnd-selected="updateQuestion(question)"
+                            dnd-effect-allowed="move">
+                            {{question.title}}
+                        </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<button class="btn btn-default btn-save btn-new-task" ng-click="createQuestion(interview)">+ Luo uusi kysymys</button>
+
+

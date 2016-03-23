@@ -1,0 +1,44 @@
+<div class="modal-header">
+    <h3 class="modal-title">Uusi toimenpide</h3>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12">
+            <form novalidate name="createTaskForm">
+                <div class="form-group has-feedback"
+                     ng-class="{
+'has-error': createTaskForm.name.$invalid && createTaskForm.name.$dirty,
+'has-success': createTaskForm.name.$valid && createTaskForm.name.$touched
+}">
+                    <label for="name">Toimenpiteen nimi</label>
+                    <input type="text"
+                           class="form-control"
+                           required pattern=".{2,}"
+                           name="name"
+                           id="name"
+                           placeholder="Toimenpiteen nimi"
+                           ng-model="newTask.name">
+
+                    <p class="help-block" ng-messages="createTaskForm.name.$error" ng-if="!createTaskForm.name.$pristine">
+                        <span ng-message="required">Nimi on pakollinen</span>
+                        <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary"
+            type="button"
+            ng-click="createTask()"
+            ng-disabled="createTaskForm.$invalid || createTaskForm.$pristine">
+        Luo
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+</div>
+

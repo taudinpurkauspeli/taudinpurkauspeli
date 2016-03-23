@@ -3,9 +3,9 @@ class Subtask < ActiveRecord::Base
 
   belongs_to :task
 
-  has_one :task_text, dependent: :destroy
-  has_one :multichoice, dependent: :destroy
-  has_one :interview, dependent: :destroy
+  has_one :task_text
+  has_one :multichoice
+  has_one :interview
   has_one :conclusion, dependent: :destroy
 
 
@@ -40,8 +40,40 @@ class Subtask < ActiveRecord::Base
     else
       update(level:1)
     end
-
   end
+
+  def update_levels_before_deleting
+    unless task.nil?
+      current_level = level
+      other_subtasks = task.subtasks.where("level > ?", current_level)
+      unless other_subtasks.empty?
+        other_subtasks.each{ |current_subtask| current_subtask.update(level:(current_subtask.level - 1)) }
+      end
+    end
+  end
+
+  def move_down(new_level)
+    unless task.nil?
+      current_level = level
+      other_subtasks = task.subtasks.where("level > ? and level <= ?", current_level, new_level)
+      unless other_subtasks.empty?
+        other_subtasks.each{ |current_subtask| current_subtask.update(level:(current_subtask.level - 1)) }
+      end
+    end
+    update(level:new_level)
+  end
+
+  def move_up(new_level)
+    unless task.nil?
+      current_level = level
+      other_subtasks = task.subtasks.where("level < ? and level >= ?", current_level, new_level)
+      unless other_subtasks.empty?
+        other_subtasks.each{ |current_subtask| current_subtask.update(level:(current_subtask.level + 1)) }
+      end
+    end
+    update(level:new_level)
+  end
+
 
   def to_s
     full_sanitizer = Rails::Html::FullSanitizer.new

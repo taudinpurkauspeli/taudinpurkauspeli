@@ -1,0 +1,67 @@
+<div class = "row">
+    <div class = "col-md-8">
+    </div>
+    <div class = "col-md-4">
+        <button class="btn btn-default btn-exercise widthAuto floatRight" ng-click="returnToTask()">Palaa toimenpiteeseen</button>
+    </div>
+</div>
+
+<div class = "panel panel-default panel-grey widthAuto">
+    <div class = "panel-heading panel-heading-grey">
+        <div class="row">
+            <div class="col-md-8">
+                <h4>Monivalintakysymyksen muokkaus</h4>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-default btn-exercise btn-del widthAuto floatRight" ng-click="deleteMultichoice()">Poista monivalinta</button>
+            </div>
+        </div>
+    </div>
+    <div class = "panel-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <form novalidate name="updateMultichoiceForm">
+                    <div class="form-group has-feedback"
+                         ng-class="{
+'has-error': updateMultichoiceForm.question.$invalid && updateMultichoiceForm.question.$dirty,
+'has-success': updateMultichoiceForm.question.$valid && updateMultichoiceForm.question.$touched
+}">
+                        <label for="question">Kysymys</label>
+                        <input type="text"
+                               class="form-control"
+                               required
+                               name="question"
+                               id="question"
+                               placeholder="Kysymys"
+                               ng-model="multichoice.question">
+
+                        <p class="help-block" ng-messages="updateMultichoiceForm.question.$error" ng-if="!updateMultichoiceForm.question.$pristine">
+                            <span ng-message="required">Kysymys on pakollinen</span>
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="is_radio_button">Radiobutton?</label>
+                        <br/>
+                        <input type="checkbox"
+                               name="is_radio_button"
+                               id="is_radio_button"
+                               ng-model="multichoice.is_radio_button">
+                    </div>
+
+                    <button class="btn btn-primary"
+                            type="button"
+                            ng-click="updateMultichoice()"
+                            ng-disabled="updateMultichoiceForm.$invalid || updateMultichoiceForm.$pristine">
+                        Päivitä
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<multichoice-options></multichoice-options>

@@ -1,0 +1,69 @@
+<div class="modal-header">
+    <h3 class="modal-title">Vastausvaihtoehdon päivitys</h3>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12">
+            <form novalidate name="updateOptionForm">
+
+
+                <div class="form-group has-feedback"
+                     ng-class="{
+'has-error': updateOptionForm.content.$invalid && updateOptionForm.content.$dirty,
+'has-success': updateOptionForm.content.$valid && updateOptionForm.content.$touched
+}">
+                    <label for="content">Vaihtoehdon teksti</label>
+                    <input type="text"
+                           class="form-control"
+                           required
+                           name="content"
+                           id="content"
+                           placeholder="Vaihtoehdon teksti"
+                           ng-model="option.content">
+
+                    <p class="help-block" ng-messages="updateOptionForm.content.$error" ng-if="!updateOptionForm.content.$pristine">
+                        <span ng-message="required">Vaihtoehdon teksti on pakollinen</span>
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label for="explanation">Seliteteksti</label>
+                    <div text-angular="text-angular"
+                         ng-model="option.explanation"
+                         ng-if="option"
+                         placeholder="Seliteteksti"
+                         name="explanation"
+                         id="explanation"
+                         required
+                         ta-text-editor-class="form-content"
+                         ta-html-editor-class="form-content"
+                         ta-toolbar-button-class="btn btn-default btn-toolbar"
+                         ta-focussed-class="focussed">
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary"
+            type="button"
+            ng-click="updateOption()"
+            ng-disabled="updateOptionForm.$invalid || updateOptionForm.$pristine">
+        Päivitä
+    </button>
+
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+
+    <button class="btn btn-danger"
+            ng-click="deleteOption()">
+        Poista
+    </button>
+</div>
+
