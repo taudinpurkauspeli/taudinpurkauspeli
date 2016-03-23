@@ -49,8 +49,8 @@ class OptionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /task_texts/1
-  # PATCH/PUT /task_texts/1.json
+  # PATCH/PUT /options/1
+  # PATCH/PUT /options/1.json
   def update
     respond_to do |format|
       if @option.update(option_params)
