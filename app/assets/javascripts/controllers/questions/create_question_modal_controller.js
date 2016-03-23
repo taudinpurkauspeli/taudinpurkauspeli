@@ -8,7 +8,10 @@ app.controller("CreateQuestionModalController", [
             interview_id: interview.id,
             title: "",
             content: "",
-            required: "allowed"
+            required: "allowed",
+            question_group_attributes: {
+                title: ""
+            }
         };
 
         $scope.answer_types = [
@@ -19,9 +22,19 @@ app.controller("CreateQuestionModalController", [
 
         var Question = $resource('/questions_json_create.json');
 
+        var QuestionGroups = $resource('/question_groups.json');
+
+        $scope.setQuestionGroups = function() {
+            QuestionGroups.query(function(data) {
+                $scope.question_groups = data;
+            });
+        };
+
+        $scope.setQuestionGroups();
+
         $scope.createQuestion = function() {
             if ($scope.createQuestionForm.$valid) {
-                Question.save($scope.newQuestion,
+                Question.save({question: $scope.newQuestion},
                     function() {
                         $window.alert("Kysymyksen luominen onnistui!");
                         $uibModalInstance.close();

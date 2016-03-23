@@ -1,10 +1,21 @@
 class QuestionGroupsController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
   before_action :set_question_group, only: [:destroy]
 
-  # POST /hypothesis_group
-  # POST /hypothesis_group.json
+  def index
+    @question_groups = QuestionGroup.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @question_groups }
+    end
+  end
+
+  # POST /question_group
+  # POST /question_group.json
   def create
     @question_group = QuestionGroup.new(title: question_group_params[:title])
 
