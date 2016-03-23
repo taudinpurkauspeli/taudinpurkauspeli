@@ -6,6 +6,7 @@ app.controller("TasksShowController", [
 
         $scope.taskText = null;
         $scope.multichoice = null;
+        $scope.interview = null;
 
         var Task = $resource('/tasks/:taskId.json',
             { taskId: "@id"},
@@ -82,6 +83,26 @@ app.controller("TasksShowController", [
             });
         };
 
+        $scope.createInterview= function(task) {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'interviews/create_interview_modal.html',
+                controller: 'CreateInterviewModalController',
+                size: 'lg',
+                resolve: {
+                    task: task
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+                $scope.setCurrentTask();
+                $scope.editInterview(data);
+            }, function() {
+                $window.alert("Pohdinnan luominen peruttu.");
+            });
+        };
+
         $scope.editTaskText = function(task_text) {
             $scope.taskText = task_text;
         };
@@ -90,9 +111,14 @@ app.controller("TasksShowController", [
             $scope.multichoice = multichoice;
         };
 
+        $scope.editInterview= function(interview) {
+            $scope.interview = interview;
+        };
+
         $scope.returnToTask = function() {
             $scope.taskText = null;
             $scope.multichoice = null;
+            $scope.interview = null;
         };
 
 

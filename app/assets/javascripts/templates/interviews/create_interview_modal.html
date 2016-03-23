@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <h3 class="modal-title">Uusi pohdinta-alakohta</h3>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12">
+            <form novalidate name="createInterviewForm">
+                <div class="form-group has-feedback"
+                     ng-class="{
+'has-error': createInterviewForm.title.$invalid && createInterviewForm.title.$dirty,
+'has-success': createInterviewForm.title.$valid && createInterviewForm.title.$touched
+}">
+                    <label for="title">Otsikko</label>
+                    <input type="text"
+                           class="form-control"
+                           required
+                           name="title"
+                           id="title"
+                           placeholder="Otsikko"
+                           ng-model="newInterview.title">
+
+                    <p class="help-block" ng-messages="createInterviewForm.title.$error" ng-if="!createInterviewForm.title.$pristine">
+                        <span ng-message="required">Otsikko on pakollinen</span>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary"
+            type="button"
+            ng-click="createInterview()"
+            ng-disabled="createInterviewForm.$invalid || createInterviewForm.$pristine">
+        Luo
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+</div>
+

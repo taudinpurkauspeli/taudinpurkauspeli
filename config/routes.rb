@@ -86,6 +86,7 @@ Rails.application.routes.draw do
   post 'task_texts_json_create', to: 'task_texts#json_create'
   post 'multichoices_json_create', to: 'multichoices#json_create'
   post 'options_json_create', to: 'options#json_create'
+  post 'interviews_json_create', to: 'interviews#json_create'
 
   get 'exercise_hypotheses_only', to: 'exercise_hypotheses#only_exercise_hypotheses'
 end

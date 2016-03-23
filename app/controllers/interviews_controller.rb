@@ -1,4 +1,7 @@
 class InterviewsController < ApplicationController
+	protect_from_forgery
+	skip_before_action :verify_authenticity_token, if: :json_request?
+
 	before_action :ensure_user_is_logged_in
 	before_action :ensure_user_is_admin, except: [:ask_question, :check_answers]
 	before_action :set_interview, only: [:edit, :update, :ask_question, :check_answers]
@@ -36,6 +39,25 @@ class InterviewsController < ApplicationController
 				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Pohdinta lisättiin onnistuneesti!' }
 			else
 				format.html { redirect_to new_interview_path(:layout => get_layout), alert: 'Pohdinnan lisääminen epäonnistui!' }
+			end
+		end
+	end
+
+	def json_create
+		@task = Task.find(params[:task_id])
+
+		# This can be done for each different type of subtask in their respective controllers
+		subtask = @task.subtasks.build
+		@interview = subtask.build_interview(title:interview_params[:title])
+
+		respond_to do |format|
+			if @interview.save
+				subtask.save
+				format.html { redirect_to edit_interview_path(@interview.id, :layout => get_layout), notice: 'Pohdinta lisättiin onnistuneesti!' }
+				format.json { render json: @interview }
+			else
+				format.html { redirect_to new_interview_path(:layout => get_layout), alert: 'Pohdinnan lisääminen epäonnistui!' }
+				format.json { head :internal_server_error }
 			end
 		end
 	end
