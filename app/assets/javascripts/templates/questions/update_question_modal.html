@@ -8,6 +8,15 @@
         <div class="col-md-12">
             <form novalidate name="updateQuestionForm">
 
+                <div class="form-group">
+                    <label for="question_group_title">Kysymysryhmä</label>
+                    <input type="text"
+                           class="form-control"
+                           name="question_group_title"
+                           id="question_group_title"
+                           placeholder="Kysymysryhmä"
+                           ng-model="question.question_group.title">
+                </div>
 
                 <div class="form-group has-feedback"
                      ng-class="{
