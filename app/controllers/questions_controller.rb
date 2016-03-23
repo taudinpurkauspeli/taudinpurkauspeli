@@ -59,6 +59,7 @@ class QuestionsController < ApplicationController
     @question.destroy
     respond_to do |format|
       format.html { redirect_to edit_interview_path(parent_id, :layout => get_layout), notice: 'Kysymyksen poisto onnistui!' }
+      format.json { head :ok }
     end
   end
 

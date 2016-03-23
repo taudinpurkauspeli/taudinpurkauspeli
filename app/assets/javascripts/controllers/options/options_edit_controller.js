@@ -33,7 +33,7 @@ app.controller("OptionsEditController", [
 
         $scope.setOptions();
 
-        $scope.moveOptionToNewType = function(option, newType){
+        $scope.moveOptionToNewType = function(option, newType) {
 
             option.is_correct_answer = newType;
 
@@ -44,7 +44,7 @@ app.controller("OptionsEditController", [
             });
         };
 
-        $scope.createOption = function(multichoice){
+        $scope.createOption = function(multichoice) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -64,7 +64,7 @@ app.controller("OptionsEditController", [
 
         };
 
-        $scope.updateOption = function(option){
+        $scope.updateOption = function(option) {
 
             var modalInstance = $uibModal.open({
                 animation: true,

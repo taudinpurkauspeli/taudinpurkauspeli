@@ -33,7 +33,7 @@ app.controller("QuestionsEditController", [
 
         $scope.setQuestions();
 
-        $scope.moveQuestionToNewType = function(question, newType){
+        $scope.moveQuestionToNewType = function(question, newType) {
 
             question.required = newType;
 
@@ -44,7 +44,7 @@ app.controller("QuestionsEditController", [
             });
         };
 
-        $scope.createQuestion = function(interview){
+        $scope.createQuestion = function(interview) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -63,26 +63,26 @@ app.controller("QuestionsEditController", [
             });
 
         };
-        /*
-        $scope.updateOption = function(option){
+
+        $scope.updateQuestion = function(question) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'options/update_option_modal.html',
-                controller: 'UpdateOptionModalController',
+                templateUrl: 'questions/update_question_modal.html',
+                controller: 'UpdateQuestionModalController',
                 size: 'lg',
                 resolve: {
-                    option: option
+                    question: question
                 }
             });
 
             modalInstance.result.then(function() {
-                $scope.setOptions();
+                $scope.setQuestions();
             }, function() {
-                $window.alert("Vastausvaihtoehdon muokkaaminen peruttu.");
+                $window.alert("Kysymyksen muokkaaminen peruttu.");
             });
 
-        };*/
+        };
 
     }
 ]);
