@@ -28,6 +28,20 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def json_create
+    @question = Question.new(question_params)
+
+    respond_to do |format|
+      if @question.save
+        format.html { redirect_to edit_interview_path(@question.interview.id, :layout => get_layout), notice: 'Kysymys lisättiin onnistuneesti.' }
+        format.json { head :ok }
+      else
+        format.html { redirect_to edit_interview_path(Interview.find(question_params[:interview_id]), :layout => get_layout), alert: 'Kysymyksen tiedot puuttelliset.' }
+        format.json { head :internal_server_error }
+      end
+    end
+  end
+
   def update
     respond_to do |format|
       if @question.update(question_params)

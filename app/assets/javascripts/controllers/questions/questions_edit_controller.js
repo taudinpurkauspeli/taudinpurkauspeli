@@ -43,27 +43,27 @@ app.controller("QuestionsEditController", [
                 $window.alert("Kysymyksen päivitys epäonnistui!");
             });
         };
-/*
-        $scope.createOption = function(multichoice){
+
+        $scope.createQuestion = function(interview){
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'options/create_option_modal.html',
-                controller: 'CreateOptionModalController',
+                templateUrl: 'questions/create_question_modal.html',
+                controller: 'CreateQuestionModalController',
                 size: 'lg',
                 resolve: {
-                    multichoice: multichoice
+                    interview: interview
                 }
             });
 
             modalInstance.result.then(function() {
-                $scope.setOptions();
+                $scope.setQuestions();
             }, function() {
-                $window.alert("Vastausvaihtoehdon luominen peruttu.");
+                $window.alert("Kysymyksen luominen peruttu.");
             });
 
         };
-
+        /*
         $scope.updateOption = function(option){
 
             var modalInstance = $uibModal.open({

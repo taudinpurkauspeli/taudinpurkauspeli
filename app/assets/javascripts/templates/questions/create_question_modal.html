@@ -1,48 +1,48 @@
 <div class="modal-header">
-    <h3 class="modal-title">Uusi vastausvaihtoehto</h3>
+    <h3 class="modal-title">Uusi kysymys</h3>
 </div>
 
 <div class="modal-body">
 
     <div class="row">
         <div class="col-md-12">
-            <form novalidate name="createOptionForm">
+            <form novalidate name="createQuestionForm">
 
-                <select name="is_correct_answer"
+                <select name="required"
                         class="form-control"
-                        id="is_correct_answer"
-                        ng-model="newOption.is_correct_answer"
+                        id="required"
+                        ng-model="newQuestion.required"
                         ng-options="answer_type.name_en as answer_type.name_fi for answer_type in answer_types">
                 </select>
 
                 <br/>
                 <div class="form-group has-feedback"
                      ng-class="{
-'has-error': createOptionForm.content.$invalid && createOptionForm.content.$dirty,
-'has-success': createOptionForm.content.$valid && createOptionForm.content.$touched
+'has-error': createQuestionForm.title.$invalid && createQuestionForm.title.$dirty,
+'has-success': createQuestionForm.title.$valid && createQuestionForm.title.$touched
 }">
-                    <label for="content">Vaihtoehdon teksti</label>
+                    <label for="title">Kysymyksen teksti</label>
                     <input type="text"
                            class="form-control"
                            required
-                           name="content"
-                           id="content"
-                           placeholder="Vaihtoehdon teksti"
-                           ng-model="newOption.content">
+                           name="title"
+                           id="title"
+                           placeholder="Kysymyksen teksti"
+                           ng-model="newQuestion.title">
 
-                    <p class="help-block" ng-messages="createOptionForm.content.$error" ng-if="!createOptionForm.content.$pristine">
-                        <span ng-message="required">Vaihtoehdon teksti on pakollinen</span>
+                    <p class="help-block" ng-messages="createQuestionForm.title.$error" ng-if="!createQuestionForm.title.$pristine">
+                        <span ng-message="required">Kysymys on pakollinen</span>
                     </p>
                 </div>
 
                 <div class="form-group">
-                    <label for="newExplanation">Seliteteksti</label>
+                    <label for="newContent">Seliteteksti</label>
                     <div text-angular="text-angular"
-                         ng-model="newOption.explanation"
-                         ng-if="newOption"
+                         ng-model="newQuestion.content"
+                         ng-if="newQuestion"
                          placeholder="Seliteteksti"
-                         name="newExplanation"
-                         id="newExplanation"
+                         name="newContent"
+                         id="newContent"
                          required
                          ta-text-editor-class="form-content"
                          ta-html-editor-class="form-content"
@@ -61,8 +61,8 @@
 <div class="modal-footer">
     <button class="btn btn-primary"
             type="button"
-            ng-click="createOption()"
-            ng-disabled="createOptionForm.$invalid || createOptionForm.$pristine">
+            ng-click="createQuestion()"
+            ng-disabled="createQuestionForm.$invalid || createQuestionForm.$pristine">
         Luo
     </button>
     <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
