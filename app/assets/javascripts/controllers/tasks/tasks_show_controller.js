@@ -16,12 +16,12 @@ app.controller("TasksShowController", [
             { taskTextId: "@id"},
             { update: { method: 'PUT' }});
 
-        $scope.updateTask = function(){
-            if ($scope.updateTaskForm.$valid) {
+        $scope.updateTask = function(updateTaskForm){
+            if (updateTaskForm.$valid) {
                 Task.update({taskId: $scope.taskForShow.id}, $scope.taskForShow, function() {
                     $window.alert("Toimenpiteen päivitys onnistui!");
-                    $scope.updateTaskForm.$setPristine();
-                    $scope.updateTaskForm.$setUntouched();
+                    updateTaskForm.$setPristine();
+                    updateTaskForm.$setUntouched();
                     $scope.updateTasksList();
                 }, function() {
                     $window.alert("Toimenpiteen päivitys epäonnistui!");

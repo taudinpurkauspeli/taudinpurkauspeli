@@ -14,8 +14,18 @@
                         ng-model="newQuestion.required"
                         ng-options="answer_type.name_en as answer_type.name_fi for answer_type in answer_types">
                 </select>
-
                 <br/>
+
+                <div class="form-group">
+                    <label for="question_group_title">Kysymysryhmä</label>
+                    <input type="text"
+                           class="form-control"
+                           name="question_group_title"
+                           id="question_group_title"
+                           placeholder="Kysymysryhmä"
+                           ng-model="newQuestion.question_group_attributes.title">
+                </div>
+
                 <div class="form-group has-feedback"
                      ng-class="{
 'has-error': createQuestionForm.title.$invalid && createQuestionForm.title.$dirty,

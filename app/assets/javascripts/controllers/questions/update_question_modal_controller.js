@@ -12,7 +12,13 @@ app.controller("UpdateQuestionModalController", [
 
         $scope.updateQuestion = function() {
             if ($scope.updateQuestionForm.$valid) {
-                Question.update({questionId: $scope.question.id}, $scope.question, function() {
+                if($scope.question.question_group) {
+                    $scope.question.question_group_attributes = {
+                        title: $scope.question.question_group.title,
+                        id: $scope.question.question_group.id
+                    };
+                }
+                Question.update({questionId: $scope.question.id}, {question: $scope.question}, function() {
                     $window.alert("Kysymyksen päivitys onnistui!");
                     $uibModalInstance.close();
                 }, function() {
