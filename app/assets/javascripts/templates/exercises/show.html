@@ -1,28 +1,44 @@
 <br />
 
 <ul class="nav nav-tabs">
-    <li ng-repeat="link in links"
-        id={{link.tabName}}
-        ng-show={{link.visibility}}
-        role="presentation"
+    <!--    <li ng-repeat="link in links"
+            id={{link.tabName}}
+            ng-show={{link.visibility}}
+            role="presentation"
+            class="tabLink exerciseTabLink" >
+            <a ng-click='changeCurrentTab(link.tabId, link.tabName)'>
+                {{link.title}}
+            </a>
+        </li>
+        <li id="CurrentTaskTab"
+            role="presentation"
+            ng-if="current_task"
+            class="tabLink exerciseTabLink" >
+            <a ng-click='changeCurrentTab("4", "CurrentTaskTab")'>
+                {{taskForShow.name}}
+                <span ng-click="removeCurrentTask()">X</span>
+            </a>
+        </li>-->
+
+    <li role="presentation"
         class="tabLink exerciseTabLink" >
-        <a ng-click='changeCurrentTab(link.tabId, link.tabName)'>
-            {{link.title}}
-        </a>
+        <a ui-sref="exercises_show.anamnesis" >Anamneesi</a>
     </li>
-    <li id="CurrentTaskTab"
-        role="presentation"
-        ng-if="current_task"
+    <li role="presentation"
         class="tabLink exerciseTabLink" >
-        <a ng-click='changeCurrentTab("4", "CurrentTaskTab")'>
-            {{taskForShow.name}}
-            <span ng-click="removeCurrentTask()">X</span>
-        </a>
+        <a ui-sref="exercises_show.tasks" >Toimenpidelista</a>
     </li>
+    <li role="presentation"
+        class="tabLink exerciseTabLink" >
+        <a ui-sref="exercises_show.hypotheses" >Diffilista</a>
+    </li>
+
 </ul>
 
 <br/>
 
-<div ng-repeat="view in views" ui-view={{view.viewName}} ng-show='current_tab === view.tabId' ng-if=view.visibility></div>
+<div ui-view></div>
 
-<current-task ng-if='current_task && current_tab === "4"'></current-task>
+
+<!--
+<current-task ng-if='current_task && current_tab === "4"'></current-task>-->

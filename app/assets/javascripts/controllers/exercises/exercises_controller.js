@@ -23,7 +23,7 @@ app.controller("ExercisesController", [
         $scope.updateExercisesList();
 
         $scope.viewExercise = function(exercise) {
-            $state.go('exercises_show', {id: exercise.id});
+            $state.go('exercises_show.anamnesis', {id: exercise.id});
         };
 
         $scope.removeExercise = function(exercise) {

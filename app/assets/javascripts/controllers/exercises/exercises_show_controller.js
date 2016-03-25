@@ -7,18 +7,6 @@ app.controller("ExercisesShowController", [
         $scope.taskForShow = {};
         $scope.tasksList = [];
 
-        $scope.views = [
-            {viewName: "anamnesis_tab",
-                tabId: "1",
-                visibility: true},
-            {viewName: "task_list",
-                tabId: "2",
-                visibility: true},
-            {viewName: "exercise_hypothesis_list",
-                tabId: "3",
-                visibility: true}
-        ];
-
         $scope.links = [
             {tabName: "AnamnesisTab",
                 tabId: "1",
@@ -39,16 +27,11 @@ app.controller("ExercisesShowController", [
             { exerciseId: "@id"});
         var TaskOne = $resource('/tasks_one/:taskId.json',
             { taskId: "@id"});
-        var TasksByLevel = $resource('/tasks_all_by_level.json');
 
         $scope.setExercise = function() {
             ExerciseOne.get({exerciseId : exerciseId}, function(data) {
                 $scope.exercise = data;
             });
-        };
-
-        $scope.setCurrentTab = function() {
-            $scope.current_tab = LocalStorageService.get("current_tab", "1");
         };
 
         $scope.setCurrentTask = function() {
@@ -62,36 +45,19 @@ app.controller("ExercisesShowController", [
             }
         };
 
-        $scope.setCurrentTab();
+
         $scope.setExercise();
         $scope.setCurrentTask();
-
-        $scope.changeCurrentTab = function(newTab, tabID) {
-            $scope.current_tab = newTab;
-            LocalStorageService.set("current_tab", newTab);
-
-            if (tabID != undefined){
-                $(".exerciseTabLink").removeClass("active");
-                $("#" + tabID).addClass("active");
-            }
-        };
 
         $scope.changeCurrentTask = function(newTask) {
             LocalStorageService.set("current_task", newTask);
             $scope.setCurrentTask();
-            $scope.changeCurrentTab("4", "CurrentTaskTab");
         };
 
         $scope.removeCurrentTask = function() {
             LocalStorageService.remove("current_task");
             $scope.setCurrentTask();
-            $scope.changeCurrentTab("2", "TaskTab");
         };
 
-        $scope.updateTasksList = function() {
-            TasksByLevel.query({"exercise_id": $stateParams.id}, function(data) {
-                $scope.tasksList = data;
-            });
-        };
     }
 ]);

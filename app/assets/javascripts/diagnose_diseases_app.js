@@ -34,34 +34,31 @@ app.config([
             templateUrl: "users/new.html"
         }).state("exercises_show",{
             url: "/exercises/:id",
-            views: {
-                "@": {
-                    controller: "ExercisesShowController",
-                    templateUrl: "exercises/show.html",
-                    resolve: {
-                        auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
-                            var userAdmin = AuthenticationService.isAdmin();
+            abstract: true,
+            controller: "ExercisesShowController",
+            templateUrl: "exercises/show.html",
+            resolve: {
+                auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                    var userAdmin = AuthenticationService.isAdmin();
 
-                            if (!userAdmin) {
-                                return $q.reject({ authenticated: false });
-                            }
-                        }]
+                    if (!userAdmin) {
+                        return $q.reject({ authenticated: false });
                     }
-                },
-                "exercise_hypothesis_list@exercises_show": {
-                    templateUrl: "exercises/exercise_hypotheses_list_teacher.html",
-                    controller: "ExerciseHypothesesController"
-                },
-                "task_list@exercises_show": {
-                    templateUrl: "exercises/tasks_list_teacher.html",
-                    controller: "TasksController"
-                },
-                "anamnesis_tab@exercises_show": {
-                    templateUrl: "exercises/anamnesis_teacher.html",
-                    controller: "ExercisesAnamnesisController"
-                }
+                }]
             }
+        }).state("exercises_show.anamnesis", {
+            url: "/anamnesis",
+            templateUrl: "exercises/anamnesis_teacher.html",
+            controller: "ExercisesAnamnesisController"
 
+        }).state("exercises_show.tasks", {
+            url: "/tasks",
+            templateUrl: "exercises/tasks_list_teacher.html",
+            controller: "TasksController"
+        }).state("exercises_show.hypotheses", {
+            url: "/hypotheses",
+            templateUrl: "exercises/exercise_hypotheses_list_teacher.html",
+            controller: "ExerciseHypothesesController"
         }).state("exercises_new", {
             url: "/exercises_new",
             controller: "ExercisesNewController",
