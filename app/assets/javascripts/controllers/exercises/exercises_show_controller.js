@@ -1,11 +1,10 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesShowController", [
-    "$scope", "$stateParams", "$resource", "LocalStorageService",
-    function($scope, $stateParams, $resource, LocalStorageService) {
+    "$scope", "$stateParams", "$resource", "LocalStorageService", "$state",
+    function($scope, $stateParams, $resource, LocalStorageService, $state) {
         $scope.exercise = {};
         $scope.taskForShow = {};
-        $scope.tasksList = [];
 
         $scope.links = [
             {tabName: "AnamnesisTab",
@@ -22,7 +21,7 @@ app.controller("ExercisesShowController", [
                 visibility: true}
         ];
 
-        var exerciseId = $stateParams.id;
+        var exerciseId = $stateParams.exerciseShowId;
         var ExerciseOne = $resource('/exercises_one/:exerciseId.json',
             { exerciseId: "@id"});
         var TaskOne = $resource('/tasks_one/:taskId.json',
@@ -45,13 +44,13 @@ app.controller("ExercisesShowController", [
             }
         };
 
-
         $scope.setExercise();
         $scope.setCurrentTask();
 
         $scope.changeCurrentTask = function(newTask) {
             LocalStorageService.set("current_task", newTask);
             $scope.setCurrentTask();
+            $state.go("exercises_show.current_task.show", {taskShowId: newTask});
         };
 
         $scope.removeCurrentTask = function() {

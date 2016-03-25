@@ -33,7 +33,7 @@ app.config([
             controller: "UsersNewController",
             templateUrl: "users/new.html"
         }).state("exercises_show",{
-            url: "/exercises/:id",
+            url: "/exercises/:exerciseShowId",
             abstract: true,
             controller: "ExercisesShowController",
             templateUrl: "exercises/show.html",
@@ -59,6 +59,14 @@ app.config([
             url: "/hypotheses",
             templateUrl: "exercises/exercise_hypotheses_list_teacher.html",
             controller: "ExerciseHypothesesController"
+        }).state("exercises_show.current_task", {
+            url: "/task/:taskShowId",
+            abstract:true,
+            template: "<ui-view/>"
+        }).state("exercises_show.current_task.show", {
+            url: "/show",
+            templateUrl: "tasks/show.html",
+            controller: "TasksShowController"
         }).state("exercises_new", {
             url: "/exercises_new",
             controller: "ExercisesNewController",

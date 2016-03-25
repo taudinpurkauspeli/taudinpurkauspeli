@@ -4,6 +4,8 @@ app.controller("TasksController", [
     "$scope", "$stateParams", "$resource", "$uibModal", "$window",
     function($scope, $stateParams, $resource, $uibModal, $window) {
 
+        $scope.tasksList = [];
+
         var TaskMoveUp = $resource('/tasks/:id/move_up.json',
             {id: "@id"});
 
@@ -19,7 +21,7 @@ app.controller("TasksController", [
         var TasksByLevel = $resource('/tasks_all_by_level.json');
 
         $scope.updateTasksList = function() {
-            TasksByLevel.query({"exercise_id": $stateParams.id}, function(data) {
+            TasksByLevel.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.tasksList = data;
             });
         };
@@ -70,7 +72,7 @@ app.controller("TasksController", [
 
             modalInstance.result.then(function(data) {
                 $scope.updateTasksList();
-           //     $scope.changeCurrentTask(data.id);
+                $scope.changeCurrentTask(data.id);
             }, function() {
                 $window.alert("Toimenpiteen luominen peruttu.");
             });

@@ -22,7 +22,6 @@ app.controller("TasksShowController", [
                     $window.alert("Toimenpiteen päivitys onnistui!");
                     updateTaskForm.$setPristine();
                     updateTaskForm.$setUntouched();
-                    $scope.updateTasksList();
                 }, function() {
                     $window.alert("Toimenpiteen päivitys epäonnistui!");
                 });
@@ -35,7 +34,6 @@ app.controller("TasksShowController", [
             if (deleteConfirmation) {
                 Task.delete({taskId : $scope.taskForShow.id}, function() {
                     $window.alert("Toimenpiteen poistaminen onnistui!");
-                    $scope.updateTasksList();
                     $scope.removeCurrentTask();
                 });
             } else {

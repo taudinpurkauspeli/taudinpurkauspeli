@@ -10,15 +10,7 @@
                 {{link.title}}
             </a>
         </li>
-        <li id="CurrentTaskTab"
-            role="presentation"
-            ng-if="current_task"
-            class="tabLink exerciseTabLink" >
-            <a ng-click='changeCurrentTab("4", "CurrentTaskTab")'>
-                {{taskForShow.name}}
-                <span ng-click="removeCurrentTask()">X</span>
-            </a>
-        </li>-->
+-->
 
     <li role="presentation"
         class="tabLink exerciseTabLink" >
@@ -33,12 +25,15 @@
         <a ui-sref="exercises_show.hypotheses" >Diffilista</a>
     </li>
 
+    <li id="CurrentTaskTab"
+        role="presentation"
+        ng-if="current_task"
+        class="tabLink exerciseTabLink" >
+        <a ui-sref="exercises_show.current_task.show({taskShowId: current_task})" >{{taskForShow.name}} <span ui-sref="exercises_show.tasks" ng-click="removeCurrentTask()">X</span></a>
+    </li>
+
 </ul>
 
 <br/>
 
 <div ui-view></div>
-
-
-<!--
-<current-task ng-if='current_task && current_tab === "4"'></current-task>-->
