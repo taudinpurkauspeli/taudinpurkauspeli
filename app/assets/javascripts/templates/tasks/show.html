@@ -5,49 +5,15 @@
                 <div class = "panel-heading panel-heading-grey">
                     <div class = "row">
                         <div class = "col-md-6">
-                            <h4>Toimenpiteen {{taskForShow.name}} muokkaus</h4>
+                            <h4>Toimenpide {{taskForShow.name}}</h4>
                         </div>
                         <div class= "col-md-6">
+                            <button class="btn btn-default btn-save widthAuto floatRight margin-em" ng-click="updateTask(taskForShow)">Muokkaa</button>
                             <button class="btn btn-default btn-del widthAuto floatRight margin-em" ng-click="deleteTask()">Poista toimenpide</button>
-                            <button class="btn btn-default widthAuto floatRight margin-em">Esikatsele</button>
                         </div>
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form novalidate name="updateTaskForm">
-
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="form-group has-feedback"
-                                     ng-class="{
-'has-error': updateTaskForm.name.$invalid && updateTaskForm.name.$dirty,
-'has-success': updateTaskForm.name.$valid && updateTaskForm.name.$touched
-}">
-                                    <input type="text"
-                                           class="form-control"
-                                           required pattern=".{2,}"
-                                           name="name"
-                                           id="name"
-                                           placeholder="Toimenpiteen nimi"
-                                           ng-model="taskForShow.name">
-                                    <p class="help-block" ng-messages="updateTaskForm.name.$error">
-
-                                        <span ng-message="required">Nimi on pakollinen</span>
-                                        <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-default btn-save width100"
-                                        type="button"
-                                        ng-click="updateTask(updateTaskForm)"
-                                        ng-disabled="updateTaskForm.$invalid || updateTaskForm.$pristine">
-                                    Päivitä
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    <br>
                     <subtask-list></subtask-list>
                 </div>
             </div>

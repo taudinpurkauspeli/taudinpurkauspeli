@@ -23,16 +23,23 @@ app.controller("TasksShowController", [
 
         $scope.setTask();
 
-        $scope.updateTask = function(updateTaskForm){
-            if (updateTaskForm.$valid) {
-                Task.update({taskId: $scope.taskForShow.id}, $scope.taskForShow, function() {
-                    $window.alert("Toimenpiteen päivitys onnistui!");
-                    updateTaskForm.$setPristine();
-                    updateTaskForm.$setUntouched();
-                }, function() {
-                    $window.alert("Toimenpiteen päivitys epäonnistui!");
-                });
-            }
+        $scope.updateTask = function(task){
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'tasks/update_task_modal.html',
+                controller: 'UpdateTaskModalController',
+                size: 'lg',
+                resolve: {
+                    task: task
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+            }, function() {
+                $window.alert("Toimenpiteen päivitys peruttu.");
+            });
+
         };
 
         $scope.deleteTask = function() {
