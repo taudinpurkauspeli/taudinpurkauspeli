@@ -4,23 +4,7 @@ app.controller("TasksShowController", [
     "$scope", "$resource", "$window", "$uibModal", "$stateParams", "LocalStorageService", "$state",
     function($scope, $resource, $window, $uibModal, $stateParams, LocalStorageService, $state) {
 
-        var Task = $resource('/tasks/:taskId.json',
-            { taskId: "@id"},
-            { update: { method: 'PUT' }});
-
-        var TaskText = $resource('/task_texts/:taskTextId.json',
-            { taskTextId: "@id"},
-            { update: { method: 'PUT' }});
-
-        $scope.setTask = function() {
-            LocalStorageService.set("current_task", $stateParams.taskShowId);
-            $scope.setCurrentTask();
-        };
-
-        $scope.setTask();
-
         $scope.updateTask = function(task){
-
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'tasks/update_task_modal.html',

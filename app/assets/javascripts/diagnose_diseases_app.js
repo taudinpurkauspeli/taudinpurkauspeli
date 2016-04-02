@@ -67,6 +67,7 @@ app.config([
             }).state("exercises_show.current_task", {
                 url: "/task/:taskShowId",
                 abstract:true,
+                controller: "TasksCurrentTaskController",
                 template: "<ui-view/>"
             })
 
