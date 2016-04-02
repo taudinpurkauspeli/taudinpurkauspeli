@@ -1,8 +1,20 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("MultichoicesEditController", [
-    "$scope", "$resource", "$window", "$uibModal",
-    function($scope, $resource, $window, $uibModal) {
+app.controller("MultichoicesShowController", [
+    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "$state",
+    function($scope, $resource, $window, $uibModal, $stateParams, $state) {
+
+        var Multichoice = $resource('/multichoices/:multichoiceId.json',
+            { multichoiceId: "@id"},
+            { update: { method: 'PUT' }});
+
+        $scope.setMultichoice = function() {
+            Multichoice.get({multichoiceId : $stateParams.multichoiceShowId}, function(data) {
+                $scope.multichoice = data;
+            });
+        };
+
+        $scope.setMultichoice();
 
         $scope.updateMultichoice = function(multichoice) {
 
@@ -17,9 +29,8 @@ app.controller("MultichoicesEditController", [
             });
 
             modalInstance.result.then(function(data) {
-                $scope.setTask();
                 if(data.multichoiceRemoved){
-                    $scope.returnToTask();
+                    $state.go("exercises_show.current_task.show");
                 }
             }, function() {
                 $window.alert("Monivalinnan päivitys peruttu.");

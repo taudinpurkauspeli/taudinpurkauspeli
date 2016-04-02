@@ -121,15 +121,11 @@ app.controller("TasksShowController", [
         };
 
         $scope.editMultichoice= function(multichoice) {
-            $scope.multichoice = multichoice;
+            $state.go("exercises_show.current_task.multichoice", {multichoiceShowId: multichoice.id});
         };
 
         $scope.editInterview= function(interview) {
             $state.go("exercises_show.current_task.interview", {interviewShowId: interview.id});
-        };
-
-        $scope.returnToTask = function() {
-            $scope.multichoice = null;
         };
 
 
