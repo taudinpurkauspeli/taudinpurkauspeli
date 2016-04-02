@@ -8,17 +8,14 @@ app.controller("ExercisesShowController", [
 
         $scope.links = [
             {tabName: "AnamnesisTab",
-                tabId: "1",
-                title: "Anamneesi",
-                visibility: true},
+                tabState: "exercises_show.anamnesis",
+                title: "Anamneesi"},
             {tabName: "TaskTab",
-                tabId: "2",
-                title: "Toimenpidelista",
-                visibility: true},
+                tabState: "exercises_show.tasks",
+                title: "Toimenpidelista"},
             {tabName: "HypothesisTab",
-                tabId: "3",
-                title: "Diffilista",
-                visibility: true}
+                tabState: "exercises_show.hypotheses",
+                title: "Diffilista"}
         ];
 
         var exerciseId = $stateParams.exerciseShowId;
