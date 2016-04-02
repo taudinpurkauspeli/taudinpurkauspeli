@@ -14,7 +14,7 @@ app.controller("UpdateTaskModalController", [
             if ($scope.updateTaskForm.$valid) {
                 Task.update({taskId: $scope.task.id}, $scope.task, function() {
                     $window.alert("Toimenpiteen päivitys onnistui!");
-                    $uibModalInstance.close();
+                    $uibModalInstance.close({taskRemoved: false});
                 }, function() {
                     $window.alert("Toimenpiteen päivitys epäonnistui!");
                 });

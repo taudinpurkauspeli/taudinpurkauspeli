@@ -1,40 +1,30 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("InterviewsEditController", [
-    "$scope", "$resource", "$window",
-    function($scope, $resource, $window) {
+    "$scope", "$resource", "$window", "$uibModal",
+    function($scope, $resource, $window, $uibModal) {
 
-        var Interview = $resource('/interviews/:interviewId.json',
-            { interviewId: "@id"},
-            { update: { method: 'PUT' }});
+        $scope.updateInterview = function(interview) {
 
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'interviews/update_interview_modal.html',
+                controller: 'UpdateInterviewModalController',
+                size: 'lg',
+                resolve: {
+                    interview: interview
+                }
+            });
 
-        $scope.updateInterview = function() {
-            if ($scope.updateInterviewForm.$valid) {
-                Interview.update({interviewId: $scope.interview.id}, $scope.interview, function() {
-                    $window.alert("Pohdinnan päivitys onnistui!");
-                    $scope.setCurrentTask();
-                    $scope.updateInterviewForm.$setPristine();
-                    $scope.updateInterviewForm.$setUntouched();
-                }, function() {
-                    $window.alert("Pohdinnan päivitys epäonnistui!");
-                });
-            }
-        };
-
-        $scope.deleteInterview = function() {
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa pohdinta-alakohdan?");
-
-            if (deleteConfirmation) {
-                Interview.delete({interviewId : $scope.interview.id}, function() {
-                    $window.alert("Pohdinnan poistaminen onnistui!");
-                    $scope.setCurrentTask();
+            modalInstance.result.then(function(data) {
+                $scope.setTask();
+                if(data.interviewRemoved){
                     $scope.returnToTask();
-                });
+                }
+            }, function() {
+                $window.alert("Pohdinnan päivitys peruttu.");
+            });
 
-            } else {
-                $window.alert("Pohdintaa ei poistettu!");
-            }
         };
 
     }

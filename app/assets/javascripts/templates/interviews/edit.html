@@ -10,46 +10,11 @@
     <div class = "panel-heading panel-heading-grey">
         <div class="row">
             <div class="col-md-8">
-                <h4>Pohdinnan muokkaus</h4>
+                <h4>Pohdinta: {{interview.title}}</h4>
             </div>
             <div class="col-md-4">
-                <button class="btn btn-default btn-exercise btn-del widthAuto floatRight" ng-click="deleteInterview()">Poista pohdinta</button>
+                <button class="btn btn-default btn-exercise btn-save widthAuto floatRight" ng-click="updateInterview(interview)">Muokkaa</button>
             </div>
-        </div>
-    </div>
-    <div class = "panel-body">
-
-        <div class="row">
-            <div class="col-md-12">
-                <form novalidate name="updateInterviewForm">
-                    <div class="form-group has-feedback"
-                         ng-class="{
-'has-error': updateInterviewForm.title.$invalid && updateInterviewForm.title.$dirty,
-'has-success': updateInterviewForm.title.$valid && updateInterviewForm.title.$touched
-}">
-                        <label for="title">Otsikko</label>
-                        <input type="text"
-                               class="form-control"
-                               required
-                               name="title"
-                               id="title"
-                               placeholder="Otsikko"
-                               ng-model="interview.title">
-
-                        <p class="help-block" ng-messages="updateInterviewForm.title.$error" ng-if="!updateInterviewForm.title.$pristine">
-                            <span ng-message="required">Otsikko on pakollinen</span>
-                        </p>
-                    </div>
-
-                    <button class="btn btn-primary"
-                            type="button"
-                            ng-click="updateInterview()"
-                            ng-disabled="updateInterviewForm.$invalid || updateInterviewForm.$pristine">
-                        Päivitä
-                    </button>
-                </form>
-            </div>
-
         </div>
     </div>
 

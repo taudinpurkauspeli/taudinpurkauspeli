@@ -22,7 +22,7 @@ app.controller("MultichoicesEditController", [
                     $scope.returnToTask();
                 }
             }, function() {
-                $window.alert("Toimenpiteen päivitys peruttu.");
+                $window.alert("Monivalinnan päivitys peruttu.");
             });
 
         };
