@@ -1,8 +1,20 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("InterviewsEditController", [
-    "$scope", "$resource", "$window", "$uibModal",
-    function($scope, $resource, $window, $uibModal) {
+app.controller("InterviewsShowController", [
+    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "$state",
+    function($scope, $resource, $window, $uibModal, $stateParams, $state) {
+
+        var Interview = $resource('/interviews/:interviewId.json',
+            { interviewId: "@id"},
+            { update: { method: 'PUT' }});
+
+        $scope.setInterview = function() {
+            Interview.get({interviewId : $stateParams.interviewShowId}, function(data) {
+                $scope.interview = data;
+            });
+        };
+
+        $scope.setInterview();
 
         $scope.updateInterview = function(interview) {
 
@@ -17,9 +29,8 @@ app.controller("InterviewsEditController", [
             });
 
             modalInstance.result.then(function(data) {
-                $scope.setTask();
                 if(data.interviewRemoved){
-                    $scope.returnToTask();
+                    $state.go("exercises_show.current_task.show");
                 }
             }, function() {
                 $window.alert("Pohdinnan päivitys peruttu.");

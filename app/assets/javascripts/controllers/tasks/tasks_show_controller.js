@@ -4,10 +4,6 @@ app.controller("TasksShowController", [
     "$scope", "$resource", "$window", "$uibModal", "$stateParams", "LocalStorageService", "$state",
     function($scope, $resource, $window, $uibModal, $stateParams, LocalStorageService, $state) {
 
-        $scope.taskText = null;
-        $scope.multichoice = null;
-        $scope.interview = null;
-
         var Task = $resource('/tasks/:taskId.json',
             { taskId: "@id"},
             { update: { method: 'PUT' }});
@@ -129,12 +125,11 @@ app.controller("TasksShowController", [
         };
 
         $scope.editInterview= function(interview) {
-            $scope.interview = interview;
+            $state.go("exercises_show.current_task.interview", {interviewShowId: interview.id});
         };
 
         $scope.returnToTask = function() {
             $scope.multichoice = null;
-            $scope.interview = null;
         };
 
 

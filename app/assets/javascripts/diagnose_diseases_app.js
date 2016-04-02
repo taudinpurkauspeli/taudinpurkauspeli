@@ -50,7 +50,6 @@ app.config([
             url: "/anamnesis",
             templateUrl: "exercises/anamnesis_teacher.html",
             controller: "ExercisesAnamnesisController"
-
         }).state("exercises_show.tasks", {
             url: "/tasks",
             templateUrl: "exercises/tasks_list_teacher.html",
@@ -67,6 +66,10 @@ app.config([
             url: "/show",
             templateUrl: "tasks/show.html",
             controller: "TasksShowController"
+        }).state("exercises_show.current_task.interview", {
+            url: "/interview/:interviewShowId",
+            templateUrl: "interviews/show.html",
+            controller: "InterviewsShowController"
         }).state("exercises_new", {
             url: "/exercises_new",
             controller: "ExercisesNewController",

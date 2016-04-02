@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("QuestionsEditController", [
-    "$scope", "$resource", "$window", "$uibModal",
-    function($scope, $resource, $window, $uibModal) {
+    "$scope", "$resource", "$window", "$uibModal", "$stateParams",
+    function($scope, $resource, $window, $uibModal, $stateParams) {
 
         $scope.answer_types = [{
             name_fi: "Pakolliset kysymykset",
@@ -26,7 +26,7 @@ app.controller("QuestionsEditController", [
             { update: { method: 'PUT' }});
 
         $scope.setQuestions = function() {
-            Questions.get({ interview_id : $scope.interview.id}, function(data) {
+            Questions.get({ interview_id : $stateParams.interviewShowId}, function(data) {
                 $scope.questions = data;
             });
         };

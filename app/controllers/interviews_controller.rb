@@ -4,7 +4,7 @@ class InterviewsController < ApplicationController
 
 	before_action :ensure_user_is_logged_in
 	before_action :ensure_user_is_admin, except: [:ask_question, :check_answers]
-	before_action :set_interview, only: [:edit, :update, :ask_question, :check_answers, :destroy]
+	before_action :set_interview, only: [:edit, :update, :ask_question, :check_answers, :destroy, :show]
 	before_action :set_current_user, only: [:ask_question, :check_answers]
 
 	def new
@@ -25,6 +25,13 @@ class InterviewsController < ApplicationController
 		set_view_layout
 	end
 
+	# GET /interviews/1
+	def show
+		respond_to do |format|
+			format.html
+			format.json { render json: @interview }
+		end
+	end
 
 	def create
 		@task = Task.find(session[:task_id])
