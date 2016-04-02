@@ -1,40 +1,30 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("MultichoicesEditController", [
-    "$scope", "$resource", "$window",
-    function($scope, $resource, $window) {
+    "$scope", "$resource", "$window", "$uibModal",
+    function($scope, $resource, $window, $uibModal) {
 
-        var Multichoice = $resource('/multichoices/:multichoiceId.json',
-            { multichoiceId: "@id"},
-            { update: { method: 'PUT' }});
+        $scope.updateMultichoice = function(multichoice) {
 
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'multichoices/update_multichoice_modal.html',
+                controller: 'UpdateMultichoiceModalController',
+                size: 'lg',
+                resolve: {
+                    multichoice: multichoice
+                }
+            });
 
-        $scope.updateMultichoice = function() {
-            if ($scope.updateMultichoiceForm.$valid) {
-                Multichoice.update({multichoiceId: $scope.multichoice.id}, $scope.multichoice, function() {
-                    $window.alert("Monivalinnan päivitys onnistui!");
-                    $scope.setCurrentTask();
-                    $scope.updateMultichoiceForm.$setPristine();
-                    $scope.updateMultichoiceForm.$setUntouched();
-                }, function() {
-                    $window.alert("Monivalinnan päivitys epäonnistui!");
-                });
-            }
-        };
-
-        $scope.deleteMultichoice = function() {
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa monivalinta-alakohdan?");
-
-            if (deleteConfirmation) {
-                Multichoice.delete({multichoiceId : $scope.multichoice.id}, function() {
-                    $window.alert("Monivalinnan poistaminen onnistui!");
-                    $scope.setCurrentTask();
+            modalInstance.result.then(function(data) {
+                $scope.setTask();
+                if(data.multichoiceRemoved){
                     $scope.returnToTask();
-                });
+                }
+            }, function() {
+                $window.alert("Toimenpiteen päivitys peruttu.");
+            });
 
-            } else {
-                $window.alert("Monivalintaa ei poistettu!");
-            }
         };
 
     }
