@@ -39,6 +39,13 @@
             ng-disabled="updateTaskForm.$invalid || updateTaskForm.$pristine">
         Päivitä
     </button>
+
     <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+
+
+    <button class="btn btn-danger"
+            ng-click="deleteTask()">
+        Poista toimenpide
+    </button>
 </div>
 

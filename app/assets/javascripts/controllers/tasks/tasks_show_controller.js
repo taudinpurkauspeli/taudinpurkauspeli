@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("TasksShowController", [
-    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "LocalStorageService",
-    function($scope, $resource, $window, $uibModal, $stateParams, LocalStorageService) {
+    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "LocalStorageService", "$state",
+    function($scope, $resource, $window, $uibModal, $stateParams, LocalStorageService, $state) {
 
         $scope.taskText = null;
         $scope.multichoice = null;
@@ -36,23 +36,14 @@ app.controller("TasksShowController", [
             });
 
             modalInstance.result.then(function(data) {
+                if(data.taskRemoved){
+                    $scope.removeCurrentTask();
+                    $state.go("exercises_show.tasks");
+                }
             }, function() {
                 $window.alert("Toimenpiteen päivitys peruttu.");
             });
 
-        };
-
-        $scope.deleteTask = function() {
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa toimenpiteen ja kaikki sen alakohdat?");
-
-            if (deleteConfirmation) {
-                Task.delete({taskId : $scope.taskForShow.id}, function() {
-                    $window.alert("Toimenpiteen poistaminen onnistui!");
-                    $scope.removeCurrentTask();
-                });
-            } else {
-                $window.alert("Toimenpidettä '" + $scope.taskForShow.name + "' ei poistettu");
-            }
         };
 
         $scope.createTaskText = function(task) {

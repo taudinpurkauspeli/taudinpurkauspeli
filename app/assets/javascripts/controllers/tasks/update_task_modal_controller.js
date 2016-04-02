@@ -21,6 +21,19 @@ app.controller("UpdateTaskModalController", [
             }
         };
 
+        $scope.deleteTask = function() {
+            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa toimenpiteen ja kaikki sen alakohdat?");
+
+            if (deleteConfirmation) {
+                Task.delete({taskId : $scope.task.id}, function() {
+                    $window.alert("Toimenpiteen poistaminen onnistui!");
+                    $uibModalInstance.close({taskRemoved: true});
+                });
+            } else {
+                $window.alert("Toimenpidettä '" + $scope.task.name + "' ei poistettu");
+            }
+        };
+
         $scope.cancel = function() {
             $uibModalInstance.dismiss('cancel');
         };
