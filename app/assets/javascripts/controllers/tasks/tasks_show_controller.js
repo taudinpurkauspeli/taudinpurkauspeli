@@ -68,7 +68,7 @@ app.controller("TasksShowController", [
             });
 
             modalInstance.result.then(function(data) {
-                $scope.setCurrentTask();
+                $scope.setTask();
                 $scope.editTaskText(data);
             }, function() {
                 $window.alert("Tekstialakohdan luominen peruttu.");
@@ -115,8 +115,22 @@ app.controller("TasksShowController", [
             });
         };
 
-        $scope.editTaskText = function(task_text) {
-            $scope.taskText = task_text;
+        $scope.editTaskText = function(taskText) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'task_texts/update_task_text_modal.html',
+                controller: 'UpdateTaskTextModalController',
+                size: 'lg',
+                resolve: {
+                    taskText: taskText
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+                $scope.setTask();
+            }, function() {
+                $window.alert("Tekstialakohdan päivitys peruttu.");
+            });
         };
 
         $scope.editMultichoice= function(multichoice) {
@@ -128,7 +142,6 @@ app.controller("TasksShowController", [
         };
 
         $scope.returnToTask = function() {
-            $scope.taskText = null;
             $scope.multichoice = null;
             $scope.interview = null;
         };
