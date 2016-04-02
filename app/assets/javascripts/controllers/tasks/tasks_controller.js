@@ -72,7 +72,7 @@ app.controller("TasksController", [
 
             modalInstance.result.then(function(data) {
                 $scope.updateTasksList();
-                $scope.changeCurrentTask(data.id);
+                $scope.goToCurrentTask(data.id);
             }, function() {
                 $window.alert("Toimenpiteen luominen peruttu.");
             });

@@ -47,9 +47,7 @@ app.controller("ExercisesShowController", [
         $scope.setExercise();
         $scope.setCurrentTask();
 
-        $scope.changeCurrentTask = function(newTask) {
-            LocalStorageService.set("current_task", newTask);
-            $scope.setCurrentTask();
+        $scope.goToCurrentTask = function(newTask) {
             $state.go("exercises_show.current_task.show", {taskShowId: newTask});
         };
 

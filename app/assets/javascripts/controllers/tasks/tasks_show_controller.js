@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("TasksShowController", [
-    "$scope", "$resource", "$window", "$uibModal",
-    function($scope, $resource, $window, $uibModal) {
+    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "LocalStorageService",
+    function($scope, $resource, $window, $uibModal, $stateParams, LocalStorageService) {
 
         $scope.taskText = null;
         $scope.multichoice = null;
@@ -15,6 +15,13 @@ app.controller("TasksShowController", [
         var TaskText = $resource('/task_texts/:taskTextId.json',
             { taskTextId: "@id"},
             { update: { method: 'PUT' }});
+
+        $scope.setTask = function() {
+            LocalStorageService.set("current_task", $stateParams.taskShowId);
+            $scope.setCurrentTask();
+        };
+
+        $scope.setTask();
 
         $scope.updateTask = function(updateTaskForm){
             if (updateTaskForm.$valid) {
