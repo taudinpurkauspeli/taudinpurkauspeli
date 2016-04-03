@@ -25,6 +25,7 @@ app.controller("ExerciseHypothesesController", [
         };
 
         $scope.updateAllExerciseHypotheses();
+        $scope.setActiveTab("HypothesisTab");
 
         $scope.addToExercise = function(hypothesis) {
             var newExerciseHypothesis = {

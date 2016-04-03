@@ -1,17 +1,34 @@
 <br />
 
 <ul class="nav nav-tabs">
-    <li ng-repeat="link in links"
+<!--    <li ng-repeat="link in links"
         id={{link.tabName}}
         role="presentation"
-        class="tabLink exerciseTabLink" >
+        class="tabLink exerciseTabLink active" >
         <a ui-sref={{link.tabState}} >{{link.title}}</a>
+    </li>-->
+
+    <li id="AnamnesisTab"
+        role="presentation"
+        class="tabLink exerciseTabLink" >
+        <a ui-sref="exercises_show.anamnesis" >Anamneesi</a>
+    </li>
+
+    <li id="TaskTab"
+        role="presentation"
+        class="tabLink exerciseTabLink" >
+        <a ui-sref="exercises_show.tasks" >Toimenpidelista</a>
+    </li>
+    <li id="HypothesisTab"
+        role="presentation"
+        class="tabLink exerciseTabLink" >
+        <a ui-sref="exercises_show.hypotheses" >Diffilista</a>
     </li>
 
     <li id="CurrentTaskTab"
         role="presentation"
         ng-if="current_task"
-        class="tabLink exerciseTabLink" >
+        class="tabLink exerciseTabLink active" >
         <a ng-click="goToState(current_task_show_path)" >{{taskForShow.name}} <span ui-sref="exercises_show.tasks" ng-click="removeCurrentTask()">X</span></a>
     </li>
 

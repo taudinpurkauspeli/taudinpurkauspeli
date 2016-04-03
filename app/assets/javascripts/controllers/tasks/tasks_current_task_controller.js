@@ -25,6 +25,7 @@ app.controller("TasksCurrentTaskController", [
         };
 
         $scope.setTask();
+        $scope.setActiveTab("CurrentTaskTab");
 
     }
 ]);

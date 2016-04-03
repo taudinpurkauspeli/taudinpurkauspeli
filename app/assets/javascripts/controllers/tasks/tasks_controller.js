@@ -27,6 +27,7 @@ app.controller("TasksController", [
         };
 
         $scope.updateTasksList();
+        $scope.setActiveTab("TaskTab");
 
         $scope.moveTaskFromLevelToLevel = function(task, sourceLevel, destinationLevel) {
 

@@ -45,6 +45,13 @@ app.controller("ExercisesShowController", [
             $scope.current_task_show_path = LocalStorageService.getObject("current_task_show_path", '{"state": "", "parameters": "{}"}');
         };
 
+        $scope.setActiveTab = function(tabId){
+            if (tabId != undefined){
+                $(".exerciseTabLink").removeClass("active");
+                $("#" + tabId).addClass("active");
+            }
+        };
+
         $scope.setExercise();
         $scope.setCurrentTask();
         $scope.setCurrentTaskShowPath();
