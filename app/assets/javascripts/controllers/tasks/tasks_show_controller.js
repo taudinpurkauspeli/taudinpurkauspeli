@@ -4,6 +4,8 @@ app.controller("TasksShowController", [
     "$scope", "$resource", "$window", "$uibModal", "$stateParams", "LocalStorageService", "$state",
     function($scope, $resource, $window, $uibModal, $stateParams, LocalStorageService, $state) {
 
+        $scope.setTaskShowPath("exercises_show.current_task.show", {});
+
         $scope.updateTask = function(task){
             var modalInstance = $uibModal.open({
                 animation: true,

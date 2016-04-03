@@ -15,6 +15,7 @@ app.controller("InterviewsShowController", [
         };
 
         $scope.setInterview();
+        $scope.setTaskShowPath("exercises_show.current_task.interview", {interviewShowId: $stateParams.interviewShowId});
 
         $scope.updateInterview = function(interview) {
 

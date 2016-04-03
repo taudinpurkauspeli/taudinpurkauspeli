@@ -12,7 +12,7 @@
         role="presentation"
         ng-if="current_task"
         class="tabLink exerciseTabLink" >
-        <a ui-sref="exercises_show.current_task.show({taskShowId: current_task})" >{{taskForShow.name}} <span ui-sref="exercises_show.tasks" ng-click="removeCurrentTask()">X</span></a>
+        <a ng-click="goToState(current_task_show_path)" >{{taskForShow.name}} <span ui-sref="exercises_show.tasks" ng-click="removeCurrentTask()">X</span></a>
     </li>
 
 </ul>

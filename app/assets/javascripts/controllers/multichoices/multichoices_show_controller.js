@@ -15,6 +15,7 @@ app.controller("MultichoicesShowController", [
         };
 
         $scope.setMultichoice();
+        $scope.setTaskShowPath("exercises_show.current_task.multichoice", {multichoiceShowId:  $stateParams.multichoiceShowId});
 
         $scope.updateMultichoice = function(multichoice) {
 

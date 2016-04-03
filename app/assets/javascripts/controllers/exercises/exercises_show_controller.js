@@ -41,8 +41,17 @@ app.controller("ExercisesShowController", [
             }
         };
 
+        $scope.setCurrentTaskShowPath = function() {
+            $scope.current_task_show_path = LocalStorageService.getObject("current_task_show_path", '{"state": "", "parameters": "{}"}');
+        };
+
         $scope.setExercise();
         $scope.setCurrentTask();
+        $scope.setCurrentTaskShowPath();
+
+        $scope.goToState = function(newState){
+            $state.go(newState.state, newState.parameters);
+        };
 
         $scope.goToCurrentTask = function(newTask) {
             $state.go("exercises_show.current_task.show", {taskShowId: newTask});
