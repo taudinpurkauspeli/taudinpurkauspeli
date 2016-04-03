@@ -8,13 +8,13 @@ app.controller("ExerciseHypothesesController", [
         var ExerciseHypothesesOnly = $resource('/exercise_hypotheses_only.json');
 
         $scope.updateExerciseHypotheses = function() {
-            ExerciseHypotheses.get({"exercise_id": $stateParams.id}, function(data) {
+            ExerciseHypotheses.get({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.exerciseHypotheses = data;
             });
         };
 
         $scope.updateExerciseHypothesesOnly = function() {
-            ExerciseHypothesesOnly.query({"exercise_id": $stateParams.id}, function(data) {
+            ExerciseHypothesesOnly.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.exerciseHypothesesOnly = data;
             });
         };
@@ -25,10 +25,11 @@ app.controller("ExerciseHypothesesController", [
         };
 
         $scope.updateAllExerciseHypotheses();
+        $scope.setActiveTab("HypothesisTab");
 
         $scope.addToExercise = function(hypothesis) {
             var newExerciseHypothesis = {
-                exercise_id: $stateParams.id,
+                exercise_id: $stateParams.exerciseShowId,
                 hypothesis_id: hypothesis.id,
                 explanation: ""
             };

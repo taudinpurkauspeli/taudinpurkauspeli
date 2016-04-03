@@ -1,46 +1,31 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("TasksShowController", [
-    "$scope", "$resource", "$window", "$uibModal",
-    function($scope, $resource, $window, $uibModal) {
+    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "LocalStorageService", "$state",
+    function($scope, $resource, $window, $uibModal, $stateParams, LocalStorageService, $state) {
 
-        $scope.taskText = null;
-        $scope.multichoice = null;
-        $scope.interview = null;
+        $scope.setTaskShowPath("exercises_show.current_task.show", {});
 
-        var Task = $resource('/tasks/:taskId.json',
-            { taskId: "@id"},
-            { update: { method: 'PUT' }});
+        $scope.updateTask = function(task){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'tasks/update_task_modal.html',
+                controller: 'UpdateTaskModalController',
+                size: 'lg',
+                resolve: {
+                    task: task
+                }
+            });
 
-        var TaskText = $resource('/task_texts/:taskTextId.json',
-            { taskTextId: "@id"},
-            { update: { method: 'PUT' }});
-
-        $scope.updateTask = function(updateTaskForm){
-            if (updateTaskForm.$valid) {
-                Task.update({taskId: $scope.taskForShow.id}, $scope.taskForShow, function() {
-                    $window.alert("Toimenpiteen päivitys onnistui!");
-                    updateTaskForm.$setPristine();
-                    updateTaskForm.$setUntouched();
-                    $scope.updateTasksList();
-                }, function() {
-                    $window.alert("Toimenpiteen päivitys epäonnistui!");
-                });
-            }
-        };
-
-        $scope.deleteTask = function() {
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa toimenpiteen ja kaikki sen alakohdat?");
-
-            if (deleteConfirmation) {
-                Task.delete({taskId : $scope.taskForShow.id}, function() {
-                    $window.alert("Toimenpiteen poistaminen onnistui!");
-                    $scope.updateTasksList();
+            modalInstance.result.then(function(data) {
+                if(data.taskRemoved){
                     $scope.removeCurrentTask();
-                });
-            } else {
-                $window.alert("Toimenpidettä '" + $scope.taskForShow.name + "' ei poistettu");
-            }
+                    $state.go("exercises_show.tasks");
+                }
+            }, function() {
+                $window.alert("Toimenpiteen päivitys peruttu.");
+            });
+
         };
 
         $scope.createTaskText = function(task) {
@@ -56,7 +41,7 @@ app.controller("TasksShowController", [
             });
 
             modalInstance.result.then(function(data) {
-                $scope.setCurrentTask();
+                $scope.setTask();
                 $scope.editTaskText(data);
             }, function() {
                 $window.alert("Tekstialakohdan luominen peruttu.");
@@ -103,22 +88,30 @@ app.controller("TasksShowController", [
             });
         };
 
-        $scope.editTaskText = function(task_text) {
-            $scope.taskText = task_text;
+        $scope.editTaskText = function(taskText) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'task_texts/update_task_text_modal.html',
+                controller: 'UpdateTaskTextModalController',
+                size: 'lg',
+                resolve: {
+                    taskText: taskText
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+                $scope.setTask();
+            }, function() {
+                $window.alert("Tekstialakohdan päivitys peruttu.");
+            });
         };
 
         $scope.editMultichoice= function(multichoice) {
-            $scope.multichoice = multichoice;
+            $state.go("exercises_show.current_task.multichoice", {multichoiceShowId: multichoice.id});
         };
 
         $scope.editInterview= function(interview) {
-            $scope.interview = interview;
-        };
-
-        $scope.returnToTask = function() {
-            $scope.taskText = null;
-            $scope.multichoice = null;
-            $scope.interview = null;
+            $state.go("exercises_show.current_task.interview", {interviewShowId: interview.id});
         };
 
 

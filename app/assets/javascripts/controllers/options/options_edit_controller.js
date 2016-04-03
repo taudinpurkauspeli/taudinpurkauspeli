@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("OptionsEditController", [
-    "$scope", "$resource", "$window", "$uibModal",
-    function($scope, $resource, $window, $uibModal) {
+    "$scope", "$resource", "$window", "$uibModal", "$stateParams",
+    function($scope, $resource, $window, $uibModal, $stateParams) {
 
         $scope.answer_types = [{
             name_fi: "Pakolliset vaihtoehdot",
@@ -26,7 +26,7 @@ app.controller("OptionsEditController", [
             { update: { method: 'PUT' }});
 
         $scope.setOptions = function() {
-            Options.get({ multichoice_id : $scope.multichoice.id}, function(data) {
+            Options.get({ multichoice_id : $stateParams.multichoiceShowId}, function(data) {
                 $scope.options = data;
             });
         };

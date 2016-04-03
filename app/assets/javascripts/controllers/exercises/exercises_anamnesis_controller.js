@@ -3,6 +3,9 @@ var app = angular.module('diagnoseDiseases');
 app.controller("ExercisesAnamnesisController", [
     "$scope", "$uibModal", "$window",
     function($scope, $uibModal, $window) {
+
+        $scope.setActiveTab("AnamnesisTab");
+
         $scope.updateExercise = function() {
 
             var modalInstance = $uibModal.open({

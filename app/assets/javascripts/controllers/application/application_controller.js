@@ -5,8 +5,8 @@ app.controller("ApplicationController", [
     function($scope, AuthenticationService, LocalStorageService) {
 
         $scope.resetCurrentExercise = function(){
-            LocalStorageService.remove("current_tab");
             LocalStorageService.remove("current_task");
+            LocalStorageService.remove("current_task_show_path");
         };
 
         $scope.navigationLinksList = [

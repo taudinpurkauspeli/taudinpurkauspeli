@@ -1,21 +1,20 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("MultichoicesEditController", [
-    "$scope", "$resource", "$window",
-    function($scope, $resource, $window) {
+app.controller("UpdateMultichoiceModalController", [
+    '$scope', '$uibModalInstance', '$resource', '$window', "multichoice",
+    function($scope, $uibModalInstance, $resource, $window, multichoice) {
+
+        $scope.multichoice = multichoice;
 
         var Multichoice = $resource('/multichoices/:multichoiceId.json',
             { multichoiceId: "@id"},
             { update: { method: 'PUT' }});
 
-
         $scope.updateMultichoice = function() {
             if ($scope.updateMultichoiceForm.$valid) {
                 Multichoice.update({multichoiceId: $scope.multichoice.id}, $scope.multichoice, function() {
                     $window.alert("Monivalinnan päivitys onnistui!");
-                    $scope.setCurrentTask();
-                    $scope.updateMultichoiceForm.$setPristine();
-                    $scope.updateMultichoiceForm.$setUntouched();
+                    $uibModalInstance.close({multichoiceRemoved: false});
                 }, function() {
                     $window.alert("Monivalinnan päivitys epäonnistui!");
                 });
@@ -28,13 +27,15 @@ app.controller("MultichoicesEditController", [
             if (deleteConfirmation) {
                 Multichoice.delete({multichoiceId : $scope.multichoice.id}, function() {
                     $window.alert("Monivalinnan poistaminen onnistui!");
-                    $scope.setCurrentTask();
-                    $scope.returnToTask();
+                    $uibModalInstance.close({multichoiceRemoved: true});
                 });
-
             } else {
                 $window.alert("Monivalintaa ei poistettu!");
             }
+        };
+
+        $scope.cancel = function() {
+            $uibModalInstance.dismiss('cancel');
         };
 
     }

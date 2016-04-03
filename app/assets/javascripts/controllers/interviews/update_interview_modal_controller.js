@@ -1,21 +1,20 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("InterviewsEditController", [
-    "$scope", "$resource", "$window",
-    function($scope, $resource, $window) {
+app.controller("UpdateInterviewModalController", [
+    '$scope', '$uibModalInstance', '$resource', '$window', "interview",
+    function($scope, $uibModalInstance, $resource, $window, interview) {
+
+        $scope.interview = interview;
 
         var Interview = $resource('/interviews/:interviewId.json',
             { interviewId: "@id"},
             { update: { method: 'PUT' }});
 
-
         $scope.updateInterview = function() {
             if ($scope.updateInterviewForm.$valid) {
                 Interview.update({interviewId: $scope.interview.id}, $scope.interview, function() {
                     $window.alert("Pohdinnan päivitys onnistui!");
-                    $scope.setCurrentTask();
-                    $scope.updateInterviewForm.$setPristine();
-                    $scope.updateInterviewForm.$setUntouched();
+                    $uibModalInstance.close({interviewRemoved: false});
                 }, function() {
                     $window.alert("Pohdinnan päivitys epäonnistui!");
                 });
@@ -28,13 +27,16 @@ app.controller("InterviewsEditController", [
             if (deleteConfirmation) {
                 Interview.delete({interviewId : $scope.interview.id}, function() {
                     $window.alert("Pohdinnan poistaminen onnistui!");
-                    $scope.setCurrentTask();
-                    $scope.returnToTask();
+                    $uibModalInstance.close({interviewRemoved: true});
                 });
 
             } else {
                 $window.alert("Pohdintaa ei poistettu!");
             }
+        };
+
+        $scope.cancel = function() {
+            $uibModalInstance.dismiss('cancel');
         };
 
     }

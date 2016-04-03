@@ -1,28 +1,39 @@
 <br />
 
 <ul class="nav nav-tabs">
-    <li ng-repeat="link in links"
+<!--    <li ng-repeat="link in links"
         id={{link.tabName}}
-        ng-show={{link.visibility}}
+        role="presentation"
+        class="tabLink exerciseTabLink active" >
+        <a ui-sref={{link.tabState}} >{{link.title}}</a>
+    </li>-->
+
+    <li id="AnamnesisTab"
         role="presentation"
         class="tabLink exerciseTabLink" >
-        <a ng-click='changeCurrentTab(link.tabId, link.tabName)'>
-            {{link.title}}
-        </a>
+        <a ui-sref="exercises_show.anamnesis" >Anamneesi</a>
     </li>
+
+    <li id="TaskTab"
+        role="presentation"
+        class="tabLink exerciseTabLink" >
+        <a ui-sref="exercises_show.tasks" >Toimenpidelista</a>
+    </li>
+    <li id="HypothesisTab"
+        role="presentation"
+        class="tabLink exerciseTabLink" >
+        <a ui-sref="exercises_show.hypotheses" >Diffilista</a>
+    </li>
+
     <li id="CurrentTaskTab"
         role="presentation"
         ng-if="current_task"
-        class="tabLink exerciseTabLink" >
-        <a ng-click='changeCurrentTab("4", "CurrentTaskTab")'>
-            {{taskForShow.name}}
-            <span ng-click="removeCurrentTask()">X</span>
-        </a>
+        class="tabLink exerciseTabLink active" >
+        <a ng-click="goToState(current_task_show_path)" >{{taskForShow.name}} <span ui-sref="exercises_show.tasks" ng-click="removeCurrentTask()">X</span></a>
     </li>
+
 </ul>
 
 <br/>
 
-<div ng-repeat="view in views" ui-view={{view.viewName}} ng-show='current_tab === view.tabId' ng-if=view.visibility></div>
-
-<current-task ng-if='current_task && current_tab === "4"'></current-task>
+<div ui-view></div>

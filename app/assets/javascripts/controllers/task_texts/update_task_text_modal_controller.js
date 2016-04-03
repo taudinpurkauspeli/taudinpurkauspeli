@@ -1,8 +1,10 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("TaskTextsEditController", [
-    "$scope", "$resource", "$window",
-    function($scope, $resource, $window) {
+app.controller("UpdateTaskTextModalController", [
+    "$scope", "$resource", "$window", "$uibModalInstance", "taskText",
+    function($scope, $resource, $window, $uibModalInstance, taskText) {
+
+        $scope.taskText = taskText;
 
         var TaskText = $resource('/task_texts/:taskTextId.json',
             { taskTextId: "@id"},
@@ -12,7 +14,7 @@ app.controller("TaskTextsEditController", [
             if ($scope.updateTaskTextForm.$valid) {
                 TaskText.update({taskTextId: $scope.taskText.id}, $scope.taskText, function() {
                     $window.alert("Tekstialakohdan päivitys onnistui!");
-                    $scope.setCurrentTask();
+                    $uibModalInstance.close();
                 }, function() {
                     $window.alert("Tekstialakohdan päivitys epäonnistui!");
                 });
@@ -25,13 +27,16 @@ app.controller("TaskTextsEditController", [
             if (deleteConfirmation) {
                 TaskText.delete({taskTextId : $scope.taskText.id}, function() {
                     $window.alert("Tekstialakohdan poistaminen onnistui!");
-                    $scope.setCurrentTask();
-                    $scope.returnToTask();
+                    $uibModalInstance.close();
                 });
 
             } else {
                 $window.alert("Tekstialakohtaa ei poistettu!");
             }
+        };
+
+        $scope.cancel = function() {
+            $uibModalInstance.dismiss('cancel');
         };
 
     }
