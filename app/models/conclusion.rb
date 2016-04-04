@@ -6,12 +6,15 @@ class Conclusion < ActiveRecord::Base
 	has_one :task, through: :subtask
 
 	def user_answered_correctly?(user, final_conclusion)
-		if final_conclusion.to_i == exercise_hypothesis.id
-			user.complete_subtask(subtask)
-			return true
-		else
-			return false
+		if exercise_hypothesis
+			if final_conclusion.to_i == exercise_hypothesis.id
+				user.complete_subtask(subtask)
+				return true
+			else
+				return false
+			end
 		end
+		return false
 	end
 
 	def to_s

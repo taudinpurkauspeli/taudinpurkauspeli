@@ -17,7 +17,6 @@ app.controller("CreateConclusionModalController", [
         $scope.setExerciseHypotheses = function() {
             ExerciseHypotheses.query({"exercise_id": $stateParams.exerciseShowId}, function(data){
                 $scope.exerciseHypotheses = data;
-                $scope.newConclusion.exercise_hypothesis_id = data[0].id
             });
         };
 
