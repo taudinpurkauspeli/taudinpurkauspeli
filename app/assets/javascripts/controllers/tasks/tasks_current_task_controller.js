@@ -1,12 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("TasksCurrentTaskController", [
-    "$scope", "$resource", "$stateParams", "LocalStorageService",
-    function($scope, $resource, $stateParams, LocalStorageService) {
-
-        var Task = $resource('/tasks/:taskId.json',
-            { taskId: "@id"},
-            { update: { method: 'PUT' }});
+    "$scope", "$stateParams", "LocalStorageService",
+    function($scope, $stateParams, LocalStorageService) {
 
         $scope.setTask = function() {
             LocalStorageService.set("current_task", $stateParams.taskShowId);
@@ -20,8 +16,8 @@ app.controller("TasksCurrentTaskController", [
             path.state = state;
             path.parameters = parameters;
 
-            LocalStorageService.setObject("current_task_show_path", path);
-            $scope.setCurrentTaskShowPath();
+            LocalStorageService.setObject("current_task_tab_path", path);
+            $scope.setTaskTabPath();
         };
 
         $scope.setTask();

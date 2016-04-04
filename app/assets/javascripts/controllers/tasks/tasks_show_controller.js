@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("TasksShowController", [
-    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "LocalStorageService", "$state",
-    function($scope, $resource, $window, $uibModal, $stateParams, LocalStorageService, $state) {
+    "$scope", "$window", "$uibModal", "$state",
+    function($scope, $window, $uibModal, $state) {
 
         $scope.setTaskShowPath("exercises_show.current_task.show", {});
 
@@ -61,7 +61,7 @@ app.controller("TasksShowController", [
             });
 
             modalInstance.result.then(function(data) {
-                $scope.setCurrentTask();
+                $scope.setTask();
                 $scope.editMultichoice(data);
             }, function() {
                 $window.alert("Monivalinnan luominen peruttu.");
@@ -81,7 +81,7 @@ app.controller("TasksShowController", [
             });
 
             modalInstance.result.then(function(data) {
-                $scope.setCurrentTask();
+                $scope.setTask();
                 $scope.editInterview(data);
             }, function() {
                 $window.alert("Pohdinnan luominen peruttu.");

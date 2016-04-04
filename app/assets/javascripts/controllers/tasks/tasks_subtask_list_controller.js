@@ -18,12 +18,12 @@ app.controller("TasksSubtaskListController", [
                 if(levelChange < 0){
                     var realNewLevel = newLevel + 1;
                     MoveSubtaskUp.save({id: subtask.id, new_level: realNewLevel}, function() {
-                        $scope.setCurrentTask();
+                        $scope.setTask();
                     });
 
                 } else if(levelChange > 0){
                     MoveSubtaskDown.save({id: subtask.id, new_level: newLevel}, function() {
-                        $scope.setCurrentTask();
+                        $scope.setTask();
                     });
                 }
             }

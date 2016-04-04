@@ -30,10 +30,9 @@ app.controller("ExercisesShowController", [
             });
         };
 
-        $scope.setCurrentTask = function() {
-            $scope.current_task = LocalStorageService.get("current_task", null);
-            if($scope.current_task){
-                TaskOne.get({taskId : $scope.current_task}, function(data) {
+        $scope.setTaskForShow = function(current_task){
+            if(current_task){
+                TaskOne.get({taskId : current_task}, function(data) {
                     $scope.taskForShow = data;
                 });
             } else {
@@ -41,8 +40,13 @@ app.controller("ExercisesShowController", [
             }
         };
 
-        $scope.setCurrentTaskShowPath = function() {
-            $scope.current_task_show_path = LocalStorageService.getObject("current_task_show_path", '{"state": "", "parameters": "{}"}');
+        $scope.setCurrentTask = function() {
+            $scope.current_task = LocalStorageService.get("current_task", null);
+            $scope.setTaskForShow($scope.current_task);
+        };
+
+        $scope.setTaskTabPath = function() {
+            $scope.current_task_show_path = LocalStorageService.getObject("current_task_tab_path", '{"state": "", "parameters": "{}"}');
         };
 
         $scope.setActiveTab = function(tabId){
@@ -54,7 +58,7 @@ app.controller("ExercisesShowController", [
 
         $scope.setExercise();
         $scope.setCurrentTask();
-        $scope.setCurrentTaskShowPath();
+        $scope.setTaskTabPath();
 
         $scope.goToState = function(newState){
             $state.go(newState.state, newState.parameters);
@@ -66,6 +70,7 @@ app.controller("ExercisesShowController", [
 
         $scope.removeCurrentTask = function() {
             LocalStorageService.remove("current_task");
+            LocalStorageService.remove("current_task_tab_path");
             $scope.setCurrentTask();
         };
 
