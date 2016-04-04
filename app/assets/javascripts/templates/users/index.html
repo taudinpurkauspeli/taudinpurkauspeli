@@ -13,6 +13,36 @@
 <div class = "separator"></div>
 
 <div>
-    Tähän tulee opiskelijoiden seuranta.
-</div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table class = "width100">
+                <colgroup>
+                    <col style="width:25%" />
+                    <col style="width:25%" />
+                    <col style="width:25%" />
+                    <col style="width:25%" />
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class = "user">Etunimi</th>
+                    <th class = "user">Sukunimi</th>
+                    <th class = "user">Opiskelijanumero</th>
+                    <th class = "user">Sähköposti</th>
+                    <th class = "user">Epidemiologian kurssin aloitusvuosi</th>
+                </tr>
+                </thead>
+                <tbody>
 
+                <tr ng-repeat="user in users">
+                    <td class = "user">{{user.first_name}}</td>
+                    <td class = "user">{{user.last_name}}</td>
+                    <td class = "user">{{user.student_number}}</td>
+                    <td class = "user">{{user.email}}</td>
+                    <td class = "user">{{user.starting_year}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

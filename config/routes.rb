@@ -46,6 +46,8 @@ Rails.application.routes.draw do
   get 'exercises_one/:id', to: 'exercises#exercises_one'
   put 'exercises_one/:id', to: 'exercises#update_one'
 
+  get 'users_json', to: 'users#json_index'
+
   get 'tasks_one/:id', to: 'tasks#tasks_one'
   get 'tasks_all_by_level', to: 'tasks#tasks_all_by_level'
   get 'tasks_all', to: 'tasks#tasks_all'

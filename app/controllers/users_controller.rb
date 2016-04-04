@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_current_user, only: [:index, :show]
 
-  before_action except: [:new, :create, :index] do
+  before_action except: [:new, :create, :index, :json_index] do
     current_user_now = current_user
     if @user.nil? || (!current_user_now.try(:admin) && @user != current_user_now)
       redirect_to exercises_path, alert: 'Pääsy toisen käyttäjän tietoihin estetty!'
@@ -18,39 +18,49 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-      @exercises = Exercise.all
-      @users = User.where(admin:false)
+    @exercises = Exercise.all
+    @users = User.where(admin:false)
 
-      #list type
-      if params[:list_type].nil? || params[:list_type] == "0"
-        @list_type = 0
-      else
-        @list_type = 1
-      end
+    #list type
+    if params[:list_type].nil? || params[:list_type] == "0"
+      @list_type = 0
+    else
+      @list_type = 1
+    end
 
-      #exercise
-      if params[:exercise].nil? || params[:exercise] == "0"
-        @shown_exercises = @exercises
-        @selected_exercise_id = "0"
-      else
-        @shown_exercises  = Exercise.where(id:params[:exercise])
-        @selected_exercise_id = params[:exercise]
-      end
+    #exercise
+    if params[:exercise].nil? || params[:exercise] == "0"
+      @shown_exercises = @exercises
+      @selected_exercise_id = "0"
+    else
+      @shown_exercises  = Exercise.where(id:params[:exercise])
+      @selected_exercise_id = params[:exercise]
+    end
 
-      #starting year
-      if params[:starting_year].nil? || params[:starting_year] == "0"
-        @shown_users = @users
-        @selected_starting_year = "0"
-      else
-        @shown_users  = User.where(starting_year:params[:starting_year].to_i).where(admin:false)
-        @selected_starting_year = params[:starting_year]
-      end
+    #starting year
+    if params[:starting_year].nil? || params[:starting_year] == "0"
+      @shown_users = @users
+      @selected_starting_year = "0"
+    else
+      @shown_users  = User.where(starting_year:params[:starting_year].to_i).where(admin:false)
+      @selected_starting_year = params[:starting_year]
+    end
+  end
+
+  def json_index
+    @users = User.where(admin:false).select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name")
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @users }
+    end
+
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-      @exercises = @user.started_exercises.where(hidden: false).distinct
+    @exercises = @user.started_exercises.where(hidden: false).distinct
   end
 
   # GET /users/new

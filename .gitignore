@@ -38,3 +38,7 @@ Thumbs.db
 *.rbc
 capybara-*.html
 /coverage/
+
+
+# Byebug history
+.byebug_history
