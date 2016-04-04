@@ -47,23 +47,29 @@ class User < ActiveRecord::Base
   end
 
   def complete_subtask(subtask)
-    completed_subtasks.create(subtask:subtask)
-    task = subtask.task
-    if subtask == task.subtasks.last
-      complete_task(task)
+    unless has_completed?(subtask)
+      completed_subtasks.create(subtask:subtask)
+      task = subtask.task
+      if subtask == task.subtasks.last
+        complete_task(task)
+      end
     end
   end
 
   def complete_task(task)
-    completed_tasks.create(task:task)
-    exercise = task.exercise
-    if exercise.tasks.where(level:1...999).count == tasks.where(exercise:exercise).count
-      complete_exercise(exercise)
+    unless has_completed?(task)
+      completed_tasks.create(task:task)
+      exercise = task.exercise
+      if exercise.tasks.where(level:1...999).count == tasks.where(exercise:exercise).count
+        complete_exercise(exercise)
+      end
     end
   end
 
   def complete_exercise(exercise)
-    completed_exercises.create(exercise:exercise)
+    unless has_completed?(exercise)
+      completed_exercises.create(exercise:exercise)
+    end
   end
 
   def ask_question(question)
