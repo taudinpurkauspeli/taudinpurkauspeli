@@ -15,7 +15,7 @@ app.controller("UpdateExerciseHypothesisModalController", [
 
 
         $scope.updateTasks = function() {
-            AllTasks.query({"exercise_id": $stateParams.id}, function(data){
+            AllTasks.query({"exercise_id": $stateParams.exerciseShowId}, function(data){
                 $scope.allTasks = data;
             });
         };
