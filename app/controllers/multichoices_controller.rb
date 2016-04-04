@@ -85,7 +85,7 @@ class MultichoicesController < ApplicationController
   # DELETE /multichoices/1.json
   def destroy
     @multichoice.subtask.update_levels_before_deleting
-    @multichoice.destroy
+    @multichoice.subtask.destroy
     respond_to do |format|
       format.html
       format.json { head :ok }

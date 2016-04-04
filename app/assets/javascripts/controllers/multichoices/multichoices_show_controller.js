@@ -31,6 +31,7 @@ app.controller("MultichoicesShowController", [
 
             modalInstance.result.then(function(data) {
                 if(data.multichoiceRemoved){
+                    $scope.setTask();
                     $state.go("exercises_show.current_task.show");
                 }
             }, function() {

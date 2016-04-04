@@ -39,6 +39,9 @@ app.controller("TasksSubtaskListController", [
 
             } else if(subtask.interview){
                 $scope.editInterview(subtask.interview);
+
+            } else if(subtask.conclusion){
+                $scope.editConclusion(subtask.conclusion);
             }
         };
 

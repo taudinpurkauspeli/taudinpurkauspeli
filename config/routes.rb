@@ -89,6 +89,8 @@ Rails.application.routes.draw do
   post 'interviews_json_create', to: 'interviews#json_create'
   post 'questions_json_create', to: 'questions#json_create'
   post 'conclusions_json_create', to: 'conclusions#json_create'
+  put 'conclusions_json/:id', to: 'conclusions#json_update'
+  delete 'conclusions_json/:id', to: 'conclusions#json_destroy'
 
   get 'exercise_hypotheses_only', to: 'exercise_hypotheses#only_exercise_hypotheses'
   get 'exercise_hypotheses_json_index', to: 'exercise_hypotheses#json_index'

@@ -86,7 +86,7 @@ class TaskTextsController < ApplicationController
   # DELETE /task_texts/1.json
   def destroy
     @task_text.subtask.update_levels_before_deleting
-    @task_text.destroy
+    @task_text.subtask.destroy
     respond_to do |format|
       format.html
       format.json { head :ok }

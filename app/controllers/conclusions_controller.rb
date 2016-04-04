@@ -4,7 +4,7 @@ class ConclusionsController < ApplicationController
 
 	before_action :ensure_user_is_logged_in
 	before_action :ensure_user_is_admin, except: [:check_answers]
-	before_action :set_conclusion, only: [:edit, :update, :check_answers, :destroy]
+	before_action :set_conclusion, only: [:edit, :update, :check_answers, :destroy, :json_update, :json_destroy]
 	before_action :set_current_user, only: [:check_answers]
 
 	def new
@@ -72,11 +72,32 @@ class ConclusionsController < ApplicationController
 		end
 	end
 
+	def json_update
+		respond_to do |format|
+			if @conclusion.update(conclusion_params)
+				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide päivitettiin onnistuneesti!' }
+				format.json { render json: @conclusion }
+			else
+				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), alert: 'Diagnoosioimenpiteen päivitys epäonnistui!' }
+				format.json { head :internal_server_error }
+			end
+		end
+	end
+
 	def destroy
 		@task = @conclusion.subtask.task
 		@task.destroy
 		respond_to do |format|
 			format.html { redirect_to tasks_path(:layout => get_layout), notice: 'Diagnoositoimenpide poistettu!' }
+		end
+	end
+
+	def json_destroy
+		@conclusion.subtask.update_levels_before_deleting
+		@conclusion.subtask.destroy
+		respond_to do |format|
+			format.html { redirect_to tasks_path(:layout => get_layout), notice: 'Diagnoositoimenpide poistettu!' }
+			format.json { head :ok }
 		end
 	end
 

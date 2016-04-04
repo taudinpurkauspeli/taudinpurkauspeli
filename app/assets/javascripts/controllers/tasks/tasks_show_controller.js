@@ -103,7 +103,7 @@ app.controller("TasksShowController", [
             modalInstance.result.then(function(data) {
                 $scope.setTask();
                 $scope.setExercise();
-               // $scope.editConclusion(data);
+                $scope.editConclusion(data);
             }, function() {
                 $window.alert("Diagnoosin luominen peruttu.");
             });
@@ -122,6 +122,27 @@ app.controller("TasksShowController", [
 
             modalInstance.result.then(function(data) {
                 $scope.setTask();
+            }, function() {
+                $window.alert("Tekstialakohdan päivitys peruttu.");
+            });
+        };
+
+        $scope.editConclusion = function(conclusion) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'conclusions/update_conclusion_modal.html',
+                controller: 'UpdateConclusionModalController',
+                size: 'lg',
+                resolve: {
+                    conclusion: conclusion
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+                $scope.setTask();
+                if(data.conclusionRemoved){
+                    $scope.setExercise();
+                }
             }, function() {
                 $window.alert("Tekstialakohdan päivitys peruttu.");
             });
