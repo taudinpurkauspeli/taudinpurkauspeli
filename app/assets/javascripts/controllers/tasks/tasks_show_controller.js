@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("TasksShowController", [
-    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "LocalStorageService", "$state",
-    function($scope, $resource, $window, $uibModal, $stateParams, LocalStorageService, $state) {
+    "$scope", "$window", "$uibModal", "$state",
+    function($scope, $window, $uibModal, $state) {
 
         $scope.setTaskShowPath("exercises_show.current_task.show", {});
 
@@ -61,7 +61,7 @@ app.controller("TasksShowController", [
             });
 
             modalInstance.result.then(function(data) {
-                $scope.setCurrentTask();
+                $scope.setTask();
                 $scope.editMultichoice(data);
             }, function() {
                 $window.alert("Monivalinnan luominen peruttu.");
@@ -81,10 +81,31 @@ app.controller("TasksShowController", [
             });
 
             modalInstance.result.then(function(data) {
-                $scope.setCurrentTask();
+                $scope.setTask();
                 $scope.editInterview(data);
             }, function() {
                 $window.alert("Pohdinnan luominen peruttu.");
+            });
+        };
+
+        $scope.createConclusion = function(task) {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'conclusions/create_conclusion_modal.html',
+                controller: 'CreateConclusionModalController',
+                size: 'lg',
+                resolve: {
+                    task: task
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+                $scope.setTask();
+                $scope.setExercise();
+                $scope.editConclusion(data);
+            }, function() {
+                $window.alert("Diagnoosin luominen peruttu.");
             });
         };
 
@@ -101,6 +122,27 @@ app.controller("TasksShowController", [
 
             modalInstance.result.then(function(data) {
                 $scope.setTask();
+            }, function() {
+                $window.alert("Tekstialakohdan päivitys peruttu.");
+            });
+        };
+
+        $scope.editConclusion = function(conclusion) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'conclusions/update_conclusion_modal.html',
+                controller: 'UpdateConclusionModalController',
+                size: 'lg',
+                resolve: {
+                    conclusion: conclusion
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+                $scope.setTask();
+                if(data.conclusionRemoved){
+                    $scope.setExercise();
+                }
             }, function() {
                 $window.alert("Tekstialakohdan päivitys peruttu.");
             });

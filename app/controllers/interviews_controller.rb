@@ -98,7 +98,7 @@ class InterviewsController < ApplicationController
 	# DELETE /interviews/1.json
 	def destroy
 		@interview.subtask.update_levels_before_deleting
-		@interview.destroy
+		@interview.subtask.destroy
 		respond_to do |format|
 			format.html
 			format.json { head :ok }

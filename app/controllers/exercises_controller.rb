@@ -30,7 +30,7 @@ class ExercisesController < ApplicationController
   def exercises_one
     respond_to do |format|
       format.html
-      format.json { render json: @exercise }
+      format.json { render json: {exercise: @exercise, has_conclusion: @exercise.has_conclusion?} }
     end
   end
 

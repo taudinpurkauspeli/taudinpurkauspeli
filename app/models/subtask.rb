@@ -3,9 +3,9 @@ class Subtask < ActiveRecord::Base
 
   belongs_to :task
 
-  has_one :task_text
-  has_one :multichoice
-  has_one :interview
+  has_one :task_text, dependent: :destroy
+  has_one :multichoice, dependent: :destroy
+  has_one :interview, dependent: :destroy
   has_one :conclusion, dependent: :destroy
 
 

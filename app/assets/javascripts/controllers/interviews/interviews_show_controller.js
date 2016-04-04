@@ -31,6 +31,7 @@ app.controller("InterviewsShowController", [
 
             modalInstance.result.then(function(data) {
                 if(data.interviewRemoved){
+                    $scope.setTask();
                     $state.go("exercises_show.current_task.show");
                 }
             }, function() {
