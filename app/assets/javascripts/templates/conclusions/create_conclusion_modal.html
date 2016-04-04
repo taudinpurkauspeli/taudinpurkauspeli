@@ -1,0 +1,74 @@
+<div class="modal-header">
+    <h3 class="modal-title">Uusi diagnoosi-alakohta</h3>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12">
+            <form novalidate name="createConclusionForm">
+
+                <div class="form-group">
+
+                    <label for="exerciseHypothesisId">Valitse diffi casen oikeaksi diagnoosiksi</label>
+                    <select name="exerciseHypothesisId" id="exerciseHypothesisId"
+                            class="form-control"
+                            ng-model="newConclusion.exercise_hypothesis_id"
+                            ng-options="exerciseHypothesis.id as exerciseHypothesis.hypothesis.name for exerciseHypothesis in exerciseHypotheses">
+                    </select>
+                </div>
+
+                <div class="form-group has-feedback"
+                     ng-class="{
+'has-error': createConclusionForm.title.$invalid && createConclusionForm.title.$dirty,
+'has-success': createConclusionForm.title.$valid && createConclusionForm.title.$touched
+}">
+                    <label for="title">Otsikkoteksti</label>
+                    <input type="text"
+                           class="form-control"
+                           required pattern=".{2,}"
+                           name="title"
+                           id="title"
+                           placeholder="Otsikkoteksti"
+                           ng-model="newConclusion.title">
+
+                    <p class="help-block" ng-messages="createConclusionForm.title.$error" ng-if="!createConclusionForm.title.$pristine">
+                        <span ng-message="required">Otsikko on pakollinen</span>
+                        <span ng-message="pattern">Otsikossa on oltava vähintään 2 merkkiä</span>
+                    </p>
+                </div>
+
+                <div class="form-group">
+
+                    <label for="newConclusionContent">Ohje opiskelijoille</label>
+
+                    <div text-angular="text-angular"
+                         ng-model="newConclusion.content"
+                         ng-if="newConclusion"
+                         placeholder="Ohje opiskelijoille"
+                         name="newConclusionContent"
+                         id="newConclusionContent"
+                         required
+                         ta-text-editor-class="form-content"
+                         ta-html-editor-class="form-content"
+                         ta-toolbar-button-class="btn btn-default btn-toolbar"
+                         ta-focussed-class="focussed">
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary"
+            type="button"
+            ng-click="createConclusion()"
+            ng-disabled="createConclusionForm.$invalid || createConclusionForm.$pristine">
+        Luo
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+</div>
+

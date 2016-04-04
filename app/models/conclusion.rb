@@ -1,5 +1,5 @@
 class Conclusion < ActiveRecord::Base
-	 validates :title, presence: true, length: {minimum: 2}
+	validates :title, presence: true, length: {minimum: 2}
 
 	belongs_to :subtask
 	belongs_to :exercise_hypothesis
@@ -14,7 +14,7 @@ class Conclusion < ActiveRecord::Base
 		end
 	end
 
-  def to_s
-    'Diagnoositoimenpide'
-  end
+	def to_s
+		'Diagnoositoimenpide'
+	end
 end

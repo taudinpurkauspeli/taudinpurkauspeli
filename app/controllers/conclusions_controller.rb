@@ -1,4 +1,7 @@
 class ConclusionsController < ApplicationController
+	protect_from_forgery
+	skip_before_action :verify_authenticity_token, if: :json_request?
+
 	before_action :ensure_user_is_logged_in
 	before_action :ensure_user_is_admin, except: [:check_answers]
 	before_action :set_conclusion, only: [:edit, :update, :check_answers, :destroy]
@@ -34,6 +37,26 @@ class ConclusionsController < ApplicationController
 				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide lisättiin onnistuneesti!' }
 			else
 				format.html { redirect_to new_conclusion_path(:layout => get_layout), alert: 'Diagnoositoimenpiteen lisääminen epäonnistui!' }
+			end
+		end
+	end
+
+
+	def json_create
+		@task = Task.find(params[:task_id])
+
+		# This can be done for each different type of subtask in their respective controllers
+		subtask = @task.subtasks.build
+		@conclusion = subtask.build_conclusion(title:conclusion_params[:title], content:conclusion_params[:content], exercise_hypothesis_id:conclusion_params[:exercise_hypothesis_id])
+
+		respond_to do |format|
+			if @conclusion.save
+				subtask.save
+				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide lisättiin onnistuneesti!' }
+				format.json { render json: @conclusion }
+			else
+				format.html { redirect_to new_conclusion_path(:layout => get_layout), alert: 'Diagnoositoimenpiteen lisääminen epäonnistui!' }
+				format.json { head :internal_server_error }
 			end
 		end
 	end
@@ -77,7 +100,7 @@ class ConclusionsController < ApplicationController
 	private
 
 	def conclusion_params
-		params.require(:conclusion).permit(:title, :content, :exercise_hypothesis_id)
+		params.require(:conclusion).permit(:title, :content, :exercise_hypothesis_id, :task_id)
 	end
 
 	def set_conclusion

@@ -88,6 +88,27 @@ app.controller("TasksShowController", [
             });
         };
 
+        $scope.createConclusion = function(task) {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'conclusions/create_conclusion_modal.html',
+                controller: 'CreateConclusionModalController',
+                size: 'lg',
+                resolve: {
+                    task: task
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+                $scope.setTask();
+                $scope.setExercise();
+               // $scope.editConclusion(data);
+            }, function() {
+                $window.alert("Diagnoosin luominen peruttu.");
+            });
+        };
+
         $scope.editTaskText = function(taskText) {
             var modalInstance = $uibModal.open({
                 animation: true,

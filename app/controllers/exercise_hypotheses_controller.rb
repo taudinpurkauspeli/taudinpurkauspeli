@@ -25,6 +25,22 @@ class ExerciseHypothesesController < ApplicationController
     end
   end
 
+  # GET /exercise_hypotheses
+  # GET /exercise_hypotheses.json
+  def json_index
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+        format.html
+        format.json {render json: exercise.exercise_hypotheses.to_json(include: :hypothesis)}
+      else
+        format.html
+        format.json {head :not_found}
+      end
+    end
+  end
+
   def only_exercise_hypotheses
     exercise = Exercise.find(params[:exercise_id])
 

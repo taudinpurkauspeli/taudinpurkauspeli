@@ -26,7 +26,8 @@ app.controller("ExercisesShowController", [
 
         $scope.setExercise = function() {
             ExerciseOne.get({exerciseId : exerciseId}, function(data) {
-                $scope.exercise = data;
+                $scope.exercise = data.exercise;
+                $scope.hasConclusion = data.has_conclusion;
             });
         };
 
