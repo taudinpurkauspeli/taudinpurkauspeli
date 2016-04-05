@@ -24,16 +24,16 @@
                 </colgroup>
                 <thead>
                 <tr>
-                    <th class="user">Etunimi <span ng-click="setOrderByAttribute('first_name')">^</span> <span ng-click="setOrderByAttribute('-first_name')">v</span></th>
-                    <th class="user">Sukunimi <span ng-click="setOrderByAttribute('last_name')">^</span> <span ng-click="setOrderByAttribute('-last_name')">v</span></th>
-                    <th class="user">Opiskelijanumero <span ng-click="setOrderByAttribute('student_number')">^</span> <span ng-click="setOrderByAttribute('-student_number')">v</span></th>
-                    <th class="user">Sähköposti <span ng-click="setOrderByAttribute('email')">^</span> <span ng-click="setOrderByAttribute('-email')">v</span></th>
-                    <th class="user">Epidemiologian kurssin aloitusvuosi <span ng-click="setOrderByAttribute('starting_year')">^</span> <span ng-click="setOrderByAttribute('-starting_year')">v</span></th>
+                    <th class="user" ng-click="setOrderByAttribute('first_name')">Etunimi <span class="sortorder" ng-show="orderByAttribute[0] === 'first_name'" ng-class="{reverse:reverse}"></span></th>
+                    <th class="user" ng-click="setOrderByAttribute('last_name')">Sukunimi <span class="sortorder" ng-show="orderByAttribute[0] === 'last_name'" ng-class="{reverse:reverse}"></span></th>
+                    <th class="user" ng-click="setOrderByAttribute('student_number')">Opiskelijanumero <span class="sortorder" ng-show="orderByAttribute[0] === 'student_number'" ng-class="{reverse:reverse}"></span></th>
+                    <th class="user" ng-click="setOrderByAttribute('email')">Sähköposti <span class="sortorder" ng-show="orderByAttribute[0] === 'email'" ng-class="{reverse:reverse}"></span></th>
+                    <th class="user" ng-click="setOrderByAttribute('starting_year')">Epidemiologian kurssin aloitusvuosi <span class="sortorder" ng-show="orderByAttribute[0] === 'starting_year'" ng-class="{reverse:reverse}"></span></th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <tr ng-repeat="user in users | orderBy: orderByAttribute">
+                <tr ng-repeat="user in users | orderBy: orderByAttribute:reverse">
                     <td class="user">{{user.first_name}}</td>
                     <td class="user">{{user.last_name}}</td>
                     <td class="user">{{user.student_number}}</td>

@@ -852,3 +852,13 @@ section {
   font-size: 100%;
   margin:20px 0;
 }
+
+
+//Sorting order icon
+
+.sortorder:after {
+  content: '\25b2';
+}
+.sortorder.reverse:after {
+  content: '\25bc';
+}
