@@ -30,10 +30,53 @@
                     <th class="user" ng-click="setOrderByAttribute('email')">Sähköposti <span class="sortorder" ng-show="orderByAttribute[0] === 'email'" ng-class="{reverse:reverse}"></span></th>
                     <th class="user" ng-click="setOrderByAttribute('starting_year')">Epidemiologian kurssin aloitusvuosi <span class="sortorder" ng-show="orderByAttribute[0] === 'starting_year'" ng-class="{reverse:reverse}"></span></th>
                 </tr>
+                <tr>
+                    <th class="user">
+                        <input type="text"
+                               name="queryFirstName"
+                               id="queryFirstName"
+                               class="form-control input"
+                               placeholder="Etunimi"
+                               ng-model="queryFirstName">
+                    </th>
+                    <th class="user">
+                        <input type="text"
+                               name="queryLastName"
+                               id="queryLastName"
+                               class="form-control input"
+                               placeholder="Sukunimi"
+                               ng-model="queryLastName">
+                    </th>
+                    <th class="user">
+                        <input type="text"
+                               name="queryStudentNumber"
+                               id="queryStudentNumber"
+                               class="form-control input"
+                               placeholder="Opiskelijanumero"
+                               ng-model="queryStudentNumber">
+                    </th>
+                    <th class="user">
+                        <input type="text"
+                               name="queryEmail"
+                               id="queryEmail"
+                               class="form-control input"
+                               placeholder="Sähköposti"
+                               ng-model="queryEmail">
+                    </th>
+                    <th class="user">
+                        <input type="text"
+                               name="queryStartingYear"
+                               id="queryStartingYear"
+                               class="form-control input"
+                               placeholder="Aloitusvuosi"
+                               ng-model="queryStartingYear">
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
 
-                <tr ng-repeat="user in users | orderBy: orderByAttribute:reverse">
+                <tr ng-repeat="user in users | orderBy: orderByAttribute:reverse |
+                filter:{first_name: queryFirstName, last_name: queryLastName, student_number: queryStudentNumber, email: queryEmail, starting_year: queryStartingYear}">
                     <td class="user">{{user.first_name}}</td>
                     <td class="user">{{user.last_name}}</td>
                     <td class="user">{{user.student_number}}</td>
