@@ -14,7 +14,7 @@ app.controller("ApplicationController", [
                 title: "Taudinpurkauspeli",
                 visibility: "currentUser",
                 click: $scope.resetCurrentExercise},
-            {state: "users.all",
+            {state: "users.by_case",
                 title: "Opiskelijoiden seuranta",
                 visibility: "currentUserAdmin",
                 click: $scope.resetCurrentExercise}
