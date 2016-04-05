@@ -1,6 +1,6 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("UsersController", [
+app.controller("UsersByCaseController", [
     "$scope", "$resource",
     function($scope, $resource) {
 

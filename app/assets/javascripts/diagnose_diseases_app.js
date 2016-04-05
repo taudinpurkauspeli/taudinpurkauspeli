@@ -19,6 +19,7 @@ app.config([
 
             .state("users", {
                 url: "/users",
+                abstract: true,
                 controller: "UsersController",
                 templateUrl: "users/index.html",
                 resolve: {
@@ -30,6 +31,14 @@ app.config([
                         }
                     }]
                 }
+            }).state("users.all", {
+                url: "/all",
+                controller: "UsersAllController",
+                templateUrl: "users/all.html"
+            }).state("users.by_case", {
+                url: "/by_case",
+                controller: "UsersByCaseController",
+                templateUrl: "users/by_case.html"
             })
 
             .state("signup",{

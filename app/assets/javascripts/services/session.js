@@ -19,7 +19,8 @@ app.service('Session', [
         this.destroy = function() {
             LocalStorageService.remove("current_user_id");
             LocalStorageService.remove("current_user_admin");
-            LocalStorageService.remove("current_tab");
+            LocalStorageService.remove("current_task");
+            LocalStorageService.remove("current_task_tab_path");
         };
     }
 ]);
