@@ -16,6 +16,7 @@ app.controller("UsersAllController", [
         };
 
         $scope.setUsers();
+        $scope.setActiveTab("UsersAllTab");
 
         $scope.setOrderByAttribute = function(newAttribute){
             var attributeSameAsFirstOrderByAttribute = ($scope.orderByAttribute[0] === newAttribute);

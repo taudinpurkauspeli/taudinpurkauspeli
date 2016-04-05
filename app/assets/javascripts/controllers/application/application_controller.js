@@ -28,5 +28,12 @@ app.controller("ApplicationController", [
             $scope.currentUserAdmin = userAdmin;
         };
 
+        $scope.setActiveTab = function(tabId){
+            if (tabId != undefined){
+                $(".exerciseTabLink").removeClass("active");
+                $("#" + tabId).addClass("active");
+            }
+        };
+
     }
 ]);
