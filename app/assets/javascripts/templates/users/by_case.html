@@ -13,6 +13,20 @@
 
     <div class = "row">
         <div class = "col-md-2">
+            <label for="queryCase" class="form-control">Case</label>
+        </div>
+        <div class = "col-md-8">
+            <input type="text"
+                   name="queryCase"
+                   id="queryCase"
+                   class="form-control input"
+                   placeholder="Case"
+                   ng-model="queryCase">
+        </div>
+    </div>
+
+    <div class = "row">
+        <div class = "col-md-2">
             <label for="queryStartingYear" class="form-control">Aloitusvuosi</label>
         </div>
         <div class = "col-md-8">
@@ -27,15 +41,43 @@
 
     <div class = "row">
         <div class = "col-md-2">
-            <label for="queryCase" class="form-control">Case</label>
+            <label for="queryFirstName" class="form-control">Etunimi</label>
         </div>
         <div class = "col-md-8">
             <input type="text"
-                   name="queryCase"
-                   id="queryCase"
+                   name="queryFirstName"
+                   id="queryFirstName"
                    class="form-control input"
-                   placeholder="Case"
-                   ng-model="queryCase">
+                   placeholder="Etunimi"
+                   ng-model="queryFirstName">
+        </div>
+    </div>
+
+    <div class = "row">
+        <div class = "col-md-2">
+            <label for="queryLastName" class="form-control">Sukunimi</label>
+        </div>
+        <div class = "col-md-8">
+            <input type="text"
+                   name="queryLastName"
+                   id="queryLastName"
+                   class="form-control input"
+                   placeholder="Sukunimi"
+                   ng-model="queryLastName">
+        </div>
+    </div>
+
+    <div class = "row">
+        <div class = "col-md-2">
+            <label for="queryStudentNumber" class="form-control">Opiskelijanumero</label>
+        </div>
+        <div class = "col-md-8">
+            <input type="text"
+                   name="queryStudentNumber"
+                   id="queryStudentNumber"
+                   class="form-control input"
+                   placeholder="Opiskelijanumero"
+                   ng-model="queryStudentNumber">
         </div>
     </div>
 
@@ -43,7 +85,7 @@
 
 <br/>
 
-<div class="row" ng-repeat="(index, users) in usersByCase" ng-if="!queryCase || (queryCase && index.includes(queryCase))">
+<div class="row" ng-repeat="(index, users) in usersByCase" ng-if="!queryCase || queryMatchesCaseName(index)">
     <br/>
     <div class="col-md-12">
         <h3>{{index}}</h3>
@@ -54,25 +96,29 @@
             <div class="panel-body">
                 <table class = "width100">
                     <colgroup>
-                        <col style="width:25%" />
-                        <col style="width:25%" />
-                        <col style="width:25%" />
+                        <col style="width:20%" />
+                        <col style="width:20%" />
+                        <col style="width:15%" />
+                        <col style="width:20%" />
                         <col style="width:25%" />
                     </colgroup>
                     <thead>
                     <tr>
-                        <th class="user">Etunimi</th>
-                        <th class="user">Sukunimi</th>
-                        <th class="user">Opiskelijanumero</th>
-                        <th class="user">Suoritettu</th>
+                        <th class="user" ng-click="setOrderByAttribute('first_name')">Etunimi <span class="sortorder" ng-show="orderByAttribute === 'first_name'" ng-class="{reverse:reverse}"></span></th>
+                        <th class="user" ng-click="setOrderByAttribute('last_name')">Sukunimi <span class="sortorder" ng-show="orderByAttribute === 'last_name'" ng-class="{reverse:reverse}"></span></th>
+                        <th class="user" ng-click="setOrderByAttribute('student_number')">Opiskelijanumero <span class="sortorder" ng-show="orderByAttribute === 'student_number'" ng-class="{reverse:reverse}"></span></th>
+                        <th class="user" ng-click="setOrderByAttribute('starting_year')">Epidemiologian kurssin aloitusvuosi <span class="sortorder" ng-show="orderByAttribute === 'starting_year'" ng-class="{reverse:reverse}"></span></th>
+                        <th class="user" ng-click="setOrderByAttribute('percent_of_completed_tasks')">Suoritettu <span class="sortorder" ng-show="orderByAttribute === 'percent_of_completed_tasks'" ng-class="{reverse:reverse}"></span></th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    <tr ng-repeat="user in users | filter:{starting_year: queryStartingYear}">
-                        <td class="user">{{user.last_name}}</td>
+                    <tr ng-repeat="user in users | orderBy: orderByAttribute:reverse |
+                    filter:{starting_year: queryStartingYear, first_name: queryFirstName, last_name: queryLastName, student_number: queryStudentNumber}">
                         <td class="user">{{user.first_name}}</td>
+                        <td class="user">{{user.last_name}}</td>
                         <td class="user">{{user.student_number}}</td>
+                        <td class="user">{{user.starting_year}}</td>
                         <td class="user">
                             <div class ="progressbar" ng-class="{'completed': user.percent_of_completed_tasks == 100}">
                                 <div ng-if="user.percent_of_completed_tasks < 100" class = "progressbar progress" ng-style="{'width': 100 - user.percent_of_completed_tasks}"></div>
