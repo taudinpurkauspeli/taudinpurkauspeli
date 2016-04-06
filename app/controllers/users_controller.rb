@@ -4,8 +4,8 @@ class UsersController < ApplicationController
   wrap_parameters include: User.attribute_names + [:password] + [:password_confirmation]
 
   before_action :ensure_user_is_logged_in, except: [:new, :create]
-  before_action :ensure_user_is_admin, only: [:index]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_user_is_admin, only: [:index, :json_destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :json_destroy]
   before_action :set_current_user, only: [:index, :show]
 
   before_action except: [:new, :create, :index, :json_index, :json_by_case] do
@@ -141,6 +141,20 @@ class UsersController < ApplicationController
 
       respond_to do |format|
         format.html { redirect_to exercises_path, notice: 'Käyttäjä poistettu.' }
+      end
+    end
+  end
+
+  # DELETE /users/1
+  # DELETE /users/1.json
+  def json_destroy
+    unless @user.nil?
+
+      @user.destroy
+
+      respond_to do |format|
+        format.html { redirect_to exercises_path, notice: 'Käyttäjä poistettu.' }
+        format.json { head :ok }
       end
     end
   end

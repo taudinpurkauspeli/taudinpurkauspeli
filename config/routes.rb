@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   put 'exercises_one/:id', to: 'exercises#update_one'
 
   get 'users_json', to: 'users#json_index'
+  delete 'delete_user_json/:id', to: 'users#json_destroy'
   get 'users_by_case_json', to: 'users#json_by_case'
 
   get 'tasks_one/:id', to: 'tasks#tasks_one'
