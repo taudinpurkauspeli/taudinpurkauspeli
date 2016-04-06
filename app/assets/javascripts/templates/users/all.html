@@ -1,0 +1,87 @@
+<div class = "row">
+    <div class = "col-md-8">
+        <h1>Kaikki opiskelijat</h1>
+    </div>
+    <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Pelin käyttäjät.">Ohje</a>
+    </div>
+</div>
+<div class = "separator"></div>
+
+<div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table class = "width100">
+                <colgroup>
+                    <col style="width:25%" />
+                    <col style="width:25%" />
+                    <col style="width:25%" />
+                    <col style="width:25%" />
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="user" ng-click="setOrderByAttributes('first_name')">Etunimi <span class="sortorder" ng-show="orderByAttributes[0] === 'first_name'" ng-class="{reverse:reverse}"></span></th>
+                    <th class="user" ng-click="setOrderByAttributes('last_name')">Sukunimi <span class="sortorder" ng-show="orderByAttributes[0] === 'last_name'" ng-class="{reverse:reverse}"></span></th>
+                    <th class="user" ng-click="setOrderByAttributes('student_number')">Opiskelijanumero <span class="sortorder" ng-show="orderByAttributes[0] === 'student_number'" ng-class="{reverse:reverse}"></span></th>
+                    <th class="user" ng-click="setOrderByAttributes('email')">Sähköposti <span class="sortorder" ng-show="orderByAttributes[0] === 'email'" ng-class="{reverse:reverse}"></span></th>
+                    <th class="user" ng-click="setOrderByAttributes('starting_year')">Epidemiologian kurssin aloitusvuosi <span class="sortorder" ng-show="orderByAttributes[0] === 'starting_year'" ng-class="{reverse:reverse}"></span></th>
+                </tr>
+                <tr>
+                    <th class="user">
+                        <input type="text"
+                               name="queryFirstName"
+                               id="queryFirstName"
+                               class="form-control input"
+                               placeholder="Etunimi"
+                               ng-model="queryFirstName">
+                    </th>
+                    <th class="user">
+                        <input type="text"
+                               name="queryLastName"
+                               id="queryLastName"
+                               class="form-control input"
+                               placeholder="Sukunimi"
+                               ng-model="queryLastName">
+                    </th>
+                    <th class="user">
+                        <input type="text"
+                               name="queryStudentNumber"
+                               id="queryStudentNumber"
+                               class="form-control input"
+                               placeholder="Opiskelijanumero"
+                               ng-model="queryStudentNumber">
+                    </th>
+                    <th class="user">
+                        <input type="text"
+                               name="queryEmail"
+                               id="queryEmail"
+                               class="form-control input"
+                               placeholder="Sähköposti"
+                               ng-model="queryEmail">
+                    </th>
+                    <th class="user">
+                        <input type="text"
+                               name="queryStartingYear"
+                               id="queryStartingYear"
+                               class="form-control input"
+                               placeholder="Aloitusvuosi"
+                               ng-model="queryStartingYear">
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="user in users | orderBy: orderByAttributes:reverse |
+                filter:{first_name: queryFirstName, last_name: queryLastName, student_number: queryStudentNumber, email: queryEmail, starting_year: queryStartingYear}">
+                    <td class="user" ng-click="viewUser(user)">{{user.first_name}}</td>
+                    <td class="user">{{user.last_name}}</td>
+                    <td class="user">{{user.student_number}}</td>
+                    <td class="user">{{user.email}}</td>
+                    <td class="user">{{user.starting_year}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

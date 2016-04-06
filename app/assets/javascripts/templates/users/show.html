@@ -1,0 +1,89 @@
+<br/>
+<div class = "row">
+    <div class = "col-md-8">
+        <h1>Opiskelijasivu</h1>
+    </div>
+    <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Pelin käyttäjät.">Ohje</a>
+    </div>
+</div>
+<div class = "separator"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Etunimi: {{user.first_name}}</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Sukunimi: {{user.last_name}}</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Opiskelijanumero: {{user.student_number}}</h2>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Sähköposti: {{user.email}}</h2>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Epidemiologian kurssin aloitusvuosi: {{user.starting_year}}</h2>
+    </div>
+</div>
+
+<br/>
+<br/>
+<br/>
+
+<div>
+    <h3>Caset:</h3>
+    <br/>
+    <p ng-if="!userHasStartedExercises">Ei aloitettuja caseja!</p>
+
+    <table class="width100" ng-if="userHasStartedExercises" ng-repeat="exercise in userExercises">
+        <thead>
+        <tr>
+            <th class="user">{{exercise.name}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="user">
+                <div class="progressbar" ng-class="{'completed': exercise.percent_of_completed_tasks >= 100}" >
+
+                    <div class="progressbar progress" ng-if="exercise.percent_of_completed_tasks < 100" ng-style="{'width': 100 - exercise.percent_of_completed_tasks}"></div>
+
+                </div>
+                <span class="progress-percent">{{exercise.percent_of_completed_tasks}}%</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<br/>
+<br/>
+<br/>
+
+<div class="row" ng-if="currentUserAdmin">
+    <div class="col-md-3">
+        <button class="btn btn-default btn-exercise btn-del"
+                ng-click="removeUser(user)">
+            Poista opiskelijan tili
+        </button>
+    </div>
+</div>
+
+
+
+

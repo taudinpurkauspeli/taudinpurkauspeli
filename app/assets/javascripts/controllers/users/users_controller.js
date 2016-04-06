@@ -1,9 +1,12 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("UsersController", [
-    "$scope",
-    function($scope) {
-        $scope.users = {};
+    "$scope", "$state",
+    function($scope, $state) {
+
+        $scope.viewUser = function(user){
+            $state.go('users_show', {userShowId: user.id});
+        };
 
     }
 ]);

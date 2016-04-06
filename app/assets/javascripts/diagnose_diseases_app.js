@@ -19,8 +19,32 @@ app.config([
 
             .state("users", {
                 url: "/users",
+                abstract: true,
                 controller: "UsersController",
                 templateUrl: "users/index.html",
+                resolve: {
+                    auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                        var userAdmin = AuthenticationService.isAdmin();
+
+                        if (!userAdmin) {
+                            return $q.reject({ authenticated: false });
+                        }
+                    }]
+                }
+            }).state("users.all", {
+                url: "/all",
+                controller: "UsersAllController",
+                templateUrl: "users/all.html"
+            }).state("users.by_case", {
+                url: "/by_case",
+                controller: "UsersByCaseController",
+                templateUrl: "users/by_case.html"
+            })
+
+            .state("users_show", {
+                url: "/users/:userShowId",
+                controller: "UsersShowController",
+                templateUrl: "users/show.html",
                 resolve: {
                     auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
                         var userAdmin = AuthenticationService.isAdmin();

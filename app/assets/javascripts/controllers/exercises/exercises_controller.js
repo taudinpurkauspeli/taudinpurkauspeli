@@ -14,13 +14,13 @@ app.controller("ExercisesController", [
         var ExerciseDuplicate = $resource('/exercises/:exerciseId/dup.json',
             { exerciseId: "@id"});
 
-        $scope.updateExercisesList = function() {
+        $scope.setExercises = function() {
             Exercises.query(function(data) {
                 $scope.exercisesList = data;
             });
         };
 
-        $scope.updateExercisesList();
+        $scope.setExercises();
 
         $scope.viewExercise = function(exercise) {
             $state.go('exercises_show.anamnesis', {exerciseShowId: exercise.id});
@@ -33,7 +33,7 @@ app.controller("ExercisesController", [
             if (deleteConfirmation) {
                 Exercise.delete({exerciseId : exercise.id}, function() {
                     $window.alert("Casen poistaminen onnistui!");
-                    $scope.updateExercisesList();
+                    $scope.setExercises();
                 });
             } else {
                 $window.alert("Casea '" + exercise.name + "' ei poistettu");
@@ -48,7 +48,7 @@ app.controller("ExercisesController", [
             exercise.hidden = !exercise.hidden;
             Exercise.update({exerciseId : exercise.id}, exercise, function() {
                 $window.alert("Casen näkyvyyttä muokattu!");
-                $scope.updateExercisesList();
+                $scope.setExercises();
             }, function() {
                 $window.alert("Casen näkyvyyden muokkaus epäonnistui!");
             });
@@ -61,7 +61,7 @@ app.controller("ExercisesController", [
             if (duplicateConfirmation) {
                 ExerciseDuplicate.save({exerciseId : exercise.id}, exercise, function() {
                     $window.alert("Casen kopiointi onnistui!");
-                    $scope.updateExercisesList();
+                    $scope.setExercises();
                 }, function() {
                     $window.alert("Casen kopiointi epäonnistui!");
                 });
