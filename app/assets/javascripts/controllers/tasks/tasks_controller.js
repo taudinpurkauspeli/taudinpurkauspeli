@@ -1,8 +1,9 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("TasksController", [
-    "$scope", "$stateParams", "$resource",
-    function($scope, $stateParams, $resource) {
+    "$scope", "$stateParams", "$resource", "$uibModal", "$window",
+    function($scope, $stateParams, $resource, $uibModal, $window) {
+
         $scope.tasksList = [];
 
         var TaskMoveUp = $resource('/tasks/:id/move_up.json',
@@ -20,12 +21,13 @@ app.controller("TasksController", [
         var TasksByLevel = $resource('/tasks_all_by_level.json');
 
         $scope.updateTasksList = function() {
-            TasksByLevel.query({"exercise_id": $stateParams.id}, function(data) {
+            TasksByLevel.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.tasksList = data;
             });
         };
 
         $scope.updateTasksList();
+        $scope.setActiveTab("TaskTab");
 
         $scope.moveTaskFromLevelToLevel = function(task, sourceLevel, destinationLevel) {
 
@@ -59,5 +61,22 @@ app.controller("TasksController", [
             return task;
         };
 
+        $scope.createTask = function() {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'tasks/create_task_modal.html',
+                controller: 'CreateTaskModalController',
+                resolve: {
+                    exercise: $scope.exercise
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+                $scope.updateTasksList();
+                $scope.goToCurrentTask(data.id);
+            }, function() {
+                $window.alert("Toimenpiteen luominen peruttu.");
+            });
+        };
     }
 ]);

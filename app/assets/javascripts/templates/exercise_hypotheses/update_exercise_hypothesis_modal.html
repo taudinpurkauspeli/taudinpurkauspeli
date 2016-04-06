@@ -11,11 +11,14 @@
 
                     <label for="taskId">Esitietovaatimus</label>
                     <select name="taskId" id="taskId"
+                            class="form-control"
                             ng-model="exerciseHypothesis.task_id"
                             ng-options="task.id as task.name for task in allTasks">
                     </select>
+                </div>
+                <br/>
 
-                    <br/>
+                <div class="form-group">
                     <label for="explanation">Selitys</label>
 
                     <div text-angular="text-angular"
@@ -26,6 +29,7 @@
                          id="explanation"
                          ta-text-editor-class="form-content"
                          ta-html-editor-class="form-content"
+                         ta-toolbar-button-class="btn btn-default btn-toolbar"
                          ta-focussed-class="focussed">
                     </div>
 
@@ -50,7 +54,7 @@
 
     <button class="btn btn-danger"
             ng-click="removeFromExercise()">
-        Poista
+        Poista diffi casesta
     </button>
 </div>
 

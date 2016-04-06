@@ -1,11 +1,14 @@
 class ExerciseHypothesis < ActiveRecord::Base
 
-	belongs_to :exercise
-	belongs_to :hypothesis
+  before_destroy :update_conclusion_exercise_hypothesis_id
+
+  belongs_to :exercise
+  belongs_to :hypothesis
   belongs_to :task
 
   has_many :checked_hypotheses, dependent: :destroy
   has_many :users, through: :checked_hypotheses
+  has_many :conclusions
 
   has_one :hypothesis_group, through: :hypothesis
 
@@ -37,6 +40,7 @@ class ExerciseHypothesis < ActiveRecord::Base
     end
     return notice
   end
+
   def get_right_explanation
     notice = "Onnittelut! Sait selville, että kyseessä oli " + hypothesis.name  + ". Mitä sinun tulee vielä tehdä?"
     unless explanation.nil?
@@ -44,5 +48,11 @@ class ExerciseHypothesis < ActiveRecord::Base
     end
     return notice
   end
-  
+
+  def update_conclusion_exercise_hypothesis_id
+    conclusions.each do |conclusion|
+      conclusion.update(exercise_hypothesis_id: nil)
+    end
+  end
+
 end

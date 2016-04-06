@@ -17,10 +17,10 @@ RSpec.describe AskedQuestion, type: :model do
 
   describe "with correct user id and question id" do
 
-    let!(:asked_question){FactoryGirl.create(:asked_question, user_id:1, question_id: 1)}
-
     it "is saved" do
+      asked_question = AskedQuestion.new(user_id: 123, question_id: 321)
       expect(asked_question).to be_valid
+      asked_question.save
       expect(AskedQuestion.count).to eq(1)
     end
   end

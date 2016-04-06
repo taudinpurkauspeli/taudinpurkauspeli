@@ -112,7 +112,7 @@ class TasksController < ApplicationController
   def tasks_one
     respond_to do |format|
       format.html
-      format.json { render json: @task }
+      format.json { render json: @task.to_json(:include => {:subtasks => {:include => [:task_text, :multichoice, :interview, :conclusion]}}) }
     end
   end
 
@@ -147,16 +147,33 @@ class TasksController < ApplicationController
     end
   end
 
+  # POST /json_tasks_create
+  # POST /json_tasks_create.json
+  def json_create
+    @task = Task.new(task_params)
+    @task.level = Task.get_highest_level(@task.exercise) + 1
+
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide luotiin onnistuneesti.' }
+        format.json { render json: @task }
+      else
+        format.html { redirect_to new_task_path(:layout => get_layout), alert: 'Toimenpiteen luonti epäonnistui.' }
+        format.json { head :internal_server_error }
+      end
+    end
+  end
+
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), notice: 'Toimenpide päivitettiin onnistuneesti.' }
-        format.json {head :ok}
+        format.json { head :ok }
       else
         format.html { redirect_to edit_task_path(@task.id, :layout => get_layout), alert: 'Toimenpiteen päivitys epäonnistui.' }
-        format.json {head :bad_request}
+        format.json { head :bad_request }
       end
     end
   end
@@ -169,6 +186,7 @@ class TasksController < ApplicationController
     @task.destroy
     respond_to do |format|
       format.html { redirect_to tasks_url(:layout => get_layout), notice: 'Toimenpide poistettu.' }
+      format.json { head :ok }
     end
   end
 
@@ -234,6 +252,6 @@ class TasksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    params.require(:task).permit(:name)
+    params.require(:task).permit(:name, :exercise_id)
   end
 end

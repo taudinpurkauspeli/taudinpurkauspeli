@@ -10,6 +10,15 @@
 <div class = "separator"></div>
 <br/>
 
+<div ng-if="!hasConclusion">
+    <h5>Tässä casessa ei ole vielä diagnoosi-alakohtaa. Lisää sellainen, jotta opiskelijat voivat pelata casea!</h5>
+    <br/>
+    <div class = "separator"></div>
+    <br/>
+
+</div>
+
+
 <div class="task-list">
     <div class="dropzone">
         <ul dnd-list="[]"
@@ -32,6 +41,7 @@
                         <li ng-repeat="task in tasks[1]"
                             dnd-draggable="task"
                             dnd-type="tasks[0]"
+                            dnd-selected="goToCurrentTask(task.id)"
                             dnd-effect-allowed="move">
                             {{task.name}}
                         </li>
@@ -44,3 +54,5 @@
         </ul>
     </div>
 </div>
+
+<button class="btn btn-default btn-save btn-new-task" ng-click="createTask()">+ Luo uusi toimenpide</button>

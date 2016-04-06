@@ -1,19 +1,33 @@
-<!--<div class="row">
-    <div class="col-md-5">
-        <h2>{{exercise.name}}</h2>
-    </div>
-</div>-->
 <br />
 
 <ul class="nav nav-tabs">
-  <li id="AnamnesisTab" class="tabLink exerciseTabLink" role="presentation"><a ng-click='changeCurrentTab("1", "AnamnesisTab")'>Anamneesi</a></li>
-  <li id="TaskTab" class="tabLink exerciseTabLink" role="presentation"><a ng-click='changeCurrentTab("2", "TaskTab")'>Toimenpidelista</a></li>
-  <li id="HypothesisTab" class="tabLink exerciseTabLink" role="presentation"><a ng-click='changeCurrentTab("3", "HypothesisTab")'>Diffilista</a></li>
+
+    <li id="AnamnesisTab"
+        role="presentation"
+        class="tabLink exerciseTabLink" >
+        <a ui-sref="exercises_show.anamnesis" >Anamneesi</a>
+    </li>
+
+    <li id="TaskTab"
+        role="presentation"
+        class="tabLink exerciseTabLink" >
+        <a ui-sref="exercises_show.tasks" >Toimenpidelista</a>
+    </li>
+    <li id="HypothesisTab"
+        role="presentation"
+        class="tabLink exerciseTabLink" >
+        <a ui-sref="exercises_show.hypotheses" >Diffilista</a>
+    </li>
+
+    <li id="CurrentTaskTab"
+        role="presentation"
+        ng-if="current_task"
+        class="tabLink exerciseTabLink active" >
+        <a ng-click="goToState(current_task_show_path)" >{{taskForShow.name}} <span ui-sref="exercises_show.tasks" ng-click="removeCurrentTask()">X</span></a>
+    </li>
+
 </ul>
 
 <br/>
 
-<div ui-view="anamnesis_tab" ng-show='current_tab === "1"'></div>
-<div ui-view="task_list" ng-show='current_tab === "2"'></div>
-<div ui-view="exercise_hypothesis_list" ng-show='current_tab === "3"'></div>
-
+<div ui-view></div>

@@ -5,7 +5,8 @@ app.controller("ApplicationController", [
     function($scope, AuthenticationService, LocalStorageService) {
 
         $scope.resetCurrentExercise = function(){
-            LocalStorageService.remove("current_tab");
+            LocalStorageService.remove("current_task");
+            LocalStorageService.remove("current_task_tab_path");
         };
 
         $scope.navigationLinksList = [
@@ -13,7 +14,7 @@ app.controller("ApplicationController", [
                 title: "Taudinpurkauspeli",
                 visibility: "currentUser",
                 click: $scope.resetCurrentExercise},
-            {state: "users",
+            {state: "users.by_case",
                 title: "Opiskelijoiden seuranta",
                 visibility: "currentUserAdmin",
                 click: $scope.resetCurrentExercise}
@@ -25,6 +26,13 @@ app.controller("ApplicationController", [
         $scope.setCurrentUser = function (userId, userAdmin) {
             $scope.currentUser = userId;
             $scope.currentUserAdmin = userAdmin;
+        };
+
+        $scope.setActiveTab = function(tabId){
+            if (tabId != undefined){
+                $(".exerciseTabLink").removeClass("active");
+                $("#" + tabId).addClass("active");
+            }
         };
 
     }

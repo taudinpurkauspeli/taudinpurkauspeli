@@ -1,18 +1,21 @@
-<div class = "row">
-    <div class = "col-md-8">
-        <br/>
-        <br/>
-        <h1>Opiskelijoiden seuranta</h1>
-    </div>
-    <br/>
-    <br/>
-    <div class = "col-md-4">
-        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Pelin käyttäjät.">Ohje</a>
-    </div>
-</div>
-<div class = "separator"></div>
+<br />
 
-<div>
-    Tähän tulee opiskelijoiden seuranta.
-</div>
+<ul class="nav nav-tabs">
 
+    <li id="UsersByCaseTab"
+        role="presentation"
+        class="tabLink exerciseTabLink" >
+        <a ui-sref="users.by_case">Opiskelijoiden eteneminen</a>
+    </li>
+
+    <li id="UsersAllTab"
+        role="presentation"
+        class="tabLink exerciseTabLink" >
+        <a ui-sref="users.all">Lista kaikista opiskelijoista</a>
+    </li>
+
+</ul>
+
+<br/>
+
+<div ui-view></div>

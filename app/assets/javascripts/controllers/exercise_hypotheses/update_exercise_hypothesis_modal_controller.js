@@ -14,13 +14,13 @@ app.controller("UpdateExerciseHypothesisModalController", [
             { update: { method: 'PUT' }});
 
 
-        $scope.updateTasks = function() {
-            AllTasks.query({"exercise_id": $stateParams.id}, function(data){
+        $scope.setAllTasks = function() {
+            AllTasks.query({"exercise_id": $stateParams.exerciseShowId}, function(data){
                 $scope.allTasks = data;
             });
         };
 
-        $scope.updateTasks();
+        $scope.setAllTasks();
 
         $scope.updateExerciseHypothesis = function() {
             if ($scope.updateExerciseHypothesisForm.$valid) {

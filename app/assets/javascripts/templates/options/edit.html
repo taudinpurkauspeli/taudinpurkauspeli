@@ -1,0 +1,44 @@
+<div class = "row">
+    <div class = "col-md-8">
+        <h3>Vastausvaihtoehdot</h3>
+    </div>
+</div>
+<div class = "separator"></div>
+<br/>
+
+<div class="options-list" ng-repeat="answer_type in answer_types">
+    <div class="dropzone">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    {{answer_type.name_fi}}
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="itemlist">
+                    <ul dnd-list="[]"
+                        class="list-unstyled"
+                        dnd-drop="moveOptionToNewType(item, answer_type.name_en)"
+                        dnd-allowed-types="answer_type.allowed_types">
+
+                        <li ng-repeat="option in options[answer_type.name_en]"
+                            dnd-draggable="option"
+                            dnd-type="answer_type.name_en"
+                            dnd-selected="updateOption(option)"
+                            dnd-effect-allowed="move">
+                            {{option.content}}
+                        </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<button class="btn btn-default btn-save btn-new-task" ng-click="createOption(multichoice)">+ Luo uusi vastausvaihtoehto</button>
+

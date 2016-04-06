@@ -1,7 +1,19 @@
 class OptionsController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
   before_action :set_option, only: [:update, :destroy]
+
+  def index
+    options = Option.where(multichoice_id: params[:multichoice_id]).order(:content).group_by(&:is_correct_answer)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: options }
+    end
+  end
 
   def create
     @task = Task.find(session[:task_id])
@@ -20,8 +32,25 @@ class OptionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /task_texts/1
-  # PATCH/PUT /task_texts/1.json
+  def json_create
+    @option = Option.new(option_params)
+
+    respond_to do |format|
+      if @option.save
+        if @option.multichoice.is_radio_button
+          uncheck_other_options(@option)
+        end
+        format.html { redirect_to edit_multichoice_path(@option.multichoice.id, :layout => get_layout), notice: 'Vaihtoehto lisättiin onnistuneesti.' }
+        format.json { head :ok }
+      else
+        format.html { redirect_to edit_multichoice_path(Multichoice.find(option_params[:multichoice_id]), :layout => get_layout), alert: 'Vaihtoehdon tiedot puuttelliset.' }
+        format.json { head :internal_server_error }
+      end
+    end
+  end
+
+  # PATCH/PUT /options/1
+  # PATCH/PUT /options/1.json
   def update
     respond_to do |format|
       if @option.update(option_params)
@@ -30,8 +59,10 @@ class OptionsController < ApplicationController
           uncheck_other_options(@option)
         end
         format.html { redirect_to edit_multichoice_path(@option.multichoice.id, :layout => get_layout), notice: 'Vaihtoehto päivitettiin onnistuneesti.' }
+        format.json { head :ok }
       else
         format.html { redirect_to edit_multichoice_path(@option.multichoice.id, :layout => get_layout), alert: 'Vaihtoehdon päivitys epäonnistui!.' }
+        format.json { head :internal_server_error }
       end
     end
   end

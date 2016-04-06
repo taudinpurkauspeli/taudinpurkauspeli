@@ -1,7 +1,10 @@
 class ConclusionsController < ApplicationController
+	protect_from_forgery
+	skip_before_action :verify_authenticity_token, if: :json_request?
+
 	before_action :ensure_user_is_logged_in
 	before_action :ensure_user_is_admin, except: [:check_answers]
-	before_action :set_conclusion, only: [:edit, :update, :check_answers, :destroy]
+	before_action :set_conclusion, only: [:edit, :update, :check_answers, :destroy, :json_update, :json_destroy]
 	before_action :set_current_user, only: [:check_answers]
 
 	def new
@@ -38,6 +41,26 @@ class ConclusionsController < ApplicationController
 		end
 	end
 
+
+	def json_create
+		@task = Task.find(params[:task_id])
+
+		# This can be done for each different type of subtask in their respective controllers
+		subtask = @task.subtasks.build
+		@conclusion = subtask.build_conclusion(title:conclusion_params[:title], content:conclusion_params[:content], exercise_hypothesis_id:conclusion_params[:exercise_hypothesis_id])
+
+		respond_to do |format|
+			if @conclusion.save
+				subtask.save
+				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide lisättiin onnistuneesti!' }
+				format.json { render json: @conclusion }
+			else
+				format.html { redirect_to new_conclusion_path(:layout => get_layout), alert: 'Diagnoositoimenpiteen lisääminen epäonnistui!' }
+				format.json { head :internal_server_error }
+			end
+		end
+	end
+
 	def update
 		@task = @conclusion.subtask.task
 		respond_to do |format|
@@ -49,11 +72,32 @@ class ConclusionsController < ApplicationController
 		end
 	end
 
+	def json_update
+		respond_to do |format|
+			if @conclusion.update(conclusion_params)
+				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), notice: 'Diagnoositoimenpide päivitettiin onnistuneesti!' }
+				format.json { render json: @conclusion }
+			else
+				format.html { redirect_to edit_conclusion_path(@conclusion.id, :layout => get_layout), alert: 'Diagnoosioimenpiteen päivitys epäonnistui!' }
+				format.json { head :internal_server_error }
+			end
+		end
+	end
+
 	def destroy
 		@task = @conclusion.subtask.task
 		@task.destroy
 		respond_to do |format|
 			format.html { redirect_to tasks_path(:layout => get_layout), notice: 'Diagnoositoimenpide poistettu!' }
+		end
+	end
+
+	def json_destroy
+		@conclusion.subtask.update_levels_before_deleting
+		@conclusion.subtask.destroy
+		respond_to do |format|
+			format.html { redirect_to tasks_path(:layout => get_layout), notice: 'Diagnoositoimenpide poistettu!' }
+			format.json { head :ok }
 		end
 	end
 
@@ -77,7 +121,7 @@ class ConclusionsController < ApplicationController
 	private
 
 	def conclusion_params
-		params.require(:conclusion).permit(:title, :content, :exercise_hypothesis_id)
+		params.require(:conclusion).permit(:title, :content, :exercise_hypothesis_id, :task_id)
 	end
 
 	def set_conclusion
