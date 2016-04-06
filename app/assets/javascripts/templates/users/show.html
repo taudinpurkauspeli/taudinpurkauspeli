@@ -1,0 +1,87 @@
+<br/>
+<div class = "row">
+    <div class = "col-md-8">
+        <h1>Opiskelijasivu</h1>
+    </div>
+    <div class = "col-md-4">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Pelin käyttäjät.">Ohje</a>
+    </div>
+</div>
+<div class = "separator"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Etunimi: {{user.first_name}}</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Sukunimi: {{user.last_name}}</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Opiskelijanumero: {{user.student_number}}</h2>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Sähköposti: {{user.email}}</h2>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Epidemiologian kurssin aloitusvuosi: {{user.starting_year}}</h2>
+    </div>
+</div>
+
+
+<!--
+<% if !@current_user.try(:admin) %>
+<%= button_to 'Muokkaa tietoja', edit_user_path(@user), :method => 'get', :class => 'btn btn-default widthAuto' %> <br/><br/><br/>
+<% end %>
+
+<h3>Caset:</h3>
+
+<%if  @exercises.empty? %>
+<br />
+<p>Ei aloitettuja caseja!</p>
+<% else %>
+<% @exercises.each do |exercise| %>
+
+<table class = "width100">
+    <thead>
+    <tr>
+        <th class = "user"><%= exercise.name %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class = "user">
+            <% if exercise.tasks.count - 1 == 0 %>
+            <% progress = 0 %>
+            <% else  %>
+            <% progress = @user.get_percent_of_completed_tasks_of_exercise(exercise) %>
+            <% end %>
+            <div class ="progressbar <%= 'completed' if progress == 100 %>" >
+                <% if progress < 100 %>
+                <div class = "progressbar progress" style = "width: <%= 100 - progress %>%;"></div>
+                <% end %>
+            </div>
+            <span class = "progress-percent"><%= progress %>%</span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<% end %>
+<% end %>-->
+
+
+
+

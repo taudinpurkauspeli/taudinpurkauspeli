@@ -78,6 +78,11 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @exercises = @user.started_exercises.where(hidden: false).distinct
+    @user = User.select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name").find_by(id:params[:id])
+    respond_to do |format|
+      format.html
+      format.json { render json: @user }
+    end
   end
 
   # GET /users/new
