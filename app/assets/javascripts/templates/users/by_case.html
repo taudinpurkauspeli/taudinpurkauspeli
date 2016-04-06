@@ -8,7 +8,42 @@
 </div>
 <div class = "separator"></div>
 
-<div class="row" ng-repeat="(index, users) in usersByCase">
+<div>
+    <h3>Etsi listalta</h3>
+
+    <div class = "row">
+        <div class = "col-md-2">
+            <label for="queryStartingYear" class="form-control">Aloitusvuosi</label>
+        </div>
+        <div class = "col-md-8">
+            <input type="text"
+                   name="queryStartingYear"
+                   id="queryStartingYear"
+                   class="form-control input"
+                   placeholder="Aloitusvuosi"
+                   ng-model="queryStartingYear">
+        </div>
+    </div>
+
+    <div class = "row">
+        <div class = "col-md-2">
+            <label for="queryCase" class="form-control">Case</label>
+        </div>
+        <div class = "col-md-8">
+            <input type="text"
+                   name="queryCase"
+                   id="queryCase"
+                   class="form-control input"
+                   placeholder="Case"
+                   ng-model="queryCase">
+        </div>
+    </div>
+
+</div>
+
+<br/>
+
+<div class="row" ng-repeat="(index, users) in usersByCase" ng-if="!queryCase || (queryCase && index.includes(queryCase))">
     <br/>
     <div class="col-md-12">
         <h3>{{index}}</h3>
@@ -26,15 +61,15 @@
                     </colgroup>
                     <thead>
                     <tr>
-                        <th class = "user">Etunimi</th>
-                        <th class = "user">Sukunimi</th>
-                        <th class = "user">Opiskelijanumero</th>
-                        <th class = "user">Suoritettu</th>
+                        <th class="user">Etunimi</th>
+                        <th class="user">Sukunimi</th>
+                        <th class="user">Opiskelijanumero</th>
+                        <th class="user">Suoritettu</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    <tr ng-repeat="user in users">
+                    <tr ng-repeat="user in users | filter:{starting_year: queryStartingYear}">
                         <td class="user">{{user.last_name}}</td>
                         <td class="user">{{user.first_name}}</td>
                         <td class="user">{{user.student_number}}</td>
