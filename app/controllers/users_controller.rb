@@ -78,10 +78,13 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @exercises = @user.started_exercises.where(hidden: false).distinct
+
+    @exercises_with_completion_percent = @user.get_started_exercises_with_completion_percent
+
     @user = User.select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name").find_by(id:params[:id])
     respond_to do |format|
       format.html
-      format.json { render json: @user }
+      format.json { render json: {user: @user, exercises: @exercises_with_completion_percent }}
     end
   end
 

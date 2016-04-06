@@ -73,7 +73,7 @@
 
                 <tr ng-repeat="user in users | orderBy: orderByAttributes:reverse |
                 filter:{first_name: queryFirstName, last_name: queryLastName, student_number: queryStudentNumber, email: queryEmail, starting_year: queryStartingYear}">
-                    <td class="user">{{user.first_name}}</td>
+                    <td class="user" ng-click="viewUser(user)">{{user.first_name}}</td>
                     <td class="user">{{user.last_name}}</td>
                     <td class="user">{{user.student_number}}</td>
                     <td class="user">{{user.email}}</td>

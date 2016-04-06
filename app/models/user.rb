@@ -97,6 +97,25 @@ class User < ActiveRecord::Base
     return false
   end
 
+  def get_started_exercises_with_completion_percent
+    currently_started_exercises = started_exercises.where(hidden: false).distinct
+
+    user_exercises = Array.new()
+
+    currently_started_exercises.each do |exercise|
+      percent_of_completed_tasks = get_percent_of_completed_tasks_of_exercise(exercise)
+
+      json_exercise = exercise.as_json
+
+      json_exercise["percent_of_completed_tasks"] = percent_of_completed_tasks
+      user_exercises << json_exercise
+    end
+
+    return user_exercises
+
+  end
+
+
   def get_number_of_tasks_by_level(exercise, level)
     tasks.where(level:level).where(exercise:exercise).count
   end

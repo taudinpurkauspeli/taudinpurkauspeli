@@ -6,7 +6,6 @@ app.controller("UsersController", [
 
         $scope.viewUser = function(user){
             $state.go('users_show', {userShowId: user.id});
-
         };
 
     }

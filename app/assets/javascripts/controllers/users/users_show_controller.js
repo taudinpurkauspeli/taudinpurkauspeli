@@ -10,7 +10,9 @@ app.controller("UsersShowController", [
 
         $scope.setUser = function() {
             User.get({userId : $stateParams.userShowId}, function(data) {
-                $scope.user = data;
+                $scope.user = data.user;
+                $scope.userExercises = data.exercises;
+                $scope.userHasStartedExercises = (data.exercises.length > 0);
             });
         };
 

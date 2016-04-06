@@ -41,46 +41,35 @@
     </div>
 </div>
 
+<br/>
+<br/>
+<br/>
 
-<!--
-<% if !@current_user.try(:admin) %>
-<%= button_to 'Muokkaa tietoja', edit_user_path(@user), :method => 'get', :class => 'btn btn-default widthAuto' %> <br/><br/><br/>
-<% end %>
+<div>
+    <h3>Caset:</h3>
+    <br/>
+    <p ng-if="!userHasStartedExercises">Ei aloitettuja caseja!</p>
 
-<h3>Caset:</h3>
+    <table class="width100" ng-if="userHasStartedExercises" ng-repeat="exercise in userExercises">
+        <thead>
+        <tr>
+            <th class="user">{{exercise.name}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="user">
+                <div class="progressbar" ng-class="{'completed': exercise.percent_of_completed_tasks >= 100}" >
 
-<%if  @exercises.empty? %>
-<br />
-<p>Ei aloitettuja caseja!</p>
-<% else %>
-<% @exercises.each do |exercise| %>
+                    <div class="progressbar progress" ng-if="exercise.percent_of_completed_tasks < 100" ng-style="{'width': 100 - exercise.percent_of_completed_tasks}"></div>
 
-<table class = "width100">
-    <thead>
-    <tr>
-        <th class = "user"><%= exercise.name %></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td class = "user">
-            <% if exercise.tasks.count - 1 == 0 %>
-            <% progress = 0 %>
-            <% else  %>
-            <% progress = @user.get_percent_of_completed_tasks_of_exercise(exercise) %>
-            <% end %>
-            <div class ="progressbar <%= 'completed' if progress == 100 %>" >
-                <% if progress < 100 %>
-                <div class = "progressbar progress" style = "width: <%= 100 - progress %>%;"></div>
-                <% end %>
-            </div>
-            <span class = "progress-percent"><%= progress %>%</span>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<% end %>
-<% end %>-->
+                </div>
+                <span class="progress-percent">{{exercise.percent_of_completed_tasks}}%</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 
 

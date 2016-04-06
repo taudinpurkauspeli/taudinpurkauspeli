@@ -120,7 +120,7 @@
                         <td class="user">{{user.student_number}}</td>
                         <td class="user">{{user.starting_year}}</td>
                         <td class="user">
-                            <div class ="progressbar" ng-class="{'completed': user.percent_of_completed_tasks == 100}">
+                            <div class ="progressbar" ng-class="{'completed': user.percent_of_completed_tasks >= 100}">
                                 <div ng-if="user.percent_of_completed_tasks < 100" class = "progressbar progress" ng-style="{'width': 100 - user.percent_of_completed_tasks}"></div>
                             </div>
                             <span class = "progress-percent">{{user.percent_of_completed_tasks}}%</span>
