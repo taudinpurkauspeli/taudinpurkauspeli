@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_current_user, only: [:index, :show]
 
-  before_action except: [:new, :create, :index, :json_index] do
+  before_action except: [:new, :create, :index, :json_index, :json_by_case] do
     current_user_now = current_user
     if @user.nil? || (!current_user_now.try(:admin) && @user != current_user_now)
       redirect_to exercises_path, alert: 'Pääsy toisen käyttäjän tietoihin estetty!'
@@ -49,6 +49,23 @@ class UsersController < ApplicationController
 
   def json_index
     @users = User.where(admin:false).select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name")
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @users }
+    end
+
+  end
+
+  def json_by_case
+    @users = {}
+
+    all_exercises = Exercise.all.order(:name)
+
+    all_exercises.each do |exercise|
+      exercise_users = exercise.get_all_users(exercise)
+      @users[exercise.name] = exercise_users
+    end
 
     respond_to do |format|
       format.html

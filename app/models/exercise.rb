@@ -107,6 +107,25 @@ class Exercise < ActiveRecord::Base
     return  users_of_ex.uniq
   end
 
+  def get_all_users(exercise)
+
+    users_of_ex = Array.new()
+
+    tasks.each do |task|
+      all_users = task.users.select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name")
+      addable_users = Array.new()
+      all_users.each do |user|
+        percent_of_completed_tasks = user.get_percent_of_completed_tasks_of_exercise(exercise)
+        json_user = user.as_json
+        json_user["percent_of_completed_tasks"] = percent_of_completed_tasks
+        addable_users << json_user
+      end
+      users_of_ex += addable_users
+    end
+
+    return  users_of_ex.uniq
+  end
+
   private
   def create_anamnesis
     tasks.create(name:"Anamneesi", level:0)
