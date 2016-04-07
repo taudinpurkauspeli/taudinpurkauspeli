@@ -8,7 +8,7 @@ describe "New Task page", js:true do
 
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
-      visit root_path
+      visit exercises_path
       wait_for_ajax
       expect(page).to have_button('Lihanautakuolemat')
       wait_and_trigger_click(exercise.name)

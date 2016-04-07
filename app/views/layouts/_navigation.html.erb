@@ -31,7 +31,7 @@
         <% else %>
 
           <% unless @excercise_page_rendered %>
-            <%= link_to 'Palaa pääsivulle', root_path, :class => "" %>
+            <%= link_to 'Palaa pääsivulle', exercises_path, :class => "" %>
           <% else %>
             <% if !current_user.try(:admin) %>
               <%= link_to "Omat tiedot", user_path(current_user) %>
