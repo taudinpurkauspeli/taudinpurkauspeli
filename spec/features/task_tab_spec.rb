@@ -17,7 +17,7 @@ describe "Task tab spec", js:true do
     before :each do
       sign_in(username:"Opiskelija", password:"Salainen1")
 
-      visit root_path
+      visit exercises_path
 
       wait_and_trigger_click('Lihanautakuolemat')
       wait_and_trigger_click('Toimenpiteet')
@@ -42,7 +42,7 @@ describe "Task tab spec", js:true do
     before :each do
       sign_in(username:"Testipoika", password:"Salainen1")
 
-      visit root_path
+      visit exercises_path
 
       wait_and_trigger_click('Lihanautakuolemat')
       wait_and_trigger_click('Toimenpiteet')

@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     respond_to do |format|
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
-        format.html { redirect_to :root, notice: "Tervetuloa takaisin!"}
+        format.html { redirect_to exercises_path, notice: "Tervetuloa takaisin!"}
         format.json { render json: user }
       else
         format.html {redirect_to :back, alert: "Käyttäjätunnus tai salasana on väärin."}
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
     session[:task_id] = nil
     session[:exhyp_ids] = nil
     respond_to do |format|
-      format.html { redirect_to :root}
+      format.html { redirect_to exercises_path}
       format.json { head :ok }
     end
   end

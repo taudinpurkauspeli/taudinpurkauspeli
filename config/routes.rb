@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :log_entries
   mount Ckeditor::Engine => '/ckeditor'
-  root 'exercises#index'
+  root 'diagnose_diseases#index'
 
   resources :users
 
