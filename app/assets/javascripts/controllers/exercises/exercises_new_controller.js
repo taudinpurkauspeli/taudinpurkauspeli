@@ -15,7 +15,7 @@ app.controller("ExercisesNewController", [
                 Exercise.save($scope.newExercise,
                     function(data) {
                         $window.alert("Casen luominen onnistui!");
-                        $state.go('exercises_show', {id: data.id});
+			$state.go('exercises_show.anamnesis', {exerciseShowId: data.id});
                     },
                     function() {
                         $window.alert("Casen luominen epäonnistui!");
