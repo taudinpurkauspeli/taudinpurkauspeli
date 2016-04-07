@@ -58,7 +58,7 @@ describe "Exercises page", js:true do
 
     it "should be able to visit exercises page and see exercises" do
 
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(exercises_path)
 
       expect(page).to have_button 'Lihanautakuolemat'
       expect(page).to have_button 'Kanakuolema'
@@ -67,7 +67,7 @@ describe "Exercises page", js:true do
     it "should be able to logout" do
       wait_and_trigger_click "Kirjaudu ulos"
 
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(exercises_path)
     end
 
     it "should be able to delete an exercise" do
@@ -91,7 +91,7 @@ describe "Exercises page", js:true do
     end
 
     it "should be able to visit exercises page and see exercises" do
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(exercises_path)
 
       expect(page).to have_button 'Lihanautakuolemat'
       expect(page).to have_button 'Kanakuolema'
@@ -99,7 +99,7 @@ describe "Exercises page", js:true do
 
     it "should be able to logout" do
       wait_and_trigger_click "Kirjaudu ulos"
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(exercises_path)
     end
 
     it "should not be able to delete exercise" do
