@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
         format.json { render json: user }
       else
         format.html {redirect_to :back, alert: "Käyttäjätunnus tai salasana on väärin."}
-        format.json { head :internal_server_error }
+        format.json { head :unauthorized }
       end
     end
   end

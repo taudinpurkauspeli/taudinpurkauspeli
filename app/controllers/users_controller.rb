@@ -58,13 +58,16 @@ class UsersController < ApplicationController
   end
 
   def json_by_case
-    @users = {}
+    @users = []
 
     all_exercises = Exercise.all.order(:name)
 
-    all_exercises.each do |exercise|
+    all_exercises.each_with_index do |exercise, index|
       exercise_users = exercise.get_all_users(exercise)
-      @users[exercise.name] = exercise_users
+      new_exercise_with_users = {}
+      new_exercise_with_users["exercise_name"] = exercise.name
+      new_exercise_with_users["exercise_users"] = exercise_users
+      @users[index] = new_exercise_with_users
     end
 
     respond_to do |format|
