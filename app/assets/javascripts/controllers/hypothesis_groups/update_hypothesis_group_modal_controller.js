@@ -11,7 +11,7 @@ app.controller("UpdateHypothesisGroupModalController", [
             { update: { method: 'PUT' }});
 
         $scope.deleteHypothesisGroup = function() {
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa diffiryhmän ja kaikki siihen liittyvät diffit?");
+            var deleteConfirmation = $window.confirm("VAROITUS: TÄMÄ TOIMENPIDE POISTAA KAIKKI TÄMÄN DIFFIRYHMÄN DIFFIT MYÖS CASEISTA! Oletko aivan varma, että haluat poistaa diffiryhmän ja kaikki siihen liittyvät diffit?");
 
             if (deleteConfirmation) {
                 HypothesisGroup.delete({hypothesisGroupId : hypothesisGroup.id}, function() {
