@@ -11,7 +11,7 @@ app.controller("UpdateHypothesisModalController", [
             { update: { method: 'PUT' }});
 
         $scope.deleteHypothesis = function() {
-            var deleteConfirmation = $window.confirm("VAROITUS: TÄMÄ TOIMENPIDE POISTAA TÄMÄN DIFFIN MYÖS CASEISTA! Oletko aivan varma, että haluat poistaa diffin ja sen kaikki caseihin liittyvät diffit?");
+            var deleteConfirmation = $window.confirm("VAROITUS: TÄMÄ OPERAATIO POISTAA TÄMÄN DIFFIN MYÖS CASEISTA! Oletko aivan varma, että haluat poistaa diffin ja sen kaikki caseihin liittyvät diffit?");
 
             if (deleteConfirmation) {
                 Hypothesis.delete({hypothesisId : hypothesis.id}, function() {
