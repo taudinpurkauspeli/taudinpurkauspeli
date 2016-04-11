@@ -85,10 +85,10 @@
 
 <br/>
 
-<div class="row" ng-repeat="(index, users) in usersByCase" ng-if="!queryCase || queryMatchesCaseName(index)">
+<div class="row" ng-repeat="exerciseWithUsers in usersByCase | orderBy: 'exercise_name'" ng-if="!queryCase || queryMatchesCaseName(exerciseWithUsers.exercise_name)">
     <br/>
     <div class="col-md-12">
-        <h3>{{index}}</h3>
+        <h3>{{exerciseWithUsers.exercise_name}}</h3>
     </div>
     <div class = "col-md-12">
 
@@ -113,7 +113,7 @@
                     </thead>
                     <tbody>
 
-                    <tr ng-repeat="user in users | orderBy: orderByAttribute:reverse |
+                    <tr ng-repeat="user in exerciseWithUsers.exercise_users | orderBy: orderByAttribute:reverse |
                     filter:{starting_year: queryStartingYear, first_name: queryFirstName, last_name: queryLastName, student_number: queryStudentNumber}">
                         <td class="user" ng-click="viewUser(user)">{{user.first_name}}</td>
                         <td class="user">{{user.last_name}}</td>
