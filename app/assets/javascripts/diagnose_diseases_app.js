@@ -82,7 +82,7 @@ app.config([
                 controller: "ExercisesAnamnesisController"
             }).state("exercises_show.tasks", {
                 url: "/tasks",
-                templateUrl: "exercises/tasks_list_teacher.html",
+                templateUrl: "exercises/tasks_list.html",
                 controller: "TasksController"
             }).state("exercises_show.hypotheses", {
                 url: "/hypotheses",
