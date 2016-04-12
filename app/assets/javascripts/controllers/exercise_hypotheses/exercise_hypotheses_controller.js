@@ -20,8 +20,10 @@ app.controller("ExerciseHypothesesController", [
         };
 
         $scope.updateAllExerciseHypotheses = function() {
-            $scope.updateExerciseHypothesesOnly();
-            $scope.updateExerciseHypotheses();
+            if($scope.currentUserAdmin){
+                $scope.updateExerciseHypothesesOnly();
+                $scope.updateExerciseHypotheses();
+            }
         };
 
         $scope.updateAllExerciseHypotheses();
