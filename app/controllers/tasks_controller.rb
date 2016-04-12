@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   skip_before_action :verify_authenticity_token, if: :json_request?
 
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin, except: [:index, :show]
+  before_action :ensure_user_is_admin, except: [:index, :show, :tasks_one]
   before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down,
                                   :tasks_one, :move_level_up, :move_level_down, :move_task_up, :move_task_down]
   before_action :set_current_user, only: [:index, :show]

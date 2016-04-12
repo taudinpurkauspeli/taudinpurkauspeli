@@ -21,9 +21,11 @@ app.controller("TasksController", [
         var TasksByLevel = $resource('/tasks_all_by_level.json');
 
         $scope.updateTasksList = function() {
-            TasksByLevel.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
-                $scope.tasksList = data;
-            });
+            if($scope.currentUserAdmin){
+                TasksByLevel.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
+                    $scope.tasksList = data;
+                });
+            }
         };
 
         $scope.updateTasksList();

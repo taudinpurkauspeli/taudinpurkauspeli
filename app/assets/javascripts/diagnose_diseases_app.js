@@ -47,9 +47,9 @@ app.config([
                 templateUrl: "users/show.html",
                 resolve: {
                     auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
-                        var userAdmin = AuthenticationService.isAdmin();
+                        var userIsLoggedIn = AuthenticationService.isLoggedIn();
 
-                        if (!userAdmin) {
+                        if (!userIsLoggedIn) {
                             return $q.reject({ authenticated: false });
                         }
                     }]
@@ -69,24 +69,24 @@ app.config([
                 templateUrl: "exercises/show.html",
                 resolve: {
                     auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
-                        var userAdmin = AuthenticationService.isAdmin();
+                        var userIsLoggedIn = AuthenticationService.isLoggedIn();
 
-                        if (!userAdmin) {
+                        if (!userIsLoggedIn) {
                             return $q.reject({ authenticated: false });
                         }
                     }]
                 }
             }).state("exercises_show.anamnesis", {
                 url: "/anamnesis",
-                templateUrl: "exercises/anamnesis_teacher.html",
+                templateUrl: "exercises/anamnesis.html",
                 controller: "ExercisesAnamnesisController"
             }).state("exercises_show.tasks", {
                 url: "/tasks",
-                templateUrl: "exercises/tasks_list_teacher.html",
+                templateUrl: "exercises/tasks_list.html",
                 controller: "TasksController"
             }).state("exercises_show.hypotheses", {
                 url: "/hypotheses",
-                templateUrl: "exercises/exercise_hypotheses_list_teacher.html",
+                templateUrl: "exercises/exercise_hypotheses_list.html",
                 controller: "ExerciseHypothesesController"
             }).state("exercises_show.current_task", {
                 url: "/task/:taskShowId",
@@ -102,11 +102,29 @@ app.config([
             }).state("exercises_show.current_task.interview", {
                 url: "/interview/:interviewShowId",
                 templateUrl: "interviews/show.html",
-                controller: "InterviewsShowController"
+                controller: "InterviewsShowController",
+                resolve: {
+                    auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                        var userAdmin = AuthenticationService.isAdmin();
+
+                        if (!userAdmin) {
+                            return $q.reject({ authenticated: false });
+                        }
+                    }]
+                }
             }).state("exercises_show.current_task.multichoice", {
                 url: "/multichoice/:multichoiceShowId",
                 templateUrl: "multichoices/show.html",
-                controller: "MultichoicesShowController"
+                controller: "MultichoicesShowController",
+                resolve: {
+                    auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                        var userAdmin = AuthenticationService.isAdmin();
+
+                        if (!userAdmin) {
+                            return $q.reject({ authenticated: false });
+                        }
+                    }]
+                }
             })
 
             .state("exercises_new", {
@@ -127,12 +145,12 @@ app.config([
 ]);
 
 app.run([
-    "$rootScope", "$location",
-    function($rootScope, $location){
+    "$rootScope", "$state",
+    function($rootScope, $state){
         $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
             if (error.authenticated === false) {
                 alert("Sinulla ei ole tarvittavia oikeuksia päästäksesi sivulle");
-                $location.path("/");
+                $state.go('app_root');
             }
         });
 

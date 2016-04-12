@@ -16,6 +16,11 @@ app.controller("UsersShowController", [
                 $scope.user = data.user;
                 $scope.userExercises = data.exercises;
                 $scope.userHasStartedExercises = (data.exercises.length > 0);
+            }, function(data){
+                if(data.status == 401){
+                    $window.alert("Pääsy toisen käyttäjän tietoihin estetty!");
+                    $state.go('app_root');
+                }
             });
         };
 
