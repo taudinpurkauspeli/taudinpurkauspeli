@@ -58,3 +58,88 @@
 
     <button class="btn btn-default btn-save btn-new-task" ng-click="createTask()">+ Luo uusi toimenpide</button>
 </div>
+
+<div ng-if="currentUser && !currentUserAdmin">
+
+    <br />
+    <div class = "row">
+        <div class = "col-md-8">
+            <h3>Valitse suoritettava toimenpide</h3>
+        </div>
+        <div class = "col-md-4">
+            <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteen suorittaminen" data-content="Toimenpiteet voi suorittaa vain tietyssä järjestyksessä. Voit valita haluamasi toimenpiteen klikkaamalla sitä. Jos toimenpiteen voi suorittaa, siirryt kyseisen toimenpiteen sivulle, muuten saat virheilmoituksen. Tällöin voit valita jonkun toisen toimenpiteen.">Ohje</a>
+        </div>
+    </div>
+
+    <br />
+
+    <!--    <% @available_tasks.each do |task| %>
+        <div class = "row">
+            <div class="col-md-5">
+                <%= button_to task.name, task, method: :get,
+                :class => "btn btn-default btn-available-task multiline",
+                :form_class => (@current_user.can_start?(task) ? "form-to-task-student" : "form-cannot-task-student" )%>
+            </div>
+            <% if @last_clicked_task_id == task.id.to_s %>
+            <div class="col-md-5">
+                <div class="alert-unavailable-task removable"><%= alert %></div>
+            </div>
+            <% end %>
+        </div>
+        <% end %>-->
+
+    <div class = "separator"></div>
+
+    <br/>
+
+    <div class = "row">
+        <div class = "col-md-8">
+            <h3>Tehdyt toimenpiteet</h3>
+        </div>
+        <div class = "col-md-4">
+            <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="left" title="Suoritetun toimenpiteen tarkastelu" data-content="Voit tarkastella jo suorittamiasi toimenpiteitä klikkaamalla kyseistä tehtävää. Toimenpiteet on sijoitettu tasoittain, mistä näkee toimenpiteiden mahdollisen suoritusjärjestyksen ja samalla sen, missä järjestyksessä olet suorittanut toimenpiteet. Samalla tasolla olevat toimenpiteet voi suorittaa missä tahansa järjestyksessä.">Ohje</a>
+        </div>
+    </div>
+
+    <br/>
+
+    <!--
+        <div class = "row">
+            <div class = "col-md-6">
+                <div class = "div-tasks-container-admin">
+                    <% previous_level = 0 %>
+                    <% @completed_tasks.each do |task| %>
+
+                    <% if task.level > previous_level %>
+                    <% if previous_level > 0 %>
+                </div>
+                </td></tr></table>
+            </div>
+            <% end %>
+            <div class="panel panel-default panel-light-grey">
+
+                <table><tr><td class = "task-level-header"><%= task.level %></td><td>
+
+                    <div class="panel-body">
+                        <% end %>
+
+                        <%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task-order multiline', :form_class => "form-completed-task" %>
+
+                        <% previous_level = task.level %>
+                        <% end %>
+
+                        <% if previous_level > 0 %>
+                    </div>
+                </td></tr></table>
+            </div>
+            <% end %>
+
+        </div>
+    </div>
+    </div>
+    -->
+
+
+
+
+</div>
