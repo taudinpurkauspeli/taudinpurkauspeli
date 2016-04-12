@@ -11,7 +11,10 @@ class UsersController < ApplicationController
   before_action except: [:new, :create, :index, :json_index, :json_by_case] do
     current_user_now = current_user
     if @user.nil? || (!current_user_now.try(:admin) && @user != current_user_now)
-      redirect_to exercises_path, alert: 'Pääsy toisen käyttäjän tietoihin estetty!'
+      respond_to do |format|
+        format.html {redirect_to exercises_path, alert: 'Pääsy toisen käyttäjän tietoihin estetty!'}
+        format.json { head :unauthorized }
+      end
     end
   end
 

@@ -47,9 +47,9 @@ app.config([
                 templateUrl: "users/show.html",
                 resolve: {
                     auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
-                        var userAdmin = AuthenticationService.isAdmin();
+                        var userIsLoggedIn = AuthenticationService.isLoggedIn();
 
-                        if (!userAdmin) {
+                        if (!userIsLoggedIn) {
                             return $q.reject({ authenticated: false });
                         }
                     }]

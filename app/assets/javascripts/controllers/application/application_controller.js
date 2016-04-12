@@ -17,6 +17,10 @@ app.controller("ApplicationController", [
             {state: "users.by_case",
                 title: "Opiskelijoiden seuranta",
                 visibility: "currentUserAdmin",
+                click: $scope.resetCurrentExercise},
+            {state: "users_show({userShowId: currentUser})",
+                title: "Omat käyttäjätiedot",
+                visibility: "currentUser",
                 click: $scope.resetCurrentExercise}
         ];
 
