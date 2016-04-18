@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   get 'tasks_one/:id', to: 'tasks#tasks_one'
   get 'tasks_all_by_level', to: 'tasks#tasks_all_by_level'
   get 'tasks_all', to: 'tasks#tasks_all'
+  get 'tasks_student_index', to: 'tasks#student_index'
   post 'json_tasks_create', to: 'tasks#json_create'
 
   get 'signin', to: 'sessions#new'

@@ -3,10 +3,10 @@ class TasksController < ApplicationController
   skip_before_action :verify_authenticity_token, if: :json_request?
 
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin, except: [:index, :show, :tasks_one]
+  before_action :ensure_user_is_admin, except: [:index, :show, :tasks_one, :student_index]
   before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down,
                                   :tasks_one, :move_level_up, :move_level_down, :move_task_up, :move_task_down]
-  before_action :set_current_user, only: [:index, :show]
+  before_action :set_current_user, only: [:index, :show, :student_index]
 
   # GET /tasks
   # GET /tasks.json
@@ -26,6 +26,26 @@ class TasksController < ApplicationController
     end
 
     set_view_layout
+  end
+
+  # GET /student_index
+  # GET /student_index.json
+  def student_index
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise && @current_user
+
+        completed_tasks = @current_user.tasks.where("level > ?", 0).where(exercise:exercise).order("level")
+        available_tasks = exercise.tasks.where("level > ?", 0).order("name") - completed_tasks
+
+        format.html
+        format.json {render json: { completed_tasks: completed_tasks, available_tasks: available_tasks }}
+      else
+        format.html
+        format.json {head :not_found}
+      end
+    end
   end
 
   # GET /tasks_all_by_level

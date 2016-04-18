@@ -73,20 +73,16 @@
 
     <br />
 
-    <!--    <% @available_tasks.each do |task| %>
-        <div class = "row">
+        <div class = "row" ng-repeat="task in availableTasks">
             <div class="col-md-5">
-                <%= button_to task.name, task, method: :get,
-                :class => "btn btn-default btn-available-task multiline",
-                :form_class => (@current_user.can_start?(task) ? "form-to-task-student" : "form-cannot-task-student" )%>
+                <button class="btn btn-default btn-available-task multiline" ng-click="startTask(task)">{{task.name}}</button>
             </div>
-            <% if @last_clicked_task_id == task.id.to_s %>
+<!--            <% if @last_clicked_task_id == task.id.to_s %>
             <div class="col-md-5">
                 <div class="alert-unavailable-task removable"><%= alert %></div>
             </div>
-            <% end %>
+            <% end %>-->
         </div>
-        <% end %>-->
 
     <div class = "separator"></div>
 
@@ -103,6 +99,7 @@
 
     <br/>
 
+    {{completedTasks}}
     <!--
         <div class = "row">
             <div class = "col-md-6">
