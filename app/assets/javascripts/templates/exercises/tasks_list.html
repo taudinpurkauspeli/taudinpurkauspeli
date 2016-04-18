@@ -77,11 +77,9 @@
             <div class="col-md-5">
                 <button class="btn btn-default btn-available-task multiline" ng-click="startTask(task)">{{task.name}}</button>
             </div>
-<!--            <% if @last_clicked_task_id == task.id.to_s %>
-            <div class="col-md-5">
-                <div class="alert-unavailable-task removable"><%= alert %></div>
+            <div class="col-md-5" ng-if="cannotStartTask(task.id)">
+                <div class="alert-unavailable-task removable">Et voi vielä suorittaa tätä toimenpidettä, vaan sinun tulee suorittaa ainakin yksi muu toimenpide ennen tätä.</div>
             </div>
-            <% end %>-->
         </div>
 
     <div class = "separator"></div>

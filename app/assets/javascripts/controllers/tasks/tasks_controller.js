@@ -24,6 +24,9 @@ app.controller("TasksController", [
 
         var TasksForStudent = $resource('/tasks_student_index.json');
 
+        var TaskCanBeStarted = $resource('/task_can_be_started/:id.json',
+            {id: '@id'});
+
         $scope.setTasksList = function() {
             if($scope.currentUserAdmin){
                 TasksByLevel.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
@@ -95,8 +98,24 @@ app.controller("TasksController", [
             });
         };
 
+        $scope.setTaskId = function(taskId){
+            if($scope.lastClickedTask == taskId){
+                $scope.lastClickedTask = null;
+            } else {
+                $scope.lastClickedTask = taskId;
+            }
+        };
+
         $scope.startTask = function(task) {
-            console.log(task);
-        }
+            TaskCanBeStarted.get({id: task.id}, function() {
+                console.log(task);
+            }, function() {
+                $scope.setTaskId(task.id);
+            });
+        };
+
+        $scope.cannotStartTask = function(taskId){
+            return taskId == $scope.lastClickedTask;
+        };
     }
 ]);

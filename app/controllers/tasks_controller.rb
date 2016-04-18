@@ -3,10 +3,11 @@ class TasksController < ApplicationController
   skip_before_action :verify_authenticity_token, if: :json_request?
 
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin, except: [:index, :show, :tasks_one, :student_index]
+  before_action :ensure_user_is_admin, except: [:index, :show, :tasks_one, :student_index, :task_can_be_started]
   before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down,
-                                  :tasks_one, :move_level_up, :move_level_down, :move_task_up, :move_task_down]
-  before_action :set_current_user, only: [:index, :show, :student_index]
+                                  :tasks_one, :move_level_up, :move_level_down, :move_task_up, :move_task_down,
+                                  :task_can_be_started]
+  before_action :set_current_user, only: [:index, :show, :student_index, :task_can_be_started]
 
   # GET /tasks
   # GET /tasks.json
@@ -125,6 +126,23 @@ class TasksController < ApplicationController
 
     set_view_layout
 
+  end
+
+  # GET /task_can_be_started/1
+  # GET /task_can_be_started/1.json
+  def task_can_be_started
+
+    respond_to do |format|
+      unless @current_user.try(:admin)
+        if @current_user.can_start?(@task)
+          format.html
+          format.json { head :ok }
+        else
+          format.html
+          format.json { head :not_acceptable }
+        end
+      end
+    end
   end
 
   # GET /tasks_one/1
