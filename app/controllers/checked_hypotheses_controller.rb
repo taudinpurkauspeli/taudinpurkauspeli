@@ -1,7 +1,29 @@
 class CheckedHypothesesController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
   before_action :ensure_user_is_logged_in
   before_action :set_checked_hypothesis, only: [:destroy]
-  before_action :set_current_user, only: [:create]
+  before_action :set_current_user, only: [:create, :index]
+
+  def index
+
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise && @current_user
+
+        checked_hypotheses = @current_user.checked_hypotheses.joins(:exercise_hypothesis).where(exercise_hypotheses: {exercise_id: exercise.id})
+
+        format.html
+        format.json { render json: checked_hypotheses }
+      else
+        format.html
+        format.json { head :not_found }
+      end
+    end
+
+  end
 
   # POST /checked_hypotheses
   # POST /checked_hypotheses.json

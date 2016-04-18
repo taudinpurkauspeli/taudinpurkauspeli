@@ -6,27 +6,39 @@ app.controller("ExerciseHypothesesController", [
 
         var ExerciseHypotheses = $resource('/exercise_hypotheses.json');
         var ExerciseHypothesesOnly = $resource('/exercise_hypotheses_only.json');
+        var CheckedHypotheses = $resource('/checked_hypotheses.json');
 
-        $scope.updateExerciseHypotheses = function() {
+        $scope.setExerciseHypotheses = function() {
             ExerciseHypotheses.get({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.exerciseHypotheses = data;
             });
         };
 
-        $scope.updateExerciseHypothesesOnly = function() {
+        $scope.setExerciseHypothesesOnly = function() {
             ExerciseHypothesesOnly.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.exerciseHypothesesOnly = data;
             });
         };
 
-        $scope.updateAllExerciseHypotheses = function() {
+        $scope.setCheckedHypotheses = function() {
+            CheckedHypotheses.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
+                $scope.checkedHypotheses = data;
+            });
+        };
+
+        $scope.setAllExerciseHypotheses = function() {
+            $scope.setExerciseHypotheses();
+
             if($scope.currentUserAdmin){
-                $scope.updateExerciseHypothesesOnly();
-                $scope.updateExerciseHypotheses();
+                $scope.setExerciseHypothesesOnly();
+            }
+
+            if($scope.currentUser && !$scope.currentUserAdmin){
+                $scope.setCheckedHypotheses();
             }
         };
 
-        $scope.updateAllExerciseHypotheses();
+        $scope.setAllExerciseHypotheses();
         $scope.setActiveTab("HypothesisTab");
 
         $scope.addToExercise = function(hypothesis) {
@@ -38,7 +50,7 @@ app.controller("ExerciseHypothesesController", [
 
             ExerciseHypotheses.save(newExerciseHypothesis,
                 function() {
-                    $scope.updateAllExerciseHypotheses();
+                    $scope.setAllExerciseHypotheses();
                 },
                 function() {
                     $window.alert("Diffiä ei voitu lisätä caseen.");
@@ -71,7 +83,7 @@ app.controller("ExerciseHypothesesController", [
             });
 
             modalInstance.result.then(function() {
-                $scope.updateAllExerciseHypotheses();
+                $scope.setAllExerciseHypotheses();
             }, function() {
                 $window.alert("Casen diffin päivitys peruttu.");
             });

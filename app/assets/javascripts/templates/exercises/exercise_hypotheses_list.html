@@ -106,4 +106,76 @@
     </div>
     <div class = "separator"></div>
     <br/>
+
+    {{checkedHypotheses}}
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div ng-repeat="(hypothesis_group, exercise_hypotheses) in exerciseHypotheses">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-11">
+                                <button class="btn btn-default btn-hypothesis multiline btn-save" >{{hypothesis_group}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="row" ng-repeat="exercise_hypothesis in exercise_hypotheses">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-4">
+                            <button class="btn btn-default btn-hypothesis multiline">
+                                {{exercise_hypothesis.hypothesis.name}}
+                            </button>
+                        </div>
+
+                        <div class="col-md-6">
+
+                        </div>
+                        <!--                    <% if @current_user.has_checked_hypothesis?(exercise_hypothesis) %>
+
+                                            <div class="col-md-4">
+                                                <input id="checked_hypothesis_<%= exercise_hypothesis.id.to_s %>"
+                                                       class="btn btn-default <%= (@correct_diagnosis && @correct_diagnosis.hypothesis.id == exercise_hypothesis.hypothesis.id) ? "btn-save" : "btn-checked" %> multiline"
+                                                type="button"
+                                                value="<%= exercise_hypothesis.hypothesis.name %>"
+                                                onclick='showExHypExplanation("#exhyp_explanation_<%= exercise_hypothesis.id.to_s %>");'></input>
+                                            </div>
+
+
+                                            <div class = "col-md-6">
+                                                <div class="info-checked-hypothesis removable"
+                                                     id="exhyp_explanation_<%= exercise_hypothesis.id.to_s %>"
+                                                     style=<%= @last_clicked_hypothesis_id == exercise_hypothesis.id.to_s ? "" : "display:none;"%>>
+                                                <%= (@correct_diagnosis && @correct_diagnosis.hypothesis.id == exercise_hypothesis.hypothesis.id) ? exercise_hypothesis.get_right_explanation.html_safe : exercise_hypothesis.get_explanation.html_safe %>
+                                            </div>
+                                        </div>-->
+
+
+                        <!--                <% else %>
+
+                                        <div class="col-md-4">
+                                            <%= form_for(@new_checked_hypothesis) do |f| %>
+                                            <%= f.hidden_field :exercise_hypothesis_id, :value => exercise_hypothesis.id %>
+                                            <%= f.hidden_field :user_id, :value => @current_user.id %>
+                                            <%= f.submit exercise_hypothesis.hypothesis.name, :class => 'btn btn-default multiline' %>
+                                            <% end %>
+                                        </div>
+                                        <% if @last_clicked_hypothesis_id == exercise_hypothesis.id.to_s %>
+                                        <div class = "col-md-6">
+                                            <div class="alert-unchecked-hypothesis removable"><%= alert %></div>
+                                        </div>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

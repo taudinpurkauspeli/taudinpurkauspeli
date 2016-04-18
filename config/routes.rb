@@ -16,9 +16,9 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :hypothesis_groups, only: [:new, :create, :destroy, :index, :show, :update]
+  resources :hypothesis_groups
 
-  resources :checked_hypotheses, only: [:new, :create, :destroy]
+  resources :checked_hypotheses, only: [:new, :create, :destroy, :index]
 
   resources :completed_tasks, only: [:create]
 
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   get 'tasks_all_by_level', to: 'tasks#tasks_all_by_level'
   get 'tasks_all', to: 'tasks#tasks_all'
   get 'tasks_student_index', to: 'tasks#student_index'
-  get 'task_can_be_started/:id', to: 'tasks#task_can_be_started'
+  get 'task_can_be_started/:id', to: 'tasks#student_index'
   post 'json_tasks_create', to: 'tasks#json_create'
 
   get 'signin', to: 'sessions#new'
