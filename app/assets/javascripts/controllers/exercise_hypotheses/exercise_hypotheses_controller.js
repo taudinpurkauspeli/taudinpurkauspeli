@@ -89,5 +89,45 @@ app.controller("ExerciseHypothesesController", [
             });
         };
 
+        $scope.hypothesisIsCorrectDiagnosis = function(exerciseHypothesis) {
+            // @correct_diagnosis && @correct_diagnosis.hypothesis.id == exercise_hypothesis.hypothesis.id
+            return false;
+        };
+
+        $scope.userHasCheckedHypothesis = function(exerciseHypothesis) {
+            for(var i = 0; i < $scope.checkedHypotheses.length; i++) {
+                var checkedHypothesis = $scope.checkedHypotheses[i];
+                if(checkedHypothesis.exercise_hypothesis_id == exerciseHypothesis.id){
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        $scope.setExerciseHypothesisId = function(exerciseHypothesisId){
+            if($scope.lastClickedExerciseHypothesis == exerciseHypothesisId){
+                $scope.lastClickedExerciseHypothesis = null;
+            } else {
+                $scope.lastClickedExerciseHypothesis = exerciseHypothesisId;
+            }
+        };
+
+        $scope.checkExerciseHypothesis = function(exerciseHypothesis) {
+            if($scope.userHasCheckedHypothesis(exerciseHypothesis)){
+                $scope.setExerciseHypothesisId(exerciseHypothesis.id);
+            } else {
+console.log("Palvelimelle jutut");
+/*                                    <%= form_for(@new_checked_hypothesis) do |f| %>
+                                    <%= f.hidden_field :exercise_hypothesis_id, :value => exercise_hypothesis.id %>
+                                    <%= f.hidden_field :user_id, :value => @current_user.id %>
+                                    <%= f.submit exercise_hypothesis.hypothesis.name, :class => 'btn btn-default multiline' %>*/
+            }
+
+        };
+
+        $scope.userClickedCheckedHypothesis = function(exerciseHypothesis) {
+            return exerciseHypothesis.id == $scope.lastClickedExerciseHypothesis;
+        };
+
     }
 ]);
