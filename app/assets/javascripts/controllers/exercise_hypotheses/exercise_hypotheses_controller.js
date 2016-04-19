@@ -116,11 +116,20 @@ app.controller("ExerciseHypothesesController", [
             if($scope.userHasCheckedHypothesis(exerciseHypothesis)){
                 $scope.setExerciseHypothesisId(exerciseHypothesis.id);
             } else {
-console.log("Palvelimelle jutut");
-/*                                    <%= form_for(@new_checked_hypothesis) do |f| %>
-                                    <%= f.hidden_field :exercise_hypothesis_id, :value => exercise_hypothesis.id %>
-                                    <%= f.hidden_field :user_id, :value => @current_user.id %>
-                                    <%= f.submit exercise_hypothesis.hypothesis.name, :class => 'btn btn-default multiline' %>*/
+                var newCheckedHypothesis = {
+                    exercise_hypothesis_id: exerciseHypothesis.id,
+                    user_id: $scope.currentUser
+                };
+                CheckedHypotheses.save(newCheckedHypothesis,
+                    function(data) {
+                        $window.alert(exerciseHypothesis.hypothesis.name + " poissuljettu!");
+                        $scope.setExerciseHypothesisId(exerciseHypothesis.id);
+                        $scope.setAllExerciseHypotheses();
+                    },
+                    function() {
+                        $window.alert("Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea tämän diffin.");
+                    }
+                );
             }
 
         };

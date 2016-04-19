@@ -30,20 +30,25 @@ class CheckedHypothesesController < ApplicationController
   def create
     @checked_hypothesis = CheckedHypothesis.new(checked_hypothesis_params)
     exHyp = ExerciseHypothesis.find_by(id: checked_hypothesis_params[:exercise_hypothesis_id])
-    unless(exHyp.nil?)
-      if(exHyp.user_meets_requirements(@current_user))
-        respond_to do |format|
+    respond_to do |format|
+      unless(exHyp.nil?)
+        if(exHyp.user_meets_requirements(@current_user))
+
           if @checked_hypothesis.save
             format.html { redirect_to hypotheses_url(:layout => get_layout, :last_clicked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id])}
+            format.json { head :ok }
           else
             format.html { redirect_to hypotheses_url(:layout => get_layout), alert: "Hypoteesin poisto epäonnistui" }
+            format.json { head :internal_server_error }
           end
+        else
+          format.html { redirect_to hypotheses_url(:layout => get_layout, :last_clicked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id]), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea diffin." }
+          format.json { head :not_acceptable }
         end
       else
-        redirect_to hypotheses_url(:layout => get_layout, :last_clicked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id]), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea diffin."
+        format.html { redirect_to hypotheses_url(:layout => get_layout, :last_clicked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id]), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea diffin." }
+        format.json { head :not_acceptable }
       end
-    else
-      redirect_to hypotheses_url(:layout => get_layout, :last_clicked_hypothesis_id => checked_hypothesis_params[:exercise_hypothesis_id]), alert: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea diffin."
     end
   end
 
