@@ -75,7 +75,22 @@
 <br/>
 <br/>
 
-<div class="row" ng-if="currentUserAdmin">
+
+
+<div class="row" ng-if="currentUserAdmin && (currentUser != user.id)">
+    <div class="col-md-3">
+        <button class="btn btn-default btn-exercise btn-save"
+                ng-click="changeAdminStatus(user)">
+            Tee käyttäjästä {{adminStatus}}
+        </button>
+    </div>
+</div>
+
+<br/>
+<br/>
+<br/>
+
+<div class="row" ng-if="currentUserAdmin && (currentUser != user.id)">
     <div class="col-md-3">
         <button class="btn btn-default btn-exercise btn-del"
                 ng-click="removeUser(user)">

@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   end
 
   def json_index
-    @users = User.where(admin:false).select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name")
+    @users = User.where(admin:params[:admin]).select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name")
 
     respond_to do |format|
       format.html
@@ -127,8 +127,10 @@ class UsersController < ApplicationController
       respond_to do |format|
         if @user.update(user_params)
           format.html { redirect_to @user, notice: 'Käyttäjän tiedot päivitetty.' }
+          format.json { head :ok }
         else
           format.html { render :edit }
+          format.json { head :internal_server_error }
         end
       end
     end
