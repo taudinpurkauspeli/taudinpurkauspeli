@@ -37,11 +37,12 @@ class TasksController < ApplicationController
     respond_to do |format|
       if exercise && @current_user
 
-        completed_tasks = @current_user.tasks.where("level > ?", 0).where(exercise:exercise).order("level")
+        completed_tasks = @current_user.tasks.where("level > ?", 0).where(exercise:exercise).order(:level)
+        completed_tasks_by_level = completed_tasks.group_by{|t| t.level}.map{|item| item}
         available_tasks = exercise.tasks.where("level > ?", 0).order("name") - completed_tasks
 
         format.html
-        format.json {render json: { completed_tasks: completed_tasks, available_tasks: available_tasks }}
+        format.json {render json: { completed_tasks: completed_tasks_by_level, available_tasks: available_tasks }}
       else
         format.html
         format.json {head :not_found}

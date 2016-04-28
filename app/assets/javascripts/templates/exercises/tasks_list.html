@@ -73,14 +73,14 @@
 
     <br />
 
-        <div class = "row" ng-repeat="task in availableTasks">
-            <div class="col-md-5">
-                <button class="btn btn-default btn-available-task multiline" ng-click="startTask(task)">{{task.name}}</button>
-            </div>
-            <div class="col-md-5" ng-if="cannotStartTask(task.id)">
-                <div class="alert-unavailable-task removable">Et voi vielä suorittaa tätä toimenpidettä, vaan sinun tulee suorittaa ainakin yksi muu toimenpide ennen tätä.</div>
-            </div>
+    <div class = "row" ng-repeat="task in availableTasks">
+        <div class="col-md-5">
+            <button class="btn btn-default btn-available-task multiline" ng-click="startTask(task)">{{task.name}}</button>
         </div>
+        <div class="col-md-5" ng-if="cannotStartTask(task.id)">
+            <div class="alert-unavailable-task removable">Et voi vielä suorittaa tätä toimenpidettä, vaan sinun tulee suorittaa ainakin yksi muu toimenpide ennen tätä.</div>
+        </div>
+    </div>
 
     <div class = "separator"></div>
 
@@ -97,44 +97,31 @@
 
     <br/>
 
-    {{completedTasks}}
-    <!--
-        <div class = "row">
-            <div class = "col-md-6">
-                <div class = "div-tasks-container-admin">
-                    <% previous_level = 0 %>
-                    <% @completed_tasks.each do |task| %>
+    <div class="task-list">
+        <div class="dropzone">
+            <ul class="list-unstyled">
 
-                    <% if task.level > previous_level %>
-                    <% if previous_level > 0 %>
-                </div>
-                </td></tr></table>
-            </div>
-            <% end %>
-            <div class="panel panel-default panel-light-grey">
-
-                <table><tr><td class = "task-level-header"><%= task.level %></td><td>
-
-                    <div class="panel-body">
-                        <% end %>
-
-                        <%= button_to task.name, task, method: :get, :class => 'btn btn-default btn-completed-task-order multiline', :form_class => "form-completed-task" %>
-
-                        <% previous_level = task.level %>
-                        <% end %>
-
-                        <% if previous_level > 0 %>
+                <li ng-repeat="(level, tasks) in completedTasks"
+                    class="panel panel-default itemlist">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            {{tasks[0]}}
+                        </div>
                     </div>
-                </td></tr></table>
-            </div>
-            <% end %>
+                    <div class="panel-body">
+                        <ul class="list-unstyled">
 
+                            <li ng-repeat="task in tasks[1]">
+                                {{task.name}}
+                            </li>
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+
+            </ul>
         </div>
     </div>
-    </div>
-    -->
-
-
-
 
 </div>
