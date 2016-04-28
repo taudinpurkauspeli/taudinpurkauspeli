@@ -130,17 +130,22 @@
                         <div class="col-md-4">
                             <button class="btn btn-default btn-hypothesis multiline"
                                     ng-class="{
-'btn-save': hypothesisIsCorrectDiagnosis(exercise_hypothesis),
-'btn-checked': userHasCheckedHypothesis(exercise_hypothesis)}"
-                                    ng-click="checkExerciseHypothesis(exercise_hypothesis)">
+'btn-checked': userHasCheckedHypothesis(exercise_hypothesis) && !hypothesisIsCorrectDiagnosis(exercise_hypothesis),
+'btn-save': hypothesisIsCorrectDiagnosis(exercise_hypothesis)}"
+                                    ng-click="checkExerciseHypothesis(exercise_hypothesis)"
+                                    ng-if="correctDiagnosis">
                                 {{exercise_hypothesis.hypothesis.name}}
                             </button>
                         </div>
 
                         <div class="col-md-6">
-                            <div class="info-checked-hypothesis removable" ng-if="exercise_hypothesis.explanation && userClickedCheckedHypothesis(exercise_hypothesis)"
-                                 ta-bind="text" ng-model="exercise_hypothesis.explanation">
-                                <!--<%= (@correct_diagnosis && @correct_diagnosis.hypothesis.id == exercise_hypothesis.hypothesis.id) ? exercise_hypothesis.get_right_explanation.html_safe %>-->
+                            <div class="info-checked-hypothesis removable"
+                                 ng-if="correctDiagnosis && (exercise_hypothesis.explanation || 
+                                 hypothesisIsCorrectDiagnosis(exercise_hypothesis)) && userClickedCheckedHypothesis(exercise_hypothesis)">
+
+                                <span ng-if="hypothesisIsCorrectDiagnosis(exercise_hypothesis)">Hienoa! Selvitit oikean diagnoosin! </span>
+
+                                <span ta-bind="text" ng-model="exercise_hypothesis.explanation"></span>
                             </div>
                         </div>
 

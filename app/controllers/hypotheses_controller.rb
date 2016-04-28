@@ -3,7 +3,7 @@ class HypothesesController < ApplicationController
   skip_before_action :verify_authenticity_token, if: :json_request?
 
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin, except: [:index]
+  before_action :ensure_user_is_admin, except: [:index, :correct_diagnosis]
   before_action :set_hypothesis, only: [:destroy, :update]
   before_action :set_current_user, only: [:index]
 
@@ -70,6 +70,28 @@ class HypothesesController < ApplicationController
   # GET /hypotheses/new
   def new
     @hypothesis = Hypothesis.new
+  end
+
+  def correct_diagnosis
+    exercise = Exercise.find(params[:exercise_id])
+
+    if exercise
+
+      correct_diagnosis = exercise.correct_diagnosis
+
+      respond_to do |format|
+        if correct_diagnosis
+          format.html
+          format.json {render json: correct_diagnosis}
+        else
+          format.html
+          format.json {head :not_found}
+        end
+      end
+
+
+    end
+
   end
 
   # POST /hypotheses

@@ -7,6 +7,7 @@ app.controller("ExerciseHypothesesController", [
         var ExerciseHypotheses = $resource('/exercise_hypotheses.json');
         var ExerciseHypothesesOnly = $resource('/exercise_hypotheses_only.json');
         var CheckedHypotheses = $resource('/checked_hypotheses.json');
+        var CorrectDiagnosis = $resource('/correct_diagnosis.json');
 
         $scope.setExerciseHypotheses = function() {
             ExerciseHypotheses.get({"exercise_id": $stateParams.exerciseShowId}, function(data) {
@@ -26,6 +27,12 @@ app.controller("ExerciseHypothesesController", [
             });
         };
 
+        $scope.setCorrectDiagnosis = function() {
+            CorrectDiagnosis.get({"exercise_id": $stateParams.exerciseShowId}, function(data) {
+                $scope.correctDiagnosis = data;
+            });
+        };
+
         $scope.setAllExerciseHypotheses = function() {
             $scope.setExerciseHypotheses();
 
@@ -35,6 +42,7 @@ app.controller("ExerciseHypothesesController", [
 
             if($scope.currentUser && !$scope.currentUserAdmin){
                 $scope.setCheckedHypotheses();
+                $scope.setCorrectDiagnosis();
             }
         };
 
@@ -90,8 +98,7 @@ app.controller("ExerciseHypothesesController", [
         };
 
         $scope.hypothesisIsCorrectDiagnosis = function(exerciseHypothesis) {
-            // @correct_diagnosis && @correct_diagnosis.hypothesis.id == exercise_hypothesis.hypothesis.id
-            return false;
+            return $scope.correctDiagnosis.id == exerciseHypothesis.id;
         };
 
         $scope.userHasCheckedHypothesis = function(exerciseHypothesis) {
