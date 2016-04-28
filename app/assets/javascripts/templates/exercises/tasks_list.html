@@ -111,7 +111,8 @@
                     <div class="panel-body">
                         <ul class="list-unstyled">
 
-                            <li ng-repeat="task in tasks[1]">
+                            <li ng-repeat="task in tasks[1]"
+                                ng-click="goToCurrentTask(task.id)">
                                 {{task.name}}
                             </li>
 

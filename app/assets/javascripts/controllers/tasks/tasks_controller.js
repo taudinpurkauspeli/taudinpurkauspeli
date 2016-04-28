@@ -108,7 +108,7 @@ app.controller("TasksController", [
 
         $scope.startTask = function(task) {
             TaskCanBeStarted.get({id: task.id}, function() {
-                console.log(task);
+                $scope.goToCurrentTask(task.id);
             }, function() {
                 $scope.setTaskId(task.id);
             });
