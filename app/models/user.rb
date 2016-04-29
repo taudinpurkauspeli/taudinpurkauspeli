@@ -97,6 +97,20 @@ class User < ActiveRecord::Base
     return false
   end
 
+  def completable_subtasks(task)
+
+    subtasks_to_return = Array.new
+
+    task.subtasks.each do |subtask|
+      if can_complete_subtask?(task, subtask)
+        subtasks_to_return.push(subtask)
+      end
+    end
+
+    return subtasks_to_return
+
+  end
+
   def get_started_exercises_with_completion_percent
     currently_started_exercises = started_exercises.where(hidden: false).distinct
 

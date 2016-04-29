@@ -24,6 +24,9 @@ app.controller("ExercisesShowController", [
         var TaskOne = $resource('/tasks_one/:taskId.json',
             { taskId: "@id"});
 
+        var CompletableSubtasks = $resource('/users/:id/completable_subtasks.json',
+            {id: '@id'});
+
         $scope.setExercise = function() {
             ExerciseOne.get({exerciseId : exerciseId}, function(data) {
                 $scope.exercise = data.exercise;
@@ -31,10 +34,25 @@ app.controller("ExercisesShowController", [
             });
         };
 
+        $scope.setCompletableSubtasks = function(){
+
+            CompletableSubtasks.query({id: $scope.currentUser, task_id: $scope.taskForShow.id},
+                function(data) {
+                    $scope.completableSubtasks = data;
+                }, function() {
+                    $scope.completableSubtasks = [];
+                }
+            );
+        };
+
         $scope.setTaskForShow = function(current_task){
             if(current_task){
                 TaskOne.get({taskId : current_task}, function(data) {
                     $scope.taskForShow = data;
+
+                    if($scope.currentUser && !$scope.currentUserAdmin){
+                        $scope.setCompletableSubtasks();
+                    }
                 });
             } else {
                 $scope.taskForShow = {};

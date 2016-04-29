@@ -38,19 +38,19 @@
     <h1>Toimenpide: {{taskForShow.name}}</h1>
     <br/>
 
-    <!-- {{taskForShow}} -->
+    <div ng-repeat="subtask in completableSubtasks">
 
-    <!--    <% @subtasks.each do |subtask| %>
-        <% if @current_user.can_complete_subtask?(@task, subtask) || @current_user.try(:admin) %>
-        <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask, parent_view: "task_show" } %>
-        <% end %>
-        <% end %>
+        <!--
+                   <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask, parent_view: "task_show" } %>-->
+        {{subtask}}
 
-        <% if @current_user.has_completed? current_exercise %>
-        <%= render 'exercises/user_has_completed_exercise' %>
-        <% elsif @current_user.has_completed?(@task) %>
-        <%= render 'task_completed', {task:@task} %>
-        <% end %>-->
+
+    </div>
+    <!-- <% if @current_user.has_completed? current_exercise %>
+     <%= render 'exercises/user_has_completed_exercise' %>
+     <% elsif @current_user.has_completed?(@task) %>
+     <%= render 'task_completed', {task:@task} %>
+     <% end %>-->
 
 
 </div>
