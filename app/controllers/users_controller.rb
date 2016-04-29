@@ -105,7 +105,7 @@ class UsersController < ApplicationController
         subtasks = @user.completable_subtasks(task)
 
         format.html { }
-        format.json { render json: subtasks }
+        format.json { render json: subtasks.to_json(:include => [:task_text, :multichoice, :interview, :conclusion]) }
       else
         format.html { }
         format.json { head :internal_server_error }
