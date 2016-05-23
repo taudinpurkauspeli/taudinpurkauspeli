@@ -38,7 +38,7 @@ app.controller("ExercisesShowController", [
 
             CompletableSubtasks.query({id: $scope.currentUser, task_id: $scope.taskForShow.id},
                 function(data) {
-                    $scope.completableSubtasks = data;
+                    $scope.completedSubtasks = data;
                 }, function() {
                     $scope.completableSubtasks = [];
                 }
