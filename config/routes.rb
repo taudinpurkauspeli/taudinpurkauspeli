@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   delete 'delete_user_json/:id', to: 'users#json_destroy'
   get 'users_by_case_json', to: 'users#json_by_case'
   get 'users/:id/completable_subtasks', to: 'users#completable_subtasks'
+  get 'users/:id/has_completed_task', to: 'users#has_completed_task'
 
   get 'tasks_one/:id', to: 'tasks#tasks_one'
   get 'tasks_all_by_level', to: 'tasks#tasks_all_by_level'

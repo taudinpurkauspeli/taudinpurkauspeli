@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   before_action :ensure_user_is_logged_in, except: [:new, :create]
   before_action :ensure_user_is_admin, only: [:index, :json_destroy]
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :json_destroy, :completable_subtasks]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :json_destroy, :completable_subtasks, :has_completed_task]
   before_action :set_current_user, only: [:index, :show]
 
   before_action except: [:new, :create, :index, :json_index, :json_by_case] do
@@ -106,6 +106,28 @@ class UsersController < ApplicationController
 
         format.html { }
         format.json { render json: subtasks.to_json(:include => [:task_text, :multichoice, :interview, :conclusion]) }
+      else
+        format.html { }
+        format.json { head :internal_server_error }
+      end
+    end
+  end
+
+  # GET /users/1/has_completed_task
+  # GET /users/1/has_completed_task.json
+  def has_completed_task
+
+    task = Task.find(params[:task_id])
+
+    respond_to do |format|
+      if task
+        if @user.has_completed?(task)
+          format.html { }
+          format.json { head :ok }
+        else
+          format.html { }
+          format.json { head :expectation_failed }
+        end
       else
         format.html { }
         format.json { head :internal_server_error }

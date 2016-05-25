@@ -38,15 +38,21 @@
     <h1>Toimenpide: {{taskForShow.name}}</h1>
     <br/>
 
+    <h3>Suoritetut alakohdat:</h3>
     <div ng-repeat="subtask in completedSubtasks">
 
         <!--
                    <%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask, parent_view: "task_show" } %>-->
         <completed-subtask subtask="subtask"></completed-subtask>
 
-        <uncompleted-subtask subtask="subtask"></uncompleted-subtask>
-
     </div>
+
+    <br/>
+    <br/>
+    <h3>Suorittamaton alakohta:</h3>
+
+    <uncompleted-subtask subtask="uncompletedSubtask" ng-if="!userHasCompletedTask"></uncompleted-subtask>
+
 
     <!-- <% if @current_user.has_completed? current_exercise %>
      <%= render 'exercises/user_has_completed_exercise' %>
