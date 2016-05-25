@@ -1,11 +1,11 @@
 var app = angular.module('diagnoseDiseases');
 
-app.directive('completedTask', [
+app.directive('uncompletedSubtask', [
     function() {
         return {
             restrict: 'E',
-            templateUrl: "tasks/completed_task.html",
-            controller: "TasksCompletedTaskController",
+            templateUrl: "tasks/uncompleted_subtask.html",
+            controller: "TasksUncompletedSubtaskController",
             scope: {
                 subtask: '=subtask'
             }

@@ -1,6 +1,6 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("TasksCompletedTaskController", [
+app.controller("TasksCompletedSubtzaskController", [
     "$scope", "$stateParams", "LocalStorageService",
     function($scope, $stateParams) {
 
