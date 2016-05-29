@@ -5,9 +5,7 @@ app.controller("TasksCompletedSubtaskController", [
     function($scope, $stateParams) {
 
         $scope.setSubtask = function() {
-            if($scope.subtask.task_text){
-                return;
-            } else if($scope.subtask.multichoice){
+            if($scope.subtask.multichoice){
                 //get options
 
             } else if($scope.subtask.interview){
@@ -17,8 +15,5 @@ app.controller("TasksCompletedSubtaskController", [
                 //get something
             }
         };
-
-
-
     }
 ]);
