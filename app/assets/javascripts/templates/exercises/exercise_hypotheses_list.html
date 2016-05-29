@@ -129,9 +129,8 @@
 
                         <div class="col-md-4">
                             <button class="btn btn-default btn-hypothesis multiline"
-                                    ng-class="{
-'btn-checked': userHasCheckedHypothesis(exercise_hypothesis) && !hypothesisIsCorrectDiagnosis(exercise_hypothesis),
-'btn-save': hypothesisIsCorrectDiagnosis(exercise_hypothesis)}"
+                                    ng-class="{'btn-checked': userHasCheckedHypothesis(exercise_hypothesis) && !hypothesisIsCorrectDiagnosis(exercise_hypothesis),
+                                               'btn-save': userHasCheckedHypothesis(exercise_hypothesis) && hypothesisIsCorrectDiagnosis(exercise_hypothesis)}"
                                     ng-click="checkExerciseHypothesis(exercise_hypothesis)"
                                     ng-if="correctDiagnosis">
                                 {{exercise_hypothesis.hypothesis.name}}
@@ -141,7 +140,7 @@
                         <div class="col-md-6">
                             <div class="info-checked-hypothesis removable"
                                  ng-if="correctDiagnosis && (exercise_hypothesis.explanation || 
-                                 hypothesisIsCorrectDiagnosis(exercise_hypothesis)) && userClickedCheckedHypothesis(exercise_hypothesis)">
+                                        hypothesisIsCorrectDiagnosis(exercise_hypothesis)) && userClickedCheckedHypothesis(exercise_hypothesis)">
 
                                 <span ng-if="hypothesisIsCorrectDiagnosis(exercise_hypothesis)">Hienoa! Selvitit oikean diagnoosin! </span>
 
