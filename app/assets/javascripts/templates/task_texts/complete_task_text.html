@@ -11,6 +11,6 @@
     </div>
     <div class="panel-body">
         <span ta-bind="text" ng-model="subtask.task_text.content"></span>
-        <button class="btn btn-default btn-save widthAuto" >Jatka</button>
+        <button class="btn btn-default btn-save widthAuto" ng-click="completeTaskText(subtask.task_text)">Jatka</button>
     </div>
 </div>

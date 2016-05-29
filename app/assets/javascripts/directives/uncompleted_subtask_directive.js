@@ -7,7 +7,8 @@ app.directive('uncompletedSubtask', [
             templateUrl: "tasks/uncompleted_subtask.html",
             controller: "TasksUncompletedSubtaskController",
             scope: {
-                subtask: '=subtask'
+                subtask: '=subtask',
+                'setTask': '&afterCompletion'
             }
         };
     }

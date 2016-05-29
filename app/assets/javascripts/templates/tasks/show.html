@@ -51,7 +51,7 @@
     <br/>
     <h3>Suorittamaton alakohta:</h3>
 
-    <uncompleted-subtask subtask="uncompletedSubtask" ng-if="!userHasCompletedTask"></uncompleted-subtask>
+    <uncompleted-subtask subtask="uncompletedSubtask" after-completion="setTask()" ng-if="!userHasCompletedTask"></uncompleted-subtask>
 
 
     <!-- <% if @current_user.has_completed? current_exercise %>
