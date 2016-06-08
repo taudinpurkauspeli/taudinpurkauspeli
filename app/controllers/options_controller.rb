@@ -3,7 +3,7 @@ class OptionsController < ApplicationController
   skip_before_action :verify_authenticity_token, if: :json_request?
 
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin
+  before_action :ensure_user_is_admin, except: [:index]
   before_action :set_option, only: [:update, :destroy]
 
   def index

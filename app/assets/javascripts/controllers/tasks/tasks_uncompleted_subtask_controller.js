@@ -8,10 +8,7 @@ app.controller("TasksUncompletedSubtaskController", [
             { taskTextId: "@id"});
 
         $scope.setSubtask = function() {
-            if($scope.subtask.multichoice){
-                //get options
-
-            } else if($scope.subtask.interview){
+            if($scope.subtask.interview){
                 //get questions
 
             } else if($scope.subtask.conclusion){
