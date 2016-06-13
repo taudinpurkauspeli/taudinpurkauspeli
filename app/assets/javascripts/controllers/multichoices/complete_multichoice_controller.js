@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("CompleteMultichoiceController", [
-    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "$state",
-    function($scope, $resource, $window, $uibModal, $stateParams, $state) {
+    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "$state", "$filter",
+    function($scope, $resource, $window, $uibModal, $stateParams, $state, $filter) {
 
         var Options = $resource('/options_multichoice.json');
 
@@ -13,6 +13,11 @@ app.controller("CompleteMultichoiceController", [
         };
 
         $scope.setOptions();
+
+        $scope.checkAnswers = function() {
+            var checkedAnswers = $filter('filter')($scope.options, {checked: true});
+            console.log(checkedAnswers);
+        }
 
     }
 ]);
