@@ -4,7 +4,6 @@
     </div>
     <div class="panel-body">
 
-        {{options}}
         <form>
             <table class = "width100">
 
@@ -13,32 +12,18 @@
                                                        'allowed-answer': checkedOptionsContains(option) && optionIs('allowed', option),
                                                        'wrong-answer': checkedOptionsContains(option) && optionIs('wrong', option)}">
 
+                        <input type="checkbox" ng-model="option.checked" value="option.id" id="option_{{option.id}}" ng-if="!subtask.multichoice.is_radio_button">
 
-                        <input type="checkbox" ng-model="option.checked" value="option.id" id="option_{{option.id}}">
-                        <!--
-                                          <% if subtask.multichoice.is_radio_button %>
-                                              <% if @multichoice_checked_options.to_a.include? option.id.to_s and option.is_correct_answer != "wrong" %>
-                                                  <%= radio_button_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s, :checked => true %>
-                                              <% else %>
-                                                  <%= radio_button_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s %>
-                                              <% end %>
+                        <input type="radio" ng-model="option.checked" value="option.id" id="option_{{option.id}}" ng-if="subtask.multichoice.is_radio_button">
 
-                                          <% else %>
-                                              <% if @multichoice_checked_options.to_a.include? option.id.to_s and option.is_correct_answer != "wrong" %>
-                                                  <%= check_box_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s, :checked => true %>
-                                              <% else %>
-                                                  <%= check_box_tag 'checked_options[]', option.id, nil, id: "checked_options_" + option.id.to_s %>
-                                              <% end %>
-                                          <% end %>-->
                         <label for="option_{{option.id}}">{{option.content}}</label>
-
-
                     </td>
+                    
                     <td class = "multichoice" ta-bind="text" ng-model="option.explanation"
+                        ng-if="checkedOptionsContains(option)"
                         ng-class="{'correct-answer': checkedOptionsContains(option) && optionIs('required', option),
                                    'allowed-answer': checkedOptionsContains(option) && optionIs('allowed', option),
                                    'wrong-answer': checkedOptionsContains(option) && optionIs('wrong', option)}">
-
                     </td>
                 </tr>
 

@@ -8,10 +8,7 @@
 </div>
 
 <div ng-if="subtask.multichoice">
-    {{subtask.multichoice}}
-
     <complete-multichoice subtask="subtask" after-completion="setTask()"></complete-multichoice>
-
 </div>
 
 <div ng-if="subtask.conclusion">

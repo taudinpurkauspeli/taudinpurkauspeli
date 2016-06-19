@@ -28,12 +28,12 @@ app.controller("CompleteMultichoiceController", [
             CheckAnswersMultichoice.save({ id: $scope.subtask.multichoice.id, checked_options: checkedOptions }, function(data) {
                 console.log(data.status);
             }, function(result) {
-                $scope.checkedOptions = result.data;
+                $scope.checkedOptions = result.data || [];
             });
         };
 
         $scope.checkedOptionsContains = function(option) {
-            return $scope.checkedOptions.indexOf(option.id) !== -1;
+            return $scope.checkedOptions.length !== 0 && $scope.checkedOptions.indexOf(option.id) !== -1;
         };
 
         $scope.optionIs = function(optionStatus, option) {
