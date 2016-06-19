@@ -18,7 +18,7 @@
 
                         <label for="option_{{option.id}}">{{option.content}}</label>
                     </td>
-                    
+
                     <td class = "multichoice" ta-bind="text" ng-model="option.explanation"
                         ng-if="checkedOptionsContains(option)"
                         ng-class="{'correct-answer': checkedOptionsContains(option) && optionIs('required', option),

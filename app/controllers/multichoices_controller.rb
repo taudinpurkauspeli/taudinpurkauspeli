@@ -93,9 +93,10 @@ class MultichoicesController < ApplicationController
   end
 
   # TODO fix user_has_completed redirect logic
-  # /multichoices/:id/check_answers'
+  # /multichoices/:id/check_answers
   def check_answers
     respond_to do |format|
+      byebug
       if @multichoice.user_answered_correctly?(@current_user, checked_options_params[:checked_options].to_a)
         if @current_user.has_completed?(current_exercise)
           format.html { redirect_to task_path(@multichoice.subtask.task, :layout => get_layout, notice: "Onneksi olkoon suoritit casen!") }

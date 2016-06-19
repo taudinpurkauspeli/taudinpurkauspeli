@@ -10,6 +10,7 @@ class Multichoice < ActiveRecord::Base
 	end
 
 	def user_answered_correctly?(user, checked_options)
+		byebug
 		if contains_all_right_answers(checked_options) && !contains_wrong_answers(checked_options)
 			user.complete_subtask(subtask)
 			return true

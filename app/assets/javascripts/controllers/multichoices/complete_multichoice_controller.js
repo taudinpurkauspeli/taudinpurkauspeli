@@ -27,6 +27,7 @@ app.controller("CompleteMultichoiceController", [
 
             CheckAnswersMultichoice.save({ id: $scope.subtask.multichoice.id, checked_options: checkedOptions }, function(data) {
                 console.log(data.status);
+                $scope.setTask();
             }, function(result) {
                 $scope.checkedOptions = result.data || [];
             });
