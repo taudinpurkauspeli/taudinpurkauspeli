@@ -14,7 +14,7 @@
 
                         <input type="checkbox" ng-model="option.checked" value="option.id" id="option_{{option.id}}" ng-if="!subtask.multichoice.is_radio_button">
 
-                        <input type="radio" ng-model="option.checked" value="option.id" id="option_{{option.id}}" ng-if="subtask.multichoice.is_radio_button">
+                        <input type="radio" ng-model="selectedRadiobuttonOption.id" ng-value="{{option.id}}" id="option_{{option.id}}" ng-if="subtask.multichoice.is_radio_button">
 
                         <label for="option_{{option.id}}">{{option.content}}</label>
                     </td>

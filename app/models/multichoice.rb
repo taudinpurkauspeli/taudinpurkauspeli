@@ -10,7 +10,6 @@ class Multichoice < ActiveRecord::Base
 	end
 
 	def user_answered_correctly?(user, checked_options)
-		byebug
 		if contains_all_right_answers(checked_options) && !contains_wrong_answers(checked_options)
 			user.complete_subtask(subtask)
 			return true
@@ -32,12 +31,12 @@ class Multichoice < ActiveRecord::Base
 	def contains_all_right_answers(answered)
 		right_answers = options.required.map(&:id).map!(&:to_s)
 
-		return (right_answers - answered).empty?
+		return (right_answers - answered.map!(&:to_s)).empty?
 	end
 
 	def contains_wrong_answers(answered)
 		wrong_answers = options.wrong.map(&:id).map!(&:to_s)
-		result = wrong_answers - answered
+		result = wrong_answers - answered.map!(&:to_s)
 
 		return !(wrong_answers.count == result.count)
 	end

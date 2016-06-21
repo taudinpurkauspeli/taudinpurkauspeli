@@ -4,6 +4,8 @@ app.controller("CompleteMultichoiceController", [
     "$scope", "$resource", "$window", "$uibModal", "$stateParams", "$state", "$filter",
     function($scope, $resource, $window, $uibModal, $stateParams, $state, $filter) {
 
+        $scope.selectedRadiobuttonOption = {};
+
         var Options = $resource('/options_multichoice.json');
         var CheckAnswersMultichoice = $resource('/multichoices/:id/check_answers.json',
             {id: '@id'});
@@ -19,14 +21,17 @@ app.controller("CompleteMultichoiceController", [
         $scope.setOptions();
 
         $scope.checkAnswers = function() {
-            var checkedAnswers = $filter('filter')($scope.options, {checked: true});
             var checkedOptions = [];
-            angular.forEach(checkedAnswers, function(answer) {
-                checkedOptions.push(answer.id);
-            });
+            if($scope.subtask.multichoice.is_radio_button) {
+                checkedOptions.push($scope.selectedRadiobuttonOption.id);
+            } else {
+                var checkedAnswers = $filter('filter')($scope.options, {checked: true});
+                angular.forEach(checkedAnswers, function(answer) {
+                    checkedOptions.push(answer.id);
+                });
+            }
 
             CheckAnswersMultichoice.save({ id: $scope.subtask.multichoice.id, checked_options: checkedOptions }, function(data) {
-                console.log(data.status);
                 $scope.setTask();
             }, function(result) {
                 $scope.checkedOptions = result.data || [];
