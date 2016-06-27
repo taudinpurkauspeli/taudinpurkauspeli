@@ -105,4 +105,5 @@ Rails.application.routes.draw do
   get 'exercise_hypotheses_json_index', to: 'exercise_hypotheses#json_index'
 
   get 'options_multichoice', to: 'options#multichoice_index'
+  get 'questions_interview', to: 'questions#interview_index'
 end

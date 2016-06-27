@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   skip_before_action :verify_authenticity_token, if: :json_request?
 
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin
+  before_action :ensure_user_is_admin, except: [:interview_index]
   before_action :set_question, only: [:update, :destroy]
 
   def index
@@ -12,6 +12,17 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: questions.to_json(include: :question_group) }
+    end
+  end
+
+  def interview_index
+    questions_with_group = Question.where(interview_id: params[:interview_id]).where.not(question_group_id: nil).order(:title).group_by{|q| q.question_group.title }
+    questions_without_group = Question.where(interview_id: params[:interview_id]).where(question_group_id: nil).order(:title)
+    questions_sorted_by_group = questions_with_group.slice(*questions_with_group.keys.sort)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: {questions_by_group: questions_sorted_by_group, questions_without_group: questions_without_group} }
     end
   end
 

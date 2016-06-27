@@ -4,7 +4,7 @@
 
 <div ng-if="subtask.interview">
     {{subtask.interview}}
-
+    <complete-interview subtask="subtask" after-completion="setTask()"></complete-interview>
 </div>
 
 <div ng-if="subtask.multichoice">
