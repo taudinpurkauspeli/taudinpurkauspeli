@@ -7,6 +7,8 @@ app.controller("CompleteInterviewController", [
         var Questions = $resource('/questions_interview.json');
         var CheckAnswersInterview = $resource('/interviews/:id/check_answers.json',
             {id: '@id'});
+        var AskQuestion = $resource('/questions/:id/ask.json',
+            {id: '@id'});
 
         $scope.setQuestions = function() {
             Questions.get({ interview_id : $scope.subtask.interview.id}, function(data) {
@@ -15,30 +17,20 @@ app.controller("CompleteInterviewController", [
             });
         };
 
-        $scope.askedQuestions = [];
-
         $scope.setQuestions();
 
         $scope.checkAnswers = function() {
-            var askedQuestions = [];
-            if($scope.subtask.interview.is_radio_button) {
-                askedQuestions.push($scope.selectedRadiobuttonOption.id);
-            } else {
-                var checkedAnswers = $filter('filter')($scope.questions, {checked: true});
-                angular.forEach(checkedAnswers, function(answer) {
-                    askedQuestions.push(answer.id);
-                });
-            }
-
-            CheckAnswersInterview.save({ id: $scope.subtask.interview.id, asked_questions: askedQuestions }, function(data) {
+            CheckAnswersInterview.save({ id: $scope.subtask.interview.id }, function() {
                 $scope.setTask();
             }, function(result) {
-                $scope.askedQuestions = result.data || [];
+                $window.alert("Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja");
             });
         };
 
-        $scope.askedQuestionsContains = function(question) {
-            return $scope.askedQuestions.length !== 0 && $scope.askedQuestions.indexOf(question.id) !== -1;
+        $scope.askQuestion = function(question) {
+            AskQuestion.save({id: question.id}, function() {
+                $scope.setQuestions();
+            });
         };
 
         $scope.questionIs = function(questionStatus, question) {

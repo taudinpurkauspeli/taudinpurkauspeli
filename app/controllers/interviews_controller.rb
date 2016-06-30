@@ -112,11 +112,14 @@ class InterviewsController < ApplicationController
 				@current_user.complete_subtask(@interview.subtask)
 				if @current_user.has_completed?(current_exercise)
 					format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout, notice: "Onneksi olkoon suoritit casen!") }
+					format.json { head :accepted }
 				else
 					format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout) }
+					format.json { head :ok }
 				end
 			else
 				format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout), alert: 'Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!' }
+				format.json { render json: checked_options_params[:checked_options], status: :not_acceptable  }
 			end
 		end
 	end
