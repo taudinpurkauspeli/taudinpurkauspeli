@@ -119,7 +119,7 @@ class InterviewsController < ApplicationController
 				end
 			else
 				format.html { redirect_to task_path(@interview.subtask.task, :layout => get_layout), alert: 'Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!' }
-				format.json { render json: checked_options_params[:checked_options], status: :not_acceptable  }
+				format.json { head :not_acceptable  }
 			end
 		end
 	end

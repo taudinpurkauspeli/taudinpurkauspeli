@@ -28,13 +28,18 @@ app.controller("CompleteInterviewController", [
         };
 
         $scope.askQuestion = function(question) {
-            AskQuestion.save({id: question.id}, function() {
+            AskQuestion.save({id: question.id}, function(data) {
+                $scope.asked_last_id = data.asked_last;
                 $scope.setQuestions();
             });
         };
 
         $scope.questionIs = function(questionStatus, question) {
             return question.required === questionStatus;
+        };
+
+        $scope.questionWasAskedLast = function(question) {
+          return question.id == $scope.asked_last_id;
         }
 
     }
