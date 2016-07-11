@@ -37,7 +37,7 @@
                      ng-class="{'collapse-answer-right': questionIs('required', question),
                                    'collapse-answer-allowed': questionIs('allowed', question),
                                    'collapse-answer-wrong': questionIs('wrong', question),
-                                   'in': questionWasAskedLast(question)}"
+                                   'in': questionWasAskedLast(question) || question.asked}"
                      id="collapseQuestionContent{{question.id}}">
                 </div>
             </div>
@@ -67,16 +67,14 @@
                      ng-class="{'collapse-answer-right': questionIs('required', question),
                                    'collapse-answer-allowed': questionIs('allowed', question),
                                    'collapse-answer-wrong': questionIs('wrong', question),
-                                   'in': questionWasAskedLast(question)}"
-                        id="collapseQuestionContent{{question.id}}">
+                                   'in': questionWasAskedLast(question) || question.asked}"
+                     id="collapseQuestionContent{{question.id}}">
                 </div>
 
             </div>
         </div>
 
         <br />
-
-        <input type="submit" class="btn btn-default btn-save widthAuto" value="Tarkista" ng-if="!currentUserAdmin" ng-click="checkAnswers()">
 
     </div>
 </div>

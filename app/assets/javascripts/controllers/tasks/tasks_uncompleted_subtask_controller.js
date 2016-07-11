@@ -21,8 +21,6 @@ app.controller("TasksUncompletedSubtaskController", [
                 function(data) {
                     if(data.status == 202){
                         $window.alert("Onneksi olkoon suoritit casen!");
-                    } else {
-                        $window.alert("Tehtävä suoritettu!");
                     }
                     $scope.setTask();
                 }, function() {
