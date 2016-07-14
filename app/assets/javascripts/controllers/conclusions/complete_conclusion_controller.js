@@ -4,26 +4,25 @@ app.controller("CompleteConclusionController", [
     "$scope", "$resource", "$window", "$uibModal", "$stateParams", "$state", "$filter",
     function($scope, $resource, $window, $uibModal, $stateParams, $state, $filter) {
 
-        var Questions = $resource('/questions_interview.json');
+        var ExerciseHypotheses = $resource('/exercise_hypotheses_conclusion.json');
         var CheckAnswersInterview = $resource('/interviews/:id/check_answers.json',
             {id: '@id'});
         var AskQuestion = $resource('/questions/:id/ask.json',
             {id: '@id'});
 
-        $scope.setQuestions = function() {
-            Questions.get({ interview_id : $scope.subtask.interview.id}, function(data) {
-                $scope.questionsByGroup = data.questions_by_group;
-                $scope.questionsWithoutGroup = data.questions_without_group;
+        $scope.setExerciseHypotheses = function() {
+            ExerciseHypotheses.query({ exercise_id : $stateParams.exerciseShowId}, function(data) {
+                $scope.exerciseHypotheses = data;
             });
         };
 
         $scope.$watch(function(){
-            return $scope.subtask.interview.id;
+            return $scope.subtask.conclusion.id;
         },function(newValue, oldValue){
-            $scope.setQuestions();
+            $scope.setExerciseHypotheses();
         });
 
-        $scope.setQuestions();
+        $scope.setExerciseHypotheses();
 
         $scope.checkAnswers = function() {
             CheckAnswersInterview.save({ id: $scope.subtask.interview.id }, function(data) {

@@ -108,4 +108,5 @@ Rails.application.routes.draw do
 
   get 'options_multichoice', to: 'options#multichoice_index'
   get 'questions_interview', to: 'questions#interview_index'
+  get 'exercise_hypotheses_conclusion', to: 'exercise_hypotheses#exercise_hypotheses_conclusion'
 end
