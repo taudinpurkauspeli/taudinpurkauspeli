@@ -45,7 +45,7 @@ class ExerciseHypothesesController < ApplicationController
         conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
 
         format.html
-        format.json {render json: conclusion_exercise_hypotheses}
+        format.json {render json: conclusion_exercise_hypotheses.to_json(include: :hypothesis)}
       else
         format.html
         format.json {head :not_found}

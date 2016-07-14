@@ -13,43 +13,41 @@
         <br/>
 
         {{exerciseHypotheses}}
-<!--
 
-        <% @conclusion_exercise_hypotheses.each do |exhyp| %>
 
-        <div class = "row">
+        <div class="row" ng-repeat="exerciseHypothesis in exerciseHypotheses">
 
-            <% if !@current_user.has_checked_hypothesis?(exhyp) %>
-            <div class = "col-md-4">
-                <%= form_tag("conclusions/" + subtask.conclusion.id.to_s + "/check_answers", method: "post", :id => 'check_exhyp_form') do %>
-                <%= hidden_field_tag :exhyp_id, exhyp.id %>
-                <%= submit_tag(exhyp.name, :class => "btn btn-default multiline") unless @current_user.try(:admin) %>
-                <% end %>
-            </div>
+            <!--<% if !@current_user.has_checked_hypothesis?(exhyp) %>-->
+            <!--<div class = "col-md-4">-->
+                <!--<%= form_tag("conclusions/" + subtask.conclusion.id.to_s + "/check_answers", method: "post", :id => 'check_exhyp_form') do %>-->
+                <!--<%= hidden_field_tag :exhyp_id, exhyp.id %>-->
+                <!--<%= submit_tag(exhyp.name, :class => "btn btn-default multiline") unless @current_user.try(:admin) %>-->
+                <!--<% end %>-->
+            <!--</div>-->
 
-            <% else %>
+            <!--<% else %>-->
 
             <div class = "col-md-4">
-                <input id="checked_hypothesis_{{exhyp.id.to_s}}"
+                <button id="checkedHypothesis{{exerciseHypothesis.id}}"
                        class="btn btn-default btn-checked multiline"
-                       type="button"
-                       value="{{exhyp.hypothesis.name}}"
-                       onclick="showExHypExplanation('#exhyp_explanation_{{exhyp.id.to_s}}');"></input>
+                       data-toggle="collapse" data-target="#exerciseHypothesisExplanation{{exerciseHypothesis.id}}">{{exerciseHypothesis.hypothesis.name}}</button>
             </div>
 
             <div class = "col-md-8">
 
-                <div class="info-checked-hypothesis removable"
-                     id="exhyp_explanation_{{exhyp.id}} %>"
+ <!--               <div class="info-checked-hypothesis removable"
+                     id="#exerciseHypothesisExplanation{{exhyp.id.to_s}}"
                      ng-style="{'display:none;': !(@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id)),
                                 '': (@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id))"
-                     ta-bind="text" ng-model="exhyp.get_explanation">
+                     ta-bind="text" ng-model="exhyp.get_explanation">-->
+                <div class="info-checked-hypothesis removable collapse"
+                     id="exerciseHypothesisExplanation{{exerciseHypothesis.id}}"
+                     ta-bind="text" ng-model="exerciseHypothesis.explanation">
 
                 </div>
             </div>
-            <% end %>
         </div>
--->
+
 
 
 </div>
