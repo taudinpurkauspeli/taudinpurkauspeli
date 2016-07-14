@@ -11,7 +11,6 @@ app.controller("CompleteMultichoiceController", [
             {id: '@id'});
 
         $scope.setOptions = function() {
-            console.log("Asetetaan optioita: " + $scope.subtask.multichoice.question);
             Options.query({ multichoice_id : $scope.subtask.multichoice.id}, function(data) {
                 $scope.options = data;
             });
@@ -19,6 +18,12 @@ app.controller("CompleteMultichoiceController", [
 
         $scope.checkedOptions = [];
 
+        $scope.$watch(function(){
+            return $scope.subtask.multichoice.id;
+        },function(newValue, oldValue){
+            $scope.setOptions();
+        });
+        
         $scope.setOptions();
 
         $scope.checkAnswers = function() {

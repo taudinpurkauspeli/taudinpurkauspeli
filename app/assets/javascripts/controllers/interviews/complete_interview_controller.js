@@ -11,12 +11,17 @@ app.controller("CompleteInterviewController", [
             {id: '@id'});
 
         $scope.setQuestions = function() {
-            console.log("Asetetaan questioneja: " + $scope.subtask.interview.title);
             Questions.get({ interview_id : $scope.subtask.interview.id}, function(data) {
                 $scope.questionsByGroup = data.questions_by_group;
                 $scope.questionsWithoutGroup = data.questions_without_group;
             });
         };
+
+        $scope.$watch(function(){
+            return $scope.subtask.interview.id;
+        },function(newValue, oldValue){
+            $scope.setQuestions();
+        });
 
         $scope.setQuestions();
 
