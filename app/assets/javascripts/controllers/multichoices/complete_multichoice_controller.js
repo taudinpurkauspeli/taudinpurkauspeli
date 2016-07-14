@@ -23,7 +23,7 @@ app.controller("CompleteMultichoiceController", [
         },function(newValue, oldValue){
             $scope.setOptions();
         });
-        
+
         $scope.setOptions();
 
         $scope.checkAnswers = function() {

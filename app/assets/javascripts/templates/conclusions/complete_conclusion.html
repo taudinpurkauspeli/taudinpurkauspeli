@@ -1,0 +1,53 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{subtask.conclusion.title}}</h3>
+    </div>
+    <div class="panel-body">
+
+        <h4>Tehtäväsi:</h4>
+        <p ta-bind="text" ng-model="subtask.conclusion.content"></p>
+
+        <br>
+
+        <h4>Diffilistassa jäljellä:</h4>
+        <br/>
+
+
+        <% @conclusion_exercise_hypotheses.each do |exhyp| %>
+
+        <div class = "row">
+
+            <% if !@current_user.has_checked_hypothesis?(exhyp) %>
+            <div class = "col-md-4">
+                <%= form_tag("conclusions/" + subtask.conclusion.id.to_s + "/check_answers", method: "post", :id => 'check_exhyp_form') do %>
+                <%= hidden_field_tag :exhyp_id, exhyp.id %>
+                <%= submit_tag(exhyp.name, :class => "btn btn-default multiline") unless @current_user.try(:admin) %>
+                <% end %>
+            </div>
+
+            <% else %>
+
+            <div class = "col-md-4">
+                <input id="checked_hypothesis_{{exhyp.id.to_s}}"
+                       class="btn btn-default btn-checked multiline"
+                       type="button"
+                       value="{{exhyp.hypothesis.name}}"
+                       onclick="showExHypExplanation('#exhyp_explanation_{{exhyp.id.to_s}}');"></input>
+            </div>
+
+            <div class = "col-md-8">
+
+                <div class="info-checked-hypothesis removable"
+                     id="exhyp_explanation_{{exhyp.id}} %>"
+                     ng-style="{'display:none;': !(@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id)),
+                                '': (@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id))"
+                     ta-bind="text" ng-model="exhyp.get_explanation">
+
+                </div>
+            </div>
+            <% end %>
+        </div>
+
+
+</div>
+</div>
