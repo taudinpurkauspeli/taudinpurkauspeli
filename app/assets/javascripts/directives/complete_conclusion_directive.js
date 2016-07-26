@@ -8,6 +8,7 @@ app.directive('completeConclusion', [
             controller: "CompleteConclusionController",
             scope: {
                 subtask: '=subtask',
+                currentUser: '=currentUser',
                 'setTask': '&afterCompletion'
             }
         };

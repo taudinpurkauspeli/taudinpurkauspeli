@@ -8,6 +8,7 @@ app.directive('uncompletedSubtask', [
             controller: "TasksUncompletedSubtaskController",
             scope: {
                 subtask: '=subtask',
+                currentUser: '=currentUser',
                 'setTask': '&afterCompletion'
             }
         };

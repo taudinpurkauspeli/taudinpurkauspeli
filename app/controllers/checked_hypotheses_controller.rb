@@ -30,6 +30,7 @@ class CheckedHypothesesController < ApplicationController
   def create
     @checked_hypothesis = CheckedHypothesis.new(checked_hypothesis_params)
     exHyp = ExerciseHypothesis.find_by(id: checked_hypothesis_params[:exercise_hypothesis_id])
+    #byebug
     respond_to do |format|
       unless(exHyp.nil?)
         if(exHyp.user_meets_requirements(@current_user))

@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default" ng-if="currentUser">
     <div class="panel-heading">
         <h3 class="panel-title">{{subtask.conclusion.title}}</h3>
     </div>
@@ -17,38 +17,39 @@
 
         <div class="row" ng-repeat="exerciseHypothesis in exerciseHypotheses">
 
-            <!--<% if !@current_user.has_checked_hypothesis?(exhyp) %>-->
-            <!--<div class = "col-md-4">-->
-                <!--<%= form_tag("conclusions/" + subtask.conclusion.id.to_s + "/check_answers", method: "post", :id => 'check_exhyp_form') do %>-->
-                <!--<%= hidden_field_tag :exhyp_id, exhyp.id %>-->
-                <!--<%= submit_tag(exhyp.name, :class => "btn btn-default multiline") unless @current_user.try(:admin) %>-->
-                <!--<% end %>-->
-            <!--</div>-->
-
-            <!--<% else %>-->
+            <div class="col-md-1"></div>
 
             <div class = "col-md-4">
-                <button id="checkedHypothesis{{exerciseHypothesis.id}}"
-                       class="btn btn-default btn-checked multiline"
-                       data-toggle="collapse" data-target="#exerciseHypothesisExplanation{{exerciseHypothesis.id}}">{{exerciseHypothesis.hypothesis.name}}</button>
+
+                <button class="btn btn-default btn-hypothesis multiline"
+                        ng-class="{'btn-checked': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis),
+                                   'btn-save': userHasCheckedHypothesis(exerciseHypothesis) && hypothesisIsCorrectDiagnosis(exerciseHypothesis)}"
+                        ng-click="checkExerciseHypothesisIsRightAnswer(exerciseHypothesis)"
+                        ng-if="correctDiagnosis">
+                    {{exerciseHypothesis.hypothesis.name}}
+                </button>
             </div>
 
-            <div class = "col-md-8">
+            <div class = "col-md-6">
 
- <!--               <div class="info-checked-hypothesis removable"
-                     id="#exerciseHypothesisExplanation{{exhyp.id.to_s}}"
-                     ng-style="{'display:none;': !(@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id)),
-                                '': (@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id))"
-                     ta-bind="text" ng-model="exhyp.get_explanation">-->
-                <div class="info-checked-hypothesis removable collapse"
-                     id="exerciseHypothesisExplanation{{exerciseHypothesis.id}}"
-                     ta-bind="text" ng-model="exerciseHypothesis.explanation">
+                <!--
 
+                                    ng-style="{'display:none;': !(@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id)),
+                                               '': (@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id))"-->
+
+                <div class="info-checked-hypothesis removable"
+                     ng-if="correctDiagnosis && (exerciseHypothesis.explanation || 
+                            hypothesisIsCorrectDiagnosis(exerciseHypothesis)) && userClickedCheckedHypothesis(exerciseHypothesis)">
+
+                    <span ng-if="hypothesisIsCorrectDiagnosis(exerciseHypothesis)">Hienoa! Selvitit oikean diagnoosin! </span>
+
+                    <span ta-bind="text" ng-model="exerciseHypothesis.explanation"></span>
                 </div>
+
             </div>
         </div>
 
 
 
-</div>
+    </div>
 </div>

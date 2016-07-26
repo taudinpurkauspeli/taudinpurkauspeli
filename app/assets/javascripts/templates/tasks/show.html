@@ -54,13 +54,12 @@
     <br/>
     <br/>
 
-    <div ng-if="!userHasCompletedTask">
+    <div ng-if="!userHasCompletedTask && currentUser">
         <h3>Suorittamaton alakohta:</h3>
 
         <br/>
         <br/>
-
-        <uncompleted-subtask subtask="uncompletedSubtask" after-completion="setTask()" ></uncompleted-subtask>
+        <uncompleted-subtask subtask="uncompletedSubtask" after-completion="setTask()" current-user="currentUser"></uncompleted-subtask>
     </div>
     <!-- <% if @current_user.has_completed? current_exercise %>
      <%= render 'exercises/user_has_completed_exercise' %>
