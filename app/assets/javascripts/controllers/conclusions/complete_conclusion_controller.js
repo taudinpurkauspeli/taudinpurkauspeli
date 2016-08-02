@@ -44,15 +44,21 @@ app.controller("CompleteConclusionController", [
         $scope.setAllExerciseHypotheses();
 
         $scope.checkAnswers = function(exerciseHypothesis) {
-            CheckAnswersConclusion.save({ id: $scope.subtask.conclusion.id, exhyp_id: exerciseHypothesis.id }, function(data) {
-                if(data.status == 202){
-                    $window.alert("Onneksi olkoon suoritit casen!");
-                }
+            if($scope.userHasCheckedHypothesis(exerciseHypothesis)){
                 $scope.setExerciseHypothesisId(exerciseHypothesis.id);
-                $scope.setTask();
-            }, function(result) {
-                $window.alert("Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja");
-            });
+            } else {
+                CheckAnswersConclusion.save({ id: $scope.subtask.conclusion.id, exhyp_id: exerciseHypothesis.id, current_exercise_id: $stateParams.exerciseShowId, current_task_id: $stateParams.taskShowId }, function(data) {
+                    if(data.status == 202){
+                        $window.alert("Onneksi olkoon suoritit casen!");
+                    }
+                    $scope.setExerciseHypothesisId(exerciseHypothesis.id);
+                    $scope.setTask();
+                }, function(result) {
+                    $window.alert("Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja");
+                    $scope.setCheckedHypotheses();
+                    $scope.setExerciseHypothesisId(exerciseHypothesis.id);
+                });
+            }
         };
 
         $scope.hypothesisIsCorrectDiagnosis = function(exerciseHypothesis) {
@@ -75,33 +81,6 @@ app.controller("CompleteConclusionController", [
             } else {
                 $scope.lastClickedExerciseHypothesis = exerciseHypothesisId;
             }
-        };
-
-        $scope.checkExerciseHypothesisIsRightAnswer = function(exerciseHypothesis) {
-            if($scope.userHasCheckedHypothesis(exerciseHypothesis)){
-                $scope.setExerciseHypothesisId(exerciseHypothesis.id);
-            } else {
-
-                if($scope.hypothesisIsCorrectDiagnosis(exerciseHypothesis)){
-                    $scope.checkAnswers(exerciseHypothesis);
-                } else {
-                    var newCheckedHypothesis = {
-                        exercise_hypothesis_id: exerciseHypothesis.id,
-                        user_id: $scope.currentUser
-                    };
-                    CheckedHypotheses.save({checked_hypothesis: newCheckedHypothesis},
-                        function(data) {
-                            $window.alert(exerciseHypothesis.hypothesis.name + " poissuljettu!");
-                            $scope.setExerciseHypothesisId(exerciseHypothesis.id);
-                            $scope.setAllExerciseHypotheses();
-                        },
-                        function() {
-                            $window.alert("Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea tämän diffin.");
-                        }
-                    );
-                }
-            }
-
         };
 
         $scope.userClickedCheckedHypothesis = function(exerciseHypothesis) {

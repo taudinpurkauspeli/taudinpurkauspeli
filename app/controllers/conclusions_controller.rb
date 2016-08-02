@@ -104,16 +104,37 @@ class ConclusionsController < ApplicationController
 	def check_answers
 		respond_to do |format|
 			if @conclusion.user_answered_correctly?(@current_user, check_conclusion_params[:exhyp_id])
-				@current_user.check_all_hypotheses(current_task.exercise)
+				if params[:current_task_id]
+					task = Task.find params[:current_task_id]
+					@current_user.check_all_hypotheses(task.exercise)
+				else
+					@current_user.check_all_hypotheses(current_task.exercise)
+				end
 
-				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout,
-																						:last_clicked_conclusion => check_conclusion_params[:exhyp_id]),
-																	notice: (@current_user.has_completed?(current_exercise) ? 'Onneksi olkoon suoritit casen!' : 'Hyvä, selvitit oikean diagnoosin!') }
+				if params[:current_exercise_id]
+					exercise = Exercise.find params[:current_exercise_id]
+					exercise_is_completed = @current_user.has_completed?(exercise)
+				else
+					exercise_is_completed = @current_user.has_completed?(current_exercise)
+				end
+
+				if exercise_is_completed
+					format.html {  redirect_to task_path(@conclusion.subtask.task, :layout => get_layout,
+																							 :last_clicked_conclusion => check_conclusion_params[:exhyp_id]),
+																		 notice: 'Onneksi olkoon suoritit casen!'  }
+					format.json { head :accepted }
+				else
+					format.html {  redirect_to task_path(@conclusion.subtask.task, :layout => get_layout,
+																							 :last_clicked_conclusion => check_conclusion_params[:exhyp_id]),
+																		 notice: 'Hyvä, selvitit oikean diagnoosin!'  }
+					format.json { head :ok }
+				end
 
 			else
 				exhyp = ExerciseHypothesis.find(check_conclusion_params[:exhyp_id])
 				@current_user.check_hypothesis(exhyp)
 				format.html { redirect_to task_path(@conclusion.subtask.task, :layout => get_layout, :last_clicked_conclusion => check_conclusion_params[:exhyp_id]), notice: 'Väärä diffi poissuljettu!' }
+				format.json { head :not_acceptable  }
 			end
 		end
 	end

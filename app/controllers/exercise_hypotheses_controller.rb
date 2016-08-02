@@ -36,8 +36,6 @@ class ExerciseHypothesesController < ApplicationController
 
         exercise_hypotheses = ExerciseHypothesis.where(exercise: exercise)
 
-        byebug
-
         # Unchecked exercise hypothesis id:s to session
         if session[:exhyp_ids].nil?
           session[:exhyp_ids] = (exercise_hypotheses - @current_user.exercise_hypotheses).map(&:id)
