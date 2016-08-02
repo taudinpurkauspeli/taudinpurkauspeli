@@ -37,28 +37,16 @@
 <div class="container-fluid" ng-if="currentUser && !currentUserAdmin">
     <h1>Toimenpide: {{taskForShow.name}}</h1>
     <br/>
-
-    <h3>Suoritetut alakohdat:</h3>
-
-    <br/>
     <br/>
 
     <div ng-repeat="subtask in completedSubtasks">
 
         <completed-subtask subtask="subtask"></completed-subtask>
         <br/>
-        <br/>
 
     </div>
 
-    <br/>
-    <br/>
-
     <div ng-if="!userHasCompletedTask && currentUser">
-        <h3>Suorittamaton alakohta:</h3>
-
-        <br/>
-        <br/>
         <uncompleted-subtask subtask="uncompletedSubtask" after-completion="setTask()" current-user="currentUser"></uncompleted-subtask>
     </div>
     <!-- <% if @current_user.has_completed? current_exercise %>

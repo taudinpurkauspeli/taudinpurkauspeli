@@ -1,4 +1,4 @@
-<div class="panel panel-default" ng-if="currentUser">
+<div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">{{subtask.conclusion.title}}</h3>
     </div>
@@ -11,9 +11,6 @@
 
         <h4>Diffilistassa jäljellä:</h4>
         <br/>
-
-        {{exerciseHypotheses}}
-
 
         <div class="row" ng-repeat="exerciseHypothesis in exerciseHypotheses">
 
@@ -32,11 +29,6 @@
 
             <div class = "col-md-6">
 
-                <!--
-
-                                    ng-style="{'display:none;': !(@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id)),
-                                               '': (@last_clicked_conclusion && (@last_clicked_conclusion.id == exhyp.id))"-->
-
                 <div class="info-checked-hypothesis removable"
                      ng-if="correctDiagnosis && (exerciseHypothesis.explanation || 
                             hypothesisIsCorrectDiagnosis(exerciseHypothesis)) && userClickedCheckedHypothesis(exerciseHypothesis)">
@@ -48,8 +40,6 @@
 
             </div>
         </div>
-
-
 
     </div>
 </div>

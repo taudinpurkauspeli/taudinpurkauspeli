@@ -82,7 +82,7 @@ class HypothesesController < ApplicationController
       respond_to do |format|
         if correct_diagnosis
           format.html
-          format.json {render json: correct_diagnosis}
+          format.json {render json: correct_diagnosis.to_json(include: :hypothesis)}
         else
           format.html
           format.json {head :not_found}
