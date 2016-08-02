@@ -38,7 +38,6 @@ app.controller("CompleteConclusionController", [
             $scope.setExerciseHypotheses();
             $scope.setCheckedHypotheses();
             $scope.setCorrectDiagnosis();
-
         };
 
         $scope.setAllExerciseHypotheses();
@@ -53,7 +52,6 @@ app.controller("CompleteConclusionController", [
                     }
                     $scope.setTask();
                 }, function(result) {
-                    $window.alert("Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja");
                     $scope.setCheckedHypotheses();
                     $scope.setExerciseHypothesisId(exerciseHypothesis.id);
                 });

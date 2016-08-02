@@ -43,7 +43,7 @@
 
                     <button class="btn btn-default btn-hypothesis multiline"
                             ng-class="{'btn-checked': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis)}"
-                            ng-click="checkAnswers(exerciseHypothesis)"
+                            ng-click="setExerciseHypothesisId(exerciseHypothesis)"
                             ng-if="!hypothesisIsCorrectDiagnosis(exerciseHypothesis)">
                         {{exerciseHypothesis.hypothesis.name}}
                     </button>
