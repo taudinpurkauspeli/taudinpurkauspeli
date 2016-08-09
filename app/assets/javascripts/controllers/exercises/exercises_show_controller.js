@@ -101,6 +101,7 @@ app.controller("ExercisesShowController", [
         $scope.setCurrentTask = function() {
             $scope.current_task = LocalStorageService.get("current_task", null);
             $scope.setTaskForShow($scope.current_task);
+            $scope.setCompletedExerciseValue();
         };
 
         $scope.setTaskTabPath = function() {
