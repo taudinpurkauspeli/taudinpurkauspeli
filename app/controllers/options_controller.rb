@@ -3,11 +3,20 @@ class OptionsController < ApplicationController
   skip_before_action :verify_authenticity_token, if: :json_request?
 
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin
+  before_action :ensure_user_is_admin, except: [:multichoice_index]
   before_action :set_option, only: [:update, :destroy]
 
   def index
     options = Option.where(multichoice_id: params[:multichoice_id]).order(:content).group_by(&:is_correct_answer)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: options }
+    end
+  end
+
+  def multichoice_index
+    options = Option.where(multichoice_id: params[:multichoice_id]).order(:content)
 
     respond_to do |format|
       format.html

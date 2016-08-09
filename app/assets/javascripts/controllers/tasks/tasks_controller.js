@@ -5,6 +5,8 @@ app.controller("TasksController", [
     function($scope, $stateParams, $resource, $uibModal, $window) {
 
         $scope.tasksList = [];
+        $scope.availableTasks = [];
+        $scope.completedTasks = [];
 
         var TaskMoveUp = $resource('/tasks/:id/move_up.json',
             {id: "@id"});
@@ -20,7 +22,12 @@ app.controller("TasksController", [
 
         var TasksByLevel = $resource('/tasks_all_by_level.json');
 
-        $scope.updateTasksList = function() {
+        var TasksForStudent = $resource('/tasks_student_index.json');
+
+        var TaskCanBeStarted = $resource('/task_can_be_started/:id.json',
+            {id: '@id'});
+
+        $scope.setTasksList = function() {
             if($scope.currentUserAdmin){
                 TasksByLevel.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                     $scope.tasksList = data;
@@ -28,18 +35,28 @@ app.controller("TasksController", [
             }
         };
 
-        $scope.updateTasksList();
+        $scope.setTasksForStudent = function() {
+            if($scope.currentUser && !$scope.currentUserAdmin){
+                TasksForStudent.get({"exercise_id": $stateParams.exerciseShowId}, function(data) {
+                    $scope.availableTasks = data.available_tasks;
+                    $scope.completedTasks = data.completed_tasks;
+                });
+            }
+        };
+
+        $scope.setTasksList();
+        $scope.setTasksForStudent();
         $scope.setActiveTab("TaskTab");
 
         $scope.moveTaskFromLevelToLevel = function(task, sourceLevel, destinationLevel) {
 
             if(destinationLevel < sourceLevel){
                 TaskMoveUp.save({id: task.id, new_level: destinationLevel}, function() {
-                    $scope.updateTasksList();
+                    $scope.setTasksList();
                 });
             } else if (destinationLevel > sourceLevel){
                 TaskMoveDown.save({id: task.id, new_level: destinationLevel}, function() {
-                    $scope.updateTasksList();
+                    $scope.setTasksList();
                 });
             }
 
@@ -52,11 +69,11 @@ app.controller("TasksController", [
 
             if(levelIndex < task.level){
                 MoveTaskUp.save({id: task.id, new_level: newLevel}, function() {
-                    $scope.updateTasksList();
+                    $scope.setTasksList();
                 });
             } else if (levelIndex >= task.level){
                 MoveTaskDown.save({id: task.id, new_level: newLevel}, function() {
-                    $scope.updateTasksList();
+                    $scope.setTasksList();
                 });
             }
 
@@ -74,11 +91,31 @@ app.controller("TasksController", [
             });
 
             modalInstance.result.then(function(data) {
-                $scope.updateTasksList();
+                $scope.setTasksList();
                 $scope.goToCurrentTask(data.id);
             }, function() {
                 $window.alert("Toimenpiteen luominen peruttu.");
             });
+        };
+
+        $scope.setTaskId = function(taskId){
+            if($scope.lastClickedTask == taskId){
+                $scope.lastClickedTask = null;
+            } else {
+                $scope.lastClickedTask = taskId;
+            }
+        };
+
+        $scope.startTask = function(task) {
+            TaskCanBeStarted.get({id: task.id}, function() {
+                $scope.goToCurrentTask(task.id);
+            }, function() {
+                $scope.setTaskId(task.id);
+            });
+        };
+
+        $scope.cannotStartTask = function(taskId){
+            return taskId == $scope.lastClickedTask;
         };
     }
 ]);

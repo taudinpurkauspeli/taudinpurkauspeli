@@ -24,6 +24,15 @@ app.controller("ExercisesShowController", [
         var TaskOne = $resource('/tasks_one/:taskId.json',
             { taskId: "@id"});
 
+        var CompletableSubtasks = $resource('/users/:id/completable_subtasks.json',
+            {id: '@id'});
+
+        var UserHasCompletedTask = $resource('/users/:id/has_completed_task.json',
+            {id: '@id'});
+
+        var UserHasCompletedExercise = $resource('/users/:id/has_completed_exercise.json',
+            {id: '@id'});
+
         $scope.setExercise = function() {
             ExerciseOne.get({exerciseId : exerciseId}, function(data) {
                 $scope.exercise = data.exercise;
@@ -31,10 +40,58 @@ app.controller("ExercisesShowController", [
             });
         };
 
+        $scope.setTaskShowValuesForStudent = function() {
+            $scope.setSubtasksAndCompletedTaskValue();
+        };
+
+        $scope.setSubtasksAndCompletedTaskValue = function() {
+
+            UserHasCompletedTask.get({id: $scope.currentUser, task_id: $scope.taskForShow.id},
+                function() {
+                    $scope.userHasCompletedTask = true;
+                    $scope.setCompletableSubtasks();
+                }, function() {
+                    $scope.userHasCompletedTask = false;
+                    $scope.setCompletableSubtasks();
+                }
+            );
+        };
+
+        $scope.setCompletedExerciseValue = function() {
+
+            UserHasCompletedExercise.get({id: $scope.currentUser, exercise_id: $stateParams.exerciseShowId},
+                function() {
+                    $scope.userHasCompletedExercise = true;
+                }, function() {
+                    $scope.userHasCompletedExercise = false;
+                }
+            );
+        };
+
+        $scope.setCompletableSubtasks = function() {
+
+            CompletableSubtasks.query({id: $scope.currentUser, task_id: $scope.taskForShow.id},
+                function(data) {
+                    if(!$scope.userHasCompletedTask){
+                        $scope.uncompletedSubtask = data.pop();
+                        $scope.completedSubtasks = data;
+                    } else {
+                        $scope.completedSubtasks = data;
+                    }
+                }, function() {
+                    $scope.completedSubtasks = [];
+                }
+            );
+        };
+
         $scope.setTaskForShow = function(current_task){
             if(current_task){
                 TaskOne.get({taskId : current_task}, function(data) {
                     $scope.taskForShow = data;
+
+                    if($scope.currentUser && !$scope.currentUserAdmin) {
+                        $scope.setTaskShowValuesForStudent();
+                    }
                 });
             } else {
                 $scope.taskForShow = {};
@@ -44,6 +101,7 @@ app.controller("ExercisesShowController", [
         $scope.setCurrentTask = function() {
             $scope.current_task = LocalStorageService.get("current_task", null);
             $scope.setTaskForShow($scope.current_task);
+            $scope.setCompletedExerciseValue();
         };
 
         $scope.setTaskTabPath = function() {
@@ -51,10 +109,11 @@ app.controller("ExercisesShowController", [
         };
 
         $scope.setExercise();
+        $scope.setCompletedExerciseValue();
         $scope.setCurrentTask();
         $scope.setTaskTabPath();
 
-        $scope.goToState = function(newState){
+        $scope.goToState = function(newState) {
             $state.go(newState.state, newState.parameters);
         };
 

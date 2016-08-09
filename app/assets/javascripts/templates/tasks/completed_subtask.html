@@ -1,0 +1,15 @@
+<div ng-if="subtask.task_text">
+    <ng-include src="'task_texts/completed_task_text.html'"></ng-include>
+</div>
+
+<div ng-if="subtask.interview">
+    <completed-interview subtask="subtask"></completed-interview>
+</div>
+
+<div ng-if="subtask.multichoice">
+    <completed-multichoice subtask="subtask"></completed-multichoice>
+</div>
+
+<div ng-if="subtask.conclusion">
+    <completed-conclusion subtask="subtask"></completed-conclusion>
+</div>

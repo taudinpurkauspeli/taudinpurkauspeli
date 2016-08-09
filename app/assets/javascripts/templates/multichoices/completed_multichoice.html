@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Kysymys: {{subtask.multichoice.question}}</h3>
+    </div>
+    <div class="panel-body">
+
+        <form>
+            <table class = "width100">
+
+                <tr>
+                    <td class="multichoice"><b>Vaihtoehto</b></td>
+                    <td class="multichoice"><b>Selitys</b></td>
+                </tr>
+
+                <tr ng-repeat="option in options">
+                    <td class="multichoice" ng-class="{'correct-answer': optionIs('required', option),
+                                                       'allowed-answer': optionIs('allowed', option),
+                                                       'wrong-answer': optionIs('wrong', option)}">
+
+                       {{option.content}}
+                    </td>
+
+                    <td class = "multichoice" ta-bind="text" ng-model="option.explanation"
+                        ng-class="{'correct-answer': optionIs('required', option),
+                                   'allowed-answer': optionIs('allowed', option),
+                                   'wrong-answer': optionIs('wrong', option)}">
+                    </td>
+                </tr>
+
+            </table>
+            <br />
+
+        </form>
+    </div>
+</div>

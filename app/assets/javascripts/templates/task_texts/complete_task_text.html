@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class = "row">
+            <div class = "col-md-8">
+                <h3 class="panel-title"></h3>
+            </div>
+            <div class = "col-md-4">
+                <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Muista painaa Jatka-nappia, jotta toimenpide kirjautuu suoritetuksi.">Ohje</a>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <span ta-bind="text" ng-model="subtask.task_text.content"></span>
+        <button class="btn btn-default btn-save widthAuto" ng-click="completeTaskText(subtask.task_text)">Jatka</button>
+    </div>
+</div>
