@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   get 'users_by_case_json', to: 'users#json_by_case'
   get 'users/:id/completable_subtasks', to: 'users#completable_subtasks'
   get 'users/:id/has_completed_task', to: 'users#has_completed_task'
+  get 'users/:id/has_completed_conclusion', to: 'users#has_completed_conclusion'
 
   get 'tasks_one/:id', to: 'tasks#tasks_one'
   get 'tasks_all_by_level', to: 'tasks#tasks_all_by_level'

@@ -51,7 +51,7 @@
     </div>
 
     <div ng-if="userHasCompletedTask">
-        <completed_task></completed_task>
+        <completed_task current-user="currentUser" has-conclusion="hasConclusion"></completed_task>
     </div>
     <!-- <% if @current_user.has_completed? current_exercise %>
      <%= render 'exercises/user_has_completed_exercise' %>
