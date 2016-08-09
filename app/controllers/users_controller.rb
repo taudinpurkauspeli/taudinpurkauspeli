@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   before_action :ensure_user_is_logged_in, except: [:new, :create]
   before_action :ensure_user_is_admin, only: [:index, :json_destroy]
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :json_destroy, :completable_subtasks, :has_completed_task, :has_completed_conclusion]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :json_destroy, :completable_subtasks, :has_completed_task, :has_completed_conclusion, :has_completed_exercise]
   before_action :set_current_user, only: [:index, :show]
 
   before_action except: [:new, :create, :index, :json_index, :json_by_case] do
@@ -141,11 +141,33 @@ class UsersController < ApplicationController
 
     exercise = Exercise.find(params[:exercise_id])
 
-
     respond_to do |format|
       if exercise
 
         if exercise.has_conclusion? && @user.has_completed?(exercise.get_conclusion.subtask)
+          format.html { }
+          format.json { head :ok }
+        else
+          format.html { }
+          format.json { head :expectation_failed }
+        end
+      else
+        format.html { }
+        format.json { head :internal_server_error }
+      end
+    end
+  end
+
+  # GET /users/1/has_completed_exercise
+  # GET /users/1/has_completed_exercise.json
+  def has_completed_exercise
+
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+
+        if @user.has_completed?(exercise)
           format.html { }
           format.json { head :ok }
         else

@@ -50,14 +50,13 @@
         <uncompleted-subtask subtask="uncompletedSubtask" after-completion="setTask()" current-user="currentUser"></uncompleted-subtask>
     </div>
 
-    <div ng-if="userHasCompletedTask">
+    <div ng-if="userHasCompletedTask && !userHasCompletedExercise">
         <completed_task current-user="currentUser" has-conclusion="hasConclusion"></completed_task>
     </div>
-    <!-- <% if @current_user.has_completed? current_exercise %>
-     <%= render 'exercises/user_has_completed_exercise' %>
-     <% elsif @current_user.has_completed?(@task) %>
-     <%= render 'task_completed', {task:@task} %>
-     <% end %>-->
 
+    <div ng-if="userHasCompletedExercise">
+        <completed_exercise></completed_exercise>
+    </div>
+    <!--<% if @current_user.has_completed? current_exercise %>-->
 
 </div>
