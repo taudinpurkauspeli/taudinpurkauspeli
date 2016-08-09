@@ -54,7 +54,7 @@ describe "Duplicate exercise page" do
       expect(current_path).to eq(exercises_path)
 
       expect(page).to have_content "Casen kopioiminen onnistui!"
-      expect(Exercise.where(name:"Lihanautakuolemat").count).to eq(2)
+      expect(Exercise.where(name:"Lihanautakuolemat (kopio)").count).to eq(1)
     end
 
   end
