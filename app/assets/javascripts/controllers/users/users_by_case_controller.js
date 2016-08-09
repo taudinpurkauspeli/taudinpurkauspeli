@@ -10,7 +10,7 @@ app.controller("UsersByCaseController", [
         var UsersByCase = $resource('/users_by_case_json.json');
 
         $scope.setUsersByCase = function() {
-            UsersByCase.get(function(data) {
+            UsersByCase.query(function(data) {
                 $scope.usersByCase = data;
             });
         };

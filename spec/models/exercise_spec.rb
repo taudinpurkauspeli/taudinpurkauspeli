@@ -49,7 +49,7 @@ describe Exercise do
       }.to change(Exercise, :count).by(1)
 
       new_exercise = Exercise.find(2)
-      expect(new_exercise.name).to eq(exercise.name)
+      expect(new_exercise.name).to eq(exercise.name + ' (kopio)')
       expect(new_exercise.anamnesis).to eq(exercise.anamnesis)
     end
 

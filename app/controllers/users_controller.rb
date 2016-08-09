@@ -5,13 +5,16 @@ class UsersController < ApplicationController
 
   before_action :ensure_user_is_logged_in, except: [:new, :create]
   before_action :ensure_user_is_admin, only: [:index, :json_destroy]
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :json_destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :json_destroy, :completable_subtasks, :has_completed_task, :has_completed_conclusion, :has_completed_exercise]
   before_action :set_current_user, only: [:index, :show]
 
   before_action except: [:new, :create, :index, :json_index, :json_by_case] do
     current_user_now = current_user
     if @user.nil? || (!current_user_now.try(:admin) && @user != current_user_now)
-      redirect_to exercises_path, alert: 'Pääsy toisen käyttäjän tietoihin estetty!'
+      respond_to do |format|
+        format.html {redirect_to exercises_path, alert: 'Pääsy toisen käyttäjän tietoihin estetty!'}
+        format.json { head :unauthorized }
+      end
     end
   end
 
@@ -48,7 +51,7 @@ class UsersController < ApplicationController
   end
 
   def json_index
-    @users = User.where(admin:false).select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name")
+    @users = User.where(admin:params[:admin]).select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name")
 
     respond_to do |format|
       format.html
@@ -58,13 +61,16 @@ class UsersController < ApplicationController
   end
 
   def json_by_case
-    @users = {}
+    @users = []
 
     all_exercises = Exercise.all.order(:name)
 
-    all_exercises.each do |exercise|
+    all_exercises.each_with_index do |exercise, index|
       exercise_users = exercise.get_all_users(exercise)
-      @users[exercise.name] = exercise_users
+      new_exercise_with_users = {}
+      new_exercise_with_users["exercise_name"] = exercise.name
+      new_exercise_with_users["exercise_users"] = exercise_users
+      @users[index] = new_exercise_with_users
     end
 
     respond_to do |format|
@@ -85,6 +91,93 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: {user: @user, exercises: @exercises_with_completion_percent }}
+    end
+  end
+
+  # GET /users/1/completable_subtasks
+  # GET /users/1/completable_subtasks.json
+  def completable_subtasks
+
+    task = Task.find(params[:task_id])
+
+    respond_to do |format|
+      if task
+        subtasks = @user.completable_subtasks(task)
+
+        format.html { }
+        format.json { render json: subtasks.to_json(:include => [:task_text, :multichoice, :interview, :conclusion]) }
+      else
+        format.html { }
+        format.json { head :internal_server_error }
+      end
+    end
+  end
+
+  # GET /users/1/has_completed_task
+  # GET /users/1/has_completed_task.json
+  def has_completed_task
+
+    task = Task.find(params[:task_id])
+
+    respond_to do |format|
+      if task
+        if @user.has_completed?(task)
+          format.html { }
+          format.json { head :ok }
+        else
+          format.html { }
+          format.json { head :expectation_failed }
+        end
+      else
+        format.html { }
+        format.json { head :internal_server_error }
+      end
+    end
+  end
+
+  # GET /users/1/has_completed_conclusion
+  # GET /users/1/has_completed_conclusion.json
+  def has_completed_conclusion
+
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+
+        if exercise.has_conclusion? && @user.has_completed?(exercise.get_conclusion.subtask)
+          format.html { }
+          format.json { head :ok }
+        else
+          format.html { }
+          format.json { head :expectation_failed }
+        end
+      else
+        format.html { }
+        format.json { head :internal_server_error }
+      end
+    end
+  end
+
+  # GET /users/1/has_completed_exercise
+  # GET /users/1/has_completed_exercise.json
+  def has_completed_exercise
+
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+
+        if @user.has_completed?(exercise)
+          format.html { }
+          format.json { head :ok }
+        else
+          format.html { }
+          format.json { head :expectation_failed }
+        end
+      else
+        format.html { }
+        format.json { head :internal_server_error }
+      end
     end
   end
 
@@ -121,8 +214,10 @@ class UsersController < ApplicationController
       respond_to do |format|
         if @user.update(user_params)
           format.html { redirect_to @user, notice: 'Käyttäjän tiedot päivitetty.' }
+          format.json { head :ok }
         else
           format.html { render :edit }
+          format.json { head :internal_server_error }
         end
       end
     end

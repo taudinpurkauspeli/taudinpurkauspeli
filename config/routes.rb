@@ -16,9 +16,9 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :hypothesis_groups, only: [:new, :create, :destroy, :index, :show, :update]
+  resources :hypothesis_groups
 
-  resources :checked_hypotheses, only: [:new, :create, :destroy]
+  resources :checked_hypotheses, only: [:new, :create, :destroy, :index]
 
   resources :completed_tasks, only: [:create]
 
@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   get 'hypothesis_bank', to: 'hypotheses#hypothesis_bank'
   get 'hypotheses_all', to: 'hypotheses#hypotheses_all'
   get 'hypothesis_groups_and_hypotheses', to: 'hypothesis_groups#hypothesis_groups_and_hypotheses'
+  get 'correct_diagnosis', to: 'hypotheses#correct_diagnosis'
 
   get 'exercises_one/:id', to: 'exercises#exercises_one'
   put 'exercises_one/:id', to: 'exercises#update_one'
@@ -49,10 +50,16 @@ Rails.application.routes.draw do
   get 'users_json', to: 'users#json_index'
   delete 'delete_user_json/:id', to: 'users#json_destroy'
   get 'users_by_case_json', to: 'users#json_by_case'
+  get 'users/:id/completable_subtasks', to: 'users#completable_subtasks'
+  get 'users/:id/has_completed_task', to: 'users#has_completed_task'
+  get 'users/:id/has_completed_conclusion', to: 'users#has_completed_conclusion'
+  get 'users/:id/has_completed_exercise', to: 'users#has_completed_exercise'
 
   get 'tasks_one/:id', to: 'tasks#tasks_one'
   get 'tasks_all_by_level', to: 'tasks#tasks_all_by_level'
   get 'tasks_all', to: 'tasks#tasks_all'
+  get 'tasks_student_index', to: 'tasks#student_index'
+  get 'task_can_be_started/:id', to: 'tasks#task_can_be_started'
   post 'json_tasks_create', to: 'tasks#json_create'
 
   get 'signin', to: 'sessions#new'
@@ -87,6 +94,8 @@ Rails.application.routes.draw do
   post 'exercises/:id/dup', to: 'exercises#duplicate_exercise'
   post 'exercises/:id/hide', to: 'exercises#toggle_hidden'
 
+  post 'questions/:id/ask', to: 'questions#ask'
+
   post 'task_texts_json_create', to: 'task_texts#json_create'
   post 'multichoices_json_create', to: 'multichoices#json_create'
   post 'options_json_create', to: 'options#json_create'
@@ -98,4 +107,8 @@ Rails.application.routes.draw do
 
   get 'exercise_hypotheses_only', to: 'exercise_hypotheses#only_exercise_hypotheses'
   get 'exercise_hypotheses_json_index', to: 'exercise_hypotheses#json_index'
+
+  get 'options_multichoice', to: 'options#multichoice_index'
+  get 'questions_interview', to: 'questions#interview_index'
+  get 'exercise_hypotheses_conclusion', to: 'exercise_hypotheses#exercise_hypotheses_conclusion'
 end

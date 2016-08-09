@@ -1,0 +1,65 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{subtask.conclusion.title}}</h3>
+    </div>
+    <div class="panel-body" ng-if="correctDiagnosis">
+        <h4>Oikea diagnoosi:</h4>
+        <br/>
+
+        <div class="row">
+
+            <div class="col-md-1"></div>
+
+            <div class = "col-md-4">
+
+                <button class="btn btn-default btn-hypothesis multiline"
+                        ng-class="{'btn-save': userHasCheckedHypothesis(correctDiagnosis) && hypothesisIsCorrectDiagnosis(correctDiagnosis)}"
+                        ng-click="setExerciseHypothesisId(correctDiagnosis.id)">
+                    {{correctDiagnosis.hypothesis.name}}
+                </button>
+            </div>
+
+            <div class = "col-md-6">
+
+                <div class="info-checked-hypothesis removable"
+                     ng-if="userClickedCheckedHypothesis(correctDiagnosis)">
+
+                    <span ng-if="hypothesisIsCorrectDiagnosis(correctDiagnosis)">Hienoa! Selvitit oikean diagnoosin! </span>
+
+                    <span ta-bind="text" ng-model="correctDiagnosis.explanation"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <div ng-if="thereAreExerciseHypotheses">
+            <h4>Muut poissuljetut diffit:</h4>
+            <br/>
+            <div class="row" ng-repeat="exerciseHypothesis in exerciseHypotheses">
+
+                <div class="col-md-1"></div>
+
+                <div class = "col-md-4">
+
+                    <button class="btn btn-default btn-hypothesis multiline"
+                            ng-class="{'btn-checked': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis)}"
+                            ng-click="setExerciseHypothesisId(exerciseHypothesis)"
+                            ng-if="!hypothesisIsCorrectDiagnosis(exerciseHypothesis)">
+                        {{exerciseHypothesis.hypothesis.name}}
+                    </button>
+                </div>
+
+                <div class = "col-md-6">
+
+                    <div class="info-checked-hypothesis removable"
+                         ng-if="exerciseHypothesis.explanation && userClickedCheckedHypothesis(exerciseHypothesis)">
+
+                        <span ta-bind="text" ng-model="exerciseHypothesis.explanation"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -100,8 +100,10 @@ class TaskTextsController < ApplicationController
     respond_to do |format|
       if @current_user.has_completed?(current_exercise)
         format.html { redirect_to task_path(@task_text.subtask.task, :layout => get_layout, notice: "Onneksi olkoon suoritit casen!") }
+        format.json { head :accepted }
       else
         format.html { redirect_to task_path(@task_text.subtask.task, :layout => get_layout), notice: 'Tehtävä suoritettu!' }
+        format.json { head :ok }
       end
     end
   end

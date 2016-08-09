@@ -17,6 +17,12 @@
     <br/>
 </div>
 
+<div ng-if="currentUser && !currentUserAdmin && userHasCompletedExercise">
+    <completed_exercise></completed_exercise>
+    <div class="separator"></div>
+    <br/>
+</div>
+
 <h3>Anamneesi</h3>
 
 <br/>

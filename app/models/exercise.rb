@@ -76,6 +76,8 @@ class Exercise < ActiveRecord::Base
 
   def create_duplicate(exercise)
     exercise_dup = exercise.amoeba_dup
+    new_name = exercise.name + " (kopio)"
+    exercise_dup.name = new_name
     if exercise_dup.save
       exercise_dup.exercise_hypotheses.each do |ex_hyp|
 

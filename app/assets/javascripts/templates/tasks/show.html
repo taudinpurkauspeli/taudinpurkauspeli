@@ -1,4 +1,4 @@
-<div class="container-fluid" ng-if="!taskText && !multichoice && !interview">
+<div class="container-fluid" ng-if="currentUserAdmin">
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default panel-grey">
@@ -32,4 +32,31 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="container-fluid" ng-if="currentUser && !currentUserAdmin">
+    <h1>Toimenpide: {{taskForShow.name}}</h1>
+    <br/>
+    <br/>
+
+    <div ng-repeat="subtask in completedSubtasks">
+
+        <completed-subtask subtask="subtask"></completed-subtask>
+        <br/>
+
+    </div>
+
+    <div ng-if="!userHasCompletedTask">
+        <uncompleted-subtask subtask="uncompletedSubtask" after-completion="setTask()" current-user="currentUser"></uncompleted-subtask>
+    </div>
+
+    <div ng-if="userHasCompletedTask && !userHasCompletedExercise">
+        <completed_task current-user="currentUser" has-conclusion="hasConclusion"></completed_task>
+    </div>
+
+    <div ng-if="userHasCompletedExercise">
+        <completed_exercise></completed_exercise>
+    </div>
+    <!--<% if @current_user.has_completed? current_exercise %>-->
+
 </div>

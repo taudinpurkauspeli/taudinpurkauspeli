@@ -3,8 +3,9 @@ class ExerciseHypothesesController < ApplicationController
   skip_before_action :verify_authenticity_token, if: :json_request?
 
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin
+  before_action :ensure_user_is_admin, except: [:index, :exercise_hypotheses_conclusion]
   before_action :set_exercise_hypothesis, only: [:update, :destroy]
+  before_action :set_current_user, only: [:exercise_hypotheses_conclusion]
 
   # GET /exercise_hypotheses
   # GET /exercise_hypotheses.json
@@ -18,6 +19,33 @@ class ExerciseHypothesesController < ApplicationController
 
         format.html
         format.json {render json: exercise_hypotheses}
+      else
+        format.html
+        format.json {head :not_found}
+      end
+    end
+  end
+
+  # GET /exercise_hypotheses_conclusion
+  # GET /exercise_hypotheses_conclusion.json
+  def exercise_hypotheses_conclusion
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+
+        exercise_hypotheses = ExerciseHypothesis.where(exercise: exercise)
+
+        # Unchecked exercise hypothesis id:s to session
+        if session[:exhyp_ids].nil?
+          session[:exhyp_ids] = (exercise_hypotheses - @current_user.exercise_hypotheses).map(&:id)
+        end
+
+        # Unchecked exercise hypotheses for conclusion view
+        conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
+
+        format.html
+        format.json {render json: conclusion_exercise_hypotheses.to_json(include: :hypothesis)}
       else
         format.html
         format.json {head :not_found}

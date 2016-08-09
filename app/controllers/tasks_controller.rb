@@ -3,10 +3,11 @@ class TasksController < ApplicationController
   skip_before_action :verify_authenticity_token, if: :json_request?
 
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin, except: [:index, :show]
+  before_action :ensure_user_is_admin, except: [:index, :show, :tasks_one, :student_index, :task_can_be_started]
   before_action :set_task, only: [:edit, :update, :destroy, :show, :level_up, :level_down,
-                                  :tasks_one, :move_level_up, :move_level_down, :move_task_up, :move_task_down]
-  before_action :set_current_user, only: [:index, :show]
+                                  :tasks_one, :move_level_up, :move_level_down, :move_task_up, :move_task_down,
+                                  :task_can_be_started]
+  before_action :set_current_user, only: [:index, :show, :student_index, :task_can_be_started]
 
   # GET /tasks
   # GET /tasks.json
@@ -26,6 +27,27 @@ class TasksController < ApplicationController
     end
 
     set_view_layout
+  end
+
+  # GET /student_index
+  # GET /student_index.json
+  def student_index
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise && @current_user
+
+        completed_tasks = @current_user.tasks.where("level > ?", 0).where(exercise:exercise).order(:level)
+        completed_tasks_by_level = completed_tasks.group_by{|t| t.level}.map{|item| item}
+        available_tasks = exercise.tasks.where("level > ?", 0).order("name") - completed_tasks
+
+        format.html
+        format.json {render json: { completed_tasks: completed_tasks_by_level, available_tasks: available_tasks }}
+      else
+        format.html
+        format.json {head :not_found}
+      end
+    end
   end
 
   # GET /tasks_all_by_level
@@ -105,6 +127,23 @@ class TasksController < ApplicationController
 
     set_view_layout
 
+  end
+
+  # GET /task_can_be_started/1
+  # GET /task_can_be_started/1.json
+  def task_can_be_started
+
+    respond_to do |format|
+      unless @current_user.try(:admin)
+        if @current_user.can_start?(@task)
+          format.html
+          format.json { head :ok }
+        else
+          format.html
+          format.json { head :not_acceptable }
+        end
+      end
+    end
   end
 
   # GET /tasks_one/1

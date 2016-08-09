@@ -1,0 +1,128 @@
+<div class = "row">
+    <div class = "col-md-8">
+        <h1>Toimenpiteet</h1>
+    </div>
+
+    <div class = "col-md-4" ng-if="currentUserAdmin">
+        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteiden luominen ja järjestely" data-content="Tällä sivulla voit luoda uusia toimenpiteitä ja päätöstoimenpiteen. Kussakin casessa voi olla vain yksi päätöstoimenpide. Toimenpiteiden suoritusjärjestystä voi muokata toimenpiteen vieressä olevilla nuolilla. Samassa numeroidussa ryhmässä olevat toimenpiteet voi suorittaa valinnaisessa järjestyksessä. Ryhmät taas suoritetaan numerojärjestyksessä ykkösestä alkaen.">Ohje</a>
+    </div>
+</div>
+<div class = "separator"></div>
+<br/>
+
+<div ng-if="currentUserAdmin">
+    <div ng-if="!hasConclusion">
+        <h5>Tässä casessa ei ole vielä diagnoosi-alakohtaa. Lisää sellainen, jotta opiskelijat voivat pelata casen loppuun asti!</h5>
+        <br/>
+        <div class = "separator"></div>
+        <br/>
+
+    </div>
+
+
+    <div class="task-list">
+        <div class="dropzone">
+            <ul dnd-list="[]"
+                dnd-drop="moveTaskToNewLevel(index, item)"
+                class="list-unstyled">
+
+                <li ng-repeat="(level, tasks) in tasksList"
+                    class="panel panel-default itemlist">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            {{tasks[0]}}
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <ul  dnd-list="[]"
+                             dnd-drop="moveTaskFromLevelToLevel(item, type, tasks[0])"
+                             dnd-horizontal-list="true"
+                             class="list-unstyled">
+
+                            <li ng-repeat="task in tasks[1]"
+                                dnd-draggable="task"
+                                dnd-type="tasks[0]"
+                                dnd-selected="goToCurrentTask(task.id)"
+                                dnd-effect-allowed="move">
+                                {{task.name}}
+                            </li>
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <button class="btn btn-default btn-save btn-new-task" ng-click="createTask()">+ Luo uusi toimenpide</button>
+</div>
+
+<div ng-if="currentUser && !currentUserAdmin">
+
+    <br />
+    <div class = "row">
+        <div class = "col-md-8">
+            <h3>Valitse suoritettava toimenpide</h3>
+        </div>
+        <div class = "col-md-4">
+            <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteen suorittaminen" data-content="Toimenpiteet voi suorittaa vain tietyssä järjestyksessä. Voit valita haluamasi toimenpiteen klikkaamalla sitä. Jos toimenpiteen voi suorittaa, siirryt kyseisen toimenpiteen sivulle, muuten saat virheilmoituksen. Tällöin voit valita jonkun toisen toimenpiteen.">Ohje</a>
+        </div>
+    </div>
+
+    <br />
+
+    <div class = "row" ng-repeat="task in availableTasks">
+        <div class="col-md-5">
+            <button class="btn btn-default btn-available-task multiline" ng-click="startTask(task)">{{task.name}}</button>
+        </div>
+        <div class="col-md-5" ng-if="cannotStartTask(task.id)">
+            <div class="alert-unavailable-task removable">Et voi vielä suorittaa tätä toimenpidettä, vaan sinun tulee suorittaa ainakin yksi muu toimenpide ennen tätä.</div>
+        </div>
+    </div>
+
+    <div class = "separator"></div>
+
+    <br/>
+
+    <div class = "row">
+        <div class = "col-md-8">
+            <h3>Tehdyt toimenpiteet</h3>
+        </div>
+        <div class = "col-md-4">
+            <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="left" title="Suoritetun toimenpiteen tarkastelu" data-content="Voit tarkastella jo suorittamiasi toimenpiteitä klikkaamalla kyseistä tehtävää. Toimenpiteet on sijoitettu tasoittain, mistä näkee toimenpiteiden mahdollisen suoritusjärjestyksen ja samalla sen, missä järjestyksessä olet suorittanut toimenpiteet. Samalla tasolla olevat toimenpiteet voi suorittaa missä tahansa järjestyksessä.">Ohje</a>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="task-list">
+        <div class="dropzone">
+            <ul class="list-unstyled">
+
+                <li ng-repeat="(level, tasks) in completedTasks"
+                    class="panel panel-default itemlist">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            {{tasks[0]}}
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-unstyled">
+
+                            <li ng-repeat="task in tasks[1]"
+                                ng-click="goToCurrentTask(task.id)">
+                                {{task.name}}
+                            </li>
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+</div>
