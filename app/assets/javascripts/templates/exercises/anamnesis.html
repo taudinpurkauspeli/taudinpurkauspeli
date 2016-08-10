@@ -1,49 +1,53 @@
-<div class = "row">
-    <div class = "col-md-8">
-        <h1>Case: {{exercise.name}}</h1>
-    </div>
+<div class="container-fluid">
 
-    <div class = "col-md-4">
-        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteiden luominen ja järjestely" data-content="Tällä sivulla voit luoda uusia toimenpiteitä ja päätöstoimenpiteen. Kussakin casessa voi olla vain yksi päätöstoimenpide. Toimenpiteiden suoritusjärjestystä voi muokata toimenpiteen vieressä olevilla nuolilla. Samassa numeroidussa ryhmässä olevat toimenpiteet voi suorittaa valinnaisessa järjestyksessä. Ryhmät taas suoritetaan numerojärjestyksessä ykkösestä alkaen.">Ohje</a>
-    </div>
-</div>
-<div class = "separator"></div>
-<br/>
 
-<div ng-if="exercise.hidden">
-    <p>Tämä case on piilotettu opiskelijoilta. Muokkaa casea tehdäksesi siitä näkyvä.</p>
+    <div class = "row">
+        <div class = "col-md-8">
+            <h1>Case: {{exercise.name}}</h1>
+        </div>
+
+        <div class = "col-md-4">
+            <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteiden luominen ja järjestely" data-content="Tällä sivulla voit luoda uusia toimenpiteitä ja päätöstoimenpiteen. Kussakin casessa voi olla vain yksi päätöstoimenpide. Toimenpiteiden suoritusjärjestystä voi muokata toimenpiteen vieressä olevilla nuolilla. Samassa numeroidussa ryhmässä olevat toimenpiteet voi suorittaa valinnaisessa järjestyksessä. Ryhmät taas suoritetaan numerojärjestyksessä ykkösestä alkaen.">Ohje</a>
+        </div>
+    </div>
+    <div class = "separator"></div>
     <br/>
-    <div class="separator"></div>
-    <br/>
-</div>
 
-<div ng-if="currentUser && !currentUserAdmin && userHasCompletedExercise">
-    <completed_exercise></completed_exercise>
-    <div class="separator"></div>
-    <br/>
-</div>
-
-<h3>Anamneesi</h3>
-
-<br/>
-
-<div class="panel panel-default">
-    <div class="panel-heading">
+    <div ng-if="exercise.hidden">
+        <p>Tämä case on piilotettu opiskelijoilta. Muokkaa casea tehdäksesi siitä näkyvä.</p>
+        <br/>
+        <div class="separator"></div>
+        <br/>
     </div>
-    <div ta-bind="text" ng-model="exercise.anamnesis" class="panel-body">
+
+    <div ng-if="currentUser && !currentUserAdmin && userHasCompletedExercise">
+        <completed_exercise></completed_exercise>
+        <div class="separator"></div>
+        <br/>
     </div>
-</div>
 
-<div class = "separator"></div>
-<br />
+    <h3>Anamneesi</h3>
 
-<div class="row">
+    <br/>
 
-    <div class="col-md-5">
-        <button class="btn btn-default btn-exercise btn-save"
-                ng-if="currentUserAdmin && exercise"
-                ng-click="updateExercise()">
-            Muokkaa
-        </button>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div ta-bind="text" ng-model="exercise.anamnesis" class="panel-body">
+        </div>
+    </div>
+
+    <div class = "separator"></div>
+    <br />
+
+    <div class="row">
+
+        <div class="col-md-5">
+            <button class="btn btn-default btn-exercise btn-save"
+                    ng-if="currentUserAdmin && exercise"
+                    ng-click="updateExercise()">
+                Muokkaa
+            </button>
+        </div>
     </div>
 </div>
