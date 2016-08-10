@@ -109,7 +109,7 @@
         <div class = "separator"></div>
         <br/>
 
-        <div class="row">
+        <div class="row" ng-if="correctDiagnosis">
             <div class="col-md-12">
 
                 <div ng-repeat="(hypothesis_group, exercise_hypotheses) in exerciseHypotheses" ng-if="checkedHypotheses">
@@ -133,8 +133,7 @@
                                 <button class="btn btn-default btn-hypothesis multiline"
                                         ng-class="{'btn-checked': userHasCheckedHypothesis(exercise_hypothesis) && !hypothesisIsCorrectDiagnosis(exercise_hypothesis),
                                                'btn-save': userHasCheckedHypothesis(exercise_hypothesis) && hypothesisIsCorrectDiagnosis(exercise_hypothesis)}"
-                                        ng-click="checkExerciseHypothesis(exercise_hypothesis)"
-                                        ng-if="correctDiagnosis">
+                                        ng-click="checkExerciseHypothesis(exercise_hypothesis)">
                                     {{exercise_hypothesis.hypothesis.name}}
                                 </button>
                             </div>
@@ -156,5 +155,8 @@
             </div>
         </div>
 
+        <div ng-if="!correctDiagnosis">Tähän caseen ei ole vielä asetettu oikeaa diagnoosia. Olethan yhteydessä opettajaasi asian korjaamiseksi. Kiitos!</div>
     </div>
+
+
 </div>
