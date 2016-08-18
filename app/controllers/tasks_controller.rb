@@ -223,7 +223,7 @@ class TasksController < ApplicationController
     @task.reset_prerequisites
     session[:task_id] = nil
     highest_level = @task.exercise.tasks.order(level: :desc).first.level+1
-    @task.move_level_down(highest_level)
+    @task.move_task_down(highest_level)
     @task.destroy
     respond_to do |format|
       format.html { redirect_to tasks_url(:layout => get_layout), notice: 'Toimenpide poistettu.' }
