@@ -124,6 +124,7 @@ app.controller("ExercisesShowController", [
         $scope.removeCurrentTask = function() {
             LocalStorageService.remove("current_task");
             LocalStorageService.remove("current_task_tab_path");
+            LocalStorageService.remove("unchecked_hypotheses");
             $scope.setCurrentTask();
         };
 
