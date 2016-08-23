@@ -15,10 +15,14 @@ app.controller("CompletedConclusionController", [
         };
 
         $scope.setExerciseHypotheses = function() {
-            var uncheckedHypotheses = LocalStorageService.getObject("unchecked_hypotheses", []);
+            var uncheckedHypotheses = LocalStorageService.getObject("unchecked_hypotheses", '{"ids": "[]"}');
             ExerciseHypotheses.query({'exercise_id' : $stateParams.exerciseShowId, 'unchecked_hypotheses[]': uncheckedHypotheses.ids}, function(data) {
                 $scope.exerciseHypotheses = data;
-                $scope.thereAreExerciseHypotheses = (data.length > 0);
+                if(data){
+                    $scope.thereAreExerciseHypotheses = (data.length > 0);
+                } else {
+                    $scope.thereAreExerciseHypotheses = false;
+                }
             });
         };
 

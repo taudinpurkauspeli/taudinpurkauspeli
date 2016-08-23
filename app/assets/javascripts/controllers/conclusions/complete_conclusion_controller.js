@@ -20,11 +20,11 @@ app.controller("CompleteConclusionController", [
         $scope.setUncheckedHypotheses = function() {
 
             UncheckedHypotheses.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
-                $scope.uncheckedHypotheses = LocalStorageService.getObject("unchecked_hypotheses", null);
+                $scope.uncheckedHypotheses = LocalStorageService.getObject("unchecked_hypotheses", 'null');
 
                 if(!$scope.uncheckedHypotheses){
                     LocalStorageService.setObject("unchecked_hypotheses", {ids: data});
-                    $scope.uncheckedHypotheses = LocalStorageService.getObject("unchecked_hypotheses", []);
+                    $scope.uncheckedHypotheses = LocalStorageService.getObject("unchecked_hypotheses", '{"ids": "[]"}');
                 }
 
                 $scope.setExerciseHypotheses($scope.uncheckedHypotheses.ids);
