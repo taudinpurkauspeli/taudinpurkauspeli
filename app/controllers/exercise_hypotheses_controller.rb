@@ -3,9 +3,9 @@ class ExerciseHypothesesController < ApplicationController
   skip_before_action :verify_authenticity_token, if: :json_request?
 
   before_action :ensure_user_is_logged_in
-  before_action :ensure_user_is_admin, except: [:index, :exercise_hypotheses_conclusion]
+  before_action :ensure_user_is_admin, except: [:index, :exercise_hypotheses_conclusion, :unchecked_hypotheses]
   before_action :set_exercise_hypothesis, only: [:update, :destroy]
-  before_action :set_current_user, only: [:exercise_hypotheses_conclusion]
+  before_action :set_current_user, only: [:exercise_hypotheses_conclusion, :unchecked_hypotheses]
 
   # GET /exercise_hypotheses
   # GET /exercise_hypotheses.json
@@ -33,19 +33,32 @@ class ExerciseHypothesesController < ApplicationController
 
     respond_to do |format|
       if exercise
-
-        exercise_hypotheses = ExerciseHypothesis.where(exercise: exercise)
-
-        # Unchecked exercise hypothesis id:s to session
-        if session[:exhyp_ids].nil?
-          session[:exhyp_ids] = (exercise_hypotheses - @current_user.exercise_hypotheses).map(&:id)
-        end
-
         # Unchecked exercise hypotheses for conclusion view
-        conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
+        conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: params[:unchecked_hypotheses])
 
         format.html
         format.json {render json: conclusion_exercise_hypotheses.to_json(include: :hypothesis)}
+      else
+        format.html
+        format.json {head :not_found}
+      end
+    end
+  end
+
+  # GET /unchecked_hypotheses
+  # GET /unchecked_hypotheses.json
+  def unchecked_hypotheses
+    exercise = Exercise.find(params[:exercise_id])
+
+    respond_to do |format|
+      if exercise
+
+        exercise_hypotheses = ExerciseHypothesis.where(exercise: exercise)
+
+        exhyp_ids = (exercise_hypotheses - @current_user.exercise_hypotheses).map(&:id)
+
+        format.html
+        format.json {render json: exhyp_ids}
       else
         format.html
         format.json {head :not_found}

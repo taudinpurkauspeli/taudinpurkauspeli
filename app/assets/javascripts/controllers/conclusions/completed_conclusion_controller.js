@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("CompletedConclusionController", [
-    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "$state", "$filter",
-    function($scope, $resource, $window, $uibModal, $stateParams, $state, $filter) {
+    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "$state", "$filter", "LocalStorageService",
+    function($scope, $resource, $window, $uibModal, $stateParams, $state, $filter, LocalStorageService) {
 
         var ExerciseHypotheses = $resource('/exercise_hypotheses_conclusion.json');
         var CheckedHypotheses = $resource('/checked_hypotheses.json');
@@ -15,7 +15,8 @@ app.controller("CompletedConclusionController", [
         };
 
         $scope.setExerciseHypotheses = function() {
-            ExerciseHypotheses.query({ exercise_id : $stateParams.exerciseShowId}, function(data) {
+            var uncheckedHypotheses = LocalStorageService.getObject("unchecked_hypotheses", []);
+            ExerciseHypotheses.query({'exercise_id' : $stateParams.exerciseShowId, 'unchecked_hypotheses[]': uncheckedHypotheses.ids}, function(data) {
                 $scope.exerciseHypotheses = data;
                 $scope.thereAreExerciseHypotheses = (data.length > 0);
             });
