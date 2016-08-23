@@ -33,6 +33,9 @@ app.controller("ExercisesShowController", [
         var UserHasCompletedExercise = $resource('/users/:id/has_completed_exercise.json',
             {id: '@id'});
 
+        var CompletedTasks = $resource('/users/:id/completed_tasks.json',
+            {id: '@id'});
+
         $scope.setExercise = function() {
             ExerciseOne.get({exerciseId : exerciseId}, function(data) {
                 $scope.exercise = data.exercise;
@@ -64,6 +67,15 @@ app.controller("ExercisesShowController", [
                     $scope.userHasCompletedExercise = true;
                 }, function() {
                     $scope.userHasCompletedExercise = false;
+                }
+            );
+        };
+
+        $scope.setCompletedTasksForUser = function() {
+
+            CompletedTasks.query({id: $scope.currentUser, exercise_id: $stateParams.exerciseShowId},
+                function(data) {
+                    $scope.completedTasksForUser = data;
                 }
             );
         };
@@ -110,6 +122,7 @@ app.controller("ExercisesShowController", [
 
         $scope.setExercise();
         $scope.setCompletedExerciseValue();
+        $scope.setCompletedTasksForUser();
         $scope.setCurrentTask();
         $scope.setTaskTabPath();
 

@@ -40,6 +40,39 @@
     <div class = "separator"></div>
     <br />
 
+    <div ng-if="currentUser && !currentUserAdmin">
+
+        <h3>Tehdyt toimenpiteet</h3>
+
+        <br/>
+        <br/>
+
+        {{completedTasksForUser}}
+        <!--<% unless @completed_tasks.empty? %>-->
+
+        <!--<% @completed_tasks.each_with_index do |task, index| %>-->
+
+        <!--<div class = "row">-->
+            <!--<div class = "col-md-12">-->
+
+                <!--<button class="btn btn-default btn-completed-task" data-toggle="collapse" id="collapse-completed-task-link<%= task.id.to_s %>" href="#collapse-completed-task<%= task.id.to_s %>" >-->
+                    <!--<%= (index + 1).to_s + ". " + task.name %>-->
+                <!--</button>-->
+
+                <!--<div class="panel panel-default panel-grey">-->
+                    <!--<div id="collapse-completed-task<%= task.id.to_s %>" class="panel-collapse collapse">-->
+                        <!--<div class="panel-body">-->
+                            <!--<% task.subtasks.each do |subtask| %>-->
+                            <!--<%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask, parent_view: 'exercise_show' } %>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    </div>
+
     <div class="row">
 
         <div class="col-md-5">
