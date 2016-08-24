@@ -47,29 +47,25 @@
         <br/>
         <br/>
 
-        {{completedTasksForUser}}
-        <!--<% unless @completed_tasks.empty? %>-->
+        <div ng-repeat="(index, task) in completedTasksForUser">
 
-        <!--<% @completed_tasks.each_with_index do |task, index| %>-->
+            <div class = "row">
+                <div class = "col-md-12">
 
-        <!--<div class = "row">-->
-            <!--<div class = "col-md-12">-->
+                    <button class="btn btn-default btn-completed-task" data-toggle="collapse" id="collapse-completed-task-link{{task.id}}" href="#collapse-completed-task{{task.id}}" >
+                        {{index+1}}. {{task.name}}
+                    </button>
 
-                <!--<button class="btn btn-default btn-completed-task" data-toggle="collapse" id="collapse-completed-task-link<%= task.id.to_s %>" href="#collapse-completed-task<%= task.id.to_s %>" >-->
-                    <!--<%= (index + 1).to_s + ". " + task.name %>-->
-                <!--</button>-->
-
-                <!--<div class="panel panel-default panel-grey">-->
-                    <!--<div id="collapse-completed-task<%= task.id.to_s %>" class="panel-collapse collapse">-->
-                        <!--<div class="panel-body">-->
-                            <!--<% task.subtasks.each do |subtask| %>-->
-                            <!--<%= render 'tasks/subtasks/' + subtask.template, { subtask:subtask, parent_view: 'exercise_show' } %>-->
-
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+                    <div class="panel panel-default panel-grey">
+                        <div id="collapse-completed-task{{task.id}}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <task-show task="task" current-user="currentUser"></task-show>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
