@@ -1,3 +1,4 @@
+/*
 
 //Colors
 $MediumGrey           : #dbdbdb;
@@ -75,9 +76,12 @@ li.active>a{
   background-color: #EEE !important;
 }
 
-//************
-//*  Login   *
-//************
+/*/
+/************
+/*/
+/*  Login   *
+/*/
+/************
 
 .login-container{
   display: table;
@@ -101,9 +105,12 @@ li.active>a{
 }
 
 
-//**************
-//*   Panels   *
-//**************
+/*/
+/**************
+/*/
+/*   Panels   *
+/*/
+/**************
 
 .panel-default{
   border-radius: 5px;
@@ -152,9 +159,12 @@ li.active>a{
   width: 70%
 }
 
-//***************
-//*   Buttons   *
-//***************
+/*/
+/***************
+/*/
+/*   Buttons   *
+/*/
+/***************
 
 .btn-default{
   width: 100%;
@@ -302,9 +312,12 @@ li.active>a{
   //color: white;
 }
 
-//*******************************
-//*   Notices and info fields   *
-//*******************************
+/*/
+/*******************************
+/*/
+/*   Notices and info fields   *
+/*/
+/*******************************
 .messages{
   position: fixed;
   top: 60px;
@@ -387,9 +400,12 @@ li.active>a{
   background-color: $PaleLightYellow;
 }
 
-//*********************
-//*   Progress bars   *
-//*********************
+/*/
+/*********************
+/*/
+/*   Progress bars   *
+/*/
+/*********************
 
 div.progressbar{
   float: left;
@@ -415,9 +431,12 @@ span.progress-percent{
   margin-left: 20px;
 }
 
-//***************
-//*   Inputs    *
-//***************
+/*/
+/***************
+/*/
+/*   Inputs    *
+/*/
+/***************
 
 
 //doesn't really do anything yet
@@ -434,9 +453,12 @@ input[type="checkbox"]:checked {
   //background:url(check_radio_sheet.png) -19px top no-repeat;
 }
 
-//***************
-//*   Forms     *
-//***************
+/*/
+/***************
+/*/
+/*   Forms     *
+/*/
+/***************
 
 .form-content{
   border: 1px solid #BBB;
@@ -444,9 +466,12 @@ input[type="checkbox"]:checked {
   background-color: #FFFFFF;
 }
 
-//*******************
-//*   Layout divs   *
-//*******************
+/*/
+/*******************
+/*/
+/*   Layout divs   *
+/*/
+/*******************
 
 .div-task-order-container{
   float: left;
@@ -853,3 +878,4 @@ section {
 .sortorder.reverse:after {
   content: '\25bc';
 }
+*/
