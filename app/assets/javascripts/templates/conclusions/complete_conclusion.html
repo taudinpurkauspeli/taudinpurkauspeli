@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default" ng-if="correctDiagnosis">
     <div class="panel-heading">
         <h3 class="panel-title">{{subtask.conclusion.title}}</h3>
     </div>
@@ -21,8 +21,7 @@
                 <button class="btn btn-default btn-hypothesis multiline"
                         ng-class="{'btn-checked': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis),
                                    'btn-save': userHasCheckedHypothesis(exerciseHypothesis) && hypothesisIsCorrectDiagnosis(exerciseHypothesis)}"
-                        ng-click="checkAnswers(exerciseHypothesis)"
-                        ng-if="correctDiagnosis">
+                        ng-click="checkAnswers(exerciseHypothesis)">
                     {{exerciseHypothesis.hypothesis.name}}
                 </button>
             </div>
@@ -30,7 +29,7 @@
             <div class = "col-md-6">
 
                 <div class="info-checked-hypothesis removable"
-                     ng-if="correctDiagnosis && (exerciseHypothesis.explanation || 
+                     ng-if="(exerciseHypothesis.explanation || 
                             hypothesisIsCorrectDiagnosis(exerciseHypothesis)) && userClickedCheckedHypothesis(exerciseHypothesis)">
 
                     <span ng-if="hypothesisIsCorrectDiagnosis(exerciseHypothesis)">Hienoa! Selvitit oikean diagnoosin! </span>
@@ -40,6 +39,17 @@
 
             </div>
         </div>
+
+    </div>
+</div>
+
+<div class="panel panel-default" ng-if="!correctDiagnosis">
+    <div class="panel-heading">
+        <h3 class="panel-title">Diagnoositoimenpide</h3>
+    </div>
+    <div class="panel-body">
+
+        Tähän caseen ei ole vielä asetettu oikeaa diagnoosia. Olethan yhteydessä opettajaasi asian korjaamiseksi. Kiitos!
 
     </div>
 </div>

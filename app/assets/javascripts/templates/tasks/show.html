@@ -35,8 +35,17 @@
 </div>
 
 <div class="container-fluid" ng-if="currentUser && !currentUserAdmin">
-    <h1>Toimenpide: {{taskForShow.name}}</h1>
-    <br/>
+    <div class = "row">
+        <div class = "col-md-8">
+            <h1>Toimenpide: {{taskForShow.name}}</h1>
+        </div>
+
+        <div class = "col-md-4">
+            <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteen sivu" data-content="Tällä sivulla voit suorittaa toimenpiteen.">Ohje</a>
+        </div>
+    </div>
+    <div class = "separator"></div>
+
     <br/>
 
     <div ng-repeat="subtask in completedSubtasks">
@@ -57,6 +66,5 @@
     <div ng-if="userHasCompletedExercise">
         <completed_exercise></completed_exercise>
     </div>
-    <!--<% if @current_user.has_completed? current_exercise %>-->
 
 </div>

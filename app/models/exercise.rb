@@ -86,6 +86,20 @@ class Exercise < ActiveRecord::Base
         ex_hyp.update(task: new_prerequisite_task)
       end
 
+      old_conclusion = exercise.get_conclusion
+      if old_conclusion
+        old_correct_diagnosis = exercise.correct_diagnosis
+
+        if old_correct_diagnosis
+
+          new_conclusion = exercise_dup.get_conclusion
+          new_correct_diagnosis = exercise_dup.exercise_hypotheses.where(hypothesis_id: old_correct_diagnosis.hypothesis_id).first
+
+          new_conclusion.update(exercise_hypothesis: new_correct_diagnosis)
+        end
+
+      end
+
       return true
     end
 
