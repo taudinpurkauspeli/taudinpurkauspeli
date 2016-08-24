@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get 'hypotheses_all', to: 'hypotheses#hypotheses_all'
   get 'hypothesis_groups_and_hypotheses', to: 'hypothesis_groups#hypothesis_groups_and_hypotheses'
   get 'correct_diagnosis', to: 'hypotheses#correct_diagnosis'
+  get 'unchecked_hypotheses', to: 'exercise_hypotheses#unchecked_hypotheses'
 
   get 'exercises_one/:id', to: 'exercises#exercises_one'
   put 'exercises_one/:id', to: 'exercises#update_one'
@@ -51,6 +52,7 @@ Rails.application.routes.draw do
   delete 'delete_user_json/:id', to: 'users#json_destroy'
   get 'users_by_case_json', to: 'users#json_by_case'
   get 'users/:id/completable_subtasks', to: 'users#completable_subtasks'
+  get 'users/:id/completed_tasks', to: 'users#completed_tasks'
   get 'users/:id/has_completed_task', to: 'users#has_completed_task'
   get 'users/:id/has_completed_conclusion', to: 'users#has_completed_conclusion'
   get 'users/:id/has_completed_exercise', to: 'users#has_completed_exercise'

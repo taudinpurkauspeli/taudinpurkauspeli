@@ -1,13 +1,14 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("CompleteConclusionController", [
-    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "$state", "$filter",
-    function($scope, $resource, $window, $uibModal, $stateParams, $state, $filter) {
+    "$scope", "$resource", "$window", "$uibModal", "$stateParams", "$state", "$filter", "LocalStorageService",
+    function($scope, $resource, $window, $uibModal, $stateParams, $state, $filter, LocalStorageService) {
 
         var ExerciseHypotheses = $resource('/exercise_hypotheses_conclusion.json');
         var CheckAnswersConclusion = $resource('/conclusions/:id/check_answers.json',
             {id: '@id'});
         var CheckedHypotheses = $resource('/checked_hypotheses.json');
+        var UncheckedHypotheses = $resource('/unchecked_hypotheses.json');
         var CorrectDiagnosis = $resource('/correct_diagnosis.json');
 
         $scope.setCheckedHypotheses = function() {
@@ -16,8 +17,23 @@ app.controller("CompleteConclusionController", [
             });
         };
 
-        $scope.setExerciseHypotheses = function() {
-            ExerciseHypotheses.query({ exercise_id : $stateParams.exerciseShowId}, function(data) {
+        $scope.setUncheckedHypotheses = function() {
+
+            UncheckedHypotheses.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
+                $scope.uncheckedHypotheses = LocalStorageService.getObject("unchecked_hypotheses", 'null');
+
+                if(!$scope.uncheckedHypotheses){
+                    LocalStorageService.setObject("unchecked_hypotheses", {ids: data});
+                    $scope.uncheckedHypotheses = LocalStorageService.getObject("unchecked_hypotheses", '{"ids": "[]"}');
+                }
+
+                $scope.setExerciseHypotheses($scope.uncheckedHypotheses.ids);
+
+            });
+        };
+
+        $scope.setExerciseHypotheses = function(uncheckedHypotheses) {
+            ExerciseHypotheses.query({'exercise_id': $stateParams.exerciseShowId, 'unchecked_hypotheses[]': uncheckedHypotheses}, function(data) {
                 $scope.exerciseHypotheses = data;
             });
         };
@@ -35,8 +51,8 @@ app.controller("CompleteConclusionController", [
         });
 
         $scope.setAllExerciseHypotheses = function() {
-            $scope.setExerciseHypotheses();
             $scope.setCheckedHypotheses();
+            $scope.setUncheckedHypotheses();
             $scope.setCorrectDiagnosis();
         };
 

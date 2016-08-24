@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div ng-if="thereAreExerciseHypotheses">
+        <div ng-if="thereAreExerciseHypotheses && checkedHypotheses">
             <h4>Muut poissuljetut diffit:</h4>
             <br/>
             <div class="row" ng-repeat="exerciseHypothesis in exerciseHypotheses">
@@ -43,7 +43,7 @@
 
                     <button class="btn btn-default btn-hypothesis multiline"
                             ng-class="{'btn-checked': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis)}"
-                            ng-click="setExerciseHypothesisId(exerciseHypothesis)"
+                            ng-click="setExerciseHypothesisId(exerciseHypothesis.id)"
                             ng-if="!hypothesisIsCorrectDiagnosis(exerciseHypothesis)">
                         {{exerciseHypothesis.hypothesis.name}}
                     </button>
@@ -52,7 +52,7 @@
                 <div class = "col-md-6">
 
                     <div class="info-checked-hypothesis removable"
-                         ng-if="exerciseHypothesis.explanation && userClickedCheckedHypothesis(exerciseHypothesis)">
+                         ng-if="exerciseHypothesis.explanation && userClickedCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis)">
 
                         <span ta-bind="text" ng-model="exerciseHypothesis.explanation"></span>
                     </div>
