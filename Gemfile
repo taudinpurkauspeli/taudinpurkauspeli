@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Twitter Boostrap
-gem 'bootstrap-sass'
+#gem 'bootstrap-sass'
 
 # Text editor
 gem 'ckeditor', github: 'Eepa/ckeditor'
@@ -82,7 +82,7 @@ end
 
 group :development do
   # For Bootstrap
-  gem 'rails_layout'
+  #gem 'rails_layout'
 
   # For creating a seed from database
   gem 'seed_dump'

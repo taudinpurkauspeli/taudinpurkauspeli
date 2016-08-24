@@ -18,7 +18,6 @@
 //= require angular-rails-templates
 //= require diagnose_diseases_app
 //= require ckeditor/init
-//= require bootstrap-sprockets
 //= require angular-validation-match
 //= require angular-drag-and-drop-lists
 //= require jQueryDndPageScroll/jquery.dnd_page_scroll
