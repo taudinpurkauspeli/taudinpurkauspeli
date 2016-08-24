@@ -2,50 +2,56 @@
 
 <header>
 
-  <ul>
-    <li ng-repeat="link in navigationLinksList" ng-show={{link.visibility}}><a ui-sref={{link.state}} ng-click="link.click()">{{link.title}}</a></li>
+  <nav class="navbar navbar-default">
 
-  </ul>
+    <div class="container-fluid">
 
-  <div ng-controller="AuthenticationController">
-    <div ng-if="!currentUser" class="row">
-      <form name="loginForm"
-            ng-submit="login(credentials)" novalidate>
-
-        <div class="col-md-3">
-          <input type="text" id="username"
-                 placeholder="Käyttäjätunnus"
-                 ng-model="credentials.username">
-        </div>
-
-        <div class="col-md-3">
-          <input type="password" id="password"
-                 placeholder="Salasana"
-                 ng-model="credentials.password">
-        </div>
-
-        <div class="col-md-3">
-          <button type="submit"
-                  id="btn-login">
-            Kirjaudu sisään
-          </button>
-        </div>
-      </form>
-
-      <div class="col-md-3">
-        <a id="btn-signup" ng-href=#/signup>Luo uusi tunnus</a>
+      <div class="navbar-header" ng-if="!currentUser">
+        <a class="navbar-brand" ng-href="/">Taudinpurkauspeli</a>
       </div>
-    </div>
 
-    <div ng-if="currentUser" class="row">
-      <div class="col-md-3">
-        <button type="button" ng-click="logout()">
-          Kirjaudu ulos
-        </button>
-      </div>
-    </div>
-  </div>
+      <ul class="nav navbar-nav">
+        <li ng-repeat="link in navigationLinksList" ng-show={{link.visibility}}><a ui-sref={{link.state}} ng-click="link.click()">{{link.title}}</a></li>
+      </ul>
 
+      <ul class="nav navbar-nav pull-right" ng-controller="AuthenticationController">
+
+        <li ng-if="!currentUser">
+          <a id="btn-signup" ng-href=#/signup>Luo uusi tunnus</a>
+        </li>
+
+        <li uib-dropdown ng-if="!currentUser" auto-close="disabled">
+          <a href="#" class="dropdown-toggle" uib-dropdown-toggle role="button" aria-haspopup="true" aria-expanded="false">Kirjaudu sisään <span class="caret"></span></a>
+          <div uib-dropdown-menu>
+
+            <form name="loginForm" ng-submit="login(credentials)" novalidate>
+
+              <input type="text" id="username"
+                     placeholder="Käyttäjätunnus"
+                     ng-model="credentials.username"
+                     class="form-control">
+
+              <input type="password" id="password"
+                     placeholder="Salasana"
+                     ng-model="credentials.password"
+                     class="form-control">
+
+              <button type="submit" id="btn-login">
+                Kirjaudu sisään
+              </button>
+            </form>
+          </div>
+        </li>
+
+        <li ng-if="currentUser">
+          <a href="#" ng-click="logout()">
+            Kirjaudu ulos
+          </a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
 </header>
 
 

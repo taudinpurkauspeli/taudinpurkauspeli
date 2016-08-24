@@ -1,34 +1,34 @@
-//
-////Colors
-//$MediumGrey           : #dbdbdb;
-//$BtnExerciseBorderClr : #999;
-//$PaleLightGreen       : #b2dca5;
-//$LightGreen           : #74ad61;
-//$MediumGreen          : #446739;
-//$LightRed             : #ae6161;
-//$PaleLightRed         : #be8181;
-//$DarkRed              : #692f2f;
-//$DarkGreen            : #232e1e;
-//$PaleLightYellow      : #EAEB7C;
-//
-////These are not in palette.png and should be refactored later
-//$DisabledButtonText   : #666;
-//
-//
-//// make all images responsive by default
+
+//Colors
+$MediumGrey           : #dbdbdb;
+$BtnExerciseBorderClr : #999;
+$PaleLightGreen       : #b2dca5;
+$LightGreen           : #74ad61;
+$MediumGreen          : #446739;
+$LightRed             : #ae6161;
+$PaleLightRed         : #be8181;
+$DarkRed              : #692f2f;
+$DarkGreen            : #232e1e;
+$PaleLightYellow      : #EAEB7C;
+
+//These are not in palette.png and should be refactored later
+$DisabledButtonText   : #666;
+
+
+// make all images responsive by default
 //img {
 //  margin: 0 auto;
 //}
-//
-//body{
-//  background-color: black;
-//  background-image: url('http://tautiset-pelit.it.helsinki.fi/images/5_3.JPG') !important;
-//  background-size: 100%;
-//  background-attachment: fixed;
-//  background-position: 0px 0px;
-//  background-repeat: no-repeat;
-//}
-//
+
+body{
+  background-color: black;
+  background-image: url('http://tautiset-pelit.it.helsinki.fi/images/5_3.JPG') !important;
+  background-size: 100%;
+  background-attachment: fixed;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
 //h1{
 //  margin-top: 2px;
 //}
