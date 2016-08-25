@@ -29,6 +29,17 @@ body{
   background-repeat: no-repeat;
 }
 
+.navbar {
+  margin-bottom: 0;
+}
+
+main {
+  background-color: #eee;
+  padding-bottom: 80px;
+  width: 100%;
+  max-width: 1170px;
+}
+
 .paddingLeft10 {
   padding-left: 10px;
 }
@@ -590,16 +601,7 @@ body{
 //.submit {
 //
 //}
-//// apply styles to HTML elements
-//// to make views framework-neutral
-//main {
-//
-//  background-color: #eee;
-//  padding-bottom: 80px;
-//  width: 100%;
-//  max-width: 1170px;
-//  //margin-top: 50px; // accommodate the navbar
-//}
+
 //section {
 //
 //  margin-top: 20px;
