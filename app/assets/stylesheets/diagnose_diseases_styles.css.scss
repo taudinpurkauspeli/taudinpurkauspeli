@@ -31,6 +31,26 @@ body{
 
 .navbar {
   margin-bottom: 0;
+  background-color: $MediumGreen;
+}
+
+
+.navbar-default {
+  border: none;
+  .navbar-nav li a {
+    color: white;
+  }
+
+  .navbar-nav li a:hover {
+    color: #BFBEC3;
+  }
+
+  .navbar-brand {
+    color: white;
+  }
+  .navbar-brand:hover {
+    color: #BFBEC3;
+  }
 }
 
 main {
