@@ -71,48 +71,44 @@ main {
   max-width: 1170px;
 }
 
-.paddingLeft10 {
-  padding-left: 10px;
-}
-
-.paddingRight20 {
-  padding-right: 20px;
-}
-
 .padding-bottom-10 {
-  padding-bottom: 10px;
+  padding-bottom: 10px !important;
 }
 
 .padding-bottom-20 {
-  padding-bottom: 20px;
+  padding-bottom: 20px !important;
 }
 
 .padding-bottom-30 {
-  padding-bottom: 30px;
+  padding-bottom: 30px !important;
 }
 
 .padding-bottom-40 {
-  padding-bottom: 40px;
+  padding-bottom: 40px !important;
 }
 
 .padding-top-7 {
-  padding-top: 7px;
+  padding-top: 7px !important;
 }
 
 .padding-top-10 {
-  padding-top: 10px;
+  padding-top: 10px !important;
 }
 
 .padding-top-20 {
-  padding-top: 20px;
+  padding-top: 20px !important;
 }
 
 .padding-top-30 {
-  padding-top: 30px;
+  padding-top: 30px !important;
 }
 
 .margin-bottom-20 {
-  margin-bottom: 20px;
+  margin-bottom: 20px !important;
+}
+
+.margin-top-20 {
+  margin-top: 20px !important;
 }
 
 div.separator{
@@ -136,9 +132,21 @@ div.separator{
   width: 100%;
 }
 
+.btn-completed-exercise {
+  width: 100%;
+}
+
 .multiline {
   white-space: normal;
   word-wrap: break-word;
+}
+
+.panel-light-green{
+  background-color: $PaleLightGreen;
+}
+
+.panel-heading-green{
+  background-color: $LightGreen !important;
 }
 
 //h1{
@@ -240,16 +248,11 @@ div.separator{
 //  background-color: #c2ecb5;
 //}
 //
-//.panel-light-green{
-//  //background-color: #acc7a0;
-//  background-color: $PaleLightGreen;
-//}
+
 //.panel-heading-grey{
 //  background-color: #cacaca !important;
 //}
-//.panel-heading-green{
-//  background-color: $LightGreen !important;
-//}
+
 //.padding15{
 //  padding: 15px
 //}
