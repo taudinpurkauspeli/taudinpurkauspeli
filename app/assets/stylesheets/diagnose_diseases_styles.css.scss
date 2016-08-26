@@ -14,11 +14,10 @@ $PaleLightYellow      : #EAEB7C;
 //These are not in palette.png and should be refactored later
 $DisabledButtonText   : #666;
 
-
-// make all images responsive by default
-//img {
-//  margin: 0 auto;
-//}
+.title-image {
+  width: 100%;
+  height: auto;
+}
 
 body{
   background-color: black;
@@ -33,7 +32,6 @@ body{
   margin-bottom: 0;
   background-color: $MediumGreen;
 }
-
 
 .navbar-default {
   border: none;
@@ -70,6 +68,15 @@ main {
 
 .padding20 {
   padding: 20px 20px 20px 20px;
+}
+
+div.separator{
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid #CCC;
+  background-color: #DDD;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 //h1{
@@ -513,14 +520,6 @@ main {
 //  font-weight: bold;
 //}
 //
-//div.separator{
-//  width: 100%;
-//  height: 1px;
-//  border-bottom: 1px solid #CCC;
-//  background-color: #DDD;
-//  margin-top: 10px;
-//  margin-bottom: 10px;
-//}
 //
 //td.multichoice{
 //  width: 50%;
