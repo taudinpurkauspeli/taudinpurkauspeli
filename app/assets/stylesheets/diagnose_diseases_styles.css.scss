@@ -51,6 +51,19 @@ body{
   }
 }
 
+.nav-tabs {
+  li a {
+    color: black !important;
+  }
+  li.active a {
+    background-color: #EEE !important;
+  }
+
+  .exerciseTabLink {
+    font-size: large;
+  }
+}
+
 main {
   background-color: #eee;
   padding-bottom: 80px;
@@ -166,9 +179,6 @@ div.separator{
 //}
 //li.exerciseTabLink{
 //  cursor: pointer;
-//}
-//li.exerciseTabLink>a{
-//  color: black !important;
 //}
 //li.active>a{
 //  background-color: #EEE !important;
