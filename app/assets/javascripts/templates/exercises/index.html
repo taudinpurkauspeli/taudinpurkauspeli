@@ -1,71 +1,88 @@
-<div class="row">
+<!--<div class="row">-->
+    <!--<div class="col-md-12">-->
+        <!--<img src="http://tautiset-pelit.it.helsinki.fi/images/titlebanner.png" height="200" width="1500" class="title-image">-->
+    <!--</div>-->
+<!--</div>-->
+
+<div class="row padding-bottom-20 padding-top-30">
     <div class="col-md-12">
-        <img src="http://tautiset-pelit.it.helsinki.fi/images/titlebanner.png" height="200" width="1500" class="title-image">
+        <h1 class="center-text">Taudinpurkauspeli</h1>
     </div>
 </div>
 
-<div class = "row">
-    <div class = "col-md-8">
-        <br/>
-        <br/>
-        <h1>Taudinpurkauspeli - uusi versio</h1>
-    </div>
-    <br/>
-    <br/>
-</div>
 <div class="separator"></div>
 
 
 <div ng-if="exercisesList">
-    <div class="row">
-        <label for="queryName">Hakusanat</label>
-        <div class="col-md-5">
-            <input type="text"
-                   name="queryName"
-                   id="queryName"
-                   class="form-control input"
-                   placeholder="Casen nimi"
-                   ng-model="queryName">
-
+    <div class="row padding-bottom-40 padding-top-30">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-1 padding-top-7">
+                            <label for="queryName">Hakusanat</label>
+                        </div>
+                        <div class="col-md-11">
+                            <input type="text"
+                                   name="queryName"
+                                   id="queryName"
+                                   class="form-control"
+                                   placeholder="Casen nimi"
+                                   ng-model="queryName">
+                        </div>
+                    </div>
         </div>
+        <div class="col-md-1"></div>
     </div>
-    <br/>
 
     <div ng-repeat="exercise in exercisesList | orderBy: 'name' | filter:{name: queryName}">
         <div class="row">
 
-            <div class="col-md-5">
-                <button class="btn btn-default btn-exercise"
-                        ng-class="{'disabled': !currentUser}"
-                        ng-if="!(!currentUserAdmin && exercise.hidden)"
-                        ng-click="viewExercise(exercise)">
-                    {{exercise.name}}
-                </button>
+            <div ng-if="(!currentUser || (currentUser && !currentUserAdmin)) && !exercise.hidden">
+
+                <div class="col-md-1 padding-bottom-20"></div>
+
+                <div class="col-md-10 padding-bottom-20">
+                    <button class="btn btn-default btn-lg btn-exercise-index multiline padding-top-20 padding-bottom-20"
+                            ng-class="{'disabled': !currentUser}"
+                            ng-click="viewExercise(exercise)">
+                        {{exercise.name}}
+                    </button>
+                </div>
+
+                <div class="col-md-1 padding-bottom-20"></div>
+
             </div>
 
-            <div class="col-md-1"
-                 ng-if="currentUserAdmin">
-                <button class="btn btn-default btn-exercise btn-del"
-                        ng-click="removeExercise(exercise)">
-                    Poista
-                </button>
-            </div>
+            <div ng-if="currentUserAdmin">
+                <div class="col-md-5">
+                    <button class="btn btn-default"
+                            ng-click="viewExercise(exercise)">
+                        {{exercise.name}}
+                    </button>
+                </div>
 
-            <div class="col-md-1"
-                 ng-if="currentUserAdmin">
-                <button class="btn btn-default btn-exercise"
-                        ng-click="copyExercise(exercise)">
-                    Kopioi
-                </button>
-            </div>
+                <div class="col-md-1">
+                    <button class="btn btn-default"
+                            ng-click="removeExercise(exercise)">
+                        Poista
+                    </button>
+                </div>
 
-            <div class="col-md-2"
-                 ng-if="currentUserAdmin">
-                <button class="btn btn-default btn-exercise"
-                        ng-click="toggleHiddenExercise(exercise)">
-                    <span ng-if="exercise.hidden">Tee näkyväksi</span>
-                    <span ng-if="!exercise.hidden">Piilota opiskelijoilta</span>
-                </button>
+                <div class="col-md-1">
+                    <button class="btn btn-default"
+                            ng-click="copyExercise(exercise)">
+                        Kopioi
+                    </button>
+                </div>
+
+                <div class="col-md-2">
+                    <button class="btn btn-default"
+                            ng-click="toggleHiddenExercise(exercise)">
+                        <span ng-if="exercise.hidden">Tee näkyväksi</span>
+                        <span ng-if="!exercise.hidden">Piilota opiskelijoilta</span>
+                    </button>
+                </div>
+
             </div>
 
         </div>
@@ -73,9 +90,8 @@
 </div>
 
 <div class="row">
-
     <div class="col-md-5">
-        <button class="btn btn-default btn-exercise btn-save"
+        <button class="btn btn-default"
                 ng-if="currentUserAdmin"
                 ng-click="newExercisePage()">
             + Luo uusi case
