@@ -79,6 +79,10 @@ main {
   padding-bottom: 10px !important;
 }
 
+.padding-bottom-15 {
+  padding-bottom: 15px !important;
+}
+
 .padding-bottom-20 {
   padding-bottom: 20px !important;
 }
@@ -156,6 +160,14 @@ div.separator{
   width: 100%;
 }
 
+.btn-completed-task {
+  width: 100%;
+}
+
+.btn-uncompleted-task {
+  width: 100%;
+}
+
 .multiline {
   white-space: normal;
   word-wrap: break-word;
@@ -168,6 +180,25 @@ div.separator{
 .panel-heading-green{
   background-color: $LightGreen !important;
 }
+
+.panel-body {
+
+  &.completed-tasks-list {
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 0px;
+    padding-left: 15px;
+  }
+}
+
+.panel-title {
+
+  &.completed-tasks-list {
+    font-size: large;
+    font-weight: bold;
+  }
+}
+
 
 //h1{
 //  margin-top: 2px;

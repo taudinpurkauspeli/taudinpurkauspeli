@@ -1,123 +1,133 @@
-<div class="container-fluid">
-
-    <div class = "row">
-        <div class = "col-md-8">
-            <h1>Toimenpiteet</h1>
-        </div>
+<div class="row padding-bottom-10">
+    <div class="col-md-12">
+        <h1 class="center-text">Toimenpiteet</h1>
     </div>
-    <div class = "separator"></div>
-    <br/>
+</div>
 
-    <div ng-if="currentUserAdmin">
-        <div ng-if="!hasConclusion">
-            <h5>Tässä casessa ei ole vielä diagnoosi-alakohtaa. Lisää sellainen, jotta opiskelijat voivat pelata casen loppuun asti!</h5>
-            <br/>
-            <div class = "separator"></div>
-            <br/>
+<div class = "separator"></div>
 
-        </div>
-
-
-        <div class="task-list">
-            <div class="dropzone">
-                <ul dnd-list="[]"
-                    dnd-drop="moveTaskToNewLevel(index, item)"
-                    class="list-unstyled">
-
-                    <li ng-repeat="(level, tasks) in tasksList"
-                        class="panel panel-default itemlist">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                {{tasks[0]}}
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <ul  dnd-list="[]"
-                                 dnd-drop="moveTaskFromLevelToLevel(item, type, tasks[0])"
-                                 dnd-horizontal-list="true"
-                                 class="list-unstyled">
-
-                                <li ng-repeat="task in tasks[1]"
-                                    dnd-draggable="task"
-                                    dnd-type="tasks[0]"
-                                    dnd-selected="goToCurrentTask(task.id)"
-                                    dnd-effect-allowed="move">
-                                    {{task.name}}
-                                </li>
-
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-
-        <button class="btn btn-default btn-save btn-new-task" ng-click="createTask()">+ Luo uusi toimenpide</button>
-    </div>
-
-    <div ng-if="currentUser && !currentUserAdmin">
-
-        <div ng-if="!userHasCompletedExercise">
-            <br />
-            <div class = "row">
-                <div class = "col-md-8">
-                    <h3>Valitse suoritettava toimenpide</h3>
-                </div>
-            </div>
-
-            <br />
-
-            <div class = "row" ng-repeat="task in availableTasks">
-                <div class="col-md-5">
-                    <button class="btn btn-default btn-available-task multiline" ng-click="startTask(task)">{{task.name}}</button>
-                </div>
-                <div class="col-md-5" ng-if="cannotStartTask(task.id)">
-                    <div class="alert-unavailable-task removable">Et voi vielä suorittaa tätä toimenpidettä, vaan sinun tulee suorittaa ainakin yksi muu toimenpide ennen tätä.</div>
-                </div>
-            </div>
-
-            <div class = "separator"></div>
-
-            <br/>
-        </div>
-
-        <div class = "row">
-            <div class = "col-md-8">
-                <h3>Tehdyt toimenpiteet</h3>
-            </div>
-        </div>
-
+<div ng-if="currentUserAdmin">
+    <div ng-if="!hasConclusion">
+        <h5>Tässä casessa ei ole vielä diagnoosi-alakohtaa. Lisää sellainen, jotta opiskelijat voivat pelata casen loppuun asti!</h5>
+        <br/>
+        <div class = "separator"></div>
         <br/>
 
-        <div class="task-list">
-            <div class="dropzone">
-                <ul class="list-unstyled">
+    </div>
 
-                    <li ng-repeat="(level, tasks) in completedTasks"
-                        class="panel panel-default itemlist">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                {{tasks[0]}}
-                            </div>
+
+    <div class="task-list">
+        <div class="dropzone">
+            <ul dnd-list="[]"
+                dnd-drop="moveTaskToNewLevel(index, item)"
+                class="list-unstyled">
+
+                <li ng-repeat="(level, tasks) in tasksList"
+                    class="panel panel-default itemlist">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            {{tasks[0]}}
                         </div>
-                        <div class="panel-body">
-                            <ul class="list-unstyled">
+                    </div>
+                    <div class="panel-body">
+                        <ul  dnd-list="[]"
+                             dnd-drop="moveTaskFromLevelToLevel(item, type, tasks[0])"
+                             dnd-horizontal-list="true"
+                             class="list-unstyled">
 
-                                <li ng-repeat="task in tasks[1]"
-                                    ng-click="goToCurrentTask(task.id)">
-                                    {{task.name}}
-                                </li>
+                            <li ng-repeat="task in tasks[1]"
+                                dnd-draggable="task"
+                                dnd-type="tasks[0]"
+                                dnd-selected="goToCurrentTask(task.id)"
+                                dnd-effect-allowed="move">
+                                {{task.name}}
+                            </li>
 
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                    </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
 
-                </ul>
+            </ul>
+        </div>
+    </div>
+
+    <button class="btn btn-default btn-save btn-new-task" ng-click="createTask()">+ Luo uusi toimenpide</button>
+</div>
+
+
+<div ng-if="currentUser && !currentUserAdmin">
+
+    <div ng-if="!userHasCompletedExercise">
+        <div class="row padding-bottom-20">
+            <div class="col-md-12">
+                <h2 class="center-text">Valitse suoritettava toimenpide</h2>
             </div>
         </div>
 
+
+
+        <div class="row" ng-repeat="task in availableTasks">
+            <div class="col-md-1 padding-bottom-20"></div>
+            <div class="col-md-10 padding-bottom-20">
+
+                <button class="btn btn-default btn-lg btn-uncompleted-task multiline padding-top-20 padding-bottom-20" ng-click="startTask(task)">
+                    {{task.name}}
+                </button>
+
+                <div class="panel panel-default panel-grey" uib-collapse="!isCollapsed">
+                    <div class="panel-body">
+                        <task-show task="task" current-user="currentUser"></task-show>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 padding-bottom-20"></div>
+
+        </div>
+
+
+        <div class="separator"></div>
+
     </div>
+
+    <div class="row padding-bottom-20">
+        <div class="col-md-12">
+            <h2 class="center-text">Tehdyt toimenpiteet tasoittain</h2>
+        </div>
+    </div>
+
+
+    <div class="row" ng-repeat="(level, tasks) in completedTasks">
+
+        <div class="col-md-1"></div>
+
+        <div class="col-md-10">
+            <div class="panel panel-default panel-grey" >
+                <div class="panel-heading">
+                    <div class="panel-title completed-tasks-list center-text">
+                        {{tasks[0]}}
+                    </div>
+                </div>
+                <div class="panel-body completed-tasks-list">
+
+                    <div ng-repeat="task in tasks[1]">
+
+                        <div class="row padding-bottom-15">
+                            <div class="col-md-12">
+                                <button class="btn btn-default btn-lg btn-completed-task multiline padding-top-20 padding-bottom-20" ng-click="goToCurrentTask(task.id)">
+                                    {{task.name}}
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-1"></div>
+
+    </div>
+
 </div>

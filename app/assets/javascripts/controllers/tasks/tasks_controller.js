@@ -98,24 +98,13 @@ app.controller("TasksController", [
             });
         };
 
-        $scope.setTaskId = function(taskId){
-            if($scope.lastClickedTask == taskId){
-                $scope.lastClickedTask = null;
-            } else {
-                $scope.lastClickedTask = taskId;
-            }
-        };
-
         $scope.startTask = function(task) {
             TaskCanBeStarted.get({id: task.id}, function() {
                 $scope.goToCurrentTask(task.id);
             }, function() {
-                $scope.setTaskId(task.id);
+                $window.alert("Et voi vielä suorittaa tätä toimenpidettä, vaan sinun tulee suorittaa ainakin yksi muu toimenpide ennen tätä.");
             });
         };
 
-        $scope.cannotStartTask = function(taskId){
-            return taskId == $scope.lastClickedTask;
-        };
     }
 ]);
