@@ -168,6 +168,10 @@ div.separator{
   width: 100%;
 }
 
+.btn-unchecked-hypothesis {
+  width: 100%;
+}
+
 .multiline {
   white-space: normal;
   word-wrap: break-word;
@@ -197,6 +201,15 @@ div.separator{
     font-size: large;
     font-weight: bold;
   }
+}
+
+.btn-checked-hypothesis {
+  color: #fff;
+  background-color: $LightRed;
+}
+
+.btn-correct-diagnosis {
+  background-color: $PaleLightGreen;
 }
 
 
@@ -364,10 +377,6 @@ div.separator{
 //  color: #fff;
 //}
 //
-//.btn-checked{
-//  color: #fff;
-//  background-color: $LightRed;
-//}
 //
 //.btn-checked:hover, .btn-checked:active{
 //  background-color: $DarkRed;
