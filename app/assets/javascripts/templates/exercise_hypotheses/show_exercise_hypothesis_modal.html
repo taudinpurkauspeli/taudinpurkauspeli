@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h3 class="modal-title center-text">{{exerciseHypothesis.hypothesis.name}}</h3>
+
+
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12 center-text">
+            <div ng-if="hypothesisIsCorrectDiagnosis(exerciseHypothesis)" class="padding-bottom-20">Hienoa! Selvitit oikean diagnoosin!</div>
+
+            <div ta-bind="text" ng-model="exerciseHypothesis.explanation" ng-if="exerciseHypothesis.explanation"></div>
+            <div ng-if="!exerciseHypothesis.explanation">Tälle diffille ei ole asetettu selitystä.</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+            <button class="btn btn-warning width-100" type="button" ng-click="cancel()">Sulje</button>
+        </div>
+        <div class="col-md-5"></div>
+    </div>
+</div>
+
