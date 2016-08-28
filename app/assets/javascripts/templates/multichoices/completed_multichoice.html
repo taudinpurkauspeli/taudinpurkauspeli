@@ -4,30 +4,30 @@
     </div>
     <div class="panel-body">
 
-        <div class="row padding-bottom-10">
-            <div class="col-md-6 bold">
-                Vastausvaihtoehto
-            </div>
-            <div class="col-md-6 bold">
-                Selitys
-            </div>
-        </div>
 
-        <div class="row margin-bottom-5 padding-bottom-10 padding-top-7" ng-repeat="option in options"
-             ng-class="{'correct-answer': optionIs('required', option),
-                        'allowed-answer': optionIs('allowed', option),
-                        'wrong-answer': optionIs('wrong', option)}">
-
-            <div class="col-md-6 bold">
-                {{option.content}}
-            </div>
-
-            <div class="col-md-6" ta-bind="text" ng-model="option.explanation"
+        <form class="form-horizontal">
+            <div class="margin-bottom-5" ng-repeat="option in options"
                  ng-class="{'correct-answer': optionIs('required', option),
                             'allowed-answer': optionIs('allowed', option),
                             'wrong-answer': optionIs('wrong', option)}">
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="checkbox padding-left-10 padding-right-10 multichoice-label">
+                            {{option.content}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group multichoice-explanation">
+                    <div class="col-md-12">
+                        <div ta-bind="text" ng-model="option.explanation" class="padding-left-10 padding-right-10 padding-top-10 multichoice-explanation-border">
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+
+        </form>
 
     </div>
 </div>
