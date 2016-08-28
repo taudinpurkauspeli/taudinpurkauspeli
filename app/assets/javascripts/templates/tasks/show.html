@@ -1,7 +1,7 @@
 <div class="container-fluid" ng-if="currentUserAdmin">
     <div class="row">
         <div class="col-md-8">
-            <div class="panel panel-default panel-grey">
+            <div class="panel panel-default">
                 <div class = "panel-heading panel-heading-grey">
                     <div class = "row">
                         <div class = "col-md-6">
@@ -19,7 +19,7 @@
         </div>
 
         <div class="col-md-4">
-            <div class="panel panel-default panel-grey">
+            <div class="panel panel-default">
                 <div class = "panel-heading panel-heading-grey">
                     Lisää alakohta
                 </div>
@@ -44,34 +44,36 @@
 
     <div class = "separator"></div>
 
-    <div ng-repeat="subtask in completedSubtasks" class="padding-bottom-10">
-
-        <completed-subtask subtask="subtask"></completed-subtask>
-
-    </div>
-
-    <div ng-if="!userHasCompletedTask">
-        <uncompleted-subtask subtask="uncompletedSubtask" after-completion="setTask()" current-user="currentUser"></uncompleted-subtask>
-    </div>
-
-    <div ng-if="userHasCompletedTask && !userHasCompletedExercise">
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <completed_task current-user="currentUser" has-conclusion="hasConclusion"></completed_task>
-            </div>
-            <div class="col-md-1"></div>
+    <div ng-repeat="subtask in completedSubtasks" class="row padding-bottom-10">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <completed-subtask subtask="subtask"></completed-subtask>
         </div>
+        <div class="col-md-1"></div>
     </div>
 
-    <div ng-if="userHasCompletedExercise">
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <completed_exercise></completed_exercise>
-            </div>
-            <div class="col-md-1"></div>
+    <div class="row" ng-if="!userHasCompletedTask">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <uncompleted-subtask subtask="uncompletedSubtask" after-completion="setTask()" current-user="currentUser"></uncompleted-subtask>
         </div>
+        <div class="col-md-1"></div>
+    </div>
+
+    <div class="row" ng-if="userHasCompletedTask && !userHasCompletedExercise">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <completed_task current-user="currentUser" has-conclusion="hasConclusion"></completed_task>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+    <div class="row" ng-if="userHasCompletedExercise">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <completed_exercise></completed_exercise>
+        </div>
+        <div class="col-md-1"></div>
     </div>
 
 </div>
