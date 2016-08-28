@@ -234,6 +234,10 @@ div.separator{
   width: 100%;
 }
 
+.btn-question {
+  width: 100%;
+}
+
 .multiline {
   white-space: normal;
   word-wrap: break-word;
@@ -267,6 +271,10 @@ div.separator{
   &.panel-title-multichoice {
     font-size: x-large;
   }
+
+  &.panel-title-interview {
+    font-size: x-large;
+  }
 }
 
 .btn-checked-hypothesis {
@@ -288,6 +296,12 @@ div.separator{
 
 .allowed-answer{
   background-color: $PaleLightYellow;
+}
+
+.question-answer {
+  border: 1px solid;
+  border-color: #ccc;
+  border-radius: 6px;
 }
 
 .bold {

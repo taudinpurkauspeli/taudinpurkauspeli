@@ -10,11 +10,16 @@ app.controller("CompleteInterviewController", [
         var AskQuestion = $resource('/questions/:id/ask.json',
             {id: '@id'});
 
+        $scope.isQuestionCollapsed = false;
         $scope.setQuestions = function() {
             Questions.get({ interview_id : $scope.subtask.interview.id}, function(data) {
                 $scope.questionsByGroup = data.questions_by_group;
                 $scope.questionsWithoutGroup = data.questions_without_group;
             });
+        };
+
+        $scope.changeQuestionCollapse = function() {
+            $scope.isQuestionCollapsed = !$scope.isQuestionCollapsed;
         };
 
         $scope.$watch(function(){

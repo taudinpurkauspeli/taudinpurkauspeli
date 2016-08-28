@@ -1,48 +1,68 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <div class = "row">
-            <br>
-            <div class = "col-md-8">
-                <h3 class="panel-title">{{subtask.interview.title}}</h3>
-            </div>
-        </div>
+        <h3 class="panel-title panel-title-interview">{{subtask.interview.title}}</h3>
     </div>
     <div class="panel-body">
 
-        <div ng-repeat="(group, questions) in questionsByGroup">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 class="interview">{{group}}</h4>
+        <div class="row" ng-repeat="(group, questions) in questionsByGroup" ng-if="questionsByGroup">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title panel-completed center-text">
+                            {{group}}
+                        </div>
+                    </div>
+                    <div class="panel-body panel-completed">
+
+                        <div class="row padding-bottom-15" ng-repeat="question in questions">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+
+                                <button class="btn btn-default btn-lg btn-question multiline padding-top-10 padding-bottom-10"
+                                        ng-if="!question.asked" ng-click="askQuestion(question)">
+                                    {{question.title}}
+                                </button>
+
+                                <button class="btn btn-default btn-lg btn-question multiline padding-top-10 padding-bottom-10"
+                                        ng-if="question.asked" uib-collapse ng-click="changeQuestionCollapse()"
+                                        ng-class="{'correct-answer': questionIs('required', question),
+                                                   'allowed-answer': questionIs('allowed', question),
+                                                   'wrong-answer': questionIs('wrong', question)}">
+                                    {{question.title}}
+                                </button>
+
+                                <div ta-bind="text" ng-model="question.content"
+                                     uib-collapse="!isQuestionCollapsed" class="center-text padding-top-20 padding-bottom-20 question-answer"
+                                     ng-class="{'correct-answer': questionIs('required', question),
+                                                'allowed-answer': questionIs('allowed', question),
+                                                'wrong-answer': questionIs('wrong', question)}">
+                                </div>
+
+                            </div>
+                            <div class="col-md-1"></div>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div ng-repeat="question in questions" class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
-                    <button class="btn btn-default multiline width95 floatRight" id="question_{{question.id}}"
-                            ng-if="!question.asked" ng-click="askQuestion(question)">
-                        {{question.title}}
-                    </button>
-                    <button class="btn btn-default btn-hypothesis-group multiline width95 floatRight" id="question_{{question.id}}"
-                            ng-if="question.asked"
-                            ng-class="{'collapse-answer-right': questionIs('required', question),
-                                   'collapse-answer-allowed': questionIs('allowed', question),
-                                   'collapse-answer-wrong': questionIs('wrong', question)}"
-                            data-toggle="collapse" data-target="#collapseQuestionContent{{question.id}}">
-                        {{question.title}}
-                    </button>
-                </div>
-
-                <div class="col-md-6 collapse" ta-bind="text" ng-model="question.content"
-                     ng-class="{'collapse-answer-right': questionIs('required', question),
-                                   'collapse-answer-allowed': questionIs('allowed', question),
-                                   'collapse-answer-wrong': questionIs('wrong', question),
-                                   'in': questionWasAskedLast(question)}"
-                     id="collapseQuestionContent{{question.id}}">
-                </div>
-            </div>
-
+            <div class="col-md-1"></div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div ng-repeat="question in questionsWithoutGroup">
             <div class="row">
@@ -68,15 +88,19 @@
                                    'collapse-answer-allowed': questionIs('allowed', question),
                                    'collapse-answer-wrong': questionIs('wrong', question),
                                    'in': questionWasAskedLast(question)}"
-                        id="collapseQuestionContent{{question.id}}">
+                     id="collapseQuestionContent{{question.id}}">
                 </div>
 
             </div>
         </div>
 
-        <br />
-
-        <input type="submit" class="btn btn-default btn-save widthAuto" value="Tarkista" ng-if="!currentUserAdmin" ng-click="checkAnswers()">
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+                <input type="submit" class="btn btn-default btn-lg" value="Tarkista" ng-if="!currentUserAdmin" ng-click="checkAnswers()">
+            </div>
+            <div class="col-md-5"></div>
+        </div>
 
     </div>
 </div>
