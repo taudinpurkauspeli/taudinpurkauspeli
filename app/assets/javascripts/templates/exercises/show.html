@@ -13,10 +13,9 @@
             <a ui-sref="exercises_show.hypotheses" >Diffit</a>
         </li>
 
-        <li id="CurrentTaskTab" class="exerciseTabLink"
-            ng-if="current_task"
-            class="active" >
-            <a ng-click="goToState(current_task_show_path)" >{{taskForShow.name}} <span ui-sref="exercises_show.tasks" ng-click="removeCurrentTask()">X</span></a>
+        <li id="CurrentTaskTab" class="exerciseTabLink active"
+            ng-if="current_task">
+            <a ng-click="goToState(current_task_show_path)" class="clickable">{{taskForShow.name}} <span ui-sref="exercises_show.tasks" ng-click="removeCurrentTask()" class="btn btn-default btn-close-current-task">X</span></a>
         </li>
 
     </ul>
