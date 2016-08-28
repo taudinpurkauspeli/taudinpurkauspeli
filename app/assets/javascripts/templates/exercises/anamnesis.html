@@ -25,7 +25,8 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
         <div class="panel panel-default">
             <div class="panel-heading">
             </div>
@@ -33,6 +34,7 @@
             </div>
         </div>
     </div>
+    <div class="col-md-1"></div>
 </div>
 
 
@@ -50,8 +52,9 @@
     <div ng-repeat="(index, task) in completedTasksForUser">
 
         <div class="row">
+            <div class="col-md-1 padding-bottom-20"></div>
 
-            <div class="col-md-12 padding-bottom-20">
+            <div class="col-md-10 padding-bottom-20">
 
                 <button class="btn btn-default btn-lg btn-completed-exercise multiline padding-top-20 padding-bottom-20" uib-collapse ng-click="isCollapsed = !isCollapsed">
                     {{index+1}}. {{task.name}}
@@ -63,6 +66,7 @@
                         </div>
                 </div>
             </div>
+            <div class="col-md-1 padding-bottom-20"></div>
 
         </div>
     </div>
