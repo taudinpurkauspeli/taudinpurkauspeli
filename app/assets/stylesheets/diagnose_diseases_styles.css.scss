@@ -225,6 +225,10 @@ div.separator{
     font-size: large;
     font-weight: bold;
   }
+
+  &.panel-title-multichoice {
+    font-size: large;
+  }
 }
 
 .btn-checked-hypothesis {
@@ -236,6 +240,28 @@ div.separator{
   background-color: $PaleLightGreen;
 }
 
+.wrong-answer{
+  background-color: $PaleLightRed;
+}
+
+.correct-answer{
+  background-color: $PaleLightGreen;
+}
+
+.allowed-answer{
+  background-color: $PaleLightYellow;
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+.form-group {
+  &.multichoice-option {
+    margin-bottom: 5px;
+    padding-bottom: 10px;
+  }
+}
 
 //h1{
 //  margin-top: 2px;
