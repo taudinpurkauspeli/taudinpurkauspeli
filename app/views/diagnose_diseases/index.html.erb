@@ -1,63 +1,68 @@
 <body ng-app="diagnoseDiseases" ng-controller="ApplicationController">
-<div role="tabpanel">
-  <header>
-    <div id = "navigationTabsContainer">
-      <ul id="navigationTabs" class="nav nav-tabs" role="tablist">
-        <li ng-repeat="link in navigationLinksList" ng-show={{link.visibility}} role="presentation" class="tabLink" ><a ui-sref={{link.state}} ng-click="link.click()">{{link.title}}</a></li>
 
-        <div class="login-container"  ng-controller="AuthenticationController">
-          <div ng-if="!currentUser" class="row">
-            <form name="loginForm"
-                  ng-submit="login(credentials)" novalidate>
+<header>
 
-              <div class="col-md-3 no-padding">
+  <nav class="navbar navbar-default">
+
+    <div class="container-fluid">
+
+      <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="app_root" ng-click='resetCurrentExercise()'>Taudinpurkauspeli</a>
+      </div>
+
+      <ul class="nav navbar-nav pull-right" ng-controller="AuthenticationController">
+
+        <li ng-if="!currentUser">
+          <a id="btn-signup" ng-href=#/signup>Luo uusi tunnus</a>
+        </li>
+
+        <li uib-dropdown ng-if="!currentUser" auto-close="disabled">
+          <a href="#" class="dropdown-toggle" uib-dropdown-toggle role="button" aria-haspopup="true" aria-expanded="false">Kirjaudu sisään <span class="caret"></span></a>
+          <div uib-dropdown-menu class="dropdown-menu-right">
+
+            <form name="loginForm" ng-submit="login(credentials)" novalidate>
+              <div class="form-group padding-right-10 padding-left-10 padding-top-10">
                 <input type="text" id="username"
                        placeholder="Käyttäjätunnus"
-                       class="form-control width100"
-                       ng-model="credentials.username">
+                       ng-model="credentials.username"
+                       class="form-control">
               </div>
-
-              <div class="col-md-3 no-padding">
+              <div class="form-group padding-right-10 padding-left-10">
                 <input type="password" id="password"
                        placeholder="Salasana"
-                       class="form-control width100"
-                       ng-model="credentials.password">
+                       ng-model="credentials.password"
+                       class="form-control">
               </div>
-
-              <div class="col-md-3 no-padding">
-                <button type="submit"
-                        class="btn btn-default btn-login"
-                        id="btn-login">
+              <div class="form-group padding-left-10">
+                <button class="btn btn-default" type="submit" id="btn-login">
                   Kirjaudu sisään
                 </button>
               </div>
             </form>
-
-            <div class="col-md-3 no-padding">
-              <a class="btn btn-default btn-login" id="btn-signup" ng-href=#/signup>Luo uusi tunnus</a>
-            </div>
           </div>
+        </li>
 
-          <div ng-if="currentUser" class="row">
-            <div class="col-md-3 no-padding">
-              <button class="btn btn-default btn-login widthAuto"
-                      type="button"
-                      ng-click="logout()">
-                Kirjaudu ulos
-              </button>
-            </div>
-          </div>
-        </div>
-
+        <li ng-if="currentUser">
+          <a href="#" ng-click="logout()">
+            Kirjaudu ulos
+          </a>
+        </li>
       </ul>
-    </div>
-  </header>
-  <main role="main">
-    <%#= render 'messages/messages' %>
 
-    <article >
-      <div ui-view></div>
-    </article>
+      <ul class="nav navbar-nav pull-right">
+        <li ng-repeat="link in navigationLinksList" ng-show={{link.visibility}}><a ui-sref={{link.state}} ng-click="link.click()">{{link.title}}</a></li>
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+<div class="container">
+
+  <main role="main">
+
+    <div ui-view></div>
+
   </main>
 </div>
 

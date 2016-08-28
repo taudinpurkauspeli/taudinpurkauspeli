@@ -119,9 +119,26 @@ app.controller("ExerciseHypothesesController", [
             }
         };
 
+        $scope.openCheckedHypothesis = function(exerciseHypothesis){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'exercise_hypotheses/show_exercise_hypothesis_modal.html',
+                controller: 'ShowExerciseHypothesisModalController',
+                size: 'md',
+                resolve: {
+                    exerciseHypothesis: exerciseHypothesis,
+                    correctDiagnosis: $scope.correctDiagnosis
+                }
+            });
+
+            modalInstance.result.then(function() {
+            }, function() {
+            });
+        };
+
         $scope.checkExerciseHypothesis = function(exerciseHypothesis) {
             if($scope.userHasCheckedHypothesis(exerciseHypothesis)){
-                $scope.setExerciseHypothesisId(exerciseHypothesis.id);
+                $scope.openCheckedHypothesis(exerciseHypothesis);
             } else {
                 var newCheckedHypothesis = {
                     exercise_hypothesis_id: exerciseHypothesis.id,
@@ -130,7 +147,7 @@ app.controller("ExerciseHypothesesController", [
                 CheckedHypotheses.save(newCheckedHypothesis,
                     function(data) {
                         $window.alert(exerciseHypothesis.hypothesis.name + " poissuljettu!");
-                        $scope.setExerciseHypothesisId(exerciseHypothesis.id);
+                        $scope.openCheckedHypothesis(exerciseHypothesis);
                         $scope.setAllExerciseHypotheses();
                     },
                     function() {

@@ -11,10 +11,6 @@ app.controller("ApplicationController", [
         };
 
         $scope.navigationLinksList = [
-            {state: "app_root",
-                title: "Taudinpurkauspeli",
-                visibility: "currentUser",
-                click: $scope.resetCurrentExercise},
             {state: "users.by_case",
                 title: "Käyttäjien seuranta",
                 visibility: "currentUserAdmin",

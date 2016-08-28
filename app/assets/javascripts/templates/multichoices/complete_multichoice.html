@@ -1,36 +1,46 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Kysymys: {{subtask.multichoice.question}}</h3>
+        <h3 class="panel-title panel-title-multichoice">Kysymys: {{subtask.multichoice.question}}</h3>
     </div>
     <div class="panel-body">
 
-        <form>
-            <table class = "width100">
+        <form class="form-horizontal">
+            <div class="margin-bottom-5" ng-repeat="option in options"
+                 ng-class="{'correct-answer': checkedOptionsContains(option) && optionIs('required', option),
+                            'allowed-answer': checkedOptionsContains(option) && optionIs('allowed', option),
+                            'wrong-answer': checkedOptionsContains(option) && optionIs('wrong', option)}">
 
-                <tr ng-repeat="option in options">
-                    <td class="multichoice" ng-class="{'correct-answer': checkedOptionsContains(option) && optionIs('required', option),
-                                                       'allowed-answer': checkedOptionsContains(option) && optionIs('allowed', option),
-                                                       'wrong-answer': checkedOptionsContains(option) && optionIs('wrong', option)}">
+                <div class="form-group">
+                   <div class="col-md-12">
+                       <div class="checkbox padding-right-20 padding-top-10"
+                            ng-class="{'': subtask.multichoice.is_radio_button,
+                                       'padding-left-10': !subtask.multichoice.is_radio_button}">
+                           <label class="multichoice-label">
+                               <input type="checkbox" ng-model="option.checked" value="option.id" ng-if="!subtask.multichoice.is_radio_button">
+                               <input type="radio" ng-model="selectedRadiobuttonOption.id" ng-value="{{option.id}}" ng-if="subtask.multichoice.is_radio_button">
+                               {{option.content}}
+                           </label>
+                       </div>
+                   </div>
+                </div>
 
-                        <input type="checkbox" ng-model="option.checked" value="option.id" id="option_{{option.id}}" ng-if="!subtask.multichoice.is_radio_button">
+                <div class="form-group multichoice-explanation" ng-if="checkedOptionsContains(option)">
+                    <div class="col-md-12">
+                        <div ta-bind="text" ng-model="option.explanation" class="padding-top-10 multichoice-explanation-border"
+                                ng-class="{'padding-left-40': subtask.multichoice.is_radio_button,
+                                           'padding-left-30': !subtask.multichoice.is_radio_button}">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                        <input type="radio" ng-model="selectedRadiobuttonOption.id" ng-value="{{option.id}}" id="option_{{option.id}}" ng-if="subtask.multichoice.is_radio_button">
-
-                        <label for="option_{{option.id}}">{{option.content}}</label>
-                    </td>
-
-                    <td class="multichoice" ta-bind="text" ng-model="option.explanation"
-                        ng-if="checkedOptionsContains(option)"
-                        ng-class="{'correct-answer': checkedOptionsContains(option) && optionIs('required', option),
-                                   'allowed-answer': checkedOptionsContains(option) && optionIs('allowed', option),
-                                   'wrong-answer': checkedOptionsContains(option) && optionIs('wrong', option)}">
-                    </td>
-                </tr>
-
-            </table>
-            <br />
-
-            <input type="submit" ng-click="checkAnswers()" class="btn btn-default btn-save widthAuto" value="Tarkista" ng-if="!currentUserAdmin">
+            <div class="form-group padding-top-20">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                    <input type="submit" ng-click="checkAnswers()" class="btn btn-default btn-lg" value="Tarkista" ng-if="!currentUserAdmin">
+                </div>
+                <div class="col-md-5"></div>
+            </div>
 
         </form>
     </div>

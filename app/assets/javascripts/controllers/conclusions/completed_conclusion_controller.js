@@ -26,6 +26,23 @@ app.controller("CompletedConclusionController", [
             });
         };
 
+        $scope.openCheckedHypothesis = function(exerciseHypothesis){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'exercise_hypotheses/show_exercise_hypothesis_modal.html',
+                controller: 'ShowExerciseHypothesisModalController',
+                size: 'md',
+                resolve: {
+                    exerciseHypothesis: exerciseHypothesis,
+                    correctDiagnosis: $scope.correctDiagnosis
+                }
+            });
+
+            modalInstance.result.then(function() {
+            }, function() {
+            });
+        };
+
         $scope.setCorrectDiagnosis = function() {
             CorrectDiagnosis.get({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.correctDiagnosis = data;
