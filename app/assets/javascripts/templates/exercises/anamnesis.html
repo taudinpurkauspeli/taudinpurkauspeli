@@ -14,7 +14,14 @@
 </div>
 
 <div ng-if="currentUser && !currentUserAdmin && userHasCompletedExercise" class="padding-top-20">
-    <completed_exercise></completed_exercise>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <completed_exercise></completed_exercise>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
     <div class="separator"></div>
 </div>
 
@@ -61,9 +68,9 @@
                 </button>
 
                 <div class="panel panel-default panel-grey" uib-collapse="!isCollapsed">
-                        <div class="panel-body">
-                            <task-show task="task" current-user="currentUser"></task-show>
-                        </div>
+                    <div class="panel-body">
+                        <task-show task="task" current-user="currentUser"></task-show>
+                    </div>
                 </div>
             </div>
             <div class="col-md-1 padding-bottom-20"></div>

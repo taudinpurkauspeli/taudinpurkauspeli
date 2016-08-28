@@ -34,20 +34,19 @@
     </div>
 </div>
 
-<div class="container-fluid" ng-if="currentUser && !currentUserAdmin">
-    <div class = "row">
-        <div class = "col-md-8">
-            <h1>Toimenpide: {{taskForShow.name}}</h1>
+<div ng-if="currentUser && !currentUserAdmin">
+
+    <div class="row padding-bottom-10">
+        <div class="col-md-12">
+            <h1 class="center-text">Toimenpide: {{taskForShow.name}}</h1>
         </div>
     </div>
+
     <div class = "separator"></div>
 
-    <br/>
-
-    <div ng-repeat="subtask in completedSubtasks">
+    <div ng-repeat="subtask in completedSubtasks" class="padding-bottom-10">
 
         <completed-subtask subtask="subtask"></completed-subtask>
-        <br/>
 
     </div>
 
@@ -56,11 +55,23 @@
     </div>
 
     <div ng-if="userHasCompletedTask && !userHasCompletedExercise">
-        <completed_task current-user="currentUser" has-conclusion="hasConclusion"></completed_task>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <completed_task current-user="currentUser" has-conclusion="hasConclusion"></completed_task>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
     </div>
 
     <div ng-if="userHasCompletedExercise">
-        <completed_exercise></completed_exercise>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <completed_exercise></completed_exercise>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
     </div>
 
 </div>
