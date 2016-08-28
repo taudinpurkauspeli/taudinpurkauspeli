@@ -12,7 +12,9 @@
 
                 <div class="form-group">
                    <div class="col-md-12">
-                       <div class="checkbox padding-left-10">
+                       <div class="checkbox padding-right-20"
+                            ng-class="{'': subtask.multichoice.is_radio_button,
+                                       'padding-left-10': !subtask.multichoice.is_radio_button}">
                            <label class="multichoice-label">
                                <input type="checkbox" ng-model="option.checked" value="option.id" ng-if="!subtask.multichoice.is_radio_button">
                                <input type="radio" ng-model="selectedRadiobuttonOption.id" ng-value="{{option.id}}" ng-if="subtask.multichoice.is_radio_button">
@@ -24,7 +26,9 @@
 
                 <div class="form-group multichoice-explanation" ng-if="checkedOptionsContains(option)">
                     <div class="col-md-12">
-                        <div ta-bind="text" ng-model="option.explanation" class="padding-left-30 padding-top-10 multichoice-explanation-border">
+                        <div ta-bind="text" ng-model="option.explanation" class="padding-top-10 multichoice-explanation-border"
+                                ng-class="{'padding-left-40': subtask.multichoice.is_radio_button,
+                                           'padding-left-30': !subtask.multichoice.is_radio_button}">
                         </div>
                     </div>
                 </div>
