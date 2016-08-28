@@ -100,6 +100,10 @@ main {
   padding-bottom: 40px !important;
 }
 
+.padding-top-5 {
+  padding-top: 5px !important;
+}
+
 .padding-top-7 {
   padding-top: 7px !important;
 }
@@ -207,7 +211,7 @@ div.separator{
 
 .panel-body {
 
-  &.completed-tasks-list {
+  &.panel-completed {
     padding-top: 15px;
     padding-right: 15px;
     padding-bottom: 0px;
@@ -217,7 +221,7 @@ div.separator{
 
 .panel-title {
 
-  &.completed-tasks-list {
+  &.panel-completed {
     font-size: large;
     font-weight: bold;
   }
