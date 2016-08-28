@@ -5,35 +5,35 @@
     <div class="panel-body">
 
         <form class="form-horizontal">
-            <div class="form-group multichoice-option" ng-repeat="option in options"
+            <div class="margin-bottom-5" ng-repeat="option in options"
                  ng-class="{'correct-answer': checkedOptionsContains(option) && optionIs('required', option),
                             'allowed-answer': checkedOptionsContains(option) && optionIs('allowed', option),
                             'wrong-answer': checkedOptionsContains(option) && optionIs('wrong', option)}">
 
-                <div ng-class="{'col-md-12': !checkedOptionsContains(option),
-                                'col-md-6': checkedOptionsContains(option)}">
-
-                    <div class="checkbox">
-                        <label class="bold">
-                            <input type="checkbox" ng-model="option.checked" value="option.id" ng-if="!subtask.multichoice.is_radio_button">
-                            <input type="radio" ng-model="selectedRadiobuttonOption.id" ng-value="{{option.id}}" ng-if="subtask.multichoice.is_radio_button">
-                            {{option.content}}
-                        </label>
-                    </div>
+                <div class="form-group">
+                   <div class="col-md-12">
+                       <div class="checkbox padding-left-10">
+                           <label class="multichoice-label">
+                               <input type="checkbox" ng-model="option.checked" value="option.id" ng-if="!subtask.multichoice.is_radio_button">
+                               <input type="radio" ng-model="selectedRadiobuttonOption.id" ng-value="{{option.id}}" ng-if="subtask.multichoice.is_radio_button">
+                               {{option.content}}
+                           </label>
+                       </div>
+                   </div>
                 </div>
 
-                <div class="col-md-6 padding-top-7" ta-bind="text" ng-model="option.explanation"
-                     ng-if="checkedOptionsContains(option)"
-                     ng-class="{'correct-answer': checkedOptionsContains(option) && optionIs('required', option),
-                                'allowed-answer': checkedOptionsContains(option) && optionIs('allowed', option),
-                                'wrong-answer': checkedOptionsContains(option) && optionIs('wrong', option)}">
+                <div class="form-group multichoice-explanation" ng-if="checkedOptionsContains(option)">
+                    <div class="col-md-12">
+                        <div ta-bind="text" ng-model="option.explanation" class="padding-left-30 padding-top-10 multichoice-explanation-border">
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group padding-top-20">
                 <div class="col-md-5"></div>
                 <div class="col-md-2">
-                    <input type="submit" ng-click="checkAnswers()" class="btn btn-default" value="Tarkista" ng-if="!currentUserAdmin">
+                    <input type="submit" ng-click="checkAnswers()" class="btn btn-default btn-lg" value="Tarkista" ng-if="!currentUserAdmin">
                 </div>
                 <div class="col-md-5"></div>
             </div>

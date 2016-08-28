@@ -1,35 +1,33 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Kysymys: {{subtask.multichoice.question}}</h3>
+        <h3 class="panel-title panel-title-multichoice">Kysymys: {{subtask.multichoice.question}}</h3>
     </div>
     <div class="panel-body">
 
-        <form>
-            <table class = "width100">
+        <div class="row padding-bottom-10">
+            <div class="col-md-6 bold">
+                Vastausvaihtoehto
+            </div>
+            <div class="col-md-6 bold">
+                Selitys
+            </div>
+        </div>
 
-                <tr>
-                    <td class="multichoice"><b>Vaihtoehto</b></td>
-                    <td class="multichoice"><b>Selitys</b></td>
-                </tr>
+        <div class="row margin-bottom-5 padding-bottom-10 padding-top-7" ng-repeat="option in options"
+             ng-class="{'correct-answer': optionIs('required', option),
+                        'allowed-answer': optionIs('allowed', option),
+                        'wrong-answer': optionIs('wrong', option)}">
 
-                <tr ng-repeat="option in options">
-                    <td class="multichoice" ng-class="{'correct-answer': optionIs('required', option),
-                                                       'allowed-answer': optionIs('allowed', option),
-                                                       'wrong-answer': optionIs('wrong', option)}">
+            <div class="col-md-6 bold">
+                {{option.content}}
+            </div>
 
-                       {{option.content}}
-                    </td>
+            <div class="col-md-6" ta-bind="text" ng-model="option.explanation"
+                 ng-class="{'correct-answer': optionIs('required', option),
+                            'allowed-answer': optionIs('allowed', option),
+                            'wrong-answer': optionIs('wrong', option)}">
+            </div>
+        </div>
 
-                    <td class = "multichoice" ta-bind="text" ng-model="option.explanation"
-                        ng-class="{'correct-answer': optionIs('required', option),
-                                   'allowed-answer': optionIs('allowed', option),
-                                   'wrong-answer': optionIs('wrong', option)}">
-                    </td>
-                </tr>
-
-            </table>
-            <br />
-
-        </form>
     </div>
 </div>
