@@ -5,9 +5,9 @@
     <div class="panel-body">
 
         <h3 class="center-text">Tehtäväsi:</h3>
-        <p ta-bind="text" ng-model="subtask.conclusion.content"></p>
+        <div ta-bind="text" ng-model="subtask.conclusion.content" class="center-text padding-top-10"></div>
 
-        <h3 class="center-text padding-top-20 padding-bottom-20">Diffilistassa jäljellä:</h3>
+        <h3 class="center-text padding-top-20 padding-bottom-20">Diffilistassa ovat jäljellä seuraavat diffit:</h3>
 
         <div class="row padding-bottom-15" ng-repeat="exerciseHypothesis in exerciseHypotheses">
             <div class="col-md-2"></div>
