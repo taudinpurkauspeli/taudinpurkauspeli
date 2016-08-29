@@ -50,6 +50,8 @@ app.controller("CompleteInterviewController", [
         $scope.$watch(function(){
             return $scope.subtask.interview.id;
         },function(newValue, oldValue){
+            console.log("Interview: Haettiin questiot");
+
             $scope.setQuestions();
         });
 

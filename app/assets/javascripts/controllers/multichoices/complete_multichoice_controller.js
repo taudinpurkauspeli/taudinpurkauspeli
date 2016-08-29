@@ -21,6 +21,7 @@ app.controller("CompleteMultichoiceController", [
         $scope.$watch(function(){
             return $scope.subtask.multichoice.id;
         },function(newValue, oldValue){
+            console.log("Multichoice: Haettiin optiot");
             $scope.setOptions();
         });
 
