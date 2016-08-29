@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("AuthenticationController", [
-    "$scope", "AuthenticationService", "$window", "LocalStorageService",
-    function($scope, AuthenticationService, $window, LocalStorageService) {
+    "$scope", "AuthenticationService", "$window", "LocalStorageService", "$state",
+    function($scope, AuthenticationService, $window, LocalStorageService, $state) {
 
         $scope.credentials = {};
 
@@ -19,6 +19,7 @@ app.controller("AuthenticationController", [
             AuthenticationService.login(credentials).success(function() {
                 $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin());
                 $scope.resetCredentials();
+                $state.go('app_root');
             }).error(function() {
                 $scope.resetCredentials();
             });
