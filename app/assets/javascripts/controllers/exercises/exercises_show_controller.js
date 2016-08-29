@@ -121,7 +121,6 @@ app.controller("ExercisesShowController", [
         };
 
         $scope.setExercise();
-        $scope.setCompletedExerciseValue();
         $scope.setCompletedTasksForUser();
         $scope.setCurrentTask();
         $scope.setTaskTabPath();
