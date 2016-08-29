@@ -47,7 +47,6 @@ app.controller("CompleteConclusionController", [
         $scope.$watch(function(){
             return $scope.subtask.conclusion.id;
         },function(newValue, oldValue){
-            console.log("Diagnoosi: Haettiin kaikki exhypit");
             $scope.setAllExerciseHypotheses();
         });
 
