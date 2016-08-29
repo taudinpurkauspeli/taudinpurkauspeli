@@ -6,7 +6,7 @@
 
 <div class="separator"></div>
 
-<div class="row padding-top-20">
+<div class="row padding-top-30">
     <div class="col-md-2"></div>
 
     <div class="col-md-8">
@@ -60,14 +60,16 @@
     <div class="col-md-8">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title panel-title-userinfo center-text">Caset:</h3>
+                <h3 class="panel-title panel-title-userinfo center-text">Caset</h3>
             </div>
             <div class="panel-body">
 
-                <div class="row row-userinfo padding-top-20 padding-bottom-20" ng-if="!userHasStartedExercises">
+                <div class="row row-userinfo padding-top-20 padding-bottom-20 center-text" ng-if="!userHasStartedExercises">
+                    <div class="col-md-1"></div>
                     <div class="col-md-10">
                         Ei aloitettuja caseja!
                     </div>
+                    <div class="col-md-1"></div>
                 </div>
 
                 <div class="padding-bottom-30" ng-if="userHasStartedExercises" ng-repeat="exercise in userExercises">
