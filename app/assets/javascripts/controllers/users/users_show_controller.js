@@ -36,6 +36,16 @@ app.controller("UsersShowController", [
 
         $scope.setUser();
 
+        $scope.getType = function(percentOfCompletedTasks) {
+            if(percentOfCompletedTasks >= 100) {
+                return 'success';
+            } else if (percentOfCompletedTasks < 25) {
+                return 'danger';
+            } else {
+                return 'warning';
+            }
+        };
+
         $scope.removeUser = function(user) {
 
             var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa opiskelijan?");

@@ -69,6 +69,16 @@ body{
   }
 }
 
+.progress {
+ height: 40px;
+  .progress-bar {
+      padding-top: 10px;
+      font-size: large !important;
+
+  }
+
+}
+
 .dropdown-menu-right {
   width: 300px;
 }
@@ -278,6 +288,16 @@ div.separator{
 
   &.panel-title-conclusion {
     font-size: x-large;
+  }
+
+  &.panel-title-userinfo {
+    font-size: x-large;
+  }
+}
+
+.row {
+  &.row-userinfo {
+    font-size: large;
   }
 }
 
