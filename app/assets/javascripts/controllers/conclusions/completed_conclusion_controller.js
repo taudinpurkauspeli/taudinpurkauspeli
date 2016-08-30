@@ -43,6 +43,10 @@ app.controller("CompletedConclusionController", [
             });
         };
 
+        $scope.setExerciseHypothesisCollapse = function(exerciseHypothesis) {
+            exerciseHypothesis.collapsed = !exerciseHypothesis.collapsed;
+        };
+
         $scope.setCorrectDiagnosis = function() {
             CorrectDiagnosis.get({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.correctDiagnosis = data;
