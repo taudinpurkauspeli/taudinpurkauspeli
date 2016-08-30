@@ -6,8 +6,8 @@
         <h3 class="center-text padding-bottom-20">Oikea diagnoosi:</h3>
 
         <div class="row padding-bottom-15">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
 
                 <button class="btn btn-default btn-lg btn-unchecked-hypothesis multiline padding-top-10 padding-bottom-10"
                         ng-class="{'btn-correct-diagnosis': userHasCheckedHypothesis(correctDiagnosis) && hypothesisIsCorrectDiagnosis(correctDiagnosis)}"
@@ -24,7 +24,7 @@
                 </div>
 
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-md-1"></div>
 
         </div>
 
@@ -32,8 +32,8 @@
             <h3 class="center-text padding-bottom-20 padding-top-10">Lisäksi poissuljettiin seuraavat diffit:</h3>
 
             <div class="row padding-bottom-15" ng-repeat="exerciseHypothesis in exerciseHypotheses" ng-if="!hypothesisIsCorrectDiagnosis(exerciseHypothesis)">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
 
                     <button class="btn btn-default btn-lg btn-unchecked-hypothesis multiline padding-top-10 padding-bottom-10"
                             ng-class="{'btn-checked-hypothesis': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis)}"
@@ -50,7 +50,7 @@
                     </div>
 
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
 
             </div>
 
