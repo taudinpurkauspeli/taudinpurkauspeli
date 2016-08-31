@@ -1,33 +1,25 @@
-<br />
+<div class="container-fluid">
 
-<ul class="nav nav-tabs">
+    <ul class="nav nav-tabs padding-top-20">
 
-    <li id="AnamnesisTab"
-        role="presentation"
-        class="tabLink exerciseTabLink" >
-        <a ui-sref="exercises_show.anamnesis" >Sairaskertomus</a>
-    </li>
+        <li id="AnamnesisTab" class="exerciseTabLink">
+            <a ui-sref="exercises_show.anamnesis" >Sairaskertomus</a>
+        </li>
 
-    <li id="TaskTab"
-        role="presentation"
-        class="tabLink exerciseTabLink" >
-        <a ui-sref="exercises_show.tasks" >Toimenpiteet</a>
-    </li>
-    <li id="HypothesisTab"
-        role="presentation"
-        class="tabLink exerciseTabLink" >
-        <a ui-sref="exercises_show.hypotheses" >Diffit</a>
-    </li>
+        <li id="TaskTab" class="exerciseTabLink">
+            <a ui-sref="exercises_show.tasks" >Toimenpiteet</a>
+        </li>
+        <li id="HypothesisTab" class="exerciseTabLink">
+            <a ui-sref="exercises_show.hypotheses" >Diffit</a>
+        </li>
 
-    <li id="CurrentTaskTab"
-        role="presentation"
-        ng-if="current_task"
-        class="tabLink exerciseTabLink active" >
-        <a ng-click="goToState(current_task_show_path)" >{{taskForShow.name}} <span ui-sref="exercises_show.tasks" ng-click="removeCurrentTask()">X</span></a>
-    </li>
+        <li id="CurrentTaskTab" class="exerciseTabLink active"
+            ng-if="current_task">
+            <a ng-click="goToState(current_task_show_path)" class="clickable">{{taskForShow.name}} <span ui-sref="exercises_show.tasks" ng-click="removeCurrentTask()" class="btn btn-default btn-close-current-task">X</span></a>
+        </li>
 
-</ul>
+    </ul>
 
-<br/>
+    <div class="padding-top-20" ui-view></div>
 
-<div ui-view></div>
+</div>

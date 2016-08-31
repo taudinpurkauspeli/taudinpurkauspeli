@@ -18,7 +18,6 @@
 //= require angular-rails-templates
 //= require diagnose_diseases_app
 //= require ckeditor/init
-//= require bootstrap-sprockets
 //= require angular-validation-match
 //= require angular-drag-and-drop-lists
 //= require jQueryDndPageScroll/jquery.dnd_page_scroll
@@ -29,5 +28,6 @@
 //= require textAngular/dist/textAngular-rangy.min
 //= require angular-bootstrap
 //= require angular-animate
+//= require remarkable-bootstrap-notify
 //= require_tree ./templates
 //= require_tree .

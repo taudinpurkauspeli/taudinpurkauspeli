@@ -1,0 +1,1149 @@
+
+//Colors
+$MediumGrey           : #dbdbdb;
+$BtnExerciseBorderClr : #999;
+$PaleLightGreen       : #b2dca5;
+$LightGreen           : #74ad61;
+$MediumGreen          : #446739;
+$LightRed             : #ae6161;
+$PaleLightRed         : #be8181;
+$DarkRed              : #692f2f;
+$DarkGreen            : #232e1e;
+$PaleLightYellow      : #EAEB7C;
+
+//These are not in palette.png and should be refactored later
+$DisabledButtonText   : #666;
+
+.title-image {
+  width: 100%;
+  height: auto;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+body{
+  background-color: black;
+  background-image: url('http://tautiset-pelit.it.helsinki.fi/images/5_3.JPG') !important;
+  background-size: 100%;
+  background-attachment: fixed;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+.navbar {
+  margin-bottom: 0;
+  background-color: $MediumGreen;
+}
+
+.navbar-default {
+  border: none;
+  .navbar-nav li a {
+    color: white;
+  }
+
+  .navbar-nav li a:hover {
+    color: #BFBEC3;
+  }
+
+  .navbar-brand {
+    color: white;
+  }
+  .navbar-brand:hover {
+    color: #BFBEC3;
+  }
+}
+
+.nav-tabs {
+  li a {
+    color: black !important;
+  }
+  li.active a {
+    background-color: #EEE !important;
+  }
+
+  .exerciseTabLink {
+    font-size: large;
+  }
+}
+
+.progress {
+ height: 40px;
+  .progress-bar {
+      padding-top: 10px;
+      font-size: large !important;
+
+  }
+
+}
+
+.dropdown-menu-right {
+  width: 300px;
+}
+
+main {
+  background-color: #eee;
+  padding-bottom: 80px;
+  width: 100%;
+  max-width: 1170px;
+}
+
+.padding-bottom-5 {
+  padding-bottom: 5px !important;
+}
+
+.padding-bottom-10 {
+  padding-bottom: 10px !important;
+}
+
+.padding-bottom-15 {
+  padding-bottom: 15px !important;
+}
+
+.padding-bottom-20 {
+  padding-bottom: 20px !important;
+}
+
+.padding-bottom-30 {
+  padding-bottom: 30px !important;
+}
+
+.padding-bottom-40 {
+  padding-bottom: 40px !important;
+}
+
+.padding-top-5 {
+  padding-top: 5px !important;
+}
+
+.padding-top-7 {
+  padding-top: 7px !important;
+}
+
+.padding-top-10 {
+  padding-top: 10px !important;
+}
+
+.padding-top-20 {
+  padding-top: 20px !important;
+}
+
+.padding-top-30 {
+  padding-top: 30px !important;
+}
+
+.padding-right-10 {
+  padding-right: 10px !important;
+}
+
+.padding-right-20 {
+  padding-right: 20px !important;
+}
+
+.padding-left-10 {
+  padding-left: 10px !important;
+}
+
+.padding-left-20 {
+  padding-left: 20px !important;
+}
+
+.padding-left-30 {
+  padding-left: 30px !important;
+}
+
+
+.padding-left-40 {
+  padding-left: 40px !important;
+}
+
+.padding-left-45 {
+  padding-left: 45px !important;
+}
+
+.margin-bottom-5 {
+  margin-bottom: 5px !important;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px !important;
+}
+
+.margin-top-20 {
+  margin-top: 20px !important;
+}
+
+.margin-left-15 {
+  margin-left: 15px !important;
+}
+
+.margin-right-15 {
+  margin-right: 15px !important;
+}
+
+.multichoice-label {
+  font-weight: bold !important;
+  font-size: large;
+}
+
+div.separator{
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid #CCC;
+  background-color: #DDD;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.center {
+  margin: auto !important;
+}
+
+.width-50 {
+  width: 50% !important;
+}
+
+.width-100 {
+  width: 100% !important;
+}
+
+.clickable {
+  cursor: pointer !important;
+}
+
+.btn-close-current-task {
+  padding-top: 0px;
+  padding-right: 5px;
+  padding-bottom: 0px;
+  padding-left: 5px;
+}
+
+.btn-exercise-index {
+  width: 100%;
+}
+
+.btn-completed-exercise {
+  width: 100%;
+}
+
+.btn-completed-task {
+  width: 100%;
+}
+
+.btn-uncompleted-task {
+  width: 100%;
+}
+
+.btn-unchecked-hypothesis {
+  width: 100%;
+}
+
+.btn-question {
+  width: 100%;
+}
+
+.multiline {
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.panel-light-green{
+  background-color: $PaleLightGreen;
+}
+
+.panel-heading-green{
+  background-color: $LightGreen !important;
+}
+
+.panel-body {
+
+  &.panel-completed {
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 0px;
+    padding-left: 15px;
+  }
+}
+
+.panel-title {
+
+  &.panel-completed {
+    font-size: large;
+    font-weight: bold;
+  }
+
+  &.panel-title-multichoice {
+    font-size: x-large;
+  }
+
+  &.panel-title-interview {
+    font-size: x-large;
+  }
+
+  &.panel-title-conclusion {
+    font-size: x-large;
+  }
+
+  &.panel-title-userinfo {
+    font-size: x-large;
+  }
+}
+
+.row {
+  &.row-userinfo {
+    font-size: large;
+  }
+}
+
+.btn-checked-hypothesis {
+  color: #fff;
+  background-color: $LightRed;
+}
+
+.btn-correct-diagnosis {
+  background-color: $PaleLightGreen;
+}
+
+.wrong-answer{
+  background-color: $PaleLightRed;
+}
+
+.correct-answer{
+  background-color: $PaleLightGreen;
+}
+
+.allowed-answer{
+  background-color: $PaleLightYellow;
+}
+
+.question-answer {
+  border: 1px solid;
+  border-color: #ccc;
+  border-radius: 6px;
+}
+
+.correct-diagnosis {
+  border: 1px solid;
+  border-color: #ccc;
+  border-radius: 6px;
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+.form-group {
+
+  &.multichoice-explanation {
+    margin-bottom: 5px !important;
+    padding-bottom: 5px !important;
+
+  }
+}
+
+.multichoice-explanation-border {
+  border-top: 1px solid;
+  border-color: black;
+}
+
+//h1{
+//  margin-top: 2px;
+//}
+//
+//h3{
+//  margin-top: 2px;
+//  margin-bottom: 2px
+//}
+//
+//label {
+//  padding-left: 2px;
+//}
+//
+//.navbar-collapse{
+//  float: left;
+//}
+//
+//
+//
+////Override default navigation styles
+//#navigationTabs{
+//  padding-top: 11px;
+//  margin: auto;
+//  max-width: 1170px;
+//  border-width: 0px !important;
+//}
+//#navigationTabsContainer{
+//  width: 100%;
+//  min-height: 51px;
+//  background-color: $MediumGreen;
+//  border-bottom: 0px solid #DDD;
+//}
+//
+//li.tabLink>a{
+//  color: white;
+//}
+//li.exerciseTabLink{
+//  cursor: pointer;
+//}
+//li.active>a{
+//  background-color: #EEE !important;
+//}
+//
+////************
+////*  Login   *
+////************
+//
+//.login-container{
+//  display: table;
+//  width: auto;
+//  position: absolute;
+//  //top: 10px;
+//  right: 20px;
+//}
+//
+//.login-container a, .login-container a:visited{
+//  padding-right: 10px;
+//  vertical-align: middle;
+//  display: table-cell;
+//  color: white;
+//}
+//
+//.no-padding{
+//  margin: 0px;
+//  padding: 0px;
+//  padding-right: 3px;
+//}
+//
+//
+////**************
+////*   Panels   *
+////**************
+//
+//.panel-default{
+//  border-radius: 5px;
+//  border-width: 0px
+//
+//}
+//.panel-heading{
+//  border-top-right-radius: 5px;
+//  border-top-left-radius: 5px;
+//  border-width: 0px
+//}
+//.panel-heading-tasks{
+//  padding: 3px 15px
+//}
+//.panel-grey{
+//  //background-color: #acc7a0;
+//  background-color: #dedede;
+//}
+//.panel-light-grey{
+//  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.10);
+//  background-color: #eee;
+//}
+//.panel-green{
+//  //background-color: #acc7a0;
+//  background-color: #c2ecb5;
+//}
+//
+
+//.panel-heading-grey{
+//  background-color: #cacaca !important;
+//}
+
+//.padding15{
+//  padding: 15px
+//}
+//.padding5 {
+//  padding: 5px
+//
+//}
+//.width70 {
+//  width: 70%
+//}
+//
+////***************
+////*   Buttons   *
+////***************
+//
+//.btn-default{
+//  width: 100%;
+//  text-align: left;
+//  background-color: $MediumGrey;
+//  border-color: $BtnExerciseBorderClr;
+//  border-radius: 7px;
+//  margin-bottom: 5px;
+//  border-width: 0px;
+//  padding-width: 5px;
+//}
+//
+//.disabled{
+//  width: 100%;
+//  text-align: left;
+//  color: $DisabledButtonText;
+//  background-color: $MediumGrey;
+//  border-color: $BtnExerciseBorderClr;
+//  border-radius: 7px;
+//  margin-bottom: 5px;
+//  border-width: 0px;
+//}
+//
+//.btn-default:hover{
+//  background-color: $LightGreen;
+//  color: #fff;
+//}
+//.btn-del{
+//  width: auto;
+//  color: #fff;
+//  background-color: $LightRed;
+//}
+//.btn-del:hover{
+//  background-color: $DarkRed;
+//  color: #fff;
+//}
+//
+//.btn-save, .btn-save:focus{
+//  background-color: $PaleLightGreen;
+//}
+//
+//.btn-save:hover{
+//  background-color: $LightGreen;
+//  color: #fff;
+//}
+//
+//
+//.btn-checked:hover, .btn-checked:active{
+//  background-color: $DarkRed;
+//}
+//
+//.btn-exercise{
+//  height: 45px;
+//}
+//
+//.btn-hypothesis-group{
+//  //height: 30px;
+//  font-style: italic;
+//  font-weight: bold;
+//}
+//
+//
+//.btn-hypothesis{
+//  //height: 30px;
+//  //width: 100%;
+//  //margin-left: 2em;
+//}
+//
+//
+//.btn-available-task{
+//  //height: 30px;
+//  //width: 100%;
+//  //margin-left: 2em;
+//  height: 45px;
+//}
+//
+//.btn-completed-task{
+//  background-color: $PaleLightGreen;
+//  height: 45px;
+//}
+//
+//.btn-completed-task:hover{
+//  background-color: $LightGreen;
+//  color: #fff;
+//}
+//
+//.btn-subtask{
+//  background-color: #cacaca;
+//}
+//
+//.btn-new-task{
+//  height: 5em;
+//  width: 20em;
+//  float: left;
+//  clear: left;
+//  margin-left: 2px;
+//  margin-top: 2px;
+//}
+//.btn-task-order{
+//  height: 100%;
+//  width: 20em;
+//  background-color: #cacaca;
+//}
+//
+//.btn-completed-task-order{
+//  height: 45px;
+//  width: 30em;
+//  background-color: $PaleLightGreen;
+//}
+//
+//.btn-completed-task-order:hover{
+//  background-color: $LightGreen;
+//  color: #fff;
+//}
+//
+//.btn-task-down{
+//  height: 98%;
+//  margin-top: 2%;
+//  background-color: #cacaca;
+//}
+//.btn-task-up{
+//  height: 98%;
+//  margin-bottom: 2%;
+//  background-color: #cacaca;
+//}
+//
+//.btn-login{
+//  border-radius: 3px;
+//}
+//
+//.btn-toolbar{
+//  width: auto !important;
+//}
+//
+//#btn-login{
+//  background-color: #6666cc;
+//  color: white;
+//}
+//#btn-signup{
+//  //background-color: #cc7755;
+//  //color: white;
+//}
+//
+////*******************************
+////*   Notices and info fields   *
+////*******************************
+//.messages{
+//  position: fixed;
+//  top: 60px;
+//  right: 10px;
+//  width: 300px;
+//  padding: 10px;
+//  z-index: 10;
+//}
+//.notice{
+//  width: 100%;
+//  padding: 10px;
+//  background-color: $PaleLightGreen;
+//  border: 2px solid $LightGreen;
+//  //border-radius: 5px;
+//}
+//.alert{
+//  color: white;
+//  width: 100%;
+//  padding: 10px;
+//  background-color: $PaleLightRed;
+//  border: 2px solid $LightRed;
+//  //border-radius: 5px;
+//}
+//
+//.info-checked-hypothesis{
+//  position: absolute;
+//  min-width: 200px;
+//  padding: 10px;
+//  padding-right: 20px;
+//  background-color: $PaleLightGreen;
+//  //border: 1px solid $MediumGreen;
+//  box-shadow: 0px 0px 10px $PaleLightGreen;
+//}
+//.info-checked-hypothesis:before {
+//  content:"";
+//  position: absolute;
+//  right: 100%;
+//  top: 7px;
+//  width: 0;
+//  height: 0;
+//  border-top: 7px solid transparent;
+//  border-right: 14px solid $PaleLightGreen;
+//  border-bottom: 7px solid transparent;
+//}
+//
+//.alert-unchecked-hypothesis, .alert-unavailable-task{
+//  position: absolute;
+//  min-width: 200px;
+//  padding: 10px;
+//  padding-right: 20px;
+//  background-color: $PaleLightRed;
+//  color: white;
+//  //border: 1px solid red;
+//  box-shadow: 0px 0px 10px $PaleLightRed;
+//}
+//.alert-unchecked-hypothesis:before, .alert-unavailable-task:before {
+//  content:"";
+//  position: absolute;
+//  right: 100%;
+//  top: 7px;
+//  width: 0;
+//  height: 0;
+//  border-top: 7px solid transparent;
+//  border-right: 14px solid $PaleLightRed;
+//  border-bottom: 7px solid transparent;
+//}
+//
+//.collapse-answer{
+//  padding: 10px;
+//  background-color: #EEE;
+//  border-radius: 2px;
+//}
+//.collapse-answer-right{
+//  background-color: $PaleLightGreen;
+//}
+//.collapse-answer-wrong{
+//  background-color: $PaleLightRed;
+//}
+//.collapse-answer-allowed{
+//  background-color: $PaleLightYellow;
+//}
+//
+////*********************
+////*   Progress bars   *
+////*********************
+//
+//div.progressbar{
+//  float: left;
+//  width: 100px;
+//  height: 15px;
+//  background-color: #CCA300;
+//  border: 1px solid black;
+//  border-radius: 5px;
+//}
+//div.progress{
+//  float: right;
+//  background-color: white;
+//  border-top-left-radius: 0px;
+//  border-bottom-left-radius: 0px;
+//  margin-top: -1px;
+//  margin-right: -1px;
+//}
+//div.completed{
+//  background-color: green;
+//}
+//span.progress-percent{
+//  float: left;
+//  margin-left: 20px;
+//}
+//
+////***************
+////*   Inputs    *
+////***************
+//
+//
+////doesn't really do anything yet
+//input[type="checkbox"] {
+//  display:inline-block;
+//  width:15px;
+//  height:15px;
+//  //margin:-1px 4px 0 0;
+//  vertical-align:middle;
+//  //background:url(check_radio_sheet.png) left top no-repeat;
+//  cursor:pointer;
+//}
+//input[type="checkbox"]:checked {
+//  //background:url(check_radio_sheet.png) -19px top no-repeat;
+//}
+//
+////***************
+////*   Forms     *
+////***************
+//
+//.form-content{
+//  border: 1px solid #BBB;
+//  border-radius: 5px;
+//  background-color: #FFFFFF;
+//}
+//
+////*******************
+////*   Layout divs   *
+////*******************
+//
+//.div-task-order-container{
+//  float: left;
+//  height: 5em;
+//}
+//.div-task-order-taskbutton{
+//  float: left;
+//  height: 100%;
+//  padding: 2px;
+//}
+//.div-task-order-updown{
+//  float: left;
+//  height: 100%;
+//  padding: 2px;
+//}
+//td.task-level-header{
+//  background-color: #cacaca;
+//  padding: 7px;
+//  border-top-left-radius: 5px;
+//  border-bottom-left-radius: 5px;
+//  font-weight: bold;
+//}
+//
+//
+//td.multichoice{
+//  width: 50%;
+//  padding: 5px;
+//  vertical-align: top;
+//  border-top: 1px solid white;
+//  border-bottom: 1px solid white;
+//}
+//
+//td.interview{
+//  width: 50%;
+//  padding: 5px;
+//  vertical-align: top;
+//}
+//
+//td.wrong-answer{
+//  background-color: $PaleLightRed;
+//}
+//td.correct-answer{
+//  background-color: $PaleLightGreen;
+//}
+//td.allowed-answer{
+//  background-color: $PaleLightYellow;
+//}
+//td.user{
+//  border-top: 1px solid #AAA;
+//  padding: 5px;
+//}
+//th.user{
+//  padding: 5px;
+//}
+//
+//
+////New anamnesis
+//#exercise_anamnesis{
+//  width: 60%;
+//  height: 200px;
+//}
+//
+////Other
+//.margin2em{
+//  margin-left: 2em;
+//}
+//
+//.margin-em{
+//  margin-left: 1em;
+//}
+//
+//.width50{
+//  width: 50%;
+//  float: left;
+//}
+//.width100{
+//  width: 100%;
+//}
+//.width95{
+//  width: 95%;
+//}
+//.height50{
+//  height: 50%;
+//}
+//.height100{
+//  height: 100%;
+//}
+//
+//.widthAuto{
+//  width: auto;
+//}
+//
+//.floatRight{
+//  float: right;
+//}
+//.clearLeft{
+//  clear: left;
+//}
+//.multiline {
+//  white-space: normal;
+//}
+//.margin20px{
+//  margin-left: 20px;
+//}
+//.verticalMiddle{
+//  vertical-align: middle;
+//}
+//
+//// THESE ARE EXAMPLES YOU CAN MODIFY
+//// create your own classes
+//// to make views framework-neutral
+//.column {
+//
+//}
+//.form {
+//
+//}
+//.form-centered {
+//
+//}
+//.submit {
+//
+//}
+
+//section {
+//
+//  margin-top: 20px;
+//}
+//
+//// Drag and drop hypothesis-list
+//
+//.hypothesis-list div[dnd-list] .dndPlaceholder,
+//.hypothesis-list ul[dnd-list] .dndPlaceholder {
+//  display: none;
+//}
+//
+//.hypothesis-list .dropzone ul[dnd-list],
+//.hypothesis-list .dropzone div[dnd-list] {
+//  min-height: 50px;
+//  margin: 0px;
+//  padding-left: 0px;
+//}
+//
+//// Drag and drop task-list
+//
+//.border {
+//  border-style: solid;
+//  border-color: #d3d3d3;
+//}
+//
+//.padding {
+//  padding: 40px;
+//}
+//
+//.task-list ul[dnd-list],
+//.task-list ul[dnd-list] > li{
+//  position: relative;
+//}
+//
+//.task-list .dropzone ul[dnd-list] {
+//  min-height: 42px;
+//  margin: 0px;
+//  padding-left: 0px;
+//}
+//
+//.task-list .dropzone .dndDragging {
+//  opacity: 0.7;
+//}
+//
+//.task-list .dropzone .dndDraggingSource {
+//  display: none;
+//}
+//
+//.task-list .dropzone .itemlist ul {
+//  display: table;
+//}
+//
+//.task-list .dropzone .itemlist li {
+//  border: none;
+//  border-radius: 7px;
+//  color: #000000;
+//  float: left;
+//  margin: 5px;
+//  padding: 3px;
+//  vertical-align: middle;
+//  text-align: center;
+//  font-weight: normal;
+//  font-size: 14px;
+//  height: 5em;
+//  width: 20em;
+//  background-color: #cacaca;
+//  white-space: normal;
+//  display: table-cell;
+//}
+//
+//.task-list ul[dnd-list] .dndPlaceholder {
+//  background-color: $PaleLightGreen !important;
+//  height: 5em;
+//  width: 20em;
+//  display: block;
+//  position: relative;
+//  border-radius: 7px;
+//  margin-bottom: 5px;
+//}
+//
+//
+//
+//// Drag and drop subtask-list
+//
+//
+//.subtask-list ul[dnd-list],
+//.subtask-list ul[dnd-list] > li{
+//  position: relative;
+//}
+//
+//.subtask-list .dropzone ul[dnd-list] {
+//  min-height: 42px;
+//  margin: 0px;
+//  padding-left: 0px;
+//}
+//
+//.subtask-list .dropzone .dndDragging {
+//  opacity: 0.7;
+//}
+//
+//.subtask-list .dropzone .dndDraggingSource {
+//  display: none;
+//}
+//
+//.subtask-list .dropzone .itemlist li {
+//  border: none;
+//  border-radius: 7px;
+//  color: #000000;
+//  margin: 5px;
+//  padding: 3px;
+//  vertical-align: middle;
+//  text-align: center;
+//  font-weight: normal;
+//  font-size: 14px;
+//  height: 5em;
+//  width: auto;
+//  background-color: #cacaca;
+//  white-space: normal;
+//}
+//
+//.subtask-list ul[dnd-list] .dndPlaceholder {
+//  background-color: $PaleLightGreen !important;
+//  height: 5em;
+//  width: auto;
+//  display: block;
+//  position: relative;
+//  border-radius: 7px;
+//  margin-bottom: 5px;
+//}
+//
+//
+//// Drag and drop options-list
+//
+//
+//.options-list ul[dnd-list],
+//.options-list ul[dnd-list] > li{
+//  position: relative;
+//}
+//
+//.options-list .dropzone ul[dnd-list] {
+//  min-height: 5em;
+//  min-width: 20em;
+//  margin: 0px;
+//  padding-left: 0px;
+//}
+//
+//
+//.options-list .dropzone .dndDragging {
+//  opacity: 0.7;
+//}
+//
+//.options-list .dropzone ul[dnd-list] .dndDraggingSource {
+//  display: none;
+//}
+//
+//.options-list .dropzone .itemlist ul {
+//  display: table;
+//}
+//
+//.options-list .dropzone .itemlist li {
+//  border: none;
+//  border-radius: 7px;
+//  color: #000000;
+//  float: left;
+//  margin: 5px;
+//  padding: 3px;
+//  vertical-align: middle;
+//  text-align: center;
+//  font-weight: normal;
+//  font-size: 14px;
+//  height: 5em;
+//  width: 20em;
+//  background-color: #cacaca;
+//  white-space: normal;
+//  display: table-cell;
+//}
+//
+//.options-list ul[dnd-list] .dndPlaceholder {
+//  background-color: $PaleLightGreen !important;
+//  height: 5em;
+//  width: 20em;
+//  display: block;
+//  position: relative;
+//  border-radius: 7px;
+//  margin-bottom: 5px;
+//}
+//
+//// Drag and drop questions-list
+//
+//
+//.questions-list ul[dnd-list],
+//.questions-list ul[dnd-list] > li{
+//  position: relative;
+//}
+//
+//.questions-list .dropzone ul[dnd-list] {
+//  min-height: 5em;
+//  min-width: 20em;
+//  margin: 0px;
+//  padding-left: 0px;
+//}
+//
+//
+//.questions-list .dropzone .dndDragging {
+//  opacity: 0.7;
+//}
+//
+//.questions-list .dropzone ul[dnd-list] .dndDraggingSource {
+//  display: none;
+//}
+//
+//.questions-list .dropzone .itemlist ul {
+//  display: table;
+//}
+//
+//.questions-list .dropzone .itemlist li {
+//  border: none;
+//  border-radius: 7px;
+//  color: #000000;
+//  float: left;
+//  margin: 5px;
+//  padding: 3px;
+//  vertical-align: middle;
+//  text-align: center;
+//  font-weight: normal;
+//  font-size: 14px;
+//  height: 5em;
+//  width: 20em;
+//  background-color: #cacaca;
+//  white-space: normal;
+//  display: table-cell;
+//}
+//
+//.questions-list ul[dnd-list] .dndPlaceholder {
+//  background-color: $PaleLightGreen !important;
+//  height: 5em;
+//  width: 20em;
+//  display: block;
+//  position: relative;
+//  border-radius: 7px;
+//  margin-bottom: 5px;
+//}
+//
+//
+//// TextAngular editor
+//
+//.ta-editor {
+//  min-height: 300px;
+//  height: auto;
+//  overflow: auto;
+//  font-family: inherit;
+//  font-size: 100%;
+//  margin:20px 0;
+//}
+//
+//
+////Sorting order icon
+//
+//.sortorder:after {
+//  content: '\25b2';
+//}
+//.sortorder.reverse:after {
+//  content: '\25bc';
+//}

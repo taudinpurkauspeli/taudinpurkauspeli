@@ -153,7 +153,17 @@ app.run([
     function($rootScope, $state){
         $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
             if (error.authenticated === false) {
-                alert("Sinulla ei ole tarvittavia oikeuksia päästäksesi sivulle");
+                $.notify({
+                    title: "Pääsy estetty!",
+                    message: "Sinulla ei ole tarvittavia oikeuksia päästäksesi sivulle"
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "danger",
+                    offset: 100
+                });
+
                 $state.go('app_root');
             }
         });

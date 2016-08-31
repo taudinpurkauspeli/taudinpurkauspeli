@@ -1,35 +1,33 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Kysymys: {{subtask.multichoice.question}}</h3>
+        <h3 class="panel-title panel-title-multichoice">Kysymys: {{subtask.multichoice.question}}</h3>
     </div>
     <div class="panel-body">
 
-        <form>
-            <table class = "width100">
 
-                <tr>
-                    <td class="multichoice"><b>Vaihtoehto</b></td>
-                    <td class="multichoice"><b>Selitys</b></td>
-                </tr>
+        <form class="form-horizontal">
+            <div class="margin-bottom-5" ng-repeat="option in options"
+                 ng-class="{'correct-answer': optionIs('required', option),
+                            'allowed-answer': optionIs('allowed', option),
+                            'wrong-answer': optionIs('wrong', option)}">
 
-                <tr ng-repeat="option in options">
-                    <td class="multichoice" ng-class="{'correct-answer': optionIs('required', option),
-                                                       'allowed-answer': optionIs('allowed', option),
-                                                       'wrong-answer': optionIs('wrong', option)}">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="checkbox padding-left-20 padding-right-20 multichoice-label padding-top-10">
+                            {{option.content}}
+                        </div>
+                    </div>
+                </div>
 
-                       {{option.content}}
-                    </td>
-
-                    <td class = "multichoice" ta-bind="text" ng-model="option.explanation"
-                        ng-class="{'correct-answer': optionIs('required', option),
-                                   'allowed-answer': optionIs('allowed', option),
-                                   'wrong-answer': optionIs('wrong', option)}">
-                    </td>
-                </tr>
-
-            </table>
-            <br />
+                <div class="form-group multichoice-explanation">
+                    <div class="col-md-12">
+                        <div ta-bind="text" ng-model="option.explanation" class="padding-left-20 padding-right-20 padding-top-10 multichoice-explanation-border">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </form>
+
     </div>
 </div>

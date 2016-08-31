@@ -2,7 +2,7 @@
 @license textAngular
 Author : Austin Anderson
 License : 2013 MIT
-Version 1.5.0
+Version 1.5.7
 
 See README.md or https://github.com/fraywing/textAngular/wiki for requirements and use.
 */
@@ -11,11 +11,11 @@ See README.md or https://github.com/fraywing/textAngular/wiki for requirements a
 Commonjs package manager support (eg componentjs).
 */
 
-/* istanbul ignore next:  */
-'undefined'!=typeof module&&'undefined'!=typeof exports&&module.exports===exports&&(module.exports='textAngular');
 
-(function(){ // encapsulate all variables so they don't become global vars
-"use strict";
+"use strict";// NOTE: textAngularVersion must match the Gruntfile.js 'setVersion' task.... and have format v/d+./d+./d+
+var textAngularVersion = 'v1.5.7';   // This is automatically updated during the build process to the current release!
+
+
 // IE version detection - http://stackoverflow.com/questions/4169160/javascript-ie-detection-why-not-use-simple-conditional-comments
 // We need this as IE sometimes plays funny tricks with the contenteditable.
 // ----------------------------------------------------------
@@ -45,40 +45,47 @@ var _browserDetect = {
 
 		return v > 4 ? v : undef;
 	}()),
-	webkit: /AppleWebKit\/([\d.]+)/i.test(navigator.userAgent)
+	webkit: /AppleWebKit\/([\d.]+)/i.test(navigator.userAgent),
+	isFirefox: navigator.userAgent.toLowerCase().indexOf('firefox') > -1
 };
 
-// fix a webkit bug, see: https://gist.github.com/shimondoodkin/1081133
-// this is set true when a blur occurs as the blur of the ta-bind triggers before the click
-var globalContentEditableBlur = false;
-/* istanbul ignore next: Browser Un-Focus fix for webkit */
-if(_browserDetect.webkit) {
-	document.addEventListener("mousedown", function(_event){
-		var e = _event || window.event;
-		var curelement = e.target;
-		if(globalContentEditableBlur && curelement !== null){
-			var isEditable = false;
-			var tempEl = curelement;
-			while(tempEl !== null && tempEl.tagName.toLowerCase() !== 'html' && !isEditable){
-				isEditable = tempEl.contentEditable === 'true';
-				tempEl = tempEl.parentNode;
-			}
-			if(!isEditable){
-				document.getElementById('textAngular-editableFix-010203040506070809').setSelectionRange(0, 0); // set caret focus to an element that handles caret focus correctly.
-				curelement.focus(); // focus the wanted element.
-				if (curelement.select) {
-					curelement.select(); // use select to place cursor for input elements.
-				}
-			}
-		}
-		globalContentEditableBlur = false;
-	}, false); // add global click handler
-	angular.element(document).ready(function () {
-		angular.element(document.body).append(angular.element('<input id="textAngular-editableFix-010203040506070809" class="ta-hidden-input" aria-hidden="true" unselectable="on" tabIndex="-1">'));
-	});
+// Global to textAngular to measure performance where needed
+var performance = performance || {};
+performance.now = (function() {
+	return performance.now       ||
+		performance.mozNow    ||
+		performance.msNow     ||
+		performance.oNow      ||
+		performance.webkitNow ||
+		function() { return new Date().getTime(); };
+})();
+// usage is:
+// var t0 = performance.now();
+// doSomething();
+// var t1 = performance.now();
+// console.log('Took', (t1 - t0).toFixed(4), 'milliseconds to do something!');
+//
+
+// turn html into pure text that shows visiblity
+function stripHtmlToText(html)
+{
+	var tmp = document.createElement("DIV");
+	tmp.innerHTML = html;
+	var res = tmp.textContent || tmp.innerText || '';
+	res.replace('\u200B', ''); // zero width space
+	res = res.trim();
+	return res;
+}
+// get html
+function getDomFromHtml(html)
+{
+	var tmp = document.createElement("DIV");
+	tmp.innerHTML = html;
+	return tmp;
 }
 
-// Gloabl to textAngular REGEXP vars for block and list elements.
+
+// Global to textAngular REGEXP vars for block and list elements.
 
 var BLOCKELEMENTS = /^(address|article|aside|audio|blockquote|canvas|dd|div|dl|fieldset|figcaption|figure|footer|form|h1|h2|h3|h4|h5|h6|header|hgroup|hr|noscript|ol|output|p|pre|section|table|tfoot|ul|video)$/i;
 var LISTELEMENTS = /^(ul|li|ol)$/i;
@@ -219,16 +226,33 @@ angular.module('textAngular.factories', [])
 	var taFixChrome = function(html){
 		if(!html || !angular.isString(html) || html.length <= 0) return html;
 		// grab all elements with a style attibute
-		var spanMatch = /<([^>\/]+?)style=("([^"]+)"|'([^']+)')([^>]*)>/ig;
-		var match, styleVal, newTag, finalHtml = '', lastIndex = 0;
+		var spanMatch = /<([^>\/]+?)style=("([^\"]+)"|'([^']+)')([^>]*)>/ig;
+		var appleConvertedSpaceMatch = /<span class="Apple-converted-space">([^<]+)<\/span>/ig;
+		var match, styleVal, appleSpaceVal, newTag, finalHtml = '', lastIndex = 0;
+		// remove all the Apple-converted-space spans and replace with the content of the span
+		/* istanbul ignore next: apple-contereted-space span match */
+		while(match = appleConvertedSpaceMatch.exec(html)){
+			appleSpaceVal = match[1];
+			appleSpaceVal = appleSpaceVal.replace(/&nbsp;/ig, ' ');
+			finalHtml += html.substring(lastIndex, match.index) + appleSpaceVal;
+			lastIndex = match.index + match[0].length;
+		}
+		/* istanbul ignore next: apple-contereted-space span has matched */
+		if (lastIndex) {
+			// modified....
+			finalHtml += html.substring(lastIndex);
+			html=finalHtml;
+			finalHtml='';
+			lastIndex=0;
+		}
 		while(match = spanMatch.exec(html)){
 			// one of the quoted values ' or "
 			/* istanbul ignore next: quotations match */
 			styleVal = match[3] || match[4];
 			// test for chrome inserted junk
-			if(styleVal && styleVal.match(/line-height: 1.[0-9]{3,12};|color: inherit; line-height: 1.1;/i)){
+			if(styleVal && styleVal.match(/line-height: 1.[0-9]{3,12};|color: inherit; line-height: 1.1;|color: rgb\(\d{1,3}, \d{1,3}, \d{1,3}\);|background-color: rgb\(\d{1,3}, \d{1,3}, \d{1,3}\);/i)){
 				// replace original tag with new tag
-				styleVal = styleVal.replace(/( |)font-family: inherit;|( |)line-height: 1.[0-9]{3,12};|( |)color: inherit;/ig, '');
+				styleVal = styleVal.replace(/( |)font-family: inherit;|( |)line-height: 1.[0-9]{3,12};|( |)color: inherit;|( |)color: rgb\(\d{1,3}, \d{1,3}, \d{1,3}\);|( |)background-color: rgb\(\d{1,3}, \d{1,3}, \d{1,3}\);/ig, '');
 				newTag = '<' + match[1].trim();
 				if(styleVal.trim().length > 0) newTag += ' style=' + match[2].substring(0,1) + styleVal + match[2].substring(0,1);
 				newTag += match[5].trim() + ">";
@@ -258,7 +282,7 @@ angular.module('textAngular.factories', [])
 			tag: 'i'
 		}
 	];
-	
+
 	var styleMatch = [];
 	for(var i = 0; i < convert_infos.length; i++){
 		var _partialStyle = '(' + convert_infos[i].property + ':\\s*(';
@@ -271,7 +295,7 @@ angular.module('textAngular.factories', [])
 		styleMatch.push(_partialStyle);
 	}
 	var styleRegexString = '(' + styleMatch.join('|') + ')';
-	
+
 	function wrapNested(html, wrapTag) {
 		var depth = 0;
 		var lastIndex = 0;
@@ -290,7 +314,7 @@ angular.module('textAngular.factories', [])
 			angular.element(wrapTag)[0].outerHTML.substring(wrapTag.length) +
 			html.substring(lastIndex);
 	}
-	
+
 	function transformLegacyStyles(html){
 		if(!html || !angular.isString(html) || html.length <= 0) return html;
 		var i;
@@ -338,7 +362,7 @@ angular.module('textAngular.factories', [])
 		else finalHtml += html.substring(lastIndex);
 		return finalHtml;
 	}
-	
+
 	function transformLegacyAttributes(html){
 		if(!html || !angular.isString(html) || html.length <= 0) return html;
 		// replace all align='...' tags with text-align attributes
@@ -367,7 +391,7 @@ angular.module('textAngular.factories', [])
 		// return with remaining html
 		return finalHtml + html.substring(lastIndex);
 	}
-	
+
 	return function taSanitize(unsafe, oldsafe, ignore){
 		// unsafe html should NEVER built into a DOM object via angular.element. This allows XSS to be inserted and run.
 		if ( !ignore ) {
@@ -381,7 +405,7 @@ angular.module('textAngular.factories', [])
 		// any exceptions (lets say, color for example) should be made here but with great care
 		// setup unsafe element for modification
 		unsafe = transformLegacyAttributes(unsafe);
-		
+
 		var safe;
 		try {
 			safe = $sanitize(unsafe);
@@ -390,9 +414,9 @@ angular.module('textAngular.factories', [])
 		} catch (e){
 			safe = oldsafe || '';
 		}
-		
+
 		// Do processing for <pre> tags, removing tabs and return carriages outside of them
-		
+
 		var _preTags = safe.match(/(<pre[^>]*>.*?<\/pre[^>]*>)/ig);
 		var processedSafe = safe.replace(/(&#(9|10);)*/ig, '');
 		var re = /<pre[^>]*>.*?<\/pre[^>]*>/ig;
@@ -431,6 +455,7 @@ angular.module('textAngular.factories', [])
 		}
 	};
 }]);
+
 angular.module('textAngular.DOM', ['textAngular.factories'])
 .factory('taExecCommand', ['taSelection', 'taBrowserTag', '$document', function(taSelection, taBrowserTag, $document){
 	var listToDefault = function(listElement, defaultWrap){
@@ -466,13 +491,108 @@ angular.module('textAngular.DOM', ['textAngular.factories'])
 		selectLi($target.find('li')[0]);
 	};
 	return function(taDefaultWrap, topNode){
+		// NOTE: here we are dealing with the html directly from the browser and not the html the user sees.
+		// IF you want to modify the html the user sees, do it when the user does a switchView
 		taDefaultWrap = taBrowserTag(taDefaultWrap);
 		return function(command, showUI, options, defaultTagAttributes){
-			var i, $target, html, _nodes, next, optionsTagName, selectedElement;
+			var i, $target, html, _nodes, next, optionsTagName, selectedElement, ourSelection;
 			var defaultWrapper = angular.element('<' + taDefaultWrap + '>');
 			try{
+				if (taSelection.getSelection) {
+					ourSelection = taSelection.getSelection();
+				}
 				selectedElement = taSelection.getSelectionElement();
-			}catch(e){}
+				//console.log('selectedElement', selectedElement);
+				// special checks and fixes when we are selecting the whole container
+				var __h, _innerNode;
+				/* istanbul ignore next */
+				if (selectedElement.tagName.toLowerCase() === 'div' &&
+					/taTextElement.+/.test(selectedElement.id) &&
+					ourSelection && ourSelection.start &&
+					ourSelection.start.offset === 1 &&
+					ourSelection.end.offset === 1) {
+					// opps we are actually selecting the whole container!
+					//console.log('selecting whole container!');
+					__h = selectedElement.innerHTML;
+					if (/<br>/i.test(__h)) {
+						// Firefox adds <br>'s and so we remove the <br>
+						__h = __h.replace(/<br>/i, '&#8203;');  // no space-space
+					}
+					if (/<br\/>/i.test(__h)) {
+						// Firefox adds <br/>'s and so we remove the <br/>
+						__h = __h.replace(/<br\/>/i, '&#8203;');  // no space-space
+					}
+					// remove stacked up <span>'s
+					if (/<span>(<span>)+/i.test(__h)) {
+						__h = __.replace(/<span>(<span>)+/i, '<span>');
+					}
+					// remove stacked up </span>'s
+					if (/<\/span>(<\/span>)+/i.test(__h)) {
+						__h = __.replace(/<\/span>(<\/span>)+/i, '<\/span>');
+					}
+					if (/<span><\/span>/i.test(__h)) {
+						// if we end up with a <span></span> here we remove it...
+						__h = __h.replace(/<span><\/span>/i, '');
+					}
+					//console.log('inner whole container', selectedElement.childNodes);
+					_innerNode = '<div>' + __h + '</div>';
+					selectedElement.innerHTML = _innerNode;
+					//console.log('childNodes:', selectedElement.childNodes);
+					taSelection.setSelectionToElementEnd(selectedElement.childNodes[0]);
+					selectedElement = taSelection.getSelectionElement();
+				} else if (selectedElement.tagName.toLowerCase() === 'span' &&
+					ourSelection && ourSelection.start &&
+					ourSelection.start.offset === 1 &&
+					ourSelection.end.offset === 1) {
+					// just a span -- this is a problem...
+					//console.log('selecting span!');
+					__h = selectedElement.innerHTML;
+					if (/<br>/i.test(__h)) {
+						// Firefox adds <br>'s and so we remove the <br>
+						__h = __h.replace(/<br>/i, '&#8203;');  // no space-space
+					}
+					if (/<br\/>/i.test(__h)) {
+						// Firefox adds <br/>'s and so we remove the <br/>
+						__h = __h.replace(/<br\/>/i, '&#8203;');  // no space-space
+					}
+					// remove stacked up <span>'s
+					if (/<span>(<span>)+/i.test(__h)) {
+						__h = __.replace(/<span>(<span>)+/i, '<span>');
+					}
+					// remove stacked up </span>'s
+					if (/<\/span>(<\/span>)+/i.test(__h)) {
+						__h = __.replace(/<\/span>(<\/span>)+/i, '<\/span>');
+					}
+					if (/<span><\/span>/i.test(__h)) {
+						// if we end up with a <span></span> here we remove it...
+						__h = __h.replace(/<span><\/span>/i, '');
+					}
+					//console.log('inner span', selectedElement.childNodes);
+					// we wrap this in a <div> because otherwise the browser get confused when we attempt to select the whole node
+					// and the focus is not set correctly no matter what we do
+					_innerNode = '<div>' + __h + '</div>';
+					selectedElement.innerHTML = _innerNode;
+					taSelection.setSelectionToElementEnd(selectedElement.childNodes[0]);
+					selectedElement = taSelection.getSelectionElement();
+					//console.log(selectedElement.innerHTML);
+				} else if (selectedElement.tagName.toLowerCase() === 'p' &&
+					ourSelection && ourSelection.start &&
+					ourSelection.start.offset === 1 &&
+					ourSelection.end.offset === 1) {
+					//console.log('p special');
+					// we need to remove the </br> that firefox adds!
+					__h = selectedElement.innerHTML;
+					if (/<br>/i.test(__h)) {
+						// Firefox adds <br>'s and so we remove the <br>
+						__h = __h.replace(/<br>/i, '&#8203;');  // no space-space
+					}
+					selectedElement.innerHTML = __h;
+				}
+			}catch(e){
+				/* istanbul ignore next */
+				// we ignore errors from testing...
+				if (e.codeName !== 'INDEX_SIZE_ERR') console.error(e);
+			}
 			var $selected = angular.element(selectedElement);
 			if(selectedElement !== undefined){
 				var tagName = selectedElement.tagName.toLowerCase();
@@ -579,7 +699,8 @@ angular.module('textAngular.DOM', ['textAngular.factories'])
 							$target.remove();
 							$target = defaultWrapper;
 						}
-					}else if($target.parent()[0].tagName.toLowerCase() === optionsTagName && !$target.parent().hasClass('ta-bind')){
+					}else if($target.parent()[0].tagName.toLowerCase() === optionsTagName &&
+						!$target.parent().hasClass('ta-bind')){
 						//unwrap logic for parent
 						var blockElement = $target.parent();
 						var contents = blockElement.contents();
@@ -599,7 +720,11 @@ angular.module('textAngular.DOM', ['textAngular.factories'])
 					}else{
 						// default wrap behaviour
 						_nodes = taSelection.getOnlySelectedElements();
-						if(_nodes.length === 0) _nodes = [$target[0]];
+						//console.log('default wrap behavior', _nodes);
+						if(_nodes.length === 0) {
+							// no nodes at all....
+							_nodes = [$target[0]];
+						}
 						// find the parent block element if any of the nodes are inline or text
 						for(i = 0; i < _nodes.length; i++){
 							if(_nodes[i].nodeType === 3 || !_nodes[i].tagName.match(BLOCKELEMENTS)){
@@ -608,6 +733,10 @@ angular.module('textAngular.DOM', ['textAngular.factories'])
 								}
 							}
 						}
+						// remove any duplicates from the array of _nodes!
+						_nodes = _nodes.filter(function(value, index, self) {
+							return self.indexOf(value) === index;
+						});
 						if(angular.element(_nodes[0]).hasClass('ta-bind')){
 							$target = angular.element(options);
 							$target[0].innerHTML = _nodes[0].innerHTML;
@@ -637,6 +766,11 @@ angular.module('textAngular.DOM', ['textAngular.factories'])
 						}
 					}
 					taSelection.setSelectionToElementEnd($target[0]);
+					// looses focus when we have the whole container selected and no text!
+					// refocus on the shown display element, this fixes a bug when using firefox
+					$target[0].focus();
+					//console.log($document[0].activeElement.childNodes);
+					//$document[0].activeElement.childNodes[0].focus();
 					return;
 				}else if(command.toLowerCase() === 'createlink'){
 					var tagBegin = '<a href="' + options + '" target="' +
@@ -659,15 +793,18 @@ angular.module('textAngular.DOM', ['textAngular.factories'])
 			}
 			try{
 				$document[0].execCommand(command, showUI, options);
-			}catch(e){}
+			}catch(e){
+				/* istanbul ignore next */
+				// we ignore errors from testing...
+				if (e.codeName !== 'INDEX_SIZE_ERR') console.error(e);
+			}
 		};
 	};
-}]).service('taSelection', ['$window', '$document', 'taDOM',
+}]).service('taSelection', ['$document', 'taDOM',
 /* istanbul ignore next: all browser specifics and PhantomJS dosen't seem to support half of it */
-function($window, $document, taDOM){
+function($document, taDOM){
 	// need to dereference the document else the calls don't work correctly
 	var _document = $document[0];
-	var rangy = $window.rangy;
 	var brException = function (element, offset) {
 		/* check if selection is a BR element at the beginning of a container. If so, get
 		* the parentNode instead.
@@ -708,6 +845,9 @@ function($window, $document, taDOM){
 		getOnlySelectedElements: function(){
 			var range = rangy.getSelection().getRangeAt(0);
 			var container = range.commonAncestorContainer;
+			// Node.TEXT_NODE === 3
+			// Node.ELEMENT_NODE === 1
+			// Node.COMMENT_NODE === 8
 			// Check if the container is a text node and return its parent if so
 			container = container.nodeType === 3 ? container.parentNode : container;
 			return range.getNodes([1], function(node){
@@ -752,7 +892,7 @@ function($window, $document, taDOM){
 		},
 		setSelectionToElementEnd: function (el){
 			var range = rangy.createRange();
-			
+
 			range.selectNodeContents(el);
 			range.collapse(false);
 			if(el.childNodes && el.childNodes[el.childNodes.length - 1] && el.childNodes[el.childNodes.length - 1].nodeName === 'br'){
@@ -834,6 +974,7 @@ function($window, $document, taDOM){
 						
 						angular.element(parent).after(secondParent);
 						// put cursor to end of inserted content
+						//console.log('setStartAfter', parent);
 						range.setStartAfter(parent);
 						range.setEndAfter(parent);
 						
@@ -974,30 +1115,27 @@ angular.module('textAngular.validators', [])
 });
 angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'])
 .service('_taBlankTest', [function(){
-	var INLINETAGS_NONBLANK = /<(a|abbr|acronym|bdi|bdo|big|cite|code|del|dfn|img|ins|kbd|label|map|mark|q|ruby|rp|rt|s|samp|time|tt|var)[^>]*(>|$)/i;
-	return function(_defaultTest){
-		return function(_blankVal){
-			if(!_blankVal) return true;
-			// find first non-tag match - ie start of string or after tag that is not whitespace
-			var _firstMatch = /(^[^<]|>)[^<]/i.exec(_blankVal);
-			var _firstTagIndex;
-			if(!_firstMatch){
-				// find the end of the first tag removing all the
-				// Don't do a global replace as that would be waaayy too long, just replace the first 4 occurences should be enough
-				_blankVal = _blankVal.toString().replace(/="[^"]*"/i, '').replace(/="[^"]*"/i, '').replace(/="[^"]*"/i, '').replace(/="[^"]*"/i, '');
-				_firstTagIndex = _blankVal.indexOf('>');
-			}else{
-				_firstTagIndex = _firstMatch.index;
+	return function(_blankVal){
+		// we radically restructure this code.
+		// what was here before was incredibly fragile.
+		// What we do now is to check that the html is non-blank visually
+		// which we check by looking at html->text
+		if(!_blankVal) return true;
+		// find first non-tag match - ie start of string or after tag that is not whitespace
+		// var t0 = performance.now();
+		// Takes a small fraction of a mSec to do this...
+		var _text_ = stripHtmlToText(_blankVal);
+		// var t1 = performance.now();
+		// console.log('Took', (t1 - t0).toFixed(4), 'milliseconds to generate:');
+		if (_text_=== '') {
+			// img generates a visible item so it is not blank!
+			if (/<img[^>]+>/.test(_blankVal)) {
+				return false;
 			}
-			_blankVal = _blankVal.trim().substring(_firstTagIndex, _firstTagIndex + 100);
-			// check for no tags entry
-			if(/^[^<>]+$/i.test(_blankVal)) return false;
-			// this regex is to match any number of whitespace only between two tags
-			if (_blankVal.length === 0 || _blankVal === _defaultTest || /^>(\s|&nbsp;)*<\/[^>]+>$/ig.test(_blankVal)) return true;
-			// this regex tests if there is a tag followed by some optional whitespace and some text after that
-			else if (/>\s*[^\s<]/i.test(_blankVal) || INLINETAGS_NONBLANK.test(_blankVal)) return false;
-			else return true;
-		};
+			return true;
+		} else {
+			return false;
+		}
 	};
 }])
 .directive('taButton', [function(){
@@ -1015,11 +1153,11 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 	};
 }])
 .directive('taBind', [
-		'taSanitize', '$timeout', '$window', '$document', 'taFixChrome', 'taBrowserTag',
+		'taSanitize', '$timeout', '$document', 'taFixChrome', 'taBrowserTag',
 		'taSelection', 'taSelectableElements', 'taApplyCustomRenderers', 'taOptions',
 		'_taBlankTest', '$parse', 'taDOM', 'textAngularManager',
 		function(
-			taSanitize, $timeout, $window, $document, taFixChrome, taBrowserTag,
+			taSanitize, $timeout, $document, taFixChrome, taBrowserTag,
 			taSelection, taSelectableElements, taApplyCustomRenderers, taOptions,
 			_taBlankTest, $parse, taDOM, textAngularManager){
 	// Uses for this are textarea or input with ng-model and ta-bind='text'
@@ -1140,13 +1278,15 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 			/* istanbul ignore else */
 			if(!ngModelOptions.$options) ngModelOptions.$options = {}; // ng-model-options support
 
-			var _blankTest = _taBlankTest(_defaultTest);
-
 			var _ensureContentWrapped = function(value) {
-				if (_blankTest(value)) return value;
+				if (_taBlankTest(value)) return value;
 				var domTest = angular.element("<div>" + value + "</div>");
 				//console.log('domTest.children().length():', domTest.children().length);
+				//console.log('_ensureContentWrapped', domTest.children());
+				//console.log(value, attrs.taDefaultWrap);
 				if (domTest.children().length === 0) {
+					// if we have a <br> and the attrs.taDefaultWrap is a <p> we need to remove the <br>
+					//value = value.replace(/<br>/i, '');
 					value = "<" + attrs.taDefaultWrap + ">" + value + "</" + attrs.taDefaultWrap + ">";
 				} else {
 					var _children = domTest[0].childNodes;
@@ -1163,7 +1303,7 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 						for(i = 0; i < _children.length; i++){
 							var node = _children[i];
 							var nodeName = node.nodeName.toLowerCase();
-							//console.log(nodeName);
+							//console.log('node#:', i, 'name:', nodeName);
 							if(nodeName === '#comment') {
 								value += '<!--' + node.nodeValue + '-->';
 							} else if(nodeName === '#text') {
@@ -1187,6 +1327,7 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 							} else {
 								value += node.outerHTML;
 							}
+							//console.log(value);
 						}
 					}
 				}
@@ -1194,7 +1335,9 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 				return value;
 			};
 
-			if(attrs.taPaste) _pasteHandler = $parse(attrs.taPaste);
+			if(attrs.taPaste) {
+				_pasteHandler = $parse(attrs.taPaste);
+			}
 
 			element.addClass('ta-bind');
 
@@ -1270,8 +1413,12 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 
 			// in here we are undoing the converts used elsewhere to prevent the < > and & being displayed when they shouldn't in the code.
 			var _compileHtml = function(){
-				if(_isContentEditable) return element[0].innerHTML;
-				if(_isInputFriendly) return element.val();
+				if(_isContentEditable) {
+					return element[0].innerHTML;
+				}
+				if(_isInputFriendly) {
+					return element.val();
+				}
 				throw ('textAngular Error: attempting to update non-editable taBind');
 			};
 
@@ -1279,7 +1426,7 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 				_skipRender = skipRender || false;
 				if(typeof triggerUndo === "undefined" || triggerUndo === null) triggerUndo = true && _isContentEditable; // if not contentEditable then the native undo/redo is fine
 				if(typeof _val === "undefined" || _val === null) _val = _compileHtml();
-				if(_blankTest(_val)){
+				if(_taBlankTest(_val)){
 					// this avoids us from tripping the ng-pristine flag if we click in and out with out typing
 					if(ngModel.$viewValue !== '') ngModel.$setViewValue('');
 					if(triggerUndo && ngModel.$undoManager.current() !== '') ngModel.$undoManager.push('');
@@ -1306,7 +1453,7 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 
 			// trigger the validation calls
 			if(element.attr('required')) ngModel.$validators.required = function(modelValue, viewValue) {
-				return !_blankTest(modelValue || viewValue);
+				return !_taBlankTest(modelValue || viewValue);
 			};
 			// parsers trigger from the above keyup function or any other time that the viewValue is updated and parses it for storage in the ngModel
 			ngModel.$parsers.push(_sanitize);
@@ -1466,10 +1613,12 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 					var _processingPaste = false;
 					/* istanbul ignore next: phantom js cannot test this for some reason */
 					var processpaste = function(text) {
+                       var _isOneNote = text!==undefined? text.match(/content=["']*OneNote.File/i): false;
 						/* istanbul ignore else: don't care if nothing pasted */
+                        //console.log(text);
 						if(text && text.trim().length){
 							// test paste from word/microsoft product
-							if(text.match(/class=["']*Mso(Normal|List)/i) || text.match(/content=["']*Word.Document/i)){
+							if(text.match(/class=["']*Mso(Normal|List)/i) || text.match(/content=["']*Word.Document/i) || text.match(/content=["']*OneNote.File/i)){
 								var textFragment = text.match(/<!--StartFragment-->([\s\S]*?)<!--EndFragment-->/i);
 								if(!textFragment) textFragment = text;
 								else textFragment = textFragment[1];
@@ -1567,7 +1716,11 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 									if(node.attributes.length <= 0) _unwrapElement(node);
 								});
 								angular.forEach(targetDom.find('font'), _unwrapElement);
-								text = targetDom.html();
+
+                                text = targetDom.html();
+                                if(_isOneNote){
+                                    text = targetDom.html() || dom.html();
+                                }
 							}else{
 								// remove unnecessary chrome insert
 								text = text.replace(/<(|\/)meta[^>]*?>/ig, '');
@@ -1659,13 +1812,13 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 							e.preventDefault();
 							return false;
 						} else {// Everything else - empty editdiv and allow browser to paste content into it, then cleanup
-							var _savedSelection = $window.rangy.saveSelection(),
+							var _savedSelection = rangy.saveSelection(),
 								_tempDiv = angular.element('<div class="ta-hidden-input" contenteditable="true"></div>');
 							$document.find('body').append(_tempDiv);
 							_tempDiv[0].focus();
 							$timeout(function(){
 								// restore selection
-								$window.rangy.restoreSelection(_savedSelection);
+								rangy.restoreSelection(_savedSelection);
 								processpaste(_tempDiv[0].innerHTML);
 								element[0].focus();
 								_tempDiv.remove();
@@ -1783,7 +1936,11 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 										selection = selection.parentNode;
 									}
 
-									if(selection.tagName.toLowerCase() !== attrs.taDefaultWrap && selection.tagName.toLowerCase() !== 'li' && (selection.innerHTML.trim() === '' || selection.innerHTML.trim() === '<br>')){
+									if(selection.tagName.toLowerCase() !==
+										attrs.taDefaultWrap &&
+										selection.tagName.toLowerCase() !== 'li' &&
+										(selection.innerHTML.trim() === '' || selection.innerHTML.trim() === '<br>')
+									) {
 										var _new = angular.element(_defaultVal);
 										angular.element(selection).replaceWith(_new);
 										taSelection.setSelectionToElementStart(_new[0]);
@@ -1791,16 +1948,16 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 								}
 							}
 							var val = _compileHtml();
-							if(_defaultVal !== '' && val.trim() === ''){
+							if(_defaultVal !== '' && (val.trim() === '' || val.trim() === '<br>')){
 								_setInnerHTML(_defaultVal);
 								taSelection.setSelectionToElementStart(element.children()[0]);
 							}else if(val.substring(0, 1) !== '<' && attrs.taDefaultWrap !== ''){
 								/* we no longer do this, since there can be comments here and white space
-								var _savedSelection = $window.rangy.saveSelection();
+								var _savedSelection = rangy.saveSelection();
 								val = _compileHtml();
 								val = "<" + attrs.taDefaultWrap + ">" + val + "</" + attrs.taDefaultWrap + ">";
 								_setInnerHTML(val);
-								$window.rangy.restoreSelection(_savedSelection);
+								rangy.restoreSelection(_savedSelection);
 								*/
 							}
 							var triggerUndo = _lastKey !== event.keyCode && UNDO_TRIGGER_KEYS.test(event.keyCode);
@@ -2020,12 +2177,6 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 					element.find(selector).on('click', selectorClickHandler);
 				});
 				element.on('drop', fileDropHandler);
-				element.on('blur', function(){
-					/* istanbul ignore next: webkit fix */
-					if(_browserDetect.webkit) { // detect webkit
-						globalContentEditableBlur = true;
-					}
-				});
 			}
 		}
 	};
@@ -2040,38 +2191,11 @@ textAngular.config([function(){
 	angular.forEach(taTools, function(value, key){ delete taTools[key];	});
 }]);
 
-textAngular.run([function(){
-	/* istanbul ignore next: not sure how to test this */
-	// Require Rangy and rangy savedSelection module.
-	if (typeof define === 'function' && define.amd) {
-		// AMD. Register as an anonymous module.
-		define(function(require) {
-			window.rangy = require('rangy');
-			window.rangy.saveSelection = require('rangy/lib/rangy-selectionsaverestore');
-		});
-	} else if (typeof require ==='function' && typeof module !== 'undefined' && typeof exports === 'object') {
-		// Node/CommonJS style
-		window.rangy = require('rangy');
-		window.rangy.saveSelection = require('rangy/lib/rangy-selectionsaverestore');
-	} else {
-		// Ensure that rangy and rangy.saveSelection exists on the window (global scope).
-		// TODO: Refactor so that the global scope is no longer used.
-		if(!window.rangy){
-			throw("rangy-core.js and rangy-selectionsaverestore.js are required for textAngular to work correctly, rangy-core is not yet loaded.");
-		}else{
-			window.rangy.init();
-			if(!window.rangy.saveSelection){
-				throw("rangy-selectionsaverestore.js is required for textAngular to work correctly.");
-			}
-		}
-	}
-}]);
-
 textAngular.directive("textAngular", [
 	'$compile', '$timeout', 'taOptions', 'taSelection', 'taExecCommand',
-	'textAngularManager', '$window', '$document', '$animate', '$log', '$q', '$parse',
+	'textAngularManager', '$document', '$animate', '$log', '$q', '$parse',
 	function($compile, $timeout, taOptions, taSelection, taExecCommand,
-		textAngularManager, $window, $document, $animate, $log, $q, $parse){
+		textAngularManager, $document, $animate, $log, $q, $parse){
 		return {
 			require: '?ngModel',
 			scope: {},
@@ -2080,7 +2204,7 @@ textAngular.directive("textAngular", [
 			link: function(scope, element, attrs, ngModel){
 				// all these vars should not be accessable outside this directive
 				var _keydown, _keyup, _keypress, _mouseup, _focusin, _focusout,
-					_originalContents, _toolbars,
+					_originalContents, _editorFunctions,
 					_serial = (attrs.serial) ? attrs.serial : Math.floor(Math.random() * 10000000000000000),
 					_taExecCommand, _resizeMouseDown, _updateSelectedStylesTimeout;
 
@@ -2101,6 +2225,8 @@ textAngular.directive("textAngular", [
 				angular.extend(scope, angular.copy(taOptions), {
 					// wraps the selection in the provided tag / execCommand function. Should only be called in WYSIWYG mode.
 					wrapSelection: function(command, opt, isSelectableElementTool){
+						// we restore the saved selection that was saved when focus was lost
+						textAngularManager.restoreFocusSelection(scope._name, scope);
 						if(command.toLowerCase() === "undo"){
 							scope['$undoTaBindtaTextElement' + _serial]();
 						}else if(command.toLowerCase() === "redo"){
@@ -2318,7 +2444,10 @@ textAngular.directive("textAngular", [
 					'ng-model-options': element.attr('ng-model-options')
 				});
 				scope.displayElements.scrollWindow.attr({'ng-hide': 'showHtml'});
-				if(attrs.taDefaultWrap) scope.displayElements.text.attr('ta-default-wrap', attrs.taDefaultWrap);
+				if(attrs.taDefaultWrap) {
+					// taDefaultWrap is only applied to the text and not the html view
+					scope.displayElements.text.attr('ta-default-wrap', attrs.taDefaultWrap);
+				}
 
 				if(attrs.taUnsafeSanitizer){
 					scope.displayElements.text.attr('ta-unsafe-sanitizer', attrs.taUnsafeSanitizer);
@@ -2383,9 +2512,9 @@ textAngular.directive("textAngular", [
 				scope.startAction = function(){
 					scope._actionRunning = true;
 					// if rangy library is loaded return a function to reload the current selection
-					_savedSelection = $window.rangy.saveSelection();
+					_savedSelection = rangy.saveSelection();
 					return function(){
-						if(_savedSelection) $window.rangy.restoreSelection(_savedSelection);
+						if(_savedSelection) rangy.restoreSelection(_savedSelection);
 					};
 				};
 				scope.endAction = function(){
@@ -2396,8 +2525,8 @@ textAngular.directive("textAngular", [
 						}else{
 							scope.displayElements.text[0].focus();
 						}
-						// $window.rangy.restoreSelection(_savedSelection);
-						$window.rangy.removeMarkers(_savedSelection);
+						// rangy.restoreSelection(_savedSelection);
+						rangy.removeMarkers(_savedSelection);
 					}
 					_savedSelection = false;
 					scope.updateSelectedStyles();
@@ -2410,16 +2539,26 @@ textAngular.directive("textAngular", [
 				_focusin = function(){
 					scope.focussed = true;
 					element.addClass(scope.classes.focussed);
-					_toolbars.focus();
+					_editorFunctions.focus();
 					element.triggerHandler('focus');
 				};
 				scope.displayElements.html.on('focus', _focusin);
 				scope.displayElements.text.on('focus', _focusin);
 				_focusout = function(e){
+					try {
+						var _s = rangy.getSelection();
+						/* istanbul ignore next: this only active when loose focus */
+						if (_s) {
+							// we save the selection when we loose focus so that if do a wrapSelection, the
+							// apropriate selection in the editor is restored before action.
+							var _savedFocusRange = rangy.saveRange(_s.getRangeAt(0));
+							textAngularManager.saveFocusSelection(scope._name, _savedFocusRange);
+						}
+					} catch(error) { }
 					// if we are NOT runnig an action and have NOT focussed again on the text etc then fire the blur events
 					if(!scope._actionRunning && $document[0].activeElement !== scope.displayElements.html[0] && $document[0].activeElement !== scope.displayElements.text[0]){
 						element.removeClass(scope.classes.focussed);
-						_toolbars.unfocus();
+						_editorFunctions.unfocus();
 						// to prevent multiple apply error defer to next seems to work.
 						$timeout(function(){
 							scope._bUpdateSelectedStyles = false;
@@ -2452,6 +2591,21 @@ textAngular.directive("textAngular", [
 					$animate.enabled(false, scope.displayElements.html);
 					$animate.enabled(false, scope.displayElements.text);
 					//Show the HTML view
+					/* istanbul ignore next: ngModel exists check */
+/*
+					var _model;
+					if (ngModel) {
+						_model = ngModel.$viewValue;
+					} else {
+						_model = scope.html;
+					}
+					var _html = scope.displayElements.html[0].value;
+					if (getDomFromHtml(_html).childElementCount !== getDomFromHtml(_model).childElementCount) {
+						// the model and the html do not agree
+						// they can get out of sync and when they do, we correct that here...
+						scope.displayElements.html.val(_model);
+					}
+*/
 					if(scope.showHtml){
 						//defer until the element is visible
 						$timeout(function(){
@@ -2510,7 +2664,9 @@ textAngular.directive("textAngular", [
 					}
 				});
 
-				if(attrs.taTargetToolbars) _toolbars = textAngularManager.registerEditor(scope._name, scope, attrs.taTargetToolbars.split(','));
+				if(attrs.taTargetToolbars) {
+					_editorFunctions = textAngularManager.registerEditor(scope._name, scope, attrs.taTargetToolbars.split(','));
+				}
 				else{
 					var _toolbar = angular.element('<div text-angular-toolbar name="textAngularToolbar' + _serial + '">');
 					// passthrough init of toolbar options
@@ -2523,7 +2679,7 @@ textAngular.directive("textAngular", [
 
 					element.prepend(_toolbar);
 					$compile(_toolbar)(scope.$parent);
-					_toolbars = textAngularManager.registerEditor(scope._name, scope, ['textAngularToolbar' + _serial]);
+					_editorFunctions = textAngularManager.registerEditor(scope._name, scope, ['textAngularToolbar' + _serial]);
 				}
 
 				scope.$on('$destroy', function(){
@@ -2533,7 +2689,7 @@ textAngular.directive("textAngular", [
 
 				// catch element select event and pass to toolbar tools
 				scope.$on('ta-element-select', function(event, element){
-					if(_toolbars.triggerElementSelect(event, element)){
+					if(_editorFunctions.triggerElementSelect(event, element)){
 						scope['reApplyOnSelectorHandlerstaTextElement' + _serial]();
 					}
 				});
@@ -2579,8 +2735,8 @@ textAngular.directive("textAngular", [
 					if(_updateSelectedStylesTimeout) $timeout.cancel(_updateSelectedStylesTimeout);
 					// test if the common element ISN'T the root ta-text node
 					if((_selection = taSelection.getSelectionElement()) !== undefined && _selection.parentNode !== scope.displayElements.text[0]){
-						_toolbars.updateSelectedStyles(angular.element(_selection));
-					}else _toolbars.updateSelectedStyles();
+						_editorFunctions.updateSelectedStyles(angular.element(_selection));
+					}else _editorFunctions.updateSelectedStyles();
 					// used to update the active state when a key is held down, ie the left arrow
 					/* istanbul ignore else: browser only check */
 					if(scope._bUpdateSelectedStyles) _updateSelectedStylesTimeout = $timeout(scope.updateSelectedStyles, 200);
@@ -2610,10 +2766,29 @@ textAngular.directive("textAngular", [
 				scope.displayElements.text.on('keyup', _keyup);
 				// stop updating on key up and update the display/model
 				_keypress = function(event, eventData){
+					// bug fix for Firefox.  If we are selecting a <a> already, any characters will
+					// be added within the <a> which is bad!
+					var _selection = taSelection.getSelection();
+					/* istanbul ignore next: don't see how to test this... */
+					if (taSelection.getSelectionElement().tagName.toLowerCase() === 'a') {
+						// check and see if we are at the edge of the <a>
+						if (_selection.start.element.nodeType === 3 &&
+							_selection.start.element.textContent.length === _selection.end.offset) {
+							// we are at the end of the <a>!!!
+							// so move the selection to after the <a>!!
+							taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
+						}
+						if (_selection.start.element.nodeType === 3 &&
+							_selection.start.offset === 0) {
+							// we are at the start of the <a>!!!
+							// so move the selection before the <a>!!
+							taSelection.setSelectionBeforeElement(taSelection.getSelectionElement());
+						}
+					}
 					/* istanbul ignore else: this is for catching the jqLite testing*/
 					if(eventData) angular.extend(event, eventData);
 					scope.$apply(function(){
-						if(_toolbars.sendKeyCommand(event)){
+						if(_editorFunctions.sendKeyCommand(event)){
 							/* istanbul ignore else: don't run if already running */
 							if(!scope._bUpdateSelectedStyles){
 								scope.updateSelectedStyles();
@@ -2639,66 +2814,104 @@ textAngular.directive("textAngular", [
 		};
 	}
 ]);
-textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'taRegisterTool', function(taToolExecuteAction, taTools, taRegisterTool){
+textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'taRegisterTool', '$interval', '$rootScope', '$log',
+	function(taToolExecuteAction, taTools, taRegisterTool, $interval, $rootScope, $log){
 	// this service is used to manage all textAngular editors and toolbars.
 	// All publicly published functions that modify/need to access the toolbar or editor scopes should be in here
 	// these contain references to all the editors and toolbars that have been initialised in this app
 	var toolbars = {}, editors = {};
+	// we touch the time any change occurs through register of an editor or tool so that we
+	// in the future will fire and event to trigger an updateSelection
+	var timeRecentModification = 0;
+	var updateStyles = function(selectedElement){
+		angular.forEach(editors, function(editor) {
+			editor.editorFunctions.updateSelectedStyles(selectedElement);
+		});
+	};
+	var triggerInterval = 50;
+	var triggerIntervalTimer;
+	var setupTriggerUpdateStyles = function() {
+		timeRecentModification = Date.now();
+		/* istanbul ignore next: setup a one time updateStyles() */
+		triggerIntervalTimer = $interval(function() {
+			updateStyles();
+			triggerIntervalTimer = undefined;
+		}, triggerInterval, 1); // only trigger once
+	};
+	/* istanbul ignore next: make sure clean up on destroy */
+	$rootScope.$on('destroy', function() {
+		if (triggerIntervalTimer) {
+			$interval.cancel(triggerIntervalTimer);
+			triggerIntervalTimer = undefined;
+		}
+	});
+	var touchModification = function() {
+		if (Math.abs(Date.now() - timeRecentModification) > triggerInterval) {
+			// we have already triggered the updateStyles a long time back... so setup it again...
+			setupTriggerUpdateStyles();
+		}
+	};
 	// when we focus into a toolbar, we need to set the TOOLBAR's $parent to be the toolbars it's linked to.
 	// We also need to set the tools to be updated to be the toolbars...
 	return {
 		// register an editor and the toolbars that it is affected by
-		registerEditor: function(name, scope, targetToolbars){
+		registerEditor: function(editorName, editorScope, targetToolbars){
+			// NOTE: name === editorScope._name
+			// targetToolbars is an [] of 'toolbar name's
 			// targetToolbars are optional, we don't require a toolbar to function
-			if(!name || name === '') throw('textAngular Error: An editor requires a name');
-			if(!scope) throw('textAngular Error: An editor requires a scope');
-			if(editors[name]) throw('textAngular Error: An Editor with name "' + name + '" already exists');
-			// _toolbars is an ARRAY of toolbar scopes
-			var _toolbars = [];
-			angular.forEach(targetToolbars, function(_name){
-				if(toolbars[_name]) _toolbars.push(toolbars[_name]);
-				// if it doesn't exist it may not have been compiled yet and it will be added later
-			});
-			editors[name] = {
-				scope: scope,
+			if(!editorName || editorName === '') throw('textAngular Error: An editor requires a name');
+			if(!editorScope) throw('textAngular Error: An editor requires a scope');
+			if(editors[editorName]) throw('textAngular Error: An Editor with name "' + editorName + '" already exists');
+			editors[editorName] = {
+				scope: editorScope,
 				toolbars: targetToolbars,
-				_registerToolbar: function(toolbarScope){
+				// toolbarScopes used by this editor
+				toolbarScopes: [],
+				_registerToolbarScope: function(toolbarScope){
 					// add to the list late
-					if(this.toolbars.indexOf(toolbarScope.name) >= 0) _toolbars.push(toolbarScope);
+					if(this.toolbars.indexOf(toolbarScope.name) >= 0) {
+						// if this toolbarScope is being used by this editor we add it as one of the scopes
+						this.toolbarScopes.push(toolbarScope);
+					}
 				},
 				// this is a suite of functions the editor should use to update all it's linked toolbars
 				editorFunctions: {
 					disable: function(){
 						// disable all linked toolbars
-						angular.forEach(_toolbars, function(toolbarScope){ toolbarScope.disabled = true; });
+						angular.forEach(editors[editorName].toolbarScopes, function(toolbarScope){
+							toolbarScope.disabled = true;
+						});
 					},
 					enable: function(){
 						// enable all linked toolbars
-						angular.forEach(_toolbars, function(toolbarScope){ toolbarScope.disabled = false; });
+						angular.forEach(editors[editorName].toolbarScopes, function(toolbarScope){
+							toolbarScope.disabled = false;
+						});
 					},
 					focus: function(){
 						// this should be called when the editor is focussed
-						angular.forEach(_toolbars, function(toolbarScope){
-							toolbarScope._parent = scope;
+						angular.forEach(editors[editorName].toolbarScopes, function(toolbarScope){
+							toolbarScope._parent = editorScope;
 							toolbarScope.disabled = false;
 							toolbarScope.focussed = true;
-							scope.focussed = true;
 						});
+						editorScope.focussed = true;
 					},
 					unfocus: function(){
 						// this should be called when the editor becomes unfocussed
-						angular.forEach(_toolbars, function(toolbarScope){
+						angular.forEach(editors[editorName].toolbarScopes, function(toolbarScope){
 							toolbarScope.disabled = true;
 							toolbarScope.focussed = false;
 						});
-						scope.focussed = false;
+						editorScope.focussed = false;
 					},
 					updateSelectedStyles: function(selectedElement){
 						// update the active state of all buttons on liked toolbars
-						angular.forEach(_toolbars, function(toolbarScope){
+						angular.forEach(editors[editorName].toolbarScopes, function(toolbarScope){
 							angular.forEach(toolbarScope.tools, function(toolScope){
 								if(toolScope.activeState){
-									toolbarScope._parent = scope;
+									toolbarScope._parent = editorScope;
+									// selectedElement may be undefined if nothing selected
 									toolScope.active = toolScope.activeState(selectedElement);
 								}
 							});
@@ -2709,9 +2922,9 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
 						var result = false;
 						if(event.ctrlKey || event.metaKey || event.specialKey) angular.forEach(taTools, function(tool, name){
 							if(tool.commandKeyCode && (tool.commandKeyCode === event.which || tool.commandKeyCode === event.specialKey)){
-								for(var _t = 0; _t < _toolbars.length; _t++){
-									if(_toolbars[_t].tools[name] !== undefined){
-										taToolExecuteAction.call(_toolbars[_t].tools[name], scope);
+								for(var _t = 0; _t < editors[editorName].toolbarScopes.length; _t++){
+									if(editors[editorName].toolbarScopes[_t].tools[name] !== undefined){
+										taToolExecuteAction.call(editors[editorName].toolbarScopes[_t].tools[name], editorScope);
 										result = true;
 										break;
 									}
@@ -2767,9 +2980,9 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
 							for(var _i = 0; _i < workerTools.length; _i++){
 								var tool = workerTools[_i].tool;
 								var name = workerTools[_i].name;
-								for(var _t = 0; _t < _toolbars.length; _t++){
-									if(_toolbars[_t].tools[name] !== undefined){
-										tool.onElementSelect.action.call(_toolbars[_t].tools[name], event, element, scope);
+								for(var _t = 0; _t < editors[editorName].toolbarScopes.length; _t++){
+									if(editors[editorName].toolbarScopes[_t].tools[name] !== undefined){
+										tool.onElementSelect.action.call(editors[editorName].toolbarScopes[_t].tools[name], event, element, editorScope);
 										result = true;
 										break;
 									}
@@ -2781,7 +2994,14 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
 					}
 				}
 			};
-			return editors[name].editorFunctions;
+			angular.forEach(targetToolbars, function(_name){
+				if(toolbars[_name]) {
+					editors[editorName].toolbarScopes.push(toolbars[_name]);
+				}
+				// if it doesn't exist it may not have been compiled yet and it will be added later
+			});
+			touchModification();
+			return editors[editorName].editorFunctions;
 		},
 		// retrieve editor by name, largely used by testing suites only
 		retrieveEditor: function(name){
@@ -2789,16 +3009,21 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
 		},
 		unregisterEditor: function(name){
 			delete editors[name];
+			touchModification();
 		},
 		// registers a toolbar such that it can be linked to editors
-		registerToolbar: function(scope){
-			if(!scope) throw('textAngular Error: A toolbar requires a scope');
-			if(!scope.name || scope.name === '') throw('textAngular Error: A toolbar requires a name');
-			if(toolbars[scope.name]) throw('textAngular Error: A toolbar with name "' + scope.name + '" already exists');
-			toolbars[scope.name] = scope;
+		registerToolbar: function(toolbarScope){
+			if(!toolbarScope) throw('textAngular Error: A toolbar requires a scope');
+			if(!toolbarScope.name || toolbarScope.name === '') throw('textAngular Error: A toolbar requires a name');
+			if(toolbars[toolbarScope.name]) throw('textAngular Error: A toolbar with name "' + toolbarScope.name + '" already exists');
+			toolbars[toolbarScope.name] = toolbarScope;
+			// walk all the editors and connect this toolbarScope to the editors.... if we need to.  This way, it does
+			// not matter if we register the editors after the toolbars or not
+			// Note the editor will ignore this toolbarScope if it is not connected to it...
 			angular.forEach(editors, function(_editor){
-				_editor._registerToolbar(scope);
+				_editor._registerToolbarScope(toolbarScope);
 			});
+			touchModification();
 		},
 		// retrieve toolbar by name, largely used by testing suites only
 		retrieveToolbar: function(name){
@@ -2814,6 +3039,7 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
 		},
 		unregisterToolbar: function(name){
 			delete toolbars[name];
+			touchModification();
 		},
 		// functions for updating the toolbar buttons display
 		updateToolsDisplay: function(newTaTools){
@@ -2829,6 +3055,7 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
 			angular.forEach(taTools, function(_newTool, key){
 				_this.resetToolDisplay(key);
 			});
+			touchModification();
 		},
 		// update a tool on all toolbars
 		updateToolDisplay: function(toolKey, _newTool){
@@ -2836,6 +3063,7 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
 			angular.forEach(toolbars, function(toolbarScope, toolbarKey){
 				_this.updateToolbarToolDisplay(toolbarKey, toolKey, _newTool);
 			});
+			touchModification();
 		},
 		// resets a tool to the default/starting state on all toolbars
 		resetToolDisplay: function(toolKey){
@@ -2843,6 +3071,7 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
 			angular.forEach(toolbars, function(toolbarScope, toolbarKey){
 				_this.resetToolbarToolDisplay(toolbarKey, toolKey);
 			});
+			touchModification();
 		},
 		// update a tool on a specific toolbar
 		updateToolbarToolDisplay: function(toolbarKey, toolKey, _newTool){
@@ -2877,6 +3106,7 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
 					}
 				}
 			});
+			touchModification();
 		},
 		// toolkey, toolDefinition are required. If group is not specified will pick the last group, if index isnt defined will append to group
 		addTool: function(toolKey, toolDefinition, group, index){
@@ -2884,11 +3114,13 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
 			angular.forEach(toolbars, function(toolbarScope){
 				toolbarScope.addTool(toolKey, toolDefinition, group, index);
 			});
+			touchModification();
 		},
 		// adds a Tool but only to one toolbar not all
 		addToolToToolbar: function(toolKey, toolDefinition, toolbarKey, group, index){
 			taRegisterTool(toolKey, toolDefinition);
 			toolbars[toolbarKey].addTool(toolKey, toolDefinition, group, index);
+			touchModification();
 		},
 		// this is used when externally the html of an editor has been changed and textAngular needs to be notified to update the model.
 		// this will call a $digest if not already happening
@@ -2898,6 +3130,7 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
 				/* istanbul ignore else: phase catch */
 				if(!editors[name].scope.$$phase) editors[name].scope.$digest();
 			}else throw('textAngular Error: No Editor with name "' + name + '" exists');
+			touchModification();
 		},
 		// this is used by taBind to send a key command in response to a special key event
 		sendKeyCommand: function(scope, event){
@@ -2910,6 +3143,39 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
 				}
 				event.preventDefault();
 				return false;
+			}
+		},
+		//
+		// When a toolbar and tools are created, it isn't until there is a key event or mouse event
+		// that the updateSelectedStyles() is called behind the scenes.
+		// This function forces an update through the existing editors to help the application make sure
+		// the inital state is correct.
+		//
+		updateStyles: updateStyles,
+		// return the current version of textAngular in use to the user
+		getVersion: function () { return textAngularVersion; },
+		// for testing
+		getToolbarScopes: function () {
+			var tmp=[];
+			angular.forEach(editors, function (_editor) {
+				tmp = tmp.concat(_editor.toolbarScopes);
+			});
+			return tmp;
+		},
+		// save the selection ('range') for the given editor
+		saveFocusSelection: function (name, range) {
+			editors[name].savedFocusRange = range;
+		},
+		// restore the saved selection from when the focus was lost
+		restoreFocusSelection: function(name, scope) {
+			// we only do this if NOT focussed and saved...
+			/* istanbul ignore next: not sure how to test this */
+			if (editors[name].savedFocusRange && !scope.focussed) {
+				try {
+					var _r = rangy.restoreRange(editors[name].savedFocusRange);
+					var _sel = rangy.getSelection();
+					_sel.addRange(_r);
+				} catch(e) {}
 			}
 		}
 	};
@@ -3001,6 +3267,10 @@ textAngular.directive('textAngularToolbar', [
 						return scope._parent;
 					},
 					isDisabled: function(){
+						// view selection button is always enabled since it doesn not depend on a selction!
+						if (this.name === 'html' && scope._parent.startAction) {
+							return false;
+						}
 						// to set your own disabled logic set a function or boolean on the tool called 'disabled'
 						return ( // this bracket is important as without it it just returns the first bracket and ignores the rest
 							// when the button's disabled function/value evaluates to true
@@ -3092,4 +3362,14 @@ textAngular.directive('textAngularToolbar', [
 		};
 	}
 ]);
-})();
+textAngular.directive('textAngularVersion', ['textAngularManager',
+	function(textAngularManager) {
+		var version = textAngularManager.getVersion();
+		return {
+			restrict: "EA",
+			link: function (scope, element, attrs) {
+				element.html(version);
+			}
+		};
+	}
+]);

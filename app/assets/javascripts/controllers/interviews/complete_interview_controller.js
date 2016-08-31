@@ -10,10 +10,40 @@ app.controller("CompleteInterviewController", [
         var AskQuestion = $resource('/questions/:id/ask.json',
             {id: '@id'});
 
+        $scope.changeQuestionCollapse = function(question) {
+            question.collapsed = !question.collapsed;
+        };
+
+        $scope.checkQuestionsWithGroup = function() {
+            angular.forEach($scope.questionsByGroup, function(questions, key) {
+                for(var i = 0; i < questions.length; i++) {
+                    if(questions[i].id == $scope.asked_last_id) {
+                        $scope.changeQuestionCollapse(questions[i]);
+                    }
+                }
+            });
+        };
+
+        $scope.checkQuestionsWithoutGroup = function() {
+            for(var i = 0; i < $scope.questionsWithoutGroup.length; i++) {
+                if($scope.questionsWithoutGroup[i].id == $scope.asked_last_id) {
+                    $scope.changeQuestionCollapse($scope.questionsWithoutGroup[i]);
+                }
+            }
+        };
+
+        $scope.setLastAskedQuestion = function() {
+            if ($scope.asked_last_id) {
+                $scope.checkQuestionsWithGroup();
+                $scope.checkQuestionsWithoutGroup();
+            }
+        };
+
         $scope.setQuestions = function() {
             Questions.get({ interview_id : $scope.subtask.interview.id}, function(data) {
                 $scope.questionsByGroup = data.questions_by_group;
                 $scope.questionsWithoutGroup = data.questions_without_group;
+                $scope.setLastAskedQuestion();
             });
         };
 
@@ -48,7 +78,7 @@ app.controller("CompleteInterviewController", [
         };
 
         $scope.questionWasAskedLast = function(question) {
-          return question.id == $scope.asked_last_id;
+            return question.id == $scope.asked_last_id;
         }
 
     }
