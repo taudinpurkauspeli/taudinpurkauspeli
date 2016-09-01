@@ -20,9 +20,16 @@ app.controller("ExercisesAnamnesisController", [
 
             modalInstance.result.then(function() {
                 $scope.setExercise();
-
             }, function() {
-                $window.alert("Casen päivitys peruttu.");
+                $.notify({
+                    message: "Casen päivitys peruttu!"
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
         };
 

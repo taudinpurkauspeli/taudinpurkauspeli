@@ -119,15 +119,6 @@ app.controller("ExerciseHypothesesController", [
                     type: "warning",
                     offset: 100
                 });
-                $.notify({
-                    message: "Diagnoosi-alakohdan luominen onnistui!"
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "success",
-                    offset: 100
-                });
             });
         };
 

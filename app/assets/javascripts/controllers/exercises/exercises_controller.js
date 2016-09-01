@@ -32,11 +32,27 @@ app.controller("ExercisesController", [
 
             if (deleteConfirmation) {
                 Exercise.delete({exerciseId : exercise.id}, function() {
-                    $window.alert("Casen poistaminen onnistui!");
+                    $.notify({
+                        message: "Casen poistaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $scope.setExercises();
                 });
             } else {
-                $window.alert("Casea '" + exercise.name + "' ei poistettu");
+                $.notify({
+                    message: "Casea '" + exercise.name + "' ei poistettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 
