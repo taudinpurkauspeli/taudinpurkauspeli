@@ -155,7 +155,7 @@ app.run([
             if (error.authenticated === false) {
                 $.notify({
                     title: "Pääsy estetty!",
-                    message: "Sinulla ei ole tarvittavia oikeuksia päästäksesi sivulle"
+                    message: "Sinulla ei ole tarvittavia oikeuksia päästäksesi sivulle."
                 }, {
                     placement: {
                         align: "center"

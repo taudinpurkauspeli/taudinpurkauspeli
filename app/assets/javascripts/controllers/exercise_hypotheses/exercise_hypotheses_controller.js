@@ -59,9 +59,26 @@ app.controller("ExerciseHypothesesController", [
             ExerciseHypotheses.save(newExerciseHypothesis,
                 function() {
                     $scope.setAllExerciseHypotheses();
+                    $.notify({
+                        message: "Diffin lisääminen caseen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                 },
                 function() {
-                    $window.alert("Diffiä ei voitu lisätä caseen.");
+                    $.notify({
+                        message: "Diffiä ei voitu lisätä caseen."
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 }
             );
         };
@@ -93,7 +110,24 @@ app.controller("ExerciseHypothesesController", [
             modalInstance.result.then(function() {
                 $scope.setAllExerciseHypotheses();
             }, function() {
-                $window.alert("Casen diffin päivitys peruttu.");
+                $.notify({
+                    message: "Casen diffin päivitys peruttu"
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
+                $.notify({
+                    message: "Diagnoosi-alakohdan luominen onnistui!"
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "success",
+                    offset: 100
+                });
             });
         };
 
@@ -150,12 +184,29 @@ app.controller("ExerciseHypothesesController", [
                 };
                 CheckedHypotheses.save(newCheckedHypothesis,
                     function(data) {
-                        $window.alert(exerciseHypothesis.hypothesis.name + " poissuljettu!");
+                        $.notify({
+                            message: exerciseHypothesis.hypothesis.name + " poissuljettu!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "success",
+                            offset: 100
+                        });
                         $scope.setExerciseHypothesisCollapse(exerciseHypothesis);
                         $scope.setAllExerciseHypotheses();
                     },
                     function() {
-                        $window.alert("Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea tämän diffin.");
+                        $.notify({
+                            message: "Sinulla ei ole vielä tarpeeksi tietoa voidaksesi poissulkea tämän diffin."
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "danger",
+                            offset: 100
+                        });
+
                     }
                 );
             }

@@ -31,9 +31,25 @@ app.controller("AuthenticationController", [
                 LocalStorageService.remove("current_task");
                 LocalStorageService.remove("current_task_tab_path");
                 LocalStorageService.remove("unchecked_hypotheses");
-                $window.alert("Uloskirjautuminen onnistui");
+                $.notify({
+                    message: "Uloskirjautuminen onnistui!"
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "success",
+                    offset: 100
+                });
             }).error(function() {
-                $window.alert("Uloskirjautuminen epäonnistui");
+                $.notify({
+                    message: "Uloskirjautuminen epäonnistui!"
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "danger",
+                    offset: 100
+                });
             });
         }
 

@@ -26,11 +26,27 @@ app.controller("CreateConclusionModalController", [
             if ($scope.createConclusionForm.$valid) {
                 Conclusion.save({"task_id": task.id}, $scope.newConclusion,
                     function(data) {
-                        $window.alert("Diagnoosi-alakohdan luominen onnistui!");
+                        $.notify({
+                            message: "Diagnoosi-alakohdan luominen onnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "success",
+                            offset: 100
+                        });
                         $uibModalInstance.close(data);
                     },
                     function() {
-                        $window.alert("Diagnoosi-alakohdan luominen epäonnistui!");
+                        $.notify({
+                            message: "Diagnoosi-alakohdan luominen epäonnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "danger",
+                            offset: 100
+                        });
                     }
                 );
             }
