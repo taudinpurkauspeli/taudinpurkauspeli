@@ -14,11 +14,27 @@ app.controller("CreateHypothesisModalController", [
             if ($scope.createHypothesisForm.$valid) {
                 Hypothesis.save($scope.newHypothesis,
                     function() {
-                        $window.alert("Diffin luominen onnistui!");
+                        $.notify({
+                            message: "Diffin luominen onnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "success",
+                            offset: 100
+                        });
                         $uibModalInstance.close();
                     },
                     function() {
-                        $window.alert("Diffin luominen epäonnistui!");
+                        $.notify({
+                            message: "Diffin luominen epäonnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "danger",
+                            offset: 100
+                        });
                     }
                 );
             }
