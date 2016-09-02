@@ -13,10 +13,26 @@ app.controller("UpdateExerciseModalController", [
         $scope.updateExercise = function() {
             if ($scope.updateExerciseForm.$valid) {
                 Exercise.update({exerciseId: exercise.id}, $scope.exercise, function() {
-                    $window.alert("Casen päivitys onnistui!");
+                    $.notify({
+                        message: "Casen päivitys onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close();
                 }, function() {
-                    $window.alert("Casen päivitys epäonnistui!");
+                    $.notify({
+                        message: "Casen päivitys epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
             }
         };

@@ -63,10 +63,26 @@ app.controller("ExercisesController", [
         $scope.toggleHiddenExercise = function(exercise) {
             exercise.hidden = !exercise.hidden;
             Exercise.update({exerciseId : exercise.id}, exercise, function() {
-                $window.alert("Casen näkyvyyttä muokattu!");
+                $.notify({
+                    message: "Casen näkyvyyttä muokattu!"
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "success",
+                    offset: 100
+                });
                 $scope.setExercises();
             }, function() {
-                $window.alert("Casen näkyvyyden muokkaus epäonnistui!");
+                $.notify({
+                    message: "Casen näkyvyyden muokkaus epäonnistui!"
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "danger",
+                    offset: 100
+                });
             });
         };
 
@@ -76,13 +92,37 @@ app.controller("ExercisesController", [
 
             if (duplicateConfirmation) {
                 ExerciseDuplicate.save({exerciseId : exercise.id}, exercise, function() {
-                    $window.alert("Casen kopiointi onnistui!");
+                    $.notify({
+                        message: "Casen kopiointi onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $scope.setExercises();
                 }, function() {
-                    $window.alert("Casen kopiointi epäonnistui!");
+                    $.notify({
+                        message: "Casen kopiointi epäonnistui."
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
             } else {
-                $window.alert("Casea ei kopioitu");
+                $.notify({
+                    message: "Casea ei kopioitu!"
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 

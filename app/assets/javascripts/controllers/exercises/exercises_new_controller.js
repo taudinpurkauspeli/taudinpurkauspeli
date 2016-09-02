@@ -14,11 +14,27 @@ app.controller("ExercisesNewController", [
             if ($scope.createExerciseForm.$valid) {
                 Exercise.save($scope.newExercise,
                     function(data) {
-                        $window.alert("Casen luominen onnistui!");
+                        $.notify({
+                            message: "Casen luominen onnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "success",
+                            offset: 100
+                        });
                         $state.go('exercises_show.anamnesis', {exerciseShowId: data.id});
                     },
                     function() {
-                        $window.alert("Casen luominen epäonnistui!");
+                        $.notify({
+                            message: "Casen luominen epäonnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "danger",
+                            offset: 100
+                        });
                     }
                 );
             }
