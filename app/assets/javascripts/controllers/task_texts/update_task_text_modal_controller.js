@@ -61,7 +61,7 @@ app.controller("UpdateTaskTextModalController", [
                     placement: {
                         align: "center"
                     },
-                    type: "success",
+                    type: "warning",
                     offset: 100
                 });
             }

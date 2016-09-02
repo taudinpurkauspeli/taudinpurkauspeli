@@ -20,7 +20,6 @@ app.controller("UpdateTaskModalController", [
                             align: "center"
                         },
                         type: "success",
-                        delay: 0,
                         offset: 100
                     });
                     $uibModalInstance.close({taskRemoved: false});
@@ -32,7 +31,6 @@ app.controller("UpdateTaskModalController", [
                             align: "center"
                         },
                         type: "danger",
-                        delay: 0,
                         offset: 100
                     });
                 });
@@ -51,7 +49,6 @@ app.controller("UpdateTaskModalController", [
                             align: "center"
                         },
                         type: "success",
-                        delay: 0,
                         offset: 100
                     });
                     $uibModalInstance.close({taskRemoved: true});
@@ -64,7 +61,6 @@ app.controller("UpdateTaskModalController", [
                         align: "center"
                     },
                     type: "warning",
-                    delay: 0,
                     offset: 100
                 });
             }

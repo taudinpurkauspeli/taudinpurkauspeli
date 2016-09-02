@@ -37,7 +37,6 @@ app.controller("TasksUncompletedSubtaskController", [
                             align: "center"
                         },
                         type: "danger",
-                        delay: 0,
                         offset: 100
                     });
                 }
