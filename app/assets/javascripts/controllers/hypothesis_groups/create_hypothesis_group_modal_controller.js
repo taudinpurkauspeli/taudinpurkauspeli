@@ -12,11 +12,27 @@ app.controller("CreateHypothesisGroupModalController", [
             if ($scope.createHypothesisGroupForm.$valid) {
                 HypothesisGroup.save($scope.newHypothesisGroup,
                     function() {
-                        $window.alert("Diffiryhmän luominen onnistui!");
+                        $.notify({
+                            message: "Diffiryhmän luominen onnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "success",
+                            offset: 100
+                        });
                         $uibModalInstance.close();
                     },
                     function() {
-                        $window.alert("Diffiryhmän luominen epäonnistui!");
+                        $.notify({
+                            message: "Diffiryhmän luominen epäonnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "danger",
+                            offset: 100
+                        });
                     }
                 );
             }
