@@ -15,11 +15,27 @@ app.controller("CreateMultichoiceModalController", [
             if ($scope.createMultichoiceForm.$valid) {
                 Multichoice.save({"task_id": task.id}, $scope.newMultichoice,
                     function(data) {
-                        $window.alert("Monivalinnan luominen onnistui!");
+                        $.notify({
+                            message: "Monivalinnan luominen onnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "success",
+                            offset: 100
+                        });
                         $uibModalInstance.close(data);
                     },
                     function() {
-                        $window.alert("Monivalinna luominen epäonnistui!");
+                        $.notify({
+                            message: "Monivalinnan luominen epäonnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "danger",
+                            offset: 100
+                        });
                     }
                 );
             }
