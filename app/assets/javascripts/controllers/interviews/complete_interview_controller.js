@@ -58,11 +58,28 @@ app.controller("CompleteInterviewController", [
         $scope.checkAnswers = function() {
             CheckAnswersInterview.save({ id: $scope.subtask.interview.id }, function(data) {
                 if(data.status == 202){
-                    $window.alert("Onneksi olkoon suoritit casen!");
+                    $.notify({
+                        message: "Onneksi olkoon suoritit casen!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        delay: 0,
+                        offset: 100
+                    });
                 }
                 $scope.setTask();
             }, function(result) {
-                $window.alert("Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja");
+                $.notify({
+                    message: "Et ole vielä valinnut kaikkia tarpeellisia vaihtoehtoja!"
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "danger",
+                    offset: 100
+                });
             });
         };
 
