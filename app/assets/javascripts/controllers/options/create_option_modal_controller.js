@@ -23,11 +23,27 @@ app.controller("CreateOptionModalController", [
             if ($scope.createOptionForm.$valid) {
                 Option.save($scope.newOption,
                     function() {
-                        $window.alert("Vastausvaihtoehdon luominen onnistui!");
+                        $.notify({
+                            message: "Vastausvaihtoehdon luominen onnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "success",
+                            offset: 100
+                        });
                         $uibModalInstance.close();
                     },
                     function() {
-                        $window.alert("Vastausvaihtoehdon luominen epäonnistui!");
+                        $.notify({
+                            message: "Vastausvaihtoehdon luominen epäonnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "danger",
+                            offset: 100
+                        });
                     }
                 );
             }

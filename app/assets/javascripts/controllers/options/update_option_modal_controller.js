@@ -13,10 +13,27 @@ app.controller("UpdateOptionModalController", [
         $scope.updateOption = function() {
             if ($scope.updateOptionForm.$valid) {
                 Option.update({optionId: $scope.option.id}, $scope.option, function() {
-                    $window.alert("Vastausvaihtoehdon päivitys onnistui!");
+                    $.notify({
+                        message: "Vastausvaihtoehdon päivitys onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close();
                 }, function() {
-                    $window.alert("Vastausvaihtoehdon päivitys epäonnistui!");
+
+                    $.notify({
+                        message: "Vastausvaihtoehdon päivitys epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
             }
         };
@@ -26,12 +43,28 @@ app.controller("UpdateOptionModalController", [
 
             if (deleteConfirmation) {
                 Option.delete({optionId: $scope.option.id}, function() {
-                    $window.alert("Vastausvaihtoehdon poistaminen onnistui!");
+                    $.notify({
+                        message: "Vastausvaihtoehdon poistaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close();
                 });
 
             } else {
-                $window.alert("Vastausvaihtoehtoa ei poistettu");
+                $.notify({
+                    message: "Vastausvaihtoehtoa ei poistettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 
