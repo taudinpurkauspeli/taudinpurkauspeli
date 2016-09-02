@@ -94,7 +94,15 @@ app.controller("TasksController", [
                 $scope.setTasksList();
                 $scope.goToCurrentTask(data.id);
             }, function() {
-                $window.alert("Toimenpiteen luominen peruttu.");
+                $.notify({
+                    message: "Toimenpiteen luominen peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
         };
 
@@ -102,7 +110,15 @@ app.controller("TasksController", [
             TaskCanBeStarted.get({id: task.id}, function() {
                 $scope.goToCurrentTask(task.id);
             }, function() {
-                $window.alert("Et voi vielä suorittaa tätä toimenpidettä, vaan sinun tulee suorittaa ainakin yksi muu toimenpide ennen tätä.");
+                $.notify({
+                    message: "Et voi vielä suorittaa tätä toimenpidettä, vaan sinun tulee suorittaa ainakin yksi muu toimenpide ennen tätä."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "danger",
+                    offset: 100
+                });
             });
         };
 

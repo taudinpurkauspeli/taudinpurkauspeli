@@ -13,10 +13,28 @@ app.controller("UpdateTaskModalController", [
         $scope.updateTask = function() {
             if ($scope.updateTaskForm.$valid) {
                 Task.update({taskId: $scope.task.id}, $scope.task, function() {
-                    $window.alert("Toimenpiteen päivitys onnistui!");
+                    $.notify({
+                        message: "Toimenpiteen päivitys onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        delay: 0,
+                        offset: 100
+                    });
                     $uibModalInstance.close({taskRemoved: false});
                 }, function() {
-                    $window.alert("Toimenpiteen päivitys epäonnistui!");
+                    $.notify({
+                        message: "Toimenpiteen päivitys epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        delay: 0,
+                        offset: 100
+                    });
                 });
             }
         };
@@ -26,11 +44,29 @@ app.controller("UpdateTaskModalController", [
 
             if (deleteConfirmation) {
                 Task.delete({taskId : $scope.task.id}, function() {
-                    $window.alert("Toimenpiteen poistaminen onnistui!");
+                    $.notify({
+                        message: "Toimenpiteen poistaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        delay: 0,
+                        offset: 100
+                    });
                     $uibModalInstance.close({taskRemoved: true});
                 });
             } else {
-                $window.alert("Toimenpidettä '" + $scope.task.name + "' ei poistettu");
+                $.notify({
+                    message: "Toimenpidettä '" + $scope.task.name + "' ei poistettu"
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    delay: 0,
+                    offset: 100
+                });
             }
         };
 
