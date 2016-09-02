@@ -28,7 +28,15 @@ app.controller("UsersShowController", [
                 $scope.setAdminStatus(data.user);
             }, function(data){
                 if(data.status == 401){
-                    $window.alert("Pääsy toisen käyttäjän tietoihin estetty!");
+                    $.notify({
+                        message: "Pääsy toisen käyttäjän tietoihin estetty!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                     $state.go('app_root');
                 }
             });
@@ -52,11 +60,27 @@ app.controller("UsersShowController", [
 
             if (deleteConfirmation) {
                 UserDestroy.delete({userId : user.id}, function() {
-                    $window.alert("Opiskelijan poistaminen onnistui!");
+                    $.notify({
+                        message: "Opiskelijan poistaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $state.go('users.by_case');
                 });
             } else {
-                $window.alert("Opiskelijaa '" + user.first_name + "' ei poistettu");
+                $.notify({
+                    message: "Opiskelijaa '" + user.first_name + "' ei poistettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 
@@ -69,13 +93,37 @@ app.controller("UsersShowController", [
                 user.admin = newAdminStatus;
 
                 User.update({userId : user.id}, user, function() {
-                    $window.alert("Käyttäjän oikeuksien muuttaminen onnistui!");
+                    $.notify({
+                        message: "Käyttäjän oikeuksien muuttaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $scope.setUser();
                 }, function() {
-                    $window.alert("Käyttäjän oikeuksia ei voitu muuttaa!");
+                    $.notify({
+                        message: "Käyttäjän oikeuksia ei voitu muuttaa!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
             } else {
-                $window.alert("Käyttäjän '" + user.first_name + "' oikeuksia ei muutettu.");
+                $.notify({
+                    message: "Käyttäjän '" + user.first_name + "' oikeuksia ei muutettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 
