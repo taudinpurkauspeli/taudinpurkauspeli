@@ -17,11 +17,28 @@ app.controller("TasksUncompletedSubtaskController", [
             TaskText.save({taskTextId: task_text.id}, task_text,
                 function(data) {
                     if(data.status == 202){
-                        $window.alert("Onneksi olkoon suoritit casen!");
+                        $.notify({
+                            message: "Onneksi olkoon suoritit casen!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "success",
+                            delay: 0,
+                            offset: 100
+                        });
                     }
                     $scope.setTask();
                 }, function() {
-                    $window.alert("Tehtävän suoritus epäonnistui.");
+                    $.notify({
+                        message: "Tehtävän suoritus epäonnistui."
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 }
             );
         };

@@ -15,21 +15,53 @@ app.controller("UpdateHypothesisModalController", [
 
             if (deleteConfirmation) {
                 Hypothesis.delete({hypothesisId : hypothesis.id}, function() {
-                    $window.alert("Diffin poistaminen onnistui!");
+                    $.notify({
+                        message: "Diffin poistaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close();
                 });
             } else {
-                $window.alert("Diffiä '" + hypothesis.name + "' ei poistettu");
+                $.notify({
+                    message: "Diffiä '" + hypothesis.name + "' ei poistettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 
         $scope.updateHypothesis = function() {
             if ($scope.updateHypothesisForm.$valid) {
                 Hypothesis.update({hypothesisId: hypothesis.id}, $scope.hypothesis, function() {
-                    $window.alert("Diffin päivitys onnistui!");
+                    $.notify({
+                        message: "Diffin päivitys onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close();
                 }, function() {
-                    $window.alert("Diffin päivitys epäonnistui!");
+                    $.notify({
+                        message: "Diffin päivitys epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
             }
         };

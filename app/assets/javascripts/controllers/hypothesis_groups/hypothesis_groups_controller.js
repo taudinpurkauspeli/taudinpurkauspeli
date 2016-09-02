@@ -32,7 +32,15 @@ app.controller("HypothesisGroupsController", [
                     callback();
                 }
             }, function() {
-                $window.alert("Diffiryhmän päivitys peruttu.");
+                $.notify({
+                    message: "Diffiryhmän päivitys peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
         };
 
@@ -46,7 +54,15 @@ app.controller("HypothesisGroupsController", [
             modalInstance.result.then(function() {
                 $scope.updateHypothesisGroupList();
             }, function() {
-                $window.alert("Diffiryhmän luominen peruttu.");
+                $.notify({
+                    message: "Diffiryhmän luominen peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
         };
 
@@ -67,7 +83,15 @@ app.controller("HypothesisGroupsController", [
                     callback();
                 }
             }, function() {
-                $window.alert("Diffin päivitys peruttu.");
+                $.notify({
+                    message: "Diffin päivitys peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
         };
 
@@ -84,7 +108,15 @@ app.controller("HypothesisGroupsController", [
             modalInstance.result.then(function() {
                 $scope.updateHypothesisGroupList();
             }, function() {
-                $window.alert("Diffin luominen peruttu.");
+                $.notify({
+                    message: "Diffin luominen peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
         };
 

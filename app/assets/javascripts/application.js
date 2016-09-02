@@ -28,5 +28,6 @@
 //= require textAngular/dist/textAngular-rangy.min
 //= require angular-bootstrap
 //= require angular-animate
+//= require remarkable-bootstrap-notify
 //= require_tree ./templates
 //= require_tree .

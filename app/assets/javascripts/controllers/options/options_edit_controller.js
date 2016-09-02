@@ -40,7 +40,15 @@ app.controller("OptionsEditController", [
             Option.update({optionId: option.id}, option, function() {
                 $scope.setOptions();
             }, function() {
-                $window.alert("Vastausvaihtoehdon päivitys epäonnistui!");
+                $.notify({
+                    message: "Vastausvaihtoehdon päivitys epäonnistui!"
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "danger",
+                    offset: 100
+                });
             });
         };
 
@@ -59,7 +67,15 @@ app.controller("OptionsEditController", [
             modalInstance.result.then(function() {
                 $scope.setOptions();
             }, function() {
-                $window.alert("Vastausvaihtoehdon luominen peruttu.");
+                $.notify({
+                    message: "Vastausvaihtoehdon luominen peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
 
         };
@@ -79,7 +95,15 @@ app.controller("OptionsEditController", [
             modalInstance.result.then(function() {
                 $scope.setOptions();
             }, function() {
-                $window.alert("Vastausvaihtoehdon muokkaaminen peruttu.");
+                $.notify({
+                    message: "Vastausvaihtoehdon muokkaaminen peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
 
         };

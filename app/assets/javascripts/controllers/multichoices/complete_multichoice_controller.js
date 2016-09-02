@@ -21,7 +21,6 @@ app.controller("CompleteMultichoiceController", [
         $scope.$watch(function(){
             return $scope.subtask.multichoice.id;
         },function(newValue, oldValue){
-            console.log("Multichoice: Haettiin optiot");
             $scope.setOptions();
         });
 
@@ -40,7 +39,16 @@ app.controller("CompleteMultichoiceController", [
 
             CheckAnswersMultichoice.save({ id: $scope.subtask.multichoice.id, checked_options: checkedOptions }, function(data) {
                 if(data.status == 202){
-                    $window.alert("Onneksi olkoon suoritit casen!");
+                    $.notify({
+                        message: "Onneksi olkoon suoritit casen!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        delay: 0,
+                        offset: 100
+                    });
                 }
                 $scope.setTask();
             }, function(result) {

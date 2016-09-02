@@ -14,11 +14,27 @@ app.controller("CreateTaskModalController", [
             if ($scope.createTaskForm.$valid) {
                 Task.save($scope.newTask,
                     function(data) {
-                        $window.alert("Toimenpiteen luominen onnistui!");
+                        $.notify({
+                            message: "Toimenpiteen luominen onnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "success",
+                            offset: 100
+                        });
                         $uibModalInstance.close(data);
                     },
                     function() {
-                        $window.alert("Toimenpiteen luominen epäonnistui!");
+                        $.notify({
+                            message: "Toimenpiteen luominen epäonnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "danger",
+                            offset: 100
+                        });
                     }
                 );
             }

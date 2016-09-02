@@ -35,7 +35,15 @@ app.controller("MultichoicesShowController", [
                     $state.go("exercises_show.current_task.show");
                 }
             }, function() {
-                $window.alert("Monivalinnan päivitys peruttu.");
+                $.notify({
+                    message: "Monivalinnan päivitys peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
 
         };

@@ -10,8 +10,8 @@
         <h3 class="center-text padding-top-20 padding-bottom-20">Diffilistassa ovat jäljellä seuraavat diffit:</h3>
 
         <div class="row padding-bottom-15" ng-repeat="exerciseHypothesis in exerciseHypotheses">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
 
                 <button class="btn btn-default btn-lg btn-unchecked-hypothesis multiline padding-top-10 padding-bottom-10"
                         ng-class="{'btn-checked-hypothesis': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis),
@@ -20,8 +20,16 @@
                     {{exerciseHypothesis.hypothesis.name}}
                 </button>
 
+                <div uib-collapse="!exerciseHypothesis.collapsed" class="center-text padding-top-30 padding-bottom-20 question-answer">
+
+                    <div ng-if="hypothesisIsCorrectDiagnosis(exerciseHypothesis)" class="padding-bottom-20">Hienoa! Selvitit oikean diagnoosin!</div>
+
+                    <div ta-bind="text" ng-model="exerciseHypothesis.explanation" ng-if="exerciseHypothesis.explanation"></div>
+                    <div ng-if="!exerciseHypothesis.explanation" class="padding-bottom-10">Tälle diffille ei ole asetettu selitystä.</div>
+                </div>
+
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-md-1"></div>
 
         </div>
 

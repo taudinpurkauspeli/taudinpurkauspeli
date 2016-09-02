@@ -14,11 +14,27 @@ app.controller("CreateInterviewModalController", [
             if ($scope.createInterviewForm.$valid) {
                 Interview.save({"task_id": task.id}, $scope.newInterview,
                     function(data) {
-                        $window.alert("Pohdinnan luominen onnistui!");
+                        $.notify({
+                            message: "Pohdinnan luominen onnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "success",
+                            offset: 100
+                        });
                         $uibModalInstance.close(data);
                     },
                     function() {
-                        $window.alert("Pohdinnan luominen epäonnistui!");
+                        $.notify({
+                            message: "Pohdinnan luominen epäonnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "danger",
+                            offset: 100
+                        });
                     }
                 );
             }

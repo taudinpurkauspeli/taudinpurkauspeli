@@ -19,10 +19,26 @@ app.controller("UpdateQuestionModalController", [
                     };
                 }
                 Question.update({questionId: $scope.question.id}, {question: $scope.question}, function() {
-                    $window.alert("Kysymyksen päivitys onnistui!");
+                    $.notify({
+                        message: "Kysymyksen päivitys onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close();
                 }, function() {
-                    $window.alert("Kysymyksen päivitys epäonnistui!");
+                    $.notify({
+                        message: "Kysymyksen päivitys epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
             }
         };
@@ -32,12 +48,28 @@ app.controller("UpdateQuestionModalController", [
 
             if (deleteConfirmation) {
                 Question.delete({questionId: $scope.question.id}, function() {
-                    $window.alert("Kysymyksen poistaminen onnistui!");
+                    $.notify({
+                        message: "Kysymyksen poistaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close();
                 });
 
             } else {
-                $window.alert("Kysymystä ei poistettu");
+                $.notify({
+                    message: "Kysymystä ei poistettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 

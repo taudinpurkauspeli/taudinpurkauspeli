@@ -13,10 +13,26 @@ app.controller("UpdateTaskTextModalController", [
         $scope.updateTaskText = function() {
             if ($scope.updateTaskTextForm.$valid) {
                 TaskText.update({taskTextId: $scope.taskText.id}, $scope.taskText, function() {
-                    $window.alert("Tekstialakohdan päivitys onnistui!");
+                    $.notify({
+                        message: "Tekstialakohdan päivitys onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close();
                 }, function() {
-                    $window.alert("Tekstialakohdan päivitys epäonnistui!");
+                    $.notify({
+                        message: "Tekstialakohdan päivitys epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
             }
         };
@@ -26,12 +42,28 @@ app.controller("UpdateTaskTextModalController", [
 
             if (deleteConfirmation) {
                 TaskText.delete({taskTextId : $scope.taskText.id}, function() {
-                    $window.alert("Tekstialakohdan poistaminen onnistui!");
+                    $.notify({
+                        message: "Tekstialakohdan poistaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close();
                 });
 
             } else {
-                $window.alert("Tekstialakohtaa ei poistettu!");
+                $.notify({
+                    message: "Tekstialakohtaa ei poistettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 
