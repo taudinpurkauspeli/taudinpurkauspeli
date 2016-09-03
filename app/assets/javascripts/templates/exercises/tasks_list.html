@@ -1,7 +1,20 @@
 <div class="row padding-bottom-10">
-    <div class="col-md-12">
+
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
         <h1 class="center-text">Toimenpiteet</h1>
     </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2 padding-top-25">
+        <button uib-popover="Tällä sivulla voit suorittaa caseen liittyviä toimenpiteitä. Toimenpiteet voi suorittaa vain tietyssä järjestyksessä.
+
+        Voit valita haluamasi toimenpiteen klikkaamalla sitä. Jos toimenpiteen voi suorittaa, siirryt kyseisen toimenpiteen sivulle.
+        Muussa tapauksessa sinulle näytetään virheilmoitus ja voit yrittää suorittaa jonkin toisen toimenpiteen.
+
+        Lisäksi näet sivulla suorittamistasi toimenpiteistä listan, jossa toimenpiteet on järjestetty tasoittain sen mukaan, missä järjestyksessä toimenpiteet on mahdollista suorittaa."
+                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+    </div>
+    <div class="col-md-1"></div>
 </div>
 
 <div class = "separator"></div>
@@ -85,12 +98,12 @@
 
     <div class="row padding-bottom-20">
         <div class="col-md-12">
-            <h2 class="center-text">Tehdyt toimenpiteet tasoittain</h2>
+            <h2 class="center-text">Suoritetut toimenpiteet tasoittain</h2>
         </div>
     </div>
 
 
-    <div class="row" ng-repeat="(level, tasks) in completedTasks">
+    <div class="row" ng-repeat="(level, tasks) in completedTasks" ng-if="userHasCompletedTasks(completedTasks)">
 
         <div class="col-md-2"></div>
 
@@ -119,6 +132,15 @@
             </div>
         </div>
 
+        <div class="col-md-2"></div>
+
+    </div>
+
+    <div class="row" ng-if="!userHasCompletedTasks(completedTasks)">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 center-text">
+            Et ole vielä suorittanut yhtään toimenpidettä.
+        </div>
         <div class="col-md-2"></div>
 
     </div>

@@ -9,9 +9,21 @@ app.controller("ExerciseHypothesesController", [
         var CheckedHypotheses = $resource('/checked_hypotheses.json');
         var CorrectDiagnosis = $resource('/correct_diagnosis.json');
 
-        $scope.setExerciseHypotheses = function() {
+        $scope.setExerciseHypotheses = function(exerciseHypothesis) {
             ExerciseHypotheses.get({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.exerciseHypotheses = data;
+                console.log(exerciseHypothesis);
+                console.log(data);
+                if(exerciseHypothesis) {
+                    angular.forEach(data, function(exerciseHypothesisGroup, key) {
+                        for(var i = 0; i < exerciseHypothesisGroup.length; i++) {
+                            if(exerciseHypothesisGroup[i].id == exerciseHypothesis.id){
+                                $scope.setExerciseHypothesisCollapse(exerciseHypothesisGroup[i]);
+                                break;
+                            }
+                        }
+                    });
+                }
             });
         };
 
@@ -33,8 +45,8 @@ app.controller("ExerciseHypothesesController", [
             });
         };
 
-        $scope.setAllExerciseHypotheses = function() {
-            $scope.setExerciseHypotheses();
+        $scope.setAllExerciseHypotheses = function(exerciseHypothesis) {
+            $scope.setExerciseHypotheses(exerciseHypothesis);
 
             if($scope.currentUserAdmin){
                 $scope.setExerciseHypothesesOnly();
@@ -184,8 +196,7 @@ app.controller("ExerciseHypothesesController", [
                             type: "success",
                             offset: 100
                         });
-                        $scope.setExerciseHypothesisCollapse(exerciseHypothesis);
-                        $scope.setAllExerciseHypotheses();
+                        $scope.setAllExerciseHypotheses(exerciseHypothesis);
                     },
                     function() {
                         $.notify({

@@ -80,6 +80,10 @@ app.controller("ExercisesShowController", [
             );
         };
 
+        $scope.userHasCompletedTasks = function(tasksList) {
+            return tasksList && (tasksList.length > 0);
+        };
+
         $scope.setCompletableSubtasks = function() {
 
             CompletableSubtasks.query({id: $scope.currentUser, task_id: $scope.taskForShow.id},

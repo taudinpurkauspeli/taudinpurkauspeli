@@ -1,7 +1,13 @@
 <div class="row padding-bottom-10 padding-top-20">
-    <div class="col-md-12">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
         <h1 class="center-text">Omat käyttäjätiedot</h1>
     </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2 padding-top-25">
+        <button uib-popover="Tällä sivulla voit tarkastella ja muokata omia käyttäjätietojasi. Lisäksi voit seurata etenemistäsi taudinpurkauspeleissä." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+    </div>
+    <div class="col-md-1"></div>
 </div>
 
 <div class="separator"></div>
@@ -16,6 +22,15 @@
             </div>
             <div class="panel-body">
 
+                <div class="row row-userinfo padding-top-20">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6">
+                        Käyttäjätunnus:
+                    </div>
+                    <div class="col-md-5">
+                        {{user.username}}
+                    </div>
+                </div>
                 <div class="row row-userinfo padding-top-20">
                     <div class="col-md-1"></div>
                     <div class="col-md-6">
@@ -44,6 +59,17 @@
                     <div class="col-md-5">
                         {{user.starting_year}}
                     </div>
+                </div>
+
+                <div class="row row-userinfo padding-top-20 padding-bottom-20" ng-if="currentUser == user.id">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <button class="btn btn-default width-100" ng-click="editUser(user)">Muokkaa tietoja</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-default width-100" ng-click="changePassword(user)">Vaihda salasana</button>
+                    </div>
+                    <div class="col-md-3"></div>
                 </div>
             </div>
         </div>

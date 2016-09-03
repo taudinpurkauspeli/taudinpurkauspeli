@@ -52,6 +52,15 @@ app.controller("CompleteMultichoiceController", [
                 }
                 $scope.setTask();
             }, function(result) {
+                $.notify({
+                    message: "Valinnoissa oli vielä virheitä."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "danger",
+                    offset: 100
+                });
                 $scope.checkedOptions = result.data || [];
             });
         };
