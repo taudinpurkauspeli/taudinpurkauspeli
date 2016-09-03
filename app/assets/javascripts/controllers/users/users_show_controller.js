@@ -98,7 +98,7 @@ app.controller("UsersShowController", [
             modalInstance.result.then(function(data) {
             }, function() {
                 $.notify({
-                    message: "Käyttäjätietojen päivitys peruttu."
+                    message: "Käyttäjätietojen muokkaus peruttu."
                 }, {
                     placement: {
                         align: "center"
@@ -124,7 +124,7 @@ app.controller("UsersShowController", [
             modalInstance.result.then(function(data) {
             }, function() {
                 $.notify({
-                    message: "Salasanan päivitys peruttu."
+                    message: "Salasanan vaihto peruttu."
                 }, {
                     placement: {
                         align: "center"

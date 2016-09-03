@@ -14,7 +14,7 @@ app.controller("ChangePasswordModalController", [
             if ($scope.changePasswordForm.$valid) {
                 User.update({userId: $scope.user.id}, $scope.user, function() {
                     $.notify({
-                        message: "Salasanan päivitys onnistui!"
+                        message: "Salasanan vaihto onnistui!"
                     }, {
                         placement: {
                             align: "center"
@@ -25,7 +25,7 @@ app.controller("ChangePasswordModalController", [
                     $uibModalInstance.close();
                 }, function() {
                     $.notify({
-                        message: "Salasanan päivitys epäonnistui!"
+                        message: "Salasanan vaihto epäonnistui!"
                     }, {
                         placement: {
                             align: "center"

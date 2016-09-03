@@ -15,7 +15,7 @@ app.controller("UpdateUserModalController", [
             if ($scope.updateUserForm.$valid) {
                 User.update({userId: $scope.user.id}, $scope.user, function() {
                     $.notify({
-                        message: "Käyttäjätietojen päivitys onnistui!"
+                        message: "Käyttäjätietojen muokkaus onnistui!"
                     }, {
                         placement: {
                             align: "center"
@@ -26,7 +26,7 @@ app.controller("UpdateUserModalController", [
                     $uibModalInstance.close();
                 }, function() {
                     $.notify({
-                        message: "Käyttäjätietojen päivitys epäonnistui!"
+                        message: "Käyttäjätietojen muokkaus epäonnistui!"
                     }, {
                         placement: {
                             align: "center"
