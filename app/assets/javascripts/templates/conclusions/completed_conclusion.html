@@ -1,6 +1,15 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title panel-title-conclusion">{{subtask.conclusion.title}}</h3>
+
+        <div class="row">
+            <div class="col-md-10">
+                <h3 class="panel-title panel-title-conclusion">{{subtask.conclusion.title}}</h3>
+            </div>
+            <div class="col-md-2">
+                <button uib-popover="Tällä sivulla voit tarkastella casen oikeaa diagnoosia ja siihen liittyvää selitystä."
+                        popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+            </div>
+        </div>
     </div>
     <div class="panel-body" ng-if="correctDiagnosis">
         <h3 class="center-text padding-bottom-20">Oikea diagnoosi:</h3>

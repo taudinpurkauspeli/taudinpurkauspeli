@@ -1,6 +1,16 @@
 <div class="panel panel-default" ng-if="correctDiagnosis">
     <div class="panel-heading">
-        <h3 class="panel-title panel-title-conclusion">{{subtask.conclusion.title}}</h3>
+
+        <div class="row">
+            <div class="col-md-10">
+                <h3 class="panel-title panel-title-conclusion">{{subtask.conclusion.title}}</h3>
+            </div>
+            <div class="col-md-2">
+                <button uib-popover="Tällä sivulla tehtäväsi on selvittää casen oikea diagnoosi valitsemalla mielestäsi oikea diffi jäljellä olevista diffeistä klikkaamalla sitä.
+                Jos valitsemasi diffi ei ollut casen oikea diagnoosi, näet diffiin liittyvän selityksen ja pääset valitsemaan uuden diffin. Selvitettyäsi oikean diagnoosin näet siihen liittyvän selityksen."
+                        popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+            </div>
+        </div>
     </div>
     <div class="panel-body">
 
