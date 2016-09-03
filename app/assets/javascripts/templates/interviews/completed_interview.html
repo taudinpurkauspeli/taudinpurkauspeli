@@ -1,6 +1,16 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title panel-title-interview">{{subtask.interview.title}}</h3>
+
+        <div class="row">
+            <div class="col-md-10">
+                <h3 class="panel-title panel-title-interview">{{subtask.interview.title}}</h3>
+            </div>
+            <div class="col-md-2">
+                <button uib-popover="Tällä sivulla voit tarkastella valitsemiasi vaihtoehtoja ja niiden selityksiä klikkaamalla vaihtoehtoa uudelleen.
+                Lisäksi voit valita myös sellaisia vaihtoehtoja, joita et ole vielä aiemmin valinnut. Tällöin pääset tarkastelemaan myös tällaisten vaihtoehtojen selityksiä."
+                        popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+            </div>
+        </div>
     </div>
     <div class="panel-body">
 
