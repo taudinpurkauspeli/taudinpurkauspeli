@@ -80,8 +80,8 @@ app.controller("ExercisesShowController", [
             );
         };
 
-        $scope.userHasCompletedTasks = function() {
-            return $scope.completedTasksForUser && ($scope.completedTasksForUser.length > 0);
+        $scope.userHasCompletedTasks = function(tasksList) {
+            return tasksList && (tasksList.length > 0);
         };
 
         $scope.setCompletableSubtasks = function() {

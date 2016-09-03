@@ -76,7 +76,7 @@
         </div>
     </div>
 
-    <div ng-repeat="(index, task) in completedTasksForUser" ng-if="userHasCompletedTasks()">
+    <div ng-repeat="(index, task) in completedTasksForUser" ng-if="userHasCompletedTasks(completedTasksForUser)">
 
         <div class="row padding-bottom-20">
             <div class="col-md-1"></div>
@@ -98,7 +98,7 @@
         </div>
     </div>
 
-    <div class="row padding-bottom-20" ng-if="!userHasCompletedTasks()">
+    <div class="row padding-bottom-20" ng-if="!userHasCompletedTasks(completedTasksForUser)">
         <div class="col-md-1"></div>
 
         <div class="col-md-10 center-text">
