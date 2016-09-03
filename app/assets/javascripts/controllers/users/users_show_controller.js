@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("UsersShowController", [
-    "$scope", "$resource", "$stateParams", "$window", "$state",
-    function($scope, $resource, $stateParams, $window, $state) {
+    "$scope", "$resource", "$stateParams", "$window", "$state", "$uibModal",
+    function($scope, $resource, $stateParams, $window, $state, $uibModal) {
         $scope.user = {};
 
         var User = $resource('/users/:userId.json',
@@ -82,6 +82,58 @@ app.controller("UsersShowController", [
                     offset: 100
                 });
             }
+        };
+
+        $scope.editUser = function(user) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'users/update_user_modal.html',
+                controller: 'UpdateUserModalController',
+                size: 'lg',
+                resolve: {
+                    user: user
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+            }, function() {
+                $.notify({
+                    message: "Käyttäjätietojen päivitys peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
+            });
+
+        };
+
+        $scope.changePassword = function(user) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'users/change_password_modal.html',
+                controller: 'ChangePasswordModalController',
+                size: 'lg',
+                resolve: {
+                    user: user
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+            }, function() {
+                $.notify({
+                    message: "Salasanan päivitys peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
+            });
+
         };
 
         $scope.changeAdminStatus = function(user){

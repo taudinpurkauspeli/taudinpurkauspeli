@@ -1,0 +1,187 @@
+<div class="modal-header">
+    <h3 class="modal-title center-text">Käyttäjätietojen muokkaus</h3>
+</div>
+
+<div class="modal-body">
+
+    <form class="form-horizontal" novalidate name="updateUserForm">
+        <div class="form-group has-feedback"
+             ng-class="{'has-error': updateUserForm.username.$invalid && updateUserForm.username.$dirty,
+                    'has-success': updateUserForm.username.$valid && updateUserForm.username.$touched}">
+
+            <div class="col-md-1"></div>
+
+            <label for="username" class="col-md-2 control-label">Käyttäjätunnus</label>
+
+            <div class="col-md-6">
+                <input type="text"
+                       class="form-control center-text"
+                       required pattern=".{3,}"
+                       name="username"
+                       id="username"
+                       placeholder="Käyttäjätunnus"
+                       ng-model="user.username">
+
+                <p class="help-block" ng-messages="updateUserForm.username.$error" ng-if="!updateUserForm.username.$pristine">
+                    <span ng-message="required">Käyttäjätunnus on pakollinen</span>
+                    <span ng-message="pattern">Käyttäjätunnuksessa on oltava vähintään 3 merkkiä</span>
+                </p>
+            </div>
+
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="form-group has-feedback"
+             ng-class="{'has-error': updateUserForm.first_name.$invalid && updateUserForm.first_name.$dirty,
+                    'has-success': updateUserForm.first_name.$valid && updateUserForm.first_name.$touched}">
+
+            <div class="col-md-1"></div>
+
+            <label for="first_name" class="col-md-2 control-label">Etunimi</label>
+
+            <div class="col-md-6">
+                <input type="text"
+                       class="form-control center-text"
+                       required pattern=".{3,}"
+                       name="first_name"
+                       id="first_name"
+                       placeholder="Etunimi"
+                       ng-model="user.first_name">
+
+                <p class="help-block" ng-messages="updateUserForm.first_name.$error" ng-if="!updateUserForm.first_name.$pristine">
+                    <span ng-message="required">Etunimi on pakollinen</span>
+                    <span ng-message="pattern">Etunimessä on oltava vähintään 3 merkkiä</span>
+                </p>
+            </div>
+
+            <div class="col-md-3"></div>
+        </div>
+
+
+        <div class="form-group has-feedback"
+             ng-class="{'has-error': updateUserForm.last_name.$invalid && updateUserForm.last_name.$dirty,
+                    'has-success': updateUserForm.last_name.$valid && updateUserForm.last_name.$touched}">
+
+            <div class="col-md-1"></div>
+
+            <label for="last_name" class="col-md-2 control-label">Sukunimi</label>
+
+            <div class="col-md-6">
+                <input type="text"
+                       class="form-control center-text"
+                       required pattern=".{3,}"
+                       name="last_name"
+                       id="last_name"
+                       placeholder="Sukunimi"
+                       ng-model="user.last_name">
+
+                <p class="help-block" ng-messages="updateUserForm.last_name.$error" ng-if="!updateUserForm.last_name.$pristine">
+                    <span ng-message="required">Sukunimi on pakollinen</span>
+                    <span ng-message="pattern">Sukunimessä on oltava vähintään 3 merkkiä</span>
+                </p>
+            </div>
+
+            <div class="col-md-3"></div>
+        </div>
+
+
+        <div class="form-group has-feedback"
+             ng-class="{'has-error': updateUserForm.student_number.$invalid && updateUserForm.student_number.$dirty,
+                    'has-success': updateUserForm.student_number.$valid && updateUserForm.student_number.$touched}">
+
+            <div class="col-md-1"></div>
+
+            <label for="student_number" class="col-md-2 control-label">Opiskelijanumero</label>
+
+            <div class="col-md-6">
+                <input type="text"
+                       class="form-control center-text"
+                       required pattern="^\d{9}$"
+                       name="student_number"
+                       id="student_number"
+                       placeholder="Opiskelijanumero"
+                       ng-model="user.student_number">
+
+                <p class="help-block" ng-messages="updateUserForm.student_number.$error" ng-if="!updateUserForm.student_number.$pristine">
+                    <span ng-message="required">Opiskelijanumero on pakollinen</span>
+                    <span ng-message="pattern">Opiskelijanumerossa on oltava 9 numeroa</span>
+                </p>
+            </div>
+
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="form-group has-feedback"
+             ng-class="{'has-error': updateUserForm.email.$invalid && updateUserForm.email.$dirty,
+                    'has-success': updateUserForm.email.$valid && updateUserForm.email.$touched}">
+
+            <div class="col-md-1"></div>
+
+            <label for="email" class="col-md-2 control-label">Sähköposti</label>
+
+            <div class="col-md-6">
+                <input type="text"
+                       required
+                       class="form-control center-text"
+                       name="email"
+                       id="email"
+                       placeholder="Sähköposti"
+                       ng-model="user.email">
+
+                <p class="help-block" ng-messages="updateUserForm.email.$error" ng-if="!updateUserForm.email.$pristine">
+                    <span ng-message="required">Sähköposti on pakollinen</span>
+                </p>
+            </div>
+
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="form-group has-feedback"
+             ng-class="{'has-error': updateUserForm.starting_year.$invalid && updateUserForm.starting_year.$dirty,
+                    'has-success': updateUserForm.starting_year.$valid && updateUserForm.starting_year.$touched}">
+
+            <div class="col-md-1"></div>
+
+            <label for="starting_year" class="col-md-2 control-label">Epidemiologian kurssin aloitusvuosi</label>
+
+            <div class="col-md-6">
+
+                <select ng-model="user.starting_year"
+                        class="form-control"
+                        required
+                        name="starting_year"
+                        id="starting_year"
+                        ng-options="n for n in [] | range:2000:currentYear"></select>
+
+                <p class="help-block" ng-messages="updateUserForm.starting_year.$error" ng-if="!updateUserForm.starting_year.$pristine">
+                    <span ng-message="required">Aloitusvuosi on pakollinen</span>
+                </p>
+            </div>
+
+            <div class="col-md-3"></div>
+        </div>
+
+    </form>
+</div>
+
+<div class="modal-footer">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100"
+                    type="button"
+                    ng-click="updateUser()"
+                    ng-disabled="updateUserForm.$invalid || updateUserForm.$pristine">
+                Päivitä
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="cancel()">Peruuta</button>
+
+        </div>
+        <div class="col-md-4"></div>
+
+    </div>
+
+</div>
+
