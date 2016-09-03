@@ -1,6 +1,16 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title panel-title-multichoice">Kysymys: {{subtask.multichoice.question}}</h3>
+
+        <div class="row">
+            <div class="col-md-10">
+                <h3 class="panel-title panel-title-multichoice">Kysymys: {{subtask.multichoice.question}}</h3>
+            </div>
+            <div class="col-md-2">
+                <button uib-popover="Valitse mielestäsi oikea/oikeat vaihtoehdot ja paina lopuksi Tarkista-nappia suorittaaksesi tehtävän.
+                Jos valinnoissasi oli virheitä, pääset valitsemaan uudet vaihtoehdot ja näet selitykset aiemmin valitsemiisi vaihtoehtoihin."
+                        popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+            </div>
+        </div>
     </div>
     <div class="panel-body">
 
