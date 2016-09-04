@@ -16,18 +16,6 @@ app.controller("TasksUncompletedSubtaskController", [
         $scope.completeTaskText = function(task_text){
             TaskText.save({taskTextId: task_text.id}, task_text,
                 function(data) {
-                    if(data.status == 202){
-                        $.notify({
-                            message: "Onneksi olkoon suoritit casen!"
-                        }, {
-                            placement: {
-                                align: "center"
-                            },
-                            type: "success",
-                            delay: 0,
-                            offset: 100
-                        });
-                    }
                     $scope.setTask();
                 }, function() {
                     $.notify({

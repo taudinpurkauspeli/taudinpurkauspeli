@@ -84,18 +84,6 @@ app.controller("CompleteConclusionController", [
                 $scope.setExerciseHypothesisCollapse(exerciseHypothesis);
             } else {
                 CheckAnswersConclusion.save({ id: $scope.subtask.conclusion.id, exhyp_id: exerciseHypothesis.id, current_exercise_id: $stateParams.exerciseShowId, current_task_id: $stateParams.taskShowId }, function(data) {
-                    if(data.status == 202){
-                        $.notify({
-                            message: "Onneksi olkoon suoritit casen!"
-                        }, {
-                            placement: {
-                                align: "center"
-                            },
-                            delay: 0,
-                            type: "success",
-                            offset: 100
-                        });
-                    }
                     $scope.setTask();
                 }, function(result) {
                     $scope.setCheckedHypotheses();

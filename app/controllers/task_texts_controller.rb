@@ -94,7 +94,7 @@ class TaskTextsController < ApplicationController
   end
 
   # TODO fix user_has_completed redirect logic
-  # /task_texts/:id/check_answers'
+  # /task_texts/:id/check_answers
   def check_answers
     @task_text.user_answered_correctly?(@current_user)
     respond_to do |format|
