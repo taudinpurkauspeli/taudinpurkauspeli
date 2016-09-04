@@ -1,10 +1,14 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesAnamnesisController", [
-    "$scope", "$uibModal", "$window",
-    function($scope, $uibModal, $window) {
+    "$scope", "$uibModal", "$window", "$state", "$resource",
+    function($scope, $uibModal, $window, $state, $resource) {
 
         $scope.setActiveTab("AnamnesisTab");
+
+        var Exercise = $resource('/exercises/:exerciseId.json',
+            { exerciseId: "@id"},
+            { update: { method: 'PUT' }});
 
         $scope.updateExercise = function() {
 
@@ -33,6 +37,35 @@ app.controller("ExercisesAnamnesisController", [
             });
         };
 
+        $scope.removeExercise = function(exercise) {
+
+            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa casen?");
+
+            if (deleteConfirmation) {
+                Exercise.delete({exerciseId : exercise.id}, function() {
+                    $.notify({
+                        message: "Casen poistaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
+                    $state.go('app_root');
+                });
+            } else {
+                $.notify({
+                    message: "Casea '" + exercise.name + "' ei poistettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
+            }
+        };
 
     }
 ]);
