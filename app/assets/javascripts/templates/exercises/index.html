@@ -51,13 +51,13 @@
         <div class="col-md-1"></div>
     </div>
     <div ng-repeat="exercise in exercisesList | orderBy: 'name' | filter:{name: queryName}">
-        <div class="row">
+        <div class="row padding-bottom-20">
 
             <div ng-if="(!currentUser || (currentUser && !currentUserAdmin)) && !exercise.hidden">
 
-                <div class="col-md-1 padding-bottom-20"></div>
+                <div class="col-md-1"></div>
 
-                <div class="col-md-10 padding-bottom-20">
+                <div class="col-md-10">
                     <button class="btn btn-default btn-lg btn-exercise-index multiline padding-top-20 padding-bottom-20"
                             ng-class="{'disabled': !currentUser}"
                             ng-click="viewExercise(exercise)">
@@ -65,39 +65,44 @@
                     </button>
                 </div>
 
-                <div class="col-md-1 padding-bottom-20"></div>
+                <div class="col-md-1"></div>
 
             </div>
 
             <div ng-if="currentUserAdmin">
-                <div class="col-md-5">
-                    <button class="btn btn-default"
+
+                <div class="col-md-1"></div>
+
+                <div class="col-md-7">
+                    <button class="btn btn-default btn-exercise-index multiline padding-top-20 padding-bottom-20"
                             ng-click="viewExercise(exercise)">
                         {{exercise.name}}
                     </button>
                 </div>
 
-                <div class="col-md-1">
-                    <button class="btn btn-default"
+    <!--            <div class="col-md-2">
+                    <button class="btn btn-default btn-lg btn-exercise-index multiline padding-top-20 padding-bottom-20"
                             ng-click="removeExercise(exercise)">
                         Poista
                     </button>
-                </div>
+                </div>-->
 
                 <div class="col-md-1">
-                    <button class="btn btn-default"
+                    <button class="btn btn-default btn-exercise-index multiline padding-top-20 padding-bottom-20"
                             ng-click="copyExercise(exercise)">
                         Kopioi
                     </button>
                 </div>
 
                 <div class="col-md-2">
-                    <button class="btn btn-default"
+                    <button class="btn btn-default btn-exercise-index multiline padding-top-20 padding-bottom-20"
                             ng-click="toggleHiddenExercise(exercise)">
                         <span ng-if="exercise.hidden">Tee näkyväksi</span>
                         <span ng-if="!exercise.hidden">Piilota opiskelijoilta</span>
                     </button>
                 </div>
+
+                <div class="col-md-1"></div>
 
             </div>
 
@@ -105,14 +110,17 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-5">
-        <button class="btn btn-default"
-                ng-if="currentUserAdmin"
+<div class="row padding-bottom-20" ng-if="currentUserAdmin">
+    <div class="col-md-1"></div>
+
+    <div class="col-md-7">
+        <button class="btn btn-default btn-exercise-index multiline padding-top-20 padding-bottom-20"
                 ng-click="newExercisePage()">
             + Luo uusi case
         </button>
     </div>
+
+    <div class="col-md-4"></div>
 </div>
 
 <div class="separator"></div>
