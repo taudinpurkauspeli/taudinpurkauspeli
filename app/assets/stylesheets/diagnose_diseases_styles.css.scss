@@ -171,16 +171,44 @@ main {
   margin-bottom: 5px !important;
 }
 
+.margin-bottom-10 {
+  margin-bottom: 10px !important;
+}
+
 .margin-bottom-20 {
   margin-bottom: 20px !important;
+}
+
+.margin-bottom-40 {
+  margin-bottom: 40px !important;
+}
+
+.margin-top-10 {
+  margin-top: 10px !important;
 }
 
 .margin-top-20 {
   margin-top: 20px !important;
 }
 
+.margin-top-40 {
+  margin-top: 40px !important;
+}
+
+.margin-left-10 {
+  margin-left: 10px !important;
+}
+
 .margin-left-15 {
   margin-left: 15px !important;
+}
+
+.margin-left-20 {
+  margin-left: 20px !important;
+}
+
+.margin-right-10 {
+  margin-right: 10px !important;
 }
 
 .margin-right-15 {
@@ -273,6 +301,10 @@ div.separator{
     padding-bottom: 0px;
     padding-left: 15px;
   }
+
+  &.panel-body-task-list {
+    min-height: 100px;
+  }
 }
 
 .panel-title {
@@ -295,6 +327,10 @@ div.separator{
   }
 
   &.panel-title-userinfo {
+    font-size: x-large;
+  }
+
+  &.panel-title-task-list {
     font-size: x-large;
   }
 }
@@ -363,6 +399,52 @@ div.separator{
   font-family: inherit;
   font-size: 100%;
   margin:20px 0;
+}
+
+// Drag and drop task-list
+
+.dnd-task-list ul[dnd-list],
+.dnd-task-list ul[dnd-list] > li{
+  position: relative;
+}
+
+.dnd-task-list .dropzone ul[dnd-list] {
+  min-height: 100px !important;
+}
+
+.dnd-task-list .dropzone .dnd-item-list ul[dnd-list] {
+  min-height: 100px !important;
+}
+
+.dnd-task-list .dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+.dnd-task-list .dropzone .dnd-item-list ul {
+  display: table;
+}
+
+.dnd-task-list .dropzone .dnd-item-list li {
+  border: none;
+  border-radius: 7px;
+  color: #000000;
+  float: left;
+  font-size: large;
+  height: 80px;
+  width: 420px;
+  background-color: #cacaca;
+  white-space: normal;
+  display: table-cell;
+}
+
+.dnd-task-list ul[dnd-list] .dndPlaceholder {
+  background-color: $PaleLightGreen !important;
+  height: 80px;
+  width: 420px;
+  display: block;
+  position: relative;
+  border-radius: 7px;
+  margin: 10px;
 }
 
 //h1{
@@ -914,67 +996,6 @@ div.separator{
 //  padding-left: 0px;
 //}
 //
-//// Drag and drop task-list
-//
-//.border {
-//  border-style: solid;
-//  border-color: #d3d3d3;
-//}
-//
-//.padding {
-//  padding: 40px;
-//}
-//
-//.task-list ul[dnd-list],
-//.task-list ul[dnd-list] > li{
-//  position: relative;
-//}
-//
-//.task-list .dropzone ul[dnd-list] {
-//  min-height: 42px;
-//  margin: 0px;
-//  padding-left: 0px;
-//}
-//
-//.task-list .dropzone .dndDragging {
-//  opacity: 0.7;
-//}
-//
-//.task-list .dropzone .dndDraggingSource {
-//  display: none;
-//}
-//
-//.task-list .dropzone .itemlist ul {
-//  display: table;
-//}
-//
-//.task-list .dropzone .itemlist li {
-//  border: none;
-//  border-radius: 7px;
-//  color: #000000;
-//  float: left;
-//  margin: 5px;
-//  padding: 3px;
-//  vertical-align: middle;
-//  text-align: center;
-//  font-weight: normal;
-//  font-size: 14px;
-//  height: 5em;
-//  width: 20em;
-//  background-color: #cacaca;
-//  white-space: normal;
-//  display: table-cell;
-//}
-//
-//.task-list ul[dnd-list] .dndPlaceholder {
-//  background-color: $PaleLightGreen !important;
-//  height: 5em;
-//  width: 20em;
-//  display: block;
-//  position: relative;
-//  border-radius: 7px;
-//  margin-bottom: 5px;
-//}
 //
 //
 //

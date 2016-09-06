@@ -38,22 +38,23 @@
 
         <div class="separator"></div>
     </div>
-    
 
-    <div class="task-list">
-        <div class="dropzone">
+
+    <div class="row dnd-task-list">
+        <div class="col-md-1"></div>
+        <div class="dropzone col-md-10">
             <ul dnd-list="[]"
                 dnd-drop="moveTaskToNewLevel(index, item)"
                 class="list-unstyled">
 
                 <li ng-repeat="(level, tasks) in tasksList"
-                    class="panel panel-default itemlist">
+                    class="panel panel-default dnd-item-list margin-bottom-40 margin-top-40">
                     <div class="panel-heading">
-                        <div class="panel-title">
+                        <div class="panel-title panel-title-task-list center-text">
                             {{tasks[0]}}
                         </div>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body panel-body-task-list">
                         <ul  dnd-list="[]"
                              dnd-drop="moveTaskFromLevelToLevel(item, type, tasks[0])"
                              dnd-horizontal-list="true"
@@ -63,7 +64,8 @@
                                 dnd-draggable="task"
                                 dnd-type="tasks[0]"
                                 dnd-selected="goToCurrentTask(task.id)"
-                                dnd-effect-allowed="move">
+                                dnd-effect-allowed="move"
+                                class="multiline center-text margin-left-10 margin-right-10 margin-top-10 margin-bottom-10 padding-top-25"    >
                                 {{task.name}}
                             </li>
 
@@ -74,6 +76,7 @@
 
             </ul>
         </div>
+        <div class="col-md-1"></div>
     </div>
 
     <button class="btn btn-default btn-save btn-new-task" ng-click="createTask()">+ Luo uusi toimenpide</button>
