@@ -85,6 +85,7 @@ app.controller("TasksController", [
                 animation: true,
                 templateUrl: 'tasks/create_task_modal.html',
                 controller: 'CreateTaskModalController',
+                size: 'lg',
                 resolve: {
                     exercise: $scope.exercise
                 }
