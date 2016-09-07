@@ -21,6 +21,7 @@ app.controller("HypothesisGroupsController", [
                 animation: true,
                 templateUrl: 'hypothesis_groups/update_hypothesis_group_modal.html',
                 controller: 'UpdateHypothesisGroupModalController',
+                size: 'lg',
                 resolve: {
                     hypothesisGroup: hypothesisGroup
                 }
@@ -48,7 +49,8 @@ app.controller("HypothesisGroupsController", [
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'hypothesis_groups/create_hypothesis_group_modal.html',
-                controller: 'CreateHypothesisGroupModalController'
+                controller: 'CreateHypothesisGroupModalController',
+                size: 'lg'
             });
 
             modalInstance.result.then(function() {
@@ -72,6 +74,7 @@ app.controller("HypothesisGroupsController", [
                 animation: true,
                 templateUrl: 'hypotheses/update_hypothesis_modal.html',
                 controller: 'UpdateHypothesisModalController',
+                size: 'lg',
                 resolve: {
                     hypothesis: hypothesis
                 }
@@ -100,6 +103,7 @@ app.controller("HypothesisGroupsController", [
                 animation: true,
                 templateUrl: 'hypotheses/create_hypothesis_modal.html',
                 controller: 'CreateHypothesisModalController',
+                size: 'lg',
                 resolve: {
                     hypothesisGroup: hypothesisGroup
                 }
