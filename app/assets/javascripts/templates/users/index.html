@@ -1,27 +1,22 @@
-<br />
+<div class="container-fluid">
 
-<ul class="nav nav-tabs">
+    <ul class="nav nav-tabs padding-top-20">
 
-    <li id="UsersByCaseTab"
-        role="presentation"
-        class="tabLink exerciseTabLink" >
-        <a ui-sref="users.by_case">Opiskelijoiden eteneminen</a>
-    </li>
 
-    <li id="UsersStudentsTab"
-        role="presentation"
-        class="tabLink exerciseTabLink" >
-        <a ui-sref="users.students">Lista kaikista opiskelijoista</a>
-    </li>
+        <li id="UsersByCaseTab" class="exerciseTabLink" >
+            <a ui-sref="users.by_case">Opiskelijoiden eteneminen</a>
+        </li>
 
-    <li id="UsersTeachersTab"
-        role="presentation"
-        class="tabLink exerciseTabLink" >
-        <a ui-sref="users.teachers">Opettajat</a>
-    </li>
+        <li id="UsersStudentsTab" class="exerciseTabLink" >
+            <a ui-sref="users.students">Lista kaikista opiskelijoista</a>
+        </li>
 
-</ul>
+        <li id="UsersTeachersTab" class="exerciseTabLink" >
+            <a ui-sref="users.teachers">Opettajat</a>
+        </li>
 
-<br/>
+    </ul>
 
-<div ui-view></div>
+    <div class="padding-top-20" ui-view></div>
+
+</div>
