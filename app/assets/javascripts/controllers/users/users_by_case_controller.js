@@ -3,7 +3,7 @@ var app = angular.module('diagnoseDiseases');
 app.controller("UsersByCaseController", [
     "$scope", "$resource",
     function($scope, $resource) {
-        $scope.usersByCase = {};
+        $scope.usersByCase = [{}];
         $scope.orderByAttribute = 'first_name';
         $scope.reverse = false;
 
