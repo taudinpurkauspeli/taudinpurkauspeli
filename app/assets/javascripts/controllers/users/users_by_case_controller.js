@@ -9,6 +9,20 @@ app.controller("UsersByCaseController", [
 
         var UsersByCase = $resource('/users_by_case_json.json');
 
+        $scope.getType = function(percentOfCompletedTasks) {
+            if(percentOfCompletedTasks >= 100) {
+                return 'success';
+            } else if (percentOfCompletedTasks < 25) {
+                return 'danger';
+            } else {
+                return 'warning';
+            }
+        };
+
+        $scope.thereAreUsersInExercise = function(usersOfExericse) {
+          return usersOfExericse && usersOfExericse.length > 0;
+        };
+
         $scope.setUsersByCase = function() {
             UsersByCase.query(function(data) {
                 $scope.usersByCase = data;

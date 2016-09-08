@@ -91,7 +91,7 @@
     <div class="col-md-1"></div>
 </div>
 
-<div class="row padding-bottom-20">
+<div class="row padding-bottom-30">
     <div class="col-md-1"></div>
     <div class="col-md-2">
         <label for="queryStudentNumber" class="form-control">Opiskelijanumero</label>
@@ -108,8 +108,7 @@
 </div>
 
 
-
-<div class="row" ng-repeat="exerciseWithUsers in usersByCase | orderBy: 'exercise_name'" ng-if="!queryCase || queryMatchesCaseName(exerciseWithUsers.exercise_name)">
+<div class="row padding-bottom-20" ng-repeat="exerciseWithUsers in usersByCase | orderBy: 'exercise_name'" ng-if="!queryCase || queryMatchesCaseName(exerciseWithUsers.exercise_name)">
 
     <div class="col-md-1"></div>
     <div class="col-md-10">
@@ -119,52 +118,53 @@
                     {{exerciseWithUsers.exercise_name}}
                 </div>
             </div>
-            <div class="panel-body panel-completed">
+            <div class="panel-body">
 
-                <table class = "width100">
-                    <colgroup>
-                        <col style="width:20%" />
-                        <col style="width:20%" />
-                        <col style="width:15%" />
-                        <col style="width:20%" />
-                        <col style="width:25%" />
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th class="user" ng-click="setOrderByAttribute('first_name')">Etunimi <span class="sortorder" ng-show="orderByAttribute === 'first_name'" ng-class="{reverse:reverse}"></span></th>
-                        <th class="user" ng-click="setOrderByAttribute('last_name')">Sukunimi <span class="sortorder" ng-show="orderByAttribute === 'last_name'" ng-class="{reverse:reverse}"></span></th>
-                        <th class="user" ng-click="setOrderByAttribute('student_number')">Opiskelijanumero <span class="sortorder" ng-show="orderByAttribute === 'student_number'" ng-class="{reverse:reverse}"></span></th>
-                        <th class="user" ng-click="setOrderByAttribute('starting_year')">Epidemiologian kurssin aloitusvuosi <span class="sortorder" ng-show="orderByAttribute === 'starting_year'" ng-class="{reverse:reverse}"></span></th>
-                        <th class="user" ng-click="setOrderByAttribute('percent_of_completed_tasks')">Suoritettu <span class="sortorder" ng-show="orderByAttribute === 'percent_of_completed_tasks'" ng-class="{reverse:reverse}"></span></th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div class="center-text" ng-if="!thereAreUsersInExercise(exerciseWithUsers.exercise_users)">
+                    Opiskelijat eivät ole vielä aloittaneet tätä casea.
+                </div>
 
-                    <tr ng-repeat="user in exerciseWithUsers.exercise_users | orderBy: orderByAttribute:reverse |
+                <div class="table-responsive" ng-if="thereAreUsersInExercise(exerciseWithUsers.exercise_users)">
+
+                    <table class="table table-hover table-condensed margin-0">
+
+                        <colgroup>
+                            <col style="width:20%" />
+                            <col style="width:20%" />
+                            <col style="width:20%" />
+                            <col style="width:15%" />
+                            <col style="width:25%" />
+                        </colgroup>
+
+                        <thead>
+                        <tr>
+                            <th class="clickable" ng-click="setOrderByAttribute('first_name')">Etunimi <span class="sortorder" ng-show="orderByAttribute === 'first_name'" ng-class="{reverse:reverse}"></span></th>
+                            <th class="clickable" ng-click="setOrderByAttribute('last_name')">Sukunimi <span class="sortorder" ng-show="orderByAttribute === 'last_name'" ng-class="{reverse:reverse}"></span></th>
+                            <th class="clickable" ng-click="setOrderByAttribute('student_number')">Opiskelijanumero <span class="sortorder" ng-show="orderByAttribute === 'student_number'" ng-class="{reverse:reverse}"></span></th>
+                            <th class="clickable" ng-click="setOrderByAttribute('starting_year')">Aloitusvuosi <span class="sortorder" ng-show="orderByAttribute === 'starting_year'" ng-class="{reverse:reverse}"></span></th>
+                            <th class="clickable" ng-click="setOrderByAttribute('percent_of_completed_tasks')">Suoritettu <span class="sortorder" ng-show="orderByAttribute === 'percent_of_completed_tasks'" ng-class="{reverse:reverse}"></span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr ng-repeat="user in exerciseWithUsers.exercise_users | orderBy: orderByAttribute:reverse |
                     filter:{starting_year: queryStartingYear, first_name: queryFirstName, last_name: queryLastName, student_number: queryStudentNumber}">
-                        <td class="user" ng-click="viewUser(user)">{{user.first_name}}</td>
-                        <td class="user">{{user.last_name}}</td>
-                        <td class="user">{{user.student_number}}</td>
-                        <td class="user">{{user.starting_year}}</td>
-                        <td class="user">
-                            <div class ="progressbar" ng-class="{'completed': user.percent_of_completed_tasks >= 100}">
-                                <div ng-if="user.percent_of_completed_tasks < 100" class = "progressbar progress" ng-style="{'width': 100 - user.percent_of_completed_tasks}"></div>
-                            </div>
-                            <span class = "progress-percent">{{user.percent_of_completed_tasks}}%</span>
-                        </td>
+                            <td class="padding-top-15" ng-click="viewUser(user)" class="clickable">{{user.first_name}}</td>
+                            <td class="padding-top-15">{{user.last_name}}</td>
+                            <td class="padding-top-15">{{user.student_number}}</td>
+                            <td class="padding-top-15">{{user.starting_year}}</td>
+                            <td>
+                                <uib-progressbar class="margin-0" animate="false" value="user.percent_of_completed_tasks" type="{{getType(user.percent_of_completed_tasks)}}"><b>{{user.percent_of_completed_tasks}}%</b></uib-progressbar>
+                            </td>
 
-                    </tr>
-                    </tbody>
-                </table>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
         </div>
     </div>
     <div class="col-md-1"></div>
-
-
-
-
-
 
 </div>
