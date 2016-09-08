@@ -1,86 +1,114 @@
-<div class = "row">
-    <div class = "col-md-8">
-        <h1>Opiskelijoiden etenemisen seuranta</h1>
+<div class="row padding-bottom-10 padding-top-20">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h1 class="center-text">Opiskelijoiden etenemisen seuranta</h1>
     </div>
-</div>
-<div class = "separator"></div>
-
-<div>
-    <h3>Etsi listalta</h3>
-
-    <div class = "row">
-        <div class = "col-md-2">
-            <label for="queryCase" class="form-control">Case</label>
-        </div>
-        <div class = "col-md-8">
-            <input type="text"
-                   name="queryCase"
-                   id="queryCase"
-                   class="form-control input"
-                   placeholder="Case"
-                   ng-model="queryCase">
-        </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2 padding-top-25">
+        <button uib-popover="Tällä sivulla näet opiskelijat järjestettynä caseittain. Voit seurata, miten opiskelijat ovat edenneet caseissa.
+        Voit myös etsiä listalta opiskelijoilla kirjoittamalla hakukenttiin hakusanoja. Voit järjestää opiskelijalistat etunimen, sukunimen, opiskelijanumeron,
+        epidemiologian kurssin aloitusvuoden tai suoritettu-statuksen mukaan klikkaamalla taulukon sarakkeiden otsikkoja."
+                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
     </div>
-
-    <div class = "row">
-        <div class = "col-md-2">
-            <label for="queryStartingYear" class="form-control">Aloitusvuosi</label>
-        </div>
-        <div class = "col-md-8">
-            <input type="text"
-                   name="queryStartingYear"
-                   id="queryStartingYear"
-                   class="form-control input"
-                   placeholder="Aloitusvuosi"
-                   ng-model="queryStartingYear">
-        </div>
-    </div>
-
-    <div class = "row">
-        <div class = "col-md-2">
-            <label for="queryFirstName" class="form-control">Etunimi</label>
-        </div>
-        <div class = "col-md-8">
-            <input type="text"
-                   name="queryFirstName"
-                   id="queryFirstName"
-                   class="form-control input"
-                   placeholder="Etunimi"
-                   ng-model="queryFirstName">
-        </div>
-    </div>
-
-    <div class = "row">
-        <div class = "col-md-2">
-            <label for="queryLastName" class="form-control">Sukunimi</label>
-        </div>
-        <div class = "col-md-8">
-            <input type="text"
-                   name="queryLastName"
-                   id="queryLastName"
-                   class="form-control input"
-                   placeholder="Sukunimi"
-                   ng-model="queryLastName">
-        </div>
-    </div>
-
-    <div class = "row">
-        <div class = "col-md-2">
-            <label for="queryStudentNumber" class="form-control">Opiskelijanumero</label>
-        </div>
-        <div class = "col-md-8">
-            <input type="text"
-                   name="queryStudentNumber"
-                   id="queryStudentNumber"
-                   class="form-control input"
-                   placeholder="Opiskelijanumero"
-                   ng-model="queryStudentNumber">
-        </div>
-    </div>
-
+    <div class="col-md-1"></div>
 </div>
 
-<br/>
+<div class="separator"></div>
+
+
+
+
+<div class="row padding-bottom-10">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h3 class="center-text">Etsi listalta</h3>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+        <label for="queryCase" class="form-control">Case</label>
+    </div>
+    <div class="col-md-8">
+        <input type="text"
+               name="queryCase"
+               id="queryCase"
+               class="form-control input center-text"
+               placeholder="Case"
+               ng-model="queryCase">
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+        <label for="queryStartingYear" class="form-control">Aloitusvuosi</label>
+    </div>
+    <div class="col-md-8">
+        <input type="text"
+               name="queryStartingYear"
+               id="queryStartingYear"
+               class="form-control input center-text"
+               placeholder="Aloitusvuosi"
+               ng-model="queryStartingYear">
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+        <label for="queryFirstName" class="form-control">Etunimi</label>
+    </div>
+    <div class="col-md-8">
+        <input type="text"
+               name="queryFirstName"
+               id="queryFirstName"
+               class="form-control input center-text"
+               placeholder="Etunimi"
+               ng-model="queryFirstName">
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+        <label for="queryLastName" class="form-control">Sukunimi</label>
+    </div>
+    <div class="col-md-8">
+        <input type="text"
+               name="queryLastName"
+               id="queryLastName"
+               class="form-control input center-text"
+               placeholder="Sukunimi"
+               ng-model="queryLastName">
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+        <label for="queryStudentNumber" class="form-control">Opiskelijanumero</label>
+    </div>
+    <div class="col-md-8">
+        <input type="text"
+               name="queryStudentNumber"
+               id="queryStudentNumber"
+               class="form-control input center-text"
+               placeholder="Opiskelijanumero"
+               ng-model="queryStudentNumber">
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+
+
 
 <div class="row" ng-repeat="exerciseWithUsers in usersByCase | orderBy: 'exercise_name'" ng-if="!queryCase || queryMatchesCaseName(exerciseWithUsers.exercise_name)">
     <br/>
