@@ -1,14 +1,21 @@
-<div class="container-fluid" ng-if="currentUserAdmin">
+<div ng-if="currentUserAdmin">
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default">
-                <div class = "panel-heading panel-heading-grey">
-                    <div class = "row">
-                        <div class = "col-md-6">
-                            <h4>Toimenpide: {{taskForShow.name}}</h4>
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="panel-title panel-title-task-show multiline">Toimenpide: {{taskForShow.name}}</h3>
                         </div>
-                        <div class= "col-md-6">
-                            <button class="btn btn-default btn-save widthAuto floatRight margin-em" ng-click="updateTask(taskForShow)">Muokkaa</button>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">
+                            <button class="btn btn-default width-100" ng-click="updateTask(taskForShow)">Muokkaa</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button uib-popover="Voit muokata casen nimeä klikkaamalla Muokkaa-nappia.
+                            Voit järjestää casen alakohdat ottamalla kiinni alakohdasta ja siirtämällä alakohdan oikeaan kohtaan.
+                            Pääset muokkaamaan alakohtaa klikkaamalla alakohtaa."
+                                    popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
                         </div>
                     </div>
                 </div>
@@ -20,14 +27,23 @@
 
         <div class="col-md-4">
             <div class="panel panel-default">
-                <div class = "panel-heading panel-heading-grey">
-                    Lisää alakohta
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3 class="panel-title panel-title-task-show multiline"> Lisää alakohta</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <button uib-popover="Voit lisätä caseen uuden alakohdan klikkaamalla haluamasi tyyppisen alakohdan nappia.
+                            Nappia klikkaamalla pääset syöttämään alakohdan tietoja."
+                                    popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body">
-                    <button class="btn btn-default btn-exercise btn-subtask" ng-click="createTaskText(taskForShow)">+ Teksti</button>
-                    <button class="btn btn-default btn-exercise btn-subtask" ng-click="createMultichoice(taskForShow)">+ Monivalinta tai radio button</button>
-                    <button class="btn btn-default btn-exercise btn-subtask" ng-click="createInterview(taskForShow)">+ Pohdinta</button>
-                    <button class="btn btn-default btn-exercise btn-subtask" ng-click="createConclusion(taskForShow)" ng-disabled="hasConclusion">+ Diagnoosi</button>
+                    <button class="btn btn-default" ng-click="createTaskText(taskForShow)">+ Teksti</button>
+                    <button class="btn btn-default" ng-click="createMultichoice(taskForShow)">+ Monivalinta tai radio button</button>
+                    <button class="btn btn-default" ng-click="createInterview(taskForShow)">+ Pohdinta</button>
+                    <button class="btn btn-default" ng-click="createConclusion(taskForShow)" ng-disabled="hasConclusion">+ Diagnoosi</button>
                 </div>
             </div>
         </div>
