@@ -149,7 +149,7 @@
 
                         <tr ng-repeat="user in exerciseWithUsers.exercise_users | orderBy: orderByAttribute:reverse |
                     filter:{starting_year: queryStartingYear, first_name: queryFirstName, last_name: queryLastName, student_number: queryStudentNumber}">
-                            <td class="padding-top-15" ng-click="viewUser(user)" class="clickable">{{user.first_name}}</td>
+                            <td class="padding-top-15 clickable" ng-click="viewUser(user)" class="clickable">{{user.first_name}}</td>
                             <td class="padding-top-15">{{user.last_name}}</td>
                             <td class="padding-top-15">{{user.student_number}}</td>
                             <td class="padding-top-15">{{user.starting_year}}</td>
