@@ -40,10 +40,26 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <button class="btn btn-default" ng-click="createTaskText(taskForShow)">+ Teksti</button>
-                    <button class="btn btn-default" ng-click="createMultichoice(taskForShow)">+ Monivalinta tai radio button</button>
-                    <button class="btn btn-default" ng-click="createInterview(taskForShow)">+ Pohdinta</button>
-                    <button class="btn btn-default" ng-click="createConclusion(taskForShow)" ng-disabled="hasConclusion">+ Diagnoosi</button>
+                    <div class="row padding-bottom-20">
+                        <div class="col-md-12">
+                            <button class="btn btn-default btn-lg width-100" ng-click="createTaskText(taskForShow)">+ Teksti</button>
+                        </div>
+                    </div>
+                    <div class="row padding-bottom-20">
+                        <div class="col-md-12">
+                            <button class="btn btn-default btn-lg width-100" ng-click="createMultichoice(taskForShow)">+ Monivalinta tai radio button</button>
+                        </div>
+                    </div>
+                    <div class="row padding-bottom-20">
+                        <div class="col-md-12">
+                            <button class="btn btn-default btn-lg width-100" ng-click="createInterview(taskForShow)">+ Pohdinta</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-default btn-lg width-100" ng-click="createConclusion(taskForShow)" ng-disabled="hasConclusion">+ Diagnoosi</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
