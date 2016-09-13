@@ -1,49 +1,65 @@
 <div class="modal-header">
-    <h3 class="modal-title">Tekstin muokkaus</h3>
-</div>
-
-<div class="modal-body">
-
     <div class="row">
-        <div class="col-md-12">
-            <form novalidate name="updateTaskTextForm">
-                <div class="form-group">
-
-                    <label for="content">Sisältö</label>
-
-                    <div text-angular="text-angular"
-                         ng-model="taskText.content"
-                         ng-if="taskText"
-                         placeholder="Sisältö"
-                         name="content"
-                         id="content"
-                         required
-                         ta-text-editor-class="form-content"
-                         ta-html-editor-class="form-content"
-                         ta-toolbar-button-class="btn btn-default btn-toolbar"
-                         ta-focussed-class="focussed">
-                    </div>
-
-                </div>
-            </form>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text">Tekstin muokkaus</h3>
         </div>
-
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit muokata tekstialakohtaa. Voit muokata sisältöä, jonka haluat näkyvän opiskelijoille heidän tehdessään alakohtaa." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
     </div>
 </div>
 
+<div class="modal-body">
+    <form class="form-horizontal" novalidate name="updateTaskTextForm">
+
+        <div class="form-group padding-top-10">
+
+            <label for="content" class="col-md-1 control-label">Sisältö</label>
+
+            <div class="col-md-10">
+                <div text-angular
+                     ng-model="taskText.content"
+                     ng-if="taskText"
+                     placeholder="Sisältö"
+                     name="content"
+                     id="content"
+                     required>
+                </div>
+
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </form>
+
+</div>
+
 <div class="modal-footer">
-    <button class="btn btn-primary"
-            type="button"
-            ng-click="updateTaskText()"
-            ng-disabled="updateTaskTextForm.$invalid || updateTaskTextForm.$pristine">
-        Päivitä
-    </button>
 
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100"
+                    type="button"
+                    ng-click="updateTaskText()"
+                    ng-disabled="updateTaskTextForm.$invalid || updateTaskTextForm.$pristine">
+                Päivitä
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="deleteTaskText()">
+                Poista
+            </button>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
 
-    <button class="btn btn-danger"
-            ng-click="deleteTaskText()">
-        Poista tekstialakohta
-    </button>
 </div>
 
