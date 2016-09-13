@@ -134,7 +134,6 @@ app.controller("TasksShowController", [
             modalInstance.result.then(function(data) {
                 $scope.setTask();
                 $scope.setExercise();
-                $scope.editConclusion(data);
             }, function() {
                 $.notify({
                     message: "Diagnoosin luominen peruttu."
