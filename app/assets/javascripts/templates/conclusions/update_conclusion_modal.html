@@ -1,79 +1,114 @@
 <div class="modal-header">
-    <h3 class="modal-title">Diagnoosi-alakohdan päivitys</h3>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text">Diagnoosi-alakohdan päivitys</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit muokata toimenpiteen diagnoosi-alakohtaa. Huomioithan, että casessa voi olla kerrallaan vain yksi diagnoosi-alakohta.
+            Käy myös ensin lisäämässä caseen diffejä, jotta voit valita diagnoosi-alakohtaan oikean diagnoosin.
+            Täytä diagnoosille otsikkoteksti, jonka haluat näkyvän opiskelijoille.
+            Voit myös täyttää ohjeita opiskelijoille." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+
+        <div class="col-md-1"></div>
+    </div>
 </div>
 
 <div class="modal-body">
 
-    <div class="row">
-        <div class="col-md-12">
-            <form novalidate name="updateConclusionForm">
 
-                <div class="form-group">
+    <form class="form-horizontal" novalidate name="updateConclusionForm">
 
-                    <label for="exerciseHypothesisId">Valitse diffi casen oikeaksi diagnoosiksi</label>
-                    <select name="exerciseHypothesisId" id="exerciseHypothesisId"
-                            class="form-control"
-                            ng-model="conclusion.exercise_hypothesis_id"
-                            ng-options="exerciseHypothesis.id as exerciseHypothesis.hypothesis.name for exerciseHypothesis in exerciseHypotheses">
-                    </select>
-                </div>
 
-                <div class="form-group has-feedback"
-                     ng-class="{
-'has-error': updateConclusionForm.title.$invalid && updateConclusionForm.title.$dirty,
-'has-success': updateConclusionForm.title.$valid && updateConclusionForm.title.$touched
-}">
-                    <label for="title">Otsikkoteksti</label>
-                    <input type="text"
-                           class="form-control"
-                           required pattern=".{2,}"
-                           name="title"
-                           id="title"
-                           placeholder="Otsikkoteksti"
-                           ng-model="conclusion.title">
+        <div class="form-group">
 
-                    <p class="help-block" ng-messages="updateConclusionForm.title.$error" ng-if="!updateConclusionForm.title.$pristine">
-                        <span ng-message="required">Otsikko on pakollinen</span>
-                        <span ng-message="pattern">Otsikossa on oltava vähintään 2 merkkiä</span>
-                    </p>
-                </div>
+            <label for="exerciseHypothesisId" class="col-md-2 control-label">Valitse diffi casen oikeaksi diagnoosiksi</label>
 
-                <div class="form-group">
+            <div class="col-md-9">
 
-                    <label for="conclusionContent">Ohje opiskelijoille</label>
+                <select name="exerciseHypothesisId" id="exerciseHypothesisId"
+                        class="form-control"
+                        ng-model="conclusion.exercise_hypothesis_id"
+                        ng-options="exerciseHypothesis.id as exerciseHypothesis.hypothesis.name for exerciseHypothesis in exerciseHypotheses">
+                </select>
 
-                    <div text-angular="text-angular"
-                         ng-model="conclusion.content"
-                         ng-if="conclusion"
-                         placeholder="Ohje opiskelijoille"
-                         name="conclusionContent"
-                         id="conclusionContent"
-                         ta-text-editor-class="form-content"
-                         ta-html-editor-class="form-content"
-                         ta-toolbar-button-class="btn btn-default btn-toolbar"
-                         ta-focussed-class="focussed">
-                    </div>
+            </div>
 
-                </div>
-            </form>
+            <div class="col-md-1"></div>
         </div>
 
-    </div>
+
+
+        <div class="form-group has-feedback"
+             ng-class="{'has-error': updateConclusionForm.title.$invalid && updateConclusionForm.title.$dirty,
+                        'has-success': updateConclusionForm.title.$valid && updateConclusionForm.title.$touched}">
+
+            <label for="title" class="col-md-2 control-label">Otsikkoteksti</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       required pattern=".{2,}"
+                       class="form-control center-text"
+                       name="title"
+                       id="title"
+                       placeholder="Otsikkoteksti"
+                       ng-model="conclusion.title">
+
+                <p class="help-block" ng-messages="updateConclusionForm.title.$error" ng-if="!updateConclusionForm.title.$pristine">
+                    <span ng-message="required">Otsikko on pakollinen</span>
+                    <span ng-message="pattern">Otsikossa on oltava vähintään 2 merkkiä</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="form-group padding-top-10">
+
+            <label for="conclusionContent" class="col-md-2 control-label">Ohje opiskelijoille</label>
+
+            <div class="col-md-9">
+                <div text-angular
+                     ng-model="conclusion.content"
+                     ng-if="conclusion"
+                     placeholder="Ohje opiskelijoille"
+                     name="conclusionContent"
+                     id="conclusionContent">
+                </div>
+
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </form>
+
 </div>
 
 <div class="modal-footer">
-    <button class="btn btn-primary"
-            type="button"
-            ng-click="updateConclusion()"
-            ng-disabled="updateConclusionForm.$invalid || updateConclusionForm.$pristine">
-        Päivitä
-    </button>
 
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100"
+                    type="button"
+                    ng-click="updateConclusion()"
+                    ng-disabled="updateConclusionForm.$invalid || updateConclusionForm.$pristine">
+                Päivitä
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="deleteConclusion()">
+                Poista
+            </button>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
 
-    <button class="btn btn-danger"
-            ng-click="deleteConclusion()">
-        Poista diagnoosi-alakohta
-    </button>
 </div>
 
