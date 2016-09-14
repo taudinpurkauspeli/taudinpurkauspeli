@@ -1,10 +1,13 @@
-<div class="row">
-    <div class="col-md-9">
-    </div>
-    <div class = "col-md-3">
+<div class="row padding-bottom-10">
+    <div class="col-md-9"></div>
+
+    <div class="col-md-3">
         <button class="btn btn-default width-100" ui-sref="exercises_show.current_task.show">Palaa toimenpiteeseen</button>
     </div>
+
 </div>
+
+<div class="separator"></div>
 
 <div class="row padding-bottom-10">
 
@@ -12,16 +15,21 @@
         <h2 class="center-text" ng-if="multichoice.is_radio_button">Radiobutton: {{multichoice.question}}</h2>
         <h2 class="center-text" ng-if="!multichoice.is_radio_button">Monivalinta: {{multichoice.question}}</h2>
     </div>
-    <div class="col-md-2 padding-top-25">
+    <div class="col-md-2 padding-top-20">
         <button class="btn btn-default width-100" ng-click="updateMultichoice(multichoice)">Muokkaa</button>
     </div>
-    <div class="col-md-2 padding-top-25">
+    <div class="col-md-2 padding-top-20">
         <button uib-popover="Tällä sivulla voit muokata monivalinta-alakohtaa. Alakohdan kysymystä ja tyyppiä pääset muokkaamaan 'Muokkaa'-nappia painamalla.
-        Oikean yläkulman 'Palaa toimenpiteeseen'-napista pääset palaamaan takaisin toimenpiteeseen. Tällä sivulla pääset myös lisäämään monivalintaan uusia vastausvaihtoehtoja ja
+        'Palaa toimenpiteeseen'-napista pääset palaamaan takaisin toimenpiteeseen. Tällä sivulla pääset myös lisäämään monivalintaan uusia vastausvaihtoehtoja ja
         muokkaamaan monivalinnan vastausvaihtoehtoja."
                 popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
 
     </div>
 </div>
+
+<div class="separator"></div>
+
+
+
 
 <multichoice-options></multichoice-options>
