@@ -2,7 +2,7 @@
 <div class="row padding-bottom-10">
     <div class="col-md-1"></div>
 
-    <div class="col-md-9">
+    <div class="col-md-8">
         <h3 class="center-text">Vastausvaihtoehdot</h3>
     </div>
     <div class="col-md-2 padding-top-15">
@@ -10,45 +10,60 @@
         Voit siirtää vastausvaihtoehtoja pakolliset-, sallitut- ja väärät-vaihtoehdot-kenttien välillä ottamalla kiinni vastausvaihtoehdosta ja raahaamalla sen haluamaasi kehttään."
                 popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
     </div>
+    <div class="col-md-1"></div>
 
 </div>
 
-<div class="separator"></div>
+<div class="row" ng-repeat="answer_type in answer_types">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
 
+        <div class="dnd-options-list">
+            <div class="dropzone">
 
-<div class="options-list" ng-repeat="answer_type in answer_types">
-    <div class="dropzone">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title panel-option center-text">
+                            {{answer_type.name_fi}}
+                        </div>
+                    </div>
+                    <div class="panel-body">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    {{answer_type.name_fi}}
+                        <div class="dnd-item-list">
+                            <ul dnd-list="[]"
+                                class="list-unstyled margin-0"
+                                dnd-drop="moveOptionToNewType(item, answer_type.name_en)"
+                                dnd-allowed-types="answer_type.allowed_types">
+
+                                <li ng-repeat="option in options[answer_type.name_en]"
+                                    dnd-draggable="option"
+                                    dnd-type="answer_type.name_en"
+                                    dnd-selected="updateOption(option)"
+                                    dnd-effect-allowed="move"
+                                    class="margin-left-10 margin-right-10 margin-top-10 margin-bottom-10 padding-top-25 clickable">
+                                    {{option.content}}
+                                </li>
+
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="panel-body">
 
-                <div class="itemlist">
-                    <ul dnd-list="[]"
-                        class="list-unstyled"
-                        dnd-drop="moveOptionToNewType(item, answer_type.name_en)"
-                        dnd-allowed-types="answer_type.allowed_types">
-
-                        <li ng-repeat="option in options[answer_type.name_en]"
-                            dnd-draggable="option"
-                            dnd-type="answer_type.name_en"
-                            dnd-selected="updateOption(option)"
-                            dnd-effect-allowed="move">
-                            {{option.content}}
-                        </li>
-
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
             </div>
         </div>
-
     </div>
+    <div class="col-md-1"></div>
+
 </div>
 
-<button class="btn btn-default btn-save btn-new-task" ng-click="createOption(multichoice)">+ Luo uusi vastausvaihtoehto</button>
+<div class="row padding-bottom-10">
+    <div class="col-md-4"></div>
+
+    <div class="col-md-4">
+        <button class="btn btn-default btn-lg width-100" ng-click="createOption(multichoice)">+ Luo uusi vastausvaihtoehto</button>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
 
