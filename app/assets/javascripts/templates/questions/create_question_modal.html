@@ -1,82 +1,124 @@
 <div class="modal-header">
-    <h3 class="modal-title">Uusi kysymys</h3>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text">Uusi kysymys</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit luoda uuden kysymyksen.
+            Valitse lomakkeessa, onko kysymys pakollinen, sallittu vai väärä kysymys.
+            Kysymyksen pakollisuus tarkoittaa, että opiskelijan on pakko kysyä pakollinen kysymys.
+            Sallitun kysymyksen opiskelija voi kysyä, mutta hänen ei ole pakko kysyä sitä.
+            Väärän kysymyksen opiskelija voi kysyä. Täytä lomakkeeseen lisäksi kysymyksen opiskelijalle näkyvät kysymyksen teksti ja selitys.
+            Voit lisäksi täyttää kysymykselle kysymysryhmän, johon kysymys kuuluu. Jos jätät kysymysryhmä-kentän tyhjäksi luodaan kysymys ilman ryhmää." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 </div>
 
 <div class="modal-body">
 
-    <div class="row">
-        <div class="col-md-12">
-            <form novalidate name="createQuestionForm">
-                <div class="form-group">
+    <form class="form-horizontal" novalidate name="createQuestionForm">
 
-                    <select name="required"
-                            class="form-control"
-                            id="required"
-                            ng-model="newQuestion.required"
-                            ng-options="answer_type.name_en as answer_type.name_fi for answer_type in answer_types">
-                    </select>
-                </div>
-                <br/>
+        <div class="form-group has-feedback">
 
-                <div class="form-group">
-                    <label for="question_group_title">Kysymysryhmä</label>
-                    <input type="text"
-                           class="form-control"
-                           name="question_group_title"
-                           id="question_group_title"
-                           placeholder="Kysymysryhmä"
-                           ng-model="newQuestion.question_group_attributes.title">
-                </div>
+            <div class="col-md-2"></div>
 
-                <div class="form-group has-feedback"
-                     ng-class="{
-'has-error': createQuestionForm.title.$invalid && createQuestionForm.title.$dirty,
-'has-success': createQuestionForm.title.$valid && createQuestionForm.title.$touched
-}">
-                    <label for="title">Kysymyksen teksti</label>
-                    <input type="text"
-                           class="form-control"
-                           required
-                           name="title"
-                           id="title"
-                           placeholder="Kysymyksen teksti"
-                           ng-model="newQuestion.title">
+            <div class="col-md-9">
 
-                    <p class="help-block" ng-messages="createQuestionForm.title.$error" ng-if="!createQuestionForm.title.$pristine">
-                        <span ng-message="required">Kysymys on pakollinen</span>
-                    </p>
-                </div>
+                <select name="is_correct_answer"
+                        class="form-control"
+                        id="required"
+                        ng-model="newQuestion.required"
+                        ng-options="answer_type.name_en as answer_type.name_fi for answer_type in answer_types">
+                </select>
+            </div>
 
-                <div class="form-group">
-                    <label for="newContent">Seliteteksti</label>
-                    <div text-angular="text-angular"
-                         ng-model="newQuestion.content"
-                         ng-if="newQuestion"
-                         placeholder="Seliteteksti"
-                         name="newContent"
-                         id="newContent"
-                         required
-                         ta-text-editor-class="form-content"
-                         ta-html-editor-class="form-content"
-                         ta-toolbar-button-class="btn btn-default btn-toolbar"
-                         ta-focussed-class="focussed">
-                    </div>
-                </div>
-
-
-            </form>
+            <div class="col-md-1"></div>
         </div>
 
-    </div>
+
+        <div class="form-group has-feedback">
+
+            <label for="question_group_title" class="col-md-2 control-label">Kysymysryhmä</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       class="form-control center-text"
+                       name="question_group_title"
+                       id="question_group_title"
+                       placeholder="Kysymysryhmä"
+                       ng-model="newQuestion.question_group_attributes.title">
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="form-group has-feedback"
+             ng-class="{'has-error': createQuestionForm.title.$invalid && createQuestionForm.title.$dirty,
+                        'has-success': createQuestionForm.title.$valid && createQuestionForm.title.$touched}">
+
+            <label for="title" class="col-md-2 control-label">Kysymyksen teksti</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       required
+                       class="form-control center-text"
+                       name="title"
+                       id="title"
+                       placeholder="Kysymyksen teksti"
+                       ng-model="newQuestion.title">
+
+                <p class="help-block" ng-messages="createQuestionForm.title.$error" ng-if="!createQuestionForm.title.$pristine">
+                    <span ng-message="required">Kysymys on pakollinen</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+
+
+        <div class="form-group padding-top-10">
+
+            <label for="newContent" class="col-md-2 control-label">Seliteteksti</label>
+
+            <div class="col-md-9">
+                <div text-angular
+                     ng-model="newQuestion.content"
+                     ng-if="newQuestion"
+                     placeholder="Seliteteksti"
+                     name="newContent"
+                     id="newContent"
+                     required>
+                </div>
+
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </form>
+
 </div>
 
 <div class="modal-footer">
-    <button class="btn btn-primary"
-            type="button"
-            ng-click="createQuestion()"
-            ng-disabled="createQuestionForm.$invalid || createQuestionForm.$pristine">
-        Luo
-    </button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100"
+                    type="button"
+                    ng-click="createQuestion()"
+                    ng-disabled="createQuestionForm.$invalid || createQuestionForm.$pristine">
+                Luo
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
 </div>
 
