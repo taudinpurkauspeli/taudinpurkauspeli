@@ -336,6 +336,11 @@ div.separator{
     font-weight: bold;
   }
 
+  &.panel-question {
+    font-size: large;
+    font-weight: bold;
+  }
+
   &.panel-title-multichoice {
     font-size: x-large;
   }
@@ -567,6 +572,59 @@ div.separator{
   border-radius: 7px;
   margin: 10px;
 }
+
+
+// Drag and drop questions-list
+
+
+.dnd-questions-list ul[dnd-list],
+.dnd-questions-list ul[dnd-list] > li{
+  position: relative;
+}
+
+.dnd-questions-list .dropzone ul[dnd-list] {
+  min-height: 100px !important;
+  min-width: 420px !important;
+}
+
+.dnd-questions-list .dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+.dnd-questions-list .dropzone ul[dnd-list] .dndDraggingSource {
+  display: none;
+}
+
+.dnd-questions-list .dropzone .dnd-item-list ul {
+  display: table;
+}
+
+.dnd-questions-list .dropzone .dnd-item-list li {
+  border: none;
+  border-radius: 7px;
+  color: #000000;
+  float: left;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: normal;
+  font-size: large;
+  height: 80px;
+  width: 420px;
+  background-color: #cacaca;
+  white-space: normal;
+  display: table-cell;
+}
+
+.dnd-questions-list ul[dnd-list] .dndPlaceholder {
+  background-color: $PaleLightGreen !important;
+  height: 80px;
+  width: 420px;
+  display: block;
+  position: relative;
+  border-radius: 7px;
+  margin: 10px;
+}
+
 
 
 //Sorting order icon
@@ -1128,63 +1186,6 @@ div.separator{
 //}
 //
 //
-//
-//
-//// Drag and drop questions-list
-//
-//
-//.questions-list ul[dnd-list],
-//.questions-list ul[dnd-list] > li{
-//  position: relative;
-//}
-//
-//.questions-list .dropzone ul[dnd-list] {
-//  min-height: 5em;
-//  min-width: 20em;
-//  margin: 0px;
-//  padding-left: 0px;
-//}
-//
-//
-//.questions-list .dropzone .dndDragging {
-//  opacity: 0.7;
-//}
-//
-//.questions-list .dropzone ul[dnd-list] .dndDraggingSource {
-//  display: none;
-//}
-//
-//.questions-list .dropzone .itemlist ul {
-//  display: table;
-//}
-//
-//.questions-list .dropzone .itemlist li {
-//  border: none;
-//  border-radius: 7px;
-//  color: #000000;
-//  float: left;
-//  margin: 5px;
-//  padding: 3px;
-//  vertical-align: middle;
-//  text-align: center;
-//  font-weight: normal;
-//  font-size: 14px;
-//  height: 5em;
-//  width: 20em;
-//  background-color: #cacaca;
-//  white-space: normal;
-//  display: table-cell;
-//}
-//
-//.questions-list ul[dnd-list] .dndPlaceholder {
-//  background-color: $PaleLightGreen !important;
-//  height: 5em;
-//  width: 20em;
-//  display: block;
-//  position: relative;
-//  border-radius: 7px;
-//  margin-bottom: 5px;
-//}
 //
 //
 //// TextAngular editor

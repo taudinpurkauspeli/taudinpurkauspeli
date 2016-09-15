@@ -20,38 +20,47 @@
 
 </div>
 
-<div class="questions-list" ng-repeat="answer_type in answer_types">
-    <div class="dropzone">
+<div class="row" ng-repeat="answer_type in answer_types">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    {{answer_type.name_fi}}
+        <div class="dnd-questions-list">
+            <div class="dropzone">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title panel-question center-text">
+                            {{answer_type.name_fi}}
+                        </div>
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="dnd-item-list">
+                            <ul dnd-list="[]"
+                                class="list-unstyled margin-0"
+                                dnd-drop="moveQuestionToNewType(item, answer_type.name_en)"
+                                dnd-allowed-types="answer_type.allowed_types">
+
+                                <li ng-repeat="question in questions[answer_type.name_en]"
+                                    dnd-draggable="question"
+                                    dnd-type="answer_type.name_en"
+                                    dnd-selected="updateQuestion(question)"
+                                    dnd-effect-allowed="move"
+                                    class="margin-left-10 margin-right-10 margin-top-10 margin-bottom-10 padding-top-25 clickable">
+                                    {{question.title}}
+                                </li>
+
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="panel-body">
 
-                <div class="itemlist">
-                    <ul dnd-list="[]"
-                        class="list-unstyled"
-                        dnd-drop="moveQuestionToNewType(item, answer_type.name_en)"
-                        dnd-allowed-types="answer_type.allowed_types">
-
-                        <li ng-repeat="question in questions[answer_type.name_en]"
-                            dnd-draggable="question"
-                            dnd-type="answer_type.name_en"
-                            dnd-selected="updateQuestion(question)"
-                            dnd-effect-allowed="move">
-                            {{question.title}}
-                        </li>
-
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
             </div>
         </div>
-
     </div>
+    <div class="col-md-1"></div>
+
 </div>
 
 <div class="row padding-bottom-10">
