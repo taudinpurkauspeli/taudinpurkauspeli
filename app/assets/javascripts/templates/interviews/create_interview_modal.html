@@ -1,43 +1,66 @@
 <div class="modal-header">
-    <h3 class="modal-title">Uusi pohdinta-alakohta</h3>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text">Uusi pohdinta-alakohta</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit luoda uuden pohdinta-alakohdan.
+            Täytä lomakkeeseen pohdintaan liittyvä otsikko." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 </div>
 
 <div class="modal-body">
 
-    <div class="row">
-        <div class="col-md-12">
-            <form novalidate name="createInterviewForm">
-                <div class="form-group has-feedback"
-                     ng-class="{
-'has-error': createInterviewForm.title.$invalid && createInterviewForm.title.$dirty,
-'has-success': createInterviewForm.title.$valid && createInterviewForm.title.$touched
-}">
-                    <label for="title">Otsikko</label>
-                    <input type="text"
-                           class="form-control"
-                           required
-                           name="title"
-                           id="title"
-                           placeholder="Otsikko"
-                           ng-model="newInterview.title">
+    <form class="form-horizontal" novalidate name="createInterviewForm">
 
-                    <p class="help-block" ng-messages="createInterviewForm.title.$error" ng-if="!createInterviewForm.title.$pristine">
-                        <span ng-message="required">Otsikko on pakollinen</span>
-                    </p>
-                </div>
-            </form>
+        <div class="form-group has-feedback"
+             ng-class="{'has-error': createInterviewForm.title.$invalid && createInterviewForm.title.$dirty,
+                        'has-success': createInterviewForm.title.$valid && createInterviewForm.title.$touched}">
+
+            <label for="title" class="col-md-2 control-label">Otsikko</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       required
+                       class="form-control center-text"
+                       name="title"
+                       id="title"
+                       placeholder="Otsikko"
+                       ng-model="newInterview.title">
+
+                <p class="help-block" ng-messages="createInterviewForm.title.$error" ng-if="!createInterviewForm.title.$pristine">
+                    <span ng-message="required">Otsikko on pakollinen</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
         </div>
 
-    </div>
+    </form>
+    
 </div>
 
 <div class="modal-footer">
-    <button class="btn btn-primary"
-            type="button"
-            ng-click="createInterview()"
-            ng-disabled="createInterviewForm.$invalid || createInterviewForm.$pristine">
-        Luo
-    </button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100"
+                    type="button"
+                    ng-click="createInterview()"
+                    ng-disabled="createInterviewForm.$invalid || createInterviewForm.$pristine">
+                Luo
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
 </div>
 
