@@ -1,52 +1,87 @@
 <div class="modal-header">
-    <h3 class="modal-title">Uusi monivalinta-alakohta</h3>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text">Uusi monivalinta-alakohta</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit luoda uuden monivalinta-alakohdan.
+            Täytä lomakkeeseen monivalintaan liittyvä kysymys ja valitse, onko monivalinta radiobutton-tyyppinen. Radiobutton-tyyppisessä monivalinnassa opiskelija voi valita vain yhden vaihtoehdon kerrallaan.
+            Jos jätät radiobutton-valinnan tekemättä, tulee monivalinnasta normaali monivalinta, jossa opiskelija voi valita useita vaihtoehtoja." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 </div>
 
 <div class="modal-body">
 
-    <div class="row">
-        <div class="col-md-12">
-            <form novalidate name="createMultichoiceForm">
-                <div class="form-group has-feedback"
-                     ng-class="{
-'has-error': createMultichoiceForm.question.$invalid && createMultichoiceForm.question.$dirty,
-'has-success': createMultichoiceForm.question.$valid && createMultichoiceForm.question.$touched
-}">
-                    <label for="question">Kysymys</label>
-                    <input type="text"
-                           class="form-control"
-                           required
-                           name="question"
-                           id="question"
-                           placeholder="Kysymys"
-                           ng-model="newMultichoice.question">
 
-                    <p class="help-block" ng-messages="createMultichoiceForm.question.$error" ng-if="!createMultichoiceForm.question.$pristine">
-                        <span ng-message="required">Kysymys on pakollinen</span>
-                    </p>
-                </div>
+    <form class="form-horizontal" novalidate name="createMultichoiceForm">
 
-                <div class="form-group">
-                    <label for="is_radio_button">Radiobutton?</label>
-                    <br/>
-                    <input type="checkbox"
-                           name="is_radio_button"
-                           id="is_radio_button"
-                           ng-model="newMultichoice.is_radio_button">
-                </div>
-            </form>
+        <div class="form-group has-feedback"
+             ng-class="{'has-error': createMultichoiceForm.question.$invalid && createMultichoiceForm.question.$dirty,
+                        'has-success': createMultichoiceForm.question.$valid && createMultichoiceForm.question.$touched}">
+
+            <label for="question" class="col-md-2 control-label">Kysymys</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       required
+                       class="form-control center-text"
+                       name="question"
+                       id="question"
+                       placeholder="Kysymys"
+                       ng-model="newMultichoice.question">
+
+
+                <p class="help-block" ng-messages="createMultichoiceForm.question.$error" ng-if="!createMultichoiceForm.question.$pristine">
+                    <span ng-message="required">Kysymys on pakollinen</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
         </div>
 
-    </div>
+
+        <div class="form-group padding-top-10">
+
+            <div class="col-md-2"></div>
+
+            <div class="col-md-9">
+                <div class="checkbox">
+                    <label class="bold">
+                        <input type="checkbox"
+                               name="is_radio_button"
+                               id="is_radio_button"
+                               ng-model="newMultichoice.is_radio_button"> Monivalinnan tyyppi radiobutton?
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </form>
+    
 </div>
 
 <div class="modal-footer">
-    <button class="btn btn-primary"
-            type="button"
-            ng-click="createMultichoice()"
-            ng-disabled="createMultichoiceForm.$invalid || createMultichoiceForm.$pristine">
-        Luo
-    </button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100"
+                    type="button"
+                    ng-click="createMultichoice()"
+                    ng-disabled="createMultichoiceForm.$invalid || createMultichoiceForm.$pristine">
+                Luo
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
 </div>
 

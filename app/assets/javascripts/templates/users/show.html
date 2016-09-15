@@ -1,11 +1,19 @@
 <div class="row padding-bottom-10 padding-top-20">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <h1 class="center-text">Omat käyttäjätiedot</h1>
+        <h1 class="center-text" ng-if="(currentUser == user.id) || (currentUser && !currentUserAdmin)">Omat käyttäjätiedot</h1>
+        <h1 class="center-text" ng-if="currentUserAdmin && (currentUser != user.id)">Käyttäjätiedot</h1>
     </div>
     <div class="col-md-1"></div>
     <div class="col-md-2 padding-top-25">
-        <button uib-popover="Tällä sivulla voit tarkastella ja muokata omia käyttäjätietojasi. Lisäksi voit seurata etenemistäsi taudinpurkauspeleissä." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        <button uib-popover="Tällä sivulla voit tarkastella ja muokata omia käyttäjätietojasi. Lisäksi voit seurata etenemistäsi taudinpurkauspeleissä."
+                ng-if="(currentUser == user.id) || (currentUser && !currentUserAdmin)"
+                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+
+        <button uib-popover="Tällä sivulla voit tarkastella käyttäjän tietoja ja seurata käyttäjän etenemistä taudinpurkauspeleissä.
+        Tällä sivulla voit lisäksi tehdä opiskelijasta opettajan tai opettajasta opiskelijan ja poistaa käyttäjän tilin."
+                ng-if="currentUserAdmin && (currentUser != user.id)"
+                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
     </div>
     <div class="col-md-1"></div>
 </div>
@@ -124,21 +132,20 @@
 
 
 <div class="row" ng-if="currentUserAdmin && (currentUser != user.id)">
+    <div class="col-md-3"></div>
     <div class="col-md-3">
-        <button class="btn btn-default btn-exercise btn-save"
+        <button class="btn btn-default btn-lg width-100"
                 ng-click="changeAdminStatus(user)">
             Tee käyttäjästä {{adminStatus}}
         </button>
     </div>
-</div>
-
-<div class="row" ng-if="currentUserAdmin && (currentUser != user.id)">
     <div class="col-md-3">
-        <button class="btn btn-default btn-exercise btn-del"
+        <button class="btn btn-default btn-lg width-100"
                 ng-click="removeUser(user)">
             Poista käyttäjän tili
         </button>
     </div>
+    <div class="col-md-3"></div>
 </div>
 
 

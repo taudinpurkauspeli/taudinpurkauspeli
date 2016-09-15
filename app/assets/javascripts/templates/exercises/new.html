@@ -1,83 +1,90 @@
-<br/>
-<br/>
-<div class = "row">
-    <div class = "col-md-8">
-        <h1>Uuden casen luominen</h1>
+<div class="row padding-bottom-10 padding-top-20">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <h1 class="center-text">Uuden casen luominen</h1>
     </div>
-</div>
-<div class = "separator"></div>
-<br/>
-
-<div class="row">
-    <div class="col-md-12">
-        <form novalidate name="createExerciseForm">
-
-
-            <div class="form-group has-feedback"
-                 ng-class="{
-'has-error': createExerciseForm.name.$invalid && createExerciseForm.name.$dirty,
-'has-success': createExerciseForm.name.$valid && createExerciseForm.name.$touched
-}">
-                <label for="name">Nimi</label>
-                <input type="text"
-                       class="form-control"
-                       required pattern=".{2,}"
-                       name="name"
-                       id="name"
-                       placeholder="Casen nimi"
-                       ng-model="newExercise.name">
-
-                <p class="help-block" ng-messages="createExerciseForm.name.$error" ng-if="!createExerciseForm.name.$pristine">
-                    <span ng-message="required">Nimi on pakollinen</span>
-                    <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
-                </p>
-            </div>
-
-            <br/>
-            <br/>
-
-            <div class="form-group">
-                <label for="newAnamnesis">Anamneesi</label>
-                <div text-angular="text-angular"
-                     ng-model="newExercise.anamnesis"
-                     ng-if="newExercise"
-                     placeholder="Casen anamneesi"
-                     name="newAanamnesis"
-                     id="newAnamnesis"
-                     ta-text-editor-class="form-content"
-                     ta-html-editor-class="form-content"
-                     ta-toolbar-button-class="btn btn-default btn-toolbar"
-                     ta-focussed-class="focussed">
-                </div>
-            </div>
-
-            <br/>
-            <br/>
-
-            <div class="form-group">
-                <label for="hidden">Piilota case opiskelijoilta</label>
-                <br/>
-                <input type="checkbox"
-                       name="hidden"
-                       id="hidden"
-                       ng-model="newExercise.hidden">
-            </div>
-
-            <br/>
-            <br/>
-
-            <div>
-                <button ng-click="createExercise()"
-                        class="btn btn-default btn-save"
-                        ng-disabled="createExerciseForm.$invalid || createExerciseForm.$pristine">
-                    Tallenna
-                </button>
-            </div>
-        </form>
-
+    <div class="col-md-2 padding-top-25">
+        <button uib-popover="Tällä sivulla voit luoda uuden casen. Pakolliset kentät ovat casen nimi ja anamneesi." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
     </div>
+    <div class="col-md-1"></div>
 </div>
 
+<div class="separator"></div>
+
+
+
+<form class="form-horizontal" novalidate name="createExerciseForm">
+    <div class="form-group has-feedback padding-top-10"
+         ng-class="{'has-error': createExerciseForm.name.$invalid && createExerciseForm.name.$dirty,
+                    'has-success': createExerciseForm.name.$valid && createExerciseForm.name.$touched}">
+
+        <label for="name" class="col-md-2 control-label">Nimi</label>
+
+        <div class="col-md-9">
+            <input type="text"
+                   class="form-control center-text"
+                   required pattern=".{2,}"
+                   name="name"
+                   id="name"
+                   placeholder="Casen nimi"
+                   ng-model="newExercise.name">
+
+            <p class="help-block" ng-messages="createExerciseForm.name.$error" ng-if="!createExerciseForm.name.$pristine">
+                <span ng-message="required">Nimi on pakollinen</span>
+                <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
+            </p>
+        </div>
+
+        <div class="col-md-1"></div>
+    </div>
+
+    <div class="form-group padding-top-10">
+
+        <label for="anamnesis" class="col-md-2 control-label">Anamneesi</label>
+
+        <div class="col-md-9">
+            <div text-angular
+                 ng-model="newExercise.anamnesis"
+                 ng-if="newExercise"
+                 placeholder="Anamneesi"
+                 name="anamnesis"
+                 id="anamnesis">
+            </div>
+
+        </div>
+
+        <div class="col-md-1"></div>
+    </div>
+
+    <div class="form-group padding-top-10">
+
+        <div class="col-md-2"></div>
+
+        <div class="col-md-9">
+            <div class="checkbox">
+                <label class="bold">
+                    <input type="checkbox"
+                           name="hidden"
+                           id="hidden"
+                           ng-model="newExercise.hidden"> Piilota case opiskelijoilta
+                </label>
+            </div>
+        </div>
+
+        <div class="col-md-1"></div>
+    </div>
+
+    <div class="form-group padding-top-10">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+            <button type="submit" ng-click="createExercise()" class="btn btn-default width-100"
+                    ng-disabled="createExerciseForm.$invalid || createExerciseForm.$pristine">
+                Tallenna
+            </button>
+        </div>
+        <div class="col-md-5"></div>
+    </div>
+</form>
 
 
  

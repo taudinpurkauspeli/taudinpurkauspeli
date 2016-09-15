@@ -50,7 +50,6 @@ app.controller("TasksShowController", [
 
             modalInstance.result.then(function(data) {
                 $scope.setTask();
-                $scope.editTaskText(data);
             }, function() {
                 $.notify({
                     message: "Tekstialakohdan luominen peruttu."
@@ -135,7 +134,6 @@ app.controller("TasksShowController", [
             modalInstance.result.then(function(data) {
                 $scope.setTask();
                 $scope.setExercise();
-                $scope.editConclusion(data);
             }, function() {
                 $.notify({
                     message: "Diagnoosin luominen peruttu."

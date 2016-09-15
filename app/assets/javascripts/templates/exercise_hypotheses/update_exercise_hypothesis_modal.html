@@ -1,60 +1,79 @@
 <div class="modal-header">
-    <h3 class="modal-title">Muokkaa caseen liitettyä diffiä {{exerciseHypothesis.hypothesis.name}}</h3>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text">Muokkaa caseen liitettyä diffiä {{exerciseHypothesis.hypothesis.name}}</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit muokata caseen liitetyn diffin esitietovaatimusta ja selitystä. Lisäksi voit poistaa diffin casesta tämän lomakkeen avulla." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 </div>
 
 <div class="modal-body">
 
-    <div class="row">
-        <div class="col-md-12">
-            <form novalidate name="updateExerciseHypothesisForm">
-                <div class="form-group">
+    <form class="form-horizontal" novalidate name="updateExerciseHypothesisForm">
+        <div class="form-group padding-top-10">
 
-                    <label for="taskId">Esitietovaatimus</label>
-                    <select name="taskId" id="taskId"
-                            class="form-control"
-                            ng-model="exerciseHypothesis.task_id"
-                            ng-options="task.id as task.name for task in allTasks">
-                    </select>
-                </div>
-                <br/>
+            <label for="taskId" class="col-md-2 control-label">Esitietovaatimus</label>
 
-                <div class="form-group">
-                    <label for="explanation">Selitys</label>
+            <div class="col-md-9">
+                <select name="taskId" id="taskId"
+                        class="form-control center-text"
+                        ng-model="exerciseHypothesis.task_id"
+                        ng-options="task.id as task.name for task in allTasks">
+                </select>
+            </div>
 
-                    <div text-angular="text-angular"
-                         ng-model="exerciseHypothesis.explanation"
-                         ng-if="exerciseHypothesis"
-                         placeholder="Selitys"
-                         name="explanation"
-                         id="explanation"
-                         ta-text-editor-class="form-content"
-                         ta-html-editor-class="form-content"
-                         ta-toolbar-button-class="btn btn-default btn-toolbar"
-                         ta-focussed-class="focussed">
-                    </div>
-
-                </div>
-            </form>
+            <div class="col-md-1"></div>
         </div>
-    </div>
 
+        <div class="form-group padding-top-10">
+
+            <label for="explanation" class="col-md-2 control-label">Selitys</label>
+
+            <div class="col-md-9">
+                <div text-angular
+                     ng-model="exerciseHypothesis.explanation"
+                     ng-if="exerciseHypothesis"
+                     placeholder="Selitys"
+                     name="explanation"
+                     id="explanation">
+                </div>
+
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </form>
 
 </div>
 
 <div class="modal-footer">
 
-    <button class="btn btn-primary"
-            type="button"
-            ng-click="updateExerciseHypothesis()"
-            ng-disabled="updateExerciseHypothesisForm.$pristine">
-        Päivitä
-    </button>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <button class="btn btn-default width-100"
+                    type="button"
+                    ng-click="updateExerciseHypothesis()"
+                    ng-disabled="updateExerciseHypothesisForm.$pristine">
+                Päivitä
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-default width-100" type="button" ng-click="removeFromExercise()">
+                Poista diffi casesta
+            </button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
-
-    <button class="btn btn-danger"
-            ng-click="removeFromExercise()">
-        Poista diffi casesta
-    </button>
 </div>
 

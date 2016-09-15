@@ -26,36 +26,6 @@ app.controller("ExercisesController", [
             $state.go('exercises_show.anamnesis', {exerciseShowId: exercise.id});
         };
 
-        $scope.removeExercise = function(exercise) {
-
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa casen?");
-
-            if (deleteConfirmation) {
-                Exercise.delete({exerciseId : exercise.id}, function() {
-                    $.notify({
-                        message: "Casen poistaminen onnistui!"
-                    }, {
-                        placement: {
-                            align: "center"
-                        },
-                        type: "success",
-                        offset: 100
-                    });
-                    $scope.setExercises();
-                });
-            } else {
-                $.notify({
-                    message: "Casea '" + exercise.name + "' ei poistettu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
-            }
-        };
-
         $scope.newExercisePage = function() {
             $state.go('exercises_new');
         };

@@ -1,50 +1,71 @@
 <div class="modal-header">
-    <h3 class="modal-title">Pohdintakysymyksen päivitys</h3>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text">Pohdinta-alakohdan päivitys</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit päivittää pohdinta-alakohtaa.
+            Voit muokata pohdintaan liittyvää otsikkoa. Voit myös poistaa lomakkeella koko pohdinta-alakohdan. Tällöin myös kaikki alakohtaan liittyvät kysymykset poistetaan." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 </div>
 
 <div class="modal-body">
 
-    <div class="row">
-        <div class="col-md-12">
-            <form novalidate name="updateInterviewForm">
-                <div class="form-group has-feedback"
-                     ng-class="{
-'has-error': updateInterviewForm.title.$invalid && updateInterviewForm.title.$dirty,
-'has-success': updateInterviewForm.title.$valid && updateInterviewForm.title.$touched
-}">
-                    <label for="title">Otsikko</label>
-                    <input type="text"
-                           class="form-control"
-                           required
-                           name="title"
-                           id="title"
-                           placeholder="Otsikko"
-                           ng-model="interview.title">
+    <form class="form-horizontal" novalidate name="updateInterviewForm">
 
-                    <p class="help-block" ng-messages="updateInterviewForm.title.$error" ng-if="!updateInterviewForm.title.$pristine">
-                        <span ng-message="required">Otsikko on pakollinen</span>
-                    </p>
-                </div>
-            </form>
+        <div class="form-group has-feedback"
+             ng-class="{'has-error': updateInterviewForm.title.$invalid && updateInterviewForm.title.$dirty,
+                        'has-success': updateInterviewForm.title.$valid && updateInterviewForm.title.$touched}">
+
+            <label for="title" class="col-md-2 control-label">Otsikko</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       required
+                       class="form-control center-text"
+                       name="title"
+                       id="title"
+                       placeholder="Otsikko"
+                       ng-model="interview.title">
+
+                <p class="help-block" ng-messages="updateInterviewForm.title.$error" ng-if="!updateInterviewForm.title.$pristine">
+                    <span ng-message="required">Otsikko on pakollinen</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
         </div>
 
-    </div>
+    </form>
+
 </div>
 
 <div class="modal-footer">
-    <button class="btn btn-primary"
-            type="button"
-            ng-click="updateInterview()"
-            ng-disabled="updateInterviewForm.$invalid || updateInterviewForm.$pristine">
-        Päivitä
-    </button>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100"
+                    type="button"
+                    ng-click="updateInterview()"
+                    ng-disabled="updateInterviewForm.$invalid || updateInterviewForm.$pristine">
+                Päivitä
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="deleteInterview()">
+                Poista
+            </button>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
 
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
-
-
-    <button class="btn btn-danger"
-            ng-click="deleteInterview()">
-        Poista pohdinta
-    </button>
 </div>
 

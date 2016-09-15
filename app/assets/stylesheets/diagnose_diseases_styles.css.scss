@@ -106,6 +106,10 @@ main {
   padding-bottom: 20px !important;
 }
 
+.padding-bottom-25 {
+  padding-bottom: 25px !important;
+}
+
 .padding-bottom-30 {
   padding-bottom: 30px !important;
 }
@@ -124,6 +128,10 @@ main {
 
 .padding-top-10 {
   padding-top: 10px !important;
+}
+
+.padding-top-15 {
+  padding-top: 15px !important;
 }
 
 .padding-top-20 {
@@ -167,20 +175,52 @@ main {
   padding-left: 45px !important;
 }
 
+.margin-0 {
+  margin: 0 !important;
+}
+
 .margin-bottom-5 {
   margin-bottom: 5px !important;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px !important;
 }
 
 .margin-bottom-20 {
   margin-bottom: 20px !important;
 }
 
+.margin-bottom-40 {
+  margin-bottom: 40px !important;
+}
+
+.margin-top-10 {
+  margin-top: 10px !important;
+}
+
 .margin-top-20 {
   margin-top: 20px !important;
 }
 
+.margin-top-40 {
+  margin-top: 40px !important;
+}
+
+.margin-left-10 {
+  margin-left: 10px !important;
+}
+
 .margin-left-15 {
   margin-left: 15px !important;
+}
+
+.margin-left-20 {
+  margin-left: 20px !important;
+}
+
+.margin-right-10 {
+  margin-right: 10px !important;
 }
 
 .margin-right-15 {
@@ -273,11 +313,30 @@ div.separator{
     padding-bottom: 0px;
     padding-left: 15px;
   }
+
+  &.panel-body-task-list {
+    min-height: 100px;
+  }
 }
 
 .panel-title {
 
   &.panel-completed {
+    font-size: large;
+    font-weight: bold;
+  }
+
+  &.panel-hypothesis-bank {
+    font-size: x-large;
+    font-weight: bold;
+  }
+
+  &.panel-option {
+    font-size: large;
+    font-weight: bold;
+  }
+
+  &.panel-question {
     font-size: large;
     font-weight: bold;
   }
@@ -295,6 +354,14 @@ div.separator{
   }
 
   &.panel-title-userinfo {
+    font-size: x-large;
+  }
+
+  &.panel-title-task-list {
+    font-size: x-large;
+  }
+
+  &.panel-title-task-show {
     font-size: x-large;
   }
 }
@@ -354,6 +421,219 @@ div.separator{
 .multichoice-explanation-border {
   border-top: 1px solid;
   border-color: black;
+}
+
+.ta-editor {
+  min-height: 300px;
+  height: auto;
+  overflow: auto;
+  font-family: inherit;
+  font-size: 100%;
+  margin:20px 0;
+}
+
+// Drag and drop task-list
+
+.dnd-task-list ul[dnd-list],
+.dnd-task-list ul[dnd-list] > li{
+  position: relative;
+}
+
+.dnd-task-list .dropzone ul[dnd-list] {
+  min-height: 100px !important;
+  min-width: 420px !important;
+}
+
+.dnd-task-list .dropzone .dnd-item-list ul[dnd-list] {
+  min-height: 100px !important;
+}
+
+.dnd-task-list .dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+.dnd-task-list .dropzone .dnd-item-list ul {
+  display: table;
+}
+
+.dnd-task-list .dropzone .dnd-item-list li {
+  border: none;
+  border-radius: 7px;
+  color: #000000;
+  float: left;
+  font-size: large;
+  height: 80px;
+  width: 420px;
+  background-color: #cacaca;
+  white-space: normal;
+  display: table-cell;
+}
+
+.dnd-task-list ul[dnd-list] .dndPlaceholder {
+  background-color: $PaleLightGreen !important;
+  height: 80px;
+  width: 420px;
+  display: block;
+  position: relative;
+  border-radius: 7px;
+  margin: 10px;
+}
+
+// Drag and drop subtask-list
+
+.dnd-subtask-list ul[dnd-list],
+.dnd-subtask-list ul[dnd-list] > li{
+  position: relative;
+}
+
+.dnd-subtask-list .dropzone ul[dnd-list] {
+  min-height: 100px !important;
+}
+
+.dnd-subtask-list .dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+.dnd-subtask-list .dropzone .dndDraggingSource {
+  display: none;
+}
+
+.dnd-subtask-list .dropzone .dnd-item-list li {
+  border: none;
+  border-radius: 7px;
+  color: #000000;
+  vertical-align: middle;
+  font-weight: normal;
+  font-size: large;
+  height: 80px;
+  width: auto;
+  background-color: #cacaca;
+  white-space: normal;
+}
+
+.dnd-subtask-list .dropzone .dndPlaceholder {
+  background-color: $PaleLightGreen !important;
+  height: 80px;
+  width: auto;
+  display: block;
+  position: relative;
+  border-radius: 7px;
+  margin: 10px;
+}
+
+
+// Drag and drop options-list
+
+
+.dnd-options-list ul[dnd-list],
+.dnd-options-list ul[dnd-list] > li{
+  position: relative;
+}
+
+.dnd-options-list .dropzone ul[dnd-list] {
+  min-height: 100px !important;
+  min-width: 420px !important;
+}
+
+.dnd-options-list .dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+.dnd-options-list .dropzone ul[dnd-list] .dndDraggingSource {
+  display: none;
+}
+
+.dnd-options-list .dropzone .dnd-item-list ul {
+  display: table;
+}
+
+.dnd-options-list .dropzone .dnd-item-list li {
+  border: none;
+  border-radius: 7px;
+  color: #000000;
+  float: left;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: normal;
+  font-size: large;
+  height: 80px;
+  width: 420px;
+  background-color: #cacaca;
+  white-space: normal;
+  display: table-cell;
+}
+
+.dnd-options-list ul[dnd-list] .dndPlaceholder {
+  background-color: $PaleLightGreen !important;
+  height: 80px;
+  width: 420px;
+  display: block;
+  position: relative;
+  border-radius: 7px;
+  margin: 10px;
+}
+
+
+// Drag and drop questions-list
+
+
+.dnd-questions-list ul[dnd-list],
+.dnd-questions-list ul[dnd-list] > li{
+  position: relative;
+}
+
+.dnd-questions-list .dropzone ul[dnd-list] {
+  min-height: 100px !important;
+  min-width: 420px !important;
+}
+
+.dnd-questions-list .dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+.dnd-questions-list .dropzone ul[dnd-list] .dndDraggingSource {
+  display: none;
+}
+
+.dnd-questions-list .dropzone .dnd-item-list ul {
+  display: table;
+}
+
+.dnd-questions-list .dropzone .dnd-item-list li {
+  border: none;
+  border-radius: 7px;
+  color: #000000;
+  float: left;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: normal;
+  font-size: large;
+  height: 80px;
+  width: 420px;
+  background-color: #cacaca;
+  white-space: normal;
+  display: table-cell;
+}
+
+.dnd-questions-list ul[dnd-list] .dndPlaceholder {
+  background-color: $PaleLightGreen !important;
+  height: 80px;
+  width: 420px;
+  display: block;
+  position: relative;
+  border-radius: 7px;
+  margin: 10px;
+}
+
+
+
+//Sorting order icon
+
+.sortorder:after {
+  content: '\25b2';
+}
+.sortorder.reverse:after {
+  content: '\25bc';
 }
 
 //h1{
@@ -905,230 +1185,7 @@ div.separator{
 //  padding-left: 0px;
 //}
 //
-//// Drag and drop task-list
 //
-//.border {
-//  border-style: solid;
-//  border-color: #d3d3d3;
-//}
-//
-//.padding {
-//  padding: 40px;
-//}
-//
-//.task-list ul[dnd-list],
-//.task-list ul[dnd-list] > li{
-//  position: relative;
-//}
-//
-//.task-list .dropzone ul[dnd-list] {
-//  min-height: 42px;
-//  margin: 0px;
-//  padding-left: 0px;
-//}
-//
-//.task-list .dropzone .dndDragging {
-//  opacity: 0.7;
-//}
-//
-//.task-list .dropzone .dndDraggingSource {
-//  display: none;
-//}
-//
-//.task-list .dropzone .itemlist ul {
-//  display: table;
-//}
-//
-//.task-list .dropzone .itemlist li {
-//  border: none;
-//  border-radius: 7px;
-//  color: #000000;
-//  float: left;
-//  margin: 5px;
-//  padding: 3px;
-//  vertical-align: middle;
-//  text-align: center;
-//  font-weight: normal;
-//  font-size: 14px;
-//  height: 5em;
-//  width: 20em;
-//  background-color: #cacaca;
-//  white-space: normal;
-//  display: table-cell;
-//}
-//
-//.task-list ul[dnd-list] .dndPlaceholder {
-//  background-color: $PaleLightGreen !important;
-//  height: 5em;
-//  width: 20em;
-//  display: block;
-//  position: relative;
-//  border-radius: 7px;
-//  margin-bottom: 5px;
-//}
-//
-//
-//
-//// Drag and drop subtask-list
-//
-//
-//.subtask-list ul[dnd-list],
-//.subtask-list ul[dnd-list] > li{
-//  position: relative;
-//}
-//
-//.subtask-list .dropzone ul[dnd-list] {
-//  min-height: 42px;
-//  margin: 0px;
-//  padding-left: 0px;
-//}
-//
-//.subtask-list .dropzone .dndDragging {
-//  opacity: 0.7;
-//}
-//
-//.subtask-list .dropzone .dndDraggingSource {
-//  display: none;
-//}
-//
-//.subtask-list .dropzone .itemlist li {
-//  border: none;
-//  border-radius: 7px;
-//  color: #000000;
-//  margin: 5px;
-//  padding: 3px;
-//  vertical-align: middle;
-//  text-align: center;
-//  font-weight: normal;
-//  font-size: 14px;
-//  height: 5em;
-//  width: auto;
-//  background-color: #cacaca;
-//  white-space: normal;
-//}
-//
-//.subtask-list ul[dnd-list] .dndPlaceholder {
-//  background-color: $PaleLightGreen !important;
-//  height: 5em;
-//  width: auto;
-//  display: block;
-//  position: relative;
-//  border-radius: 7px;
-//  margin-bottom: 5px;
-//}
-//
-//
-//// Drag and drop options-list
-//
-//
-//.options-list ul[dnd-list],
-//.options-list ul[dnd-list] > li{
-//  position: relative;
-//}
-//
-//.options-list .dropzone ul[dnd-list] {
-//  min-height: 5em;
-//  min-width: 20em;
-//  margin: 0px;
-//  padding-left: 0px;
-//}
-//
-//
-//.options-list .dropzone .dndDragging {
-//  opacity: 0.7;
-//}
-//
-//.options-list .dropzone ul[dnd-list] .dndDraggingSource {
-//  display: none;
-//}
-//
-//.options-list .dropzone .itemlist ul {
-//  display: table;
-//}
-//
-//.options-list .dropzone .itemlist li {
-//  border: none;
-//  border-radius: 7px;
-//  color: #000000;
-//  float: left;
-//  margin: 5px;
-//  padding: 3px;
-//  vertical-align: middle;
-//  text-align: center;
-//  font-weight: normal;
-//  font-size: 14px;
-//  height: 5em;
-//  width: 20em;
-//  background-color: #cacaca;
-//  white-space: normal;
-//  display: table-cell;
-//}
-//
-//.options-list ul[dnd-list] .dndPlaceholder {
-//  background-color: $PaleLightGreen !important;
-//  height: 5em;
-//  width: 20em;
-//  display: block;
-//  position: relative;
-//  border-radius: 7px;
-//  margin-bottom: 5px;
-//}
-//
-//// Drag and drop questions-list
-//
-//
-//.questions-list ul[dnd-list],
-//.questions-list ul[dnd-list] > li{
-//  position: relative;
-//}
-//
-//.questions-list .dropzone ul[dnd-list] {
-//  min-height: 5em;
-//  min-width: 20em;
-//  margin: 0px;
-//  padding-left: 0px;
-//}
-//
-//
-//.questions-list .dropzone .dndDragging {
-//  opacity: 0.7;
-//}
-//
-//.questions-list .dropzone ul[dnd-list] .dndDraggingSource {
-//  display: none;
-//}
-//
-//.questions-list .dropzone .itemlist ul {
-//  display: table;
-//}
-//
-//.questions-list .dropzone .itemlist li {
-//  border: none;
-//  border-radius: 7px;
-//  color: #000000;
-//  float: left;
-//  margin: 5px;
-//  padding: 3px;
-//  vertical-align: middle;
-//  text-align: center;
-//  font-weight: normal;
-//  font-size: 14px;
-//  height: 5em;
-//  width: 20em;
-//  background-color: #cacaca;
-//  white-space: normal;
-//  display: table-cell;
-//}
-//
-//.questions-list ul[dnd-list] .dndPlaceholder {
-//  background-color: $PaleLightGreen !important;
-//  height: 5em;
-//  width: 20em;
-//  display: block;
-//  position: relative;
-//  border-radius: 7px;
-//  margin-bottom: 5px;
-//}
 //
 //
 //// TextAngular editor
@@ -1143,11 +1200,4 @@ div.separator{
 //}
 //
 //
-////Sorting order icon
-//
-//.sortorder:after {
-//  content: '\25b2';
-//}
-//.sortorder.reverse:after {
-//  content: '\25bc';
-//}
+

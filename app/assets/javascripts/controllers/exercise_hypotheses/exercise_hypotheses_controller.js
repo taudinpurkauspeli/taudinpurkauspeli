@@ -12,8 +12,6 @@ app.controller("ExerciseHypothesesController", [
         $scope.setExerciseHypotheses = function(exerciseHypothesis) {
             ExerciseHypotheses.get({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.exerciseHypotheses = data;
-                console.log(exerciseHypothesis);
-                console.log(data);
                 if(exerciseHypothesis) {
                     angular.forEach(data, function(exerciseHypothesisGroup, key) {
                         for(var i = 0; i < exerciseHypothesisGroup.length; i++) {

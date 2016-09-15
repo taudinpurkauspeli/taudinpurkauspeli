@@ -1,51 +1,72 @@
 <div class="modal-header">
-    <h3 class="modal-title">Toimenpiteen nimen muokkaus</h3>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text">Toimenpiteen nimen muokkaus</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit muokata toimenpiteen nimeä." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 </div>
 
 <div class="modal-body">
 
-    <div class="row">
-        <div class="col-md-12">
-            <form novalidate name="updateTaskForm">
-                <div class="form-group has-feedback"
-                     ng-class="{
-'has-error': updateTaskForm.name.$invalid && updateTaskForm.name.$dirty,
-'has-success': updateTaskForm.name.$valid && updateTaskForm.name.$touched
-}">
-                    <label for="name">Toimenpiteen nimi</label>
-                    <input type="text"
-                           class="form-control"
-                           required pattern=".{2,}"
-                           name="name"
-                           id="name"
-                           placeholder="Toimenpiteen nimi"
-                           ng-model="task.name">
+    <form class="form-horizontal" novalidate name="updateTaskForm">
+        <div class="form-group has-feedback padding-top-10"
+             ng-class="{'has-error': updateTaskForm.name.$invalid && updateTaskForm.name.$dirty,
+                        'has-success': updateTaskForm.name.$valid && updateTaskForm.name.$touched}">
 
-                    <p class="help-block" ng-messages="updateTaskForm.name.$error" ng-if="!updateTaskForm.name.$pristine">
-                        <span ng-message="required">Nimi on pakollinen</span>
-                        <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
-                    </p>
-                </div>
-            </form>
+            <label for="name" class="col-md-3 control-label">Toimenpiteen nimi</label>
+
+            <div class="col-md-8">
+                <input type="text"
+                       class="form-control center-text"
+                       required pattern=".{2,}"
+                       name="name"
+                       id="name"
+                       placeholder="Toimenpiteen nimi"
+                       ng-model="task.name">
+
+
+                <p class="help-block" ng-messages="updateTaskForm.name.$error" ng-if="!updateTaskForm.name.$pristine">
+                    <span ng-message="required">Nimi on pakollinen</span>
+                    <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
         </div>
 
-    </div>
+    </form>
+
 </div>
 
 <div class="modal-footer">
-    <button class="btn btn-primary"
-            type="button"
-            ng-click="updateTask()"
-            ng-disabled="updateTaskForm.$invalid || updateTaskForm.$pristine">
-        Päivitä
-    </button>
 
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <button class="btn btn-default width-100"
+                    type="button"
+                    ng-click="updateTask()"
+                    ng-disabled="updateTaskForm.$invalid || updateTaskForm.$pristine">
+                Päivitä
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-default width-100" type="button" ng-click="deleteTask()">
+                Poista toimenpide
+            </button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 
-
-    <button class="btn btn-danger"
-            ng-click="deleteTask()">
-        Poista toimenpide
-    </button>
 </div>
 

@@ -6,12 +6,18 @@
     </div>
     <div class="col-md-1"></div>
     <div class="col-md-2 padding-top-25">
-        <button uib-popover="Tällä sivulla voit suorittaa caseen liittyviä toimenpiteitä. Toimenpiteet voi suorittaa vain tietyssä järjestyksessä.
+        <button ng-if="currentUser && !currentUserAdmin" uib-popover="Tällä sivulla voit suorittaa caseen liittyviä toimenpiteitä. Toimenpiteet voi suorittaa vain tietyssä järjestyksessä.
 
         Voit valita haluamasi toimenpiteen klikkaamalla sitä. Jos toimenpiteen voi suorittaa, siirryt kyseisen toimenpiteen sivulle.
         Muussa tapauksessa sinulle näytetään virheilmoitus ja voit yrittää suorittaa jonkin toisen toimenpiteen.
 
-        Lisäksi näet sivulla suorittamistasi toimenpiteistä listan, jossa toimenpiteet on järjestetty tasoittain sen mukaan, missä järjestyksessä toimenpiteet on mahdollista suorittaa."
+        Lisäksi näet sivulla suorittamistasi toimenpiteistä listan, jossa toimenpiteet on järjestetty tasoittain sen mukaan, missä järjestyksessä toimenpiteet on mahdollista suorittaa.
+        Samalla tasolla olevat toimenpiteet on mahdollista suorittaa missä järjestyksessä tahansa."
+                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+
+        <button ng-if="currentUserAdmin" uib-popover="Tällä sivulla voit lisätä caseen kuuluvia toimenpiteitä painamalla '+ Luo uusi toimenpide'-nappia.
+        Voit muuttaa toimenpiteiden järjestystä ottamalla kiinni toimenpiteestä ja siirtämällä sen haluamallesi tasolle tai tasojen välille.
+        Klikkaamalla toimenpidettä siirryt toimenpiteen sivulle, jossa voit muokata toimenpiteen ominaisuuksia."
                 popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
     </div>
     <div class="col-md-1"></div>
@@ -20,29 +26,34 @@
 <div class = "separator"></div>
 
 <div ng-if="currentUserAdmin">
-    <div ng-if="!hasConclusion">
-        <h5>Tässä casessa ei ole vielä diagnoosi-alakohtaa. Lisää sellainen, jotta opiskelijat voivat pelata casen loppuun asti!</h5>
-        <br/>
-        <div class = "separator"></div>
-        <br/>
 
+    <div ng-if="!hasConclusion" class="padding-top-20">
+        <div class="row padding-bottom-20">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 center-text">
+                Tässä casessa ei ole vielä diagnoosi-alakohtaa. Lisää sellainen, jotta opiskelijat voivat pelata casen loppuun asti!
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="separator"></div>
     </div>
 
-
-    <div class="task-list">
-        <div class="dropzone">
+    <div class="row dnd-task-list">
+        <div class="col-md-1"></div>
+        <div class="dropzone col-md-10">
             <ul dnd-list="[]"
                 dnd-drop="moveTaskToNewLevel(index, item)"
                 class="list-unstyled">
 
                 <li ng-repeat="(level, tasks) in tasksList"
-                    class="panel panel-default itemlist">
+                    class="panel panel-default dnd-item-list margin-bottom-40 margin-top-40">
                     <div class="panel-heading">
-                        <div class="panel-title">
+                        <div class="panel-title panel-title-task-list center-text">
                             {{tasks[0]}}
                         </div>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body panel-body-task-list">
                         <ul  dnd-list="[]"
                              dnd-drop="moveTaskFromLevelToLevel(item, type, tasks[0])"
                              dnd-horizontal-list="true"
@@ -52,7 +63,8 @@
                                 dnd-draggable="task"
                                 dnd-type="tasks[0]"
                                 dnd-selected="goToCurrentTask(task.id)"
-                                dnd-effect-allowed="move">
+                                dnd-effect-allowed="move"
+                                class="multiline center-text margin-left-10 margin-right-10 margin-top-10 margin-bottom-10 padding-top-25 clickable">
                                 {{task.name}}
                             </li>
 
@@ -63,9 +75,16 @@
 
             </ul>
         </div>
+        <div class="col-md-1"></div>
     </div>
 
-    <button class="btn btn-default btn-save btn-new-task" ng-click="createTask()">+ Luo uusi toimenpide</button>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <button class="btn btn-default btn-lg btn-block padding-top-25 padding-bottom-25" ng-click="createTask()">+ Luo uusi toimenpide</button>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
 </div>
 
 

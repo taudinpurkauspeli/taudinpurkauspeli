@@ -12,11 +12,16 @@
 
 <div class = "separator"></div>
 
-<div ng-if="exercise.hidden">
-    <p>Tämä case on piilotettu opiskelijoilta. Muokkaa casea tehdäksesi siitä näkyvä.</p>
-    <br/>
+<div ng-if="exercise.hidden" class="padding-top-20">
+    <div class="row padding-bottom-20">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 center-text">
+            Tämä case on piilotettu opiskelijoilta. Muokkaa casea tehdäksesi siitä opiskelijoille näkyvän.
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
     <div class="separator"></div>
-    <br/>
 </div>
 
 <div ng-if="currentUser && !currentUserAdmin && userHasCompletedExercise" class="padding-top-20">
@@ -56,6 +61,15 @@
     <div class="col-md-10">
         <div class="panel panel-default">
             <div class="panel-heading">
+
+                <div class="row">
+
+                    <div class="col-md-10"></div>
+                    <div class="col-md-2">
+                        <button uib-popover="Tässä näet caseen liittyvän anamneesin."
+                                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+                    </div>
+                </div>
             </div>
             <div ta-bind="text" ng-model="exercise.anamnesis" class="panel-body">
             </div>
@@ -110,12 +124,20 @@
 
 </div>
 
-<div class="row" ng-if="currentUserAdmin && exercise">
-
-    <div class="col-md-5">
-        <button class="btn btn-default btn-exercise btn-save"
+<div class="row padding-top-20" ng-if="currentUserAdmin && exercise">
+    <div class="col-md-4"></div>
+    <div class="col-md-2">
+        <button class="btn btn-default btn-lg width-100"
+                type="button"
                 ng-click="updateExercise()">
             Muokkaa
         </button>
     </div>
+    <div class="col-md-2">
+        <button class="btn btn-default btn-lg width-100" type="button" ng-click="removeExercise(exercise)">
+            Poista
+        </button>
+    </div>
+    <div class="col-md-4"></div>
+
 </div>
