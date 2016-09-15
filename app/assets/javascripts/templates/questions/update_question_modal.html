@@ -1,78 +1,107 @@
 <div class="modal-header">
-    <h3 class="modal-title">Kysymyksen päivitys</h3>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text">Kysymyksen päivitys</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit päivittää kysymystä.
+            Voit päivittää lomakkeella kysymyksen opiskelijalle näkyviä kysymyksen tekstiä ja selitystä.
+            Voit lisäksi päivittää kysymyksen kysymysryhmää. Jos jätät kysymysryhmä-kentän tyhjäksi jätetään kysymyksen ryhmä tyhjäksi.
+            Jos kysymys kuului aiemmin kysymysryhmään ja jätit kysymysryhmä-kentän tyhjäksi, poistetaan kysymys siitä ryhmästä, johon se aiemmin kuului." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 </div>
 
 <div class="modal-body">
 
-    <div class="row">
-        <div class="col-md-12">
-            <form novalidate name="updateQuestionForm">
+    <form class="form-horizontal" novalidate name="updateQuestionForm">
 
-                <div class="form-group">
-                    <label for="question_group_title">Kysymysryhmä</label>
-                    <input type="text"
-                           class="form-control"
-                           name="question_group_title"
-                           id="question_group_title"
-                           placeholder="Kysymysryhmä"
-                           ng-model="question.question_group.title">
-                </div>
+        <div class="form-group has-feedback">
 
-                <div class="form-group has-feedback"
-                     ng-class="{
-'has-error': updateQuestionForm.title.$invalid && updateQuestionForm.title.$dirty,
-'has-success': updateQuestionForm.title.$valid && updateQuestionForm.title.$touched
-}">
-                    <label for="title">Kysymyksen teksti</label>
-                    <input type="text"
-                           class="form-control"
-                           required
-                           name="title"
-                           id="title"
-                           placeholder="Kysymyksen teksti"
-                           ng-model="question.title">
+            <label for="question_group_title" class="col-md-2 control-label">Kysymysryhmä</label>
 
-                    <p class="help-block" ng-messages="updateQuestionForm.title.$error" ng-if="!updateQuestionForm.title.$pristine">
-                        <span ng-message="required">Kysymys on pakollinen</span>
-                    </p>
-                </div>
+            <div class="col-md-9">
+                <input type="text"
+                       class="form-control center-text"
+                       name="question_group_title"
+                       id="question_group_title"
+                       placeholder="Kysymysryhmä"
+                       ng-model="question.question_group.title">
+            </div>
 
-                <div class="form-group">
-                    <label for="content">Seliteteksti</label>
-                    <div text-angular="text-angular"
-                         ng-model="question.content"
-                         ng-if="question"
-                         placeholder="Seliteteksti"
-                         name="content"
-                         id="content"
-                         required
-                         ta-text-editor-class="form-content"
-                         ta-html-editor-class="form-content"
-                         ta-toolbar-button-class="btn btn-default btn-toolbar"
-                         ta-focussed-class="focussed">
-                    </div>
-                </div>
-
-
-            </form>
+            <div class="col-md-1"></div>
         </div>
 
-    </div>
+        <div class="form-group has-feedback"
+             ng-class="{'has-error': updateQuestionForm.title.$invalid && updateQuestionForm.title.$dirty,
+                        'has-success': updateQuestionForm.title.$valid && updateQuestionForm.title.$touched}">
+
+            <label for="title" class="col-md-2 control-label">Kysymyksen teksti</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       required
+                       class="form-control center-text"
+                       name="title"
+                       id="title"
+                       placeholder="Kysymyksen teksti"
+                       ng-model="question.title">
+
+                <p class="help-block" ng-messages="updateQuestionForm.title.$error" ng-if="!updateQuestionForm.title.$pristine">
+                    <span ng-message="required">Kysymys on pakollinen</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+
+
+        <div class="form-group padding-top-10">
+
+            <label for="content" class="col-md-2 control-label">Seliteteksti</label>
+
+            <div class="col-md-9">
+                <div text-angular
+                     ng-model="question.content"
+                     ng-if="question"
+                     placeholder="Seliteteksti"
+                     name="content"
+                     id="content"
+                     required>
+                </div>
+
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </form>
+
 </div>
 
 <div class="modal-footer">
-    <button class="btn btn-primary"
-            type="button"
-            ng-click="updateQuestion()"
-            ng-disabled="updateQuestionForm.$invalid || updateQuestionForm.$pristine">
-        Päivitä
-    </button>
-
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
-
-    <button class="btn btn-danger"
-            ng-click="deleteQuestion()">
-        Poista
-    </button>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100"
+                    type="button"
+                    ng-click="updateQuestion()"
+                    ng-disabled="updateQuestionForm.$invalid || updateQuestionForm.$pristine">
+                Päivitä
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default width-100" type="button" ng-click="deleteQuestion()">
+                Poista
+            </button>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
 </div>
 
