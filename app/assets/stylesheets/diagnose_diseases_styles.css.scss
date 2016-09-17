@@ -1,18 +1,22 @@
 
 //Colors
-$MediumGrey           : #dbdbdb;
-$BtnExerciseBorderClr : #999;
+//$MediumGrey           : #dbdbdb;
+//$BtnExerciseBorderClr : #999;
 $PaleLightGreen       : #b2dca5;
 $LightGreen           : #74ad61;
-$MediumGreen          : #446739;
+//$MediumGreen          : #446739;
 $LightRed             : #ae6161;
 $PaleLightRed         : #be8181;
-$DarkRed              : #692f2f;
-$DarkGreen            : #232e1e;
+//$DarkRed              : #692f2f;
+//$DarkGreen            : #232e1e;
 $PaleLightYellow      : #EAEB7C;
 
-//These are not in palette.png and should be refactored later
-$DisabledButtonText   : #666;
+$VeryDarkGreen          : #111700;
+$DarkGreen              : #2D3F00;
+$Green                  : #779233;
+$PaleGrey               : #ECECEC;
+$LightGrey              : #FAFAFA;
+$Grey              : #F6F6F6;
 
 .title-image {
   width: 100%;
@@ -35,7 +39,7 @@ body{
 
 .navbar {
   margin-bottom: 0;
-  background-color: $MediumGreen;
+  background-color: $VeryDarkGreen;
 }
 
 .navbar-default {
@@ -45,23 +49,39 @@ body{
   }
 
   .navbar-nav li a:hover {
-    color: #BFBEC3;
+    color: $PaleGrey;
   }
 
   .navbar-brand {
     color: white;
   }
   .navbar-brand:hover {
-    color: #BFBEC3;
+    color: $PaleGrey;
   }
 }
 
 .nav-tabs {
+  border-color: $VeryDarkGreen;
+
   li a {
     color: black !important;
   }
-  li.active a {
-    background-color: #EEE !important;
+
+  li a:hover {
+    border-color: $VeryDarkGreen;
+    background-color: $Grey;
+  }
+
+  li.active a, li.active a:focus {
+    background-color: $LightGrey !important;
+    border-color: $VeryDarkGreen;
+    border-bottom-color: transparent;
+  }
+
+  li.active a:hover {
+    background-color: $Grey !important;
+    border-color: $VeryDarkGreen;
+    border-bottom-color: transparent;
   }
 
   .exerciseTabLink {
@@ -84,7 +104,7 @@ body{
 }
 
 main {
-  background-color: #eee;
+  background-color: $LightGrey;
   padding-bottom: 80px;
   width: 100%;
   max-width: 1170px;
@@ -235,8 +255,8 @@ main {
 div.separator{
   width: 100%;
   height: 1px;
-  border-bottom: 1px solid #CCC;
-  background-color: #DDD;
+  border-bottom: 1px solid $VeryDarkGreen;
+  background-color: white;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -373,7 +393,7 @@ div.separator{
 }
 
 .btn-checked-hypothesis {
-  color: #fff;
+  color: white;
   background-color: $LightRed;
 }
 
@@ -420,7 +440,7 @@ div.separator{
 
 .multichoice-explanation-border {
   border-top: 1px solid;
-  border-color: black;
+  border-color: $VeryDarkGreen;
 }
 
 .ta-editor {
@@ -457,14 +477,15 @@ div.separator{
 }
 
 .dnd-task-list .dropzone .dnd-item-list li {
-  border: none;
+  border: 1px solid;
   border-radius: 7px;
-  color: #000000;
+  color: white;
+  border-color: $VeryDarkGreen;
   float: left;
   font-size: large;
   height: 80px;
   width: 420px;
-  background-color: #cacaca;
+  background-color: $Green;
   white-space: normal;
   display: table-cell;
 }
@@ -499,15 +520,16 @@ div.separator{
 }
 
 .dnd-subtask-list .dropzone .dnd-item-list li {
-  border: none;
+  border: 1px solid;
   border-radius: 7px;
-  color: #000000;
+  color: white;
+  border-color: $VeryDarkGreen;
   vertical-align: middle;
   font-weight: normal;
   font-size: large;
   height: 80px;
   width: auto;
-  background-color: #cacaca;
+  background-color: $Green;
   white-space: normal;
 }
 
@@ -548,9 +570,9 @@ div.separator{
 }
 
 .dnd-options-list .dropzone .dnd-item-list li {
-  border: none;
+  border: 1px solid $VeryDarkGreen;
   border-radius: 7px;
-  color: #000000;
+  color: white;
   float: left;
   vertical-align: middle;
   text-align: center;
@@ -558,7 +580,7 @@ div.separator{
   font-size: large;
   height: 80px;
   width: 420px;
-  background-color: #cacaca;
+  background-color: $Green;
   white-space: normal;
   display: table-cell;
 }
@@ -600,9 +622,9 @@ div.separator{
 }
 
 .dnd-questions-list .dropzone .dnd-item-list li {
-  border: none;
+  border: 1px solid $VeryDarkGreen;
   border-radius: 7px;
-  color: #000000;
+  color: white;
   float: left;
   vertical-align: middle;
   text-align: center;
@@ -610,7 +632,7 @@ div.separator{
   font-size: large;
   height: 80px;
   width: 420px;
-  background-color: #cacaca;
+  background-color: $Green;
   white-space: normal;
   display: table-cell;
 }
@@ -625,7 +647,21 @@ div.separator{
   margin: 10px;
 }
 
+.btn-default {
+  background-color: $Green;
+  border-color: $VeryDarkGreen;
+  color: white;
+}
 
+.panel {
+  border-color: $VeryDarkGreen;
+
+  .panel-heading {
+    background-color: $DarkGreen;
+    border-color: $VeryDarkGreen;
+    color: white;
+  }
+}
 
 //Sorting order icon
 
