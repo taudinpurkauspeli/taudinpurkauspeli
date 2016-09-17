@@ -51,13 +51,13 @@
         <div class="col-md-1"></div>
     </div>
     <div ng-repeat="exercise in exercisesList | orderBy: 'name' | filter:{name: queryName}">
-        <div class="row padding-bottom-20">
+        <div class="row">
 
             <div ng-if="(!currentUser || (currentUser && !currentUserAdmin)) && !exercise.hidden">
 
-                <div class="col-md-1"></div>
+                <div class="col-md-1 padding-bottom-20"></div>
 
-                <div class="col-md-10">
+                <div class="col-md-10 padding-bottom-20">
                     <button class="btn btn-default btn-lg btn-exercise-index multiline padding-top-20 padding-bottom-20"
                             ng-disabled="!currentUser"
                             ng-class="{'disabled': !currentUser}"
@@ -66,29 +66,29 @@
                     </button>
                 </div>
 
-                <div class="col-md-1"></div>
+                <div class="col-md-1 padding-bottom-20"></div>
 
             </div>
 
             <div ng-if="currentUserAdmin">
 
-                <div class="col-md-1"></div>
+                <div class="col-md-1 padding-bottom-20"></div>
 
-                <div class="col-md-7">
+                <div class="col-md-7 padding-bottom-20">
                     <button class="btn btn-default btn-exercise-index multiline padding-top-20 padding-bottom-20"
                             ng-click="viewExercise(exercise)">
                         {{exercise.name}}
                     </button>
                 </div>
 
-                <div class="col-md-1">
+                <div class="col-md-1 padding-bottom-20">
                     <button class="btn btn-default btn-exercise-index btn-warning multiline padding-top-20 padding-bottom-20"
                             ng-click="copyExercise(exercise)">
                         Kopioi
                     </button>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-2 padding-bottom-20">
                     <button class="btn btn-default btn-exercise-index multiline padding-top-20 padding-bottom-20"
                             ng-click="toggleHiddenExercise(exercise)"
                             ng-class="{'btn-success': exercise.hidden,
@@ -98,7 +98,7 @@
                     </button>
                 </div>
 
-                <div class="col-md-1"></div>
+                <div class="col-md-1 padding-bottom-20"></div>
 
             </div>
 
