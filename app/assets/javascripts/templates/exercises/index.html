@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="col-md-1">
-                    <button class="btn btn-default btn-exercise-index multiline padding-top-20 padding-bottom-20"
+                    <button class="btn btn-default btn-exercise-index btn-warning multiline padding-top-20 padding-bottom-20"
                             ng-click="copyExercise(exercise)">
                         Kopioi
                     </button>
@@ -90,7 +90,9 @@
 
                 <div class="col-md-2">
                     <button class="btn btn-default btn-exercise-index multiline padding-top-20 padding-bottom-20"
-                            ng-click="toggleHiddenExercise(exercise)">
+                            ng-click="toggleHiddenExercise(exercise)"
+                            ng-class="{'btn-success': exercise.hidden,
+                                       'btn-danger': !exercise.hidden}">
                         <span ng-if="exercise.hidden">Tee näkyväksi</span>
                         <span ng-if="!exercise.hidden">Piilota opiskelijoilta</span>
                     </button>
@@ -108,7 +110,7 @@
     <div class="col-md-1"></div>
 
     <div class="col-md-7">
-        <button class="btn btn-default btn-exercise-index multiline padding-top-20 padding-bottom-20"
+        <button class="btn btn-default btn-exercise-index btn-success multiline padding-top-20 padding-bottom-20"
                 ng-click="newExercisePage()">
             + Luo uusi case
         </button>

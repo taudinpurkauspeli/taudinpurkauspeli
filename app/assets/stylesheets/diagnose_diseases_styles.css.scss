@@ -725,6 +725,35 @@ div.separator{
   }
 }
 
+.btn-success, .btn-success:focus {
+  background-color: $SuccessGreen;
+  color: $FontBlack;
+}
+
+.btn-success:hover, .btn-success:active, .btn-success:active:hover {
+  background-color: $PaleGrey;
+  color: $FontBlack;
+}
+
+.btn-warning, .btn-warning:focus {
+  background-color: $SuccessYellow;
+  color: $FontBlack;
+}
+
+.btn-warning:hover, .btn-warning:active, .btn-warning:active:hover {
+  background-color: $PaleGrey;
+  color: $FontBlack;
+}
+
+.btn-danger, .btn-danger:focus {
+  background-color: $SuccessRed;
+  color: $FontBlack;
+}
+
+.btn-danger:hover, .btn-danger:active, .btn-danger:active:hover {
+  background-color: $PaleGrey;
+  color: $FontBlack;
+}
 
 tr:hover {
   background-color: $Grey;
