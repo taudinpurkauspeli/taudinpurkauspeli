@@ -16,6 +16,7 @@ $PaleLightYellow      : #EAEB7C;
 $VeryDarkGreen          : #111700;
 $DarkGreen              : #2D3F00;
 $DisabledGreen          : #266E45;
+$SuccessGreen           : #DAF98B;
 $Green                  : #779233;
 
 $PaleGrey               : #ECECEC;
@@ -27,6 +28,10 @@ $LightBrown             : #9A8E36;
 $VeryDarkBlueGreen      : #001208;
 $DarkBlueGreen          : #003015;
 $LightBlueGreen         : #266E45;
+
+$SuccessYellow          : #FFED6B;
+$SuccessRed             : #D67272;
+$FontBlack              : #333333;
 
 .title-image {
   width: 100%;
@@ -48,7 +53,7 @@ body{
 }
 
 .popover-inner {
-  color: black;
+  color: $FontBlack;
 }
 
 .navbar {
@@ -113,11 +118,12 @@ body{
 }
 
 .progress {
- height: 40px;
+  height: 40px;
+  background-color: $LightGrey;
   .progress-bar {
       padding-top: 10px;
-      font-size: large !important;
-
+      font-size: 14px !important;
+      color: $FontBlack;
   }
 
 }
@@ -708,6 +714,20 @@ tr:hover {
 
 thead tr:hover {
   background-color: transparent !important;
+}
+
+//Progressbar
+
+.progress-bar-success {
+  background-color: $SuccessGreen;
+}
+
+.progress-bar-warning {
+  background-color: $SuccessYellow;
+}
+
+.progress-bar-danger {
+  background-color: $SuccessRed;
 }
 
 //Sorting order icon
