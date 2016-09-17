@@ -710,7 +710,7 @@ div.separator{
   color: white;
 }
 
-.btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active {
+.btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active, .btn-default.disabled:active:hover {
   border-color: $DarkBlueGreen;
   background-color: $DisabledGreen;
 }
@@ -725,7 +725,7 @@ div.separator{
   }
 }
 
-.btn-success, .btn-success:focus {
+.btn-success, .btn-success:focus, .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled:active, .btn-success.disabled:active:hover {
   background-color: $SuccessGreen;
   color: $FontBlack;
 }
@@ -735,7 +735,7 @@ div.separator{
   color: $FontBlack;
 }
 
-.btn-warning, .btn-warning:focus {
+.btn-warning, .btn-warning:focus, .btn-warning.disabled:hover, .btn-warning.disabled:focus, .btn-warning.disabled:active, .btn-warning.disabled:active:hover {
   background-color: $SuccessYellow;
   color: $FontBlack;
 }
@@ -745,7 +745,7 @@ div.separator{
   color: $FontBlack;
 }
 
-.btn-danger, .btn-danger:focus {
+.btn-danger, .btn-danger:focus, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled:active, .btn-danger.disabled:active:hover {
   background-color: $SuccessRed;
   color: $FontBlack;
 }
