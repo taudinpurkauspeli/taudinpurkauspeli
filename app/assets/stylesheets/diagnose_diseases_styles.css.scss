@@ -519,6 +519,10 @@ div.separator{
   display: table-cell;
 }
 
+.dnd-task-list .dropzone .dnd-item-list li:hover {
+  background-color: $Green;
+}
+
 .dnd-task-list ul[dnd-list] .dndPlaceholder {
   background-color: $Green !important;
   height: 80px;
@@ -561,6 +565,10 @@ div.separator{
   width: auto;
   background-color: $LightBlueGreen;
   white-space: normal;
+}
+
+.dnd-subtask-list .dropzone .dnd-item-list li:hover {
+  background-color: $Green;
 }
 
 .dnd-subtask-list .dropzone .dndPlaceholder {
@@ -616,6 +624,10 @@ div.separator{
   display: table-cell;
 }
 
+.dnd-options-list .dropzone .dnd-item-list li:hover {
+  background-color: $Green;
+}
+
 .dnd-options-list ul[dnd-list] .dndPlaceholder {
   background-color: $Green !important;
   height: 80px;
@@ -669,6 +681,10 @@ div.separator{
   display: table-cell;
 }
 
+.dnd-questions-list .dropzone .dnd-item-list li:hover {
+  background-color: $Green;
+}
+
 .dnd-questions-list ul[dnd-list] .dndPlaceholder {
   background-color: $Green !important;
   height: 80px;
@@ -679,6 +695,8 @@ div.separator{
   margin: 10px;
   border: 1px solid $DarkBlueGreen;
 }
+
+//Colors
 
 .btn-default, .btn-default:focus {
   background-color: $LightBlueGreen;
