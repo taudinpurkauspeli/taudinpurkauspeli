@@ -4,6 +4,8 @@ app.controller("ApplicationController", [
     "$scope", "AuthenticationService", "LocalStorageService",
     function($scope, AuthenticationService, LocalStorageService) {
 
+        $scope.navbarCollapsed = true;
+
         $scope.resetCurrentExercise = function(){
             LocalStorageService.remove("current_task");
             LocalStorageService.remove("current_task_tab_path");

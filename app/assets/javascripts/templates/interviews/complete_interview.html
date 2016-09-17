@@ -7,8 +7,12 @@
             </div>
             <div class="col-md-2">
                 <button uib-popover="Pohdi, mikä tai mitkä ovat mielestäsi oikeita vaihtoehtoja ja valitse ne klikkaamalla vaihtoehtoa hiirellä.
-                Paina lopuksi Tarkista-nappia suorittaaksesi tehtävän ja tarkistaaksesi, valitsitko kaikki oikeat vaihtoehdot.
-                Valittuasi vaihtoehdon näet vaihtoehtoon liittyvän selityksen. Klikkaamalla valittua vaihtoehtoa myöhemmin uudelleen voit tarkastella selitystä uudestaan."
+                Paina lopuksi 'Tarkista'-nappia suorittaaksesi tehtävän ja tarkistaaksesi, valitsitko kaikki oikeat vaihtoehdot.
+                Valittuasi vaihtoehdon näet vaihtoehtoon liittyvän selityksen. Klikkaamalla valittua vaihtoehtoa myöhemmin uudelleen voit tarkastella selitystä uudestaan.
+                Valittuihin vaihtoehtoihin liittyy värikoodi, joka kertoo, oliko vaihtoehto pakollinen (vihreä väri), sallittu (keltainen väri) vai väärä (punainen väri).
+                Kaikki pakolliset vaihtoehdot on valittava ennen kuin tehtävän voi suorittaa painamalla 'Tarkista'-nappia.
+                Sallitut vaihtoehdot voi valita ja niistä saa lisätietoa, mutta ne eivät ole pakollisia tehtävän suorituksen kannalta.
+                Väärien vaihtoehtojen valitseminen kerryttää virhepisteitä."
                         popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
             </div>
         </div>
@@ -39,9 +43,9 @@
 
                                 <button class="btn btn-default btn-lg btn-question multiline padding-top-10 padding-bottom-10"
                                         ng-if="question.asked" uib-collapse ng-click="changeQuestionCollapse(question)"
-                                        ng-class="{'correct-answer': questionIs('required', question),
-                                                   'allowed-answer': questionIs('allowed', question),
-                                                   'wrong-answer': questionIs('wrong', question)}">
+                                        ng-class="{'btn-success': questionIs('required', question),
+                                                   'btn-warning': questionIs('allowed', question),
+                                                   'btn-danger': questionIs('wrong', question)}">
                                     {{question.title}}
                                 </button>
 
@@ -79,9 +83,9 @@
 
                                 <button class="btn btn-default btn-lg btn-question multiline padding-top-10 padding-bottom-10"
                                         ng-if="question.asked" uib-collapse ng-click="changeQuestionCollapse(question)"
-                                        ng-class="{'correct-answer': questionIs('required', question),
-                                                   'allowed-answer': questionIs('allowed', question),
-                                                   'wrong-answer': questionIs('wrong', question)}">
+                                        ng-class="{'btn-success': questionIs('required', question),
+                                                   'btn-warning': questionIs('allowed', question),
+                                                   'btn-danger': questionIs('wrong', question)}">
                                     {{question.title}}
                                 </button>
 
@@ -104,7 +108,7 @@
         <div class="row">
             <div class="col-md-5"></div>
             <div class="col-md-2">
-                <input type="submit" class="btn btn-default btn-lg" value="Tarkista" ng-if="!currentUserAdmin" ng-click="checkAnswers()">
+                <input type="submit" class="btn btn-default btn-success btn-lg" value="Tarkista" ng-if="!currentUserAdmin" ng-click="checkAnswers()">
             </div>
             <div class="col-md-5"></div>
         </div>

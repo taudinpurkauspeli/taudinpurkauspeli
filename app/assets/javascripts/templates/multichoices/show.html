@@ -14,8 +14,8 @@
     <div class="col-md-1"></div>
 
     <div class="col-md-10">
-        <h2 class="center-text" ng-if="multichoice.is_radio_button">Radiobutton: {{multichoice.question}}</h2>
-        <h2 class="center-text" ng-if="!multichoice.is_radio_button">Monivalinta: {{multichoice.question}}</h2>
+        <h2 class="center-text multiline" ng-if="multichoice.is_radio_button">Radiobutton: {{multichoice.question}}</h2>
+        <h2 class="center-text multiline" ng-if="!multichoice.is_radio_button">Monivalinta: {{multichoice.question}}</h2>
     </div>
     <div class="col-md-1"></div>
 
@@ -25,7 +25,7 @@
 
     <div class="col-md-4"></div>
     <div class="col-md-2">
-        <button class="btn btn-default width-100" ng-click="updateMultichoice(multichoice)">Muokkaa</button>
+        <button class="btn btn-default btn-success width-100" ng-click="updateMultichoice(multichoice)">Muokkaa</button>
     </div>
     <div class="col-md-2">
         <button uib-popover="Tällä sivulla voit muokata monivalinta-alakohtaa. Alakohdan kysymystä ja tyyppiä pääset muokkaamaan 'Muokkaa'-nappia painamalla.

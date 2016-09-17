@@ -19,7 +19,7 @@
             <div class="col-md-10">
 
                 <button class="btn btn-default btn-lg btn-unchecked-hypothesis multiline padding-top-10 padding-bottom-10"
-                        ng-class="{'btn-correct-diagnosis': userHasCheckedHypothesis(correctDiagnosis) && hypothesisIsCorrectDiagnosis(correctDiagnosis)}"
+                        ng-class="{'btn-success': userHasCheckedHypothesis(correctDiagnosis) && hypothesisIsCorrectDiagnosis(correctDiagnosis)}"
                         uib-collapse ng-click="correctDiagnosisCollapsed = !correctDiagnosisCollapsed">
                     {{correctDiagnosis.hypothesis.name}}
                 </button>
@@ -45,7 +45,7 @@
                 <div class="col-md-10">
 
                     <button class="btn btn-default btn-lg btn-unchecked-hypothesis multiline padding-top-10 padding-bottom-10"
-                            ng-class="{'btn-checked-hypothesis': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis)}"
+                            ng-class="{'btn-danger': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis)}"
                             ng-click="setExerciseHypothesisCollapse(exerciseHypothesis)">
                         {{exerciseHypothesis.hypothesis.name}}
                     </button>

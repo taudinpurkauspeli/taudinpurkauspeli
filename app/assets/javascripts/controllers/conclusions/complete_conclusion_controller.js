@@ -11,6 +11,8 @@ app.controller("CompleteConclusionController", [
         var UncheckedHypotheses = $resource('/unchecked_hypotheses.json');
         var CorrectDiagnosis = $resource('/correct_diagnosis.json');
 
+        $scope.checkedHypotheses = [];
+
         $scope.setCheckedHypotheses = function() {
             CheckedHypotheses.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.checkedHypotheses = data;

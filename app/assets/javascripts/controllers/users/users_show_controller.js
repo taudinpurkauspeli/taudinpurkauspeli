@@ -56,12 +56,12 @@ app.controller("UsersShowController", [
 
         $scope.removeUser = function(user) {
 
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa opiskelijan?");
+            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa käyttäjän?");
 
             if (deleteConfirmation) {
                 UserDestroy.delete({userId : user.id}, function() {
                     $.notify({
-                        message: "Opiskelijan poistaminen onnistui!"
+                        message: "Käyttäjän poistaminen onnistui!"
                     }, {
                         placement: {
                             align: "center"
@@ -73,7 +73,7 @@ app.controller("UsersShowController", [
                 });
             } else {
                 $.notify({
-                    message: "Opiskelijaa '" + user.first_name + "' ei poistettu."
+                    message: "Käyttäjää '" + user.first_name + "' ei poistettu."
                 }, {
                     placement: {
                         align: "center"
