@@ -512,7 +512,7 @@ div.separator{
   border-color: $DarkBlueGreen;
   float: left;
   font-size: large;
-  height: 80px;
+  min-height: 80px;
   width: 420px;
   background-color: $LightBlueGreen;
   white-space: normal;
@@ -561,7 +561,7 @@ div.separator{
   vertical-align: middle;
   font-weight: normal;
   font-size: large;
-  height: 80px;
+  min-height: 80px;
   width: auto;
   background-color: $LightBlueGreen;
   white-space: normal;
@@ -617,7 +617,7 @@ div.separator{
   text-align: center;
   font-weight: normal;
   font-size: large;
-  height: 80px;
+  min-height: 80px;
   width: 420px;
   background-color: $LightBlueGreen;
   white-space: normal;
@@ -674,7 +674,7 @@ div.separator{
   text-align: center;
   font-weight: normal;
   font-size: large;
-  height: 80px;
+  min-height: 80px;
   width: 420px;
   background-color: $LightBlueGreen;
   white-space: normal;

@@ -12,7 +12,7 @@
             class="list-unstyled dnd-item-list margin-0">
 
             <li ng-repeat="(level, subtask) in taskForShow.subtasks"
-                class="center-text multiline padding-top-25 margin-top-20 clickable"
+                class="center-text multiline padding-top-25 padding-bottom-25 margin-top-20 clickable"
                 dnd-draggable="subtask"
                 dnd-type="level"
                 dnd-selected="editSubtask(subtask)"
