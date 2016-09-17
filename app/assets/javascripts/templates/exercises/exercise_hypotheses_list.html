@@ -180,8 +180,8 @@
                             <div class="col-md-10">
 
                                 <button class="btn btn-default btn-lg btn-unchecked-hypothesis multiline padding-top-10 padding-bottom-10"
-                                        ng-class="{'btn-checked-hypothesis': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis),
-                                               'btn-correct-diagnosis': userHasCheckedHypothesis(exerciseHypothesis) && hypothesisIsCorrectDiagnosis(exerciseHypothesis)}"
+                                        ng-class="{'btn-danger': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis),
+                                                   'btn-success': userHasCheckedHypothesis(exerciseHypothesis) && hypothesisIsCorrectDiagnosis(exerciseHypothesis)}"
                                         ng-click="checkExerciseHypothesis(exerciseHypothesis)" uib-collapse>
                                     {{exerciseHypothesis.hypothesis.name}}
                                 </button>

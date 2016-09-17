@@ -347,11 +347,11 @@ div.separator{
 }
 
 .panel-light-green{
-  background-color: $PaleLightGreen;
+  background-color: $SuccessGreen;
 }
 
 .panel-heading-green{
-  background-color: $LightGreen !important;
+  background-color: $Green !important;
 }
 
 .panel-body {
@@ -431,15 +431,15 @@ div.separator{
 }
 
 .wrong-answer{
-  background-color: $PaleLightRed;
+  background-color: $SuccessRed;
 }
 
 .correct-answer{
-  background-color: $PaleLightGreen;
+  background-color: $SuccessGreen;
 }
 
 .allowed-answer{
-  background-color: $PaleLightYellow;
+  background-color: $SuccessYellow;
 }
 
 .question-answer {
@@ -722,6 +722,7 @@ div.separator{
     background-color: $DarkBlueGreen;
     border-color: $DarkBlueGreen;
     color: white;
+    min-height: 46px;
   }
 }
 
