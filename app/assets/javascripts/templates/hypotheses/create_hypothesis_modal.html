@@ -48,7 +48,8 @@
             <button class="btn btn-default width-100"
                     type="button"
                     ng-click="createHypothesis()"
-                    ng-disabled="createHypothesisForm.$invalid || createHypothesisForm.$pristine">
+                    ng-disabled="createHypothesisForm.$invalid || createHypothesisForm.$pristine"
+                    ng-class="{'disabled': createHypothesisForm.$invalid || createHypothesisForm.$pristine}">
                 Luo
             </button>
         </div>

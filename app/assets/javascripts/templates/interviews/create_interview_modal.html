@@ -50,7 +50,8 @@
             <button class="btn btn-default width-100"
                     type="button"
                     ng-click="createInterview()"
-                    ng-disabled="createInterviewForm.$invalid || createInterviewForm.$pristine">
+                    ng-disabled="createInterviewForm.$invalid || createInterviewForm.$pristine"
+                    ng-class="{'disabled': createInterviewForm.$invalid || createInterviewForm.$pristine}">
                 Luo
             </button>
         </div>

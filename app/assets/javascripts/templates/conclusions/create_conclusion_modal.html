@@ -89,7 +89,8 @@
             <button class="btn btn-default width-100"
                     type="button"
                     ng-click="createConclusion()"
-                    ng-disabled="createConclusionForm.$invalid || createConclusionForm.$pristine">
+                    ng-disabled="createConclusionForm.$invalid || createConclusionForm.$pristine"
+                    ng-class="{'disabled': createConclusionForm.$invalid || createConclusionForm.$pristine}">
                 Luo
             </button>
         </div>

@@ -72,7 +72,8 @@
             <button class="btn btn-default width-100"
                     type="button"
                     ng-click="updateMultichoice()"
-                    ng-disabled="updateMultichoiceForm.$invalid || updateMultichoiceForm.$pristine">
+                    ng-disabled="updateMultichoiceForm.$invalid || updateMultichoiceForm.$pristine"
+                    ng-class="{'disabled': updateMultichoiceForm.$invalid || updateMultichoiceForm.$pristine}">
                 Päivitä
             </button>
         </div>

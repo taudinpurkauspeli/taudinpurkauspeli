@@ -59,6 +59,7 @@
 
                 <div class="col-md-10">
                     <button class="btn btn-default btn-lg btn-exercise-index multiline padding-top-20 padding-bottom-20"
+                            ng-disabled="!currentUser"
                             ng-class="{'disabled': !currentUser}"
                             ng-click="viewExercise(exercise)">
                         {{exercise.name}}

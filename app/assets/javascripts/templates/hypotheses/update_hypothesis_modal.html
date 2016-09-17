@@ -50,7 +50,8 @@
             <button class="btn btn-default width-100"
                     type="button"
                     ng-click="updateHypothesis()"
-                    ng-disabled="updateHypothesisForm.$invalid || updateHypothesisForm.$pristine">
+                    ng-disabled="updateHypothesisForm.$invalid || updateHypothesisForm.$pristine"
+                    ng-class="{'disabled': updateHypothesisForm.$invalid || updateHypothesisForm.$pristine}">
                 Päivitä
             </button>
         </div>

@@ -97,7 +97,8 @@
 
                                         <button class="btn btn-default btn-unchecked-hypothesis multiline padding-top-10 padding-bottom-10"
                                                 ng-click="addToExercise(hypothesis)"
-                                                ng-disabled="belongsToExercise(hypothesis)">
+                                                ng-disabled="belongsToExercise(hypothesis)"
+                                                ng-class="{'disabled': belongsToExercise(hypothesis)}">
                                             {{hypothesis.name}}
                                         </button>
                                     </div>

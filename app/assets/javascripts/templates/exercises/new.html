@@ -78,7 +78,8 @@
         <div class="col-md-5"></div>
         <div class="col-md-2">
             <button type="submit" ng-click="createExercise()" class="btn btn-default width-100"
-                    ng-disabled="createExerciseForm.$invalid || createExerciseForm.$pristine">
+                    ng-disabled="createExerciseForm.$invalid || createExerciseForm.$pristine"
+                    ng-class="{'disabled': createExerciseForm.$invalid || createExerciseForm.$pristine}">
                 Tallenna
             </button>
         </div>

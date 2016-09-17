@@ -72,7 +72,8 @@
             <button class="btn btn-default width-100"
                     type="button"
                     ng-click="createMultichoice()"
-                    ng-disabled="createMultichoiceForm.$invalid || createMultichoiceForm.$pristine">
+                    ng-disabled="createMultichoiceForm.$invalid || createMultichoiceForm.$pristine"
+                    ng-class="{'disabled': createMultichoiceForm.$invalid || createMultichoiceForm.$pristine}">
                 Luo
             </button>
         </div>
