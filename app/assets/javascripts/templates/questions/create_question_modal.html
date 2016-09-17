@@ -108,7 +108,8 @@
             <button class="btn btn-default width-100"
                     type="button"
                     ng-click="createQuestion()"
-                    ng-disabled="createQuestionForm.$invalid || createQuestionForm.$pristine">
+                    ng-disabled="createQuestionForm.$invalid || createQuestionForm.$pristine"
+                    ng-class="{'disabled': createQuestionForm.$invalid || createQuestionForm.$pristine}">
                 Luo
             </button>
         </div>

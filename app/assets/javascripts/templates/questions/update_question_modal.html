@@ -87,7 +87,8 @@
             <button class="btn btn-default width-100"
                     type="button"
                     ng-click="updateQuestion()"
-                    ng-disabled="updateQuestionForm.$invalid || updateQuestionForm.$pristine">
+                    ng-disabled="updateQuestionForm.$invalid || updateQuestionForm.$pristine"
+                    ng-class="{'disabled': updateQuestionForm.$invalid || updateQuestionForm.$pristine}">
                 Päivitä
             </button>
         </div>

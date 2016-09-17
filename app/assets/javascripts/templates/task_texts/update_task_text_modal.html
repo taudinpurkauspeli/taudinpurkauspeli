@@ -44,7 +44,8 @@
             <button class="btn btn-default width-100"
                     type="button"
                     ng-click="updateTaskText()"
-                    ng-disabled="updateTaskTextForm.$invalid || updateTaskTextForm.$pristine">
+                    ng-disabled="updateTaskTextForm.$invalid || updateTaskTextForm.$pristine"
+                    ng-class="{'disabled': updateTaskTextForm.$invalid || updateTaskTextForm.$pristine}">
                 Päivitä
             </button>
         </div>

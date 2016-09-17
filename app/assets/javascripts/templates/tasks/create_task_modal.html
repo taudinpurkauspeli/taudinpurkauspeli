@@ -49,7 +49,8 @@
             <button class="btn btn-default btn-block"
                     type="button"
                     ng-click="createTask()"
-                    ng-disabled="createTaskForm.$invalid || createTaskForm.$pristine">
+                    ng-disabled="createTaskForm.$invalid || createTaskForm.$pristine"
+                    ng-class="{'disabled': createTaskForm.$invalid || createTaskForm.$pristine}">
                 Luo
             </button>
         </div>

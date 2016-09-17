@@ -44,7 +44,8 @@
             <button class="btn btn-default width-100"
                     type="button"
                     ng-click="createTaskText()"
-                    ng-disabled="createTaskTextForm.$invalid || createTaskTextForm.$pristine">
+                    ng-disabled="createTaskTextForm.$invalid || createTaskTextForm.$pristine"
+                    ng-class="{'disabled': createTaskTextForm.$invalid || createTaskTextForm.$pristine}">
                 Luo
             </button>
         </div>

@@ -180,7 +180,8 @@
             <button class="btn btn-default width-100"
                     type="button"
                     ng-click="updateUser()"
-                    ng-disabled="updateUserForm.$invalid || updateUserForm.$pristine">
+                    ng-disabled="updateUserForm.$invalid || updateUserForm.$pristine"
+                    ng-class="{'disabled': updateUserForm.$invalid || updateUserForm.$pristine}">
                 Tallenna
             </button>
         </div>
