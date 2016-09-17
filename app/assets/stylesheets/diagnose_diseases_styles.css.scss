@@ -701,6 +701,15 @@ div.separator{
   }
 }
 
+
+tr:hover {
+  background-color: $Grey;
+}
+
+thead tr:hover {
+  background-color: transparent !important;
+}
+
 //Sorting order icon
 
 .sortorder:after {
