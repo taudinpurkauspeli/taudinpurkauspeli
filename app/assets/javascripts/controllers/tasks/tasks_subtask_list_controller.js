@@ -62,12 +62,7 @@ app.controller("TasksSubtaskListController", [
         };
 
         var taskTextTitle = function(task_text){
-            var words = task_text.content.match(/\S+/gi);
-            var returnString = "Teksti: " + words[0];
-            if(words.length > 1){
-                returnString += " " + words[1];
-            }
-            return returnString;
+            return "Tekstialakohta";
         };
 
         var interviewTitle = function(interview){

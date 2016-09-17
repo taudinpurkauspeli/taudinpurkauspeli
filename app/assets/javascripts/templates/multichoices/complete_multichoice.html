@@ -6,8 +6,12 @@
                 <h3 class="panel-title panel-title-multichoice multiline">Kysymys: {{subtask.multichoice.question}}</h3>
             </div>
             <div class="col-md-2">
-                <button uib-popover="Valitse mielestäsi oikea/oikeat vaihtoehdot ja paina lopuksi Tarkista-nappia suorittaaksesi tehtävän.
-                Jos valinnoissasi oli virheitä, pääset valitsemaan uudet vaihtoehdot ja näet selitykset aiemmin valitsemiisi vaihtoehtoihin."
+                <button uib-popover="Valitse mielestäsi oikea/oikeat vaihtoehdot ja paina lopuksi 'Tarkista'-nappia suorittaaksesi tehtävän.
+                Jos valinnoissasi oli virheitä, pääset valitsemaan uudet vaihtoehdot ja näet selitykset aiemmin valitsemiisi vaihtoehtoihin.
+                Valittuihin vaihtoehtoihin liittyy värikoodi, joka kertoo, oliko vaihtoehto pakollinen (vihreä väri), sallittu (keltainen väri) vai väärä (punainen väri).
+                Kaikki pakolliset vaihtoehdot on valittava ennen kuin tehtävän voi suorittaa painamalla 'Tarkista'-nappia.
+                Sallitut vaihtoehdot voi valita ja niistä saa lisätietoa, mutta ne eivät ole pakollisia tehtävän suorituksen kannalta.
+                Väärien vaihtoehtojen valitseminen kerryttää virhepisteitä."
                         popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
             </div>
         </div>
