@@ -17,6 +17,8 @@ $Green                  : #779233;
 $PaleGrey               : #ECECEC;
 $LightGrey              : #FAFAFA;
 $Grey              : #F6F6F6;
+$LightBrown              : #9A8E36;
+$LightBlueGreen              : #266E45;
 
 .title-image {
   width: 100%;
@@ -37,6 +39,10 @@ body{
   background-repeat: no-repeat;
 }
 
+.popover-inner {
+  color: black;
+}
+
 .navbar {
   margin-bottom: 0;
   background-color: $VeryDarkGreen;
@@ -52,10 +58,19 @@ body{
     color: $PaleGrey;
   }
 
+  .navbar-nav li a:focus {
+    color: $PaleGrey;
+  }
+
   .navbar-brand {
     color: white;
   }
+
   .navbar-brand:hover {
+    color: $PaleGrey;
+  }
+
+  .navbar-brand:focus {
     color: $PaleGrey;
   }
 }
@@ -415,13 +430,13 @@ div.separator{
 
 .question-answer {
   border: 1px solid;
-  border-color: #ccc;
+  border-color: $VeryDarkGreen;
   border-radius: 6px;
 }
 
 .correct-diagnosis {
   border: 1px solid;
-  border-color: #ccc;
+  border-color: $VeryDarkGreen;
   border-radius: 6px;
 }
 
@@ -647,11 +662,18 @@ div.separator{
   margin: 10px;
 }
 
-.btn-default {
+.btn-default, .btn-default:focus {
   background-color: $Green;
   border-color: $VeryDarkGreen;
   color: white;
 }
+
+.btn-default:hover, .btn-default:active, .btn-default:active:hover {
+  background-color: $LightBlueGreen;
+  border-color: $VeryDarkGreen;
+  color: white;
+}
+
 
 .panel {
   border-color: $VeryDarkGreen;
