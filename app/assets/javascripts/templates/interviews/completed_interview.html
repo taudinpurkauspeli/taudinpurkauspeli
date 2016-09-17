@@ -37,9 +37,9 @@
 
                                 <button class="btn btn-default btn-lg btn-question multiline padding-top-10 padding-bottom-10"
                                         ng-if="question.asked" uib-collapse ng-click="changeQuestionCollapse(question)"
-                                        ng-class="{'correct-answer': questionIs('required', question),
-                                                   'allowed-answer': questionIs('allowed', question),
-                                                   'wrong-answer': questionIs('wrong', question)}">
+                                        ng-class="{'btn-success': questionIs('required', question),
+                                                   'btn-warning': questionIs('allowed', question),
+                                                   'btn-danger': questionIs('wrong', question)}">
                                     {{question.title}}
                                 </button>
 
@@ -77,9 +77,9 @@
 
                                 <button class="btn btn-default btn-lg btn-question multiline padding-top-10 padding-bottom-10"
                                         ng-if="question.asked" uib-collapse ng-click="changeQuestionCollapse(question)"
-                                        ng-class="{'correct-answer': questionIs('required', question),
-                                                   'allowed-answer': questionIs('allowed', question),
-                                                   'wrong-answer': questionIs('wrong', question)}">
+                                        ng-class="{'btn-success': questionIs('required', question),
+                                                   'btn-warning': questionIs('allowed', question),
+                                                   'btn-danger': questionIs('wrong', question)}">
                                     {{question.title}}
                                 </button>
 
