@@ -786,3 +786,30 @@ thead tr:hover {
 .sortorder.reverse:after {
   content: '\25bc';
 }
+
+
+//Alerts
+
+.alert-success {
+  background-color: $SuccessGreen;
+  border-color: $DarkBlueGreen;
+  color: $FontBlack;
+  width: 55%;
+  text-align: center;
+}
+
+.alert-warning {
+  background-color: $SuccessYellow;
+  border-color: $DarkBlueGreen;
+  color: $FontBlack;
+  width: 55%;
+  text-align: center;
+}
+
+.alert-danger {
+  background-color: $SuccessRed;
+  border-color: $DarkBlueGreen;
+  color: $FontBlack;
+  width: 55%;
+  text-align: center;
+}
