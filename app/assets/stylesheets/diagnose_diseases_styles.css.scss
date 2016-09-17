@@ -13,6 +13,7 @@ $PaleLightYellow      : #EAEB7C;
 
 $VeryDarkGreen          : #111700;
 $DarkGreen              : #2D3F00;
+$DisabledGreen              : #779233;
 $Green                  : #779233;
 $PaleGrey               : #ECECEC;
 $LightGrey              : #FAFAFA;
@@ -674,6 +675,10 @@ div.separator{
   color: white;
 }
 
+.btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active {
+  border-color: $VeryDarkGreen;
+  background-color: $DisabledGreen;
+}
 
 .panel {
   border-color: $VeryDarkGreen;

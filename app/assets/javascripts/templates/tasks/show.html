@@ -57,7 +57,10 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-default btn-lg width-100" ng-click="createConclusion(taskForShow)" ng-disabled="hasConclusion">+ Diagnoosi</button>
+                            <button class="btn btn-default btn-lg width-100" ng-click="createConclusion(taskForShow)" ng-disabled="hasConclusion"
+                                    ng-class="{'disabled': hasConclusion}">
+                                + Diagnoosi
+                            </button>
                         </div>
                     </div>
                 </div>
