@@ -134,13 +134,13 @@
 <div class="row" ng-if="currentUserAdmin && (currentUser != user.id)">
     <div class="col-md-3"></div>
     <div class="col-md-3">
-        <button class="btn btn-default btn-lg width-100"
+        <button class="btn btn-default btn-warning btn-lg width-100"
                 ng-click="changeAdminStatus(user)">
             Tee käyttäjästä {{adminStatus}}
         </button>
     </div>
     <div class="col-md-3">
-        <button class="btn btn-default btn-lg width-100"
+        <button class="btn btn-default btn-danger btn-lg width-100"
                 ng-click="removeUser(user)">
             Poista käyttäjän tili
         </button>
