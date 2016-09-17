@@ -1,5 +1,5 @@
 
-//Colors
+// Old Colors
 //$MediumGrey           : #dbdbdb;
 //$BtnExerciseBorderClr : #999;
 $PaleLightGreen       : #b2dca5;
@@ -11,15 +11,22 @@ $PaleLightRed         : #be8181;
 //$DarkGreen            : #232e1e;
 $PaleLightYellow      : #EAEB7C;
 
+// New colors
+
 $VeryDarkGreen          : #111700;
 $DarkGreen              : #2D3F00;
-$DisabledGreen              : #779233;
+$DisabledGreen          : #266E45;
 $Green                  : #779233;
+
 $PaleGrey               : #ECECEC;
 $LightGrey              : #FAFAFA;
-$Grey              : #F6F6F6;
-$LightBrown              : #9A8E36;
-$LightBlueGreen              : #266E45;
+$Grey                   : #F6F6F6;
+
+$LightBrown             : #9A8E36;
+
+$VeryDarkBlueGreen      : #001208;
+$DarkBlueGreen          : #003015;
+$LightBlueGreen         : #266E45;
 
 .title-image {
   width: 100%;
@@ -46,7 +53,7 @@ body{
 
 .navbar {
   margin-bottom: 0;
-  background-color: $VeryDarkGreen;
+  background-color: $DarkBlueGreen;
 }
 
 .navbar-default {
@@ -77,26 +84,26 @@ body{
 }
 
 .nav-tabs {
-  border-color: $VeryDarkGreen;
+  border-color: $DarkBlueGreen;
 
   li a {
     color: black !important;
   }
 
   li a:hover {
-    border-color: $VeryDarkGreen;
+    border-color: $DarkBlueGreen;
     background-color: $Grey;
   }
 
   li.active a, li.active a:focus {
     background-color: $LightGrey !important;
-    border-color: $VeryDarkGreen;
+    border-color: $DarkBlueGreen;
     border-bottom-color: transparent;
   }
 
   li.active a:hover {
     background-color: $Grey !important;
-    border-color: $VeryDarkGreen;
+    border-color: $DarkBlueGreen;
     border-bottom-color: transparent;
   }
 
@@ -271,7 +278,7 @@ main {
 div.separator{
   width: 100%;
   height: 1px;
-  border-bottom: 1px solid $VeryDarkGreen;
+  border-bottom: 1px solid $DarkBlueGreen;
   background-color: white;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -431,13 +438,13 @@ div.separator{
 
 .question-answer {
   border: 1px solid;
-  border-color: $VeryDarkGreen;
+  border-color: $DarkBlueGreen;
   border-radius: 6px;
 }
 
 .correct-diagnosis {
   border: 1px solid;
-  border-color: $VeryDarkGreen;
+  border-color: $DarkBlueGreen;
   border-radius: 6px;
 }
 
@@ -456,7 +463,7 @@ div.separator{
 
 .multichoice-explanation-border {
   border-top: 1px solid;
-  border-color: $VeryDarkGreen;
+  border-color: $DarkBlueGreen;
 }
 
 .ta-editor {
@@ -496,24 +503,25 @@ div.separator{
   border: 1px solid;
   border-radius: 7px;
   color: white;
-  border-color: $VeryDarkGreen;
+  border-color: $DarkBlueGreen;
   float: left;
   font-size: large;
   height: 80px;
   width: 420px;
-  background-color: $Green;
+  background-color: $LightBlueGreen;
   white-space: normal;
   display: table-cell;
 }
 
 .dnd-task-list ul[dnd-list] .dndPlaceholder {
-  background-color: $PaleLightGreen !important;
+  background-color: $Green !important;
   height: 80px;
   width: 420px;
   display: block;
   position: relative;
   border-radius: 7px;
   margin: 10px;
+  border: 1px solid $DarkBlueGreen;
 }
 
 // Drag and drop subtask-list
@@ -539,24 +547,25 @@ div.separator{
   border: 1px solid;
   border-radius: 7px;
   color: white;
-  border-color: $VeryDarkGreen;
+  border-color: $DarkBlueGreen;
   vertical-align: middle;
   font-weight: normal;
   font-size: large;
   height: 80px;
   width: auto;
-  background-color: $Green;
+  background-color: $LightBlueGreen;
   white-space: normal;
 }
 
 .dnd-subtask-list .dropzone .dndPlaceholder {
-  background-color: $PaleLightGreen !important;
+  background-color: $Green !important;
   height: 80px;
   width: auto;
   display: block;
   position: relative;
   border-radius: 7px;
   margin: 10px;
+  border: 1px solid $DarkBlueGreen;
 }
 
 
@@ -586,7 +595,7 @@ div.separator{
 }
 
 .dnd-options-list .dropzone .dnd-item-list li {
-  border: 1px solid $VeryDarkGreen;
+  border: 1px solid $DarkBlueGreen;
   border-radius: 7px;
   color: white;
   float: left;
@@ -596,19 +605,20 @@ div.separator{
   font-size: large;
   height: 80px;
   width: 420px;
-  background-color: $Green;
+  background-color: $LightBlueGreen;
   white-space: normal;
   display: table-cell;
 }
 
 .dnd-options-list ul[dnd-list] .dndPlaceholder {
-  background-color: $PaleLightGreen !important;
+  background-color: $Green !important;
   height: 80px;
   width: 420px;
   display: block;
   position: relative;
   border-radius: 7px;
   margin: 10px;
+  border: 1px solid $DarkBlueGreen;
 }
 
 
@@ -638,7 +648,7 @@ div.separator{
 }
 
 .dnd-questions-list .dropzone .dnd-item-list li {
-  border: 1px solid $VeryDarkGreen;
+  border: 1px solid $DarkBlueGreen;
   border-radius: 7px;
   color: white;
   float: left;
@@ -648,44 +658,45 @@ div.separator{
   font-size: large;
   height: 80px;
   width: 420px;
-  background-color: $Green;
+  background-color: $LightBlueGreen;
   white-space: normal;
   display: table-cell;
 }
 
 .dnd-questions-list ul[dnd-list] .dndPlaceholder {
-  background-color: $PaleLightGreen !important;
+  background-color: $Green !important;
   height: 80px;
   width: 420px;
   display: block;
   position: relative;
   border-radius: 7px;
   margin: 10px;
+  border: 1px solid $DarkBlueGreen;
 }
 
 .btn-default, .btn-default:focus {
-  background-color: $Green;
-  border-color: $VeryDarkGreen;
+  background-color: $LightBlueGreen;
+  border-color: $DarkBlueGreen;
   color: white;
 }
 
 .btn-default:hover, .btn-default:active, .btn-default:active:hover {
-  background-color: $LightBlueGreen;
-  border-color: $VeryDarkGreen;
+  background-color: $Green;
+  border-color: $DarkBlueGreen;
   color: white;
 }
 
 .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active {
-  border-color: $VeryDarkGreen;
+  border-color: $DarkBlueGreen;
   background-color: $DisabledGreen;
 }
 
 .panel {
-  border-color: $VeryDarkGreen;
+  border-color: $DarkBlueGreen;
 
   .panel-heading {
-    background-color: $DarkGreen;
-    border-color: $VeryDarkGreen;
+    background-color: $DarkBlueGreen;
+    border-color: $DarkBlueGreen;
     color: white;
   }
 }
