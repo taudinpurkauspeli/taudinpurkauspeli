@@ -2,7 +2,7 @@
 
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <h1 class="center-text">Toimenpiteet</h1>
+        <h1 class="center-text multiline">Toimenpiteet</h1>
     </div>
     <div class="col-md-1"></div>
     <div class="col-md-2 padding-top-25">
@@ -93,7 +93,7 @@
     <div ng-if="!userHasCompletedExercise">
         <div class="row padding-bottom-20">
             <div class="col-md-12">
-                <h2 class="center-text">Valitse suoritettava toimenpide</h2>
+                <h2 class="center-text multiline">Valitse suoritettava toimenpide</h2>
             </div>
         </div>
 
@@ -101,7 +101,7 @@
             <div class="col-md-2 padding-bottom-20"></div>
             <div class="col-md-8 padding-bottom-20">
 
-                <button class="btn btn-default btn-lg btn-uncompleted-task multiline padding-top-20 padding-bottom-20" ng-click="startTask(task)">
+                <button class="btn btn-default btn-lg width-100 multiline padding-top-20 padding-bottom-20" ng-click="startTask(task)">
                     {{task.name}}
                 </button>
 
@@ -117,7 +117,7 @@
 
     <div class="row padding-bottom-20">
         <div class="col-md-12">
-            <h2 class="center-text">Suoritetut toimenpiteet tasoittain</h2>
+            <h2 class="center-text multiline">Suoritetut toimenpiteet tasoittain</h2>
         </div>
     </div>
 
@@ -139,7 +139,7 @@
 
                         <div class="row padding-bottom-15">
                             <div class="col-md-12">
-                                <button class="btn btn-default btn-lg btn-completed-task multiline padding-top-20 padding-bottom-20" ng-click="goToCurrentTask(task.id)">
+                                <button class="btn btn-default btn-lg width-100 multiline padding-top-20 padding-bottom-20" ng-click="goToCurrentTask(task.id)">
                                     {{task.name}}
                                 </button>
                             </div>

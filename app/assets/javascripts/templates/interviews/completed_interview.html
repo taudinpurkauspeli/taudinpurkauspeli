@@ -34,12 +34,12 @@
 
                             <div class="col-md-12">
 
-                                <button class="btn btn-default btn-lg btn-question multiline padding-top-10 padding-bottom-10"
+                                <button class="btn btn-default btn-lg width-100 multiline padding-top-10 padding-bottom-10"
                                         ng-if="!question.asked" ng-click="askQuestion(question)">
                                     {{question.title}}
                                 </button>
 
-                                <button class="btn btn-default btn-lg btn-question multiline padding-top-10 padding-bottom-10"
+                                <button class="btn btn-default btn-lg width-100 multiline padding-top-10 padding-bottom-10"
                                         ng-if="question.asked" uib-collapse ng-click="changeQuestionCollapse(question)"
                                         ng-class="{'btn-success': questionIs('required', question),
                                                    'btn-warning': questionIs('allowed', question),
@@ -74,12 +74,12 @@
                         <div class="row padding-bottom-15" ng-repeat="question in questionsWithoutGroup">
                             <div class="col-md-12">
 
-                                <button class="btn btn-default btn-lg btn-question multiline padding-top-10 padding-bottom-10"
+                                <button class="btn btn-default btn-lg width-100 multiline padding-top-10 padding-bottom-10"
                                         ng-if="!question.asked" ng-click="askQuestion(question)">
                                     {{question.title}}
                                 </button>
 
-                                <button class="btn btn-default btn-lg btn-question multiline padding-top-10 padding-bottom-10"
+                                <button class="btn btn-default btn-lg width-100 multiline padding-top-10 padding-bottom-10"
                                         ng-if="question.asked" uib-collapse ng-click="changeQuestionCollapse(question)"
                                         ng-class="{'btn-success': questionIs('required', question),
                                                    'btn-warning': questionIs('allowed', question),

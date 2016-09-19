@@ -1,17 +1,6 @@
-
-// Old Colors
-//$MediumGrey           : #dbdbdb;
-//$BtnExerciseBorderClr : #999;
-$PaleLightGreen       : #b2dca5;
-$LightGreen           : #74ad61;
-//$MediumGreen          : #446739;
-$LightRed             : #ae6161;
-$PaleLightRed         : #be8181;
-//$DarkRed              : #692f2f;
-//$DarkGreen            : #232e1e;
-$PaleLightYellow      : #EAEB7C;
-
-// New colors
+/*****************
+*     Colors     *
+******************/
 
 $VeryDarkGreen          : #111700;
 $DarkGreen              : #2D3F00;
@@ -33,6 +22,11 @@ $SuccessYellow          : #FFED6B;
 $SuccessRed             : #D67272;
 $FontBlack              : #333333;
 
+
+/******************
+*     Images      *
+*******************/
+
 .title-image {
   width: 100%;
   height: auto;
@@ -43,6 +37,11 @@ img {
   height: auto;
 }
 
+
+/******************
+*     Layout      *
+*******************/
+
 body{
   background-color: black;
   background-image: url('http://tautiset-pelit.it.helsinki.fi/images/5_3.JPG') !important;
@@ -50,10 +49,6 @@ body{
   background-attachment: fixed;
   background-position: 0px 0px;
   background-repeat: no-repeat;
-}
-
-.popover-inner {
-  color: $FontBlack;
 }
 
 .navbar {
@@ -117,15 +112,8 @@ body{
   }
 }
 
-.progress {
-  height: 40px;
-  background-color: $LightGrey;
-  .progress-bar {
-      padding-top: 10px;
-      font-size: 14px !important;
-      color: $FontBlack;
-  }
-
+.popover-inner {
+  color: $FontBlack;
 }
 
 .dropdown-menu-right {
@@ -142,6 +130,20 @@ main {
   width: 100%;
   max-width: 1170px;
 }
+
+div.separator{
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid $DarkBlueGreen;
+  background-color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+/**************************
+*     Padding-bottom      *
+***************************/
 
 .padding-bottom-5 {
   padding-bottom: 5px !important;
@@ -171,6 +173,11 @@ main {
   padding-bottom: 40px !important;
 }
 
+
+/***********************
+*     Padding-top      *
+************************/
+
 .padding-top-5 {
   padding-top: 5px !important;
 }
@@ -199,6 +206,11 @@ main {
   padding-top: 30px !important;
 }
 
+
+/*************************
+*     Padding-right      *
+**************************/
+
 .padding-right-10 {
   padding-right: 10px !important;
 }
@@ -206,6 +218,11 @@ main {
 .padding-right-20 {
   padding-right: 20px !important;
 }
+
+
+/************************
+*     Padding-left      *
+*************************/
 
 .padding-left-10 {
   padding-left: 10px !important;
@@ -219,7 +236,6 @@ main {
   padding-left: 30px !important;
 }
 
-
 .padding-left-40 {
   padding-left: 40px !important;
 }
@@ -228,9 +244,19 @@ main {
   padding-left: 45px !important;
 }
 
+
+/******************
+*     Margin      *
+*******************/
+
 .margin-0 {
   margin: 0 !important;
 }
+
+
+/*************************
+*     Margin-bottom      *
+**************************/
 
 .margin-bottom-5 {
   margin-bottom: 5px !important;
@@ -248,6 +274,11 @@ main {
   margin-bottom: 40px !important;
 }
 
+
+/**********************
+*     Margin-top      *
+***********************/
+
 .margin-top-10 {
   margin-top: 10px !important;
 }
@@ -259,6 +290,11 @@ main {
 .margin-top-40 {
   margin-top: 40px !important;
 }
+
+
+/***********************
+*     Margin-left      *
+************************/
 
 .margin-left-10 {
   margin-left: 10px !important;
@@ -272,6 +308,11 @@ main {
   margin-left: 20px !important;
 }
 
+
+/************************
+*     Margin-right      *
+*************************/
+
 .margin-right-10 {
   margin-right: 10px !important;
 }
@@ -280,19 +321,10 @@ main {
   margin-right: 15px !important;
 }
 
-.multichoice-label {
-  font-weight: bold !important;
-  font-size: large;
-}
 
-div.separator{
-  width: 100%;
-  height: 1px;
-  border-bottom: 1px solid $DarkBlueGreen;
-  background-color: white;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
+/***********************
+*     Text layout      *
+************************/
 
 .center-text {
   text-align: center;
@@ -302,6 +334,24 @@ div.separator{
   margin: auto !important;
 }
 
+.multiline {
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.clickable {
+  cursor: pointer !important;
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+
+/*****************
+*     Width      *
+******************/
+
 .width-50 {
   width: 50% !important;
 }
@@ -310,8 +360,330 @@ div.separator{
   width: 100% !important;
 }
 
-.clickable {
-  cursor: pointer !important;
+
+/****************
+*     Misc      *
+*****************/
+
+.multichoice-label {
+  font-weight: bold !important;
+  font-size: large;
+}
+
+.wrong-answer {
+  background-color: $SuccessRed;
+}
+
+.correct-answer {
+  background-color: $SuccessGreen;
+}
+
+.allowed-answer {
+  background-color: $SuccessYellow;
+}
+
+.question-answer {
+  border: 1px solid;
+  border-color: $DarkBlueGreen;
+  border-radius: 6px;
+}
+
+.correct-diagnosis {
+  border: 1px solid;
+  border-color: $DarkBlueGreen;
+  border-radius: 6px;
+}
+
+.form-group {
+
+  &.multichoice-explanation {
+    margin-bottom: 5px !important;
+    padding-bottom: 5px !important;
+  }
+}
+
+.multichoice-explanation-border {
+  border-top: 1px solid;
+  border-color: $DarkBlueGreen;
+}
+
+
+/***********************************
+*     Drag and drop task-list      *
+************************************/
+
+.dnd-task-list ul[dnd-list],
+.dnd-task-list ul[dnd-list] > li{
+  position: relative;
+}
+
+.dnd-task-list .dropzone ul[dnd-list] {
+  min-height: 100px !important;
+  min-width: 420px !important;
+}
+
+.dnd-task-list .dropzone .dnd-item-list ul[dnd-list] {
+  min-height: 100px !important;
+}
+
+.dnd-task-list .dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+.dnd-task-list .dropzone .dnd-item-list ul {
+  display: table;
+}
+
+.dnd-task-list .dropzone .dnd-item-list li {
+  border: 1px solid;
+  border-radius: 7px;
+  color: white;
+  border-color: $DarkBlueGreen;
+  float: left;
+  font-size: large;
+  min-height: 80px;
+  width: 420px;
+  background-color: $LightBlueGreen;
+  white-space: normal;
+  display: table-cell;
+}
+
+.dnd-task-list .dropzone .dnd-item-list li:hover {
+  background-color: $PaleGrey;
+  color: $FontBlack;
+}
+
+.dnd-task-list ul[dnd-list] .dndPlaceholder {
+  background-color: $Green !important;
+  height: 80px;
+  width: 420px;
+  display: block;
+  position: relative;
+  border-radius: 7px;
+  margin: 10px;
+  border: 1px solid $DarkBlueGreen;
+}
+
+
+/****************************************
+*     Drag and drop subtask-list        *
+*****************************************/
+
+.dnd-subtask-list ul[dnd-list],
+.dnd-subtask-list ul[dnd-list] > li{
+  position: relative;
+}
+
+.dnd-subtask-list .dropzone ul[dnd-list] {
+  min-height: 100px !important;
+}
+
+.dnd-subtask-list .dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+.dnd-subtask-list .dropzone .dndDraggingSource {
+  display: none;
+}
+
+.dnd-subtask-list .dropzone .dnd-item-list li {
+  border: 1px solid;
+  border-radius: 7px;
+  color: white;
+  border-color: $DarkBlueGreen;
+  vertical-align: middle;
+  font-weight: normal;
+  font-size: large;
+  min-height: 80px;
+  width: auto;
+  background-color: $LightBlueGreen;
+  white-space: normal;
+}
+
+.dnd-subtask-list .dropzone .dnd-item-list li:hover {
+  background-color: $PaleGrey;
+  color: $FontBlack;
+}
+
+.dnd-subtask-list .dropzone .dndPlaceholder {
+  background-color: $Green !important;
+  height: 80px;
+  width: auto;
+  display: block;
+  position: relative;
+  border-radius: 7px;
+  margin: 10px;
+  border: 1px solid $DarkBlueGreen;
+}
+
+
+/****************************************
+*     Drag and drop options-list        *
+*****************************************/
+
+.dnd-options-list ul[dnd-list],
+.dnd-options-list ul[dnd-list] > li{
+  position: relative;
+}
+
+.dnd-options-list .dropzone ul[dnd-list] {
+  min-height: 100px !important;
+  min-width: 420px !important;
+}
+
+.dnd-options-list .dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+.dnd-options-list .dropzone ul[dnd-list] .dndDraggingSource {
+  display: none;
+}
+
+.dnd-options-list .dropzone .dnd-item-list ul {
+  display: table;
+}
+
+.dnd-options-list .dropzone .dnd-item-list li {
+  border: 1px solid $DarkBlueGreen;
+  border-radius: 7px;
+  color: white;
+  float: left;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: normal;
+  font-size: large;
+  min-height: 80px;
+  width: 420px;
+  background-color: $LightBlueGreen;
+  white-space: normal;
+  display: table-cell;
+}
+
+.dnd-options-list .dropzone .dnd-item-list li:hover {
+  background-color: $PaleGrey;
+  color: $FontBlack;
+}
+
+.dnd-options-list ul[dnd-list] .dndPlaceholder {
+  background-color: $Green !important;
+  height: 80px;
+  width: 420px;
+  display: block;
+  position: relative;
+  border-radius: 7px;
+  margin: 10px;
+  border: 1px solid $DarkBlueGreen;
+}
+
+
+/****************************************
+*     Drag and drop questions-list      *
+*****************************************/
+
+.dnd-questions-list ul[dnd-list],
+.dnd-questions-list ul[dnd-list] > li{
+  position: relative;
+}
+
+.dnd-questions-list .dropzone ul[dnd-list] {
+  min-height: 100px !important;
+  min-width: 420px !important;
+}
+
+.dnd-questions-list .dropzone .dndDragging {
+  opacity: 0.7;
+}
+
+.dnd-questions-list .dropzone ul[dnd-list] .dndDraggingSource {
+  display: none;
+}
+
+.dnd-questions-list .dropzone .dnd-item-list ul {
+  display: table;
+}
+
+.dnd-questions-list .dropzone .dnd-item-list li {
+  border: 1px solid $DarkBlueGreen;
+  border-radius: 7px;
+  color: white;
+  float: left;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: normal;
+  font-size: large;
+  min-height: 80px;
+  width: 420px;
+  background-color: $LightBlueGreen;
+  white-space: normal;
+  display: table-cell;
+}
+
+.dnd-questions-list .dropzone .dnd-item-list li:hover {
+  background-color: $PaleGrey;
+  color: $FontBlack;
+}
+
+.dnd-questions-list ul[dnd-list] .dndPlaceholder {
+  background-color: $Green !important;
+  height: 80px;
+  width: 420px;
+  display: block;
+  position: relative;
+  border-radius: 7px;
+  margin: 10px;
+  border: 1px solid $DarkBlueGreen;
+}
+
+
+/*******************
+*     Buttons      *
+********************/
+
+.btn-default, .btn-default:focus {
+  background-color: $LightBlueGreen;
+  border-color: $DarkBlueGreen;
+  color: white;
+}
+
+.btn-default:hover, .btn-default:active, .btn-default:active:hover {
+  background-color: $PaleGrey;
+  border-color: $DarkBlueGreen;
+  color: $FontBlack;
+}
+
+.btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active, .btn-default.disabled:active:hover {
+  border-color: $DarkBlueGreen;
+  background-color: $DisabledGreen;
+}
+
+.btn-success, .btn-success:focus, .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled:active, .btn-success.disabled:active:hover {
+  background-color: $SuccessGreen;
+  color: $FontBlack;
+}
+
+.btn-success:hover, .btn-success:active, .btn-success:active:hover {
+  background-color: $PaleGrey;
+  color: $FontBlack;
+}
+
+.btn-warning, .btn-warning:focus, .btn-warning.disabled:hover, .btn-warning.disabled:focus, .btn-warning.disabled:active, .btn-warning.disabled:active:hover {
+  background-color: $SuccessYellow;
+  color: $FontBlack;
+}
+
+.btn-warning:hover, .btn-warning:active, .btn-warning:active:hover {
+  background-color: $PaleGrey;
+  color: $FontBlack;
+}
+
+.btn-danger, .btn-danger:focus, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled:active, .btn-danger.disabled:active:hover {
+  background-color: $SuccessRed;
+  color: $FontBlack;
+}
+
+.btn-danger:hover, .btn-danger:active, .btn-danger:active:hover {
+  background-color: $PaleGrey;
+  color: $FontBlack;
 }
 
 .btn-close-current-task {
@@ -321,40 +693,27 @@ div.separator{
   padding-left: 5px;
 }
 
-.btn-exercise-index {
-  width: 100%;
+
+/******************
+*     Panels      *
+*******************/
+
+.panel {
+  border-color: $DarkBlueGreen;
+
+  .panel-heading {
+    background-color: $DarkBlueGreen;
+    border-color: $DarkBlueGreen;
+    color: white;
+    min-height: 46px;
+  }
 }
 
-.btn-completed-exercise {
-  width: 100%;
-}
-
-.btn-completed-task {
-  width: 100%;
-}
-
-.btn-uncompleted-task {
-  width: 100%;
-}
-
-.btn-unchecked-hypothesis {
-  width: 100%;
-}
-
-.btn-question {
-  width: 100%;
-}
-
-.multiline {
-  white-space: normal;
-  word-wrap: break-word;
-}
-
-.panel-light-green{
+.panel-light-green {
   background-color: $SuccessGreen;
 }
 
-.panel-heading-green{
+.panel-heading-green {
   background-color: $Green !important;
 }
 
@@ -419,346 +778,10 @@ div.separator{
   }
 }
 
-.row {
-  &.row-userinfo {
-    font-size: large;
-  }
-}
 
-.btn-checked-hypothesis {
-  color: white;
-  background-color: $LightRed;
-}
-
-.btn-correct-diagnosis {
-  background-color: $PaleLightGreen;
-}
-
-.wrong-answer{
-  background-color: $SuccessRed;
-}
-
-.correct-answer{
-  background-color: $SuccessGreen;
-}
-
-.allowed-answer{
-  background-color: $SuccessYellow;
-}
-
-.question-answer {
-  border: 1px solid;
-  border-color: $DarkBlueGreen;
-  border-radius: 6px;
-}
-
-.correct-diagnosis {
-  border: 1px solid;
-  border-color: $DarkBlueGreen;
-  border-radius: 6px;
-}
-
-.bold {
-  font-weight: bold !important;
-}
-
-.form-group {
-
-  &.multichoice-explanation {
-    margin-bottom: 5px !important;
-    padding-bottom: 5px !important;
-
-  }
-}
-
-.multichoice-explanation-border {
-  border-top: 1px solid;
-  border-color: $DarkBlueGreen;
-}
-
-.ta-editor {
-  min-height: 300px;
-  height: auto;
-  overflow: auto;
-  font-family: inherit;
-  font-size: 100%;
-  margin:20px 0;
-}
-
-// Drag and drop task-list
-
-.dnd-task-list ul[dnd-list],
-.dnd-task-list ul[dnd-list] > li{
-  position: relative;
-}
-
-.dnd-task-list .dropzone ul[dnd-list] {
-  min-height: 100px !important;
-  min-width: 420px !important;
-}
-
-.dnd-task-list .dropzone .dnd-item-list ul[dnd-list] {
-  min-height: 100px !important;
-}
-
-.dnd-task-list .dropzone .dndDragging {
-  opacity: 0.7;
-}
-
-.dnd-task-list .dropzone .dnd-item-list ul {
-  display: table;
-}
-
-.dnd-task-list .dropzone .dnd-item-list li {
-  border: 1px solid;
-  border-radius: 7px;
-  color: white;
-  border-color: $DarkBlueGreen;
-  float: left;
-  font-size: large;
-  min-height: 80px;
-  width: 420px;
-  background-color: $LightBlueGreen;
-  white-space: normal;
-  display: table-cell;
-}
-
-.dnd-task-list .dropzone .dnd-item-list li:hover {
-  background-color: $Green;
-}
-
-.dnd-task-list ul[dnd-list] .dndPlaceholder {
-  background-color: $Green !important;
-  height: 80px;
-  width: 420px;
-  display: block;
-  position: relative;
-  border-radius: 7px;
-  margin: 10px;
-  border: 1px solid $DarkBlueGreen;
-}
-
-// Drag and drop subtask-list
-
-.dnd-subtask-list ul[dnd-list],
-.dnd-subtask-list ul[dnd-list] > li{
-  position: relative;
-}
-
-.dnd-subtask-list .dropzone ul[dnd-list] {
-  min-height: 100px !important;
-}
-
-.dnd-subtask-list .dropzone .dndDragging {
-  opacity: 0.7;
-}
-
-.dnd-subtask-list .dropzone .dndDraggingSource {
-  display: none;
-}
-
-.dnd-subtask-list .dropzone .dnd-item-list li {
-  border: 1px solid;
-  border-radius: 7px;
-  color: white;
-  border-color: $DarkBlueGreen;
-  vertical-align: middle;
-  font-weight: normal;
-  font-size: large;
-  min-height: 80px;
-  width: auto;
-  background-color: $LightBlueGreen;
-  white-space: normal;
-}
-
-.dnd-subtask-list .dropzone .dnd-item-list li:hover {
-  background-color: $Green;
-}
-
-.dnd-subtask-list .dropzone .dndPlaceholder {
-  background-color: $Green !important;
-  height: 80px;
-  width: auto;
-  display: block;
-  position: relative;
-  border-radius: 7px;
-  margin: 10px;
-  border: 1px solid $DarkBlueGreen;
-}
-
-
-// Drag and drop options-list
-
-
-.dnd-options-list ul[dnd-list],
-.dnd-options-list ul[dnd-list] > li{
-  position: relative;
-}
-
-.dnd-options-list .dropzone ul[dnd-list] {
-  min-height: 100px !important;
-  min-width: 420px !important;
-}
-
-.dnd-options-list .dropzone .dndDragging {
-  opacity: 0.7;
-}
-
-.dnd-options-list .dropzone ul[dnd-list] .dndDraggingSource {
-  display: none;
-}
-
-.dnd-options-list .dropzone .dnd-item-list ul {
-  display: table;
-}
-
-.dnd-options-list .dropzone .dnd-item-list li {
-  border: 1px solid $DarkBlueGreen;
-  border-radius: 7px;
-  color: white;
-  float: left;
-  vertical-align: middle;
-  text-align: center;
-  font-weight: normal;
-  font-size: large;
-  min-height: 80px;
-  width: 420px;
-  background-color: $LightBlueGreen;
-  white-space: normal;
-  display: table-cell;
-}
-
-.dnd-options-list .dropzone .dnd-item-list li:hover {
-  background-color: $Green;
-}
-
-.dnd-options-list ul[dnd-list] .dndPlaceholder {
-  background-color: $Green !important;
-  height: 80px;
-  width: 420px;
-  display: block;
-  position: relative;
-  border-radius: 7px;
-  margin: 10px;
-  border: 1px solid $DarkBlueGreen;
-}
-
-
-// Drag and drop questions-list
-
-
-.dnd-questions-list ul[dnd-list],
-.dnd-questions-list ul[dnd-list] > li{
-  position: relative;
-}
-
-.dnd-questions-list .dropzone ul[dnd-list] {
-  min-height: 100px !important;
-  min-width: 420px !important;
-}
-
-.dnd-questions-list .dropzone .dndDragging {
-  opacity: 0.7;
-}
-
-.dnd-questions-list .dropzone ul[dnd-list] .dndDraggingSource {
-  display: none;
-}
-
-.dnd-questions-list .dropzone .dnd-item-list ul {
-  display: table;
-}
-
-.dnd-questions-list .dropzone .dnd-item-list li {
-  border: 1px solid $DarkBlueGreen;
-  border-radius: 7px;
-  color: white;
-  float: left;
-  vertical-align: middle;
-  text-align: center;
-  font-weight: normal;
-  font-size: large;
-  min-height: 80px;
-  width: 420px;
-  background-color: $LightBlueGreen;
-  white-space: normal;
-  display: table-cell;
-}
-
-.dnd-questions-list .dropzone .dnd-item-list li:hover {
-  background-color: $Green;
-}
-
-.dnd-questions-list ul[dnd-list] .dndPlaceholder {
-  background-color: $Green !important;
-  height: 80px;
-  width: 420px;
-  display: block;
-  position: relative;
-  border-radius: 7px;
-  margin: 10px;
-  border: 1px solid $DarkBlueGreen;
-}
-
-//Colors
-
-.btn-default, .btn-default:focus {
-  background-color: $LightBlueGreen;
-  border-color: $DarkBlueGreen;
-  color: white;
-}
-
-.btn-default:hover, .btn-default:active, .btn-default:active:hover {
-  background-color: $Green;
-  border-color: $DarkBlueGreen;
-  color: white;
-}
-
-.btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active, .btn-default.disabled:active:hover {
-  border-color: $DarkBlueGreen;
-  background-color: $DisabledGreen;
-}
-
-.panel {
-  border-color: $DarkBlueGreen;
-
-  .panel-heading {
-    background-color: $DarkBlueGreen;
-    border-color: $DarkBlueGreen;
-    color: white;
-    min-height: 46px;
-  }
-}
-
-.btn-success, .btn-success:focus, .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled:active, .btn-success.disabled:active:hover {
-  background-color: $SuccessGreen;
-  color: $FontBlack;
-}
-
-.btn-success:hover, .btn-success:active, .btn-success:active:hover {
-  background-color: $PaleGrey;
-  color: $FontBlack;
-}
-
-.btn-warning, .btn-warning:focus, .btn-warning.disabled:hover, .btn-warning.disabled:focus, .btn-warning.disabled:active, .btn-warning.disabled:active:hover {
-  background-color: $SuccessYellow;
-  color: $FontBlack;
-}
-
-.btn-warning:hover, .btn-warning:active, .btn-warning:active:hover {
-  background-color: $PaleGrey;
-  color: $FontBlack;
-}
-
-.btn-danger, .btn-danger:focus, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled:active, .btn-danger.disabled:active:hover {
-  background-color: $SuccessRed;
-  color: $FontBlack;
-}
-
-.btn-danger:hover, .btn-danger:active, .btn-danger:active:hover {
-  background-color: $PaleGrey;
-  color: $FontBlack;
-}
+/***************************
+*     Tables and rows      *
+****************************/
 
 tr:hover {
   background-color: $Grey;
@@ -768,7 +791,27 @@ thead tr:hover {
   background-color: transparent !important;
 }
 
-//Progressbar
+.row {
+  &.row-userinfo {
+    font-size: large;
+  }
+}
+
+
+/**********************
+*     Progressbar     *
+***********************/
+
+.progress {
+  height: 40px;
+  background-color: $LightGrey;
+
+  .progress-bar {
+    padding-top: 10px;
+    font-size: 14px !important;
+    color: $FontBlack;
+  }
+}
 
 .progress-bar-success {
   background-color: $SuccessGreen;
@@ -782,7 +825,10 @@ thead tr:hover {
   background-color: $SuccessRed;
 }
 
-//Sorting order icon
+
+/*****************************
+*     Sorting order icon     *
+******************************/
 
 .sortorder:after {
   content: '\25b2';
@@ -792,7 +838,9 @@ thead tr:hover {
 }
 
 
-//Alerts
+/*****************
+*     Alerts     *
+******************/
 
 .alert-success {
   background-color: $SuccessGreen;
