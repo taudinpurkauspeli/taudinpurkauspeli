@@ -13,10 +13,26 @@ app.controller("UpdateMultichoiceModalController", [
         $scope.updateMultichoice = function() {
             if ($scope.updateMultichoiceForm.$valid) {
                 Multichoice.update({multichoiceId: $scope.multichoice.id}, $scope.multichoice, function() {
-                    $window.alert("Monivalinnan päivitys onnistui!");
+                    $.notify({
+                        message: "Monivalinnan päivitys onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close({multichoiceRemoved: false});
                 }, function() {
-                    $window.alert("Monivalinnan päivitys epäonnistui!");
+                    $.notify({
+                        message: "Monivalinnan päivitys epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
             }
         };
@@ -26,11 +42,27 @@ app.controller("UpdateMultichoiceModalController", [
 
             if (deleteConfirmation) {
                 Multichoice.delete({multichoiceId : $scope.multichoice.id}, function() {
-                    $window.alert("Monivalinnan poistaminen onnistui!");
+                    $.notify({
+                        message: "Monivalinnan poistaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close({multichoiceRemoved: true});
                 });
             } else {
-                $window.alert("Monivalintaa ei poistettu!");
+                $.notify({
+                    message: "Monivalintaa ei poistettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 

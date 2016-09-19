@@ -4,6 +4,8 @@ app.controller("ApplicationController", [
     "$scope", "AuthenticationService", "LocalStorageService",
     function($scope, AuthenticationService, LocalStorageService) {
 
+        $scope.navbarCollapsed = true;
+
         $scope.resetCurrentExercise = function(){
             LocalStorageService.remove("current_task");
             LocalStorageService.remove("current_task_tab_path");
@@ -11,10 +13,6 @@ app.controller("ApplicationController", [
         };
 
         $scope.navigationLinksList = [
-            {state: "app_root",
-                title: "Taudinpurkauspeli",
-                visibility: "currentUser",
-                click: $scope.resetCurrentExercise},
             {state: "users.by_case",
                 title: "Käyttäjien seuranta",
                 visibility: "currentUserAdmin",

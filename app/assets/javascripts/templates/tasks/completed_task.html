@@ -1,17 +1,25 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Toimenpide suoritettu!</h3>
+        <h3 class="panel-title center-text multiline">Toimenpide suoritettu!</h3>
     </div>
     <div class="panel-body">
-        <p>Nyt voit mennä <span ng-if="!hasConclusion || !userHasCompletedConclusion">poissulkemaan diffejä tai</span> suorittamaan lisää toimenpiteitä.</p>
+        <p class="padding-top-5 center-text">Nyt voit mennä <span ng-if="!hasConclusion || !userHasCompletedConclusion">poissulkemaan diffejä tai</span> suorittamaan lisää toimenpiteitä.</p>
 
-        <div class="row">
+        <div class="row padding-top-10">
+            <div ng-class="{'col-md-3': !hasConclusion || !userHasCompletedConclusion,
+                            'col-md-4': hasConclusion && userHasCompletedConclusion}"></div>
+
             <div class="col-md-3" ng-if="!hasConclusion || !userHasCompletedConclusion">
-                <a ui-sref="exercises_show.hypotheses" class="btn btn-default widthAuto">Diffilista</a>
+                <a ui-sref="exercises_show.hypotheses" class="btn btn-default width-100">Diffilista</a>
             </div>
-            <div class="col-md-3">
-                <a ui-sref="exercises_show.tasks" class="btn btn-default widthAuto">Toimenpidelista</a>
+
+            <div ng-class="{'col-md-3': !hasConclusion || !userHasCompletedConclusion,
+                            'col-md-4': hasConclusion && userHasCompletedConclusion}">
+                <a ui-sref="exercises_show.tasks" class="btn btn-default width-100">Toimenpidelista</a>
             </div>
+
+            <div ng-class="{'col-md-3': !hasConclusion || !userHasCompletedConclusion,
+                            'col-md-4': hasConclusion && userHasCompletedConclusion}"></div>
         </div>
     </div>
 </div>

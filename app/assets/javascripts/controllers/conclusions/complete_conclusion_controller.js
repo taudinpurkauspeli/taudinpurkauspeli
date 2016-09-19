@@ -11,6 +11,8 @@ app.controller("CompleteConclusionController", [
         var UncheckedHypotheses = $resource('/unchecked_hypotheses.json');
         var CorrectDiagnosis = $resource('/correct_diagnosis.json');
 
+        $scope.checkedHypotheses = [];
+
         $scope.setCheckedHypotheses = function() {
             CheckedHypotheses.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.checkedHypotheses = data;
@@ -58,18 +60,36 @@ app.controller("CompleteConclusionController", [
 
         $scope.setAllExerciseHypotheses();
 
+        $scope.openCheckedHypothesis = function(exerciseHypothesis){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'exercise_hypotheses/show_exercise_hypothesis_modal.html',
+                controller: 'ShowExerciseHypothesisModalController',
+                size: 'md',
+                resolve: {
+                    exerciseHypothesis: exerciseHypothesis,
+                    correctDiagnosis: $scope.correctDiagnosis
+                }
+            });
+
+            modalInstance.result.then(function() {
+            }, function() {
+            });
+        };
+
+        $scope.setExerciseHypothesisCollapse = function(exerciseHypothesis) {
+            exerciseHypothesis.collapsed = !exerciseHypothesis.collapsed;
+        };
+
         $scope.checkAnswers = function(exerciseHypothesis) {
             if($scope.userHasCheckedHypothesis(exerciseHypothesis)){
-                $scope.setExerciseHypothesisId(exerciseHypothesis.id);
+                $scope.setExerciseHypothesisCollapse(exerciseHypothesis);
             } else {
                 CheckAnswersConclusion.save({ id: $scope.subtask.conclusion.id, exhyp_id: exerciseHypothesis.id, current_exercise_id: $stateParams.exerciseShowId, current_task_id: $stateParams.taskShowId }, function(data) {
-                    if(data.status == 202){
-                        $window.alert("Onneksi olkoon suoritit casen!");
-                    }
                     $scope.setTask();
                 }, function(result) {
                     $scope.setCheckedHypotheses();
-                    $scope.setExerciseHypothesisId(exerciseHypothesis.id);
+                    $scope.setExerciseHypothesisCollapse(exerciseHypothesis);
                 });
             }
         };

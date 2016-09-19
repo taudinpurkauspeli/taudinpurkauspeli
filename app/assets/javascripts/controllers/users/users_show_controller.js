@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("UsersShowController", [
-    "$scope", "$resource", "$stateParams", "$window", "$state",
-    function($scope, $resource, $stateParams, $window, $state) {
+    "$scope", "$resource", "$stateParams", "$window", "$state", "$uibModal",
+    function($scope, $resource, $stateParams, $window, $state, $uibModal) {
         $scope.user = {};
 
         var User = $resource('/users/:userId.json',
@@ -28,7 +28,15 @@ app.controller("UsersShowController", [
                 $scope.setAdminStatus(data.user);
             }, function(data){
                 if(data.status == 401){
-                    $window.alert("Pääsy toisen käyttäjän tietoihin estetty!");
+                    $.notify({
+                        message: "Pääsy toisen käyttäjän tietoihin estetty!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                     $state.go('app_root');
                 }
             });
@@ -36,18 +44,96 @@ app.controller("UsersShowController", [
 
         $scope.setUser();
 
+        $scope.getType = function(percentOfCompletedTasks) {
+            if(percentOfCompletedTasks >= 100) {
+                return 'success';
+            } else if (percentOfCompletedTasks < 25) {
+                return 'danger';
+            } else {
+                return 'warning';
+            }
+        };
+
         $scope.removeUser = function(user) {
 
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa opiskelijan?");
+            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa käyttäjän?");
 
             if (deleteConfirmation) {
                 UserDestroy.delete({userId : user.id}, function() {
-                    $window.alert("Opiskelijan poistaminen onnistui!");
+                    $.notify({
+                        message: "Käyttäjän poistaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $state.go('users.by_case');
                 });
             } else {
-                $window.alert("Opiskelijaa '" + user.first_name + "' ei poistettu");
+                $.notify({
+                    message: "Käyttäjää '" + user.first_name + "' ei poistettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
+        };
+
+        $scope.editUser = function(user) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'users/update_user_modal.html',
+                controller: 'UpdateUserModalController',
+                size: 'lg',
+                resolve: {
+                    user: user
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+            }, function() {
+                $.notify({
+                    message: "Käyttäjätietojen muokkaus peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
+            });
+
+        };
+
+        $scope.changePassword = function(user) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'users/change_password_modal.html',
+                controller: 'ChangePasswordModalController',
+                size: 'lg',
+                resolve: {
+                    user: user
+                }
+            });
+
+            modalInstance.result.then(function(data) {
+            }, function() {
+                $.notify({
+                    message: "Salasanan vaihto peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
+            });
+
         };
 
         $scope.changeAdminStatus = function(user){
@@ -59,13 +145,37 @@ app.controller("UsersShowController", [
                 user.admin = newAdminStatus;
 
                 User.update({userId : user.id}, user, function() {
-                    $window.alert("Käyttäjän oikeuksien muuttaminen onnistui!");
+                    $.notify({
+                        message: "Käyttäjän oikeuksien muuttaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $scope.setUser();
                 }, function() {
-                    $window.alert("Käyttäjän oikeuksia ei voitu muuttaa!");
+                    $.notify({
+                        message: "Käyttäjän oikeuksia ei voitu muuttaa!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
             } else {
-                $window.alert("Käyttäjän '" + user.first_name + "' oikeuksia ei muutettu.");
+                $.notify({
+                    message: "Käyttäjän '" + user.first_name + "' oikeuksia ei muutettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 

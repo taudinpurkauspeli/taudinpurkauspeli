@@ -23,7 +23,15 @@ app.controller("TasksShowController", [
                     $state.go("exercises_show.tasks");
                 }
             }, function() {
-                $window.alert("Toimenpiteen päivitys peruttu.");
+                $.notify({
+                    message: "Toimenpiteen päivitys peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
 
         };
@@ -42,9 +50,16 @@ app.controller("TasksShowController", [
 
             modalInstance.result.then(function(data) {
                 $scope.setTask();
-                $scope.editTaskText(data);
             }, function() {
-                $window.alert("Tekstialakohdan luominen peruttu.");
+                $.notify({
+                    message: "Tekstialakohdan luominen peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
         };
 
@@ -64,7 +79,15 @@ app.controller("TasksShowController", [
                 $scope.setTask();
                 $scope.editMultichoice(data);
             }, function() {
-                $window.alert("Monivalinnan luominen peruttu.");
+                $.notify({
+                    message: "Monivalinnan luominen peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
         };
 
@@ -84,7 +107,15 @@ app.controller("TasksShowController", [
                 $scope.setTask();
                 $scope.editInterview(data);
             }, function() {
-                $window.alert("Pohdinnan luominen peruttu.");
+                $.notify({
+                    message: "Pohdinnan luominen peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
         };
 
@@ -103,9 +134,16 @@ app.controller("TasksShowController", [
             modalInstance.result.then(function(data) {
                 $scope.setTask();
                 $scope.setExercise();
-                $scope.editConclusion(data);
             }, function() {
-                $window.alert("Diagnoosin luominen peruttu.");
+                $.notify({
+                    message: "Diagnoosin luominen peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
         };
 
@@ -123,7 +161,15 @@ app.controller("TasksShowController", [
             modalInstance.result.then(function(data) {
                 $scope.setTask();
             }, function() {
-                $window.alert("Tekstialakohdan päivitys peruttu.");
+                $.notify({
+                    message: "Tekstialakohdan päivitys peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
         };
 
@@ -144,7 +190,15 @@ app.controller("TasksShowController", [
                     $scope.setExercise();
                 }
             }, function() {
-                $window.alert("Tekstialakohdan päivitys peruttu.");
+                $.notify({
+                    message: "Diagnoosin päivitys peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
         };
 

@@ -80,6 +80,10 @@ app.controller("ExercisesShowController", [
             );
         };
 
+        $scope.userHasCompletedTasks = function(tasksList) {
+            return tasksList && (tasksList.length > 0);
+        };
+
         $scope.setCompletableSubtasks = function() {
 
             CompletableSubtasks.query({id: $scope.currentUser, task_id: $scope.taskForShow.id},
@@ -114,6 +118,7 @@ app.controller("ExercisesShowController", [
             $scope.current_task = LocalStorageService.get("current_task", null);
             $scope.setTaskForShow($scope.current_task);
             $scope.setCompletedExerciseValue();
+            $scope.setCompletedTasksForUser();
         };
 
         $scope.setTaskTabPath = function() {
@@ -121,8 +126,6 @@ app.controller("ExercisesShowController", [
         };
 
         $scope.setExercise();
-        $scope.setCompletedExerciseValue();
-        $scope.setCompletedTasksForUser();
         $scope.setCurrentTask();
         $scope.setTaskTabPath();
 

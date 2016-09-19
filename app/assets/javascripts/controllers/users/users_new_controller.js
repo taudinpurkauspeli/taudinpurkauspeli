@@ -21,12 +21,29 @@ app.controller("UsersNewController", [
                             $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin());
                             $scope.newUser = {};
                             $state.go('app_root');
-                            $window.alert("Tervetuloa käyttämään Taudinpurkauspeliä!");
+                            $.notify({
+                                message: "Tervetuloa käyttämään Taudinpurkauspeliä!"
+                            }, {
+                                placement: {
+                                    align: "center"
+                                },
+                                type: "success",
+                                delay: 0,
+                                offset: 100
+                            });
                         }).error(function() {
                         });
                     },
                     function() {
-                        $window.alert("Käyttäjätunnuksen luominen ei onnistunut!");
+                        $.notify({
+                            message: "Käyttäjätunnuksen luominen ei onnistunut!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "danger",
+                            offset: 100
+                        });
                     }
                 );
             }

@@ -36,11 +36,27 @@ app.controller("CreateQuestionModalController", [
             if ($scope.createQuestionForm.$valid) {
                 Question.save({question: $scope.newQuestion},
                     function() {
-                        $window.alert("Kysymyksen luominen onnistui!");
+                        $.notify({
+                            message: "Kysymyksen luominen onnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "success",
+                            offset: 100
+                        });
                         $uibModalInstance.close();
                     },
                     function() {
-                        $window.alert("Kysymyksen luominen epäonnistui!");
+                        $.notify({
+                            message: "Kysymyksen luominen epäonnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "danger",
+                            offset: 100
+                        });
                     }
                 );
             }

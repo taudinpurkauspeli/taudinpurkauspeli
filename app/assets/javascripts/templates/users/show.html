@@ -1,102 +1,151 @@
-<br/>
-<div class = "row">
-    <div class = "col-md-8">
-        <h1>Käyttäjäsivu</h1>
+<div class="row padding-bottom-10 padding-top-20">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h1 class="center-text multiline" ng-if="(currentUser == user.id) || (currentUser && !currentUserAdmin)">Omat käyttäjätiedot</h1>
+        <h1 class="center-text multiline" ng-if="currentUserAdmin && (currentUser != user.id)">Käyttäjätiedot</h1>
     </div>
-    <div class = "col-md-4">
-        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Pelin käyttäjät.">Ohje</a>
-    </div>
-</div>
-<div class = "separator"></div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2 padding-top-25">
+        <button uib-popover="Tällä sivulla voit tarkastella ja muokata omia käyttäjätietojasi. Lisäksi voit seurata etenemistäsi taudinpurkauspeleissä."
+                ng-if="(currentUser == user.id) || (currentUser && !currentUserAdmin)"
+                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
 
-<div class="row">
-    <div class="col-md-12">
-        <h2>Etunimi: {{user.first_name}}</h2>
+        <button uib-popover="Tällä sivulla voit tarkastella käyttäjän tietoja ja seurata käyttäjän etenemistä taudinpurkauspeleissä.
+        Tällä sivulla voit lisäksi tehdä opiskelijasta opettajan tai opettajasta opiskelijan ja poistaa käyttäjän tilin."
+                ng-if="currentUserAdmin && (currentUser != user.id)"
+                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <h2>Sukunimi: {{user.last_name}}</h2>
-    </div>
+    <div class="col-md-1"></div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <h2>Opiskelijanumero: {{user.student_number}}</h2>
+<div class="separator"></div>
+
+<div class="row padding-top-30">
+    <div class="col-md-2"></div>
+
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title panel-title-userinfo center-text multiline">{{user.first_name}} {{user.last_name}}</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="row row-userinfo padding-top-20">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6">
+                        Käyttäjätunnus:
+                    </div>
+                    <div class="col-md-5">
+                        {{user.username}}
+                    </div>
+                </div>
+                <div class="row row-userinfo padding-top-20">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6">
+                        Opiskelijanumero:
+                    </div>
+                    <div class="col-md-5">
+                        {{user.student_number}}
+                    </div>
+                </div>
+
+                <div class="row row-userinfo padding-top-20">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6">
+                        Sähköposti:
+                    </div>
+                    <div class="col-md-5">
+                        {{user.email}}
+                    </div>
+                </div>
+
+                <div class="row row-userinfo padding-top-20 padding-bottom-20">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6">
+                        Epidemiologian kurssin aloitusvuosi:
+                    </div>
+                    <div class="col-md-5">
+                        {{user.starting_year}}
+                    </div>
+                </div>
+
+                <div class="row row-userinfo padding-top-20 padding-bottom-20" ng-if="currentUser == user.id">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <button class="btn btn-default btn-success width-100" ng-click="editUser(user)">Muokkaa tietoja</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-default btn-success width-100" ng-click="changePassword(user)">Vaihda salasana</button>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="col-md-2"></div>
+
 </div>
 
 
-<div class="row">
-    <div class="col-md-12">
-        <h2>Sähköposti: {{user.email}}</h2>
-    </div>
-</div>
+<div class="row padding-top-20">
+    <div class="col-md-2"></div>
 
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title panel-title-userinfo center-text multiline">Caset</h3>
+            </div>
+            <div class="panel-body">
 
-<div class="row">
-    <div class="col-md-12">
-        <h2>Epidemiologian kurssin aloitusvuosi: {{user.starting_year}}</h2>
-    </div>
-</div>
+                <div class="row row-userinfo padding-top-20 padding-bottom-20 center-text" ng-if="!userHasStartedExercises">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        Ei aloitettuja caseja!
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
 
-<br/>
-<br/>
-<br/>
+                <div class="padding-bottom-30" ng-if="userHasStartedExercises" ng-repeat="exercise in userExercises">
 
-<div>
-    <h3>Caset:</h3>
-    <br/>
-    <p ng-if="!userHasStartedExercises">Ei aloitettuja caseja!</p>
+                    <div class="row row-userinfo padding-top-20 bold">
+                        <div class="col-md-12">
+                            {{exercise.name}}
+                        </div>
+                    </div>
 
-    <table class="width100" ng-if="userHasStartedExercises" ng-repeat="exercise in userExercises">
-        <thead>
-        <tr>
-            <th class="user">{{exercise.name}}</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td class="user">
-                <div class="progressbar" ng-class="{'completed': exercise.percent_of_completed_tasks >= 100}" >
-
-                    <div class="progressbar progress" ng-if="exercise.percent_of_completed_tasks < 100" ng-style="{'width': 100 - exercise.percent_of_completed_tasks}"></div>
+                    <div class="row row-userinfo padding-top-20">
+                        <div class="col-md-12">
+                            <uib-progressbar animate="false" value="exercise.percent_of_completed_tasks" type="{{getType(exercise.percent_of_completed_tasks)}}"><b>{{exercise.percent_of_completed_tasks}}%</b></uib-progressbar>
+                        </div>
+                    </div>
 
                 </div>
-                <span class="progress-percent">{{exercise.percent_of_completed_tasks}}%</span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2"></div>
+
 </div>
-
-<br/>
-<br/>
-<br/>
-
 
 
 <div class="row" ng-if="currentUserAdmin && (currentUser != user.id)">
+    <div class="col-md-3"></div>
     <div class="col-md-3">
-        <button class="btn btn-default btn-exercise btn-save"
+        <button class="btn btn-default btn-warning btn-lg width-100"
                 ng-click="changeAdminStatus(user)">
             Tee käyttäjästä {{adminStatus}}
         </button>
     </div>
-</div>
-
-<br/>
-<br/>
-<br/>
-
-<div class="row" ng-if="currentUserAdmin && (currentUser != user.id)">
     <div class="col-md-3">
-        <button class="btn btn-default btn-exercise btn-del"
+        <button class="btn btn-default btn-danger btn-lg width-100"
                 ng-click="removeUser(user)">
             Poista käyttäjän tili
         </button>
     </div>
+    <div class="col-md-3"></div>
 </div>
 
 

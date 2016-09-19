@@ -1,43 +1,46 @@
 <div class="panel panel-default" ng-if="correctDiagnosis">
     <div class="panel-heading">
-        <h3 class="panel-title">{{subtask.conclusion.title}}</h3>
+
+        <div class="row">
+            <div class="col-md-10">
+                <h3 class="panel-title panel-title-conclusion multiline">{{subtask.conclusion.title}}</h3>
+            </div>
+            <div class="col-md-2">
+                <button uib-popover="Tällä sivulla tehtäväsi on selvittää casen oikea diagnoosi valitsemalla mielestäsi oikea diffi jäljellä olevista diffeistä klikkaamalla sitä.
+                Jos valitsemasi diffi ei ollut casen oikea diagnoosi, näet diffiin liittyvän selityksen ja pääset valitsemaan uuden diffin. Selvitettyäsi oikean diagnoosin näet siihen liittyvän selityksen."
+                        popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+            </div>
+        </div>
     </div>
     <div class="panel-body">
 
-        <h4>Tehtäväsi:</h4>
-        <p ta-bind="text" ng-model="subtask.conclusion.content"></p>
+        <h3 class="center-text multiline">Tehtäväsi:</h3>
+        <div ta-bind="text" ng-model="subtask.conclusion.content" class="center-text padding-top-10"></div>
 
-        <br>
+        <h3 class="center-text padding-top-20 padding-bottom-20 multiline">Diffilistassa ovat jäljellä seuraavat diffit:</h3>
 
-        <h4>Diffilistassa jäljellä:</h4>
-        <br/>
-
-        <div class="row" ng-repeat="exerciseHypothesis in exerciseHypotheses">
-
+        <div class="row padding-bottom-15" ng-repeat="exerciseHypothesis in exerciseHypotheses">
             <div class="col-md-1"></div>
+            <div class="col-md-10">
 
-            <div class = "col-md-4">
-
-                <button class="btn btn-default btn-hypothesis multiline"
-                        ng-class="{'btn-checked': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis),
-                                   'btn-save': userHasCheckedHypothesis(exerciseHypothesis) && hypothesisIsCorrectDiagnosis(exerciseHypothesis)}"
+                <button class="btn btn-default btn-lg width-100 multiline padding-top-10 padding-bottom-10"
+                        ng-class="{'btn-danger': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis),
+                                   'btn-success': userHasCheckedHypothesis(exerciseHypothesis) && hypothesisIsCorrectDiagnosis(exerciseHypothesis)}"
                         ng-click="checkAnswers(exerciseHypothesis)">
                     {{exerciseHypothesis.hypothesis.name}}
                 </button>
-            </div>
 
-            <div class = "col-md-6">
+                <div uib-collapse="!exerciseHypothesis.collapsed" class="center-text padding-top-30 padding-bottom-20 question-answer">
 
-                <div class="info-checked-hypothesis removable"
-                     ng-if="(exerciseHypothesis.explanation || 
-                            hypothesisIsCorrectDiagnosis(exerciseHypothesis)) && userClickedCheckedHypothesis(exerciseHypothesis)">
+                    <div ng-if="hypothesisIsCorrectDiagnosis(exerciseHypothesis)" class="padding-bottom-20">Hienoa! Selvitit oikean diagnoosin!</div>
 
-                    <span ng-if="hypothesisIsCorrectDiagnosis(exerciseHypothesis)">Hienoa! Selvitit oikean diagnoosin! </span>
-
-                    <span ta-bind="text" ng-model="exerciseHypothesis.explanation"></span>
+                    <div ta-bind="text" ng-model="exerciseHypothesis.explanation" ng-if="exerciseHypothesis.explanation"></div>
+                    <div ng-if="!exerciseHypothesis.explanation" class="padding-bottom-10">Tälle diffille ei ole asetettu selitystä.</div>
                 </div>
 
             </div>
+            <div class="col-md-1"></div>
+
         </div>
 
     </div>
@@ -45,11 +48,9 @@
 
 <div class="panel panel-default" ng-if="!correctDiagnosis">
     <div class="panel-heading">
-        <h3 class="panel-title">Diagnoositoimenpide</h3>
+        <h3 class="panel-title panel-title-conclusion multiline">Diagnoositoimenpide</h3>
     </div>
     <div class="panel-body">
-
         Tähän caseen ei ole vielä asetettu oikeaa diagnoosia. Olethan yhteydessä opettajaasi asian korjaamiseksi. Kiitos!
-
     </div>
 </div>

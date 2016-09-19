@@ -40,7 +40,15 @@ app.controller("QuestionsEditController", [
             Question.update({questionId: question.id}, question, function() {
                 $scope.setQuestions();
             }, function() {
-                $window.alert("Kysymyksen päivitys epäonnistui!");
+                $.notify({
+                    message: "Kysymyksen päivitys epäonnistui!"
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "danger",
+                    offset: 100
+                });
             });
         };
 
@@ -59,7 +67,15 @@ app.controller("QuestionsEditController", [
             modalInstance.result.then(function() {
                 $scope.setQuestions();
             }, function() {
-                $window.alert("Kysymyksen luominen peruttu.");
+                $.notify({
+                    message: "Kysymyksen luominen peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
 
         };
@@ -79,7 +95,15 @@ app.controller("QuestionsEditController", [
             modalInstance.result.then(function() {
                 $scope.setQuestions();
             }, function() {
-                $window.alert("Kysymyksen muokkaaminen peruttu.");
+                $.notify({
+                    message: "Kysymyksen muokkaaminen peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
 
         };

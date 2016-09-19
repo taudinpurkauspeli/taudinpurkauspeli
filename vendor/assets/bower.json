@@ -12,6 +12,8 @@
     "textAngular": "latest",
     "font-awesome": "latest",
     "angular-bootstrap": "latest",
-    "angular-animate": "latest"
+    "angular-animate": "latest",
+    "remarkable-bootstrap-notify": "latest",
+    "animate.css": "https://github.com/daneden/animate.css.git"
   }
 }

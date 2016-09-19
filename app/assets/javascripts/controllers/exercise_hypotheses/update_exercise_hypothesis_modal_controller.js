@@ -25,10 +25,26 @@ app.controller("UpdateExerciseHypothesisModalController", [
         $scope.updateExerciseHypothesis = function() {
             if ($scope.updateExerciseHypothesisForm.$valid) {
                 ExerciseHypothesis.update({exerciseHypothesisId: exerciseHypothesis.id}, $scope.exerciseHypothesis, function(){
-                    $window.alert("Caseen liitetyn diffin päivitys onnistui!");
+                    $.notify({
+                        message: "Caseen liitetyn diffin päivitys onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close();
                 }, function() {
-                    $window.alert("Caseen liitetyn diffin päivitys epäonnistui!");
+                    $.notify({
+                        message: "Caseen liitetyn diffin päivitys epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
             }
         };
@@ -38,11 +54,27 @@ app.controller("UpdateExerciseHypothesisModalController", [
 
             if (deleteConfirmation) {
                 ExerciseHypothesis.delete({exerciseHypothesisId: exerciseHypothesis.id}, function() {
-                    $window.alert("Diffi poistettu casesta");
+                    $.notify({
+                        message: "Diffi poistettu casesta!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close();
                 });
             } else {
-                $window.alert("Diffiä ei poistettu casesta.");
+                $.notify({
+                    message: "Diffiä ei poistettu casesta."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 

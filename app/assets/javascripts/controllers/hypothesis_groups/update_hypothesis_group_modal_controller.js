@@ -15,22 +15,54 @@ app.controller("UpdateHypothesisGroupModalController", [
 
             if (deleteConfirmation) {
                 HypothesisGroup.delete({hypothesisGroupId : hypothesisGroup.id}, function() {
-                    $window.alert("Diffiryhmän poistaminen onnistui!");
+                    $.notify({
+                        message: "Diffiryhmän poistaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close();
                 });
 
             } else {
-                $window.alert("Diffiryhmää '" + hypothesisGroup.name + "' ei poistettu");
+                $.notify({
+                    message: "Diffiryhmää '" + hypothesisGroup.name + "' ei poistettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 
         $scope.updateHypothesisGroup = function() {
             if ($scope.updateHypothesisGroupForm.$valid) {
                 HypothesisGroup.update({hypothesisGroupId: hypothesisGroup.id}, $scope.hypothesisGroup, function() {
-                    $window.alert("Diffiryhmän päivitys onnistui!");
+                    $.notify({
+                        message: "Diffiryhmän päivitys onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close();
                 }, function() {
-                    $window.alert("Diffiryhmän päivitys epäonnistui!");
+                    $.notify({
+                        message: "Diffiryhmän päivitys epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
             }
         };

@@ -1,14 +1,21 @@
-<div class="container-fluid" ng-if="currentUserAdmin">
+<div ng-if="currentUserAdmin">
     <div class="row">
         <div class="col-md-8">
-            <div class="panel panel-default panel-grey">
-                <div class = "panel-heading panel-heading-grey">
-                    <div class = "row">
-                        <div class = "col-md-6">
-                            <h4>Toimenpide: {{taskForShow.name}}</h4>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="panel-title panel-title-task-show multiline">Toimenpide: {{taskForShow.name}}</h3>
                         </div>
-                        <div class= "col-md-6">
-                            <button class="btn btn-default btn-save widthAuto floatRight margin-em" ng-click="updateTask(taskForShow)">Muokkaa</button>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">
+                            <button class="btn btn-default btn-success width-100" ng-click="updateTask(taskForShow)">Muokkaa</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button uib-popover="Voit muokata casen nimeä klikkaamalla Muokkaa-nappia.
+                            Voit järjestää casen alakohdat ottamalla kiinni alakohdasta ja siirtämällä alakohdan oikeaan kohtaan.
+                            Pääset muokkaamaan alakohtaa klikkaamalla alakohtaa."
+                                    popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
                         </div>
                     </div>
                 </div>
@@ -19,52 +26,98 @@
         </div>
 
         <div class="col-md-4">
-            <div class="panel panel-default panel-grey">
-                <div class = "panel-heading panel-heading-grey">
-                    Lisää alakohta
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3 class="panel-title panel-title-task-show multiline"> Lisää alakohta</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <button uib-popover="Voit lisätä caseen uuden alakohdan klikkaamalla haluamasi tyyppisen alakohdan nappia.
+                            Nappia klikkaamalla pääset syöttämään alakohdan tietoja."
+                                    popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body">
-                    <button class="btn btn-default btn-exercise btn-subtask" ng-click="createTaskText(taskForShow)">+ Teksti</button>
-                    <button class="btn btn-default btn-exercise btn-subtask" ng-click="createMultichoice(taskForShow)">+ Monivalinta tai radio button</button>
-                    <button class="btn btn-default btn-exercise btn-subtask" ng-click="createInterview(taskForShow)">+ Pohdinta</button>
-                    <button class="btn btn-default btn-exercise btn-subtask" ng-click="createConclusion(taskForShow)" ng-disabled="hasConclusion">+ Diagnoosi</button>
+                    <div class="row padding-bottom-20">
+                        <div class="col-md-12">
+                            <button class="btn btn-default btn-success btn-lg width-100" ng-click="createTaskText(taskForShow)">+ Teksti</button>
+                        </div>
+                    </div>
+                    <div class="row padding-bottom-20">
+                        <div class="col-md-12">
+                            <button class="btn btn-default btn-success btn-lg width-100" ng-click="createMultichoice(taskForShow)">+ Monivalinta tai radio button</button>
+                        </div>
+                    </div>
+                    <div class="row padding-bottom-20">
+                        <div class="col-md-12">
+                            <button class="btn btn-default btn-success btn-lg width-100" ng-click="createInterview(taskForShow)">+ Pohdinta</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-default btn-success btn-lg width-100" ng-click="createConclusion(taskForShow)" ng-disabled="hasConclusion"
+                                    ng-class="{'disabled': hasConclusion}">
+                                + Diagnoosi
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container-fluid" ng-if="currentUser && !currentUserAdmin">
-    <div class = "row">
-        <div class = "col-md-8">
-            <h1>Toimenpide: {{taskForShow.name}}</h1>
-        </div>
+<div ng-if="currentUser && !currentUserAdmin">
 
-        <div class = "col-md-4">
-            <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteen sivu" data-content="Tällä sivulla voit suorittaa toimenpiteen.">Ohje</a>
+    <div class="row padding-bottom-10">
+
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h1 class="center-text multiline">Toimenpide: {{taskForShow.name}}</h1>
         </div>
+        <div class="col-md-2 padding-top-25">
+            <button uib-popover="Tällä sivulla voit suorittaa toimenpiteen tekemällä kaikki toimenpiteeseen liittyvät tehtävät. Viimeisin suorittamaton tehtävä löytyy sivun alalaidasta.
+            Lisäksi suoritettuasi toimenpiteen voit tarkastella suoritettuja tehtäviä tällä sivulla.
+            Tällöin sivun alalaidassa näkyy mahdollisuus siirtyä suorittamaan lisää toimenpiteitä tai poissulkemaan diffejä."
+                    popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
     </div>
+
     <div class = "separator"></div>
 
-    <br/>
-
-    <div ng-repeat="subtask in completedSubtasks">
-
-        <completed-subtask subtask="subtask"></completed-subtask>
-        <br/>
-
+    <div ng-repeat="subtask in completedSubtasks" class="row padding-bottom-10">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <completed-subtask subtask="subtask"></completed-subtask>
+        </div>
+        <div class="col-md-1"></div>
     </div>
 
-    <div ng-if="!userHasCompletedTask">
-        <uncompleted-subtask subtask="uncompletedSubtask" after-completion="setTask()" current-user="currentUser"></uncompleted-subtask>
+    <div class="row" ng-if="!userHasCompletedTask">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <uncompleted-subtask subtask="uncompletedSubtask" after-completion="setTask()" current-user="currentUser"></uncompleted-subtask>
+        </div>
+        <div class="col-md-1"></div>
     </div>
 
-    <div ng-if="userHasCompletedTask && !userHasCompletedExercise">
-        <completed_task current-user="currentUser" has-conclusion="hasConclusion"></completed_task>
+    <div class="row" ng-if="userHasCompletedTask && !userHasCompletedExercise">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <completed_task current-user="currentUser" has-conclusion="hasConclusion"></completed_task>
+        </div>
+        <div class="col-md-1"></div>
     </div>
 
-    <div ng-if="userHasCompletedExercise">
-        <completed_exercise></completed_exercise>
+    <div class="row" ng-if="userHasCompletedExercise">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <completed_exercise></completed_exercise>
+        </div>
+        <div class="col-md-1"></div>
     </div>
 
 </div>

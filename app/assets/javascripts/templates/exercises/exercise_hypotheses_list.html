@@ -1,162 +1,213 @@
-<div class="container-fluid">
+<div class="hypothesis-list" ng-if="currentUserAdmin">
 
-    <div class="hypothesis-list" ng-if="currentUserAdmin">
-        <div class="row">
-            <div class="col-md-5">
-                <h3>Casen {{exercise.name}} diffit</h3>
-                <br/>
-
-                <div ng-repeat="(hypothesis_group, exercise_hypotheses) in exerciseHypotheses">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button class="btn btn-default btn-hypothesis multiline btn-save" >{{hypothesis_group}}</button>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-11">
-                            <button class="btn btn-default btn-hypothesis multiline"
-                                    ng-repeat="exercise_hypothesis in exercise_hypotheses"
-                                    ng-click="updateExerciseHypothesis(exercise_hypothesis)">
-                                {{exercise_hypothesis.hypothesis.name}}
-                            </button>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row padding-bottom-10">
+                <div class="col-md-10 center-text multiline">
+                    <h2 class="margin-0 multiline">Casen {{exercise.name}} diffit</h2>
+                </div>
+                <div class="col-md-2">
+                    <button uib-popover="Vasemmalla palstalla näet tällä hetkellä caseen kuuluvat diffit. Klikkaamalla diffin nimeä avautuu ikkuna, jossa voit muokata caseen liitetyn diffin selitystä ja esitietovaatimusta ja jonka kautta voit poistaa diffin casesta."
+                            popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
                 </div>
             </div>
 
-            <div class="col-md-2">
-                <br/>
-                <br/>
-                <br/>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row padding-bottom-10">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 center-text">
+                    <h2 class="margin-0 multiline">Diffipankki</h2>
+                </div>
+                <div class="col-md-2">
+                    <button uib-popover="Oikealla palstalla näet diffipankin, josta voit valita diffejä lisättäväksi caseen. Voit myös lisätä diffipankkiin diffejä tämän sivun kautta. Klikkaamalla diffin nimeä voit siirtää diffin caseen. 'Muokkaa'-napeista pääset muokkaamaan diffiryhmän ja diffien nimiä.
+                                '+ Luo uusi diffi'- ja '+ Luo uusi diffiryhmä'-nappien avulla voit luoda uusia diffejä ja diffiryhmiä diffipankkiin."
+                            popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+                </div>
             </div>
 
-            <div class="col-md-5" ng-controller="HypothesisGroupsController" ng-if="exerciseHypothesesOnly">
-                <h3>Diffipankki</h3>
-                <br/>
-
-                <div ng-repeat="hypothesisGroup in hypothesisGroupsAndHypothesesList">
-
-                    <div class="row">
-                        <div class="col-md-9">
-                            <button class="btn btn-default btn-hypothesis multiline btn-save" >{{hypothesisGroup.name}}</button>
-                        </div>
-                        <div class="col-md-3">
-                            <button class="btn btn-default btn-hypothesis multiline btn-save"
-                                    ng-click="updateHypothesisGroup(hypothesisGroup, updateAllExerciseHypotheses)">
-                                Muokkaa
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="row" ng-repeat="hypothesis in hypothesisGroup.hypotheses">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-8">
-                            <button class="btn btn-default btn-hypothesis multiline"
-                                    ng-click="addToExercise(hypothesis)"
-                                    ng-disabled="belongsToExercise(hypothesis)">
-                                {{hypothesis.name}}
-                            </button>
-                        </div>
-                        <div class="col-md-3">
-                            <button class="btn btn-default btn-hypothesis btn-save"
-                                    ng-click="updateHypothesis(hypothesis, updateAllExerciseHypotheses)">
-                                Muokkaa
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-1">
-
-                        </div>
-                        <div class="col-md-8">
-                            <button class="btn btn-default btn-hypothesis btn-save multiline"
-                                    ng-click="createHypothesis(hypothesisGroup)">
-                                + Luo uusi diffi
-                            </button>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-md-9">
-                        <button class="btn btn-default btn-hypothesis btn-save"
-                                ng-click="createHypothesisGroup()">
-                            + Luo uusi diffiryhmä
-                        </button>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </div>
 
+    <div class="separator"></div>
 
-    <div ng-if="currentUser && !currentUserAdmin">
-        <div class = "row">
-            <div class = "col-md-8">
-                <h1>Valitse poissuljettavat diffit</h1>
-            </div>
+    <div class="row">
+        <div class="col-md-6">
 
-            <div class = "col-md-4">
-                <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohjeotsikko" data-content="Ohjetekstiä">Ohje</a>
-            </div>
-        </div>
-        <div class = "separator"></div>
-        <br/>
+            <div class="row padding-top-10">
+                <div class="col-md-12">
+                    <div class="panel panel-default" ng-repeat="(hypothesis_group, exercise_hypotheses) in exerciseHypotheses">
+                        <div class="panel-heading">
+                            <div class="panel-title panel-completed center-text multiline">
+                                {{hypothesis_group}}
+                            </div>
+                        </div>
+                        <div class="panel-body panel-completed">
 
-        <div class="row" ng-if="correctDiagnosis">
-            <div class="col-md-12">
+                            <div ng-repeat="exercise_hypothesis in exercise_hypotheses">
 
-                <div ng-repeat="(hypothesis_group, exercise_hypotheses) in exerciseHypotheses" ng-if="checkedHypotheses">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="row">
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-11">
-                                    <button class="btn btn-default btn-hypothesis multiline btn-save" >{{hypothesis_group}}</button>
+                                <div class="row padding-bottom-15">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-10">
+
+                                        <button class="btn btn-default width-100 multiline padding-top-10 padding-bottom-10"
+                                                ng-click="updateExerciseHypothesis(exercise_hypothesis)">
+                                            {{exercise_hypothesis.hypothesis.name}}
+                                        </button>
+                                    </div>
+                                    <div class="col-md-1"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                </div>
+            </div>
 
-                        <div class="row" ng-repeat="exercise_hypothesis in exercise_hypotheses">
+        </div>
+
+        <div class="col-md-6" ng-controller="HypothesisGroupsController" ng-if="exerciseHypothesesOnly">
+
+            <div class="row padding-top-10">
+                <div class="col-md-12">
+                    <div class="panel panel-default" ng-repeat="hypothesisGroup in hypothesisGroupsAndHypothesesList">
+                        <div class="panel-heading">
+                            <div class="panel-title panel-completed">
+
+                                <div class="row">
+                                    <div class="col-md-9 center-text multiline padding-top-7">
+                                        {{hypothesisGroup.name}}
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-default width-100 btn-success multiline padding-top-10 padding-bottom-10" type="button"
+                                                ng-click="updateHypothesisGroup(hypothesisGroup, updateAllExerciseHypotheses)">
+                                            Muokkaa
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="panel-body panel-completed">
+
+                            <div ng-repeat="hypothesis in hypothesisGroup.hypotheses">
+
+                                <div class="row padding-bottom-15">
+                                    <div class="col-md-9">
+
+                                        <button class="btn btn-default width-100 multiline padding-top-10 padding-bottom-10"
+                                                ng-click="addToExercise(hypothesis)"
+                                                ng-disabled="belongsToExercise(hypothesis)"
+                                                ng-class="{'disabled': belongsToExercise(hypothesis)}">
+                                            {{hypothesis.name}}
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-default width-100 btn-success multiline padding-top-10 padding-bottom-10"
+                                                ng-click="updateHypothesis(hypothesis, updateAllExerciseHypotheses)">
+                                            Muokkaa
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row padding-bottom-15">
+                                <div class="col-md-9">
+
+                                    <button class="btn btn-default width-100 btn-success multiline padding-top-10 padding-bottom-10"
+                                            ng-click="createHypothesis(hypothesisGroup)">
+                                        + Luo uusi diffi
+                                    </button>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-default btn-lg width-100 btn-success multiline padding-top-10 padding-bottom-10"
+                            ng-click="createHypothesisGroup()">
+                        + Luo uusi diffiryhmä
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div ng-if="currentUser && !currentUserAdmin">
+    <div class="row padding-bottom-10">
+
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h1 class="center-text multiline">Valitse poissuljettavat diffit</h1>
+        </div>
+        <div class="col-md-2 padding-top-25">
+            <button uib-popover="Voit sulkea pois mielestäsi väärän diffin klikkaamalla sitä.
+            Poissuljettu diffi muuttuu punaiseksi, ja näet difin alapuolella selityksen diffiin liittyen.
+            Et kuitenkaan pysty poissulkemaan diffejä, joiden poissulkemiseksi sinulla ei ole vielä tarpeeksi tietoa.
+            Tällöin voit tehdä lisää toimenpiteitä ja tulla myöhemmin poissulkemaan lisää diffejä. Poissuljettua diffiä klikkaamalla voit tarkastella diffiin liittyvää selitystä.
+            Tällä sivulla näet myös casen oikean diagnoosin selvitettyäsi sen. Casen oikea diagnoosi on merkitty vihreällä värillä."
+                    popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+    <div class = "separator"></div>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" ng-if="correctDiagnosis">
+
+            <div class="panel panel-default" ng-repeat="(hypothesisGroup, hypotheses) in exerciseHypotheses" ng-if="checkedHypotheses">
+                <div class="panel-heading">
+                    <div class="panel-title panel-completed center-text">
+                        {{hypothesisGroup}}
+                    </div>
+                </div>
+                <div class="panel-body panel-completed">
+
+                    <div ng-repeat="exerciseHypothesis in hypotheses">
+
+                        <div class="row padding-bottom-15">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+
+                                <button class="btn btn-default btn-lg width-100 multiline padding-top-10 padding-bottom-10"
+                                        ng-class="{'btn-danger': userHasCheckedHypothesis(exerciseHypothesis) && !hypothesisIsCorrectDiagnosis(exerciseHypothesis),
+                                                   'btn-success': userHasCheckedHypothesis(exerciseHypothesis) && hypothesisIsCorrectDiagnosis(exerciseHypothesis)}"
+                                        ng-click="checkExerciseHypothesis(exerciseHypothesis)" uib-collapse>
+                                    {{exerciseHypothesis.hypothesis.name}}
+                                </button>
+
+                                <div uib-collapse="!exerciseHypothesis.collapsed" class="center-text padding-top-30 padding-bottom-20 question-answer">
+
+                                    <div ng-if="hypothesisIsCorrectDiagnosis(exerciseHypothesis)" class="padding-bottom-20">Hienoa! Selvitit oikean diagnoosin!</div>
+
+                                    <div ta-bind="text" ng-model="exerciseHypothesis.explanation" ng-if="exerciseHypothesis.explanation"></div>
+                                    <div ng-if="!exerciseHypothesis.explanation" class="padding-bottom-10">Tälle diffille ei ole asetettu selitystä.</div>
+                                </div>
+
+                            </div>
                             <div class="col-md-1"></div>
 
-                            <div class="col-md-4">
-                                <button class="btn btn-default btn-hypothesis multiline"
-                                        ng-class="{'btn-checked': userHasCheckedHypothesis(exercise_hypothesis) && !hypothesisIsCorrectDiagnosis(exercise_hypothesis),
-                                               'btn-save': userHasCheckedHypothesis(exercise_hypothesis) && hypothesisIsCorrectDiagnosis(exercise_hypothesis)}"
-                                        ng-click="checkExerciseHypothesis(exercise_hypothesis)">
-                                    {{exercise_hypothesis.hypothesis.name}}
-                                </button>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="info-checked-hypothesis removable"
-                                     ng-if="correctDiagnosis && (exercise_hypothesis.explanation || 
-                                        hypothesisIsCorrectDiagnosis(exercise_hypothesis)) && userClickedCheckedHypothesis(exercise_hypothesis)">
-
-                                    <span ng-if="hypothesisIsCorrectDiagnosis(exercise_hypothesis)">Hienoa! Selvitit oikean diagnoosin! </span>
-
-                                    <span ta-bind="text" ng-model="exercise_hypothesis.explanation"></span>
-                                </div>
-                            </div>
-
                         </div>
+
                     </div>
+
                 </div>
             </div>
         </div>
 
-        <div ng-if="!correctDiagnosis">Tähän caseen ei ole vielä asetettu oikeaa diagnoosia. Olethan yhteydessä opettajaasi asian korjaamiseksi. Kiitos!</div>
+        <div class="col-md-8 padding-top-20" ng-if="!correctDiagnosis">Tähän caseen ei ole vielä asetettu oikeaa diagnoosia. Olethan yhteydessä opettajaasi asian korjaamiseksi. Kiitos!</div>
+        <div class="col-md-2"></div>
     </div>
 
-
 </div>
+

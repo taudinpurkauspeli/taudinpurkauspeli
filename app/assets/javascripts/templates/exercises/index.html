@@ -1,81 +1,132 @@
-<div class = "row">
-    <div class = "col-md-8">
-        <br/>
-        <br/>
-        <h1>Taudinpurkauspeli - uusi versio</h1>
-    </div>
-    <br/>
-    <br/>
-    <div class = "col-md-4">
-        <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Pelin kaikki caset.">Ohje</a>
+<div class="row">
+    <div class="col-md-12">
+        <img src="http://tautiset-pelit.it.helsinki.fi/images/titlebanner.png" height="200" width="1500" class="title-image">
     </div>
 </div>
-<div class = "separator"></div>
+
+<div class="row padding-bottom-10 padding-top-20">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h1 class="center-text multiline">Taudinpurkauspelit</h1>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2 padding-top-25">
+        <button ng-if="!currentUser" uib-popover="Kirjaudu sisään tai luo uusi käyttäjätunnus pelataksesi peliä." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        <button ng-if="currentUser"
+                uib-popover="Valitse haluamasi taudinpurkauspeli hiirellä klikkaamalla. Oikean yläreunan linkistä pääset tarkastelemaan ja muokkaamaan omia tietojasi."
+                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="separator"></div>
 
 
 <div ng-if="exercisesList">
-    <div class="row">
-        <label for="queryName">Hakusanat</label>
-        <div class="col-md-5">
-            <input type="text"
-                   name="queryName"
-                   id="queryName"
-                   class="form-control input"
-                   placeholder="Casen nimi"
-                   ng-model="queryName">
 
+
+    <div class="row padding-bottom-20">
+        <div class="col-md-12">
+            <h2 class="center-text multiline">Caset</h2>
         </div>
     </div>
-    <br/>
+
+
+    <form class="form-horizontal padding-bottom-30" novalidate name="searchExerciseForm">
+        <div class="form-group">
+            <div class="col-md-1"></div>
+
+            <label for="queryName" class="col-md-1 control-label">Hakusanat</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       class="form-control"
+                       name="queryName"
+                       id="queryName"
+                       placeholder="Casen nimi"
+                       ng-model="queryName">
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </form>
+
 
     <div ng-repeat="exercise in exercisesList | orderBy: 'name' | filter:{name: queryName}">
         <div class="row">
 
-            <div class="col-md-5">
-                <button class="btn btn-default btn-exercise"
-                        ng-class="{'disabled': !currentUser}"
-                        ng-if="!(!currentUserAdmin && exercise.hidden)"
-                        ng-click="viewExercise(exercise)">
-                    {{exercise.name}}
-                </button>
+            <div ng-if="(!currentUser || (currentUser && !currentUserAdmin)) && !exercise.hidden">
+
+                <div class="col-md-1 padding-bottom-20"></div>
+
+                <div class="col-md-10 padding-bottom-20">
+                    <button class="btn btn-default btn-lg width-100 multiline padding-top-20 padding-bottom-20"
+                            ng-disabled="!currentUser"
+                            ng-class="{'disabled': !currentUser}"
+                            ng-click="viewExercise(exercise)">
+                        {{exercise.name}}
+                    </button>
+                </div>
+
+                <div class="col-md-1 padding-bottom-20"></div>
+
             </div>
 
-            <div class="col-md-1"
-                 ng-if="currentUserAdmin">
-                <button class="btn btn-default btn-exercise btn-del"
-                        ng-click="removeExercise(exercise)">
-                    Poista
-                </button>
-            </div>
+            <div ng-if="currentUserAdmin">
 
-            <div class="col-md-1"
-                 ng-if="currentUserAdmin">
-                <button class="btn btn-default btn-exercise"
-                        ng-click="copyExercise(exercise)">
-                    Kopioi
-                </button>
-            </div>
+                <div class="col-md-1 padding-bottom-20"></div>
 
-            <div class="col-md-2"
-                 ng-if="currentUserAdmin">
-                <button class="btn btn-default btn-exercise"
-                        ng-click="toggleHiddenExercise(exercise)">
-                    <span ng-if="exercise.hidden">Tee näkyväksi</span>
-                    <span ng-if="!exercise.hidden">Piilota opiskelijoilta</span>
-                </button>
+                <div class="col-md-7 padding-bottom-20">
+                    <button class="btn btn-default width-100 multiline padding-top-20 padding-bottom-20"
+                            ng-click="viewExercise(exercise)">
+                        {{exercise.name}}
+                    </button>
+                </div>
+
+                <div class="col-md-1 padding-bottom-20">
+                    <button class="btn btn-default width-100 btn-warning multiline padding-top-20 padding-bottom-20"
+                            ng-click="copyExercise(exercise)">
+                        Kopioi
+                    </button>
+                </div>
+
+                <div class="col-md-2 padding-bottom-20">
+                    <button class="btn btn-default width-100 multiline padding-top-20 padding-bottom-20"
+                            ng-click="toggleHiddenExercise(exercise)"
+                            ng-class="{'btn-success': exercise.hidden,
+                                       'btn-danger': !exercise.hidden}">
+                        <span ng-if="exercise.hidden">Tee näkyväksi</span>
+                        <span ng-if="!exercise.hidden">Piilota opiskelijoilta</span>
+                    </button>
+                </div>
+
+                <div class="col-md-1 padding-bottom-20"></div>
+
             </div>
 
         </div>
     </div>
 </div>
 
-<div class="row">
+<div class="row padding-bottom-20" ng-if="currentUserAdmin">
+    <div class="col-md-1"></div>
 
-    <div class="col-md-5">
-        <button class="btn btn-default btn-exercise btn-save"
-                ng-if="currentUserAdmin"
+    <div class="col-md-7">
+        <button class="btn btn-default width-100 btn-success multiline padding-top-20 padding-bottom-20"
                 ng-click="newExercisePage()">
             + Luo uusi case
         </button>
     </div>
+
+    <div class="col-md-4"></div>
+</div>
+
+<div class="separator"></div>
+
+<div class="row padding-top-20">
+    <div class="col-md-5"></div>
+    <div class="col-md-2 center-text">
+        <a href="http://tautiset-pelit.it.helsinki.fi/images/MikroEpinSuoritusrekisterinSeloste.pdf">Rekisteriseloste</a>
+    </div>
+    <div class="col-md-5"></div>
 </div>

@@ -1,82 +1,103 @@
 <div class="modal-header">
-    <h3 class="modal-title">Muokkaa casea {{exercise.name}}</h3>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text multiline">Muokkaa casea {{exercise.name}}</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit muokata casen nimeä, anamneesia ja näkyvyyttä opiskelijalle." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 </div>
 
 <div class="modal-body">
 
-    <div class="row">
-        <div class="col-md-12">
-            <form novalidate name="updateExerciseForm">
+    <form class="form-horizontal" novalidate name="updateExerciseForm">
+        <div class="form-group has-feedback padding-top-10"
+             ng-class="{'has-error': updateExerciseForm.name.$invalid && updateExerciseForm.name.$dirty,
+                    'has-success': updateExerciseForm.name.$valid && updateExerciseForm.name.$touched}">
 
-                <div class="form-group has-feedback"
-                     ng-class="{
-'has-error': updateExerciseForm.name.$invalid && updateExerciseForm.name.$dirty,
-'has-success': updateExerciseForm.name.$valid && updateExerciseForm.name.$touched
-}">
-                    <label for="name">Nimi</label>
-                    <input type="text"
-                           class="form-control"
-                           required pattern=".{2,}"
-                           name="name"
-                           id="name"
-                           placeholder="Casen nimi"
-                           ng-model="exercise.name">
+            <label for="name" class="col-md-2 control-label">Nimi</label>
 
-                    <p class="help-block" ng-messages="updateExerciseForm.name.$error" ng-if="!updateExerciseForm.name.$pristine">
-                        <span ng-message="required">Nimi on pakollinen</span>
-                        <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
-                    </p>
-                </div>
+            <div class="col-md-9">
+                <input type="text"
+                       class="form-control center-text"
+                       required pattern=".{2,}"
+                       name="name"
+                       id="name"
+                       placeholder="Casen nimi"
+                       ng-model="exercise.name">
 
-                <br/>
-                <br/>
+                <p class="help-block" ng-messages="updateExerciseForm.name.$error" ng-if="!updateExerciseForm.name.$pristine">
+                    <span ng-message="required">Nimi on pakollinen</span>
+                    <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
+                </p>
+            </div>
 
-                <div class="form-group">
-
-                    <label for="anamnesis">Anamneesi</label>
-
-                    <div text-angular="text-angular"
-                         ng-model="exercise.anamnesis"
-                         ng-if="exercise"
-                         placeholder="Anamneesi"
-                         name="anamnesis"
-                         id="anamnesis"
-                         ta-text-editor-class="form-content"
-                         ta-html-editor-class="form-content"
-                         ta-toolbar-button-class="btn btn-default btn-toolbar"
-                         ta-focussed-class="focussed">
-                    </div>
-
-                </div>
-
-                <br/>
-                <br/>
-
-                <div class="form-group">
-                    <label for="hidden">Piilota case opiskelijoilta</label>
-                    <br/>
-                    <input type="checkbox"
-                           name="hidden"
-                           id="hidden"
-                           ng-model="exercise.hidden">
-                </div>
-            </form>
+            <div class="col-md-1"></div>
         </div>
-    </div>
 
+        <div class="form-group padding-top-10">
+
+            <label for="anamnesis" class="col-md-2 control-label">Anamneesi</label>
+
+            <div class="col-md-9">
+                <div text-angular
+                     ng-model="exercise.anamnesis"
+                     ng-if="exercise"
+                     placeholder="Anamneesi"
+                     name="anamnesis"
+                     id="anamnesis">
+                </div>
+
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="form-group padding-top-10">
+
+            <div class="col-md-2"></div>
+
+            <div class="col-md-9">
+                <div class="checkbox">
+                    <label class="bold">
+                        <input type="checkbox"
+                               name="hidden"
+                               id="hidden"
+                               ng-model="exercise.hidden"> Piilota case opiskelijoilta
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+
+    </form>
 
 </div>
 
 <div class="modal-footer">
 
-    <button class="btn btn-primary"
-            type="button"
-            ng-click="updateExercise()"
-            ng-disabled="updateExerciseForm.$invalid || updateExerciseForm.$pristine">
-        Päivitä
-    </button>
-
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-success width-100"
+                    type="button"
+                    ng-click="updateExercise()"
+                    ng-disabled="updateExerciseForm.$invalid || updateExerciseForm.$pristine"
+                    ng-class="{'disabled': updateExerciseForm.$invalid || updateExerciseForm.$pristine}">
+                Päivitä
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-warning width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
 
 </div>
 

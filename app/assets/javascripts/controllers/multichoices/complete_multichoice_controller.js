@@ -38,11 +38,17 @@ app.controller("CompleteMultichoiceController", [
             }
 
             CheckAnswersMultichoice.save({ id: $scope.subtask.multichoice.id, checked_options: checkedOptions }, function(data) {
-                if(data.status == 202){
-                    $window.alert("Onneksi olkoon suoritit casen!");
-                }
                 $scope.setTask();
             }, function(result) {
+                $.notify({
+                    message: "Valinnoissa oli vielä virheitä."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "danger",
+                    offset: 100
+                });
                 $scope.checkedOptions = result.data || [];
             });
         };

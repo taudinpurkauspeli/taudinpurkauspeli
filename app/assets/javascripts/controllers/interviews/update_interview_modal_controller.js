@@ -13,10 +13,26 @@ app.controller("UpdateInterviewModalController", [
         $scope.updateInterview = function() {
             if ($scope.updateInterviewForm.$valid) {
                 Interview.update({interviewId: $scope.interview.id}, $scope.interview, function() {
-                    $window.alert("Pohdinnan päivitys onnistui!");
+                    $.notify({
+                        message: "Pohdinnan päivitys onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close({interviewRemoved: false});
                 }, function() {
-                    $window.alert("Pohdinnan päivitys epäonnistui!");
+                    $.notify({
+                        message: "Pohdinnan päivitys epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
             }
         };
@@ -26,12 +42,28 @@ app.controller("UpdateInterviewModalController", [
 
             if (deleteConfirmation) {
                 Interview.delete({interviewId : $scope.interview.id}, function() {
-                    $window.alert("Pohdinnan poistaminen onnistui!");
+                    $.notify({
+                        message: "Pohdinnan poistaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close({interviewRemoved: true});
                 });
 
             } else {
-                $window.alert("Pohdintaa ei poistettu!");
+                $.notify({
+                    message: "Pohdintaa ei poistettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 

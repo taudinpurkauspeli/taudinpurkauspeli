@@ -85,6 +85,7 @@ app.controller("TasksController", [
                 animation: true,
                 templateUrl: 'tasks/create_task_modal.html',
                 controller: 'CreateTaskModalController',
+                size: 'lg',
                 resolve: {
                     exercise: $scope.exercise
                 }
@@ -94,28 +95,33 @@ app.controller("TasksController", [
                 $scope.setTasksList();
                 $scope.goToCurrentTask(data.id);
             }, function() {
-                $window.alert("Toimenpiteen luominen peruttu.");
+                $.notify({
+                    message: "Toimenpiteen luominen peruttu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             });
-        };
-
-        $scope.setTaskId = function(taskId){
-            if($scope.lastClickedTask == taskId){
-                $scope.lastClickedTask = null;
-            } else {
-                $scope.lastClickedTask = taskId;
-            }
         };
 
         $scope.startTask = function(task) {
             TaskCanBeStarted.get({id: task.id}, function() {
                 $scope.goToCurrentTask(task.id);
             }, function() {
-                $scope.setTaskId(task.id);
+                $.notify({
+                    message: "Et voi vielä suorittaa tätä toimenpidettä, vaan sinun tulee suorittaa ainakin yksi muu toimenpide ennen tätä."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "danger",
+                    offset: 100
+                });
             });
         };
 
-        $scope.cannotStartTask = function(taskId){
-            return taskId == $scope.lastClickedTask;
-        };
     }
 ]);

@@ -14,11 +14,27 @@ app.controller("CreateTaskTextModalController", [
             if ($scope.createTaskTextForm.$valid) {
                 TaskText.save({"task_id": task.id}, $scope.newTaskText,
                     function(data) {
-                        $window.alert("Tekstialakohdan luominen onnistui!");
+                        $.notify({
+                            message: "Tekstialakohdan luominen onnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "success",
+                            offset: 100
+                        });
                         $uibModalInstance.close(data);
                     },
                     function() {
-                        $window.alert("Tekstialakohdan luominen epäonnistui!");
+                        $.notify({
+                            message: "Tekstialakohdan luominen epäonnistui!"
+                        }, {
+                            placement: {
+                                align: "center"
+                            },
+                            type: "danger",
+                            offset: 100
+                        });
                     }
                 );
             }

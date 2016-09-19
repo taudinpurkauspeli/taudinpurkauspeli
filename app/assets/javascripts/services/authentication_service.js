@@ -12,7 +12,15 @@ app.factory('AuthenticationService', [
                     Session.create(data);
                     return data;
                 }).error(function(data,status,headers,config) {
-                    alert("Kirjautuminen epäonnistui");
+                    $.notify({
+                        message: "Kirjautuminen epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
         };
 
@@ -23,7 +31,15 @@ app.factory('AuthenticationService', [
                     Session.destroy();
                     $state.go('app_root');
                 }).error(function(data,status,headers,config) {
-                    alert("Uloskirjautuminen epäonnistui");
+                    $.notify({
+                        message: "Uloskirjautuminen epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
         };
 

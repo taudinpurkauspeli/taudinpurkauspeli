@@ -1,44 +1,66 @@
 <div class="modal-header">
-    <h3 class="modal-title">Uusi toimenpide</h3>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text multiline">Uusi toimenpide</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit luoda uuden toimenpiteen caseen. Täytä lomakkeeseen toimenpiteen nimi. Toimenpide luodaan uudelle tasolle casen viimeiseksi toimenpiteeksi." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 </div>
 
 <div class="modal-body">
 
-    <div class="row">
-        <div class="col-md-12">
-            <form novalidate name="createTaskForm">
-                <div class="form-group has-feedback"
-                     ng-class="{
-'has-error': createTaskForm.name.$invalid && createTaskForm.name.$dirty,
-'has-success': createTaskForm.name.$valid && createTaskForm.name.$touched
-}">
-                    <label for="name">Toimenpiteen nimi</label>
-                    <input type="text"
-                           class="form-control"
-                           required pattern=".{2,}"
-                           name="name"
-                           id="name"
-                           placeholder="Toimenpiteen nimi"
-                           ng-model="newTask.name">
+    <form class="form-horizontal" novalidate name="createTaskForm">
+        <div class="form-group has-feedback padding-top-10"
+             ng-class="{'has-error': createTaskForm.name.$invalid && createTaskForm.name.$dirty,
+                    'has-success': createTaskForm.name.$valid && createTaskForm.name.$touched}">
 
-                    <p class="help-block" ng-messages="createTaskForm.name.$error" ng-if="!createTaskForm.name.$pristine">
-                        <span ng-message="required">Nimi on pakollinen</span>
-                        <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
-                    </p>
-                </div>
-            </form>
+            <label for="name" class="col-md-3 control-label">Toimenpiteen nimi</label>
+
+            <div class="col-md-8">
+                <input type="text"
+                       class="form-control center-text"
+                       required pattern=".{2,}"
+                       name="name"
+                       id="name"
+                       placeholder="Toimenpiteen nimi"
+                       ng-model="newTask.name">
+
+                <p class="help-block" ng-messages="createTaskForm.name.$error" ng-if="!createTaskForm.name.$pristine">
+                    <span ng-message="required">Nimi on pakollinen</span>
+                    <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
         </div>
+    </form>
 
-    </div>
 </div>
 
 <div class="modal-footer">
-    <button class="btn btn-primary"
-            type="button"
-            ng-click="createTask()"
-            ng-disabled="createTaskForm.$invalid || createTaskForm.$pristine">
-        Luo
-    </button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-success btn-block"
+                    type="button"
+                    ng-click="createTask()"
+                    ng-disabled="createTaskForm.$invalid || createTaskForm.$pristine"
+                    ng-class="{'disabled': createTaskForm.$invalid || createTaskForm.$pristine}">
+                Luo
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-warning btn-block" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
 </div>
 

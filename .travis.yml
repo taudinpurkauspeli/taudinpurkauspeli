@@ -7,7 +7,7 @@ gemfile:
   - Gemfile
 
 script:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then echo "Master branch - run tests and deploy."; bundle exec rake db:migrate --trace; RAILS_ENV=test bundle exec rake db:migrate --trace; bundle exec rake db:test:prepare; bundle exec rspec -fd spec/ --color; elif [ "$TRAVIS_BRANCH" == "development" ]; then echo "Development branch - deploy only."; else echo "$TRAVIS_BRANCH branch."; fi
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then echo "Master branch - deploy only - tests disabled."; elif [ "$TRAVIS_BRANCH" == "development" ]; then echo "Development branch - deploy only."; else echo "$TRAVIS_BRANCH branch."; fi
 
 deploy:
   provider: heroku

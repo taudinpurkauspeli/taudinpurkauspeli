@@ -1,16 +1,29 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <div class = "row">
-            <div class = "col-md-8">
-                <h3 class="panel-title"></h3>
-            </div>
-            <div class = "col-md-4">
-                <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Ohje" data-content="Muista painaa Jatka-nappia, jotta toimenpide kirjautuu suoritetuksi.">Ohje</a>
+
+        <div class="row">
+
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <button uib-popover="Voit suorittaa tämän tehtävän painamalla Jatka-nappia."
+                        popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
             </div>
         </div>
     </div>
+
     <div class="panel-body">
-        <span ta-bind="text" ng-model="subtask.task_text.content"></span>
-        <button class="btn btn-default btn-save widthAuto" ng-click="completeTaskText(subtask.task_text)">Jatka</button>
+        <div class="row">
+            <div class="col-md-12">
+                <div ta-bind="text" ng-model="subtask.task_text.content" class=" padding-bottom-20"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+                <button class="btn btn-default btn-success btn-lg" ng-click="completeTaskText(subtask.task_text)">Jatka</button>
+            </div>
+            <div class="col-md-5"></div>
+        </div>
     </div>
 </div>

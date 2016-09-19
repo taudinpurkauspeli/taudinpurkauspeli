@@ -1,13 +1,18 @@
-<h4>Alakohdat</h4>
-<br/>
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="center-text multiline">Alakohdat</h3>
+    </div>
+</div>
+<div class="separator"></div>
 
-<div class="subtask-list">
+<div class="dnd-subtask-list">
     <div class="dropzone">
         <ul dnd-list="[]"
             dnd-drop="moveSubaskToNewLevel(index, item, type)"
-            class="list-unstyled itemlist">
+            class="list-unstyled dnd-item-list margin-0">
 
             <li ng-repeat="(level, subtask) in taskForShow.subtasks"
+                class="center-text multiline padding-top-25 padding-bottom-25 margin-top-20 clickable"
                 dnd-draggable="subtask"
                 dnd-type="level"
                 dnd-selected="editSubtask(subtask)"

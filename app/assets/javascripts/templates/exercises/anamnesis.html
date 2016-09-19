@@ -1,82 +1,143 @@
-<div class="container-fluid">
-
-
-    <div class = "row">
-        <div class = "col-md-8">
-            <h1>Case: {{exercise.name}}</h1>
-        </div>
-
-        <div class = "col-md-4">
-            <a tabindex="0" class="btn btn-help floatRight" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Toimenpiteiden luominen ja järjestely" data-content="Tällä sivulla voit luoda uusia toimenpiteitä ja päätöstoimenpiteen. Kussakin casessa voi olla vain yksi päätöstoimenpide. Toimenpiteiden suoritusjärjestystä voi muokata toimenpiteen vieressä olevilla nuolilla. Samassa numeroidussa ryhmässä olevat toimenpiteet voi suorittaa valinnaisessa järjestyksessä. Ryhmät taas suoritetaan numerojärjestyksessä ykkösestä alkaen.">Ohje</a>
-        </div>
+<div class="row padding-bottom-10">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <h1 class="center-text multiline">Case: {{exercise.name}}</h1>
     </div>
-    <div class = "separator"></div>
-    <br/>
-
-    <div ng-if="exercise.hidden">
-        <p>Tämä case on piilotettu opiskelijoilta. Muokkaa casea tehdäksesi siitä näkyvä.</p>
-        <br/>
-        <div class="separator"></div>
-        <br/>
+    <div class="col-md-2 padding-top-25">
+        <button uib-popover="Tällä sivulla voit lukea casen anamneesin ja seurata suorittamiesi toimenpiteiden suoritusjärjestystä. Lisäksi näet yleisiä ohjeita taudinpurkauspelin pelaamiseen liittyen."
+                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
     </div>
+    <div class="col-md-1"></div>
+</div>
 
-    <div ng-if="currentUser && !currentUserAdmin && userHasCompletedExercise">
-        <completed_exercise></completed_exercise>
-        <div class="separator"></div>
-        <br/>
+<div class = "separator"></div>
+
+<div ng-if="exercise.hidden" class="padding-top-20">
+    <div class="row padding-bottom-20">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 center-text">
+            Tämä case on piilotettu opiskelijoilta. Muokkaa casea tehdäksesi siitä opiskelijoille näkyvän.
+        </div>
+        <div class="col-md-1"></div>
     </div>
 
-    <h3>Anamneesi</h3>
+    <div class="separator"></div>
+</div>
 
-    <br/>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
+<div ng-if="currentUser && !currentUserAdmin && userHasCompletedExercise" class="padding-top-20">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <completed_exercise></completed_exercise>
         </div>
-        <div ta-bind="text" ng-model="exercise.anamnesis" class="panel-body">
-        </div>
+        <div class="col-md-1"></div>
     </div>
 
-    <div class = "separator"></div>
-    <br />
+    <div class="separator"></div>
+</div>
 
-    <div ng-if="currentUser && !currentUserAdmin">
+<div ng-if="currentUser && !currentUserAdmin" class="padding-top-20">
+    <div class="row  padding-bottom-20">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 center-text">
+            Pelin tarkoitus on opetella taudinpurkaukseen tarvittavaa ajattelumallia. Yritä miettiä, mikä olisi paras järjestys suorittaa pelin toimenpiteet oikeaan diagnoosiin päästäksesi. Pelin toimenpiteet eivät ole toimenpidelistassa oikeassa suoritusjärjestyksessä. Vääriä diffejä on helpointa sulkea pois heti, kun voit varmuudella tehdä niin.
 
-        <h3>Tehdyt toimenpiteet</h3>
+            Ohjeita löytyy sivun oikeasta laidasta Ohje-napista. Sivun yläreunassa on välilehtiä, joiden avulla voi liikkua. Huomioithan myös, että joillakin pelin sivuilla on paljon sisältöä, joten muista scrollata sivut aina alas asti!
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 
-        <br/>
-        <br/>
+    <div class="separator"></div>
+</div>
 
-        <div ng-repeat="(index, task) in completedTasksForUser">
+<div class="row padding-bottom-20">
+    <div class="col-md-12">
+        <h2 class="center-text multiline">Anamneesi</h2>
+    </div>
+</div>
 
-            <div class = "row">
-                <div class = "col-md-12">
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
 
-                    <button class="btn btn-default btn-completed-task" data-toggle="collapse" id="collapse-completed-task-link{{task.id}}" href="#collapse-completed-task{{task.id}}" >
-                        {{index+1}}. {{task.name}}
-                    </button>
+                <div class="row">
 
-                    <div class="panel panel-default panel-grey">
-                        <div id="collapse-completed-task{{task.id}}" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <task-show task="task" current-user="currentUser"></task-show>
-                            </div>
-                        </div>
+                    <div class="col-md-10"></div>
+                    <div class="col-md-2">
+                        <button uib-popover="Tässä näet caseen liittyvän anamneesin."
+                                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
                     </div>
                 </div>
             </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-5">
-            <button class="btn btn-default btn-exercise btn-save"
-                    ng-if="currentUserAdmin && exercise"
-                    ng-click="updateExercise()">
-                Muokkaa
-            </button>
+            <div ta-bind="text" ng-model="exercise.anamnesis" class="panel-body">
+            </div>
         </div>
     </div>
+    <div class="col-md-1"></div>
+</div>
+
+
+<div class="separator"></div>
+
+
+<div ng-if="currentUser && !currentUserAdmin">
+
+    <div class="row padding-bottom-20">
+        <div class="col-md-12">
+            <h2 class="center-text multiline">Tehdyt toimenpiteet suoritusjärjestyksessä</h2>
+        </div>
+    </div>
+
+    <div ng-repeat="(index, task) in completedTasksForUser" ng-if="userHasCompletedTasks(completedTasksForUser)">
+
+        <div class="row padding-bottom-20">
+            <div class="col-md-1"></div>
+
+            <div class="col-md-10">
+
+                <button class="btn btn-default btn-lg width-100 multiline padding-top-20 padding-bottom-20" uib-collapse ng-click="isCollapsed = !isCollapsed">
+                    {{index+1}}. {{task.name}}
+                </button>
+
+                <div class="panel panel-default" uib-collapse="!isCollapsed">
+                    <div class="panel-body">
+                        <task-show task="task" current-user="currentUser"></task-show>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+
+        </div>
+    </div>
+
+    <div class="row padding-bottom-20" ng-if="!userHasCompletedTasks(completedTasksForUser)">
+        <div class="col-md-1"></div>
+
+        <div class="col-md-10 center-text">
+            Et ole vielä suorittanut yhtään toimenpidettä.
+        </div>
+
+        <div class="col-md-1"></div>
+    </div>
+
+</div>
+
+<div class="row padding-top-20" ng-if="currentUserAdmin && exercise">
+    <div class="col-md-4"></div>
+    <div class="col-md-2">
+        <button class="btn btn-default btn-success btn-lg width-100"
+                type="button"
+                ng-click="updateExercise()">
+            Muokkaa
+        </button>
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-default btn-danger btn-lg width-100" type="button" ng-click="removeExercise(exercise)">
+            Poista
+        </button>
+    </div>
+    <div class="col-md-4"></div>
+
 </div>

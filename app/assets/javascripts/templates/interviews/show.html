@@ -1,23 +1,42 @@
-<div class = "row">
-    <div class = "col-md-8">
-    </div>
-    <div class = "col-md-4">
-        <button class="btn btn-default btn-exercise widthAuto floatRight" ui-sref="exercises_show.current_task.show">Palaa toimenpiteeseen</button>
-    </div>
-</div>
+<div class="row padding-bottom-10">
+    <div class="col-md-8"></div>
 
-<div class = "panel panel-default panel-grey widthAuto">
-    <div class = "panel-heading panel-heading-grey">
-        <div class="row">
-            <div class="col-md-8">
-                <h4>Pohdinta: {{interview.title}}</h4>
-            </div>
-            <div class="col-md-4">
-                <button class="btn btn-default btn-exercise btn-save widthAuto floatRight" ng-click="updateInterview(interview)">Muokkaa</button>
-            </div>
-        </div>
+    <div class="col-md-3">
+        <button class="btn btn-default width-100" ui-sref="exercises_show.current_task.show">Palaa toimenpiteeseen</button>
     </div>
+    <div class="col-md-1"></div>
 
 </div>
+
+<div class="separator"></div>
+
+<div class="row padding-bottom-10">
+    <div class="col-md-1"></div>
+
+    <div class="col-md-10">
+        <h2 class="center-text multiline">Pohdinta: {{interview.title}}</h2>
+    </div>
+    <div class="col-md-1"></div>
+
+</div>
+
+
+<div class="row padding-bottom-10">
+
+    <div class="col-md-4"></div>
+    <div class="col-md-2">
+        <button class="btn btn-default btn-success width-100" ng-click="updateInterview(interview)">Muokkaa</button>
+    </div>
+    <div class="col-md-2">
+        <button uib-popover="Tällä sivulla voit muokata pohdinta-alakohtaa. Alakohdan otsikkoa pääset muokkaamaan 'Muokkaa'-nappia painamalla. Lisäksi pääset poistamaan alakohdan 'Muokkaa'-napista.
+        'Palaa toimenpiteeseen'-napista pääset palaamaan takaisin toimenpiteeseen. Tällä sivulla pääset myös lisäämään pohdintaan uusia kysymyksiä ja
+        muokkaamaan ja poistamaan pohdinnan kysymyksiä."
+                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+    </div>
+    <div class="col-md-4"></div>
+
+</div>
+
+<div class="separator"></div>
 
 <interview-questions></interview-questions>

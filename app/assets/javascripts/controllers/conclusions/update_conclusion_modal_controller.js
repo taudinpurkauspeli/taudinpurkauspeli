@@ -23,10 +23,26 @@ app.controller("UpdateConclusionModalController", [
         $scope.updateConclusion = function() {
             if ($scope.updateConclusionForm.$valid) {
                 Conclusion.update({conclusionId: $scope.conclusion.id}, $scope.conclusion, function() {
-                    $window.alert("Diagnoosi-alakohdan päivitys onnistui!");
+                    $.notify({
+                        message: "Diagnoosi-alakohdan päivitys onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close({conclusionRemoved: false});
                 }, function() {
-                    $window.alert("Diagnoosi-alakohdan päivitys epäonnistui!");
+                    $.notify({
+                        message: "Diagnoosi-alakohdan päivitys epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
                 });
             }
         };
@@ -36,12 +52,28 @@ app.controller("UpdateConclusionModalController", [
 
             if (deleteConfirmation) {
                 Conclusion.delete({conclusionId: $scope.conclusion.id}, function() {
-                    $window.alert("Diagnoosi-alakohdan poistaminen onnistui!");
+                    $.notify({
+                        message: "Diagnoosi-alakohdan poistaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
                     $uibModalInstance.close({conclusionRemoved: true});
                 });
 
             } else {
-                $window.alert("Diagnoosi-alakohtaa ei poistettu!");
+                $.notify({
+                    message: "Diagnoosi-alakohtaa ei poistettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
             }
         };
 

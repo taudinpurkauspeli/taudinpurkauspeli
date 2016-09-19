@@ -1,43 +1,60 @@
 <div class="modal-header">
-    <h3 class="modal-title">Uusi tekstialakohta</h3>
-</div>
-
-<div class="modal-body">
-
     <div class="row">
-        <div class="col-md-12">
-            <form novalidate name="createTaskTextForm">
-                <div class="form-group">
-
-                    <label for="newTaskTextContent">Sisältö</label>
-
-                    <div text-angular="text-angular"
-                         ng-model="newTaskText.content"
-                         ng-if="newTaskText"
-                         placeholder="Sisältö"
-                         name="newTaskTextContent"
-                         id="newTaskTextContent"
-                         required
-                         ta-text-editor-class="form-content"
-                         ta-html-editor-class="form-content"
-                         ta-toolbar-button-class="btn btn-default btn-toolbar"
-                         ta-focussed-class="focussed">
-                    </div>
-
-                </div>
-            </form>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text multiline">Uusi tekstialakohta</h3>
         </div>
-
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit luoda uuden tekstialakohdan. Täytä tekstialakohtaan sisältö, jonka haluat näkyvän opiskelijoille heidän tehdessään alakohtaa." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
     </div>
 </div>
 
+<div class="modal-body">
+    <form class="form-horizontal" novalidate name="createTaskTextForm">
+
+        <div class="form-group padding-top-10">
+
+            <label for="newTaskTextContent" class="col-md-1 control-label">Sisältö</label>
+
+            <div class="col-md-10">
+                <div text-angular
+                     ng-model="newTaskText.content"
+                     ng-if="newTaskText"
+                     placeholder="Sisältö"
+                     name="newTaskTextContent"
+                     id="newTaskTextContent"
+                     required>
+                </div>
+
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </form>
+
+</div>
+
 <div class="modal-footer">
-    <button class="btn btn-primary"
-            type="button"
-            ng-click="createTaskText()"
-            ng-disabled="createTaskTextForm.$invalid || createTaskTextForm.$pristine">
-        Luo
-    </button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Peruuta</button>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-success width-100"
+                    type="button"
+                    ng-click="createTaskText()"
+                    ng-disabled="createTaskTextForm.$invalid || createTaskTextForm.$pristine"
+                    ng-class="{'disabled': createTaskTextForm.$invalid || createTaskTextForm.$pristine}">
+                Luo
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-warning width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
 </div>
 
