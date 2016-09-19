@@ -1,8 +1,8 @@
-<!--<div class="row">
+<div class="row">
     <div class="col-md-12">
         <img src="http://tautiset-pelit.it.helsinki.fi/images/titlebanner.png" height="200" width="1500" class="title-image">
     </div>
-</div>-->
+</div>
 
 <div class="row padding-bottom-10 padding-top-20">
     <div class="col-md-4"></div>
@@ -31,25 +31,27 @@
         </div>
     </div>
 
-    <div class="row padding-bottom-30">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <div class="row">
-                <div class="col-md-1 padding-top-7">
-                    <label for="queryName">Hakusanat</label>
-                </div>
-                <div class="col-md-11">
-                    <input type="text"
-                           name="queryName"
-                           id="queryName"
-                           class="form-control"
-                           placeholder="Casen nimi"
-                           ng-model="queryName">
-                </div>
+
+    <form class="form-horizontal padding-bottom-30" novalidate name="searchExerciseForm">
+        <div class="form-group">
+            <div class="col-md-1"></div>
+
+            <label for="queryName" class="col-md-1 control-label">Hakusanat</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       class="form-control"
+                       name="queryName"
+                       id="queryName"
+                       placeholder="Casen nimi"
+                       ng-model="queryName">
             </div>
+
+            <div class="col-md-1"></div>
         </div>
-        <div class="col-md-1"></div>
-    </div>
+    </form>
+
+
     <div ng-repeat="exercise in exercisesList | orderBy: 'name' | filter:{name: queryName}">
         <div class="row">
 
