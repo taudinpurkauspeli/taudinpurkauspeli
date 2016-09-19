@@ -58,7 +58,7 @@
                 <div class="col-md-1 padding-bottom-20"></div>
 
                 <div class="col-md-10 padding-bottom-20">
-                    <button class="btn btn-default btn-lg btn-exercise-index multiline padding-top-20 padding-bottom-20"
+                    <button class="btn btn-default btn-lg width-100 multiline padding-top-20 padding-bottom-20"
                             ng-disabled="!currentUser"
                             ng-class="{'disabled': !currentUser}"
                             ng-click="viewExercise(exercise)">
@@ -75,21 +75,21 @@
                 <div class="col-md-1 padding-bottom-20"></div>
 
                 <div class="col-md-7 padding-bottom-20">
-                    <button class="btn btn-default btn-exercise-index multiline padding-top-20 padding-bottom-20"
+                    <button class="btn btn-default width-100 multiline padding-top-20 padding-bottom-20"
                             ng-click="viewExercise(exercise)">
                         {{exercise.name}}
                     </button>
                 </div>
 
                 <div class="col-md-1 padding-bottom-20">
-                    <button class="btn btn-default btn-exercise-index btn-warning multiline padding-top-20 padding-bottom-20"
+                    <button class="btn btn-default width-100 btn-warning multiline padding-top-20 padding-bottom-20"
                             ng-click="copyExercise(exercise)">
                         Kopioi
                     </button>
                 </div>
 
                 <div class="col-md-2 padding-bottom-20">
-                    <button class="btn btn-default btn-exercise-index multiline padding-top-20 padding-bottom-20"
+                    <button class="btn btn-default width-100 multiline padding-top-20 padding-bottom-20"
                             ng-click="toggleHiddenExercise(exercise)"
                             ng-class="{'btn-success': exercise.hidden,
                                        'btn-danger': !exercise.hidden}">
@@ -110,7 +110,7 @@
     <div class="col-md-1"></div>
 
     <div class="col-md-7">
-        <button class="btn btn-default btn-exercise-index btn-success multiline padding-top-20 padding-bottom-20"
+        <button class="btn btn-default width-100 btn-success multiline padding-top-20 padding-bottom-20"
                 ng-click="newExercisePage()">
             + Luo uusi case
         </button>

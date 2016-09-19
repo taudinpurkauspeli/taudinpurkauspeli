@@ -1,16 +1,6 @@
-
-
-$PaleLightGreen       : #b2dca5;
-$LightGreen           : #74ad61;
-
-$LightRed             : #ae6161;
-$PaleLightRed         : #be8181;
-
-$PaleLightYellow      : #EAEB7C;
-
-/*********************
-*     New colors     *
-**********************/
+/*****************
+*     Colors     *
+******************/
 
 $VeryDarkGreen          : #111700;
 $DarkGreen              : #2D3F00;
@@ -32,6 +22,7 @@ $SuccessYellow          : #FFED6B;
 $SuccessRed             : #D67272;
 $FontBlack              : #333333;
 
+
 /******************
 *     Images      *
 *******************/
@@ -45,6 +36,7 @@ img {
   width: 100%;
   height: auto;
 }
+
 
 /******************
 *     Layout      *
@@ -147,6 +139,7 @@ div.separator{
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
 
 /**************************
 *     Padding-bottom      *
@@ -377,15 +370,15 @@ div.separator{
   font-size: large;
 }
 
-.wrong-answer{
+.wrong-answer {
   background-color: $SuccessRed;
 }
 
-.correct-answer{
+.correct-answer {
   background-color: $SuccessGreen;
 }
 
-.allowed-answer{
+.allowed-answer {
   background-color: $SuccessYellow;
 }
 
@@ -412,20 +405,6 @@ div.separator{
 .multichoice-explanation-border {
   border-top: 1px solid;
   border-color: $DarkBlueGreen;
-}
-
-
-/*******************************
-*     Text angular editor      *
-********************************/
-
-.ta-editor {
-  min-height: 300px;
-  height: auto;
-  overflow: auto;
-  font-family: inherit;
-  font-size: 100%;
-  margin:20px 0;
 }
 
 
@@ -714,39 +693,6 @@ div.separator{
   padding-left: 5px;
 }
 
-.btn-exercise-index {
-  width: 100%;
-}
-
-.btn-completed-exercise {
-  width: 100%;
-}
-
-.btn-completed-task {
-  width: 100%;
-}
-
-.btn-uncompleted-task {
-  width: 100%;
-}
-
-.btn-unchecked-hypothesis {
-  width: 100%;
-}
-
-.btn-question {
-  width: 100%;
-}
-
-.btn-checked-hypothesis {
-  color: white;
-  background-color: $LightRed;
-}
-
-.btn-correct-diagnosis {
-  background-color: $PaleLightGreen;
-}
-
 
 /******************
 *     Panels      *
@@ -763,13 +709,11 @@ div.separator{
   }
 }
 
-
-
-.panel-light-green{
+.panel-light-green {
   background-color: $SuccessGreen;
 }
 
-.panel-heading-green{
+.panel-heading-green {
   background-color: $Green !important;
 }
 
@@ -852,6 +796,7 @@ thead tr:hover {
     font-size: large;
   }
 }
+
 
 /**********************
 *     Progressbar     *
