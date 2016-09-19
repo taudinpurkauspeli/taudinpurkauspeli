@@ -524,7 +524,8 @@ div.separator{
 }
 
 .dnd-task-list .dropzone .dnd-item-list li:hover {
-  background-color: $Green;
+  background-color: $PaleGrey;
+  color: $FontBlack;
 }
 
 .dnd-task-list ul[dnd-list] .dndPlaceholder {
@@ -572,7 +573,8 @@ div.separator{
 }
 
 .dnd-subtask-list .dropzone .dnd-item-list li:hover {
-  background-color: $Green;
+  background-color: $PaleGrey;
+  color: $FontBlack;
 }
 
 .dnd-subtask-list .dropzone .dndPlaceholder {
@@ -629,7 +631,8 @@ div.separator{
 }
 
 .dnd-options-list .dropzone .dnd-item-list li:hover {
-  background-color: $Green;
+  background-color: $PaleGrey;
+  color: $FontBlack;
 }
 
 .dnd-options-list ul[dnd-list] .dndPlaceholder {
@@ -686,7 +689,8 @@ div.separator{
 }
 
 .dnd-questions-list .dropzone .dnd-item-list li:hover {
-  background-color: $Green;
+  background-color: $PaleGrey;
+  color: $FontBlack;
 }
 
 .dnd-questions-list ul[dnd-list] .dndPlaceholder {
@@ -709,9 +713,9 @@ div.separator{
 }
 
 .btn-default:hover, .btn-default:active, .btn-default:active:hover {
-  background-color: $Green;
+  background-color: $PaleGrey;
   border-color: $DarkBlueGreen;
-  color: white;
+  color: $FontBlack;
 }
 
 .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active, .btn-default.disabled:active:hover {
