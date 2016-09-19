@@ -654,6 +654,7 @@ div.separator{
 .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active, .btn-default.disabled:active:hover {
   border-color: $DarkBlueGreen;
   background-color: $DisabledGreen;
+  color: white;
 }
 
 .btn-success, .btn-success:focus, .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled:active, .btn-success.disabled:active:hover {
