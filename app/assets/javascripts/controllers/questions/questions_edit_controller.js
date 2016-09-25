@@ -67,15 +67,6 @@ app.controller("QuestionsEditController", [
             modalInstance.result.then(function() {
                 $scope.setQuestions();
             }, function() {
-                $.notify({
-                    message: "Kysymyksen luominen peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
 
         };
@@ -95,15 +86,6 @@ app.controller("QuestionsEditController", [
             modalInstance.result.then(function() {
                 $scope.setQuestions();
             }, function() {
-                $.notify({
-                    message: "Kysymyksen muokkaaminen peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
 
         };

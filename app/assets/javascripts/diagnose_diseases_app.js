@@ -170,3 +170,18 @@ app.run([
 
     }
 ]);
+
+app.config([
+    "$provide",
+    function($provide){
+        $provide.decorator('taOptions', ['taCustomRenderers','$delegate', function(taCustomRenderers, taOptions){
+            taCustomRenderers.push({
+                selector: 'a',
+                renderLogic: function(element){
+                    element.attr('target', '_blank');
+                }
+            });
+            return taOptions;
+        }]);
+    }
+]);

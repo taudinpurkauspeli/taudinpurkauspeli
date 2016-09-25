@@ -95,15 +95,6 @@ app.controller("TasksController", [
                 $scope.setTasksList();
                 $scope.goToCurrentTask(data.id);
             }, function() {
-                $.notify({
-                    message: "Toimenpiteen luominen peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
         };
 
