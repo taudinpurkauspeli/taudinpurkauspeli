@@ -19,7 +19,7 @@ app.controller("CompletedConclusionController", [
             ExerciseHypotheses.query({'exercise_id' : $stateParams.exerciseShowId, 'unchecked_hypotheses[]': uncheckedHypotheses.ids}, function(data) {
                 $scope.exerciseHypotheses = data;
                 if(data){
-                    $scope.thereAreExerciseHypotheses = (data.length > 0);
+                    $scope.thereAreExerciseHypotheses = (data.length > 1);
                 } else {
                     $scope.thereAreExerciseHypotheses = false;
                 }

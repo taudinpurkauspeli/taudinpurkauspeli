@@ -97,15 +97,6 @@ app.controller("UsersShowController", [
 
             modalInstance.result.then(function(data) {
             }, function() {
-                $.notify({
-                    message: "Käyttäjätietojen muokkaus peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
 
         };
@@ -123,15 +114,6 @@ app.controller("UsersShowController", [
 
             modalInstance.result.then(function(data) {
             }, function() {
-                $.notify({
-                    message: "Salasanan vaihto peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
 
         };

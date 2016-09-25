@@ -35,15 +35,6 @@ app.controller("InterviewsShowController", [
                     $state.go("exercises_show.current_task.show");
                 }
             }, function() {
-                $.notify({
-                    message: "Pohdinnan päivitys peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
 
         };

@@ -120,15 +120,6 @@ app.controller("ExerciseHypothesesController", [
             modalInstance.result.then(function() {
                 $scope.setAllExerciseHypotheses();
             }, function() {
-                $.notify({
-                    message: "Casen diffin päivitys peruttu"
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
         };
 

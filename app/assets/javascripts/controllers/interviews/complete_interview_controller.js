@@ -43,6 +43,11 @@ app.controller("CompleteInterviewController", [
             Questions.get({ interview_id : $scope.subtask.interview.id}, function(data) {
                 $scope.questionsByGroup = data.questions_by_group;
                 $scope.questionsWithoutGroup = data.questions_without_group;
+                if(data.questions_without_group) {
+                    $scope.thereAreQuestionsWithoutGroup = (data.questions_without_group.length > 0);
+                } else {
+                    $scope.thereAreQuestionsWithoutGroup = false;
+                }
                 $scope.setLastAskedQuestion();
             });
         };
