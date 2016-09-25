@@ -33,15 +33,6 @@ app.controller("HypothesisGroupsController", [
                     callback();
                 }
             }, function() {
-                $.notify({
-                    message: "Diffiryhmän päivitys peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
         };
 
@@ -56,15 +47,6 @@ app.controller("HypothesisGroupsController", [
             modalInstance.result.then(function() {
                 $scope.updateHypothesisGroupList();
             }, function() {
-                $.notify({
-                    message: "Diffiryhmän luominen peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
         };
 
@@ -86,15 +68,6 @@ app.controller("HypothesisGroupsController", [
                     callback();
                 }
             }, function() {
-                $.notify({
-                    message: "Diffin päivitys peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
         };
 
@@ -112,15 +85,6 @@ app.controller("HypothesisGroupsController", [
             modalInstance.result.then(function() {
                 $scope.updateHypothesisGroupList();
             }, function() {
-                $.notify({
-                    message: "Diffin luominen peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
         };
 

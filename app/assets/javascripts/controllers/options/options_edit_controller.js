@@ -67,15 +67,6 @@ app.controller("OptionsEditController", [
             modalInstance.result.then(function() {
                 $scope.setOptions();
             }, function() {
-                $.notify({
-                    message: "Vastausvaihtoehdon luominen peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
 
         };
@@ -95,15 +86,6 @@ app.controller("OptionsEditController", [
             modalInstance.result.then(function() {
                 $scope.setOptions();
             }, function() {
-                $.notify({
-                    message: "Vastausvaihtoehdon muokkaaminen peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
 
         };

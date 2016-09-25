@@ -23,15 +23,6 @@ app.controller("TasksShowController", [
                     $state.go("exercises_show.tasks");
                 }
             }, function() {
-                $.notify({
-                    message: "Toimenpiteen päivitys peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
 
         };
@@ -51,15 +42,6 @@ app.controller("TasksShowController", [
             modalInstance.result.then(function(data) {
                 $scope.setTask();
             }, function() {
-                $.notify({
-                    message: "Tekstialakohdan luominen peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
         };
 
@@ -79,15 +61,6 @@ app.controller("TasksShowController", [
                 $scope.setTask();
                 $scope.editMultichoice(data);
             }, function() {
-                $.notify({
-                    message: "Monivalinnan luominen peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
         };
 
@@ -107,15 +80,6 @@ app.controller("TasksShowController", [
                 $scope.setTask();
                 $scope.editInterview(data);
             }, function() {
-                $.notify({
-                    message: "Pohdinnan luominen peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
         };
 
@@ -135,15 +99,6 @@ app.controller("TasksShowController", [
                 $scope.setTask();
                 $scope.setExercise();
             }, function() {
-                $.notify({
-                    message: "Diagnoosin luominen peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
         };
 
@@ -161,15 +116,6 @@ app.controller("TasksShowController", [
             modalInstance.result.then(function(data) {
                 $scope.setTask();
             }, function() {
-                $.notify({
-                    message: "Tekstialakohdan päivitys peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
         };
 
@@ -190,15 +136,6 @@ app.controller("TasksShowController", [
                     $scope.setExercise();
                 }
             }, function() {
-                $.notify({
-                    message: "Diagnoosin päivitys peruttu."
-                }, {
-                    placement: {
-                        align: "center"
-                    },
-                    type: "warning",
-                    offset: 100
-                });
             });
         };
 
