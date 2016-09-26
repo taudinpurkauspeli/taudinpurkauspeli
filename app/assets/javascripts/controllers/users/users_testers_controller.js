@@ -1,6 +1,6 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("UsersStudentsController", [
+app.controller("UsersTestersController", [
     "$scope", "$resource",
     function($scope, $resource) {
         $scope.users = [];
@@ -10,13 +10,13 @@ app.controller("UsersStudentsController", [
         var Users = $resource('/users_json.json');
 
         $scope.setUsers = function() {
-            Users.query({admin: "f", tester: "f"}, function(data) {
+            Users.query({admin: "f", tester: "t"}, function(data) {
                 $scope.users = data;
             });
         };
 
         $scope.setUsers();
-        $scope.setActiveTab("UsersStudentsTab");
+        $scope.setActiveTab("UsersTestersTab");
 
         $scope.setOrderByAttributes = function(newAttribute){
             var attributeSameAsFirstOrderByAttribute = ($scope.orderByAttributes[0] === newAttribute);
