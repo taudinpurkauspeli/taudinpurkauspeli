@@ -20,12 +20,21 @@ app.controller("UsersShowController", [
             }
         };
 
+        $scope.setTesterStatus = function(user){
+            if(user.tester){
+                $scope.testerStatus = "testaaja";
+            } else {
+                $scope.testerStatus = "tavallinen opiskelija";
+            }
+        };
+
         $scope.setUser = function() {
             User.get({userId : $stateParams.userShowId}, function(data) {
                 $scope.user = data.user;
                 $scope.userExercises = data.exercises;
                 $scope.userHasStartedExercises = (data.exercises.length > 0);
                 $scope.setAdminStatus(data.user);
+                $scope.setTesterStatus(data.user);
             }, function(data){
                 if(data.status == 401){
                     $.notify({
