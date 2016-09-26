@@ -22,9 +22,9 @@ app.controller("UsersShowController", [
 
         $scope.setTesterStatus = function(user){
             if(user.tester){
-                $scope.testerStatus = "testaaja";
-            } else {
                 $scope.testerStatus = "tavallinen opiskelija";
+            } else {
+                $scope.testerStatus = "testaaja";
             }
         };
 
@@ -160,6 +160,49 @@ app.controller("UsersShowController", [
             } else {
                 $.notify({
                     message: "Käyttäjän '" + user.first_name + "' oikeuksia ei muutettu."
+                }, {
+                    placement: {
+                        align: "center"
+                    },
+                    type: "warning",
+                    offset: 100
+                });
+            }
+        };
+
+        $scope.changeTesterStatus = function(user){
+            var testerStatusChangeConfirmation = $window.confirm("Oletko aivan varma, että haluat muuttaa käyttäjän testaajastatusta?");
+
+            if (testerStatusChangeConfirmation) {
+
+                var newTesterStatus = !user.tester;
+                user.tester = newTesterStatus;
+
+                User.update({userId : user.id}, user, function() {
+                    $.notify({
+                        message: "Käyttäjän testaajastatuksen muuttaminen onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
+                    $scope.setUser();
+                }, function() {
+                    $.notify({
+                        message: "Käyttäjän testaajastatusta ei voitu muuttaa!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
+                });
+            } else {
+                $.notify({
+                    message: "Käyttäjän '" + user.first_name + "' testaajastatusta ei muutettu."
                 }, {
                     placement: {
                         align: "center"
