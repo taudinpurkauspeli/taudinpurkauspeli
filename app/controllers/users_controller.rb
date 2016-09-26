@@ -51,8 +51,12 @@ class UsersController < ApplicationController
   end
 
   def json_index
-    @users = User.where(admin:params[:admin]).select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name")
 
+    if params[:tester].nil?
+      @users = User.where(admin:params[:admin]).select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name", "tester")
+    else
+      @users = User.where(admin:params[:admin], tester:params[:tester]).select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name", "tester")
+    end
     respond_to do |format|
       format.html
       format.json { render json: @users }
