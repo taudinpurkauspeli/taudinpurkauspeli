@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150927140349) do
+ActiveRecord::Schema.define(version: 20160926165457) do
 
   create_table "asked_questions", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "checked_hypotheses", force: :cascade do |t|
@@ -72,48 +72,37 @@ ActiveRecord::Schema.define(version: 20150927140349) do
   create_table "exercise_hypotheses", force: :cascade do |t|
     t.integer  "exercise_id"
     t.integer  "hypothesis_id"
+    t.integer  "task_id"
     t.string   "explanation"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.integer  "task_id"
   end
 
   create_table "exercises", force: :cascade do |t|
     t.string   "name"
+    t.boolean  "hidden"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text     "anamnesis"
-    t.boolean  "hidden"
-    t.integer  "image_id"
   end
 
   create_table "hypotheses", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
     t.integer  "count"
     t.integer  "hypothesis_group_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "hypothesis_groups", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "images", force: :cascade do |t|
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.string   "picture_file_name"
-    t.string   "picture_content_type"
-    t.integer  "picture_file_size"
-    t.datetime "picture_updated_at"
-    t.string   "name"
-  end
-
   create_table "interviews", force: :cascade do |t|
     t.string   "title"
+    t.integer  "subtask_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "subtask_id"
   end
 
   create_table "log_entries", force: :cascade do |t|
@@ -138,9 +127,9 @@ ActiveRecord::Schema.define(version: 20150927140349) do
   create_table "multichoices", force: :cascade do |t|
     t.string   "question"
     t.integer  "subtask_id"
+    t.boolean  "is_radio_button"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.boolean  "is_radio_button"
   end
 
   create_table "options", force: :cascade do |t|
@@ -150,24 +139,22 @@ ActiveRecord::Schema.define(version: 20150927140349) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.integer  "is_correct_answer", default: 0
-    t.integer  "image_id"
   end
 
   create_table "question_groups", force: :cascade do |t|
     t.string   "title"
+    t.integer  "interview_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.integer  "interview_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
     t.integer  "question_group_id"
     t.integer  "interview_id"
-    t.integer  "image_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "required",          default: 0
   end
 
@@ -180,31 +167,31 @@ ActiveRecord::Schema.define(version: 20150927140349) do
 
   create_table "task_texts", force: :cascade do |t|
     t.string   "content"
+    t.integer  "subtask_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "subtask_id"
-    t.integer  "image_id"
   end
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
     t.integer  "exercise_id"
     t.integer  "level"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.boolean  "admin",           default: false
     t.string   "email"
     t.string   "password_digest"
     t.string   "student_number"
     t.integer  "starting_year"
+    t.boolean  "admin",           default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "first_name"
     t.string   "last_name"
+    t.boolean  "tester",          default: false
   end
 
 end
