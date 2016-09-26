@@ -17,7 +17,7 @@ app.controller("AuthenticationController", [
 
         $scope.login = function(credentials) {
             AuthenticationService.login(credentials).success(function() {
-                $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin());
+                $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin(), AuthenticationService.isTester());
                 $scope.resetCredentials();
                 $state.go('app_root');
             }).error(function() {
@@ -27,7 +27,7 @@ app.controller("AuthenticationController", [
 
         $scope.logout = function() {
             AuthenticationService.logout().success(function() {
-                $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin());
+                $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin(), AuthenticationService.isTester());
                 LocalStorageService.remove("current_task");
                 LocalStorageService.remove("current_task_tab_path");
                 LocalStorageService.remove("unchecked_hypotheses");

@@ -51,6 +51,10 @@ app.factory('AuthenticationService', [
             return Session.userAdmin() === "true";
         };
 
+        authService.isTester = function() {
+            return Session.userTester() === "true";
+        };
+
         return authService;
     }
 ]);
