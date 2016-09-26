@@ -51,8 +51,12 @@ class UsersController < ApplicationController
   end
 
   def json_index
-    @users = User.where(admin:params[:admin]).select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name")
 
+    if params[:tester].nil?
+      @users = User.where(admin:params[:admin]).select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name", "tester")
+    else
+      @users = User.where(admin:params[:admin], tester:params[:tester]).select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name", "tester")
+    end
     respond_to do |format|
       format.html
       format.json { render json: @users }
@@ -87,7 +91,7 @@ class UsersController < ApplicationController
 
     @exercises_with_completion_percent = @user.get_started_exercises_with_completion_percent
 
-    @user = User.select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name").find_by(id:params[:id])
+    @user = User.select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name", "tester").find_by(id:params[:id])
     respond_to do |format|
       format.html
       format.json { render json: {user: @user, exercises: @exercises_with_completion_percent }}
@@ -282,7 +286,7 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:username, :first_name, :last_name, :email, :admin, :password, :password_confirmation, :student_number, :starting_year)
+    params.require(:user).permit(:username, :first_name, :last_name, :email, :admin, :password, :password_confirmation, :student_number, :starting_year, :tester)
   end
 
 end

@@ -25,10 +25,12 @@ app.controller("ApplicationController", [
 
         $scope.currentUser = AuthenticationService.isLoggedIn();
         $scope.currentUserAdmin = AuthenticationService.isAdmin();
+        $scope.currentUserTester = AuthenticationService.isTester();
 
-        $scope.setCurrentUser = function (userId, userAdmin) {
+        $scope.setCurrentUser = function (userId, userAdmin, userTester) {
             $scope.currentUser = userId;
             $scope.currentUserAdmin = userAdmin;
+            $scope.currentUserTester = userTester;
         };
 
         $scope.setActiveTab = function(tabId){

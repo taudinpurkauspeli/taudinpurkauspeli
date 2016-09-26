@@ -18,7 +18,7 @@ app.controller("UsersNewController", [
                             password: $scope.newUser.password
                         };
                         AuthenticationService.login(credentials).success(function() {
-                            $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin());
+                            $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin(), AuthenticationService.isTester());
                             $scope.newUser = {};
                             $state.go('app_root');
                             $.notify({

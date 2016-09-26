@@ -43,6 +43,10 @@ app.config([
                 url: "/teachers",
                 controller: "UsersTeachersController",
                 templateUrl: "users/teachers.html"
+            }).state("users.testers", {
+                url: "/testers",
+                controller: "UsersTestersController",
+                templateUrl: "users/testers.html"
             })
 
             .state("users_show", {

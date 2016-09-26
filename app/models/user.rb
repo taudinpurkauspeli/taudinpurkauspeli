@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
   end
 
   def get_started_exercises_with_completion_percent
-    currently_started_exercises = started_exercises.where(hidden: false).distinct
+    currently_started_exercises = started_exercises.distinct
 
     user_exercises = Array.new()
 
