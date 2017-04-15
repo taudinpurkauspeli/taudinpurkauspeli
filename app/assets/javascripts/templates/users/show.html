@@ -69,15 +69,19 @@
                     </div>
                 </div>
 
-                <div class="row row-userinfo padding-top-20 padding-bottom-20" ng-if="currentUser == user.id">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-3">
+                <div class="row row-userinfo padding-top-20 padding-bottom-20">
+                    <div ng-class="{'col-md-3': currentUser == user.id,
+                                    'col-md-4': currentUser != user.id}"></div>
+
+                    <div class="col-md-3" ng-if="currentUser == user.id">
                         <button class="btn btn-default btn-success width-100" ng-click="editUser(user)">Muokkaa tietoja</button>
                     </div>
-                    <div class="col-md-3">
+                    <div ng-class="{'col-md-3': currentUser == user.id,
+                                    'col-md-4': currentUser != user.id}">
                         <button class="btn btn-default btn-success width-100" ng-click="changePassword(user)">Vaihda salasana</button>
                     </div>
-                    <div class="col-md-3"></div>
+                    <div ng-class="{'col-md-3': currentUser == user.id,
+                                    'col-md-4': currentUser != user.id}"></div>
                 </div>
             </div>
         </div>
