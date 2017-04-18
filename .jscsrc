@@ -1,0 +1,14 @@
+{
+	"preset": "airbnb",
+	"validateIndentation": null,
+	"requireSpacesInAnonymousFunctionExpression": null,
+	"requireTrailingComma": null,
+	"requireSpacesInsideObjectBrackets": null,
+	"requireSpaceBeforeBlockStatements": null,
+	"maximumLineLength": null,
+	"requirePaddingNewLinesAfterBlocks": null,
+	"requireSpaceAfterComma": null,
+	"requireCamelCaseOrUpperCaseIdentifiers": null,
+	"disallowSpaceBeforeSemicolon": null,
+    "maxErrors": "Infinity"
+}

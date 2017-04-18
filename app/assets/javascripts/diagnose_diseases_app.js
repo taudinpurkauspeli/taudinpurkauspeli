@@ -1,21 +1,24 @@
 (function() {
-    var app = angular.module('diagnoseDiseases',[ 'templates',
-        'ngResource', 'ngMessages', 'validation.match', 'dndLists', 'ui.router', 'textAngular', 'ngAnimate', 'ui.bootstrap']);
+    var app = angular.module('diagnoseDiseases', ['templates',
+        'ngResource', 'ngMessages', 'validation.match', 'dndLists', 'ui.router', 'textAngular', 'ngAnimate', 'ui.bootstrap',]
+    );
 })();
 
 var app = angular.module('diagnoseDiseases');
 
 app.config([
     "$stateProvider", "$urlRouterProvider",
-    function($stateProvider, $urlRouterProvider) {
+    function ($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.otherwise("/");
 
-        $stateProvider.state("app_root", {
-            url: "/",
-            controller: "ExercisesController",
-            templateUrl: "exercises/index.html"
-        })
+        $stateProvider.state("app_root",
+            {
+                url: "/",
+                controller: "ExercisesController",
+                templateUrl: "exercises/index.html"
+            }
+        )
 
             .state("users", {
                 url: "/users",
@@ -32,22 +35,22 @@ app.config([
                     }]
                 }
             }).state("users.students", {
-                url: "/students",
-                controller: "UsersStudentsController",
-                templateUrl: "users/students.html"
-            }).state("users.by_case", {
-                url: "/by_case",
-                controller: "UsersByCaseController",
-                templateUrl: "users/by_case.html"
-            }).state("users.teachers", {
-                url: "/teachers",
-                controller: "UsersTeachersController",
-                templateUrl: "users/teachers.html"
-            }).state("users.testers", {
-                url: "/testers",
-                controller: "UsersTestersController",
-                templateUrl: "users/testers.html"
-            })
+            url: "/students",
+            controller: "UsersStudentsController",
+            templateUrl: "users/students.html"
+        }).state("users.by_case", {
+            url: "/by_case",
+            controller: "UsersByCaseController",
+            templateUrl: "users/by_case.html"
+        }).state("users.teachers", {
+            url: "/teachers",
+            controller: "UsersTeachersController",
+            templateUrl: "users/teachers.html"
+        }).state("users.testers", {
+            url: "/testers",
+            controller: "UsersTestersController",
+            templateUrl: "users/testers.html"
+        })
 
             .state("users_show", {
                 url: "/users/:userShowId",
@@ -85,55 +88,55 @@ app.config([
                     }]
                 }
             }).state("exercises_show.anamnesis", {
-                url: "/anamnesis",
-                templateUrl: "exercises/anamnesis.html",
-                controller: "ExercisesAnamnesisController"
-            }).state("exercises_show.tasks", {
-                url: "/tasks",
-                templateUrl: "exercises/tasks_list.html",
-                controller: "TasksController"
-            }).state("exercises_show.hypotheses", {
-                url: "/hypotheses",
-                templateUrl: "exercises/exercise_hypotheses_list.html",
-                controller: "ExerciseHypothesesController"
-            }).state("exercises_show.current_task", {
-                url: "/task/:taskShowId",
-                abstract:true,
-                controller: "TasksCurrentTaskController",
-                template: "<ui-view/>"
-            })
+            url: "/anamnesis",
+            templateUrl: "exercises/anamnesis.html",
+            controller: "ExercisesAnamnesisController"
+        }).state("exercises_show.tasks", {
+            url: "/tasks",
+            templateUrl: "exercises/tasks_list.html",
+            controller: "TasksController"
+        }).state("exercises_show.hypotheses", {
+            url: "/hypotheses",
+            templateUrl: "exercises/exercise_hypotheses_list.html",
+            controller: "ExerciseHypothesesController"
+        }).state("exercises_show.current_task", {
+            url: "/task/:taskShowId",
+            abstract:true,
+            controller: "TasksCurrentTaskController",
+            template: "<ui-view/>"
+        })
 
             .state("exercises_show.current_task.show", {
                 url: "/show",
                 templateUrl: "tasks/show.html",
                 controller: "TasksShowController"
             }).state("exercises_show.current_task.interview", {
-                url: "/interview/:interviewShowId",
-                templateUrl: "interviews/show.html",
-                controller: "InterviewsShowController",
-                resolve: {
-                    auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
-                        var userAdmin = AuthenticationService.isAdmin();
+            url: "/interview/:interviewShowId",
+            templateUrl: "interviews/show.html",
+            controller: "InterviewsShowController",
+            resolve: {
+                auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                    var userAdmin = AuthenticationService.isAdmin();
 
-                        if (!userAdmin) {
-                            return $q.reject({ authenticated: false });
-                        }
-                    }]
-                }
-            }).state("exercises_show.current_task.multichoice", {
-                url: "/multichoice/:multichoiceShowId",
-                templateUrl: "multichoices/show.html",
-                controller: "MultichoicesShowController",
-                resolve: {
-                    auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
-                        var userAdmin = AuthenticationService.isAdmin();
+                    if (!userAdmin) {
+                        return $q.reject({ authenticated: false });
+                    }
+                }]
+            }
+        }).state("exercises_show.current_task.multichoice", {
+            url: "/multichoice/:multichoiceShowId",
+            templateUrl: "multichoices/show.html",
+            controller: "MultichoicesShowController",
+            resolve: {
+                auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                    var userAdmin = AuthenticationService.isAdmin();
 
-                        if (!userAdmin) {
-                            return $q.reject({ authenticated: false });
-                        }
-                    }]
-                }
-            })
+                    if (!userAdmin) {
+                        return $q.reject({ authenticated: false });
+                    }
+                }]
+            }
+        })
 
             .state("exercises_new", {
                 url: "/exercises_new",
