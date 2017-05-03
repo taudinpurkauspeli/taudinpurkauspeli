@@ -1,32 +1,32 @@
 (function() {
     var app = angular.module('diagnoseDiseases', ['templates',
-        'ngResource', 'ngMessages', 'validation.match', 'dndLists', 'ui.router', 'textAngular', 'ngAnimate', 'ui.bootstrap',]
+        'ngResource', 'ngMessages', 'validation.match', 'dndLists', 'ui.router', 'textAngular', 'ngAnimate', 'ui.bootstrap']
     );
 })();
 
 var app = angular.module('diagnoseDiseases');
 
 app.config([
-    "$stateProvider", "$urlRouterProvider",
+    '$stateProvider', '$urlRouterProvider',
     function ($stateProvider, $urlRouterProvider) {
 
-        $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.otherwise('/');
 
-        $stateProvider.state("app_root",
+        $stateProvider.state('app_root',
             {
-                url: "/",
-                controller: "ExercisesController",
-                templateUrl: "exercises/index.html"
+                url: '/',
+                controller: 'ExercisesController',
+                templateUrl: 'exercises/index.html'
             }
         )
 
-            .state("users", {
-                url: "/users",
+            .state('users', {
+                url: '/users',
                 abstract: true,
-                controller: "UsersController",
-                templateUrl: "users/index.html",
+                controller: 'UsersController',
+                templateUrl: 'users/index.html',
                 resolve: {
-                    auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                    auth: ['$q', 'AuthenticationService', function($q, AuthenticationService) {
                         var userAdmin = AuthenticationService.isAdmin();
 
                         if (!userAdmin) {
@@ -34,30 +34,30 @@ app.config([
                         }
                     }]
                 }
-            }).state("users.students", {
-            url: "/students",
-            controller: "UsersStudentsController",
-            templateUrl: "users/students.html"
-        }).state("users.by_case", {
-            url: "/by_case",
-            controller: "UsersByCaseController",
-            templateUrl: "users/by_case.html"
-        }).state("users.teachers", {
-            url: "/teachers",
-            controller: "UsersTeachersController",
-            templateUrl: "users/teachers.html"
-        }).state("users.testers", {
-            url: "/testers",
-            controller: "UsersTestersController",
-            templateUrl: "users/testers.html"
+            }).state('users.students', {
+            url: '/students',
+            controller: 'UsersStudentsController',
+            templateUrl: 'users/students.html'
+        }).state('users.by_case', {
+            url: '/by_case',
+            controller: 'UsersByCaseController',
+            templateUrl: 'users/by_case.html'
+        }).state('users.teachers', {
+            url: '/teachers',
+            controller: 'UsersTeachersController',
+            templateUrl: 'users/teachers.html'
+        }).state('users.testers', {
+            url: '/testers',
+            controller: 'UsersTestersController',
+            templateUrl: 'users/testers.html'
         })
 
-            .state("users_show", {
-                url: "/users/:userShowId",
-                controller: "UsersShowController",
-                templateUrl: "users/show.html",
+            .state('users_show', {
+                url: '/users/:userShowId',
+                controller: 'UsersShowController',
+                templateUrl: 'users/show.html',
                 resolve: {
-                    auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                    auth: ['$q', 'AuthenticationService', function($q, AuthenticationService) {
                         var userIsLoggedIn = AuthenticationService.isLoggedIn();
 
                         if (!userIsLoggedIn) {
@@ -67,19 +67,19 @@ app.config([
                 }
             })
 
-            .state("signup",{
-                url: "/signup",
-                controller: "UsersNewController",
-                templateUrl: "users/new.html"
+            .state('signup',{
+                url: '/signup',
+                controller: 'UsersNewController',
+                templateUrl: 'users/new.html'
             })
 
-            .state("exercises_show",{
-                url: "/exercises/:exerciseShowId",
+            .state('exercises_show',{
+                url: '/exercises/:exerciseShowId',
                 abstract: true,
-                controller: "ExercisesShowController",
-                templateUrl: "exercises/show.html",
+                controller: 'ExercisesShowController',
+                templateUrl: 'exercises/show.html',
                 resolve: {
-                    auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                    auth: ['$q', 'AuthenticationService', function($q, AuthenticationService) {
                         var userIsLoggedIn = AuthenticationService.isLoggedIn();
 
                         if (!userIsLoggedIn) {
@@ -87,35 +87,35 @@ app.config([
                         }
                     }]
                 }
-            }).state("exercises_show.anamnesis", {
-            url: "/anamnesis",
-            templateUrl: "exercises/anamnesis.html",
-            controller: "ExercisesAnamnesisController"
-        }).state("exercises_show.tasks", {
-            url: "/tasks",
-            templateUrl: "exercises/tasks_list.html",
-            controller: "TasksController"
-        }).state("exercises_show.hypotheses", {
-            url: "/hypotheses",
-            templateUrl: "exercises/exercise_hypotheses_list.html",
-            controller: "ExerciseHypothesesController"
-        }).state("exercises_show.current_task", {
-            url: "/task/:taskShowId",
+            }).state('exercises_show.anamnesis', {
+            url: '/anamnesis',
+            templateUrl: 'exercises/anamnesis.html',
+            controller: 'ExercisesAnamnesisController'
+        }).state('exercises_show.tasks', {
+            url: '/tasks',
+            templateUrl: 'exercises/tasks_list.html',
+            controller: 'TasksController'
+        }).state('exercises_show.hypotheses', {
+            url: '/hypotheses',
+            templateUrl: 'exercises/exercise_hypotheses_list.html',
+            controller: 'ExerciseHypothesesController'
+        }).state('exercises_show.current_task', {
+            url: '/task/:taskShowId',
             abstract:true,
-            controller: "TasksCurrentTaskController",
-            template: "<ui-view/>"
+            controller: 'TasksCurrentTaskController',
+            template: '<ui-view/>'
         })
 
-            .state("exercises_show.current_task.show", {
-                url: "/show",
-                templateUrl: "tasks/show.html",
-                controller: "TasksShowController"
-            }).state("exercises_show.current_task.interview", {
-            url: "/interview/:interviewShowId",
-            templateUrl: "interviews/show.html",
-            controller: "InterviewsShowController",
+            .state('exercises_show.current_task.show', {
+                url: '/show',
+                templateUrl: 'tasks/show.html',
+                controller: 'TasksShowController'
+            }).state('exercises_show.current_task.interview', {
+            url: '/interview/:interviewShowId',
+            templateUrl: 'interviews/show.html',
+            controller: 'InterviewsShowController',
             resolve: {
-                auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                auth: ['$q', 'AuthenticationService', function($q, AuthenticationService) {
                     var userAdmin = AuthenticationService.isAdmin();
 
                     if (!userAdmin) {
@@ -123,12 +123,12 @@ app.config([
                     }
                 }]
             }
-        }).state("exercises_show.current_task.multichoice", {
-            url: "/multichoice/:multichoiceShowId",
-            templateUrl: "multichoices/show.html",
-            controller: "MultichoicesShowController",
+        }).state('exercises_show.current_task.multichoice', {
+            url: '/multichoice/:multichoiceShowId',
+            templateUrl: 'multichoices/show.html',
+            controller: 'MultichoicesShowController',
             resolve: {
-                auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                auth: ['$q', 'AuthenticationService', function($q, AuthenticationService) {
                     var userAdmin = AuthenticationService.isAdmin();
 
                     if (!userAdmin) {
@@ -138,12 +138,12 @@ app.config([
             }
         })
 
-            .state("exercises_new", {
-                url: "/exercises_new",
-                controller: "ExercisesNewController",
-                templateUrl: "exercises/new.html",
+            .state('exercises_new', {
+                url: '/exercises_new',
+                controller: 'ExercisesNewController',
+                templateUrl: 'exercises/new.html',
                 resolve: {
-                    auth: ["$q", "AuthenticationService", function($q, AuthenticationService) {
+                    auth: ['$q', 'AuthenticationService', function($q, AuthenticationService) {
                         var userAdmin = AuthenticationService.isAdmin();
 
                         if (!userAdmin) {
@@ -156,18 +156,18 @@ app.config([
 ]);
 
 app.run([
-    "$rootScope", "$state",
+    '$rootScope', '$state',
     function($rootScope, $state){
-        $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+        $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
             if (error.authenticated === false) {
                 $.notify({
-                    title: "Pääsy estetty!",
-                    message: "Sinulla ei ole tarvittavia oikeuksia päästäksesi sivulle."
+                    title: 'Pääsy estetty!',
+                    message: 'Sinulla ei ole tarvittavia oikeuksia päästäksesi sivulle.'
                 }, {
                     placement: {
-                        align: "center"
+                        align: 'center'
                     },
-                    type: "danger",
+                    type: 'danger',
                     offset: 100
                 });
 
@@ -179,7 +179,7 @@ app.run([
 ]);
 
 app.config([
-    "$provide",
+    '$provide',
     function($provide){
         $provide.decorator('taOptions', ['taCustomRenderers','$delegate', function(taCustomRenderers, taOptions){
             taCustomRenderers.push({
