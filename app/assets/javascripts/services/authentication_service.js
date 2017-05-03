@@ -1,24 +1,24 @@
 var app = angular.module('diagnoseDiseases');
 
 app.factory('AuthenticationService', [
-    "$http","Session", "$state",
+    '$http','Session', '$state',
     function ($http, Session, $state) {
         var authService = {};
 
         authService.login = function(credentials) {
             return $http
                 .post('/sessions.json', credentials)
-                .success(function(data,status,headers,config) {
+                .then(function onSuccess(data,status,headers,config) {
                     Session.create(data);
                     return data;
-                }).error(function(data,status,headers,config) {
+                }).catch(function onError(data,status,headers,config) {
                     $.notify({
-                        message: "Kirjautuminen epäonnistui!"
+                        message: 'Kirjautuminen epäonnistui!'
                     }, {
                         placement: {
-                            align: "center"
+                            align: 'center'
                         },
-                        type: "danger",
+                        type: 'danger',
                         offset: 100
                     });
                 });
@@ -27,17 +27,17 @@ app.factory('AuthenticationService', [
         authService.logout = function() {
             return $http
                 .delete('/signout.json')
-                .success(function(data,status,headers,config) {
+                .then(function onSuccess(data,status,headers,config) {
                     Session.destroy();
                     $state.go('app_root');
-                }).error(function(data,status,headers,config) {
+                }).catch(function onError(data,status,headers,config) {
                     $.notify({
-                        message: "Uloskirjautuminen epäonnistui!"
+                        message: 'Uloskirjautuminen epäonnistui!'
                     }, {
                         placement: {
-                            align: "center"
+                            align: 'center'
                         },
-                        type: "danger",
+                        type: 'danger',
                         offset: 100
                     });
                 });
@@ -48,11 +48,11 @@ app.factory('AuthenticationService', [
         };
 
         authService.isAdmin = function() {
-            return Session.userAdmin() === "true";
+            return Session.userAdmin() === 'true';
         };
 
         authService.isTester = function() {
-            return Session.userTester() === "true";
+            return Session.userTester() === 'true';
         };
 
         return authService;

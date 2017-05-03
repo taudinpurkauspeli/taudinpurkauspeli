@@ -37,9 +37,10 @@ app.controller("ExercisesShowController", [
             {id: '@id'});
 
         $scope.setExercise = function() {
-            ExerciseOne.get({exerciseId : exerciseId}, function(data) {
+            ExerciseOne.get({exerciseId: exerciseId}, function(data) {
                 $scope.exercise = data.exercise;
                 $scope.hasConclusion = data.has_conclusion;
+            }, function() {
             });
         };
 
@@ -76,6 +77,7 @@ app.controller("ExercisesShowController", [
             CompletedTasks.query({id: $scope.currentUser, exercise_id: $stateParams.exerciseShowId},
                 function(data) {
                     $scope.completedTasksForUser = data;
+                }, function() {
                 }
             );
         };
@@ -88,7 +90,7 @@ app.controller("ExercisesShowController", [
 
             CompletableSubtasks.query({id: $scope.currentUser, task_id: $scope.taskForShow.id},
                 function(data) {
-                    if(!$scope.userHasCompletedTask){
+                    if (!$scope.userHasCompletedTask){
                         $scope.uncompletedSubtask = data.pop();
                         $scope.completedSubtasks = data;
                     } else {
@@ -101,13 +103,14 @@ app.controller("ExercisesShowController", [
         };
 
         $scope.setTaskForShow = function(current_task){
-            if(current_task){
-                TaskOne.get({taskId : current_task}, function(data) {
+            if (current_task){
+                TaskOne.get({taskId: current_task}, function(data) {
                     $scope.taskForShow = data;
 
-                    if($scope.currentUser && !$scope.currentUserAdmin) {
+                    if ($scope.currentUser && !$scope.currentUserAdmin) {
                         $scope.setTaskShowValuesForStudent();
                     }
+                }, function() {
                 });
             } else {
                 $scope.taskForShow = {};

@@ -1,7 +1,7 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("AuthenticationController", [
-    "$scope", "AuthenticationService", "$window", "LocalStorageService", "$state",
+app.controller('AuthenticationController', [
+    '$scope', 'AuthenticationService', '$window', 'LocalStorageService', '$state',
     function($scope, AuthenticationService, $window, LocalStorageService, $state) {
 
         $scope.credentials = {};
@@ -16,38 +16,38 @@ app.controller("AuthenticationController", [
         $scope.resetCredentials();
 
         $scope.login = function(credentials) {
-            AuthenticationService.login(credentials).success(function() {
+            AuthenticationService.login(credentials).then(function onSuccess() {
                 $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin(), AuthenticationService.isTester());
                 $scope.resetCredentials();
                 $state.go('app_root');
-            }).error(function() {
+            }).catch(function onError() {
                 $scope.resetCredentials();
             });
         };
 
         $scope.logout = function() {
-            AuthenticationService.logout().success(function() {
+            AuthenticationService.logout().then(function onSuccess() {
                 $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin(), AuthenticationService.isTester());
-                LocalStorageService.remove("current_task");
-                LocalStorageService.remove("current_task_tab_path");
-                LocalStorageService.remove("unchecked_hypotheses");
+                LocalStorageService.remove('current_task');
+                LocalStorageService.remove('current_task_tab_path');
+                LocalStorageService.remove('unchecked_hypotheses');
                 $.notify({
-                    message: "Uloskirjautuminen onnistui!"
+                    message: 'Uloskirjautuminen onnistui!'
                 }, {
                     placement: {
-                        align: "center"
+                        align: 'center'
                     },
-                    type: "success",
+                    type: 'success',
                     offset: 100
                 });
-            }).error(function() {
+            }).catch(function onError() {
                 $.notify({
-                    message: "Uloskirjautuminen epäonnistui!"
+                    message: 'Uloskirjautuminen epäonnistui!'
                 }, {
                     placement: {
-                        align: "center"
+                        align: 'center'
                     },
-                    type: "danger",
+                    type: 'danger',
                     offset: 100
                 });
             });
