@@ -24,31 +24,34 @@ app.controller("CompleteConclusionController", [
             UncheckedHypotheses.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.uncheckedHypotheses = LocalStorageService.getObject("unchecked_hypotheses", 'null');
 
-                if(!$scope.uncheckedHypotheses){
+                if (!$scope.uncheckedHypotheses){
                     LocalStorageService.setObject("unchecked_hypotheses", {ids: data});
                     $scope.uncheckedHypotheses = LocalStorageService.getObject("unchecked_hypotheses", '{"ids": "[]"}');
                 }
 
                 $scope.setExerciseHypotheses($scope.uncheckedHypotheses.ids);
 
+            }, function() {
             });
         };
 
         $scope.setExerciseHypotheses = function(uncheckedHypotheses) {
             ExerciseHypotheses.query({'exercise_id': $stateParams.exerciseShowId, 'unchecked_hypotheses[]': uncheckedHypotheses}, function(data) {
                 $scope.exerciseHypotheses = data;
+            }, function() {
             });
         };
 
         $scope.setCorrectDiagnosis = function() {
             CorrectDiagnosis.get({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.correctDiagnosis = data;
+            }, function() {
             });
         };
 
         $scope.$watch(function(){
             return $scope.subtask.conclusion.id;
-        },function(newValue, oldValue){
+        }, function(newValue, oldValue){
             $scope.setAllExerciseHypotheses();
         });
 
@@ -82,7 +85,7 @@ app.controller("CompleteConclusionController", [
         };
 
         $scope.checkAnswers = function(exerciseHypothesis) {
-            if($scope.userHasCheckedHypothesis(exerciseHypothesis)){
+            if ($scope.userHasCheckedHypothesis(exerciseHypothesis)){
                 $scope.setExerciseHypothesisCollapse(exerciseHypothesis);
             } else {
                 CheckAnswersConclusion.save({ id: $scope.subtask.conclusion.id, exhyp_id: exerciseHypothesis.id, current_exercise_id: $stateParams.exerciseShowId, current_task_id: $stateParams.taskShowId }, function(data) {
@@ -95,13 +98,13 @@ app.controller("CompleteConclusionController", [
         };
 
         $scope.hypothesisIsCorrectDiagnosis = function(exerciseHypothesis) {
-            return $scope.correctDiagnosis.id == exerciseHypothesis.id;
+            return $scope.correctDiagnosis.id === exerciseHypothesis.id;
         };
 
         $scope.userHasCheckedHypothesis = function(exerciseHypothesis) {
-            for(var i = 0; i < $scope.checkedHypotheses.length; i++) {
+            for (var i = 0; i < $scope.checkedHypotheses.length; i++) {
                 var checkedHypothesis = $scope.checkedHypotheses[i];
-                if(checkedHypothesis.exercise_hypothesis_id == exerciseHypothesis.id){
+                if (checkedHypothesis.exercise_hypothesis_id === exerciseHypothesis.id){
                     return true;
                 }
             }
@@ -109,7 +112,7 @@ app.controller("CompleteConclusionController", [
         };
 
         $scope.setExerciseHypothesisId = function(exerciseHypothesisId){
-            if($scope.lastClickedExerciseHypothesis == exerciseHypothesisId){
+            if ($scope.lastClickedExerciseHypothesis === exerciseHypothesisId){
                 $scope.lastClickedExerciseHypothesis = null;
             } else {
                 $scope.lastClickedExerciseHypothesis = exerciseHypothesisId;
@@ -117,7 +120,7 @@ app.controller("CompleteConclusionController", [
         };
 
         $scope.userClickedCheckedHypothesis = function(exerciseHypothesis) {
-            return exerciseHypothesis.id == $scope.lastClickedExerciseHypothesis;
+            return exerciseHypothesis.id === $scope.lastClickedExerciseHypothesis;
         };
 
     }

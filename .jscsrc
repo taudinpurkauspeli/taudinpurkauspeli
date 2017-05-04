@@ -10,5 +10,6 @@
 	"requireSpaceAfterComma": null,
 	"requireCamelCaseOrUpperCaseIdentifiers": null,
 	"disallowSpaceBeforeSemicolon": null,
+	"validateQuoteMarks": null,
     "maxErrors": "Infinity"
 }
