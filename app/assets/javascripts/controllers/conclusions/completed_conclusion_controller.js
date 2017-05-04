@@ -11,18 +11,22 @@ app.controller("CompletedConclusionController", [
         $scope.setCheckedHypotheses = function() {
             CheckedHypotheses.query({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.checkedHypotheses = data;
+            }, function() {
+
             });
         };
 
         $scope.setExerciseHypotheses = function() {
             var uncheckedHypotheses = LocalStorageService.getObject("unchecked_hypotheses", '{"ids": "[]"}');
-            ExerciseHypotheses.query({'exercise_id' : $stateParams.exerciseShowId, 'unchecked_hypotheses[]': uncheckedHypotheses.ids}, function(data) {
+            ExerciseHypotheses.query({'exercise_id': $stateParams.exerciseShowId, 'unchecked_hypotheses[]': uncheckedHypotheses.ids}, function(data) {
                 $scope.exerciseHypotheses = data;
-                if(data){
+                if (data){
                     $scope.thereAreExerciseHypotheses = (data.length > 1);
                 } else {
                     $scope.thereAreExerciseHypotheses = false;
                 }
+            }, function() {
+
             });
         };
 
@@ -51,6 +55,8 @@ app.controller("CompletedConclusionController", [
             CorrectDiagnosis.get({"exercise_id": $stateParams.exerciseShowId}, function(data) {
                 $scope.correctDiagnosis = data;
                 $scope.setExerciseHypothesisId(data.id);
+            }, function() {
+
             });
         };
 
@@ -64,13 +70,13 @@ app.controller("CompletedConclusionController", [
         $scope.setAllExerciseHypotheses();
 
         $scope.hypothesisIsCorrectDiagnosis = function(exerciseHypothesis) {
-            return $scope.correctDiagnosis.id == exerciseHypothesis.id;
+            return $scope.correctDiagnosis.id === exerciseHypothesis.id;
         };
 
         $scope.userHasCheckedHypothesis = function(exerciseHypothesis) {
             for(var i = 0; i < $scope.checkedHypotheses.length; i++) {
                 var checkedHypothesis = $scope.checkedHypotheses[i];
-                if(checkedHypothesis.exercise_hypothesis_id == exerciseHypothesis.id){
+                if(checkedHypothesis.exercise_hypothesis_id === exerciseHypothesis.id){
                     return true;
                 }
             }
@@ -78,7 +84,7 @@ app.controller("CompletedConclusionController", [
         };
 
         $scope.setExerciseHypothesisId = function(exerciseHypothesisId){
-            if($scope.lastClickedExerciseHypothesis == exerciseHypothesisId){
+            if($scope.lastClickedExerciseHypothesis === exerciseHypothesisId){
                 $scope.lastClickedExerciseHypothesis = null;
             } else {
                 $scope.lastClickedExerciseHypothesis = exerciseHypothesisId;
@@ -86,7 +92,7 @@ app.controller("CompletedConclusionController", [
         };
 
         $scope.userClickedCheckedHypothesis = function(exerciseHypothesis) {
-            return exerciseHypothesis.id == $scope.lastClickedExerciseHypothesis;
+            return exerciseHypothesis.id === $scope.lastClickedExerciseHypothesis;
         };
 
     }

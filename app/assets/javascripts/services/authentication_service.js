@@ -1,46 +1,44 @@
 var app = angular.module('diagnoseDiseases');
 
 app.factory('AuthenticationService', [
-    "$http","Session", "$state",
-    function ($http, Session, $state) {
+    '$http','Session', '$state', '$resource',
+    function ($http, Session, $state, $resource) {
         var authService = {};
+        var Sessions = $resource('/sessions.json');
+        var Signout = $resource('/signout.json');
 
         authService.login = function(credentials) {
-            return $http
-                .post('/sessions.json', credentials)
-                .success(function(data,status,headers,config) {
-                    Session.create(data);
-                    return data;
-                }).error(function(data,status,headers,config) {
-                    $.notify({
-                        message: "Kirjautuminen epäonnistui!"
-                    }, {
-                        placement: {
-                            align: "center"
-                        },
-                        type: "danger",
-                        offset: 100
-                    });
+            return Sessions.save(credentials, function onSuccess(data) {
+                Session.create(data);
+                return data;
+            }, function onError() {
+                $.notify({
+                    message: 'Kirjautuminen epäonnistui!'
+                }, {
+                    placement: {
+                        align: 'center'
+                    },
+                    type: 'danger',
+                    offset: 100
                 });
+            });
         };
 
         authService.logout = function() {
-            return $http
-                .delete('/signout.json')
-                .success(function(data,status,headers,config) {
-                    Session.destroy();
-                    $state.go('app_root');
-                }).error(function(data,status,headers,config) {
-                    $.notify({
-                        message: "Uloskirjautuminen epäonnistui!"
-                    }, {
-                        placement: {
-                            align: "center"
-                        },
-                        type: "danger",
-                        offset: 100
-                    });
+            return Signout.delete(function onSuccess() {
+                Session.destroy();
+                $state.go('app_root');
+            }, function onError() {
+                $.notify({
+                    message: 'Uloskirjautuminen epäonnistui!'
+                }, {
+                    placement: {
+                        align: 'center'
+                    },
+                    type: 'danger',
+                    offset: 100
                 });
+            });
         };
 
         authService.isLoggedIn = function() {
@@ -48,11 +46,11 @@ app.factory('AuthenticationService', [
         };
 
         authService.isAdmin = function() {
-            return Session.userAdmin() === "true";
+            return Session.userAdmin() === 'true';
         };
 
         authService.isTester = function() {
-            return Session.userTester() === "true";
+            return Session.userTester() === 'true';
         };
 
         return authService;
