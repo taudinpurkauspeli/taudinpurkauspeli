@@ -16,7 +16,7 @@ app.controller('AuthenticationController', [
         $scope.resetCredentials();
 
         $scope.login = function(credentials) {
-            AuthenticationService.login(credentials).then(function onSuccess() {
+            AuthenticationService.login(credentials).$promise.then(function onSuccess() {
                 $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin(), AuthenticationService.isTester());
                 $scope.resetCredentials();
                 $state.go('app_root');
@@ -26,7 +26,7 @@ app.controller('AuthenticationController', [
         };
 
         $scope.logout = function() {
-            AuthenticationService.logout().then(function onSuccess() {
+            AuthenticationService.logout().$promise.then(function onSuccess() {
                 $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin(), AuthenticationService.isTester());
                 LocalStorageService.remove('current_task');
                 LocalStorageService.remove('current_task_tab_path');
@@ -51,7 +51,7 @@ app.controller('AuthenticationController', [
                     offset: 100
                 });
             });
-        }
+        };
 
     }
 ]);

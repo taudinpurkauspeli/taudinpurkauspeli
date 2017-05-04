@@ -15,6 +15,8 @@ app.controller("UpdateConclusionModalController", [
         $scope.setExerciseHypotheses = function() {
             ExerciseHypotheses.query({"exercise_id": $stateParams.exerciseShowId}, function(data){
                 $scope.exerciseHypotheses = data;
+            }, function() {
+
             });
         };
 
@@ -62,6 +64,8 @@ app.controller("UpdateConclusionModalController", [
                         offset: 100
                     });
                     $uibModalInstance.close({conclusionRemoved: true});
+                }, function() {
+
                 });
 
             } else {

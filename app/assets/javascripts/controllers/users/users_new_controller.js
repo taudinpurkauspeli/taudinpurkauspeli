@@ -17,7 +17,7 @@ app.controller('UsersNewController', [
                             username: $scope.newUser.username,
                             password: $scope.newUser.password
                         };
-                        AuthenticationService.login(credentials).then(function onSuccess() {
+                        AuthenticationService.login(credentials).$promise.then(function onSuccess() {
                             $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin(), AuthenticationService.isTester());
                             $scope.newUser = {};
                             $state.go('app_root');
