@@ -4,6 +4,7 @@ class Question < ActiveRecord::Base
 
 	belongs_to :interview
 	belongs_to :question_group
+	belongs_to :title
 
 	accepts_nested_attributes_for :question_group, :reject_if => :check_question_group
 

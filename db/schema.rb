@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513184832) do
+ActiveRecord::Schema.define(version: 20170513191516) do
 
   create_table "asked_questions", force: :cascade do |t|
     t.integer  "user_id"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20170513184832) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.integer  "required",          default: 0
+    t.integer  "title_id"
   end
 
   create_table "subtasks", force: :cascade do |t|
