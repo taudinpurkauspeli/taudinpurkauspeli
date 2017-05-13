@@ -11,13 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926165457) do
+ActiveRecord::Schema.define(version: 20170513182932) do
 
   create_table "asked_questions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "question_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "banks", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "checked_hypotheses", force: :cascade do |t|
