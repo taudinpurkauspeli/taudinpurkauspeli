@@ -8,20 +8,21 @@ class QuestionsController < ApplicationController
   before_action :set_current_user, only: [:ask, :interview_index]
 
   def index
-    questions = Question.where(interview_id: params[:interview_id]).order(:title).group_by(&:required)
+    questions = Question.where(interview_id: params[:interview_id]).joins(:title).order('titles.text').group_by(&:required)
 
     respond_to do |format|
       format.html
-      format.json { render json: questions.to_json(include: :question_group) }
+      format.json { render json: questions.to_json(include: [:question_group, :title]) }
     end
   end
 
   def interview_index
-    questions_with_group = Question.where(interview_id: params[:interview_id]).where.not(question_group_id: nil).order(:title).group_by{|q| q.question_group.title }
+    questions_with_group = Question.where(interview_id: params[:interview_id]).where.not(question_group_id: nil)
+                               .joins(:title).order('titles.text').group_by{|q| q.question_group.title }
     questions_sorted_by_group = questions_with_group.slice(*questions_with_group.keys.sort)
     handled_sorted_questions = questions_with_group(questions_sorted_by_group)
 
-    questions_without_group = Question.where(interview_id: params[:interview_id]).where(question_group_id: nil).order(:title)
+    questions_without_group = Question.where(interview_id: params[:interview_id]).where(question_group_id: nil).joins(:title).order('titles.text')
     handled_questions_without_group = questions_without_group(questions_without_group)
 
     respond_to do |format|
