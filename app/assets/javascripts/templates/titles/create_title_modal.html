@@ -1,0 +1,64 @@
+<div class="modal-header">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text multiline">Uusi diffi</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit luoda uuden diffin. Täytä lomakkeeseen diffin nimi." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+<div class="modal-body">
+
+    <form class="form-horizontal" novalidate name="createHypothesisForm">
+        <div class="form-group has-feedback padding-top-10"
+             ng-class="{'has-error': createHypothesisForm.name.$invalid && createHypothesisForm.name.$dirty,
+                    'has-success': createHypothesisForm.name.$valid && createHypothesisForm.name.$touched}">
+
+            <label for="name" class="col-md-2 control-label">Diffin nimi</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       class="form-control center-text"
+                       required pattern=".{3,}"
+                       name="name"
+                       id="name"
+                       placeholder="Diffin nimi"
+                       ng-model="newHypothesis.name">
+
+                <p class="help-block" ng-messages="createHypothesisForm.name.$error" ng-if="!createHypothesisForm.name.$pristine">
+                    <span ng-message="required">Nimi on pakollinen</span>
+                    <span ng-message="pattern">Nimessä on oltava vähintään 3 merkkiä</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </form>
+
+</div>
+
+<div class="modal-footer">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-success width-100"
+                    type="button"
+                    ng-click="createHypothesis()"
+                    ng-disabled="createHypothesisForm.$invalid || createHypothesisForm.$pristine"
+                    ng-class="{'disabled': createHypothesisForm.$invalid || createHypothesisForm.$pristine}">
+                Luo
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-warning width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+

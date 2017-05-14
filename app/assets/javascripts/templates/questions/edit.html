@@ -95,12 +95,12 @@
             <div class="row padding-bottom-10">
                 <div class="col-md-2"></div>
                 <div class="col-md-8 center-text">
-                    <h3 class="margin-0 multiline">Kysymyspankki</h3>
+                    <h3 class="margin-0 multiline">Kysymyspankit</h3>
                 </div>
                 <div class="col-md-2">
-                    <button uib-popover="Oikealla palstalla näet diffipankin, josta voit valita diffejä lisättäväksi caseen. Voit myös lisätä diffipankkiin diffejä tämän sivun kautta.
-                    Klikkaamalla diffin nimeä voit siirtää diffin caseen. Caseen siirretyt diffit näkyvät diffipankissa himmennettyinä. 'Muokkaa'-napeista pääset muokkaamaan diffiryhmän ja diffien nimiä.
-                                '+ Luo uusi diffi'- ja '+ Luo uusi diffiryhmä'-nappien avulla voit luoda uusia diffejä ja diffiryhmiä diffipankkiin."
+                    <button uib-popover="Oikealla palstalla näet kysymyspankit, joista voit valita kysymyksiä lisättäväksi pohdintaan. Voit myös lisätä kysymyspankkiin kysymyksiä tämän sivun kautta.
+                    Klikkaamalla kysymyksen nimeä voit lisätä kysymyksen pohdintaan. Pohdintaan lisätyt kysymykset näkyvät kysymyspankissa himmennettyinä. 'Muokkaa'-napeista pääset muokkaamaan kysymyspankin ja kysymysten tekstejä.
+                                '+ Luo uusi kysymys'- ja '+ Luo uusi kysymyspankki'-nappien avulla voit luoda uusia kysymyksiä ja kysymyspankkeja."
                             popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
                 </div>
             </div>
@@ -159,21 +159,21 @@
 
         </div>
 
-        <div class="col-md-6" ng-controller="HypothesisGroupsController" ng-if="exerciseHypothesesOnly">
+        <div class="col-md-6" ng-controller="BanksController" ng-if="exerciseHypothesesOnly">
 
             <div class="row padding-top-10">
                 <div class="col-md-12">
-                    <div class="panel panel-default" ng-repeat="hypothesisGroup in hypothesisGroupsAndHypothesesList">
+                    <div class="panel panel-default" ng-repeat="bank in banksAndTitlesList">
                         <div class="panel-heading">
                             <div class="panel-title panel-completed">
 
                                 <div class="row">
                                     <div class="col-md-9 center-text multiline padding-top-7">
-                                        {{hypothesisGroup.name}}
+                                        {{bank.name}}
                                     </div>
                                     <div class="col-md-3">
                                         <button class="btn btn-default width-100 btn-success multiline padding-top-10 padding-bottom-10" type="button"
-                                                ng-click="updateHypothesisGroup(hypothesisGroup, updateAllExerciseHypotheses)">
+                                                ng-click="updateBank(bank, updateAllExerciseHypotheses)">
                                             Muokkaa
                                         </button>
                                     </div>
@@ -183,21 +183,21 @@
                         </div>
                         <div class="panel-body panel-completed">
 
-                            <div ng-repeat="hypothesis in hypothesisGroup.hypotheses">
+                            <div ng-repeat="title in bank.titles">
 
                                 <div class="row padding-bottom-15">
                                     <div class="col-md-9">
 
                                         <button class="btn btn-default width-100 multiline padding-top-10 padding-bottom-10"
-                                                ng-click="addToExercise(hypothesis)"
+                                                ng-click="addToInterview(bank)"
                                                 ng-disabled="belongsToExercise(hypothesis)"
                                                 ng-class="{'disabled': belongsToExercise(hypothesis)}">
-                                            {{hypothesis.name}}
+                                            {{title.text}}
                                         </button>
                                     </div>
                                     <div class="col-md-3">
                                         <button class="btn btn-default width-100 btn-success multiline padding-top-10 padding-bottom-10"
-                                                ng-click="updateHypothesis(hypothesis, updateAllExerciseHypotheses)">
+                                                ng-click="updateTitle(title, updateAllExerciseHypotheses)">
                                             Muokkaa
                                         </button>
                                     </div>
@@ -208,8 +208,8 @@
                                 <div class="col-md-9">
 
                                     <button class="btn btn-default width-100 btn-success multiline padding-top-10 padding-bottom-10"
-                                            ng-click="createHypothesis(hypothesisGroup)">
-                                        + Luo uusi diffi
+                                            ng-click="createTitle(bank)">
+                                        + Luo uusi kysymys
                                     </button>
                                 </div>
                                 <div class="col-md-3"></div>
@@ -223,8 +223,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <button class="btn btn-default btn-lg width-100 btn-success multiline padding-top-10 padding-bottom-10"
-                            ng-click="createHypothesisGroup()">
-                        + Luo uusi diffiryhmä
+                            ng-click="createBank()">
+                        + Luo uusi kysymyspankki
                     </button>
                 </div>
             </div>

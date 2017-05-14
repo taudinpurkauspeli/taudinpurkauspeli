@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text multiline">Muokkaa diffiryhmää {{hypothesisGroup.name}}</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit muokata diffiryhmän nimeä." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+</div>
+
+<div class="modal-body">
+
+    <form class="form-horizontal" novalidate name="updateHypothesisGroupForm">
+        <div class="form-group has-feedback padding-top-10"
+             ng-class="{'has-error': updateHypothesisGroupForm.name.$invalid && updateHypothesisGroupForm.name.$dirty,
+                    'has-success': updateHypothesisGroupForm.name.$valid && updateHypothesisGroupForm.name.$touched}">
+
+            <label for="name" class="col-md-2 control-label">Diffiryhmän nimi</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       class="form-control center-text"
+                       required pattern=".{3,}"
+                       name="name"
+                       id="name"
+                       placeholder="Diffiryhmän nimi"
+                       ng-model="hypothesisGroup.name">
+
+                <p class="help-block" ng-messages="updateHypothesisGroupForm.name.$error" ng-if="!updateHypothesisGroupForm.name.$pristine">
+                    <span ng-message="required">Nimi on pakollinen</span>
+                    <span ng-message="pattern">Nimessä on oltava vähintään 3 merkkiä</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </form>
+
+</div>
+
+<div class="modal-footer">
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <button class="btn btn-default btn-success width-100"
+                    type="button"
+                    ng-click="updateHypothesisGroup()"
+                    ng-disabled="updateHypothesisGroupForm.$invalid || updateHypothesisGroupForm.$pristine"
+                    ng-class="{'disabled': updateHypothesisGroupForm.$invalid || updateHypothesisGroupForm.$pristine}">
+                Päivitä
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-warning width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-default btn-danger width-100" type="button" ng-click="deleteHypothesisGroup()">
+                Poista diffiryhmä diffipankista
+            </button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
