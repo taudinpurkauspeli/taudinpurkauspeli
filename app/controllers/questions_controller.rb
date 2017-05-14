@@ -94,7 +94,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :content, :required, :interview_id, question_group_attributes: [:title])
+    params.require(:question).permit(:title_id, :content, :required, :interview_id, question_group_attributes: [:title])
   end
 
   def questions_with_group(questions_sorted)
