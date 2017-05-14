@@ -36,7 +36,7 @@
 
                                 <button class="btn btn-default btn-lg width-100 multiline padding-top-10 padding-bottom-10"
                                         ng-if="!question.asked" ng-click="askQuestion(question)">
-                                    {{question.title}}
+                                    {{question.title.text}}
                                 </button>
 
                                 <button class="btn btn-default btn-lg width-100 multiline padding-top-10 padding-bottom-10"
@@ -44,7 +44,7 @@
                                         ng-class="{'btn-success': questionIs('required', question),
                                                    'btn-warning': questionIs('allowed', question),
                                                    'btn-danger': questionIs('wrong', question)}">
-                                    {{question.title}}
+                                    {{question.title.text}}
                                 </button>
 
                                 <div ta-bind="text" ng-model="question.content"
@@ -76,7 +76,7 @@
 
                                 <button class="btn btn-default btn-lg width-100 multiline padding-top-10 padding-bottom-10"
                                         ng-if="!question.asked" ng-click="askQuestion(question)">
-                                    {{question.title}}
+                                    {{question.title.text}}
                                 </button>
 
                                 <button class="btn btn-default btn-lg width-100 multiline padding-top-10 padding-bottom-10"
@@ -84,7 +84,7 @@
                                         ng-class="{'btn-success': questionIs('required', question),
                                                    'btn-warning': questionIs('allowed', question),
                                                    'btn-danger': questionIs('wrong', question)}">
-                                    {{question.title}}
+                                    {{question.title.text}}
                                 </button>
 
                                 <div ta-bind="text" ng-model="question.content"

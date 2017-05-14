@@ -106,7 +106,7 @@ class QuestionsController < ApplicationController
       ready_questions = Array.new()
 
       questions.each do |question|
-        json_question = question.as_json
+        json_question = question.as_json(include: :title)
         json_question["asked"] = @current_user.has_asked_question?(question)
         ready_questions << json_question
       end
@@ -122,7 +122,7 @@ class QuestionsController < ApplicationController
     ready_questions = Array.new()
 
     questions.each do |question|
-      json_question = question.as_json
+      json_question = question.as_json(include: :title)
       json_question["asked"] = @current_user.has_asked_question?(question)
       ready_questions << json_question
     end
