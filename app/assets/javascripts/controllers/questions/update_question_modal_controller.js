@@ -10,6 +10,12 @@ app.controller("UpdateQuestionModalController", [
             { questionId: "@id"},
             { update: { method: 'PUT' }});
 
+        $scope.answer_types = [
+            {name_fi: "Pakollinen kysymys", name_en: "required"},
+            {name_fi: "Sallittu kysymys", name_en: "allowed"},
+            {name_fi: "Väärä kysymys", name_en: "wrong"}
+        ];
+
         $scope.updateQuestion = function() {
             if ($scope.updateQuestionForm.$valid) {
                 if ($scope.question.question_group) {

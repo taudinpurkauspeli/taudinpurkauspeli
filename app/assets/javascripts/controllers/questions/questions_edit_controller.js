@@ -39,7 +39,6 @@ app.controller("QuestionsEditController", [
             });
         };
 
-
         $scope.setQuestions();
 
         $scope.moveQuestionToNewType = function(question, newType) {
@@ -98,6 +97,10 @@ app.controller("QuestionsEditController", [
             }, function() {
             });
 
+        };
+
+        $scope.questionIs = function(questionStatus, question) {
+            return question.required === questionStatus;
         };
 
     }

@@ -56,7 +56,10 @@
                                     <div class="col-md-10">
 
                                         <button class="btn btn-default width-100 multiline padding-top-10 padding-bottom-10"
-                                                ng-click="updateQuestion(question)">
+                                                ng-click="updateQuestion(question)"
+                                                ng-class="{'btn-success': questionIs('required', question),
+                                                           'btn-warning': questionIs('allowed', question),
+                                                           'btn-danger': questionIs('wrong', question)}">
                                             {{question.title.text}}
                                         </button>
                                     </div>
@@ -82,7 +85,10 @@
                                     <div class="col-md-10">
 
                                         <button class="btn btn-default width-100 multiline padding-top-10 padding-bottom-10"
-                                                ng-click="updateQuestion(question)">
+                                                ng-click="updateQuestion(question)"
+                                                ng-class="{'btn-success': questionIs('required', question),
+                                                           'btn-warning': questionIs('allowed', question),
+                                                           'btn-danger': questionIs('wrong', question)}">
                                             {{question.title.text}}
                                         </button>
                                     </div>
