@@ -1,80 +1,4 @@
-<div class="row padding-bottom-10">
-    <div class="col-md-1"></div>
-
-    <div class="col-md-10">
-        <h3 class="center-text multiline">Kysymykset</h3>
-    </div>
-    <div class="col-md-1"></div>
-
-</div>
-
-<div class="row padding-bottom-20">
-    <div class="col-md-5"></div>
-
-    <div class="col-md-2">
-        <button uib-popover="Voit lisätä uuden kysymyksen '+ Luo uusi kysymys'-napista. Kysymystä pääset muokkaamaan klikkaamalla kysymyksen nappia.
-        Voit siirtää kysymyksiä pakolliset-, sallitut- ja väärät-kysymykset-kenttien välillä ottamalla kiinni kysymyksestä ja raahaamalla sen haluamaasi kenttään."
-                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
-    </div>
-    <div class="col-md-5"></div>
-
-</div>
-
-<div class="row" ng-repeat="answer_type in answer_types">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
-
-        <div class="dnd-questions-list">
-            <div class="dropzone">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-title panel-question center-text">
-                            {{answer_type.name_fi}}
-                        </div>
-                    </div>
-                    <div class="panel-body">
-
-                        <div class="dnd-item-list">
-                            <ul dnd-list="[]"
-                                class="list-unstyled margin-0"
-                                dnd-drop="moveQuestionToNewType(item, answer_type.name_en)"
-                                dnd-allowed-types="answer_type.allowed_types">
-
-                                <li ng-repeat="question in questions[answer_type.name_en]"
-                                    dnd-draggable="question"
-                                    dnd-type="answer_type.name_en"
-                                    dnd-selected="updateQuestion(question)"
-                                    dnd-effect-allowed="move"
-                                    class="multiline margin-left-10 margin-right-10 margin-top-10 margin-bottom-10 padding-top-25 padding-bottom-25 clickable">
-                                    {{question.title.text}}
-                                </li>
-
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-md-1"></div>
-
-</div>
-
-<div class="row padding-bottom-10">
-    <div class="col-md-4"></div>
-
-    <div class="col-md-4">
-        <button class="btn btn-default btn-success btn-lg width-100" ng-click="createQuestion(interview)">+ Luo uusi kysymys</button>
-    </div>
-    <div class="col-md-4"></div>
-</div>
-
-
-
-<div class="hypothesis-list" ng-if="currentUserAdmin">
+<div class="margin-top-20">
 
     <div class="row">
         <div class="col-md-6">
@@ -189,7 +113,7 @@
                                     <div class="col-md-9">
 
                                         <button class="btn btn-default width-100 multiline padding-top-10 padding-bottom-10"
-                                                ng-click="addToInterview(bank)"
+                                                ng-click="addToInterview(interview, title)"
                                                 ng-disabled="belongsToExercise(hypothesis)"
                                                 ng-class="{'disabled': belongsToExercise(hypothesis)}">
                                             {{title.text}}

@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-	validates :title_string, presence: true
+	validates :title_id, presence: true
 	validates :content, presence: true
 
 	belongs_to :interview

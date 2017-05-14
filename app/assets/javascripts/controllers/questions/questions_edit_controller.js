@@ -54,7 +54,7 @@ app.controller("QuestionsEditController", [
             });
         };
 
-        $scope.createQuestion = function(interview) {
+        $scope.addToInterview = function(interview, title) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -62,7 +62,8 @@ app.controller("QuestionsEditController", [
                 controller: 'CreateQuestionModalController',
                 size: 'lg',
                 resolve: {
-                    interview: interview
+                    interview: interview,
+                    title: title
                 }
             });
 
