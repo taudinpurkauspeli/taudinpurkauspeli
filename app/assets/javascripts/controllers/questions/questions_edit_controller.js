@@ -28,7 +28,6 @@ app.controller("QuestionsEditController", [
         $scope.setQuestions = function() {
             Questions.get({ interview_id: $stateParams.interviewShowId}, function onSuccess(data) {
                 $scope.questions = data;
-                console.log(data);
             }, function onError() {
 
             });

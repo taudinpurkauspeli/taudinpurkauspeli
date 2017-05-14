@@ -8,8 +8,9 @@ app.controller("BanksController", [
         var BanksAndTitles = $resource('/banks_and_titles.json');
 
         $scope.updateBanksList = function() {
-            BanksAndTitles.query(function(data){
+            BanksAndTitles.query(function onSuccess(data){
                 $scope.banksAndTitlesList = data;
+            }, function onError() {
             });
         };
 

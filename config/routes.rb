@@ -38,6 +38,10 @@ Rails.application.routes.draw do
 
   resources :conclusions
 
+  resources :banks
+
+  resources :titles
+
   get 'taudinpurkauspeli', to: 'diagnose_diseases#index'
   get 'hypothesis_bank', to: 'hypotheses#hypothesis_bank'
   get 'hypotheses_all', to: 'hypotheses#hypotheses_all'
@@ -113,4 +117,7 @@ Rails.application.routes.draw do
   get 'options_multichoice', to: 'options#multichoice_index'
   get 'questions_interview', to: 'questions#interview_index'
   get 'exercise_hypotheses_conclusion', to: 'exercise_hypotheses#exercise_hypotheses_conclusion'
+
+  get 'banks_and_titles', to: 'banks#banks_and_titles'
+
 end
