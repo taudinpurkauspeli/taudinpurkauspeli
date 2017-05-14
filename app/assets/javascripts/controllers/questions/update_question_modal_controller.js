@@ -12,7 +12,7 @@ app.controller("UpdateQuestionModalController", [
 
         $scope.updateQuestion = function() {
             if ($scope.updateQuestionForm.$valid) {
-                if($scope.question.question_group) {
+                if ($scope.question.question_group) {
                     $scope.question.question_group_attributes = {
                         title: $scope.question.question_group.title,
                         id: $scope.question.question_group.id

@@ -20,6 +20,18 @@
 
         <div class="form-group has-feedback">
 
+            <div class="col-md-2"></div>
+
+            <div class="col-md-9">
+                <h4 class="center-text">{{question.title.text}}</h4>
+            </div>
+
+            <div class="col-md-1"></div>
+
+        </div>
+
+        <div class="form-group has-feedback">
+
             <label for="question_group_title" class="col-md-2 control-label">Kysymysryhmä</label>
 
             <div class="col-md-9">
@@ -33,30 +45,6 @@
 
             <div class="col-md-1"></div>
         </div>
-
-        <div class="form-group has-feedback"
-             ng-class="{'has-error': updateQuestionForm.title.$invalid && updateQuestionForm.title.$dirty,
-                        'has-success': updateQuestionForm.title.$valid && updateQuestionForm.title.$touched}">
-
-            <label for="title" class="col-md-2 control-label">Kysymyksen teksti</label>
-
-            <div class="col-md-9">
-                <input type="text"
-                       required
-                       class="form-control center-text"
-                       name="title"
-                       id="title"
-                       placeholder="Kysymyksen teksti"
-                       ng-model="question.title">
-
-                <p class="help-block" ng-messages="updateQuestionForm.title.$error" ng-if="!updateQuestionForm.title.$pristine">
-                    <span ng-message="required">Kysymys on pakollinen</span>
-                </p>
-            </div>
-
-            <div class="col-md-1"></div>
-        </div>
-
 
         <div class="form-group padding-top-10">
 
