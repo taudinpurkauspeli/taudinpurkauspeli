@@ -1,19 +1,19 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("CreateHypothesisGroupModalController", [
+app.controller("CreateBankModalController", [
     '$scope', '$uibModalInstance', '$resource', '$window',
     function($scope, $uibModalInstance, $resource, $window) {
 
-        $scope.newHypothesisGroup = {};
+        $scope.newBank = {};
 
-        var HypothesisGroup = $resource('/hypothesis_groups.json');
+        var Bank = $resource('/banks.json');
 
-        $scope.createHypothesisGroup = function() {
-            if ($scope.createHypothesisGroupForm.$valid) {
-                HypothesisGroup.save($scope.newHypothesisGroup,
+        $scope.createBank = function() {
+            if ($scope.createBankForm.$valid) {
+                Bank.save($scope.newBank,
                     function() {
                         $.notify({
-                            message: "Diffiryhmän luominen onnistui!"
+                            message: "Kysymyspankin luominen onnistui!"
                         }, {
                             placement: {
                                 align: "center"
@@ -25,7 +25,7 @@ app.controller("CreateHypothesisGroupModalController", [
                     },
                     function() {
                         $.notify({
-                            message: "Diffiryhmän luominen epäonnistui!"
+                            message: "Kysymyspankin luominen epäonnistui!"
                         }, {
                             placement: {
                                 align: "center"

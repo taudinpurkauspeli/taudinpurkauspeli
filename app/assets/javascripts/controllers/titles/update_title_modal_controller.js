@@ -1,22 +1,23 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("UpdateHypothesisModalController", [
-    '$scope', '$uibModalInstance', '$resource', '$window', 'hypothesis',
-    function($scope, $uibModalInstance, $resource, $window, hypothesis) {
+app.controller("UpdateTitleModalController", [
+    '$scope', '$uibModalInstance', '$resource', '$window', 'title',
+    function($scope, $uibModalInstance, $resource, $window, title) {
 
-        $scope.hypothesis = hypothesis;
+        $scope.title = title;
 
-        var Hypothesis = $resource('/hypotheses/:hypothesisId.json',
-            { hypothesisId: "@id"},
+        var Title = $resource('/titles/:titleId.json',
+            { titleId: "@id"},
             { update: { method: 'PUT' }});
 
-        $scope.deleteHypothesis = function() {
-            var deleteConfirmation = $window.confirm("VAROITUS: TÄMÄ OPERAATIO POISTAA TÄMÄN DIFFIN MYÖS CASEISTA! Oletko aivan varma, että haluat poistaa diffin ja sen kaikki caseihin liittyvät diffit?");
+        $scope.deleteTitle = function() {
+            var deleteConfirmation = $window.confirm("VAROITUS: TÄMÄ OPERAATIO POISTAA TÄMÄN KYSYMYKSEN MYÖS POHDINNOISTA! " +
+                "Oletko aivan varma, että haluat poistaa kysymyksen ja sen kaikki pohdintoihin liittyvät kysymykset?");
 
             if (deleteConfirmation) {
-                Hypothesis.delete({hypothesisId : hypothesis.id}, function() {
+                Title.delete({titleId: title.id}, function() {
                     $.notify({
-                        message: "Diffin poistaminen onnistui!"
+                        message: "Kysymyksen poistaminen onnistui!"
                     }, {
                         placement: {
                             align: "center"
@@ -28,7 +29,7 @@ app.controller("UpdateHypothesisModalController", [
                 });
             } else {
                 $.notify({
-                    message: "Diffiä '" + hypothesis.name + "' ei poistettu."
+                    message: "Kysymystä '" + title.text + "' ei poistettu."
                 }, {
                     placement: {
                         align: "center"
@@ -39,11 +40,11 @@ app.controller("UpdateHypothesisModalController", [
             }
         };
 
-        $scope.updateHypothesis = function() {
-            if ($scope.updateHypothesisForm.$valid) {
-                Hypothesis.update({hypothesisId: hypothesis.id}, $scope.hypothesis, function() {
+        $scope.updateTitle = function() {
+            if ($scope.updateTitleForm.$valid) {
+                Title.update({titleId: title.id}, $scope.title, function() {
                     $.notify({
-                        message: "Diffin päivitys onnistui!"
+                        message: "Kysymyksen päivitys onnistui!"
                     }, {
                         placement: {
                             align: "center"
@@ -54,7 +55,7 @@ app.controller("UpdateHypothesisModalController", [
                     $uibModalInstance.close();
                 }, function() {
                     $.notify({
-                        message: "Diffin päivitys epäonnistui!"
+                        message: "Kysymyksen päivitys epäonnistui!"
                     }, {
                         placement: {
                             align: "center"

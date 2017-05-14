@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <h3 class="modal-title center-text multiline">Muokkaa diffiä {{hypothesis.name}}</h3>
+            <h3 class="modal-title center-text multiline">Muokkaa kysymystä {{title.text}}</h3>
         </div>
         <div class="col-md-2">
-            <button uib-popover="Tällä lomakkeella voit muokata diffin nimeä." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+            <button uib-popover="Tällä lomakkeella voit muokata kysymyksen tekstiä." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
         </div>
         <div class="col-md-1"></div>
     </div>
@@ -14,25 +14,25 @@
 
 <div class="modal-body">
 
-    <form class="form-horizontal" novalidate name="updateHypothesisForm">
+    <form class="form-horizontal" novalidate name="updateTitleForm">
         <div class="form-group has-feedback padding-top-10"
-             ng-class="{'has-error': updateHypothesisForm.name.$invalid && updateHypothesisForm.name.$dirty,
-                    'has-success': updateHypothesisForm.name.$valid && updateHypothesisForm.name.$touched}">
+             ng-class="{'has-error': updateTitleForm.text.$invalid && updateTitleForm.text.$dirty,
+                    'has-success': updateTitleForm.text.$valid && updateTitleForm.text.$touched}">
 
-            <label for="name" class="col-md-2 control-label">Diffin nimi</label>
+            <label for="text" class="col-md-2 control-label">Kysymyksen teksti</label>
 
             <div class="col-md-9">
                 <input type="text"
                        class="form-control center-text"
-                       required pattern=".{3,}"
-                       name="name"
-                       id="name"
-                       placeholder="Diffin nimi"
-                       ng-model="hypothesis.name">
+                       required pattern=".{2,}"
+                       name="text"
+                       id="text"
+                       placeholder="Kysymyksen teksti"
+                       ng-model="title.text">
 
-                <p class="help-block" ng-messages="updateHypothesisForm.name.$error" ng-if="!updateHypothesisForm.name.$pristine">
-                    <span ng-message="required">Nimi on pakollinen</span>
-                    <span ng-message="pattern">Nimessä on oltava vähintään 3 merkkiä</span>
+                <p class="help-block" ng-messages="updateTitleForm.text.$error" ng-if="!updateTitleForm.text.$pristine">
+                    <span ng-message="required">Teksti on pakollinen</span>
+                    <span ng-message="pattern">Tekstissä on oltava vähintään 2 merkkiä</span>
                 </p>
             </div>
 
@@ -49,9 +49,9 @@
         <div class="col-md-3">
             <button class="btn btn-default btn-success width-100"
                     type="button"
-                    ng-click="updateHypothesis()"
-                    ng-disabled="updateHypothesisForm.$invalid || updateHypothesisForm.$pristine"
-                    ng-class="{'disabled': updateHypothesisForm.$invalid || updateHypothesisForm.$pristine}">
+                    ng-click="updateTitle()"
+                    ng-disabled="updateTitleForm.$invalid || updateTitleForm.$pristine"
+                    ng-class="{'disabled': updateTitleForm.$invalid || updateTitleForm.$pristine}">
                 Päivitä
             </button>
         </div>
@@ -61,8 +61,8 @@
             </button>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-default btn-danger width-100" type="button" ng-click="deleteHypothesis()">
-                Poista diffi diffipankista
+            <button class="btn btn-default btn-danger width-100" type="button" ng-click="deleteTitle()">
+                Poista kysymys kysymyspankista
             </button>
         </div>
         <div class="col-md-1"></div>

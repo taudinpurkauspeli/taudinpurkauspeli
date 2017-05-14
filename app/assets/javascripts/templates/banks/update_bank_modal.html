@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <h3 class="modal-title center-text multiline">Muokkaa diffiryhmää {{hypothesisGroup.name}}</h3>
+            <h3 class="modal-title center-text multiline">Muokkaa kysymyspankkia {{bank.name}}</h3>
         </div>
         <div class="col-md-2">
-            <button uib-popover="Tällä lomakkeella voit muokata diffiryhmän nimeä." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+            <button uib-popover="Tällä lomakkeella voit muokata kysymyspankin nimeä." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
         </div>
         <div class="col-md-1"></div>
     </div>
@@ -14,25 +14,25 @@
 
 <div class="modal-body">
 
-    <form class="form-horizontal" novalidate name="updateHypothesisGroupForm">
+    <form class="form-horizontal" novalidate name="updateBankForm">
         <div class="form-group has-feedback padding-top-10"
-             ng-class="{'has-error': updateHypothesisGroupForm.name.$invalid && updateHypothesisGroupForm.name.$dirty,
-                    'has-success': updateHypothesisGroupForm.name.$valid && updateHypothesisGroupForm.name.$touched}">
+             ng-class="{'has-error': updateBankForm.name.$invalid && updateBankForm.name.$dirty,
+                    'has-success': updateBankForm.name.$valid && updateBankForm.name.$touched}">
 
-            <label for="name" class="col-md-2 control-label">Diffiryhmän nimi</label>
+            <label for="name" class="col-md-2 control-label">Kysymyspankin nimi</label>
 
             <div class="col-md-9">
                 <input type="text"
                        class="form-control center-text"
-                       required pattern=".{3,}"
+                       required pattern=".{2,}"
                        name="name"
                        id="name"
-                       placeholder="Diffiryhmän nimi"
-                       ng-model="hypothesisGroup.name">
+                       placeholder="Kysymyspankin nimi"
+                       ng-model="bank.name">
 
-                <p class="help-block" ng-messages="updateHypothesisGroupForm.name.$error" ng-if="!updateHypothesisGroupForm.name.$pristine">
+                <p class="help-block" ng-messages="updateBankForm.name.$error" ng-if="!updateBankForm.name.$pristine">
                     <span ng-message="required">Nimi on pakollinen</span>
-                    <span ng-message="pattern">Nimessä on oltava vähintään 3 merkkiä</span>
+                    <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
                 </p>
             </div>
 
@@ -49,9 +49,9 @@
         <div class="col-md-3">
             <button class="btn btn-default btn-success width-100"
                     type="button"
-                    ng-click="updateHypothesisGroup()"
-                    ng-disabled="updateHypothesisGroupForm.$invalid || updateHypothesisGroupForm.$pristine"
-                    ng-class="{'disabled': updateHypothesisGroupForm.$invalid || updateHypothesisGroupForm.$pristine}">
+                    ng-click="updateBank()"
+                    ng-disabled="updateBankForm.$invalid || updateBankForm.$pristine"
+                    ng-class="{'disabled': updateBankForm.$invalid || updateBankForm.$pristine}">
                 Päivitä
             </button>
         </div>
@@ -61,8 +61,8 @@
             </button>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-default btn-danger width-100" type="button" ng-click="deleteHypothesisGroup()">
-                Poista diffiryhmä diffipankista
+            <button class="btn btn-default btn-danger width-100" type="button" ng-click="deleteBank()">
+                Poista kysymyspankki
             </button>
         </div>
         <div class="col-md-1"></div>

@@ -1,21 +1,21 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("CreateHypothesisModalController", [
-    '$scope', '$uibModalInstance', '$resource', '$window', 'hypothesisGroup',
-    function($scope, $uibModalInstance, $resource, $window, hypothesisGroup) {
+app.controller("CreateTitleModalController", [
+    '$scope', '$uibModalInstance', '$resource', '$window', 'bank',
+    function($scope, $uibModalInstance, $resource, $window, bank) {
 
-        $scope.newHypothesis = {
-            hypothesis_group_id: hypothesisGroup.id
+        $scope.newTitle = {
+            bank_id: bank.id
         };
 
-        var Hypothesis = $resource('/hypotheses.json');
+        var Title = $resource('/titles.json');
 
-        $scope.createHypothesis = function() {
-            if ($scope.createHypothesisForm.$valid) {
-                Hypothesis.save($scope.newHypothesis,
+        $scope.createTitle = function() {
+            if ($scope.createTitleForm.$valid) {
+                Title.save($scope.newTitle,
                     function() {
                         $.notify({
-                            message: "Diffin luominen onnistui!"
+                            message: "Kysymyksen luominen onnistui!"
                         }, {
                             placement: {
                                 align: "center"
@@ -27,7 +27,7 @@ app.controller("CreateHypothesisModalController", [
                     },
                     function() {
                         $.notify({
-                            message: "Diffin luominen epäonnistui!"
+                            message: "Kysymyksen luominen epäonnistui!"
                         }, {
                             placement: {
                                 align: "center"

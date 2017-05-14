@@ -1,22 +1,23 @@
 var app = angular.module('diagnoseDiseases');
 
-app.controller("UpdateHypothesisGroupModalController", [
-    '$scope', '$uibModalInstance', '$resource', '$window', 'hypothesisGroup',
-    function($scope, $uibModalInstance, $resource, $window, hypothesisGroup) {
+app.controller("UpdateBankModalController", [
+    '$scope', '$uibModalInstance', '$resource', '$window', 'bank',
+    function($scope, $uibModalInstance, $resource, $window, bank) {
 
-        $scope.hypothesisGroup = hypothesisGroup;
+        $scope.bank = bank;
 
-        var HypothesisGroup = $resource('/hypothesis_groups/:hypothesisGroupId.json',
-            { hypothesisGroupId: "@id"},
+        var Bank = $resource('/banks/:bankId.json',
+            { bankId: "@id"},
             { update: { method: 'PUT' }});
 
-        $scope.deleteHypothesisGroup = function() {
-            var deleteConfirmation = $window.confirm("VAROITUS: TÄMÄ OPERAATIO POISTAA KAIKKI TÄMÄN DIFFIRYHMÄN DIFFIT MYÖS CASEISTA! Oletko aivan varma, että haluat poistaa diffiryhmän ja kaikki siihen liittyvät diffit?");
+        $scope.deleteBank = function() {
+            var deleteConfirmation = $window.confirm("VAROITUS: TÄMÄ OPERAATIO POISTAA KAIKKI TÄMÄN KYSYMYSPANKIN KYSYMYKSET MYÖS POHDINNOISTA!" +
+                " Oletko aivan varma, että haluat poistaa kysymyspankin ja kaikki siihen liittyvät kysymykset?");
 
             if (deleteConfirmation) {
-                HypothesisGroup.delete({hypothesisGroupId : hypothesisGroup.id}, function() {
+                Bank.delete({bankId: bank.id}, function() {
                     $.notify({
-                        message: "Diffiryhmän poistaminen onnistui!"
+                        message: "Kysymyspankin poistaminen onnistui!"
                     }, {
                         placement: {
                             align: "center"
@@ -29,7 +30,7 @@ app.controller("UpdateHypothesisGroupModalController", [
 
             } else {
                 $.notify({
-                    message: "Diffiryhmää '" + hypothesisGroup.name + "' ei poistettu."
+                    message: "Kysymyspankkia '" + bank.name + "' ei poistettu."
                 }, {
                     placement: {
                         align: "center"
@@ -40,11 +41,11 @@ app.controller("UpdateHypothesisGroupModalController", [
             }
         };
 
-        $scope.updateHypothesisGroup = function() {
-            if ($scope.updateHypothesisGroupForm.$valid) {
-                HypothesisGroup.update({hypothesisGroupId: hypothesisGroup.id}, $scope.hypothesisGroup, function() {
+        $scope.updateBank = function() {
+            if ($scope.updateBankForm.$valid) {
+                Bank.update({bankId: bank.id}, $scope.bank, function() {
                     $.notify({
-                        message: "Diffiryhmän päivitys onnistui!"
+                        message: "Kysymyspankin päivitys onnistui!"
                     }, {
                         placement: {
                             align: "center"
@@ -55,7 +56,7 @@ app.controller("UpdateHypothesisGroupModalController", [
                     $uibModalInstance.close();
                 }, function() {
                     $.notify({
-                        message: "Diffiryhmän päivitys epäonnistui!"
+                        message: "Kysymyspankin päivitys epäonnistui!"
                     }, {
                         placement: {
                             align: "center"
