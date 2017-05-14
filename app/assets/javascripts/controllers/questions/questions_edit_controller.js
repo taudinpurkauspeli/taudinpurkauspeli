@@ -19,7 +19,7 @@ app.controller("QuestionsEditController", [
         }
         ];
 
-        var Questions = $resource('/questions.json');
+        var Questions = $resource('/questions_admin.json');
 
         var Question = $resource('/questions/:questionId.json',
             { questionId: "@id"},
@@ -27,11 +27,18 @@ app.controller("QuestionsEditController", [
 
         $scope.setQuestions = function() {
             Questions.get({ interview_id: $stateParams.interviewShowId}, function onSuccess(data) {
-                $scope.questions = data;
+                $scope.questionsByGroup = data.questions_by_group;
+                $scope.questionsWithoutGroup = data.questions_without_group;
+                if (data.questions_without_group) {
+                    $scope.thereAreQuestionsWithoutGroup = (data.questions_without_group.length > 0);
+                } else {
+                    $scope.thereAreQuestionsWithoutGroup = false;
+                }
             }, function onError() {
 
             });
         };
+
 
         $scope.setQuestions();
 
