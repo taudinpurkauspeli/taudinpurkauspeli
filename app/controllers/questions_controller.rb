@@ -16,6 +16,16 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def only_questions
+    questions = Question.where(interview_id: params[:interview_id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: questions.to_json(include: [:title]) }
+    end
+  end
+
+
   def index_admin
     questions_with_group = Question.where(interview_id: params[:interview_id]).where.not(question_group_id: nil)
                                .joins(:title).order('titles.text').group_by{|q| q.question_group.title }
