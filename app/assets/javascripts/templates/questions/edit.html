@@ -106,17 +106,27 @@
 
             <div class="row padding-top-10">
                 <div class="col-md-12">
-                    <div class="panel panel-default" ng-repeat="bank in banksAndTitlesList">
+
+                    <form>
+                        <div class="form-group">
+                            <select name="bankSelect" id="bankSelect"
+                                    class="form-control"
+                                    ng-options="bank.name for bank in banksAndTitlesList track by bank.id"
+                                    ng-model="selectedBank"></select>
+                        </div>
+                    </form>
+
+                    <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title panel-completed">
 
                                 <div class="row">
                                     <div class="col-md-9 center-text multiline padding-top-7">
-                                        {{bank.name}}
+                                        {{selectedBank.name}}
                                     </div>
                                     <div class="col-md-3">
                                         <button class="btn btn-default width-100 btn-success multiline padding-top-10 padding-bottom-10" type="button"
-                                                ng-click="updateBank(bank, setQuestions)">
+                                                ng-click="updateBank(selectedBank, setQuestions)">
                                             Muokkaa
                                         </button>
                                     </div>
@@ -126,7 +136,18 @@
                         </div>
                         <div class="panel-body panel-completed">
 
-                            <div ng-repeat="title in bank.titles">
+                            <div class="row padding-bottom-15">
+                                <div class="col-md-12">
+                                    <input type="text"
+                                           name="titleTextQuery"
+                                           id="titleTextQuery"
+                                           class="form-control input center-text"
+                                           placeholder="Kysymyksen teksti"
+                                           ng-model="titleTextQuery">
+                                </div>
+                            </div>
+
+                            <div ng-repeat="title in selectedBank.titles | filter:{text: titleTextQuery}">
 
                                 <div class="row padding-bottom-15">
                                     <div class="col-md-9">
@@ -151,7 +172,7 @@
                                 <div class="col-md-9">
 
                                     <button class="btn btn-default width-100 btn-success multiline padding-top-10 padding-bottom-10"
-                                            ng-click="createTitle(bank)">
+                                            ng-click="createTitle(selectedBank)">
                                         + Luo uusi kysymys
                                     </button>
                                 </div>

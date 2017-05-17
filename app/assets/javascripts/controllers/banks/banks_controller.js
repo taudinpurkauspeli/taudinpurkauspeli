@@ -5,11 +5,14 @@ app.controller("BanksController", [
     function($scope, $resource, $window, $uibModal) {
         $scope.banksAndTitlesList = [];
 
+        $scope.selectedBank = {};
+
         var BanksAndTitles = $resource('/banks_and_titles.json');
 
         $scope.updateBanksList = function() {
             BanksAndTitles.query(function onSuccess(data){
                 $scope.banksAndTitlesList = data;
+                $scope.selectedBank = data[0];
             }, function onError() {
             });
         };
