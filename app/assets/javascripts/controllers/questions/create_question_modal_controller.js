@@ -1,18 +1,20 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("CreateQuestionModalController", [
-    '$scope', '$uibModalInstance', '$resource', '$window', "interview",
-    function($scope, $uibModalInstance, $resource, $window, interview) {
+    '$scope', '$uibModalInstance', '$resource', '$window', "interview", "title",
+    function($scope, $uibModalInstance, $resource, $window, interview, title) {
 
         $scope.newQuestion = {
             interview_id: interview.id,
-            title: "",
+            title_id: title.id,
             content: "",
             required: "allowed",
             question_group_attributes: {
                 title: ""
             }
         };
+
+        $scope.title = title;
 
         $scope.answer_types = [
             {name_fi: "Pakollinen kysymys", name_en: "required"},

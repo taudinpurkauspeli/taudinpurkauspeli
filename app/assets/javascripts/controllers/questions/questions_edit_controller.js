@@ -19,26 +19,49 @@ app.controller("QuestionsEditController", [
         }
         ];
 
-        var Questions = $resource('/questions.json');
+        var Questions = $resource('/questions_admin.json');
+
+        var QuestionsOnly = $resource('/questions_only.json');
 
         var Question = $resource('/questions/:questionId.json',
             { questionId: "@id"},
             { update: { method: 'PUT' }});
 
         $scope.setQuestions = function() {
-            Questions.get({ interview_id : $stateParams.interviewShowId}, function(data) {
-                $scope.questions = data;
+            Questions.get({ interview_id: $stateParams.interviewShowId}, function onSuccess(data) {
+                $scope.questionsByGroup = data.questions_by_group;
+                $scope.questionsWithoutGroup = data.questions_without_group;
+                if (data.questions_without_group) {
+                    $scope.thereAreQuestionsWithoutGroup = (data.questions_without_group.length > 0);
+                } else {
+                    $scope.thereAreQuestionsWithoutGroup = false;
+                }
+            }, function onError() {
+
             });
         };
 
-        $scope.setQuestions();
+        $scope.setQuestionsOnly = function() {
+            QuestionsOnly.query({interview_id: $stateParams.interviewShowId}, function(data) {
+                $scope.questionsOnly = data;
+            }, function() {
+
+            });
+        };
+
+        $scope.setAllQuestions = function() {
+            $scope.setQuestions();
+            $scope.setQuestionsOnly();
+        };
+
+        $scope.setAllQuestions();
 
         $scope.moveQuestionToNewType = function(question, newType) {
 
             question.required = newType;
 
             Question.update({questionId: question.id}, question, function() {
-                $scope.setQuestions();
+                $scope.setAllQuestions();
             }, function() {
                 $.notify({
                     message: "Kysymyksen päivitys epäonnistui!"
@@ -52,7 +75,7 @@ app.controller("QuestionsEditController", [
             });
         };
 
-        $scope.createQuestion = function(interview) {
+        $scope.addToInterview = function(interview, title) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -60,12 +83,13 @@ app.controller("QuestionsEditController", [
                 controller: 'CreateQuestionModalController',
                 size: 'lg',
                 resolve: {
-                    interview: interview
+                    interview: interview,
+                    title: title
                 }
             });
 
             modalInstance.result.then(function() {
-                $scope.setQuestions();
+                $scope.setAllQuestions();
             }, function() {
             });
 
@@ -84,11 +108,25 @@ app.controller("QuestionsEditController", [
             });
 
             modalInstance.result.then(function() {
-                $scope.setQuestions();
+                $scope.setAllQuestions();
             }, function() {
             });
 
         };
 
+        $scope.questionIs = function(questionStatus, question) {
+            return question.required === questionStatus;
+        };
+
+        $scope.belongsToInterview = function(questionTitle) {
+
+            for (var i = 0; i < $scope.questionsOnly.length; i++) {
+                var questionValue = $scope.questionsOnly[i];
+                if (questionValue.title.id === questionTitle.id){
+                    return true;
+                }
+            }
+            return false;
+        };
     }
 ]);

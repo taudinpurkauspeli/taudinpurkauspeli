@@ -1,9 +1,10 @@
 class Question < ActiveRecord::Base
-	validates :title, presence: true
+	validates :title_id, presence: true
 	validates :content, presence: true
 
 	belongs_to :interview
 	belongs_to :question_group
+	belongs_to :title
 
 	accepts_nested_attributes_for :question_group, :reject_if => :check_question_group
 

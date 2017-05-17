@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text multiline">Muokkaa kysymyspankkia {{bank.name}}</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit muokata kysymyspankin nimeä." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+</div>
+
+<div class="modal-body">
+
+    <form class="form-horizontal" novalidate name="updateBankForm">
+        <div class="form-group has-feedback padding-top-10"
+             ng-class="{'has-error': updateBankForm.name.$invalid && updateBankForm.name.$dirty,
+                    'has-success': updateBankForm.name.$valid && updateBankForm.name.$touched}">
+
+            <label for="name" class="col-md-2 control-label">Kysymyspankin nimi</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       class="form-control center-text"
+                       required pattern=".{2,}"
+                       name="name"
+                       id="name"
+                       placeholder="Kysymyspankin nimi"
+                       ng-model="bank.name">
+
+                <p class="help-block" ng-messages="updateBankForm.name.$error" ng-if="!updateBankForm.name.$pristine">
+                    <span ng-message="required">Nimi on pakollinen</span>
+                    <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </form>
+
+</div>
+
+<div class="modal-footer">
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <button class="btn btn-default btn-success width-100"
+                    type="button"
+                    ng-click="updateBank()"
+                    ng-disabled="updateBankForm.$invalid || updateBankForm.$pristine"
+                    ng-class="{'disabled': updateBankForm.$invalid || updateBankForm.$pristine}">
+                Päivitä
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-warning width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-default btn-danger width-100" type="button" ng-click="deleteBank()">
+                Poista kysymyspankki
+            </button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+

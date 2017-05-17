@@ -16,8 +16,8 @@ app.controller("CompleteInterviewController", [
 
         $scope.checkQuestionsWithGroup = function() {
             angular.forEach($scope.questionsByGroup, function(questions, key) {
-                for(var i = 0; i < questions.length; i++) {
-                    if(questions[i].id == $scope.asked_last_id) {
+                for (var i = 0; i < questions.length; i++) {
+                    if (questions[i].id == $scope.asked_last_id) {
                         $scope.changeQuestionCollapse(questions[i]);
                     }
                 }
@@ -25,8 +25,8 @@ app.controller("CompleteInterviewController", [
         };
 
         $scope.checkQuestionsWithoutGroup = function() {
-            for(var i = 0; i < $scope.questionsWithoutGroup.length; i++) {
-                if($scope.questionsWithoutGroup[i].id == $scope.asked_last_id) {
+            for (var i = 0; i < $scope.questionsWithoutGroup.length; i++) {
+                if ($scope.questionsWithoutGroup[i].id == $scope.asked_last_id) {
                     $scope.changeQuestionCollapse($scope.questionsWithoutGroup[i]);
                 }
             }
@@ -40,10 +40,10 @@ app.controller("CompleteInterviewController", [
         };
 
         $scope.setQuestions = function() {
-            Questions.get({ interview_id : $scope.subtask.interview.id}, function(data) {
+            Questions.get({ interview_id: $scope.subtask.interview.id}, function(data) {
                 $scope.questionsByGroup = data.questions_by_group;
                 $scope.questionsWithoutGroup = data.questions_without_group;
-                if(data.questions_without_group) {
+                if (data.questions_without_group) {
                     $scope.thereAreQuestionsWithoutGroup = (data.questions_without_group.length > 0);
                 } else {
                     $scope.thereAreQuestionsWithoutGroup = false;
@@ -54,7 +54,7 @@ app.controller("CompleteInterviewController", [
 
         $scope.$watch(function(){
             return $scope.subtask.interview.id;
-        },function(newValue, oldValue){
+        }, function (newValue, oldValue){
             $scope.setQuestions();
         });
 
@@ -89,7 +89,7 @@ app.controller("CompleteInterviewController", [
 
         $scope.questionWasAskedLast = function(question) {
             return question.id == $scope.asked_last_id;
-        }
+        };
 
     }
 ]);

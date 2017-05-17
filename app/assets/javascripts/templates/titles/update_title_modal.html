@@ -1,0 +1,90 @@
+<div class="modal-header">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text multiline">Muokkaa kysymystä {{title.text}}</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit muokata kysymyksen tekstiä." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+</div>
+
+<div class="modal-body">
+
+    <form class="form-horizontal" novalidate name="updateTitleForm">
+
+        <div class="form-group has-feedback">
+
+            <label for="text" class="col-md-2 control-label">Kysymyspankki</label>
+
+            <div class="col-md-9">
+
+                <select name="bank_id"
+                        class="form-control"
+                        id="bank_id"
+                        ng-model="title.bank_id"
+                        ng-options="bank.id as bank.name for bank in banks">
+                </select>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="form-group has-feedback"
+             ng-class="{'has-error': updateTitleForm.text.$invalid && updateTitleForm.text.$dirty,
+                    'has-success': updateTitleForm.text.$valid && updateTitleForm.text.$touched}">
+
+            <label for="text" class="col-md-2 control-label">Kysymyksen teksti</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       class="form-control center-text"
+                       required pattern=".{2,}"
+                       name="text"
+                       id="text"
+                       placeholder="Kysymyksen teksti"
+                       ng-model="title.text">
+
+                <p class="help-block" ng-messages="updateTitleForm.text.$error" ng-if="!updateTitleForm.text.$pristine">
+                    <span ng-message="required">Teksti on pakollinen</span>
+                    <span ng-message="pattern">Tekstissä on oltava vähintään 2 merkkiä</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </form>
+
+</div>
+
+<div class="modal-footer">
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <button class="btn btn-default btn-success width-100"
+                    type="button"
+                    ng-click="updateTitle()"
+                    ng-disabled="updateTitleForm.$invalid || updateTitleForm.$pristine"
+                    ng-class="{'disabled': updateTitleForm.$invalid || updateTitleForm.$pristine}">
+                Päivitä
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-warning width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-default btn-danger width-100" type="button" ng-click="deleteTitle()">
+                Poista kysymys kysymyspankista
+            </button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+</div>
+
