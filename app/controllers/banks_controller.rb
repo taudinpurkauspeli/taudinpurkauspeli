@@ -7,7 +7,7 @@ class BanksController < ApplicationController
   before_action :set_bank, only: [:destroy, :show, :update]
 
   def index
-    @banks = Bank.all
+    @banks = Bank.all.order(:name)
     respond_to do |format|
       format.html
       format.json { render json: @banks }

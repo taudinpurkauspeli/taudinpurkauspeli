@@ -5,14 +5,25 @@ app.controller("BanksController", [
     function($scope, $resource, $window, $uibModal) {
         $scope.banksAndTitlesList = [];
 
-        $scope.selectedBank = {};
+        $scope.$watch('banksAndTitlesList', function(newList, oldList) {
+            $scope.banksAndTitlesList = newList;
+        }, true);
 
         var BanksAndTitles = $resource('/banks_and_titles.json');
 
         $scope.updateBanksList = function() {
             BanksAndTitles.query(function onSuccess(data){
                 $scope.banksAndTitlesList = data;
-                $scope.selectedBank = data[0];
+
+                if (!$scope.selectedBank) {
+                    $scope.selectedBank = data[0];
+                } else {
+                    angular.forEach(data, function (bank) {
+                        if (bank.id === $scope.selectedBank.id) {
+                            $scope.selectedBank = bank;
+                        }
+                    });
+                }
             }, function onError() {
             });
         };

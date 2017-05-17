@@ -5,10 +5,22 @@ app.controller("UpdateTitleModalController", [
     function($scope, $uibModalInstance, $resource, $window, title) {
 
         $scope.title = title;
+        $scope.banks = [];
 
         var Title = $resource('/titles/:titleId.json',
             { titleId: "@id"},
             { update: { method: 'PUT' }});
+
+        var Banks = $resource('/banks.json');
+
+        $scope.updateBanks = function() {
+            Banks.query(function onSuccess(data){
+                $scope.banks = data;
+            }, function onError() {
+            });
+        };
+
+        $scope.updateBanks();
 
         $scope.deleteTitle = function() {
             var deleteConfirmation = $window.confirm("VAROITUS: TÄMÄ OPERAATIO POISTAA TÄMÄN KYSYMYKSEN MYÖS POHDINNOISTA! " +

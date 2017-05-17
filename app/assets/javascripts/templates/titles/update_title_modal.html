@@ -15,7 +15,25 @@
 <div class="modal-body">
 
     <form class="form-horizontal" novalidate name="updateTitleForm">
-        <div class="form-group has-feedback padding-top-10"
+
+        <div class="form-group has-feedback">
+
+            <label for="text" class="col-md-2 control-label">Kysymyspankki</label>
+
+            <div class="col-md-9">
+
+                <select name="bank_id"
+                        class="form-control"
+                        id="bank_id"
+                        ng-model="title.bank_id"
+                        ng-options="bank.id as bank.name for bank in banks">
+                </select>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="form-group has-feedback"
              ng-class="{'has-error': updateTitleForm.text.$invalid && updateTitleForm.text.$dirty,
                     'has-success': updateTitleForm.text.$valid && updateTitleForm.text.$touched}">
 
