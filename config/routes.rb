@@ -119,6 +119,7 @@ Rails.application.routes.draw do
   get 'exercise_hypotheses_conclusion', to: 'exercise_hypotheses#exercise_hypotheses_conclusion'
 
   get 'banks_and_titles', to: 'banks#banks_and_titles'
+  get 'banks/:id/titles', to: 'banks#bank_titles'
   get 'questions_admin', to: 'questions#index_admin'
   get 'questions_only', to: 'questions#only_questions'
 
