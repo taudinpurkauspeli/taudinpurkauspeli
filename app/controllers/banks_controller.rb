@@ -7,7 +7,7 @@ class BanksController < ApplicationController
   before_action :set_bank, only: [:destroy, :show, :update, :bank_titles]
 
   def index
-    @banks = Bank.all.order(:name)
+    @banks = Bank.all.where.not(name: "Toimenpidepankki").order(:name)
     respond_to do |format|
       format.html
       format.json { render json: @banks }
@@ -15,7 +15,7 @@ class BanksController < ApplicationController
   end
 
   def banks_and_titles
-    banks = Bank.all.order(:name).to_json(include: :titles)
+    banks = Bank.all.where.not(name: "Toimenpidepankki").order(:name).to_json(include: :titles)
     respond_to do |format|
       format.html
       format.json { render json: banks }
