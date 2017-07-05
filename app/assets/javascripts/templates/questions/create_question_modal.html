@@ -54,8 +54,11 @@
 
             <label for="question_group_title" class="col-md-2 control-label">Kysymysryhmä</label>
 
-            <div class="col-md-9">
+            <div class="col-md-9 typeahead-col">
                 <input type="text"
+                       uib-typeahead="questionGroup.title for questionGroup in questionGroups | filter:$viewValue"
+                       autocomplete="off"
+                       typeahead-min-length="0"
                        class="form-control center-text"
                        name="question_group_title"
                        id="question_group_title"

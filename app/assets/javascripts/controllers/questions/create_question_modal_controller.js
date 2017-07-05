@@ -16,6 +16,8 @@ app.controller("CreateQuestionModalController", [
 
         $scope.title = title;
 
+        $scope.questionGroups = [];
+
         $scope.answer_types = [
             {name_fi: "Pakollinen kysymys", name_en: "required"},
             {name_fi: "Sallittu kysymys", name_en: "allowed"},
@@ -28,7 +30,7 @@ app.controller("CreateQuestionModalController", [
 
         $scope.setQuestionGroups = function() {
             QuestionGroups.query(function(data) {
-                $scope.question_groups = data;
+                $scope.questionGroups = data;
             });
         };
 
