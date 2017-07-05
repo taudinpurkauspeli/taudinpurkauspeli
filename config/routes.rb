@@ -123,5 +123,7 @@ Rails.application.routes.draw do
   get 'questions_admin', to: 'questions#index_admin'
   get 'questions_only', to: 'questions#only_questions'
 
+  get 'task_names', to: 'tasks#task_names'
+
 
 end

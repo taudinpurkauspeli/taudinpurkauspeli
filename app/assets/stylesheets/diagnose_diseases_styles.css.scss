@@ -408,6 +408,21 @@ div.separator{
 }
 
 
+/*********************
+*     Typeahead      *
+**********************/
+
+.typeahead-col {
+  ul  {
+
+    max-height: 300px;
+    overflow-y: auto;
+    li a {
+      white-space: normal;
+    }
+  }
+}
+
 /***********************************
 *     Drag and drop task-list      *
 ************************************/
