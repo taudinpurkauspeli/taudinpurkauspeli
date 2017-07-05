@@ -4,10 +4,10 @@ class BanksController < ApplicationController
 
   before_action :ensure_user_is_logged_in
   before_action :ensure_user_is_admin
-  before_action :set_bank, only: [:destroy, :show, :update]
+  before_action :set_bank, only: [:destroy, :show, :update, :bank_titles]
 
   def index
-    @banks = Bank.all.order(:name)
+    @banks = Bank.all.where.not(name: "Toimenpidepankki").order(:name)
     respond_to do |format|
       format.html
       format.json { render json: @banks }
@@ -15,10 +15,18 @@ class BanksController < ApplicationController
   end
 
   def banks_and_titles
-    banks = Bank.all.order(:name).to_json(include: :titles)
+    banks = Bank.all.where.not(name: "Toimenpidepankki").order(:name).to_json(include: :titles)
     respond_to do |format|
       format.html
       format.json { render json: banks }
+    end
+  end
+
+  def bank_titles
+    titles = Title.where(bank_id: @bank.id).order(:text)
+    respond_to do |format|
+      format.html
+      format.json { render json: titles }
     end
   end
 

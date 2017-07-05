@@ -7,7 +7,7 @@ class QuestionGroupsController < ApplicationController
   before_action :set_question_group, only: [:destroy]
 
   def index
-    @question_groups = QuestionGroup.all
+    @question_groups = QuestionGroup.all.order(:title)
     respond_to do |format|
       format.html
       format.json { render json: @question_groups }

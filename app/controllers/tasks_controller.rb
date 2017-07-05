@@ -69,6 +69,16 @@ class TasksController < ApplicationController
     end
   end
 
+  def task_names
+    task_names = Task.uniq.order(:name).pluck(:name)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: task_names }
+    end
+
+  end
+
   # GET /tasks_all
   # GET /tasks_all.json
   def tasks_all

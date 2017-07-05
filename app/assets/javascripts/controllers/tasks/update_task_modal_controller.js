@@ -5,10 +5,21 @@ app.controller("UpdateTaskModalController", [
     function($scope, $uibModalInstance, $resource, $window, task) {
 
         $scope.task = task;
+        $scope.taskNames = [];
 
         var Task = $resource('/tasks/:taskId.json',
             { taskId: "@id"},
             { update: { method: 'PUT' }});
+        var TaskNames = $resource('/task_names.json');
+
+        $scope.setTaskNames = function() {
+            TaskNames.query(function onSuccess(data){
+                $scope.taskNames = data;
+            }, function onError() {
+            });
+        };
+
+        $scope.setTaskNames();
 
         $scope.updateTask = function() {
             if ($scope.updateTaskForm.$valid) {

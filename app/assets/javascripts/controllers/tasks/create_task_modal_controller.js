@@ -8,7 +8,19 @@ app.controller("CreateTaskModalController", [
             exercise_id: exercise.id
         };
 
+        $scope.taskNames = [];
+
         var Task = $resource('/json_tasks_create.json');
+        var TaskNames = $resource('/task_names.json');
+
+        $scope.setTaskNames = function() {
+            TaskNames.query(function onSuccess(data){
+                $scope.taskNames = data;
+            }, function onError() {
+            });
+        };
+
+        $scope.setTaskNames();
 
         $scope.createTask = function() {
             if ($scope.createTaskForm.$valid) {
@@ -35,6 +47,7 @@ app.controller("CreateTaskModalController", [
                             type: "danger",
                             offset: 100
                         });
+                        $uibModalInstance.dismiss('close');
                     }
                 );
             }

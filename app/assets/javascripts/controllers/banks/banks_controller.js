@@ -3,17 +3,14 @@ var app = angular.module('diagnoseDiseases');
 app.controller("BanksController", [
     '$scope', '$resource', '$window', '$uibModal',
     function($scope, $resource, $window, $uibModal) {
-        $scope.banksAndTitlesList = [];
+        $scope.banksList = [];
 
-        $scope.$watch('banksAndTitlesList', function(newList, oldList) {
-            $scope.banksAndTitlesList = newList;
-        }, true);
-
-        var BanksAndTitles = $resource('/banks_and_titles.json');
+        var Banks = $resource('/banks.json');
+        var Titles = $resource('/banks/:bankId/titles.json');
 
         $scope.updateBanksList = function() {
-            BanksAndTitles.query(function onSuccess(data){
-                $scope.banksAndTitlesList = data;
+            Banks.query(function onSuccess(data){
+                $scope.banksList = data;
 
                 if (!$scope.selectedBank) {
                     $scope.selectedBank = data[0];
@@ -50,6 +47,18 @@ app.controller("BanksController", [
             }, function() {
             });
         };
+
+        $scope.$watch(function() {
+            return $scope.selectedBank;
+        }, function(newSelectedBank) {
+            if (newSelectedBank) {
+                Titles.query({bankId: newSelectedBank.id}, function(data) {
+                    newSelectedBank.titles = data;
+                }, function() {
+                });
+            }
+            $scope.selectedBank = newSelectedBank;
+        });
 
         $scope.createBank = function() {
             var modalInstance = $uibModal.open({

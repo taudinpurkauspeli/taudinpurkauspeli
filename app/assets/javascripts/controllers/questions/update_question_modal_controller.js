@@ -6,15 +6,27 @@ app.controller("UpdateQuestionModalController", [
 
         $scope.question = question;
 
-        var Question = $resource('/questions/:questionId.json',
-            { questionId: "@id"},
-            { update: { method: 'PUT' }});
+        $scope.questionGroups = [];
 
         $scope.answer_types = [
             {name_fi: "Pakollinen kysymys", name_en: "required"},
             {name_fi: "Sallittu kysymys", name_en: "allowed"},
             {name_fi: "Väärä kysymys", name_en: "wrong"}
         ];
+
+        var Question = $resource('/questions/:questionId.json',
+            { questionId: "@id"},
+            { update: { method: 'PUT' }});
+
+        var QuestionGroups = $resource('/question_groups.json');
+
+        $scope.setQuestionGroups = function() {
+            QuestionGroups.query(function(data) {
+                $scope.questionGroups = data;
+            });
+        };
+
+        $scope.setQuestionGroups();
 
         $scope.updateQuestion = function() {
             if ($scope.updateQuestionForm.$valid) {

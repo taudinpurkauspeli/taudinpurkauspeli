@@ -20,8 +20,11 @@
 
             <label for="name" class="col-md-3 control-label">Toimenpiteen nimi</label>
 
-            <div class="col-md-8">
+            <div class="col-md-8 typeahead-col">
                 <input type="text"
+                       uib-typeahead="name for name in taskNames | filter:$viewValue"
+                       autocomplete="off"
+                       typeahead-min-length="0"
                        class="form-control center-text"
                        required pattern=".{2,}"
                        name="name"
