@@ -122,6 +122,7 @@ Rails.application.routes.draw do
   get 'banks/:id/titles', to: 'banks#bank_titles'
   get 'questions_admin', to: 'questions#index_admin'
   get 'questions_only', to: 'questions#only_questions'
+  get 'options_only', to: 'options#only_options'
 
   get 'task_names', to: 'tasks#task_names'
 

@@ -7,11 +7,20 @@ class OptionsController < ApplicationController
   before_action :set_option, only: [:update, :destroy]
 
   def index
-    options = Option.where(multichoice_id: params[:multichoice_id]).order(:content).group_by(&:is_correct_answer)
+    options = Option.where(multichoice_id: params[:multichoice_id]).joins(:title).order('titles.text').group_by(&:is_correct_answer)
 
     respond_to do |format|
       format.html
-      format.json { render json: options }
+      format.json { render json: options.to_json(include: [:title]) }
+    end
+  end
+
+  def only_options
+    options = Option.where(multichoice_id: params[:multichoice_id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: options.to_json(include: [:title]) }
     end
   end
 

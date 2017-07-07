@@ -19,19 +19,39 @@ app.controller("OptionsEditController", [
         }
         ];
 
+        $scope.optionsOnly = [];
+
         var Options = $resource('/options.json');
 
         var Option = $resource('/options/:optionId.json',
             { optionId: "@id"},
             { update: { method: 'PUT' }});
 
+        var OptionsOnly = $resource('/options_only.json');
+
         $scope.setOptions = function() {
-            Options.get({ multichoice_id : $stateParams.multichoiceShowId}, function(data) {
+            Options.get({ multichoice_id: $stateParams.multichoiceShowId}, function(data) {
                 $scope.options = data;
+            }, function() {
+
             });
         };
 
-        $scope.setOptions();
+        $scope.setOptionsOnly = function() {
+            OptionsOnly.query({multichoice_id: $stateParams.multichoiceShowId}, function(data) {
+                $scope.optionsOnly = data;
+            }, function() {
+
+            });
+        };
+
+
+        $scope.setAllOptions = function() {
+            $scope.setOptions();
+            $scope.setOptionsOnly();
+        };
+
+        $scope.setAllOptions();
 
         $scope.moveOptionToNewType = function(option, newType) {
 
@@ -52,7 +72,7 @@ app.controller("OptionsEditController", [
             });
         };
 
-        $scope.createOption = function(multichoice) {
+        $scope.addToMultichoice = function(multichoice, title) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -60,12 +80,13 @@ app.controller("OptionsEditController", [
                 controller: 'CreateOptionModalController',
                 size: 'lg',
                 resolve: {
-                    multichoice: multichoice
+                    multichoice: multichoice,
+                    title: title
                 }
             });
 
             modalInstance.result.then(function() {
-                $scope.setOptions();
+                $scope.setAllOptions();
             }, function() {
             });
 
@@ -88,6 +109,21 @@ app.controller("OptionsEditController", [
             }, function() {
             });
 
+        };
+
+        $scope.optionIs = function(optionAnswerType, option) {
+            return option.is_correct_answer === optionAnswerType;
+        };
+
+        $scope.belongsToMultichoice = function(optionTitle) {
+
+            for (var i = 0; i < $scope.optionsOnly.length; i++) {
+                var optionValue = $scope.optionsOnly[i];
+                if (optionValue.title.id === optionTitle.id){
+                    return true;
+                }
+            }
+            return false;
         };
 
     }
