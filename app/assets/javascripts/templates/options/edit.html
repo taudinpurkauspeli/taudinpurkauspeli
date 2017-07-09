@@ -4,12 +4,13 @@
         <div class="col-md-6">
             <div class="row padding-bottom-10">
                 <div class="col-md-10 center-text multiline">
-                    <h3 class="margin-0 multiline">Vastausvaihtoehdot</h3>
+                    <h3 class="margin-0 multiline">Monivalintaan lisätyt vastausvaihtoehdot</h3>
                 </div>
                 <div class="col-md-2">
-                    <button uib-popover="Voit lisätä uuden vastausvaihtoehdon '+ Luo uusi vastausvaihtoehto'-napista. Vastausvaihtoehtoa pääset muokkaamaan klikkaamalla vastausvaihtoehdon nappia.
-        Voit siirtää vastausvaihtoehtoja pakolliset-, sallitut- ja väärät-vaihtoehdot-kenttien välillä ottamalla kiinni vastausvaihtoehdosta ja raahaamalla sen haluamaasi kenttään.
-        Vastausvaihtoehdot näkyvät opiskelijoille aakkosjärjestyksessä. Jos haluat vaihtoehdot tiettyyn järjestykseen, lisää vastausvaihtoehtojen tekstin alkuun järjestysnumero."
+                    <button uib-popover="Vasemmalla palstalla näet tällä hetkellä monivalintaan kuuluvat vastausvaihtoehdot.
+                    Klikkaamalla vastausvaihtoehdon nimeä avautuu ikkuna, jossa voit muokata monivalintaan lisättyä vastausvaihtoehtoa ja jonka kautta voit poistaa vastausvaihtoehdon monivalinnasta.
+                    Vastausvaihtoehdot näkyvät opiskelijoille aakkosjärjestyksessä. Jos haluat vaihtoehdot tiettyyn järjestykseen, lisää monivalintaan vastausvaihtoehtoja, joiden nimessä on ensimmäisenä järjestysnumero.
+                    Voit lisätä vastausvaihtoehtoja monivalintaan kysymyspankeista."
                             popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
                 </div>
             </div>
@@ -23,8 +24,8 @@
                     <h3 class="margin-0 multiline">Kysymyspankit</h3>
                 </div>
                 <div class="col-md-2">
-                    <button uib-popover="Oikealla palstalla näet kysymyspankit, joista voit valita kysymyksiä lisättäväksi pohdintaan. Voit myös lisätä kysymyspankkiin kysymyksiä tämän sivun kautta.
-                    Klikkaamalla kysymyksen nimeä voit lisätä kysymyksen pohdintaan. Pohdintaan lisätyt kysymykset näkyvät kysymyspankissa himmennettyinä. 'Muokkaa'-napeista pääset muokkaamaan kysymyspankin ja kysymysten tekstejä.
+                    <button uib-popover="Oikealla palstalla näet kysymyspankit, joista voit valita vastausvaihtoehtoja lisättäväksi monivalintaan. Voit myös lisätä kysymyspankkiin kysymyksiä tämän sivun kautta.
+                    Klikkaamalla kysymyksen nimeä voit lisätä vastausvaihtoehdon monivalintaan. Monivalintaan lisätyt vastausvaihtoehdot näkyvät kysymyspankissa himmennettyinä. 'Muokkaa'-napeista pääset muokkaamaan kysymyspankin ja kysymysten tekstejä.
                                 '+ Luo uusi kysymys'- ja '+ Luo uusi kysymyspankki'-nappien avulla voit luoda uusia kysymyksiä ja kysymyspankkeja."
                             popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
                 </div>
@@ -75,7 +76,7 @@
 
         <div class="col-md-6" ng-controller="BanksController" ng-if="optionsOnly">
 
-            <div class="row padding-top-10" ng-if="banksList.length > 0">
+            <div class="row padding-top-10" ng-show="banksList.length > 0">
                 <div class="col-md-12">
 
                     <form>

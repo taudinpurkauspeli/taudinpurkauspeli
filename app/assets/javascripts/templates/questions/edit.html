@@ -4,11 +4,12 @@
         <div class="col-md-6">
             <div class="row padding-bottom-10">
                 <div class="col-md-10 center-text multiline">
-                    <h3 class="margin-0 multiline">Kysymykset</h3>
+                    <h3 class="margin-0 multiline">Pohdintaan lisätyt kysymykset</h3>
                 </div>
                 <div class="col-md-2">
-                    <button uib-popover="Vasemmalla palstalla näet tällä hetkellä caseen kuuluvat diffit.
-                    Klikkaamalla diffin nimeä avautuu ikkuna, jossa voit muokata caseen liitetyn diffin selitystä ja esitietovaatimusta ja jonka kautta voit poistaa diffin casesta."
+                    <button uib-popover="Vasemmalla palstalla näet tällä hetkellä pohdintaan kuuluvat kysymykset.
+                    Klikkaamalla kysymyksen nimeä avautuu ikkuna, jossa voit muokata pohdintaan lisättyä kysymystä ja jonka kautta voit poistaa kysymyksen pohdinnasta.
+                    Kysymyksen taustaväri kertoo, onko kysymys pakollinen (vihreä taustaväri), sallittu (keltainen taustaväri) vai väärä (punainen taustaväri) kysymys."
                             popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
                 </div>
             </div>
@@ -104,7 +105,7 @@
 
         <div class="col-md-6" ng-controller="BanksController" ng-if="questionsOnly">
 
-            <div class="row padding-top-10" ng-if="banksList.length > 0">
+            <div class="row padding-top-10" ng-show="banksList.length > 0">
                 <div class="col-md-12">
 
                     <form>

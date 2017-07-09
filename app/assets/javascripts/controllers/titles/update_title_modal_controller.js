@@ -23,13 +23,13 @@ app.controller("UpdateTitleModalController", [
         $scope.updateBanks();
 
         $scope.deleteTitle = function() {
-            var deleteConfirmation = $window.confirm("VAROITUS: TÄMÄ OPERAATIO POISTAA TÄMÄN KYSYMYKSEN MYÖS POHDINNOISTA! " +
-                "Oletko aivan varma, että haluat poistaa kysymyksen ja sen kaikki pohdintoihin liittyvät kysymykset?");
+            var deleteConfirmation = $window.confirm("VAROITUS: TÄMÄ OPERAATIO POISTAA TÄMÄN KYSYMYKSEN MYÖS KAIKISTA POHDINNOISTA JA MONIVALINNOISTA! " +
+                "Oletko aivan varma, että haluat poistaa kysymyksen ja sen kaikki pohdintoihin ja monivalintoihin liittyvät kysymykset?");
 
             if (deleteConfirmation) {
                 Title.delete({titleId: title.id}, function() {
                     $.notify({
-                        message: "Kysymyksen poistaminen onnistui!"
+                        message: "Kysymyksen poistaminen kysymyspankista onnistui!"
                     }, {
                         placement: {
                             align: "center"
@@ -41,7 +41,7 @@ app.controller("UpdateTitleModalController", [
                 });
             } else {
                 $.notify({
-                    message: "Kysymystä '" + title.text + "' ei poistettu."
+                    message: "Kysymystä '" + title.text + "' ei poistettu kysymyspankista."
                 }, {
                     placement: {
                         align: "center"

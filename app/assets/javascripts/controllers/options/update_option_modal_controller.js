@@ -45,12 +45,12 @@ app.controller("UpdateOptionModalController", [
         };
 
         $scope.deleteOption = function() {
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa vastausvaihtoehdon?");
+            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa vastausvaihtoehdon monivalinnasta?");
 
             if (deleteConfirmation) {
                 Option.delete({optionId: $scope.option.id}, function() {
                     $.notify({
-                        message: "Vastausvaihtoehdon poistaminen onnistui!"
+                        message: "Vastausvaihtoehdon poistaminen monivalinnasta onnistui!"
                     }, {
                         placement: {
                             align: "center"
@@ -63,7 +63,7 @@ app.controller("UpdateOptionModalController", [
 
             } else {
                 $.notify({
-                    message: "Vastausvaihtoehtoa ei poistettu."
+                    message: "Vastausvaihtoehtoa ei poistettu monivalinnasta."
                 }, {
                     placement: {
                         align: "center"

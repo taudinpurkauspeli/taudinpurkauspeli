@@ -12,9 +12,9 @@
                             <button class="btn btn-default btn-success width-100" ng-click="updateTask(taskForShow)">Muokkaa</button>
                         </div>
                         <div class="col-md-2">
-                            <button uib-popover="Voit muokata casen nimeä klikkaamalla Muokkaa-nappia.
-                            Voit järjestää casen alakohdat ottamalla kiinni alakohdasta ja siirtämällä alakohdan oikeaan kohtaan.
-                            Pääset muokkaamaan alakohtaa klikkaamalla alakohtaa."
+                            <button uib-popover="Voit muokata toimenpiteen nimeä klikkaamalla Muokkaa-nappia.
+                            Voit järjestää toimenpiteen alakohtien järjestystä ottamalla kiinni alakohdasta ja siirtämällä alakohdan oikeaan kohtaan.
+                            Pääset muokkaamaan toinempiteen alakohtaa klikkaamalla alakohtaa."
                                     popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
                         </div>
                     </div>
@@ -30,10 +30,11 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-8">
-                            <h3 class="panel-title panel-title-task-show multiline"> Lisää alakohta</h3>
+                            <h3 class="panel-title panel-title-task-show multiline">Lisää alakohta toimenpiteeseen</h3>
                         </div>
                         <div class="col-md-4">
-                            <button uib-popover="Voit lisätä caseen uuden alakohdan klikkaamalla haluamasi tyyppisen alakohdan nappia.
+                            <button uib-popover="Voit lisätä toimenpiteeseen uuden alakohdan klikkaamalla haluamasi tyyppisen alakohdan nappia.
+                            Alakohtia voit lisätä toimenpiteeseen yhden tai useampia. Voit lisätä samanlaisia alakohtia myös useaan kertaan samaan toimenpiteeseen.
                             Nappia klikkaamalla pääset syöttämään alakohdan tietoja."
                                     popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
                         </div>
@@ -57,9 +58,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-default btn-success btn-lg width-100" ng-click="createConclusion(taskForShow)" ng-disabled="hasConclusion"
+                            <button class="btn btn-default btn-success btn-lg width-100 multiline" ng-click="createConclusion(taskForShow)" ng-disabled="hasConclusion"
                                     ng-class="{'disabled': hasConclusion}">
-                                + Diagnoosi
+                                + Diagnoosin valinta diffilistasta
                             </button>
                         </div>
                     </div>
