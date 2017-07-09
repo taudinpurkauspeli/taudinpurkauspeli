@@ -17,30 +17,34 @@
 
     <form class="form-horizontal" novalidate name="updateOptionForm">
 
-        <div class="form-group has-feedback"
-             ng-class="{'has-error': updateOptionForm.content.$invalid && updateOptionForm.content.$dirty,
-                        'has-success': updateOptionForm.content.$valid && updateOptionForm.content.$touched}">
+        <div class="form-group has-feedback">
 
-            <label for="content" class="col-md-2 control-label">Vaihtoehdon teksti</label>
+            <div class="col-md-2"></div>
 
             <div class="col-md-9">
-                <input type="text"
-                       required
-                       class="form-control center-text"
-                       name="content"
-                       id="content"
-                       placeholder="Vaihtoehdon teksti"
-                       ng-model="option.content">
+                <h4 class="center-text">{{option.title.text}}</h4>
+            </div>
 
+            <div class="col-md-1"></div>
 
-                <p class="help-block" ng-messages="updateOptionForm.content.$error" ng-if="!updateOptionForm.content.$pristine">
-                    <span ng-message="required">Vaihtoehdon teksti on pakollinen</span>
-                </p>
+        </div>
+
+        <div class="form-group has-feedback">
+
+            <div class="col-md-2"></div>
+
+            <div class="col-md-9">
+
+                <select name="is_correct_answer"
+                        class="form-control"
+                        id="is_correct_answer"
+                        ng-model="option.is_correct_answer"
+                        ng-options="answer_type.name_en as answer_type.name_fi for answer_type in answer_types">
+                </select>
             </div>
 
             <div class="col-md-1"></div>
         </div>
-
 
         <div class="form-group padding-top-10">
 

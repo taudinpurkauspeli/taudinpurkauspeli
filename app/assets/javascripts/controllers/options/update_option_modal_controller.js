@@ -6,6 +6,12 @@ app.controller("UpdateOptionModalController", [
 
         $scope.option = option;
 
+        $scope.answer_types = [
+            {name_fi: "Pakollinen vaihtoehto", name_en: "required"},
+            {name_fi: "Sallittu vaihtoehto", name_en: "allowed"},
+            {name_fi: "Väärä vaihtoehto", name_en: "wrong"}
+        ];
+
         var Option = $resource('/options/:optionId.json',
             { optionId: "@id"},
             { update: { method: 'PUT' }});

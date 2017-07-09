@@ -8,19 +8,32 @@ app.controller("BanksController", [
         var Banks = $resource('/banks.json');
         var Titles = $resource('/banks/:bankId/titles.json');
 
+        var setSelectedBank = function(data) {
+            var bankFound = false;
+            angular.forEach(data, function (bank) {
+                if (bank.id === $scope.selectedBank.id) {
+                    $scope.selectedBank = bank;
+                    bankFound = true;
+                }
+            });
+
+            if (!bankFound) {
+                $scope.selectedBank = data[0];
+            }
+        };
+
         $scope.updateBanksList = function() {
             Banks.query(function onSuccess(data){
                 $scope.banksList = data;
 
-                if (!$scope.selectedBank) {
-                    $scope.selectedBank = data[0];
-                } else {
-                    angular.forEach(data, function (bank) {
-                        if (bank.id === $scope.selectedBank.id) {
-                            $scope.selectedBank = bank;
-                        }
-                    });
+                if (data.length > 0) {
+                    if (!$scope.selectedBank) {
+                        $scope.selectedBank = data[0];
+                    } else {
+                        setSelectedBank(data);
+                    }
                 }
+
             }, function onError() {
             });
         };

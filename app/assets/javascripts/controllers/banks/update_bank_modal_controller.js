@@ -11,7 +11,7 @@ app.controller("UpdateBankModalController", [
             { update: { method: 'PUT' }});
 
         $scope.deleteBank = function() {
-            var deleteConfirmation = $window.confirm("VAROITUS: TÄMÄ OPERAATIO POISTAA KAIKKI TÄMÄN KYSYMYSPANKIN KYSYMYKSET MYÖS POHDINNOISTA!" +
+            var deleteConfirmation = $window.confirm("VAROITUS: TÄMÄ OPERAATIO POISTAA KAIKKI TÄMÄN KYSYMYSPANKIN KYSYMYKSET MYÖS POHDINNOISTA JA MONIVALINNOISTA!" +
                 " Oletko aivan varma, että haluat poistaa kysymyspankin ja kaikki siihen liittyvät kysymykset?");
 
             if (deleteConfirmation) {

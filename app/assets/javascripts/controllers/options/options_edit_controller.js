@@ -105,7 +105,7 @@ app.controller("OptionsEditController", [
             });
 
             modalInstance.result.then(function() {
-                $scope.setOptions();
+                $scope.setAllOptions();
             }, function() {
             });
 
