@@ -42,26 +42,46 @@
                 </div>
                 <div class="panel-body">
                     <div class="row padding-bottom-20">
-                        <div class="col-md-12">
+                        <div class="col-md-9">
                             <button class="btn btn-default btn-success btn-lg width-100" ng-click="createTaskText(taskForShow)">+ Teksti</button>
                         </div>
-                    </div>
-                    <div class="row padding-bottom-20">
-                        <div class="col-md-12">
-                            <button class="btn btn-default btn-success btn-lg width-100" ng-click="createMultichoice(taskForShow)">+ Monivalinta tai radio button</button>
+                        <div class="col-md-3 padding-left-0">
+                            <button uib-popover="Tekstialakohta voi olla esimerkiksi vastausteksti tai alkukuvaus, jossa annetaan opiskelijalle lisätietoja."
+                                    popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default btn-lg width-100">Ohje</button>
                         </div>
                     </div>
                     <div class="row padding-bottom-20">
-                        <div class="col-md-12">
+                        <div class="col-md-9">
+                            <button class="btn btn-default btn-success btn-lg width-100 multiline" ng-click="createMultichoice(taskForShow)">
+                                + Monivalinta tai radio button
+                            </button>
+                        </div>
+                        <div class="col-md-3 padding-left-0">
+                            <button uib-popover="Monivalinta- tai radio button -alakohdassa voi tehdä opiskelijalle monivalinta- tai radio button -tyyppisen kysymyksen."
+                                    popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default btn-lg width-100">Ohje</button>
+                        </div>
+                    </div>
+                    <div class="row padding-bottom-20">
+                        <div class="col-md-9">
                             <button class="btn btn-default btn-success btn-lg width-100" ng-click="createInterview(taskForShow)">+ Pohdinta</button>
+                        </div>
+                        <div class="col-md-3 padding-left-0">
+                            <button uib-popover="Pohdinta-alakohta on tekstialakohdan ja monivalinta-alakohdan välimuoto.
+                            Pohdinta-alakohdassa opiskelijalle voi antaa lisätietoja yksittäisten kysymysten kautta. Pohdinta-alakohtaa on hyödynnetty esimerkiksi
+                            'Lisätietoja kysymyksillä kliinisen tutkimuksen yhteydessä'-toimenpiteessä, kun opiskelijalle pitää antaa lisätietoja tiettyihin asioihin (esim. säätilaan) liittyvien kysymysten kautta."
+                                    popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default btn-lg width-100">Ohje</button>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-9">
                             <button class="btn btn-default btn-success btn-lg width-100 multiline" ng-click="createConclusion(taskForShow)" ng-disabled="hasConclusion"
                                     ng-class="{'disabled': hasConclusion}">
                                 + Diagnoosin valinta diffilistasta
                             </button>
+                        </div>
+                        <div class="col-md-3 padding-left-0">
+                            <button uib-popover="Tämän alakohdan avulla voit asettaa casen oikean diagnoosin. Jokaisessa casessa voi olla vain yksi 'Diagnoosin valinta diffilistasta'-alakohta."
+                                    popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default btn-lg width-100">Ohje</button>
                         </div>
                     </div>
                 </div>
