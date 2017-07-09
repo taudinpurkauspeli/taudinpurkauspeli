@@ -62,12 +62,12 @@ app.controller("UpdateQuestionModalController", [
         };
 
         $scope.deleteQuestion = function() {
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa kysymyksen?");
+            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa kysymyksen pohdinnasta?");
 
             if (deleteConfirmation) {
                 Question.delete({questionId: $scope.question.id}, function() {
                     $.notify({
-                        message: "Kysymyksen poistaminen onnistui!"
+                        message: "Kysymyksen poistaminen pohdinnasta onnistui!"
                     }, {
                         placement: {
                             align: "center"
@@ -80,7 +80,7 @@ app.controller("UpdateQuestionModalController", [
 
             } else {
                 $.notify({
-                    message: "Kysymystä ei poistettu."
+                    message: "Kysymystä ei poistettu pohdinnasta."
                 }, {
                     placement: {
                         align: "center"

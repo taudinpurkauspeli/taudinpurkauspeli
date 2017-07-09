@@ -2,15 +2,15 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <h3 class="modal-title center-text multiline">Uusi kysymys</h3>
+            <h3 class="modal-title center-text multiline">Lisää kysymys pohdintaan</h3>
         </div>
         <div class="col-md-2">
-            <button uib-popover="Tällä lomakkeella voit luoda uuden kysymyksen.
+            <button uib-popover="Tällä lomakkeella voit lisätä pohdintaan uuden kysymyksen.
             Valitse lomakkeessa, onko kysymys pakollinen, sallittu vai väärä kysymys.
             Kysymyksen pakollisuus tarkoittaa, että opiskelijan on pakko kysyä pakollinen kysymys.
             Sallitun kysymyksen opiskelija voi kysyä, mutta hänen ei ole pakko kysyä sitä.
-            Väärän kysymyksen opiskelija voi kysyä. Täytä lomakkeeseen lisäksi kysymyksen opiskelijalle näkyvät kysymyksen teksti ja selitys.
-            Voit lisäksi täyttää kysymykselle kysymysryhmän, johon kysymys kuuluu. Jos jätät kysymysryhmä-kentän tyhjäksi luodaan kysymys ilman ryhmää." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+            Väärän kysymyksen opiskelija voi kysyä. Täytä lomakkeeseen lisäksi opiskelijalle näkyvä seliteteksti eli kysymykseen liittyvä vastaus.
+            Voit lisäksi täyttää kysymykselle kysymysryhmän, johon kysymys kuuluu. Jos jätät kysymysryhmä-kentän tyhjäksi lisätään kysymys pohdintaan ilman ryhmää." popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
         </div>
         <div class="col-md-1"></div>
     </div>
@@ -101,7 +101,7 @@
                     ng-click="createQuestion()"
                     ng-disabled="createQuestionForm.$invalid || createQuestionForm.$pristine"
                     ng-class="{'disabled': createQuestionForm.$invalid || createQuestionForm.$pristine}">
-                Luo
+                Lisää
             </button>
         </div>
         <div class="col-md-2">

@@ -5,5 +5,6 @@ class Title < ActiveRecord::Base
 
   belongs_to :bank
   has_many :questions, dependent: :destroy
+  has_many :options, dependent: :destroy
 
 end
