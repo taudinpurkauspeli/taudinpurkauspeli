@@ -8,20 +8,46 @@ class QuestionsController < ApplicationController
   before_action :set_current_user, only: [:ask, :interview_index]
 
   def index
-    questions = Question.where(interview_id: params[:interview_id]).order(:title).group_by(&:required)
+    questions = Question.where(interview_id: params[:interview_id]).joins(:title).order('titles.text').group_by(&:required)
 
     respond_to do |format|
       format.html
-      format.json { render json: questions.to_json(include: :question_group) }
+      format.json { render json: questions.to_json(include: [:question_group, :title]) }
+    end
+  end
+
+  def only_questions
+    questions = Question.where(interview_id: params[:interview_id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: questions.to_json(include: [:title]) }
+    end
+  end
+
+
+  def index_admin
+    questions_with_group = Question.where(interview_id: params[:interview_id]).where.not(question_group_id: nil)
+                               .joins(:title).order('titles.text').group_by{|q| q.question_group.title }
+    questions_sorted_by_group = questions_with_group.slice(*questions_with_group.keys.sort)
+    populated_sorted_questions = populate_questions_with_group_with_dependencies(questions_sorted_by_group)
+
+    questions_without_group = Question.where(interview_id: params[:interview_id]).where(question_group_id: nil).joins(:title).order('titles.text')
+    populated_questions_without_group = populate_questions_without_group_with_dependencies(questions_without_group)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: {questions_by_group: populated_sorted_questions, questions_without_group: populated_questions_without_group} }
     end
   end
 
   def interview_index
-    questions_with_group = Question.where(interview_id: params[:interview_id]).where.not(question_group_id: nil).order(:title).group_by{|q| q.question_group.title }
+    questions_with_group = Question.where(interview_id: params[:interview_id]).where.not(question_group_id: nil)
+                               .joins(:title).order('titles.text').group_by{|q| q.question_group.title }
     questions_sorted_by_group = questions_with_group.slice(*questions_with_group.keys.sort)
     handled_sorted_questions = questions_with_group(questions_sorted_by_group)
 
-    questions_without_group = Question.where(interview_id: params[:interview_id]).where(question_group_id: nil).order(:title)
+    questions_without_group = Question.where(interview_id: params[:interview_id]).where(question_group_id: nil).joins(:title).order('titles.text')
     handled_questions_without_group = questions_without_group(questions_without_group)
 
     respond_to do |format|
@@ -93,7 +119,26 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :content, :required, :interview_id, question_group_attributes: [:title])
+    params.require(:question).permit(:title_id, :content, :required, :interview_id, question_group_attributes: [:title])
+  end
+
+  def populate_questions_with_group_with_dependencies(questions_sorted)
+
+    questions_handled = Hash.new()
+
+    questions_sorted.each do |question_group, questions|
+
+      ready_questions = Array.new()
+
+      questions.each do |question|
+        json_question = question.as_json(include: [:title, :question_group])
+        ready_questions << json_question
+      end
+
+      questions_handled[question_group] = ready_questions
+    end
+
+    return  questions_handled
   end
 
   def questions_with_group(questions_sorted)
@@ -105,7 +150,7 @@ class QuestionsController < ApplicationController
       ready_questions = Array.new()
 
       questions.each do |question|
-        json_question = question.as_json
+        json_question = question.as_json(include: :title)
         json_question["asked"] = @current_user.has_asked_question?(question)
         ready_questions << json_question
       end
@@ -116,12 +161,24 @@ class QuestionsController < ApplicationController
     return  questions_handled
   end
 
+  def populate_questions_without_group_with_dependencies(questions)
+
+    ready_questions = Array.new()
+
+    questions.each do |question|
+      json_question = question.as_json(include: [:title, :question_group])
+      ready_questions << json_question
+    end
+
+    return  ready_questions
+  end
+
   def questions_without_group(questions)
 
     ready_questions = Array.new()
 
     questions.each do |question|
-      json_question = question.as_json
+      json_question = question.as_json(include: :title)
       json_question["asked"] = @current_user.has_asked_question?(question)
       ready_questions << json_question
     end

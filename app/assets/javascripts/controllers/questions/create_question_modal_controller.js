@@ -1,18 +1,22 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("CreateQuestionModalController", [
-    '$scope', '$uibModalInstance', '$resource', '$window', "interview",
-    function($scope, $uibModalInstance, $resource, $window, interview) {
+    '$scope', '$uibModalInstance', '$resource', '$window', "interview", "title",
+    function($scope, $uibModalInstance, $resource, $window, interview, title) {
 
         $scope.newQuestion = {
             interview_id: interview.id,
-            title: "",
+            title_id: title.id,
             content: "",
             required: "allowed",
             question_group_attributes: {
                 title: ""
             }
         };
+
+        $scope.title = title;
+
+        $scope.questionGroups = [];
 
         $scope.answer_types = [
             {name_fi: "Pakollinen kysymys", name_en: "required"},
@@ -26,7 +30,7 @@ app.controller("CreateQuestionModalController", [
 
         $scope.setQuestionGroups = function() {
             QuestionGroups.query(function(data) {
-                $scope.question_groups = data;
+                $scope.questionGroups = data;
             });
         };
 

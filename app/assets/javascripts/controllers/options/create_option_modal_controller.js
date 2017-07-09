@@ -1,12 +1,12 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("CreateOptionModalController", [
-    '$scope', '$uibModalInstance', '$resource', '$window', "multichoice",
-    function($scope, $uibModalInstance, $resource, $window, multichoice) {
+    '$scope', '$uibModalInstance', '$resource', '$window', "multichoice", "title",
+    function($scope, $uibModalInstance, $resource, $window, multichoice, title) {
 
         $scope.newOption = {
             multichoice_id: multichoice.id,
-            content: "",
+            title_id: title.id,
             explanation: "",
             is_correct_answer: "allowed"
         };
@@ -16,6 +16,8 @@ app.controller("CreateOptionModalController", [
             {name_fi: "Sallittu vaihtoehto", name_en: "allowed"},
             {name_fi: "Väärä vaihtoehto", name_en: "wrong"}
         ];
+
+        $scope.title = title;
 
         var Option = $resource('/options_json_create.json');
 

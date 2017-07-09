@@ -6,13 +6,31 @@ app.controller("UpdateQuestionModalController", [
 
         $scope.question = question;
 
+        $scope.questionGroups = [];
+
+        $scope.answer_types = [
+            {name_fi: "Pakollinen kysymys", name_en: "required"},
+            {name_fi: "Sallittu kysymys", name_en: "allowed"},
+            {name_fi: "Väärä kysymys", name_en: "wrong"}
+        ];
+
         var Question = $resource('/questions/:questionId.json',
             { questionId: "@id"},
             { update: { method: 'PUT' }});
 
+        var QuestionGroups = $resource('/question_groups.json');
+
+        $scope.setQuestionGroups = function() {
+            QuestionGroups.query(function(data) {
+                $scope.questionGroups = data;
+            });
+        };
+
+        $scope.setQuestionGroups();
+
         $scope.updateQuestion = function() {
             if ($scope.updateQuestionForm.$valid) {
-                if($scope.question.question_group) {
+                if ($scope.question.question_group) {
                     $scope.question.question_group_attributes = {
                         title: $scope.question.question_group.title,
                         id: $scope.question.question_group.id
@@ -44,12 +62,12 @@ app.controller("UpdateQuestionModalController", [
         };
 
         $scope.deleteQuestion = function() {
-            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa kysymyksen?");
+            var deleteConfirmation = $window.confirm("Oletko aivan varma, että haluat poistaa kysymyksen pohdinnasta?");
 
             if (deleteConfirmation) {
                 Question.delete({questionId: $scope.question.id}, function() {
                     $.notify({
-                        message: "Kysymyksen poistaminen onnistui!"
+                        message: "Kysymyksen poistaminen pohdinnasta onnistui!"
                     }, {
                         placement: {
                             align: "center"
@@ -62,7 +80,7 @@ app.controller("UpdateQuestionModalController", [
 
             } else {
                 $.notify({
-                    message: "Kysymystä ei poistettu."
+                    message: "Kysymystä ei poistettu pohdinnasta."
                 }, {
                     placement: {
                         align: "center"

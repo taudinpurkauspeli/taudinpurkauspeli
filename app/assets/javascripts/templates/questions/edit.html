@@ -1,76 +1,199 @@
-<div class="row padding-bottom-10">
-    <div class="col-md-1"></div>
+<div class="margin-top-20">
 
-    <div class="col-md-10">
-        <h3 class="center-text multiline">Kysymykset</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row padding-bottom-10">
+                <div class="col-md-10 center-text multiline">
+                    <h3 class="margin-0 multiline">Pohdintaan lisätyt kysymykset</h3>
+                </div>
+                <div class="col-md-2">
+                    <button uib-popover="Vasemmalla palstalla näet tällä hetkellä pohdintaan kuuluvat kysymykset.
+                    Klikkaamalla kysymyksen nimeä avautuu ikkuna, jossa voit muokata pohdintaan lisättyä kysymystä ja jonka kautta voit poistaa kysymyksen pohdinnasta.
+                    Kysymyksen taustaväri kertoo, onko kysymys pakollinen (vihreä taustaväri), sallittu (keltainen taustaväri) vai väärä (punainen taustaväri) kysymys."
+                            popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="row padding-bottom-10">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 center-text">
+                    <h3 class="margin-0 multiline">Kysymyspankit</h3>
+                </div>
+                <div class="col-md-2">
+                    <button uib-popover="Oikealla palstalla näet kysymyspankit, joista voit valita kysymyksiä lisättäväksi pohdintaan. Voit myös lisätä kysymyspankkiin kysymyksiä tämän sivun kautta.
+                    Klikkaamalla kysymyksen nimeä voit lisätä kysymyksen pohdintaan. Pohdintaan lisätyt kysymykset näkyvät kysymyspankissa himmennettyinä. 'Muokkaa'-napeista pääset muokkaamaan kysymyspankin ja kysymysten tekstejä.
+                                '+ Luo uusi kysymys'- ja '+ Luo uusi kysymyspankki'-nappien avulla voit luoda uusia kysymyksiä ja kysymyspankkeja."
+                            popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <div class="col-md-1"></div>
 
-</div>
+    <div class="separator"></div>
 
-<div class="row padding-bottom-20">
-    <div class="col-md-5"></div>
 
-    <div class="col-md-2">
-        <button uib-popover="Voit lisätä uuden kysymyksen '+ Luo uusi kysymys'-napista. Kysymystä pääset muokkaamaan klikkaamalla kysymyksen nappia.
-        Voit siirtää kysymyksiä pakolliset-, sallitut- ja väärät-kysymykset-kenttien välillä ottamalla kiinni kysymyksestä ja raahaamalla sen haluamaasi kenttään."
-                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
-    </div>
-    <div class="col-md-5"></div>
 
-</div>
+    <div class="row">
+        <div class="col-md-6">
 
-<div class="row" ng-repeat="answer_type in answer_types">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
-
-        <div class="dnd-questions-list">
-            <div class="dropzone">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-title panel-question center-text">
-                            {{answer_type.name_fi}}
+            <div class="row padding-top-10">
+                <div class="col-md-12">
+                    <div class="panel panel-default" ng-repeat="(group, questions) in questionsByGroup">
+                        <div class="panel-heading">
+                            <div class="panel-title panel-completed center-text multiline">
+                                {{group}}
+                            </div>
                         </div>
-                    </div>
-                    <div class="panel-body">
+                        <div class="panel-body panel-completed">
 
-                        <div class="dnd-item-list">
-                            <ul dnd-list="[]"
-                                class="list-unstyled margin-0"
-                                dnd-drop="moveQuestionToNewType(item, answer_type.name_en)"
-                                dnd-allowed-types="answer_type.allowed_types">
+                            <div ng-repeat="question in questions">
 
-                                <li ng-repeat="question in questions[answer_type.name_en]"
-                                    dnd-draggable="question"
-                                    dnd-type="answer_type.name_en"
-                                    dnd-selected="updateQuestion(question)"
-                                    dnd-effect-allowed="move"
-                                    class="multiline margin-left-10 margin-right-10 margin-top-10 margin-bottom-10 padding-top-25 padding-bottom-25 clickable">
-                                    {{question.title}}
-                                </li>
+                                <div class="row padding-bottom-15">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-10">
 
-                            </ul>
-                            <div class="clearfix"></div>
+                                        <button class="btn btn-default width-100 multiline padding-top-10 padding-bottom-10"
+                                                ng-click="updateQuestion(question)"
+                                                ng-class="{'btn-success': questionIs('required', question),
+                                                           'btn-warning': questionIs('allowed', question),
+                                                           'btn-danger': questionIs('wrong', question)}">
+                                            {{question.title.text}}
+                                        </button>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
+
+            <div class="row" ng-if="thereAreQuestionsWithoutGroup">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        </div>
+                        <div class="panel-body panel-completed">
+
+                            <div ng-repeat="question in questionsWithoutGroup">
+
+                                <div class="row padding-bottom-15">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-10">
+
+                                        <button class="btn btn-default width-100 multiline padding-top-10 padding-bottom-10"
+                                                ng-click="updateQuestion(question)"
+                                                ng-class="{'btn-success': questionIs('required', question),
+                                                           'btn-warning': questionIs('allowed', question),
+                                                           'btn-danger': questionIs('wrong', question)}">
+                                            {{question.title.text}}
+                                        </button>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6" ng-controller="BanksController" ng-if="questionsOnly">
+
+            <div class="row padding-top-10" ng-show="banksList.length > 0">
+                <div class="col-md-12">
+
+                    <form>
+                        <div class="form-group">
+                            <select name="bankSelect" id="bankSelect"
+                                    class="form-control"
+                                    ng-options="bank.name for bank in banksList track by bank.id"
+                                    ng-model="selectedBank"></select>
+                        </div>
+                    </form>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title panel-completed">
+
+                                <div class="row">
+                                    <div class="col-md-9 center-text multiline padding-top-7">
+                                        {{selectedBank.name}}
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-default width-100 btn-success multiline padding-top-10 padding-bottom-10" type="button"
+                                                ng-click="updateBank(selectedBank, setQuestions)">
+                                            Muokkaa
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="panel-body panel-completed">
+
+                            <div class="row padding-bottom-15">
+                                <div class="col-md-12">
+                                    <input type="text"
+                                           name="titleTextQuery"
+                                           id="titleTextQuery"
+                                           class="form-control input center-text"
+                                           placeholder="Kysymyksen teksti"
+                                           ng-model="titleTextQuery">
+                                </div>
+                            </div>
+
+                            <div ng-repeat="title in selectedBank.titles | filter:{text: titleTextQuery}">
+
+                                <div class="row padding-bottom-15">
+                                    <div class="col-md-9">
+
+                                        <button class="btn btn-default width-100 multiline padding-top-10 padding-bottom-10"
+                                                ng-click="addToInterview(interview, title)"
+                                                ng-disabled="belongsToInterview(title)"
+                                                ng-class="{'disabled': belongsToInterview(title)}">
+                                            {{title.text}}
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-default width-100 btn-success multiline padding-top-10 padding-bottom-10"
+                                                ng-click="updateTitle(title, setQuestions)">
+                                            Muokkaa
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row padding-bottom-15">
+                                <div class="col-md-9">
+
+                                    <button class="btn btn-default width-100 btn-success multiline padding-top-10 padding-bottom-10"
+                                            ng-click="createTitle(selectedBank)">
+                                        + Luo uusi kysymys
+                                    </button>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-default btn-lg width-100 btn-success multiline padding-top-10 padding-bottom-10"
+                            ng-click="createBank()">
+                        + Luo uusi kysymyspankki
+                    </button>
+                </div>
+            </div>
+
         </div>
     </div>
-    <div class="col-md-1"></div>
-
 </div>
-
-<div class="row padding-bottom-10">
-    <div class="col-md-4"></div>
-
-    <div class="col-md-4">
-        <button class="btn btn-default btn-success btn-lg width-100" ng-click="createQuestion(interview)">+ Luo uusi kysymys</button>
-    </div>
-    <div class="col-md-4"></div>
-</div>
-
-
-

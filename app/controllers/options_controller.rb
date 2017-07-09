@@ -7,11 +7,20 @@ class OptionsController < ApplicationController
   before_action :set_option, only: [:update, :destroy]
 
   def index
-    options = Option.where(multichoice_id: params[:multichoice_id]).order(:content).group_by(&:is_correct_answer)
+    options = Option.where(multichoice_id: params[:multichoice_id]).joins(:title).order('titles.text').group_by(&:is_correct_answer)
 
     respond_to do |format|
       format.html
-      format.json { render json: options }
+      format.json { render json: options.to_json(include: [:title]) }
+    end
+  end
+
+  def only_options
+    options = Option.where(multichoice_id: params[:multichoice_id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: options.to_json(include: [:title]) }
     end
   end
 
@@ -94,7 +103,7 @@ class OptionsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def option_params
-    params.require(:option).permit(:content, :is_correct_answer, :explanation, :multichoice_id)
+    params.require(:option).permit(:title_id, :is_correct_answer, :explanation, :multichoice_id)
   end
 
   # Unchecks other options when updated option is corrent answer
