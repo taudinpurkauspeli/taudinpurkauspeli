@@ -27,14 +27,14 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <div class="checkbox padding-left-20 padding-right-20 multichoice-label padding-top-10">
-                            {{option.content}}
+                            {{option.title.text}}
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group multichoice-explanation">
                     <div class="col-md-12">
-                        <div ta-bind="text" ng-model="option.explanation" class="padding-left-20 padding-right-20 padding-top-10 multichoice-explanation-border">
+                        <div ta-bind="text" ng-model="option.explanation" class="multiline padding-left-20 padding-right-20 padding-top-10 multichoice-explanation-border">
                         </div>
                     </div>
                 </div>
