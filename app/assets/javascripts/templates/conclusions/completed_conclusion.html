@@ -29,7 +29,8 @@
 
                     <div ng-if="hypothesisIsCorrectDiagnosis(correctDiagnosis)" class="padding-bottom-20">Hienoa! Selvitit oikean diagnoosin! </div>
 
-                    <div ta-bind="text" ng-model="correctDiagnosis.explanation" class="padding-bottom-10"></div>
+                    <div ta-bind="text" ng-model="correctDiagnosis.explanation" class="padding-bottom-10" class="multiline"></div>
+                    <div ng-if="!correctDiagnosis.explanation" class="multiline padding-bottom-10">Tälle diffille ei ole asetettu selitystä.</div>
                 </div>
 
             </div>
@@ -54,8 +55,8 @@
 
                         <div ng-if="hypothesisIsCorrectDiagnosis(exerciseHypothesis)" class="padding-bottom-20">Hienoa! Selvitit oikean diagnoosin!</div>
 
-                        <div ta-bind="text" ng-model="exerciseHypothesis.explanation" ng-if="exerciseHypothesis.explanation"></div>
-                        <div ng-if="!exerciseHypothesis.explanation" class="padding-bottom-10">Tälle diffille ei ole asetettu selitystä.</div>
+                        <div ta-bind="text" ng-model="exerciseHypothesis.explanation" ng-if="exerciseHypothesis.explanation" class="multiline"></div>
+                        <div ng-if="!exerciseHypothesis.explanation" class="multiline padding-bottom-10">Tälle diffille ei ole asetettu selitystä.</div>
                     </div>
 
                 </div>

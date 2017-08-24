@@ -140,6 +140,10 @@ app.controller("ExercisesShowController", [
             $state.go("exercises_show.current_task.show", {taskShowId: newTask});
         };
 
+        $scope.getDndType = function(dndTypeAsNumber) {
+          return dndTypeAsNumber.toString();
+        };
+
         $scope.removeCurrentTask = function() {
             LocalStorageService.remove("current_task");
             LocalStorageService.remove("current_task_tab_path");
