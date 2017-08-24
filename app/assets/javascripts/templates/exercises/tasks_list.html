@@ -58,10 +58,10 @@
                              dnd-drop="moveTaskFromLevelToLevel(item, type, tasks[0])"
                              dnd-horizontal-list="true"
                              class="list-unstyled">
-
+{{logType(tasks[0])}}
                             <li ng-repeat="task in tasks[1]"
                                 dnd-draggable="task"
-                                dnd-type="tasks[0]"
+                                dnd-type="getDndType(tasks[0])"
                                 dnd-selected="goToCurrentTask(task.id)"
                                 dnd-effect-allowed="move"
                                 class="multiline center-text margin-left-10 margin-right-10 margin-top-10 margin-bottom-10 padding-top-25 padding-bottom-25 clickable">
