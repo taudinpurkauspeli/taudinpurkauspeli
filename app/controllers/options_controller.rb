@@ -25,11 +25,11 @@ class OptionsController < ApplicationController
   end
 
   def multichoice_index
-    options = Option.where(multichoice_id: params[:multichoice_id]).order(:content)
+    options = Option.where(multichoice_id: params[:multichoice_id]).joins(:title).order('titles.text')
 
     respond_to do |format|
       format.html
-      format.json { render json: options }
+      format.json { render json: options.to_json(include: [:title]) }
     end
   end
 

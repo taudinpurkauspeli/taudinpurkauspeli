@@ -32,7 +32,7 @@
                            <label class="multichoice-label">
                                <input type="checkbox" ng-model="option.checked" value="option.id" ng-if="!subtask.multichoice.is_radio_button">
                                <input type="radio" ng-model="selectedRadiobuttonOption.id" ng-value="{{option.id}}" ng-if="subtask.multichoice.is_radio_button">
-                               {{option.content}}
+                               {{option.title.text}}
                            </label>
                        </div>
                    </div>
@@ -40,7 +40,7 @@
 
                 <div class="form-group multichoice-explanation" ng-if="checkedOptionsContains(option)">
                     <div class="col-md-12">
-                        <div ta-bind="text" ng-model="option.explanation" class="padding-top-10 multichoice-explanation-border"
+                        <div ta-bind="text" ng-model="option.explanation" class="multiline padding-top-10 padding-right-20 multichoice-explanation-border"
                                 ng-class="{'padding-left-40': subtask.multichoice.is_radio_button,
                                            'padding-left-30': !subtask.multichoice.is_radio_button}">
                         </div>
