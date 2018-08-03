@@ -1,20 +1,20 @@
 source 'https://rubygems.org'
-ruby '2.3.0'
+ruby '2.4.0'
 
 gem 'rb-readline'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.0'
+gem 'rails'
 
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
@@ -23,9 +23,9 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', group: :doc
 
 # Twitter Boostrap
 #gem 'bootstrap-sass'
@@ -37,14 +37,14 @@ gem "non-stupid-digest-assets"
 gem 'rails-html-sanitizer'
 
 # Password encryption
-#gem 'bcrypt-ruby', '~> 3.1.2'
+#gem 'bcrypt-ruby'
 
 # Use ActiveModel has_secure_password
- gem 'bcrypt', '~> 3.1.7'
+ gem 'bcrypt'
 
 # Paperclip for image use
 gem 'paperclip'
-gem 'aws-sdk', '< 2.0'
+gem 'aws-sdk'
 
 # Cloning gem
 gem 'amoeba'
@@ -60,7 +60,7 @@ gem 'bower-rails'
 
 # Angular html-files to Assets Pipeline
 gem "angular-rails-templates"
-gem "sprockets", "~> 2.0"
+gem "sprockets"
 
 group :test do
   
@@ -93,8 +93,8 @@ group :development do
   #Automating deployments with Capistrano
 
   gem 'capistrano'
-  gem 'capistrano-bundler', '>= 1.1.0'
-  gem 'capistrano-passenger', '>= 0.1.1'
+  gem 'capistrano-bundler'
+  gem 'capistrano-passenger'
 
   # Remove the following if your app does not use Rails
   gem 'capistrano-rails'
@@ -103,14 +103,14 @@ group :development do
   gem 'capistrano-rvm'
   
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
 end
 
 
 group :development, :test do
 
   # RSpec for testing
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails'
 
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
