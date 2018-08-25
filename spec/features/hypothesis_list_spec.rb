@@ -106,7 +106,6 @@ describe "Hypothesis list page", js:true do
 
       it "remove hypotheses from an exercise" do
         wait_and_trigger_click("Virustauti")
-        wait_for_ckeditor("exercise_hypothesis_explanation_1")
         wait_and_trigger_click("remove_from_case_1")
 
         expect(ExerciseHypothesis.count).to eq(0)
@@ -114,9 +113,8 @@ describe "Hypothesis list page", js:true do
 
       it "edit the explanation of a hypothesis added to an exercise" do
         wait_and_trigger_click("Virustauti")
-        wait_for_ckeditor("exercise_hypothesis_explanation_1")
 
-        fill_in_ckeditor 'exercise_hypothesis_explanation_1', with: 'Virus ei olekaan bakteeritauti'
+        fill_in('exercise_hypothesis_explanation_1', with: 'Virus ei olekaan bakteeritauti')
 
         wait_and_trigger_click("update_exercise_hypothesis_1")
         expect(ExerciseHypothesis.first.explanation).to eq("<p>Virus ei olekaan bakteeritauti</p>\r\n")
@@ -125,7 +123,6 @@ describe "Hypothesis list page", js:true do
       it "add prerequisite task to a hypothesis added to an exercise" do
 
         wait_and_trigger_click("Virustauti")
-        wait_for_ckeditor("exercise_hypothesis_explanation_1")
 
         select('Asiakkaan soitto', from:'exercise_hypothesis[task_id]')
 

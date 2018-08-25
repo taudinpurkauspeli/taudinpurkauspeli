@@ -12,12 +12,12 @@ end
 
 Given(/^I fill in all the fields with correct input values$/) do
   fill_in('exercise_name', with: 'Lihanautakuolemat')
-  fill_in_ckeditor 'exercise_anamnesis', with: 'Nauta on koullut'
+  fill_in('exercise_anamnesis', with: 'Nauta on koullut')
 end
 
 Given(/^I do not fill in all the fields with correct input values$/) do
   fill_in('exercise_name', with: '')
-  fill_in_ckeditor 'exercise_anamnesis', with: 'Nauta on koullut'
+  fill_in('exercise_anamnesis', with: 'Nauta on koullut')
 end
 
 When(/^I press the button "(.*?)"$/) do |arg1|

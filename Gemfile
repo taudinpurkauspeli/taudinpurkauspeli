@@ -24,7 +24,6 @@ gem 'jbuilder'
 gem 'sdoc', group: :doc
 
 # Text editor
-gem 'ckeditor', github: 'Eepa/ckeditor'
 gem 'responders'
 gem "non-stupid-digest-assets"
 gem 'rails-html-sanitizer'
@@ -35,7 +34,6 @@ gem 'bcrypt'
 
 # Paperclip for image use
 gem 'paperclip'
-gem 'aws-sdk'
 
 # Cloning gem
 gem 'amoeba'

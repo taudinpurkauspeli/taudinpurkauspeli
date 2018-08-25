@@ -1,4 +1,4 @@
-class AddDefaultBanks < ActiveRecord::Migration
+class AddDefaultBanks < ActiveRecord::Migration[5.1]
   def change
 
     Bank.create name:"Yleispankki"

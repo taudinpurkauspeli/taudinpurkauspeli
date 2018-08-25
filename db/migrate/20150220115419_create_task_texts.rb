@@ -1,4 +1,4 @@
-class CreateTaskTexts < ActiveRecord::Migration
+class CreateTaskTexts < ActiveRecord::Migration[5.1]
   def change
     create_table :task_texts do |t|
       t.string :content

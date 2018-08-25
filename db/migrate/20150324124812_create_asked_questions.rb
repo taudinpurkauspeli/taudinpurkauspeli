@@ -1,4 +1,4 @@
-class CreateAskedQuestions < ActiveRecord::Migration
+class CreateAskedQuestions < ActiveRecord::Migration[5.1]
   def change
     create_table :asked_questions do |t|
       t.integer :user_id

@@ -1,4 +1,4 @@
-class CreateCompletedSubtasks < ActiveRecord::Migration
+class CreateCompletedSubtasks < ActiveRecord::Migration[5.1]
   def change
     create_table :completed_subtasks do |t|
       t.integer :subtask_id
