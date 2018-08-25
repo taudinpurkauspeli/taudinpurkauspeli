@@ -1,7 +1,7 @@
 language: ruby
 cache: bundler
 sudo: false
-rvm: 2.2.0
+rvm: 2.5.1
 
 gemfile:
   - Gemfile
