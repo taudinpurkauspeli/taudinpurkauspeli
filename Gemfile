@@ -6,11 +6,8 @@ gem 'rb-readline'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 
-# Use sqlite3 as the database for Active Record
-# gem 'sqlite3'
-
 # Use SCSS for stylesheets
-gem 'sass-rails'
+gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
@@ -20,15 +17,11 @@ gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-#gem 'turbolinks'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', group: :doc
-
-# Twitter Boostrap
-#gem 'bootstrap-sass'
 
 # Text editor
 gem 'ckeditor', github: 'Eepa/ckeditor'
@@ -36,11 +29,9 @@ gem 'responders'
 gem "non-stupid-digest-assets"
 gem 'rails-html-sanitizer'
 
-# Password encryption
-#gem 'bcrypt-ruby'
 
 # Use ActiveModel has_secure_password
- gem 'bcrypt'
+gem 'bcrypt'
 
 # Paperclip for image use
 gem 'paperclip'
@@ -51,12 +42,6 @@ gem 'amoeba'
 
 # Bower for Angular dependency management
 gem 'bower-rails'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 # Angular html-files to Assets Pipeline
 gem "angular-rails-templates"
@@ -81,14 +66,9 @@ group :test do
 end
 
 group :development do
-  # For Bootstrap
-  #gem 'rails_layout'
 
   # For creating a seed from database
   gem 'seed_dump'
-
-  # For showing speed/database queries
- # gem 'rack-mini-profiler'
 
   #Automating deployments with Capistrano
 
