@@ -5,6 +5,10 @@ class Conclusion < ActiveRecord::Base
 	belongs_to :exercise_hypothesis
 	has_one :task, through: :subtask
 
+	amoeba do
+		enable
+	end
+
 	def user_answered_correctly?(user, final_conclusion)
 		if exercise_hypothesis
 			if final_conclusion.to_i == exercise_hypothesis.id

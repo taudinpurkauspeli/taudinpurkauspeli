@@ -70,7 +70,7 @@ class TasksController < ApplicationController
   end
 
   def task_names
-    task_names = Task.uniq.order(:name).pluck(:name)
+    task_names = Task.order(:name).pluck(:name).uniq
 
     respond_to do |format|
       format.html
