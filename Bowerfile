@@ -1,4 +1,4 @@
-asset 'angular', '~> 1.6'
+asset 'angular', '~> 1.7'
 asset 'bootstrap-sass-official'
 asset 'angular-resource'
 asset 'angular-messages'

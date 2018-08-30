@@ -1,7 +1,7 @@
 {
   "name": "dsl-generated-dependencies",
   "dependencies": {
-    "angular": "~> 1.6",
+    "angular": "~> 1.7",
     "bootstrap-sass-official": "latest",
     "angular-resource": "latest",
     "angular-messages": "latest",

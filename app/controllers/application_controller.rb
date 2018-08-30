@@ -3,7 +3,7 @@ require "application_responder"
 class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
   respond_to :html, :json
-  around_action :log_request, if: :current_user_is_student_in_production
+  around_action :log_request, if: :current_user_is_student_in_production_and_accepted_academic_research
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -99,10 +99,10 @@ class ApplicationController < ActionController::Base
 
   end
 
-  def current_user_is_student_in_production
+  def current_user_is_student_in_production_and_accepted_academic_research
     if Rails.env.production?
       user = current_user
-      if  user.nil? || user.admin || Rails.env.test?
+      if  user.nil? || user.admin || !user.accept_academic_research || Rails.env.test?
         return false
       end
       return true
