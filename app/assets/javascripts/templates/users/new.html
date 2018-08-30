@@ -15,7 +15,7 @@
 
         <label for="new_username" class="col-md-2 control-label">Käyttäjätunnus</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="text"
                    class="form-control center-text"
                    required pattern=".{3,}"
@@ -30,7 +30,7 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
 
@@ -42,7 +42,7 @@
 
         <label for="new_password" class="col-md-2 control-label">Salasana</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="password" class="form-control center-text"
                    required
                    name="new_password"
@@ -55,7 +55,7 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
 
@@ -67,7 +67,7 @@
 
         <label for="password_confirmation" class="col-md-2 control-label">Salasanan vahvistus</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="password" class="form-control center-text"
                    required match="newUser.password"
                    name="password_confirmation"
@@ -81,7 +81,7 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
 
@@ -93,7 +93,7 @@
 
         <label for="first_name" class="col-md-2 control-label">Etunimi</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="text"
                    class="form-control center-text"
                    required pattern=".{3,}"
@@ -108,7 +108,7 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
 
@@ -120,14 +120,14 @@
 
         <label for="last_name" class="col-md-2 control-label">Sukunimi</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="text"
-            class="form-control center-text"
-            required pattern=".{3,}"
-            name="last_name"
-            id="last_name"
-            placeholder="Sukunimi"
-            ng-model="newUser.last_name">
+                   class="form-control center-text"
+                   required pattern=".{3,}"
+                   name="last_name"
+                   id="last_name"
+                   placeholder="Sukunimi"
+                   ng-model="newUser.last_name">
 
             <p class="help-block" ng-messages="createUserForm.last_name.$error" ng-if="!createUserForm.last_name.$pristine">
                 <span ng-message="required">Sukunimi on pakollinen</span>
@@ -135,7 +135,7 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
 
@@ -147,7 +147,7 @@
 
         <label for="student_number" class="col-md-2 control-label">Opiskelijanumero</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="text"
                    class="form-control center-text"
                    required pattern="^\d{9}$"
@@ -162,7 +162,7 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
     <div class="form-group has-feedback"
@@ -173,7 +173,7 @@
 
         <label for="email" class="col-md-2 control-label">Sähköposti</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="text"
                    required
                    class="form-control center-text"
@@ -187,7 +187,7 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
     <div class="form-group has-feedback"
@@ -198,7 +198,7 @@
 
         <label for="starting_year" class="col-md-2 control-label">Epidemiologian kurssin aloitusvuosi</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
 
             <select ng-model="newUser.starting_year"
                     class="form-control"
@@ -212,8 +212,67 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
+
+    <div class="row padding-top-20">
+        <div class="col-md-3"></div>
+        <div class="col-md-7">
+            <h3>MikroEpin pelien käyttöehdot</h3>
+
+            <p>
+                MikroEpin pelit (Bakteerien tunnistuspeli, Taudinpurkauspeli ja HarMa) ovat Helsingin yliopiston
+                eläinlääketieteellisen tiedekunnan tiettyjen kurssien suorittamiseen käytettäviä digitaalisia oppimispelejä.
+                Näitä kutsutaan myöhemmin tekstissä sanalla palvelut.
+            </p>
+
+            <h3>Käyttäjien tietosuoja</h3>
+
+            <p>
+                Rekisteröitymällä näissä käyttöehdoissa mainittuihin palveluihin hyväksyt palvelun käytön kannalta
+                tarpeellisen tiedon tallentamisen ja käsittelyn tietosuojaselosteemme mukaisessa muodossa.
+                Henkilötiedon ylläpitämisessä noudatetaan henkilötietolakia, emmekä kerää pelaamisen ja pelaajan
+                opintosuorituksen kirjaamisen kannalta tarpeellisen tiedon lisäksi ylimääräistä henkilötietoa. Pelien
+                pelaamisesta syntyvien henkilörekisterien avulla kurssien vastuuopettajat pystyvät antamaan
+                suorituksia. Edellä mainittua tarkoitusta varten tietoja säilytetään Yliopistolain (24.7.2009/558) 44
+                §:n mukaan vähintään kuuden kuukauden ajan tulosten julkistamisesta. Jos peleistä tehdään
+                akateemista tutkimusta, kun opiskelijalta on saatu siihen lupa, tietoja säilytetään tutkimukseen
+                tarvittava aika. Voit lukea lisää tietosuojasta palveluiden
+                <a href="https://tautiset-pelit.it.helsinki.fi/images/TietosuojaselosteMikroEpinPelisuoritusrekisteri.pdf">Tietosuojaselosteesta</a>.
+            </p>
+
+            <h3>Tekijänoikeudet</h3>
+
+            <p>
+                Palvelun materiaalin, kuten tehtävien ja niihin liittyvien kuvien tekijänoikeudet kuuluvat Helsingin
+                yliopistolle tai materiaalin tuottaneille henkilöille, ellei toisin mainita.
+                Tiedon ajantasaisuus ja lainmukaisuus
+                Käyttäjä vastaa ilmoittamiensa tietojen oikeellisuudesta (tietojen päivittäminen onnistuu suoraan
+                palvelusta käsin). Opintosuoritukset kirjataan palveluun ilmoitettujen tietojen pohjalta, eikä HY ole
+                vastuussa väärin ilmoitettujen henkilötietojen johdosta kirjaamatta jääneistä opintosuorituksista.
+            </p>
+
+            <h3>Voimassaolo ja sovellettava laki</h3>
+
+            <p>
+                Nämä ehdot tulevat voimaan käyttäjän hyväksyessä käyttöehdot palveluun rekisteröitymisen yhteydessä.
+                Käyttäjä voi milloin tahansa lopettaa palveluiden käytön poistamalla käyttäjätilinsä palvelusta (tai
+                pyytämällä tätä palveluiden vastuuopettajilta).
+                Palveluihin sekä näihin käyttöehtoihin sovelletaan Suomen lakia.
+            </p>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+    <div class="row padding-top-20">
+        <div class="col-md-3"></div>
+        <div class="col-md-7 center-text">
+            <a href="https://tautiset-pelit.it.helsinki.fi/images/TietosuojaselosteMikroEpinPelisuoritusrekisteri.pdf">Tietosuojaseloste</a> |
+            <a href="https://tautiset-pelit.it.helsinki.fi/images/TietosuojailmoitusMikroEpinPelisuoritusrekisteri.pdf">Tietosuojailmoitus</a>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
 
     <div class="form-group has-feedback"
          ng-class="{'has-error': createUserForm.accept_licence_agreement.$invalid && createUserForm.accept_licence_agreement.$dirty,
@@ -223,7 +282,7 @@
 
         <label for="accept_licence_agreement" class="col-md-2 control-label">Hyväksyn käyttöehdot</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
 
             <input type="checkbox"
                    ng-model="newUser.accept_licence_agreement"
@@ -237,7 +296,7 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
     <div class="form-group has-feedback">
@@ -246,7 +305,7 @@
 
         <label for="accept_academic_research" class="col-md-2 control-label">Hyväksyn pelihistoriani käyttämisen tutkimukseen</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
 
             <input type="checkbox"
                    ng-model="newUser.accept_academic_research"
@@ -255,7 +314,7 @@
                    class="big-checkbox">
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
     <div class="form-group">
