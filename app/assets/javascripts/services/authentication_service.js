@@ -53,6 +53,14 @@ app.factory('AuthenticationService', [
             return Session.userTester() === 'true';
         };
 
+        authService.hasAcceptedLicenceAgreement = function() {
+            return Session.userAcceptLicenceAgreement() === 'true';
+        };
+
+        authService.hasAcceptedAcademicResearch = function() {
+            return Session.userAcceptAcademicResearch() === 'true';
+        };
+
         return authService;
     }
 ]);
