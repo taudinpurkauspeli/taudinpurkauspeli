@@ -8,23 +8,23 @@
 
 <form class="form-horizontal" novalidate name="createUserForm">
     <div class="form-group has-feedback"
-         ng-class="{'has-error': createUserForm.username.$invalid && createUserForm.username.$dirty,
-                    'has-success': createUserForm.username.$valid && createUserForm.username.$touched}">
+         ng-class="{'has-error': createUserForm.new_username.$invalid && createUserForm.new_username.$dirty,
+                    'has-success': createUserForm.new_username.$valid && createUserForm.new_username.$touched}">
 
         <div class="col-md-1"></div>
 
-        <label for="username" class="col-md-2 control-label">Käyttäjätunnus</label>
+        <label for="new_username" class="col-md-2 control-label">Käyttäjätunnus</label>
 
         <div class="col-md-6">
             <input type="text"
                    class="form-control center-text"
                    required pattern=".{3,}"
-                   name="username"
-                   id="username"
+                   name="new_username"
+                   id="new_username"
                    placeholder="Käyttäjätunnus"
                    ng-model="newUser.username">
 
-            <p class="help-block" ng-messages="createUserForm.username.$error" ng-if="!createUserForm.username.$pristine">
+            <p class="help-block" ng-messages="createUserForm.new_username.$error" ng-if="!createUserForm.new_username.$pristine">
                 <span ng-message="required">Käyttäjätunnus on pakollinen</span>
                 <span ng-message="pattern">Käyttäjätunnuksessa on oltava vähintään 3 merkkiä</span>
             </p>
@@ -35,22 +35,22 @@
 
 
     <div class="form-group has-feedback"
-         ng-class="{'has-error': createUserForm.password.$invalid && createUserForm.password.$dirty,
-                    'has-success': createUserForm.password.$valid && createUserForm.password.$touched}">
+         ng-class="{'has-error': createUserForm.new_password.$invalid && createUserForm.new_password.$dirty,
+                    'has-success': createUserForm.new_password.$valid && createUserForm.new_password.$touched}">
 
         <div class="col-md-1"></div>
 
-        <label for="password" class="col-md-2 control-label">Salasana</label>
+        <label for="new_password" class="col-md-2 control-label">Salasana</label>
 
         <div class="col-md-6">
             <input type="password" class="form-control center-text"
                    required
-                   name="password"
-                   id="password"
+                   name="new_password"
+                   id="new_password"
                    placeholder="Salasana"
                    ng-model="newUser.password">
 
-            <p class="help-block" ng-messages="createUserForm.password.$error" ng-if="!createUserForm.password.$pristine">
+            <p class="help-block" ng-messages="createUserForm.new_password.$error" ng-if="!createUserForm.new_password.$pristine">
                 <span ng-message="required">Salasana on pakollinen</span>
             </p>
         </div>
@@ -221,7 +221,7 @@
 
         <div class="col-md-1"></div>
 
-        <label for="starting_year" class="col-md-2 control-label">Hyväksyn käyttöehdot</label>
+        <label for="accept_licence_agreement" class="col-md-2 control-label">Hyväksyn käyttöehdot</label>
 
         <div class="col-md-6">
 
@@ -229,12 +229,30 @@
                    ng-model="newUser.accept_licence_agreement"
                    name="accept_licence_agreement"
                    id="accept_licence_agreement"
-                   class="form-control"
+                   class="big-checkbox"
                    required>
 
             <p class="help-block" ng-messages="createUserForm.accept_licence_agreement.$error" ng-if="!createUserForm.accept_licence_agreement.$pristine">
                 <span ng-message="required">Voidaksesi käyttää palvelua sinun on hyväksyttävä käyttöehdot</span>
             </p>
+        </div>
+
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="form-group has-feedback">
+
+        <div class="col-md-1"></div>
+
+        <label for="accept_academic_research" class="col-md-2 control-label">Hyväksyn pelihistoriani käyttämisen tutkimukseen</label>
+
+        <div class="col-md-6">
+
+            <input type="checkbox"
+                   ng-model="newUser.accept_academic_research"
+                   name="accept_academic_research"
+                   id="accept_academic_research"
+                   class="big-checkbox">
         </div>
 
         <div class="col-md-3"></div>
