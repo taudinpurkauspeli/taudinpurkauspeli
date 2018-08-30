@@ -21,7 +21,7 @@
 
           <%= f.text_area :content, placeholder: "Vaihtoehto", :class => 'form-control' %><br>
 
-          <%= f.cktext_area :explanation, placeholder: "Vastausteksti", :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %>
+          <%= f.text_area :explanation, placeholder: "Vastausteksti", :class => 'form-control' %>
 
         </div>
         <%= f.hidden_field :multichoice_id, :value => @multichoice.id %>

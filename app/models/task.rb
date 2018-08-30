@@ -14,6 +14,11 @@ class Task < ActiveRecord::Base
   amoeba do
     enable
     include_association :subtasks
+    customize(lambda { |original_task,new_task|
+      if original_task.name == "Anamneesi"
+        new_task.name = "Anamneesi (tekninen kopio)"
+      end
+    })
   end
 
   def self.get_highest_level(exercise)

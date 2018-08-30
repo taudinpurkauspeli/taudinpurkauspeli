@@ -1,4 +1,4 @@
-class RemoveRealnameFromUsers < ActiveRecord::Migration
+class RemoveRealnameFromUsers < ActiveRecord::Migration[5.1]
   def change
     remove_column :users, :realname, :string
   end

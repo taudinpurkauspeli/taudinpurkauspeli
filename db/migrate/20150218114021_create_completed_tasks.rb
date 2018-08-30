@@ -1,4 +1,4 @@
-class CreateCompletedTasks < ActiveRecord::Migration
+class CreateCompletedTasks < ActiveRecord::Migration[5.1]
   def change
     create_table :completed_tasks do |t|
       t.integer :user_id

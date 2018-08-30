@@ -1,4 +1,4 @@
-class ChangeQuestionRequiredTypeToInteger < ActiveRecord::Migration
+class ChangeQuestionRequiredTypeToInteger < ActiveRecord::Migration[5.1]
 
   def self.up
     rename_column :questions, :required, :required_boolean
