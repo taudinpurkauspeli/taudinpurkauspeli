@@ -43,13 +43,21 @@ app.controller('AuthenticationController', [
         };
 
         $scope.checkAgreements = function() {
-            console.log("Checking agreements");
             if ($scope.currentUser && !$scope.currentUserAcceptLicenceAgreement){
+                var user = {
+                    id: AuthenticationService.isLoggedIn(),
+                    accept_licence_agreement: AuthenticationService.hasAcceptedLicenceAgreement(),
+                    accept_academic_research: AuthenticationService.hasAcceptedAcademicResearch()
+                };
+
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'users/update_agreement_modal.html',
                     controller: 'UpdateAgreementModalController',
-                    size: 'lg'
+                    size: 'lg',
+                    resolve: {
+                        user: user
+                    }
                 });
 
                 modalInstance.result.then(function() {
