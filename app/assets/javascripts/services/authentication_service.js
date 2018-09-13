@@ -61,6 +61,10 @@ app.factory('AuthenticationService', [
             return Session.userAcceptAcademicResearch() === 'true';
         };
 
+        authService.hasAcceptedAcademicUse = function() {
+            return Session.userAcceptAcademicUse() === 'true';
+        };
+
         return authService;
     }
 ]);

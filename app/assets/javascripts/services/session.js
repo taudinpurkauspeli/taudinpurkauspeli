@@ -9,6 +9,7 @@ app.service('Session', [
             LocalStorageService.set("current_user_tester", user.tester);
             LocalStorageService.set("current_user_accept_licence_agreement", user.accept_licence_agreement);
             LocalStorageService.set("current_user_accept_academic_research", user.accept_academic_research);
+            LocalStorageService.set("current_user_accept_academic_use", user.accept_academic_use);
         };
 
         this.userId = function() {
@@ -31,12 +32,17 @@ app.service('Session', [
             return LocalStorageService.get("current_user_accept_academic_research", null);
         };
 
+        this.userAcceptAcademicUse = function() {
+            return LocalStorageService.get("current_user_accept_academic_use", null);
+        };
+
         this.destroy = function() {
             LocalStorageService.remove("current_user_id");
             LocalStorageService.remove("current_user_admin");
             LocalStorageService.remove("current_user_tester");
             LocalStorageService.remove("current_user_accept_licence_agreement");
             LocalStorageService.remove("current_user_accept_academic_research");
+            LocalStorageService.remove("current_user_accept_academic_use");
             LocalStorageService.remove("current_task");
             LocalStorageService.remove("current_task_tab_path");
         };
