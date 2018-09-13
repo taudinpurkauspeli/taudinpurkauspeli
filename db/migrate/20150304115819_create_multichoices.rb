@@ -1,4 +1,4 @@
-class CreateMultichoices < ActiveRecord::Migration
+class CreateMultichoices < ActiveRecord::Migration[5.1]
   def change
     create_table :multichoices do |t|
       t.string :question

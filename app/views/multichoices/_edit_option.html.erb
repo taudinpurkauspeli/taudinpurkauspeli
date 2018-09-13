@@ -25,7 +25,7 @@
 							<%= f.text_area :content, placeholder: "Vaihtoehto", :id => "option_content_" + option.id.to_s, :class => 'form-control' %><br>
 
 							<%= f.label "Seliteteksti"%><br>
-							<%= f.cktext_area :explanation, placeholder: "Vastausteksti", :id => "option_explanation_" + option.id.to_s, :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %><br>
+							<%= f.text_area :explanation, placeholder: "Vastausteksti", :id => "option_explanation_" + option.id.to_s, :class => 'form-control' %><br>
 						</div>
 					</div>
 				</div>

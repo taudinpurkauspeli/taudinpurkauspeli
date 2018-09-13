@@ -1,4 +1,4 @@
-class CreateConclusions < ActiveRecord::Migration
+class CreateConclusions < ActiveRecord::Migration[5.1]
   def change
     create_table :conclusions do |t|
       t.string :title

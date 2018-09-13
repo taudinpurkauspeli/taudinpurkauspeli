@@ -20,7 +20,7 @@
 
               <%= f.text_area :title, placeholder: "Vaihtoehto", :class => 'form-control' %><br>
 
-              <%= f.cktext_area :content, placeholder: "Vastausteksti", :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %>
+              <%= f.text_area :content, placeholder: "Vastausteksti", :class => 'form-control', :height => 200 %>
               <br>
               <%= f.fields_for :question_group, @new_question.question_group do |q_g| %>
                   <%= q_g.text_area :title, placeholder: "Kysymysryhmä", :class => 'form-control' %><br>

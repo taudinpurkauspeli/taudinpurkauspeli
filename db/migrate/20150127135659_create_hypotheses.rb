@@ -1,4 +1,4 @@
-class CreateHypotheses < ActiveRecord::Migration
+class CreateHypotheses < ActiveRecord::Migration[5.1]
   def change
     create_table :hypotheses do |t|
       t.string :name

@@ -6,6 +6,12 @@
 
 var app = angular.module('diagnoseDiseases');
 
+
+// Fix for TextAngular still using angular.lowercase function while it is deprecated in AngularJS 1.7
+app.config(function() {
+    angular.lowercase = angular.$$lowercase;
+});
+
 app.config([
     '$stateProvider', '$urlRouterProvider',
     function ($stateProvider, $urlRouterProvider) {

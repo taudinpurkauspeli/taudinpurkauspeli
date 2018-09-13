@@ -28,8 +28,7 @@ describe "New Conclusion page", js:true do
       it "with all fields filled in" do
 
         fill_in('conclusion_title', with: "Diagnoositoimenpide")
-        wait_for_ckeditor("conclusion_content")
-        fill_in_ckeditor 'conclusion_content', with: 'Valitse oikea diagnoosi!'
+        fill_in('conclusion_content', with: 'Valitse oikea diagnoosi!')
 
         select('Virustauti', from:'conclusion[exercise_hypothesis_id]')
 
@@ -49,8 +48,7 @@ describe "New Conclusion page", js:true do
       it "without a right exercise hypothesis" do
 
         fill_in('conclusion_title', with: "Diagnoositoimenpide")
-        wait_for_ckeditor("conclusion_content")
-        fill_in_ckeditor 'conclusion_content', with: 'Valitse oikea diagnoosi!'
+        fill_in('conclusion_content', with: 'Valitse oikea diagnoosi!')
 
         expect{
           wait_and_trigger_click('Tallenna')
@@ -89,8 +87,7 @@ describe "New Conclusion page", js:true do
       it "without a title" do
 
         select('Virustauti', from:'conclusion[exercise_hypothesis_id]')
-        wait_for_ckeditor("conclusion_content")
-        fill_in_ckeditor 'conclusion_content', with: 'Valitse oikea diagnoosi!'
+        fill_in('conclusion_content', with: 'Valitse oikea diagnoosi!')
 
         expect{
           wait_and_trigger_click('Tallenna')
@@ -109,8 +106,7 @@ describe "New Conclusion page", js:true do
       before :each do
 
         fill_in('conclusion_title', with: "Diagnoositoimenpide")
-        wait_for_ckeditor("conclusion_content")
-        fill_in_ckeditor 'conclusion_content', with: 'Valitse oikea diagnoosi!'
+        fill_in('conclusion_content', with: 'Valitse oikea diagnoosi!')
 
         select('Virustauti', from:'conclusion[exercise_hypothesis_id]')
 
@@ -157,8 +153,7 @@ describe "New Conclusion page", js:true do
           end
 
           it "the contents of conclusion" do
-            wait_for_ckeditor("conclusion_content")
-            fill_in_ckeditor 'conclusion_content', with: 'Diagnoosin valinta!'
+            fill_in('conclusion_content', with: 'Diagnoosin valinta!')
             wait_and_trigger_click('Tallenna')
             expect(page).to have_content 'Diagnoositoimenpide päivitettiin onnistuneesti!'
             expect(Task.where(level:1...999).first.conclusions.first.content).to eq("<p>Diagnoosin valinta!</p>\r\n")

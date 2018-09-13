@@ -1,4 +1,4 @@
-class ChangeOptionIsCorrectAnswerTypeToInteger < ActiveRecord::Migration
+class ChangeOptionIsCorrectAnswerTypeToInteger < ActiveRecord::Migration[5.1]
   def self.up
     rename_column :options, :is_correct_answer, :is_correct_answer_boolean
     add_column :options, :is_correct_answer, :integer

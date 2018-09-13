@@ -71,7 +71,6 @@ When(/^I save changes with button "(.*?)"$/) do |arg1|
 end
 
 When(/^I click on the delete button "(.*?)"$/) do |arg1|
-  wait_for_ckeditor("exercise_hypothesis_explanation_2")
   wait_and_trigger_click("remove_from_case_2")
 end
 
@@ -88,12 +87,10 @@ When(/^I fill in the hypothesis group name field with a correct name$/) do
 end
 
 When(/^I fill in the explanation field$/) do
-  wait_for_ckeditor("exercise_hypothesis_explanation_2")
-  fill_in_ckeditor 'exercise_hypothesis_explanation_2', with: 'Hevosen hauraat luut'
+  fill_in('exercise_hypothesis_explanation_2', with: 'Hevosen hauraat luut')
 end
 
 When(/^I change the prerequisite task$/) do
-  wait_for_ckeditor("exercise_hypothesis_explanation_2")
   select('Soita lääkärille', from:'exercise_hypothesis[task_id]')
 end
 

@@ -13,8 +13,7 @@ describe "New Exercise page", js:true do
 
 		it "should be able to create a new exercise" do
 			fill_in('exercise_name', with: "Broilerimysteeri")
-			wait_for_ckeditor("exercise_anamnesis")
-			fill_in_ckeditor 'exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??'
+			fill_in('exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??')
 
 			expect{
 				click_and_wait('Tallenna')
@@ -27,8 +26,7 @@ describe "New Exercise page", js:true do
 
 		it "should not be able to create a new exercise without a name" do
 			fill_in('exercise_name', with: "")
-			wait_for_ckeditor("exercise_anamnesis")
-			fill_in_ckeditor 'exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??'
+			fill_in('exercise_anamnesis', with: 'Mitä kanoille on tapahtunut??')
 
 			expect{
 				wait_and_trigger_click('Tallenna')

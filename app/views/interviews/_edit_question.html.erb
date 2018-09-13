@@ -25,7 +25,7 @@
                 <%= f.text_area :title, placeholder: "Vaihtoehto", :id => "question_title_" + question.id.to_s, :class => 'form-control' %><br>
 
                 <%= f.label "Seliteteksti"%><br>
-                <%= f.cktext_area :content, placeholder: "Vastausteksti", :id => "question_content_" + question.id.to_s, :class => 'form-control', :ckeditor => {:toolbar => 'minimalist', :height => 200} %><br>
+                <%= f.text_area :content, placeholder: "Vastausteksti", :id => "question_content_" + question.id.to_s, :class => 'form-control' %><br>
 
                 <% if question.question_group.nil? %>
                     <%= f.fields_for :question_group, question.init_new_question_group do |q_g| %>

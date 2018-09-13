@@ -1,4 +1,4 @@
-class CreateExerciseHypotheses < ActiveRecord::Migration
+class CreateExerciseHypotheses < ActiveRecord::Migration[5.1]
   def change
     create_table :exercise_hypotheses do |t|
       t.integer :exercise_id

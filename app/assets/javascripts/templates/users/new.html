@@ -8,54 +8,54 @@
 
 <form class="form-horizontal" novalidate name="createUserForm">
     <div class="form-group has-feedback"
-         ng-class="{'has-error': createUserForm.username.$invalid && createUserForm.username.$dirty,
-                    'has-success': createUserForm.username.$valid && createUserForm.username.$touched}">
+         ng-class="{'has-error': createUserForm.new_username.$invalid && createUserForm.new_username.$dirty,
+                    'has-success': createUserForm.new_username.$valid && createUserForm.new_username.$touched}">
 
         <div class="col-md-1"></div>
 
-        <label for="username" class="col-md-2 control-label">Käyttäjätunnus</label>
+        <label for="new_username" class="col-md-2 control-label">Käyttäjätunnus</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="text"
                    class="form-control center-text"
                    required pattern=".{3,}"
-                   name="username"
-                   id="username"
+                   name="new_username"
+                   id="new_username"
                    placeholder="Käyttäjätunnus"
                    ng-model="newUser.username">
 
-            <p class="help-block" ng-messages="createUserForm.username.$error" ng-if="!createUserForm.username.$pristine">
+            <p class="help-block" ng-messages="createUserForm.new_username.$error" ng-if="!createUserForm.new_username.$pristine">
                 <span ng-message="required">Käyttäjätunnus on pakollinen</span>
                 <span ng-message="pattern">Käyttäjätunnuksessa on oltava vähintään 3 merkkiä</span>
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
 
     <div class="form-group has-feedback"
-         ng-class="{'has-error': createUserForm.password.$invalid && createUserForm.password.$dirty,
-                    'has-success': createUserForm.password.$valid && createUserForm.password.$touched}">
+         ng-class="{'has-error': createUserForm.new_password.$invalid && createUserForm.new_password.$dirty,
+                    'has-success': createUserForm.new_password.$valid && createUserForm.new_password.$touched}">
 
         <div class="col-md-1"></div>
 
-        <label for="password" class="col-md-2 control-label">Salasana</label>
+        <label for="new_password" class="col-md-2 control-label">Salasana</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="password" class="form-control center-text"
                    required
-                   name="password"
-                   id="password"
+                   name="new_password"
+                   id="new_password"
                    placeholder="Salasana"
                    ng-model="newUser.password">
 
-            <p class="help-block" ng-messages="createUserForm.password.$error" ng-if="!createUserForm.password.$pristine">
+            <p class="help-block" ng-messages="createUserForm.new_password.$error" ng-if="!createUserForm.new_password.$pristine">
                 <span ng-message="required">Salasana on pakollinen</span>
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
 
@@ -67,7 +67,7 @@
 
         <label for="password_confirmation" class="col-md-2 control-label">Salasanan vahvistus</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="password" class="form-control center-text"
                    required match="newUser.password"
                    name="password_confirmation"
@@ -81,7 +81,7 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
 
@@ -93,7 +93,7 @@
 
         <label for="first_name" class="col-md-2 control-label">Etunimi</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="text"
                    class="form-control center-text"
                    required pattern=".{3,}"
@@ -108,7 +108,7 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
 
@@ -120,14 +120,14 @@
 
         <label for="last_name" class="col-md-2 control-label">Sukunimi</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="text"
-            class="form-control center-text"
-            required pattern=".{3,}"
-            name="last_name"
-            id="last_name"
-            placeholder="Sukunimi"
-            ng-model="newUser.last_name">
+                   class="form-control center-text"
+                   required pattern=".{3,}"
+                   name="last_name"
+                   id="last_name"
+                   placeholder="Sukunimi"
+                   ng-model="newUser.last_name">
 
             <p class="help-block" ng-messages="createUserForm.last_name.$error" ng-if="!createUserForm.last_name.$pristine">
                 <span ng-message="required">Sukunimi on pakollinen</span>
@@ -135,7 +135,7 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
 
@@ -147,7 +147,7 @@
 
         <label for="student_number" class="col-md-2 control-label">Opiskelijanumero</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="text"
                    class="form-control center-text"
                    required pattern="^\d{9}$"
@@ -162,7 +162,7 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
     <div class="form-group has-feedback"
@@ -173,7 +173,7 @@
 
         <label for="email" class="col-md-2 control-label">Sähköposti</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <input type="text"
                    required
                    class="form-control center-text"
@@ -187,7 +187,7 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
     <div class="form-group has-feedback"
@@ -198,7 +198,7 @@
 
         <label for="starting_year" class="col-md-2 control-label">Epidemiologian kurssin aloitusvuosi</label>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
 
             <select ng-model="newUser.starting_year"
                     class="form-control"
@@ -212,8 +212,201 @@
             </p>
         </div>
 
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
+
+    <div class="row padding-top-20">
+        <div class="col-md-3"></div>
+        <div class="col-md-7">
+            <div class="licence-information">
+                <h3>MikroEpin pelien käyttöehdot</h3>
+
+                <p>
+                    MikroEpin pelit (Bakteerien tunnistuspeli, Taudinpurkauspeli ja HarMa) ovat Helsingin yliopiston
+                    eläinlääketieteellisen tiedekunnan tiettyjen kurssien suorittamiseen käytettäviä digitaalisia oppimispelejä.
+                    Näitä kutsutaan myöhemmin tekstissä sanalla palvelut.
+                </p>
+
+                <h3>Käyttäjien tietosuoja</h3>
+
+                <p>
+                    Rekisteröitymällä näissä käyttöehdoissa mainittuihin palveluihin hyväksyt palvelun käytön kannalta
+                    tarpeellisen tiedon tallentamisen ja käsittelyn tietosuojaselosteemme mukaisessa muodossa.
+                    Henkilötiedon ylläpitämisessä noudatetaan henkilötietolakia, emmekä kerää pelaamisen ja pelaajan
+                    opintosuorituksen kirjaamisen kannalta tarpeellisen tiedon lisäksi ylimääräistä henkilötietoa. Pelien
+                    pelaamisesta syntyvien henkilörekisterien avulla kurssien vastuuopettajat pystyvät antamaan
+                    suorituksia. Edellä mainittua tarkoitusta varten tietoja säilytetään Yliopistolain (24.7.2009/558) 44
+                    §:n mukaan vähintään kuuden kuukauden ajan tulosten julkistamisesta. Jos peleistä tehdään
+                    akateemista tutkimusta, kun opiskelijalta on saatu siihen lupa, tietoja säilytetään tutkimukseen
+                    tarvittava aika. Voit lukea lisää tietosuojasta palveluiden
+                    <a href="https://tautiset-pelit.it.helsinki.fi/images/TietosuojaselosteMikroEpinPelisuoritusrekisteri.pdf">Tietosuojaselosteesta</a>.
+                </p>
+
+                <h3>Tekijänoikeudet</h3>
+
+                <p>
+                    Palvelun materiaalin, kuten tehtävien ja niihin liittyvien kuvien tekijänoikeudet kuuluvat Helsingin
+                    yliopistolle tai materiaalin tuottaneille henkilöille, ellei toisin mainita.
+                    Tiedon ajantasaisuus ja lainmukaisuus
+                    Käyttäjä vastaa ilmoittamiensa tietojen oikeellisuudesta (tietojen päivittäminen onnistuu suoraan
+                    palvelusta käsin). Opintosuoritukset kirjataan palveluun ilmoitettujen tietojen pohjalta, eikä HY ole
+                    vastuussa väärin ilmoitettujen henkilötietojen johdosta kirjaamatta jääneistä opintosuorituksista.
+                </p>
+
+                <h3>Voimassaolo ja sovellettava laki</h3>
+
+                <p>
+                    Nämä ehdot tulevat voimaan käyttäjän hyväksyessä käyttöehdot palveluun rekisteröitymisen yhteydessä.
+                    Käyttäjä voi milloin tahansa lopettaa palveluiden käytön poistamalla käyttäjätilinsä palvelusta (tai
+                    pyytämällä tätä palveluiden vastuuopettajilta).
+                    Palveluihin sekä näihin käyttöehtoihin sovelletaan Suomen lakia.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+
+    <div class="row padding-top-20">
+        <div class="col-md-3"></div>
+        <div class="col-md-7 center-text">
+            <a href="https://tautiset-pelit.it.helsinki.fi/images/TietosuojaselosteMikroEpinPelisuoritusrekisteri.pdf">Tietosuojaseloste</a> |
+            <a href="https://tautiset-pelit.it.helsinki.fi/images/TietosuojailmoitusMikroEpinPelisuoritusrekisteri.pdf">Tietosuojailmoitus</a>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+    <div class="form-group has-feedback"
+         ng-class="{'has-error': createUserForm.accept_licence_agreement.$invalid && createUserForm.accept_licence_agreement.$dirty,
+                    'has-success': createUserForm.accept_licence_agreement.$valid && createUserForm.accept_licence_agreement.$touched}">
+
+        <div class="col-md-1"></div>
+
+        <label for="accept_licence_agreement" class="col-md-2 control-label">Hyväksyn käyttöehdot</label>
+
+        <div class="col-md-7">
+
+            <input type="checkbox"
+                   ng-model="newUser.accept_licence_agreement"
+                   name="accept_licence_agreement"
+                   id="accept_licence_agreement"
+                   class="big-checkbox"
+                   required>
+
+            <p class="help-block" ng-messages="createUserForm.accept_licence_agreement.$error" ng-if="!createUserForm.accept_licence_agreement.$pristine">
+                <span ng-message="required">Voidaksesi käyttää palvelua sinun on hyväksyttävä käyttöehdot</span>
+            </p>
+        </div>
+
+        <div class="col-md-2"></div>
+    </div>
+
+
+    <div class="row padding-top-20">
+        <div class="col-md-3"></div>
+        <div class="col-md-7">
+            <div class="licence-information">
+                <h3>Taudinpurkauspelin pelaamisesta tehtävästä tutkimuksesta</h3>
+
+                <p>
+                    Mikrobiologian ja epidemiologian oppiaineessa tehdään digitaaliseen oppimiseen liittyvää tutkimusta. Taudinpurkauspelissä on
+                    tavoitteena harjoitella johdonmukaisesti etenevää taudinpurkauksen selvitysprosessia. Sen pelaamiseen liittyvällä
+                    tutkimuksella on useampia tavoitteita: (1) tutkia pelin vaikutusta oppimiseen,
+                    (2) oppia ottamaan oppijoiden yksilölliset erot paremmin huomioon ja reagoimaan niihin tarjoten kohdennetumpaa opetusta,
+                    (3) kehittää digitaalisissa ympäristöissä tapahtuvaan oppimiseen liittyvää ymmärrystä ja tietoa, sekä
+                    (4) tukea tutkimustiedon kautta muita oppimateriaalien kehittäjiä ja oppimisen tutkijoita.
+                </p>
+
+                <p>
+                    Peliä pelatessa pelitiedot tallentuvat automaattisesti. Nämä liittyvät pelissä etenemiseen. Lisäksi pelaaja
+                    täyttää osaamista kartoittavan kyselomakkeen (e-lomake) ennen ja jälkeen pelaamisen.
+                    Kyselylomakkeen tiedot tallennetaan pelitietojen yhteyteen.
+                </p>
+
+                <p>
+                    Työskentelystä ja kyselylomakkeella kerättyä tietoa käytetään tutkimuksessa, jos sallit. Tutkimuksemme päätavoitteena
+                    on osaamisen kehittymisen arviointi tekemisen arvioinnin sijaan, mikä mahdollistaisi yksilöllistä osaamista edistävien
+                    tehtävien tarjoamisen. Tutkimustuloksista ei pystytä tunnistamaan yksittäisiä opiskelijoita.
+                    Jos et salli kurssin aikana kerättyjen tietojen käyttämistä tutkimuksessa, siitä ei tule minkäänlaisia
+                    seuraamuksia, eikä se vaikuta loppuarvosanaan.
+                </p>
+
+                <p>
+                    Tutkimusdatan hallinnasta vastaa Helsingin yliopiston eläinlääketieteellisen tiedekunnan dosentti Anna-Maija Virtala
+                    sekä tietojenkäsittelytieteen osaston Agile Education Research -ryhmän Arto Hellas. Anonymisoimattomaan
+                    tutkimusdataan eivät pääse käsiksi muut tutkijat.
+                </p>
+
+                <h3>Pelimateriaalin tekijät ja lisenssi</h3>
+
+                <p>
+                    Pelimateriaalia ovat tehneet Anna-Maija Virtala ja Heli I Koskinen. Pelin sisältöön ovat vaikuttaneet ja
+                    vaikuttavat myös Joanna Koort, Tanja Lähteinen ja Kristiina Suominen. Peliympäristöä on kehittänyt:
+                    Eveliina Pakarinen. Siihen ovat vaikuttaneet myös: Jimi Welling, Dani Nummikoski, Tarja Holopainen ja Jouko Niinimäki.
+                </p>
+
+                <p>
+                    Taudinpurkauspelin lähdekoodi on lisensoitu avoimen lähdekoodin lisenssillä. Materiaalien käyttö
+                    kaupalliseen tarkoitukseen on kielletty. Voit osallistua kurssimateriaalin parantamiseen myös itse.
+                    Opintojakson Moodlesivulla on Presemo linkki, jonka kautta pääset ehdottamaan muutoksia.
+                </p>
+            </div>
+
+            <h3>Luvat</h3>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+    <div class="form-group has-feedback">
+
+        <div class="col-md-3"></div>
+
+        <div class="col-md-7">
+
+
+            <label for="accept_academic_research" class="control-label">
+
+                <input type="checkbox"
+                       ng-model="newUser.accept_academic_research"
+                       name="accept_academic_research"
+                       id="accept_academic_research"
+                       class="big-checkbox">
+                Sallin analytiikkadatan keräämisen, joka Taudinpurkauspelissä sisältää pelissä etenemisestä tallentuneet logitiedot.
+            </label>
+
+        </div>
+
+        <div class="col-md-2"></div>
+    </div>
+
+    <div class="form-group has-feedback">
+
+        <div class="col-md-3"></div>
+
+        <div class="col-md-7">
+
+
+            <label for="accept_academic_use" class="control-label">
+
+                <input type="checkbox"
+                       ng-model="newUser.accept_academic_use"
+                       name="accept_academic_use"
+                       id="accept_academic_use"
+                       class="big-checkbox">
+
+                Sallin minusta kurssin aikana kerättyjen tietojen käyttämisen oppimiseen liittyvässä tutkimuksessa.
+
+            </label>
+
+        </div>
+
+
+
+        <div class="col-md-2"></div>
+    </div>
+
+
 
     <div class="form-group">
         <div class="col-md-offset-3 col-md-9">

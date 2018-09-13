@@ -79,6 +79,9 @@ class Exercise < ActiveRecord::Base
     new_name = exercise.name + " (kopio)"
     exercise_dup.name = new_name
     if exercise_dup.save
+
+      exercise_dup.tasks.where(name: "Anamneesi (tekninen kopio)").destroy_all
+
       exercise_dup.exercise_hypotheses.each do |ex_hyp|
 
         new_prerequisite_task = exercise_dup.tasks.where(name: ex_hyp.task.name).first
@@ -144,6 +147,6 @@ class Exercise < ActiveRecord::Base
 
   private
   def create_anamnesis
-    tasks.create(name:"Anamneesi", level:0)
+    tasks.create(name: "Anamneesi", level: 0)
   end
 end

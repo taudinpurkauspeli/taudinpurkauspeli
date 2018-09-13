@@ -1,4 +1,4 @@
-class ChangeQuestionTitlesToTitleObjects < ActiveRecord::Migration
+class ChangeQuestionTitlesToTitleObjects < ActiveRecord::Migration[5.1]
   def self.up
 
     bank = Bank.where(name:"Yleispankki").first

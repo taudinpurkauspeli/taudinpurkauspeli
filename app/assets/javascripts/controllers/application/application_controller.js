@@ -25,12 +25,17 @@ app.controller('ApplicationController', [
 
         $scope.currentUser = AuthenticationService.isLoggedIn();
         $scope.currentUserAdmin = AuthenticationService.isAdmin();
-        $scope.currentUserTester = AuthenticationService.isTester();
+        $scope.currentUserAcceptLicenceAgreement = AuthenticationService.hasAcceptedLicenceAgreement();
+        $scope.currentUserAcceptAcademicResearch = AuthenticationService.hasAcceptedAcademicResearch();
+        $scope.currentUserAcceptAcademicUse = AuthenticationService.hasAcceptedAcademicUse();
 
-        $scope.setCurrentUser = function (userId, userAdmin, userTester) {
+        $scope.setCurrentUser = function (userId, userAdmin, userTester, userAcceptLicenceAgreement, userAcceptAcademicResearch, userAcceptAcademicUse) {
             $scope.currentUser = userId;
             $scope.currentUserAdmin = userAdmin;
             $scope.currentUserTester = userTester;
+            $scope.currentUserAcceptLicenceAgreement = userAcceptLicenceAgreement;
+            $scope.currentUserAcceptAcademicResearch = userAcceptAcademicResearch;
+            $scope.currentUserAcceptAcademicUse = userAcceptAcademicUse;
         };
 
         $scope.setActiveTab = function(tabId){

@@ -1,50 +1,39 @@
 source 'https://rubygems.org'
-ruby '2.2.0'
+ruby '2.5.1'
 
 gem 'rb-readline'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.0'
-
-# Use sqlite3 as the database for Active Record
-# gem 'sqlite3'
+gem 'rails'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-#gem 'turbolinks'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
 
-# Twitter Boostrap
-#gem 'bootstrap-sass'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder'
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', group: :doc
 
 # Text editor
-gem 'ckeditor', github: 'Eepa/ckeditor'
 gem 'responders'
 gem "non-stupid-digest-assets"
 gem 'rails-html-sanitizer'
 
-# Password encryption
-#gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use ActiveModel has_secure_password
- gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt'
 
 # Paperclip for image use
 gem 'paperclip'
-gem 'aws-sdk', '< 2.0'
 
 # Cloning gem
 gem 'amoeba'
@@ -52,15 +41,9 @@ gem 'amoeba'
 # Bower for Angular dependency management
 gem 'bower-rails'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 # Angular html-files to Assets Pipeline
 gem "angular-rails-templates"
-gem "sprockets", "~> 2.0"
+gem "sprockets"
 
 group :test do
   
@@ -81,20 +64,15 @@ group :test do
 end
 
 group :development do
-  # For Bootstrap
-  #gem 'rails_layout'
 
   # For creating a seed from database
   gem 'seed_dump'
 
-  # For showing speed/database queries
- # gem 'rack-mini-profiler'
-
   #Automating deployments with Capistrano
 
   gem 'capistrano'
-  gem 'capistrano-bundler', '>= 1.1.0'
-  gem 'capistrano-passenger', '>= 0.1.1'
+  gem 'capistrano-bundler'
+  gem 'capistrano-passenger'
 
   # Remove the following if your app does not use Rails
   gem 'capistrano-rails'
@@ -103,14 +81,14 @@ group :development do
   gem 'capistrano-rvm'
   
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
 end
 
 
 group :development, :test do
 
   # RSpec for testing
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails'
 
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
