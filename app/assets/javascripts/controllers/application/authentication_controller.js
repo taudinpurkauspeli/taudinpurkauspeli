@@ -16,7 +16,8 @@ app.controller('AuthenticationController', [
         $scope.logout = function() {
             AuthenticationService.logout().$promise.then(function onSuccess() {
                 $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin(), AuthenticationService.isTester(),
-                    AuthenticationService.hasAcceptedLicenceAgreement(), AuthenticationService.hasAcceptedAcademicResearch());
+                    AuthenticationService.hasAcceptedLicenceAgreement(), AuthenticationService.hasAcceptedAcademicResearch(),
+                    AuthenticationService.hasAcceptedAcademicUse());
                 LocalStorageService.remove('current_task');
                 LocalStorageService.remove('current_task_tab_path');
                 LocalStorageService.remove('unchecked_hypotheses');
@@ -47,7 +48,8 @@ app.controller('AuthenticationController', [
                 var user = {
                     id: AuthenticationService.isLoggedIn(),
                     accept_licence_agreement: AuthenticationService.hasAcceptedLicenceAgreement(),
-                    accept_academic_research: AuthenticationService.hasAcceptedAcademicResearch()
+                    accept_academic_research: AuthenticationService.hasAcceptedAcademicResearch(),
+                    accept_academic_use: AuthenticationService.hasAcceptedAcademicUse()
                 };
 
                 var modalInstance = $uibModal.open({
@@ -73,7 +75,8 @@ app.controller('AuthenticationController', [
         $scope.login = function(credentials) {
             AuthenticationService.login(credentials).$promise.then(function onSuccess() {
                 $scope.setCurrentUser(AuthenticationService.isLoggedIn(), AuthenticationService.isAdmin(), AuthenticationService.isTester(),
-                    AuthenticationService.hasAcceptedLicenceAgreement(), AuthenticationService.hasAcceptedAcademicResearch());
+                    AuthenticationService.hasAcceptedLicenceAgreement(), AuthenticationService.hasAcceptedAcademicResearch(),
+                    AuthenticationService.hasAcceptedAcademicUse());
                 $scope.resetCredentials();
                 $scope.checkAgreements();
             }).catch(function onError() {

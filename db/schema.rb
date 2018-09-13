@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_30_142843) do
+ActiveRecord::Schema.define(version: 2018_09_13_114805) do
 
   create_table "asked_questions", force: :cascade do |t|
     t.integer "user_id"
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 2018_08_30_142843) do
     t.boolean "tester", default: false
     t.boolean "accept_academic_research", default: false
     t.boolean "accept_licence_agreement", default: false
+    t.boolean "accept_academic_use", default: false
   end
 
 end

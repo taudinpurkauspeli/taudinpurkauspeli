@@ -1,8 +1,8 @@
 var app = angular.module('diagnoseDiseases');
 
 app.controller("ExercisesController", [
-    "$scope", "$resource", "$state", "$window",
-    function($scope, $resource, $state, $window) {
+    "$scope", "$uibModal", "$resource", "$state", "$window",
+    function($scope, $uibModal, $resource, $state, $window) {
         $scope.exercisesList = [];
 
         var Exercises = $resource('/exercises.json');
@@ -94,6 +94,21 @@ app.controller("ExercisesController", [
                     offset: 100
                 });
             }
+        };
+
+
+        $scope.showTermsOfUse = function() {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'users/terms_of_use_modal.html',
+                controller: 'TermsOfUseModalController',
+                size: 'lg'
+            });
+
+            modalInstance.result.then(function() {
+            }, function() {
+            });
         };
 
     }
