@@ -59,13 +59,35 @@
                     </div>
                 </div>
 
-                <div class="row row-userinfo padding-top-20 padding-bottom-20">
+                <div class="row row-userinfo padding-top-20">
                     <div class="col-md-1"></div>
                     <div class="col-md-6">
                         Epidemiologian kurssin aloitusvuosi:
                     </div>
                     <div class="col-md-5">
                         {{user.starting_year}}
+                    </div>
+                </div>
+
+                <div class="row row-userinfo padding-top-20">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6">
+                        Sallin analytiikkadatan keräämisen:
+                    </div>
+                    <div class="col-md-5">
+                        <span ng-if="user.accept_academic_research">Kyllä</span>
+                        <span ng-if="!user.accept_academic_research">Ei</span>
+                    </div>
+                </div>
+
+                <div class="row row-userinfo padding-top-20 padding-bottom-20">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6">
+                        Sallin tietojen käyttämisen tutkimukseen:
+                    </div>
+                    <div class="col-md-5">
+                        <span ng-if="user.accept_academic_use">Kyllä</span>
+                        <span ng-if="!user.accept_academic_use">Ei</span>
                     </div>
                 </div>
 

@@ -91,7 +91,7 @@ class UsersController < ApplicationController
 
     @exercises_with_completion_percent = @user.get_started_exercises_with_completion_percent
 
-    @user = User.select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name", "tester").find_by(id:params[:id])
+    @user = User.select("id", "username", "email", "student_number", "starting_year", "admin", "first_name", "last_name", "tester", "accept_academic_research", "accept_academic_use").find_by(id:params[:id])
     respond_to do |format|
       format.html
       format.json { render json: {user: @user, exercises: @exercises_with_completion_percent }}
