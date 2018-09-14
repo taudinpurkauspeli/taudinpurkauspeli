@@ -68,7 +68,7 @@ app.controller('AuthenticationController', [
                     $scope.logout();
                 });
             } else {
-                $state.go('app_root');
+                $state.go($state.current);
             }
         };
 

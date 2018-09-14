@@ -22,7 +22,7 @@
 
             <label for="username" class="col-md-2 control-label">Käyttäjätunnus</label>
 
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <input type="text"
                        class="form-control center-text"
                        required pattern=".{3,}"
@@ -37,7 +37,7 @@
                 </p>
             </div>
 
-            <div class="col-md-3"></div>
+            <div class="col-md-2"></div>
         </div>
 
         <div class="form-group has-feedback"
@@ -48,7 +48,7 @@
 
             <label for="first_name" class="col-md-2 control-label">Etunimi</label>
 
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <input type="text"
                        class="form-control center-text"
                        required pattern=".{3,}"
@@ -63,7 +63,7 @@
                 </p>
             </div>
 
-            <div class="col-md-3"></div>
+            <div class="col-md-2"></div>
         </div>
 
 
@@ -75,7 +75,7 @@
 
             <label for="last_name" class="col-md-2 control-label">Sukunimi</label>
 
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <input type="text"
                        class="form-control center-text"
                        required pattern=".{3,}"
@@ -90,7 +90,7 @@
                 </p>
             </div>
 
-            <div class="col-md-3"></div>
+            <div class="col-md-2"></div>
         </div>
 
 
@@ -102,7 +102,7 @@
 
             <label for="student_number" class="col-md-2 control-label">Opiskelijanumero</label>
 
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <input type="text"
                        class="form-control center-text"
                        required pattern="^\d{9}$"
@@ -117,7 +117,7 @@
                 </p>
             </div>
 
-            <div class="col-md-3"></div>
+            <div class="col-md-2"></div>
         </div>
 
         <div class="form-group has-feedback"
@@ -128,7 +128,7 @@
 
             <label for="email" class="col-md-2 control-label">Sähköposti</label>
 
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <input type="text"
                        required
                        class="form-control center-text"
@@ -142,7 +142,7 @@
                 </p>
             </div>
 
-            <div class="col-md-3"></div>
+            <div class="col-md-2"></div>
         </div>
 
         <div class="form-group has-feedback"
@@ -153,7 +153,7 @@
 
             <label for="starting_year" class="col-md-2 control-label">Epidemiologian kurssin aloitusvuosi</label>
 
-            <div class="col-md-6">
+            <div class="col-md-7">
 
                 <select ng-model="user.starting_year"
                         class="form-control"
@@ -167,48 +167,37 @@
                 </p>
             </div>
 
-            <div class="col-md-3"></div>
+            <div class="col-md-2"></div>
         </div>
 
         <div class="form-group has-feedback">
-
-            <div class="col-md-1"></div>
-
-            <div class="col-md-8">
-
-                <label for="accept_academic_research" class="control-label">
-
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
+                <label for="accept_academic_research" class="checkbox-inline padding-left-40 bold">
                     <input type="checkbox"
                            ng-model="user.accept_academic_research"
                            name="accept_academic_research"
                            id="accept_academic_research"
-                           class="big-checkbox">
+                           class="big-checkbox position-left-30">
                     Sallin analytiikkadatan keräämisen, joka Taudinpurkauspelissä sisältää pelissä etenemisestä tallentuneet logitiedot.
                 </label>
-
             </div>
-
-            <div class="col-md-3"></div>
+            <div class="col-md-2"></div>
         </div>
 
         <div class="form-group has-feedback">
-            <div class="col-md-1"></div>
-
-
-            <div class="col-md-8">
-                <label for="accept_academic_use" class="control-label">
-
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
+                <label for="accept_academic_use" class="checkbox-inline padding-left-40 bold">
                     <input type="checkbox"
                            ng-model="user.accept_academic_use"
                            name="accept_academic_use"
                            id="accept_academic_use"
-                           class="big-checkbox">
+                           class="big-checkbox position-left-30">
                     Sallin minusta kurssin aikana kerättyjen tietojen käyttämisen oppimiseen liittyvässä tutkimuksessa.
                 </label>
-
             </div>
-
-            <div class="col-md-3"></div>
+            <div class="col-md-2"></div>
         </div>
 
     </form>
