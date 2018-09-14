@@ -193,7 +193,6 @@
     <div class="form-group has-feedback"
          ng-class="{'has-error': createUserForm.starting_year.$invalid && createUserForm.starting_year.$dirty,
                     'has-success': createUserForm.starting_year.$valid && createUserForm.starting_year.$touched}">
-
         <div class="col-md-1"></div>
 
         <label for="starting_year" class="col-md-2 control-label">Epidemiologian kurssin aloitusvuosi</label>
@@ -276,28 +275,29 @@
         <div class="col-md-2"></div>
     </div>
 
-    <div class="form-group has-feedback"
+    <div class="form-group has-feedback padding-bottom-30"
          ng-class="{'has-error': createUserForm.accept_licence_agreement.$invalid && createUserForm.accept_licence_agreement.$dirty,
                     'has-success': createUserForm.accept_licence_agreement.$valid && createUserForm.accept_licence_agreement.$touched}">
-
-        <div class="col-md-1"></div>
-
-        <label for="accept_licence_agreement" class="col-md-2 control-label">Hyväksyn käyttöehdot</label>
-
+        <div class="col-md-3"></div>
         <div class="col-md-7">
 
-            <input type="checkbox"
-                   ng-model="newUser.accept_licence_agreement"
-                   name="accept_licence_agreement"
-                   id="accept_licence_agreement"
-                   class="big-checkbox"
-                   required>
+            <label for="accept_licence_agreement" class="checkbox-inline padding-left-40 bold">
+                <input type="checkbox"
+                       ng-model="newUser.accept_licence_agreement"
+                       name="accept_licence_agreement"
+                       id="accept_licence_agreement"
+                       class="big-checkbox position-left-30"
+                       required>
 
-            <p class="help-block" ng-messages="createUserForm.accept_licence_agreement.$error" ng-if="!createUserForm.accept_licence_agreement.$pristine">
-                <span ng-message="required">Voidaksesi käyttää palvelua sinun on hyväksyttävä käyttöehdot</span>
-            </p>
+                Hyväksyn käyttöehdot
+
+                <span ng-messages="createUserForm.accept_licence_agreement.$error" ng-if="!createUserForm.accept_licence_agreement.$pristine">
+                    <span ng-message="required">| Voidaksesi käyttää palvelua sinun on hyväksyttävä käyttöehdot</span>
+                </span>
+            </label>
+
+
         </div>
-
         <div class="col-md-2"></div>
     </div>
 
@@ -359,53 +359,37 @@
     </div>
 
     <div class="form-group has-feedback">
-
         <div class="col-md-3"></div>
-
         <div class="col-md-7">
-
-
-            <label for="accept_academic_research" class="control-label">
+            <label for="accept_academic_research" class="checkbox-inline padding-left-40 bold">
 
                 <input type="checkbox"
                        ng-model="newUser.accept_academic_research"
                        name="accept_academic_research"
                        id="accept_academic_research"
-                       class="big-checkbox">
+                       class="big-checkbox position-left-30">
                 Sallin analytiikkadatan keräämisen, joka Taudinpurkauspelissä sisältää pelissä etenemisestä tallentuneet logitiedot.
             </label>
 
         </div>
-
         <div class="col-md-2"></div>
     </div>
 
     <div class="form-group has-feedback">
-
         <div class="col-md-3"></div>
-
         <div class="col-md-7">
-
-
-            <label for="accept_academic_use" class="control-label">
+            <label for="accept_academic_use" class="checkbox-inline padding-left-40 bold">
 
                 <input type="checkbox"
                        ng-model="newUser.accept_academic_use"
                        name="accept_academic_use"
                        id="accept_academic_use"
-                       class="big-checkbox">
-
+                       class="big-checkbox position-left-30">
                 Sallin minusta kurssin aikana kerättyjen tietojen käyttämisen oppimiseen liittyvässä tutkimuksessa.
-
             </label>
-
         </div>
-
-
-
         <div class="col-md-2"></div>
     </div>
-
 
 
     <div class="form-group">

@@ -45,7 +45,7 @@ set :rails_env, 'production'
 
 set :bundle_env_variables, { rails_env: "production" }
 
-set :rvm_ruby_version, '2.2.0'
+set :rvm_ruby_version, '2.5.1'
 
 namespace :deploy do
 
