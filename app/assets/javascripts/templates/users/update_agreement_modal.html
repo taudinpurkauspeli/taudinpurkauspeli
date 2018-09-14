@@ -82,22 +82,24 @@
              ng-class="{'has-error': updateAgreementForm.accept_licence_agreement.$invalid && updateAgreementForm.accept_licence_agreement.$dirty,
                     'has-success': updateAgreementForm.accept_licence_agreement.$valid && updateAgreementForm.accept_licence_agreement.$touched}">
 
-            <label for="accept_licence_agreement" class="col-md-3 control-label">Hyväksyn käyttöehdot</label>
-
+            <div class="col-md-1"></div>
             <div class="col-md-8">
+                <label for="accept_licence_agreement" class="checkbox-inline padding-left-40 bold">
+                    <input type="checkbox"
+                           ng-model="user.accept_licence_agreement"
+                           name="accept_licence_agreement"
+                           id="accept_licence_agreement"
+                           class="big-checkbox position-left-30"
+                           required>
 
-                <input type="checkbox"
-                       ng-model="user.accept_licence_agreement"
-                       name="accept_licence_agreement"
-                       id="accept_licence_agreement"
-                       class="big-checkbox"
-                       required>
+                    Hyväksyn käyttöehdot
 
-                <p class="help-block" ng-messages="updateAgreementForm.accept_licence_agreement.$error" ng-if="!updateAgreementForm.accept_licence_agreement.$pristine">
-                    <span ng-message="required">Voidaksesi käyttää palvelua sinun on hyväksyttävä käyttöehdot. Sinut kirjataan ulos, jos et hyväksy palvelun käyttöehtoja.</span>
-                </p>
+                    <span ng-messages="updateAgreementForm.accept_licence_agreement.$error" ng-if="!updateAgreementForm.accept_licence_agreement.$pristine">
+                        <span ng-message="required">| Voidaksesi käyttää palvelua sinun on hyväksyttävä käyttöehdot. Sinut kirjataan ulos, jos et hyväksy palvelun käyttöehtoja.</span>
+                    </span>
+
+                </label>
             </div>
-
             <div class="col-md-1"></div>
         </div>
 
@@ -157,50 +159,35 @@
         </div>
 
         <div class="form-group has-feedback">
-
             <div class="col-md-1"></div>
-
             <div class="col-md-10">
-
-                <label for="accept_academic_research" class="control-label">
+                <label for="accept_academic_research" class="checkbox-inline padding-left-40 bold">
 
                     <input type="checkbox"
                            ng-model="user.accept_academic_research"
                            name="accept_academic_research"
                            id="accept_academic_research"
-                           class="big-checkbox">
+                           class="big-checkbox position-left-30">
                     Sallin analytiikkadatan keräämisen, joka Taudinpurkauspelissä sisältää pelissä etenemisestä tallentuneet logitiedot.
                 </label>
-
             </div>
-
             <div class="col-md-1"></div>
         </div>
 
         <div class="form-group has-feedback">
             <div class="col-md-1"></div>
-
-
             <div class="col-md-10">
-                <label for="accept_academic_use" class="control-label">
-
+                <label for="accept_academic_use" class="checkbox-inline padding-left-40 bold">
                     <input type="checkbox"
                            ng-model="user.accept_academic_use"
                            name="accept_academic_use"
                            id="accept_academic_use"
-                           class="big-checkbox">
+                           class="big-checkbox position-left-30">
                     Sallin minusta kurssin aikana kerättyjen tietojen käyttämisen oppimiseen liittyvässä tutkimuksessa.
                 </label>
-
             </div>
-
             <div class="col-md-1"></div>
         </div>
-
-
-
-
-
 
     </form>
 
