@@ -47,6 +47,8 @@ set :bundle_env_variables, { rails_env: "production" }
 
 set :rvm_ruby_version, '2.5.1'
 
+set :linked_files, %w{config/master.key}
+
 namespace :deploy do
 
   after :restart, :clear_cache do
