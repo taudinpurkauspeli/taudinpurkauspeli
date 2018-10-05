@@ -1,1 +1,32 @@
-$fa-font-path: "font-awesome/web-fonts-with-css/webfonts";
+/*!
+ * Override Font Awesome Free 5.3.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) font path configuration
+ * in order to fix font problem in production (fonts required in production with wrong path).
+ */
+
+/* FONT PATH
+* -------------------------- */
+@font-face {
+  font-family: 'FontAwesome';
+  src: font-url('fontawesome-webfont.eot');
+  src: font-url('fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
+  font-url('fontawesome-webfont.woff2') format('woff2'),
+  font-url('fontawesome-webfont.woff') format('woff'),
+  font-url('fontawesome-webfont.ttf') format('truetype'),
+  font-url('fontawesome-webfont.svg?#fontawesomeregular') format('svg');
+  //  src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype'); // used when developing fonts
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import "font-awesome/web-fonts-with-css/scss/variables";
+@import "font-awesome/web-fonts-with-css/scss/mixins";
+@import "font-awesome/web-fonts-with-css/scss/core";
+@import "font-awesome/web-fonts-with-css/scss/larger";
+@import "font-awesome/web-fonts-with-css/scss/fixed-width";
+@import "font-awesome/web-fonts-with-css/scss/list";
+@import "font-awesome/web-fonts-with-css/scss/bordered-pulled";
+@import "font-awesome/web-fonts-with-css/scss/animated";
+@import "font-awesome/web-fonts-with-css/scss/rotated-flipped";
+@import "font-awesome/web-fonts-with-css/scss/stacked";
+@import "font-awesome/web-fonts-with-css/scss/icons";
