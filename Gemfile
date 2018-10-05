@@ -32,9 +32,6 @@ gem 'rails-html-sanitizer'
 # Use ActiveModel has_secure_password
 gem 'bcrypt'
 
-# Paperclip for image use
-gem 'paperclip'
-
 # Cloning gem
 gem 'amoeba'
 

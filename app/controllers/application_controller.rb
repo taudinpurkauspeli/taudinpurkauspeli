@@ -55,11 +55,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_view_layout
-    if params[:layout] === "false" || params[:layout] == false
-      render :layout => false
-    end
-  end
 
   def set_current_user
     @current_user = current_user
