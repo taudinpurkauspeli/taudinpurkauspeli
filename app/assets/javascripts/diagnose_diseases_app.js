@@ -198,3 +198,17 @@ app.config([
         }]);
     }
 ]);
+
+app.config([
+    '$provide',
+    function($provide){
+        $provide.decorator('taTools', ['$delegate', function(taTools){
+            taTools.insertImage.iconclass = 'far fa-image';
+            taTools.insertVideo.iconclass = 'fab fa-youtube';
+            taTools.undo.iconclass = 'fas fa-undo';
+            taTools.redo.iconclass = 'fas fa-redo';
+            taTools.iconclass = 'far fa-image';
+            return taTools;
+        }]);
+    }
+]);
