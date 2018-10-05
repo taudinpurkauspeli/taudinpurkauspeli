@@ -12,8 +12,7 @@
  *
  *= require 'bootstrap-sass-official'
  *= require font-awesome-config
- //*= require font-awesome/web-fonts-with-css/scss/fontawesome
- //*= require font-awesome/web-fonts-with-css/css/fontawesome-all.min
+ *= require font-awesome/web-fonts-with-css/css/fontawesome-all.min
  *= require textAngular/dist/textAngular.css
  *= require animate.css/animate.min.css
  *= require_tree .
