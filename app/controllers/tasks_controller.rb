@@ -26,7 +26,6 @@ class TasksController < ApplicationController
       redirect_to exercises_path, alert: 'Valitse ensin case, jota haluat tarkastella!'
     end
 
-    set_view_layout
   end
 
   # GET /student_index
@@ -135,7 +134,6 @@ class TasksController < ApplicationController
     # Unchecked exercise hypotheses for conclusion view
     @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
 
-    set_view_layout
 
   end
 
@@ -168,16 +166,12 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
-
-    set_view_layout
   end
 
   # GET /tasks/1/edit
   def edit
     session[:task_id] = params[:id]
     @subtasks = @task.subtasks
-
-    set_view_layout
   end
 
   # POST /tasks

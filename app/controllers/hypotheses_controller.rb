@@ -33,7 +33,6 @@ class HypothesesController < ApplicationController
       redirect_to exercises_path, alert: 'Valitse ensin case, jota haluat tarkastella!'
     end
 
-    set_view_layout
   end
 
 

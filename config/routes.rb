@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 
   resources :titles
 
-  resources :own_files
+  resources :documents
 
   get 'taudinpurkauspeli', to: 'diagnose_diseases#index'
   get 'hypothesis_bank', to: 'hypotheses#hypothesis_bank'

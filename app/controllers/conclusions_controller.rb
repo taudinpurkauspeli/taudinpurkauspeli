@@ -11,7 +11,6 @@ class ConclusionsController < ApplicationController
 		@hypothesis_groups = HypothesisGroup.all
 		@exercise_hypotheses = ExerciseHypothesis.where(exercise: current_exercise)
 		@conclusion = Conclusion.new
-		set_view_layout
 	end
 
 	# GET /conclusions/1/edit
@@ -19,7 +18,6 @@ class ConclusionsController < ApplicationController
 		@hypothesis_groups = HypothesisGroup.all
 		@exercise_hypotheses = ExerciseHypothesis.where(exercise: @conclusion.subtask.task.exercise)
 		@task = @conclusion.subtask.task
-		set_view_layout
 	end
 
 	def create

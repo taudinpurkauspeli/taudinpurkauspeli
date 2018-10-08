@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_05_122159) do
+ActiveRecord::Schema.define(version: 2018_10_08_064105) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -75,6 +75,13 @@ ActiveRecord::Schema.define(version: 2018_10_05_122159) do
     t.string "content"
     t.integer "subtask_id"
     t.integer "exercise_hypothesis_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -149,13 +156,6 @@ ActiveRecord::Schema.define(version: 2018_10_05_122159) do
     t.datetime "updated_at", null: false
     t.integer "is_correct_answer", default: 0
     t.integer "title_id"
-  end
-
-  create_table "own_files", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "question_groups", force: :cascade do |t|
