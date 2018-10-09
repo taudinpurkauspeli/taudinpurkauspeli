@@ -1,0 +1,101 @@
+<div class="modal-header">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text multiline">Uusi tiedosto</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit luoda tiedoston. Täytä lomakkeeseen tiedoston nimi ja kuvaus. Valitse sen jälkeen haluamasi tiedosto"
+                    popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+<div class="modal-body">
+
+
+
+    <form class="form-horizontal" novalidate name="createDocumentForm">
+        <div class="form-group has-feedback padding-top-10"
+             ng-class="{'has-error': createDocumentForm.name.$invalid && createDocumentForm.name.$dirty,
+                    'has-success': createDocumentForm.name.$valid && createDocumentForm.name.$touched}">
+
+            <label for="name" class="col-md-2 control-label">Nimi</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       class="form-control center-text"
+                       required pattern=".{2,}"
+                       name="name"
+                       id="name"
+                       placeholder="Tiedoston nimi"
+                       ng-model="newDocument.name">
+
+                <p class="help-block" ng-messages="createDocumentForm.name.$error" ng-if="!createDocumentForm.name.$pristine">
+                    <span ng-message="required">Nimi on pakollinen</span>
+                    <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="form-group padding-top-10">
+
+            <label for="description" class="col-md-2 control-label">Kuvaus</label>
+
+            <div class="col-md-9">
+
+            <textarea class="form-control center-text"
+                      ng-model="newDocument.description"
+                      ng-if="newDocument"
+                      placeholder="Kuvaus"
+                      name="description"
+                      id="description"></textarea>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="form-group padding-top-10">
+
+            <label for="data" class="col-md-2 control-label">Tiedosto</label>
+
+            <div class="col-md-9">
+
+                <input class="form-control center-text" type="file" name="data" id="data" nv-file-select uploader="fileUploader"/><br/>
+
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+
+
+    </form>
+
+</div>
+
+<div class="modal-footer">
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-success width-100"
+                    type="button"
+                    ng-click="createDocument()"
+                    ng-disabled="createDocumentForm.$invalid || createDocumentForm.$pristine"
+                    ng-class="{'disabled': createDocumentForm.$invalid || createDocumentForm.$pristine}">
+                Luo
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-warning width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+</div>
+
