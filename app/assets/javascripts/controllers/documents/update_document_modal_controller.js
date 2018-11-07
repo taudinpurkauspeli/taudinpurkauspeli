@@ -4,8 +4,10 @@ app.controller("UpdateDocumentModalController", [
     '$scope', '$uibModalInstance', '$resource', '$window', "FileUploader", "selectedDocument",
     function($scope, $uibModalInstance, $resource, $window, FileUploader, selectedDocument) {
 
-        $scope.fileUploader = new FileUploader({queueLimit: 1});
-        $scope.fileUploader.url = "/documents.json";
+        var DocumentResource = $resource('/documents/:documentId.json',
+            { documentId: "@id"},
+            { update: { method: 'PUT' }});
+
 
         $scope.selectedDocument = selectedDocument;
 
@@ -35,42 +37,41 @@ app.controller("UpdateDocumentModalController", [
             });
         };
 
+
         $scope.updateDocument = function() {
-
-            console.log($scope.fileUploader);
-
-            if ($scope.createDocumentForm.$valid) {
-
-                if ($scope.fileUploader.queue.length === 1) {
-
-                    $scope.fileUploader.onBeforeUploadItem = function (item) {
-                        item.formData = [$scope.newDocument];
-                    };
-
-                    $scope.fileUploader.uploadItem(0);
-
-                    $scope.fileUploader.onCompleteItem = function (item, response, status, headers) {
-                        console.log(item, response, status, headers);
-
-                        if(status === 200) {
-                            $uibModalInstance.close('success');
-                        } else {
-                            $uibModalInstance.close('error');
-                        }
-
-                    }
-
-                }
-
+            if ($scope.updateDocumentForm.$valid) {
+                DocumentResource.update({documentId: selectedDocument.id}, $scope.selectedDocument, function() {
+                    $.notify({
+                        message: "Tiedoston päivitys onnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "success",
+                        offset: 100
+                    });
+                    $uibModalInstance.close();
+                }, function() {
+                    $.notify({
+                        message: "Tiedoston päivitys epäonnistui!"
+                    }, {
+                        placement: {
+                            align: "center"
+                        },
+                        type: "danger",
+                        offset: 100
+                    });
+                });
             }
         };
+
 
 
         $scope.deleteDocument = function() {
             var deleteConfirmation = $window.confirm("VAROITUS: TÄMÄ OPERAATIO POISTAA TÄMÄN TIEDOSTON NÄKYVISTÄ MYÖS CASEISTA! Oletko aivan varma, että haluat poistaa tiedoston?");
 
             if (deleteConfirmation) {
-                Hypothesis.delete({hypothesisId : hypothesis.id}, function() {
+                DocumentResource.delete({documentId : selectedDocument.id}, function() {
                     $.notify({
                         message: "Tiedoston poistaminen onnistui!"
                     }, {

@@ -10,7 +10,6 @@ app.controller("DocumentsController", [
         var Documents = $resource('/documents.json');
         $scope.setDocuments = function() {
             Documents.query(function(data) {
-                console.log(data);
                 $scope.documentsList = data;
 
             });
@@ -82,29 +81,6 @@ app.controller("DocumentsController", [
 
             modalInstance.result.then(function(status) {
                 $scope.setDocuments();
-
-                if(status === 'success') {
-                    $.notify({
-                        message: "Tiedoston päivittäminen onnistui!"
-                    }, {
-                        placement: {
-                            align: "center"
-                        },
-                        type: "success",
-                        offset: 100
-                    });
-                } else {
-                    $.notify({
-                        message: "Tiedoston päivittäminen epäonnistui!"
-                    }, {
-                        placement: {
-                            align: "center"
-                        },
-                        type: "danger",
-                        offset: 100
-                    });
-                }
-
             }, function() {
             });
         };

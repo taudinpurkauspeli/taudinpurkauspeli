@@ -14,8 +14,6 @@ app.controller("CreateDocumentModalController", [
 
         $scope.createDocument = function() {
 
-            console.log($scope.fileUploader);
-
             if ($scope.createDocumentForm.$valid) {
 
                 if ($scope.fileUploader.queue.length === 1) {
@@ -27,8 +25,6 @@ app.controller("CreateDocumentModalController", [
                     $scope.fileUploader.uploadItem(0);
 
                     $scope.fileUploader.onCompleteItem = function (item, response, status, headers) {
-                        console.log(item, response, status, headers);
-
                         if(status === 200) {
                             $uibModalInstance.close('success');
                         } else {

@@ -39,11 +39,14 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /exercises_one/1
-  # PATCH/PUT /exercises_one/1.json
+  # PATCH/PUT /documents/1
+  # PATCH/PUT /documents/1.json
   def update
     respond_to do |format|
-      if @document.update(document_params)
+      @document.name = document_params[:name]
+      @document.description = document_params[:description]
+
+      if @document.save
         format.html { redirect_to document_path(@document.id, :layout => get_layout), notice: 'Tiedoston päivitys onnistui!' }
         format.json { head :ok }
       else
@@ -74,8 +77,8 @@ class DocumentsController < ApplicationController
   end
 
 
-  # DELETE /exercises/1
-  # DELETE /exercises/1.json
+  # DELETE /documents/1
+  # DELETE /documents/1.json
   def destroy
     @document.destroy
     respond_to do |format|
