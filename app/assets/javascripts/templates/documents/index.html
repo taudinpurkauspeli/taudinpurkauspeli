@@ -13,42 +13,62 @@
 
 <div class="separator"></div>
 
-<div class="padding-top-30" ng-repeat="document in documentsList | orderBy: 'name'">
-    <div class="row padding-bottom-20">
+<div class="padding-top-30">
 
-        <!--TODO: Urlin kopiointimahdollisuus & katsomismahdollisuus-->
+    <div class="table-responsive">
+        <table class="table table-hover table-condensed">
+            <colgroup>
+                <col style="width:45%" />
+                <col style="width:20%" />
+                <col style="width:35%" />
 
-        <div class="col-md-1"></div>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>Kuva</th>
+                <th class="clickable" ng-click="setOrderByAttributes('name')">Nimi <span class="sortorder" ng-show="orderByAttributes[0] === 'name'" ng-class="{reverse:reverse}"></span></th>
+                <th>Kuvaus</th>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    <input type="text"
+                           name="queryName"
+                           id="queryName"
+                           class="form-control input"
+                           placeholder="Nimi"
+                           ng-model="queryName">
+                </th>
+                <th>
+                    <input type="text"
+                           name="queryDescription"
+                           id="queryDescription"
+                           class="form-control input"
+                           placeholder="Kuvaus"
+                           ng-model="queryDescription">
+                </th>
+            </tr>
+            </thead>
+            <tbody>
 
-        <div class="col-md-3">
-            <div ng-if="dataExists(document.data)" >
-                <img ng-if="isImage(document.data)" ng-src="{{document.data}}" alt="{{document.name}}">
-                <a ng-if="!isImage(document.data)" ng-href="{{document.data}}">{{document.name}}</a>
-            </div>
-
-            <div ng-if="!dataExists(document.data)" >
-                Tiedosto puuttuu
-            </div>
-
-        </div>
-
-        <div class="col-md-3">
-
-            {{document.name}}
-
-        </div>
-
-        <div class="col-md-4">
-
-            {{document.description}}
-
-        </div>
-
-        <div class="col-md-1"></div>
-
-
+            <tr ng-repeat="currentDocument in documentsList | orderBy: orderByAttributes:reverse |
+                filter:{first_name: queryFirstName, name: queryName, description: queryDescription}">
+                <td ng-if="dataExists(currentDocument.data)" class="clickable" ng-click="updateDocument(currentDocument)">
+                    <img class="preview-image" ng-if="isImage(currentDocument.data)" ng-src="{{currentDocument.data}}" alt="{{currentDocument.name}}">
+                    <a ng-if="!isImage(currentDocument.data)" ng-href="{{currentDocument.data}}">{{currentDocument.name}}</a>
+                </td>
+                <td ng-if="!dataExists(currentDocument.data)">
+                    Ei tiedostoa!
+                </td>
+                <td>{{currentDocument.name}}</td>
+                <td>{{currentDocument.description}}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-md-4"></div>
