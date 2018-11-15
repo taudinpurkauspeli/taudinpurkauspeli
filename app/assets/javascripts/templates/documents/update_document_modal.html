@@ -50,6 +50,7 @@
                       ng-if="selectedDocument"
                       placeholder="Kuvaus"
                       name="description"
+                      rows="6"
                       id="description"></textarea>
             </div>
 
@@ -69,9 +70,11 @@
         </div>
 
         <div class="row padding-top-20">
-            <div class="col-md-12">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
                 <textarea class="form-control center-text rezise-none" name="documentDataUrl" title="Linkki tiedostoon" ng-model="selectedDocument.data" id="documentDataUrl" readonly></textarea>
             </div>
+            <div class="col-md-1"></div>
         </div>
 
         <div class="row padding-top-20 padding-bottom-20">
@@ -83,10 +86,11 @@
         </div>
     </div>
 
-    <div ng-if="!dataExists(selectedDocument.data)">
-        Ei tiedostoa!
+    <div class="row" ng-if="!dataExists(selectedDocument.data)">
+        <div class="col-md-12 center-text">
+            <h3>Ei tiedostoa</h3>
+        </div>
     </div>
-
 
 </div>
 

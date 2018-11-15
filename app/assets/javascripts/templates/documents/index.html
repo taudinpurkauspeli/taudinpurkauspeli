@@ -20,7 +20,8 @@
             <colgroup>
                 <col style="width:45%" />
                 <col style="width:20%" />
-                <col style="width:35%" />
+                <col style="width:30%" />
+                <col style="width:5%" />
 
             </colgroup>
             <thead>
@@ -28,6 +29,7 @@
                 <th>Kuva</th>
                 <th class="clickable" ng-click="setOrderByAttributes('name')">Nimi <span class="sortorder" ng-show="orderByAttributes[0] === 'name'" ng-class="{reverse:reverse}"></span></th>
                 <th>Kuvaus</th>
+                <th>Tiedot</th>
             </tr>
             <tr>
                 <th>
@@ -54,15 +56,20 @@
 
             <tr ng-repeat="currentDocument in documentsList | orderBy: orderByAttributes:reverse |
                 filter:{first_name: queryFirstName, name: queryName, description: queryDescription}">
-                <td ng-if="dataExists(currentDocument.data)" class="clickable" ng-click="updateDocument(currentDocument)">
+                <td ng-if="dataExists(currentDocument.data)" class="center-text table-vertical-middle">
                     <img class="preview-image" ng-if="isImage(currentDocument.data)" ng-src="{{currentDocument.data}}" alt="{{currentDocument.name}}">
                     <a ng-if="!isImage(currentDocument.data)" ng-href="{{currentDocument.data}}">{{currentDocument.name}}</a>
                 </td>
-                <td ng-if="!dataExists(currentDocument.data)">
-                    Ei tiedostoa!
+                <td ng-if="!dataExists(currentDocument.data)" class="center-text table-vertical-middle">
+                    <span>Ei tiedostoa</span>
                 </td>
-                <td>{{currentDocument.name}}</td>
-                <td>{{currentDocument.description}}</td>
+                <td class="center-text table-vertical-middle">{{currentDocument.name}}</td>
+                <td class="center-text table-vertical-middle">{{currentDocument.description}}</td>
+                <td class="center-text table-vertical-middle">
+                    <button class="btn btn-default width-100 btn-success multiline padding-top-10 padding-bottom-10" ng-click="updateDocument(currentDocument)">
+                        Tiedot
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
