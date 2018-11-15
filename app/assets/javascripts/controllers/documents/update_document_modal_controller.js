@@ -27,7 +27,7 @@ app.controller("UpdateDocumentModalController", [
             document.execCommand("copy");
 
             $.notify({
-                message: "Linkin kopiointi onnistui!"
+                message: "Linkki kopioitu!"
             }, {
                 placement: {
                     align: "center"

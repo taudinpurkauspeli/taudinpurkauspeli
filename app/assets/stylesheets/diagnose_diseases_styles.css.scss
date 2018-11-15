@@ -37,10 +37,16 @@ img {
   height: auto !important;
 }
 
-.preview-image{
+.preview-image {
   max-width: 100% !important;
   width: auto !important;
   height: 200px !important;
+}
+
+.center-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
