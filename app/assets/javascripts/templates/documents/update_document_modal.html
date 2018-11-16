@@ -5,7 +5,10 @@
             <h3 class="modal-title center-text multiline">Päivitä tiedostoa</h3>
         </div>
         <div class="col-md-2">
-            <button uib-popover="Tällä lomakkeella voit päivittää tiedoston kuvausta ja nimeä. Täytä lomakkeeseen tiedoston nimi ja kuvaus."
+            <button uib-popover="Tällä lomakkeella voit päivittää tiedoston kuvausta ja nimeä. Täytä lomakkeeseen tiedoston nimi ja kuvaus. Voit tallentaa muutokset painamalla
+Päivitä-nappia ja peruuttaa muutokset painamalla Peruuta-nappia. Voit poistaa tiedoston painamalla Poista tiedosto -nappia. Näet lomakkeessa tiedoston esikatselukuvan tai linkin,
+jota painamalla voit ladata tiedoston. Näet myös esikatselun tiedoston linkistä, jonka avulla voit lisätä tiedoston tekstin sekaan. Voit kopioida linkin tiedostoon painamalla nappia
+Kopioi linkki tiedostoon."
                     popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
         </div>
         <div class="col-md-1"></div>
@@ -63,7 +66,7 @@
     <div ng-if="dataExists(selectedDocument.data)">
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 center-text">
                 <img class="preview-image center-image" ng-if="isImage(selectedDocument.data)" ng-src="{{selectedDocument.data}}" alt="{{selectedDocument.name}}">
                 <a ng-if="!isImage(selectedDocument.data)" ng-href="{{selectedDocument.data}}">{{selectedDocument.name}}</a>
             </div>

@@ -18,7 +18,7 @@ app.controller('ApplicationController', [
                 visibility: 'currentUserAdmin',
                 click: $scope.resetCurrentExercise},
             {state: 'documents',
-                title: 'Tiedostot',
+                title: 'Tiedostopankki',
                 visibility: 'currentUserAdmin',
                 click: $scope.resetCurrentExercise},
             {state: 'users_show({userShowId: currentUser})',
