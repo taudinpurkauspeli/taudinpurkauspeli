@@ -17,9 +17,12 @@ deploy:
     - "rake db:migrate"
     - restart
     - "rake cleanup"
+  branches:
+    only:
+      - disabled-build-branch
   app:
-    development: taudinpurkauspeli-development-disabled
-    master: taudinpurkauspeli-disabled
+    development: taudinpurkauspeli-development
+    master: taudinpurkauspeli
 
 notifications:
   email: false
