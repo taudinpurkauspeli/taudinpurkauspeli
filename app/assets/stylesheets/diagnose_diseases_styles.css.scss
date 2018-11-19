@@ -37,6 +37,18 @@ img {
   height: auto !important;
 }
 
+.preview-image {
+  max-width: 100% !important;
+  width: auto !important;
+  height: 200px !important;
+}
+
+.center-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 /******************
 *     Layout      *
@@ -148,6 +160,18 @@ div.separator{
 .licence-information {
   max-height: 300px;
   overflow-y: scroll;
+}
+
+.max-width-100 {
+  max-width: 100% !important;
+}
+
+.rezise-none {
+  resize: none !important;
+}
+
+.table-vertical-middle {
+  vertical-align: middle !important;
 }
 
 /**************************
@@ -889,6 +913,7 @@ thead tr:hover {
   color: $FontBlack;
   width: 55%;
   text-align: center;
+  z-index: 10000 !important;
 }
 
 .alert-warning {
@@ -897,6 +922,7 @@ thead tr:hover {
   color: $FontBlack;
   width: 55%;
   text-align: center;
+  z-index: 10000 !important;
 }
 
 .alert-danger {
@@ -905,4 +931,5 @@ thead tr:hover {
   color: $FontBlack;
   width: 55%;
   text-align: center;
+  z-index: 10000 !important;
 }

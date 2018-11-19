@@ -16,6 +16,7 @@
 //= require angular-resource
 //= require angular-messages
 //= require angular-rails-templates
+//= require angular-file-upload
 //= require diagnose_diseases_app
 //= require angular-validation-match
 //= require angular-drag-and-drop-lists

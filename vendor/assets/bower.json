@@ -8,6 +8,7 @@
     "angular-validation-match": "latest",
     "angular-drag-and-drop-lists": "latest",
     "angular-ui-router": "latest",
+    "angular-file-upload": "latest",
     "jQueryDndPageScroll": "git@github.com:martindrapeau/jQueryDndPageScroll.git",
     "textAngular": "latest",
     "font-awesome": "latest",

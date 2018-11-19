@@ -10,7 +10,6 @@ class InterviewsController < ApplicationController
 	def new
 		@interview = Interview.new
 
-		set_view_layout
 	end
 
 	# GET /interviews/1/edit
@@ -22,7 +21,6 @@ class InterviewsController < ApplicationController
 		@question_groups = QuestionGroup.all
 		@requireds = Question.requireds
 
-		set_view_layout
 	end
 
 	# GET /interviews/1
