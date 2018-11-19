@@ -57,6 +57,7 @@ GEM
     bcrypt (3.1.12)
     bindex (0.5.0)
     bower-rails (0.11.0)
+    brakeman (4.3.1)
     builder (3.2.3)
     byebug (10.0.2)
     capistrano (3.11.0)
@@ -294,6 +295,7 @@ DEPENDENCIES
   angular-rails-templates
   bcrypt
   bower-rails
+  brakeman
   byebug
   capistrano
   capistrano-bundler
@@ -335,4 +337,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.3
+   1.17.1
