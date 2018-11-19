@@ -18,8 +18,8 @@ deploy:
     - restart
     - "rake cleanup"
   app:
-    development: taudinpurkauspeli-development
-    master: taudinpurkauspeli
+    development: taudinpurkauspeli-development-disabled
+    master: taudinpurkauspeli-disabled
 
 notifications:
   email: false
