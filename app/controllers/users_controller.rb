@@ -5,8 +5,8 @@ class UsersController < ApplicationController
 
   before_action :ensure_user_is_logged_in, except: [:new, :create]
   before_action :ensure_user_is_admin, only: [:index, :json_destroy]
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :json_destroy, :completable_subtasks, :has_completed_task, :has_completed_conclusion, :has_completed_exercise, :completed_tasks]
-  before_action :set_current_user, only: [:index, :show]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :json_destroy, :completable_subtasks, :has_completed_task, :has_completed_conclusion, :has_completed_exercise, :completed_tasks, :saved_exercises]
+  before_action :set_current_user, only: [:index, :show, :saved_exercises]
 
   before_action except: [:new, :create, :index, :json_index, :json_by_case] do
     current_user_now = current_user
@@ -95,6 +95,17 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: {user: @user, exercises: @exercises_with_completion_percent }}
+    end
+  end
+
+  # GET /users/1/saved_exercises
+  # GET /users/1/saved_exercises.json
+  def saved_exercises
+    saved_exercises = @user.saved_exercises.order(:created_at)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: saved_exercises.to_json(:include => [:exercise])}
     end
   end
 

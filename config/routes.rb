@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   get 'users/:id/has_completed_task', to: 'users#has_completed_task'
   get 'users/:id/has_completed_conclusion', to: 'users#has_completed_conclusion'
   get 'users/:id/has_completed_exercise', to: 'users#has_completed_exercise'
+  get 'users/:id/saved_exercises', to: 'users#saved_exercises'
 
   get 'tasks_one/:id', to: 'tasks#tasks_one'
   get 'tasks_all_by_level', to: 'tasks#tasks_all_by_level'

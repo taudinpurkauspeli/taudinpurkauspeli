@@ -71,8 +71,7 @@ class User < ActiveRecord::Base
   def complete_exercise(exercise)
     unless has_completed?(exercise)
       completed_exercises.create(exercise:exercise)
-      byebug
-      saved_exercises.create(exercise:exercise, completion_percent: 100, description: "Opiskelija suoritti casen")
+      saved_exercises.create(exercise:exercise, completion_percent: 100, description: "Case suoritettu onnistuneesti")
     end
   end
 

@@ -157,6 +157,55 @@
 </div>
 
 
+<div class="row padding-top-20">
+    <div class="col-md-2"></div>
+
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title panel-title-userinfo center-text multiline">Tallennetut pelikerrat</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="row row-userinfo padding-top-20 padding-bottom-20 center-text" ng-if="!userHasSavedExercises">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        Ei tallennettuja pelikertoja!
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+
+                <div class="padding-bottom-30" ng-if="userHasSavedExercises" ng-repeat="savedExercise in savedExercises">
+
+                    <div class="row row-userinfo padding-top-20 bold">
+                        <div class="col-md-12">
+                            {{savedExercise.exercise.name}}
+                        </div>
+                    </div>
+
+                    <div class="row row-userinfo padding-top-20">
+                        <div class="col-md-12">
+                            <uib-progressbar animate="false" value="savedExercise.completion_percent" type="{{getType(savedExercise.completion_percent)}}"><b>{{savedExercise.completion_percent}}%</b></uib-progressbar>
+                        </div>
+                    </div>
+
+                    <div class="row row-userinfo">
+                        <div class="col-md-12">
+                            {{savedExercise.description}} {{savedExercise.created_at | date:'dd.MM.yyyy'}}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2"></div>
+
+</div>
+
+
 <div class="row" ng-if="currentUserAdmin && (currentUser != user.id)">
     <div ng-class="{'col-md-3': user.admin,
                     'col-md-2': !user.admin}"></div>
