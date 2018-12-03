@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_08_064105) do
+ActiveRecord::Schema.define(version: 2018_11_23_102532) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -173,6 +173,15 @@ ActiveRecord::Schema.define(version: 2018_10_08_064105) do
     t.datetime "updated_at", null: false
     t.integer "required", default: 0
     t.integer "title_id"
+  end
+
+  create_table "saved_exercises", force: :cascade do |t|
+    t.integer "exercise_id"
+    t.integer "user_id"
+    t.integer "completion_percent"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "subtasks", force: :cascade do |t|

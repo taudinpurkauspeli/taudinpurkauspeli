@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
   has_many :completed_exercises
   has_many :exercises, through: :completed_exercises
 
+  has_many :saved_exercises
+
   has_many :subtasks, through: :completed_subtasks
 
   has_many :log_entries
@@ -69,6 +71,8 @@ class User < ActiveRecord::Base
   def complete_exercise(exercise)
     unless has_completed?(exercise)
       completed_exercises.create(exercise:exercise)
+      byebug
+      saved_exercises.create(exercise:exercise, completion_percent: 100, description: "Opiskelija suoritti casen")
     end
   end
 
