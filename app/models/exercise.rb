@@ -145,6 +145,11 @@ class Exercise < ActiveRecord::Base
     return  users_of_ex.uniq
   end
 
+  def restart
+    puts "==================================================================================== ALOITETAAN CASE UUDESTAAN ===================================================================================="
+    return true
+  end
+
   private
   def create_anamnesis
     tasks.create(name: "Anamneesi", level: 0)
