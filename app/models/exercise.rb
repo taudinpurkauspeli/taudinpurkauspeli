@@ -145,8 +145,12 @@ class Exercise < ActiveRecord::Base
     return  users_of_ex.uniq
   end
 
-  def restart
+  def restart(user)
     puts "==================================================================================== ALOITETAAN CASE UUDESTAAN ===================================================================================="
+
+    user.restart_exercise(self)
+
+
     return true
   end
 

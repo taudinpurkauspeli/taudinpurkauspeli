@@ -136,7 +136,7 @@
     <div class="row" ng-if="userHasCompletedExercise">
         <div class="col-md-1"></div>
         <div class="col-md-10">
-            <completed_exercise></completed_exercise>
+            <completed-exercise exercise="exercise" after-restart="removeCurrentTask()"></completed-exercise>
         </div>
         <div class="col-md-1"></div>
     </div>

@@ -6,7 +6,7 @@ class ExercisesController < ApplicationController
   before_action :ensure_user_is_admin, except: [:index, :show, :exercises_one, :restart_one]
   before_action :set_exercise, only: [:show, :edit, :update, :destroy, :duplicate_exercise, :toggle_hidden,
                                       :exercises_one, :update_one, :restart_one]
-  before_action :set_current_user, only: [:show, :index]
+  before_action :set_current_user, only: [:show, :index, :restart_one]
 
   # GET /exercises
   # GET /exercises.json
@@ -50,7 +50,7 @@ class ExercisesController < ApplicationController
   # PATCH/PUT /exercises_one/1/restart.json
   def restart_one
     respond_to do |format|
-      if @exercise.restart
+      if @exercise.restart(@current_user)
         format.html { redirect_to exercise_path(@exercise.id, :layout => get_layout), notice: 'Casen uudelleen aloittaminen onnistui!' }
         format.json { head :ok }
       else

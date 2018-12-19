@@ -75,6 +75,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def restart_exercise(exercise)
+    completion_percent = get_percent_of_completed_tasks_of_exercise(exercise)
+    saved_exercises.create(exercise:exercise, completion_percent: completion_percent, description: "Case aloitettu uudelleen")
+    checked_hypotheses.joins(:exercise_hypothesis).where(exercise_hypotheses: {exercise_id: exercise.id}).destroy_all
+    completed_exercises.where(exercise_id: exercise.id).destroy_all
+    completed_tasks.joins(:exercise).where(exercises: {id: exercise.id}).destroy_all
+    completed_subtasks.joins(subtask: [:task]).where(subtasks: {tasks: {exercise_id: exercise.id}}).destroy_all
+    asked_questions.joins(question: [interview: [subtask: [:task]]]).where(questions: {interviews: {subtasks: {tasks: {exercise_id: exercise.id}}}}).destroy_all
+  end
+
   def ask_question(question)
     asked_questions.create(question:question)
   end

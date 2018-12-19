@@ -7,7 +7,8 @@ app.directive('completedExercise', [
             templateUrl: "exercises/completed_exercise.html",
             controller: "CompletedExerciseController",
             scope: {
-                exercise: '=exercise'
+                exercise: '=exercise',
+                'removeCurrentTask': '&afterRestart'
             }
         };
     }
