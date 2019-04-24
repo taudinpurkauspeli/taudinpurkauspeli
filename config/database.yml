@@ -20,6 +20,17 @@ test: &test
   <<: *default
   database: db/test.sqlite3
 
+staging:
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+  database: taudinpurkauspeli_staging
+  username: taudinpurkauspeli
+  password: <%= ENV['TAUDINPURKAUSPELI_DATABASE_PASSWORD'] %>
+  template: template0
+
 production:
   adapter: postgresql
   encoding: unicode

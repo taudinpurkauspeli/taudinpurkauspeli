@@ -12,7 +12,7 @@ set :repo_url, 'git@github.com:taudinpurkauspeli/taudinpurkauspeli.git'
 set :deploy_to, '/data/var/www/taudinpurkauspeli/code'
 
 set :stages, ["staging", "production"]
-set :default_stage, "production"
+set :default_stage, "staging"
 
 # Default value for :scm is :git
 # set :scm, :git

@@ -6,6 +6,10 @@ test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
 
+staging:
+  service: Disk
+  root: "/data/var/www/taudinpurkauspeli/storage"
+
 production:
   service: Disk
   root: "/data/var/www/taudinpurkauspeli/storage"

@@ -21,10 +21,6 @@
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 
-role :app, %w{taudinpurkauspeli@tautiset-pelit.it.helsinki.fi}
-role :web, %w{taudinpurkauspeli@tautiset-pelit.it.helsinki.fi}
-role :db,  %w{taudinpurkauspeli@tautiset-pelit.it.helsinki.fi}
-
 
 
 # Configuration
