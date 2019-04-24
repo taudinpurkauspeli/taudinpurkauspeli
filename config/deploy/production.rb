@@ -1,3 +1,7 @@
+set :rails_env, 'production'
+
+set :bundle_env_variables, { rails_env: "production" }
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
@@ -21,9 +25,9 @@
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 
-role :app, %w{taudinpurkauspeli@tautiset-pelit.it.helsinki.fi}
-role :web, %w{taudinpurkauspeli@tautiset-pelit.it.helsinki.fi}
-role :db,  %w{taudinpurkauspeli@tautiset-pelit.it.helsinki.fi}
+role :app, %w{taudinpurkauspeli@tautiset-pelit-18.it.helsinki.fi}
+role :web, %w{taudinpurkauspeli@tautiset-pelit-18.it.helsinki.fi}
+role :db,  %w{taudinpurkauspeli@tautiset-pelit-18.it.helsinki.fi}
 
 
 

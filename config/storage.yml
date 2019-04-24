@@ -8,8 +8,8 @@ test:
 
 staging:
   service: Disk
-  root: "/data/var/www/taudinpurkauspeli/storage"
+  root: <%= ENV['TAUDINPURKAUSPELI_STORAGE_PATH'] %>
 
 production:
   service: Disk
-  root: "/data/var/www/taudinpurkauspeli/storage"
+  root: <%= ENV['TAUDINPURKAUSPELI_STORAGE_PATH'] %>
