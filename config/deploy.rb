@@ -3,7 +3,9 @@
 
 set :application, 'taudinpurkauspeli'
 #set :repo_url, 'git@example.com:me/my_repo.git'
-set :repo_url, 'git@github.com:taudinpurkauspeli/taudinpurkauspeli.git'
+set :repo_url, 'https://github.com/taudinpurkauspeli/taudinpurkauspeli.git'
+
+set :branch, 'new-environment'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

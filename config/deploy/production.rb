@@ -1,6 +1,12 @@
+set :stage, 'production'
 set :rails_env, 'production'
+set :migrate_env, 'production'
 
 set :bundle_env_variables, { rails_env: "production" }
+
+set :rvm_custom_path, '/usr/share/rvm'
+
+set :passenger_restart_with_touch, false
 
 # server-based syntax
 # ======================
