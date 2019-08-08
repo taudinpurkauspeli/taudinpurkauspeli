@@ -32,9 +32,9 @@ set :passenger_restart_with_touch, false
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 
-role :app, %w{tauppeli@tautiset-test-18.it.helsinki.fi}
-role :web, %w{tauppeli@tautiset-test-18.it.helsinki.fi}
-role :db,  %w{tauppeli@tautiset-test-18.it.helsinki.fi}
+role :app, %w{taudinpurkauspeli@tautiset-test-18.it.helsinki.fi}
+role :web, %w{taudinpurkauspeli@tautiset-test-18.it.helsinki.fi}
+role :db,  %w{taudinpurkauspeli@tautiset-test-18.it.helsinki.fi}
 
 
 
