@@ -100,7 +100,7 @@ group :development, :test do
 
 end
 
-group :production do
+group :production, :staging do
  
   # Use postgresql for Heroku
   gem 'pg'
