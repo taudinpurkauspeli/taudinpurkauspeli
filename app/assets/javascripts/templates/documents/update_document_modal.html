@@ -1,0 +1,127 @@
+<div class="modal-header">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="modal-title center-text multiline">Päivitä tiedostoa</h3>
+        </div>
+        <div class="col-md-2">
+            <button uib-popover="Tällä lomakkeella voit päivittää tiedoston kuvausta ja nimeä. Täytä lomakkeeseen tiedoston nimi ja kuvaus. Voit tallentaa muutokset painamalla
+Päivitä-nappia ja peruuttaa muutokset painamalla Peruuta-nappia. Voit poistaa tiedoston painamalla Poista tiedosto -nappia. Näet lomakkeessa tiedoston esikatselukuvan tai linkin,
+jota painamalla voit ladata tiedoston. Näet myös esikatselun tiedoston linkistä, jonka avulla voit lisätä tiedoston tekstin sekaan. Voit kopioida linkin tiedostoon painamalla nappia
+Kopioi linkki tiedostoon."
+                    popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje</button>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+<div class="modal-body">
+
+    <form class="form-horizontal" novalidate name="updateDocumentForm">
+        <div class="form-group has-feedback padding-top-10"
+             ng-class="{'has-error': updateDocumentForm.name.$invalid && updateDocumentForm.name.$dirty,
+                    'has-success': updateDocumentForm.name.$valid && updateDocumentForm.name.$touched}">
+
+            <label for="name" class="col-md-2 control-label">Nimi</label>
+
+            <div class="col-md-9">
+                <input type="text"
+                       class="form-control center-text"
+                       required pattern=".{2,}"
+                       name="name"
+                       id="name"
+                       placeholder="Tiedoston nimi"
+                       ng-model="selectedDocument.name">
+
+                <p class="help-block" ng-messages="updateDocumentForm.name.$error" ng-if="!updateDocumentForm.name.$pristine">
+                    <span ng-message="required">Nimi on pakollinen</span>
+                    <span ng-message="pattern">Nimessä on oltava vähintään 2 merkkiä</span>
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="form-group padding-top-10">
+
+            <label for="description" class="col-md-2 control-label">Kuvaus</label>
+
+            <div class="col-md-9">
+
+            <textarea class="form-control center-text max-width-100"
+                      ng-model="selectedDocument.description"
+                      ng-if="selectedDocument"
+                      placeholder="Kuvaus"
+                      name="description"
+                      rows="6"
+                      id="description"></textarea>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+
+
+    </form>
+
+    <div ng-if="dataExists(selectedDocument.data)">
+
+        <div class="row">
+            <div class="col-md-12 center-text">
+                <img class="preview-image center-image" ng-if="isImage(selectedDocument.data)" ng-src="{{selectedDocument.data}}" alt="{{selectedDocument.name}}">
+                <a ng-if="!isImage(selectedDocument.data)" ng-href="{{selectedDocument.data}}">{{selectedDocument.name}}</a>
+            </div>
+        </div>
+
+        <div class="row padding-top-20">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <textarea class="form-control center-text rezise-none" name="documentDataUrl" title="Linkki tiedostoon" ng-model="selectedDocument.data" id="documentDataUrl" readonly></textarea>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="row padding-top-20 padding-bottom-20">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button class="btn btn-default btn-success width-100" ng-click="copyDocumentUrl()">Kopioi linkki tiedostoon</button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="!dataExists(selectedDocument.data)">
+        <div class="col-md-12 center-text">
+            <h3>Ei tiedostoa</h3>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-success width-100"
+                    type="button"
+                    ng-click="updateDocument()"
+                    ng-disabled="updateDocumentForm.$invalid || updateDocumentForm.$pristine"
+                    ng-class="{'disabled': updateDocumentForm.$invalid || updateDocumentForm.$pristine}">
+                Päivitä
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-warning width-100" type="button" ng-click="cancel()">
+                Peruuta
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-danger width-100" type="button" ng-click="deleteDocument()">
+                Poista tiedosto
+            </button>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+</div>
+

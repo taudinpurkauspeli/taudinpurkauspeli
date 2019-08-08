@@ -55,11 +55,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_view_layout
-    if params[:layout] === "false" || params[:layout] == false
-      render :layout => false
-    end
-  end
 
   def set_current_user
     @current_user = current_user
@@ -100,7 +95,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_is_student_in_production_and_accepted_academic_research
-    if Rails.env.production?
+    if Rails.env.production? || Rails.env.staging?
       user = current_user
       if  user.nil? || user.admin || !user.accept_academic_research || Rails.env.test?
         return false

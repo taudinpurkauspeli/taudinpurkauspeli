@@ -1,0 +1,96 @@
+<div class="row padding-bottom-10 padding-top-20">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <h1 class="center-text multiline">Tiedostopankki</h1>
+    </div>
+    <div class="col-md-2 padding-top-25">
+        <button uib-popover="Tällä sivulla näet tiedostopankissa olevat tiedostot. Kuva-sarakkeessa näet esikatselukuvan tiedostosta tai linkin, jota
+        painamalla voit ladata tiedoston. Nimi- ja Kuvaus-sarakkeissa näet tiedoston nimen
+ja kuvauksen. Voit järjestää tiedostot niiden nimen mukaan painamalla Nimi-sarakkeen otsikkoa. Voit hakea tiedostoja kirjoittamalla hakusanan Nimi- ja Kuvaus-sarakkeiden otsikoiden
+alle. Tiedot-sarakkeessa olevaa nappia painamalla voit tarkastella tiedoston osoitetta ja kopioida osoitteen tiedostoon. Lisäksi voit muokata tiedostoa ja poistaa sen Tiedot-nappia painamalla
+avautuvan lomakkeen kautta."
+                popover-trigger="'outsideClick'" popover-placement="auto bottom-right" type="button" class="btn btn-default width-100">Ohje
+        </button>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="separator"></div>
+
+<div class="padding-top-30">
+
+    <div class="table-responsive">
+        <table class="table table-hover table-condensed">
+            <colgroup>
+                <col style="width:45%" />
+                <col style="width:20%" />
+                <col style="width:30%" />
+                <col style="width:5%" />
+
+            </colgroup>
+            <thead>
+            <tr>
+                <th>Kuva</th>
+                <th class="clickable" ng-click="setOrderByAttributes('name')">Nimi <span class="sortorder" ng-show="orderByAttributes[0] === 'name'" ng-class="{reverse:reverse}"></span></th>
+                <th>Kuvaus</th>
+                <th>Tiedot</th>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    <input type="text"
+                           name="queryName"
+                           id="queryName"
+                           class="form-control input"
+                           placeholder="Nimi"
+                           ng-model="queryName">
+                </th>
+                <th>
+                    <input type="text"
+                           name="queryDescription"
+                           id="queryDescription"
+                           class="form-control input"
+                           placeholder="Kuvaus"
+                           ng-model="queryDescription">
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr ng-repeat="currentDocument in documentsList | orderBy: orderByAttributes:reverse |
+                filter:{first_name: queryFirstName, name: queryName, description: queryDescription}">
+                <td ng-if="dataExists(currentDocument.data)" class="center-text table-vertical-middle">
+                    <img class="preview-image" ng-if="isImage(currentDocument.data)" ng-src="{{currentDocument.data}}" alt="{{currentDocument.name}}">
+                    <a ng-if="!isImage(currentDocument.data)" ng-href="{{currentDocument.data}}">{{currentDocument.name}}</a>
+                </td>
+                <td ng-if="!dataExists(currentDocument.data)" class="center-text table-vertical-middle">
+                    <span>Ei tiedostoa</span>
+                </td>
+                <td class="center-text table-vertical-middle">{{currentDocument.name}}</td>
+                <td class="center-text table-vertical-middle">{{currentDocument.description}}</td>
+                <td class="center-text table-vertical-middle">
+                    <button class="btn btn-default width-100 btn-success multiline padding-top-10 padding-bottom-10" ng-click="updateDocument(currentDocument)">
+                        Tiedot
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-4"></div>
+
+    <div class="col-md-4">
+        <button class="btn btn-default btn-lg width-100 btn-success multiline padding-top-10 padding-bottom-10"
+                ng-click="createDocument()">
+            + Luo uusi tiedosto
+        </button>
+    </div>
+
+    <div class="col-md-4"></div>
+</div>
+

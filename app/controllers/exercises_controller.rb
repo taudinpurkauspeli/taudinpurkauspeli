@@ -17,8 +17,6 @@ class ExercisesController < ApplicationController
     session[:task_id] = nil
     session[:exhyp_ids] = nil
 
-    set_view_layout
-
     respond_to do |format|
       format.html
       format.json { render json: @exercises }
@@ -58,7 +56,6 @@ class ExercisesController < ApplicationController
     # Unchecked exercise hypotheses for conclusion view
     @conclusion_exercise_hypotheses = ExerciseHypothesis.where(id: session[:exhyp_ids])
 
-    set_view_layout
   end
 
   # GET /exercises/new
@@ -68,7 +65,6 @@ class ExercisesController < ApplicationController
 
   # GET /exercises/1/edit
   def edit
-    set_view_layout
   end
 
   # POST /exercises

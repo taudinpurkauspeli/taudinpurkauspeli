@@ -1,0 +1,55 @@
+/*!
+ * Override Font Awesome Free 5.3.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) font path configuration
+ * in order to fix font problem in production (fonts required in production with wrong path).
+ */
+
+/* FONT PATH
+* -------------------------- */
+@font-face {
+  font-family: 'Font Awesome 5 Brands';
+  font-style: normal;
+  font-weight: normal;
+  src: font-url('fa-brands-400.eot');
+  src: font-url('fa-brands-400.eot?#iefix') format('embedded-opentype'),
+  font-url('fa-brands-400.woff2') format('woff2'),
+  font-url('fa-brands-400.woff') format('woff'),
+  font-url('fa-brands-400.ttf') format('truetype'),
+  font-url('fa-brands-400.svg#fontawesome') format('svg');
+}
+
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 400;
+  src: font-url('fa-regular-400.eot');
+  src: font-url('fa-regular-400.eot?#iefix') format('embedded-opentype'),
+  font-url('fa-regular-400.woff2') format('woff2'),
+  font-url('fa-regular-400.woff') format('woff'),
+  font-url('fa-regular-400.ttf') format('truetype'),
+  font-url('fa-regular-400.svg#fontawesome') format('svg');
+}
+
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+  src: font-url('fa-solid-900.eot');
+  src: font-url('fa-solid-900.eot?#iefix') format('embedded-opentype'),
+  font-url('fa-solid-900.woff2') format('woff2'),
+  font-url('fa-solid-900.woff') format('woff'),
+  font-url('fa-solid-900.ttf') format('truetype'),
+  font-url('fa-solid-900.svg#fontawesome') format('svg');
+}
+
+@import "font-awesome/web-fonts-with-css/scss/variables";
+@import "font-awesome/web-fonts-with-css/scss/mixins";
+@import "font-awesome/web-fonts-with-css/scss/core";
+@import "font-awesome/web-fonts-with-css/scss/larger";
+@import "font-awesome/web-fonts-with-css/scss/fixed-width";
+@import "font-awesome/web-fonts-with-css/scss/list";
+@import "font-awesome/web-fonts-with-css/scss/bordered-pulled";
+@import "font-awesome/web-fonts-with-css/scss/animated";
+@import "font-awesome/web-fonts-with-css/scss/rotated-flipped";
+@import "font-awesome/web-fonts-with-css/scss/stacked";
+@import "font-awesome/web-fonts-with-css/scss/icons";

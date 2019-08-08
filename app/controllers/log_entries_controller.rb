@@ -6,7 +6,6 @@ class LogEntriesController < ApplicationController
   # GET /log_entries
   def index
     @log_entries = LogEntry.all
-    set_view_layout
   end
 
   # GET /log_entries/1
@@ -14,7 +13,6 @@ class LogEntriesController < ApplicationController
     @parameters = YAML::load(@log_entry.params)
     @exercise_hypothesis_ids = YAML::load(@log_entry.exhyp_ids)
 
-    set_view_layout
   end
 
   # DELETE /log_entries/1

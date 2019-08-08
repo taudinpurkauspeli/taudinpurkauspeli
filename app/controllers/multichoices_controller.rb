@@ -10,7 +10,6 @@ class MultichoicesController < ApplicationController
   def new
     @multichoice = Multichoice.new
 
-    set_view_layout
   end
 
   def show
@@ -26,7 +25,6 @@ class MultichoicesController < ApplicationController
     @new_option = Option.new
     @is_correct_answers = Option.is_correct_answers
 
-    set_view_layout
   end
 
   def create

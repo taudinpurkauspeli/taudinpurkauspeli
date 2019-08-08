@@ -41,6 +41,8 @@ Rails.application.routes.draw do
 
   resources :titles
 
+  resources :documents
+
   get 'taudinpurkauspeli', to: 'diagnose_diseases#index'
   get 'hypothesis_bank', to: 'hypotheses#hypothesis_bank'
   get 'hypotheses_all', to: 'hypotheses#hypotheses_all'

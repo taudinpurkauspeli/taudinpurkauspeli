@@ -4,7 +4,7 @@ require 'rails/all'
 require 'sassc/rails'
 
 # Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
+# you've limited to :test, :development, :staging, or :production.
 Bundler.require(*Rails.groups)
 
 module Taudinpurkauspeli
@@ -28,7 +28,7 @@ module Taudinpurkauspeli
 
     config.assets.paths << Rails.root.join("vendor","assets","bower_components")
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass-official","assets","fonts")
-    config.assets.paths << Rails.root.join("vendor","assets","bower_components","font-awesome","fonts")
+    config.assets.paths << Rails.root.join("vendor","assets","bower_components","font-awesome","web-fonts-with-css","webfonts")
 
     config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff|woff2|otf)$)
 

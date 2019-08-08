@@ -1,6 +1,6 @@
 (function() {
-    var app = angular.module('diagnoseDiseases', ['templates',
-        'ngResource', 'ngMessages', 'validation.match', 'dndLists', 'ui.router', 'textAngular', 'ngAnimate', 'ui.bootstrap']
+    var app = angular.module('diagnoseDiseases', ['templates', 'ngResource', 'ngMessages', 'validation.match', 'dndLists',
+        'ui.router', 'textAngular', 'ngAnimate', 'ui.bootstrap', 'angularFileUpload']
     );
 })();
 
@@ -25,7 +25,20 @@ app.config([
                 templateUrl: 'exercises/index.html'
             }
         )
+            .state('documents', {
+                url: '/documents',
+                controller: 'DocumentsController',
+                templateUrl: 'documents/index.html',
+                resolve: {
+                    auth: ['$q', 'AuthenticationService', function($q, AuthenticationService) {
+                        var userAdmin = AuthenticationService.isAdmin();
 
+                        if (!userAdmin) {
+                            return $q.reject({ authenticated: false });
+                        }
+                    }]
+                }
+            })
             .state('users', {
                 url: '/users',
                 abstract: true,
@@ -195,6 +208,20 @@ app.config([
                 }
             });
             return taOptions;
+        }]);
+    }
+]);
+
+app.config([
+    '$provide',
+    function($provide){
+        $provide.decorator('taTools', ['$delegate', function(taTools){
+            taTools.insertImage.iconclass = 'far fa-image';
+            taTools.insertVideo.iconclass = 'fab fa-youtube';
+            taTools.undo.iconclass = 'fas fa-undo';
+            taTools.redo.iconclass = 'fas fa-redo';
+            taTools.iconclass = 'far fa-image';
+            return taTools;
         }]);
     }
 ]);

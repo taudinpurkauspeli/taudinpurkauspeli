@@ -32,9 +32,6 @@ gem 'rails-html-sanitizer'
 # Use ActiveModel has_secure_password
 gem 'bcrypt'
 
-# Paperclip for image use
-gem 'paperclip'
-
 # Cloning gem
 gem 'amoeba'
 
@@ -101,7 +98,7 @@ group :development, :test do
 
 end
 
-group :production do
+group :production, :staging do
  
   # Use postgresql for Heroku
   gem 'pg'

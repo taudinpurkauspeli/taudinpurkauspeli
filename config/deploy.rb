@@ -3,16 +3,18 @@
 
 set :application, 'taudinpurkauspeli'
 #set :repo_url, 'git@example.com:me/my_repo.git'
-set :repo_url, 'git@github.com:taudinpurkauspeli/taudinpurkauspeli.git'
+set :repo_url, 'https://github.com/taudinpurkauspeli/taudinpurkauspeli.git'
+
+set :branch, 'master'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/data/var/www/taudinpurkauspeli/code'
+set :deploy_to, '/opt/taudinpurkauspeli/code'
 
 set :stages, ["staging", "production"]
-set :default_stage, "production"
+set :default_stage, "staging"
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -40,10 +42,6 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-
-set :rails_env, 'production'
-
-set :bundle_env_variables, { rails_env: "production" }
 
 set :rvm_ruby_version, '2.5.1'
 
