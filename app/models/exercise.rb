@@ -146,11 +146,7 @@ class Exercise < ActiveRecord::Base
   end
 
   def restart(user)
-    puts "==================================================================================== ALOITETAAN CASE UUDESTAAN ===================================================================================="
-
     user.restart_exercise(self)
-
-
     return true
   end
 
