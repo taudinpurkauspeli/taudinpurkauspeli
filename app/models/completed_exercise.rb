@@ -2,6 +2,9 @@ class CompletedExercise < ActiveRecord::Base
   belongs_to :user
   belongs_to :exercise
 
+  validates :exercise_id, presence: true
+  validates :user_id, presence: true
+
   validate :cannot_complete_same_exercise_many_times
 
   def cannot_complete_same_exercise_many_times
