@@ -4,7 +4,12 @@ app.directive('completedExercise', [
     function() {
         return {
             restrict: 'E',
-            templateUrl: "exercises/completed_exercise.html"
+            templateUrl: "exercises/completed_exercise.html",
+            controller: "CompletedExerciseController",
+            scope: {
+                exercise: '=exercise',
+                'removeCurrentTask': '&afterRestart'
+            }
         };
     }
 ]);

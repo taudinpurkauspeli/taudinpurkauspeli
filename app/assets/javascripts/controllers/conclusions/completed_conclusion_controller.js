@@ -74,10 +74,12 @@ app.controller("CompletedConclusionController", [
         };
 
         $scope.userHasCheckedHypothesis = function(exerciseHypothesis) {
-            for(var i = 0; i < $scope.checkedHypotheses.length; i++) {
-                var checkedHypothesis = $scope.checkedHypotheses[i];
-                if(checkedHypothesis.exercise_hypothesis_id === exerciseHypothesis.id){
-                    return true;
+            if($scope.checkedHypotheses) {
+                for (var i = 0; i < $scope.checkedHypotheses.length; i++) {
+                    var checkedHypothesis = $scope.checkedHypotheses[i];
+                    if (checkedHypothesis.exercise_hypothesis_id === exerciseHypothesis.id) {
+                        return true;
+                    }
                 }
             }
             return false;

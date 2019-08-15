@@ -4,10 +4,17 @@ app.controller("UsersShowController", [
     "$scope", "$resource", "$stateParams", "$window", "$state", "$uibModal",
     function($scope, $resource, $stateParams, $window, $state, $uibModal) {
         $scope.user = {};
+        $scope.userExercises = [];
+        $scope.userHasStartedExercises = false;
+        $scope.savedExercises = [];
+        $scope.userHasSavedExercises = false;
 
         var User = $resource('/users/:userId.json',
             { userId: "@id"},
             { update: { method: 'PUT' }});
+
+        var UserSavedExercises = $resource('/users/:userId/saved_exercises.json',
+            { userId: "@id"});
 
         var UserDestroy = $resource('/delete_user_json/:userId.json',
             { userId: "@id"});
@@ -28,15 +35,25 @@ app.controller("UsersShowController", [
             }
         };
 
+        $scope.setSavedExercises = function() {
+            UserSavedExercises.query({userId : $stateParams.userShowId}, function(data) {
+                console.log(data);
+                $scope.savedExercises = data;
+                $scope.userHasSavedExercises = (data && data.length > 0);
+            }, function(data){
+            });
+
+        };
+
         $scope.setUser = function() {
             User.get({userId : $stateParams.userShowId}, function(data) {
                 $scope.user = data.user;
                 $scope.userExercises = data.exercises;
-                $scope.userHasStartedExercises = (data.exercises.length > 0);
+                $scope.userHasStartedExercises = (data.exercises && data.exercises.length > 0);
                 $scope.setAdminStatus(data.user);
                 $scope.setTesterStatus(data.user);
             }, function(data){
-                if(data.status == 401){
+                if(data.status === 401){
                     $.notify({
                         message: "Pääsy toisen käyttäjän tietoihin estetty!"
                     }, {
@@ -51,7 +68,12 @@ app.controller("UsersShowController", [
             });
         };
 
-        $scope.setUser();
+        $scope.setUserInformation = function() {
+            $scope.setUser();
+            $scope.setSavedExercises();
+        };
+
+        $scope.setUserInformation();
 
         $scope.getType = function(percentOfCompletedTasks) {
             if(percentOfCompletedTasks >= 100) {
@@ -145,7 +167,7 @@ app.controller("UsersShowController", [
                         type: "success",
                         offset: 100
                     });
-                    $scope.setUser();
+                    $scope.setUserInformation();
                 }, function() {
                     $.notify({
                         message: "Käyttäjän oikeuksia ei voitu muuttaa!"
@@ -188,7 +210,7 @@ app.controller("UsersShowController", [
                         type: "success",
                         offset: 100
                     });
-                    $scope.setUser();
+                    $scope.setUserInformation();
                 }, function() {
                     $.notify({
                         message: "Käyttäjän testaajastatusta ei voitu muuttaa!"
